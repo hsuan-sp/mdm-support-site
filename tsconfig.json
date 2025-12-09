@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["vite/client"]
+  },
+  "include": ["docs/**/*.ts", "docs/**/*.d.ts", "docs/**/*.tsx", "docs/**/*.vue", "docs/.vitepress/**/*.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "mdm-technical-support",
+  "version": "1.0.0",
+  "description": "Professional MDM FAQ & Support Documentation",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "vue": "^3.3.0",
+    "markdown-it": "^13.0.0",
+    "@types/markdown-it": "^13.0.0",
+    "@types/node": "^18.0.0"
+  }
+}

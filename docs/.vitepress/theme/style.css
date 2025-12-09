@@ -1,0 +1,82 @@
+:root {
+  /* Apple-like Color Palette Override */
+  --vp-c-bg: #fbfbfd;
+  --vp-c-bg-alt: #ffffff;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-text-1: #1d1d1f;
+  --vp-c-text-2: #86868b;
+  --vp-c-brand-1: #0066cc;
+  --vp-c-brand-2: #0077ed;
+  --vp-c-brand-3: #0055aa;
+  
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Glassmorphism Logic */
+  --vp-nav-bg-color: rgba(251, 251, 253, 0.8) !important;
+  --vp-local-nav-bg-color: rgba(251, 251, 253, 0.8) !important;
+  --vp-sidebar-bg-color: rgba(251, 251, 253, 0.8) !important;
+  --vp-backdrop-filter: blur(20px);
+}
+
+.dark {
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: #1c1c1e;
+  --vp-c-bg-elv: #1c1c1e;
+  --vp-c-text-1: #f5f5f7;
+  --vp-c-text-2: #86868b;
+  --vp-c-brand-1: #2997ff;
+  --vp-c-brand-2: #4ba6ff;
+  --vp-c-brand-3: #007aff;
+  
+  --vp-nav-bg-color: rgba(28, 28, 30, 0.8) !important;
+  --vp-local-nav-bg-color: rgba(28, 28, 30, 0.8) !important;
+  --vp-sidebar-bg-color: rgba(28, 28, 30, 0.8) !important;
+}
+
+/* Enhancing the Card look for Feature components */
+.VPFeature {
+  border-radius: 18px !important;
+  background-color: var(--vp-c-bg-alt) !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08) !important;
+  border-color: var(--vp-c-brand-1) !important;
+}
+
+/* Nav Bar Glass Effect */
+.VPNavBar {
+  backdrop-filter: var(--vp-backdrop-filter);
+  -webkit-backdrop-filter: var(--vp-backdrop-filter);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* Hero Section Typography */
+.VPHero .name {
+  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-text-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700 !important;
+}
+
+.VPHero .text {
+  color: var(--vp-c-text-2) !important;
+  font-weight: 400 !important;
+}
+
+/* Button Styling (Apple Style) */
+.VPButton.brand {
+  border-radius: 980px !important;
+  background-color: var(--vp-c-brand-1) !important;
+  transition: transform 0.2s, opacity 0.2s !important;
+}
+
+.VPButton.brand:hover {
+  background-color: var(--vp-c-brand-1) !important;
+  transform: scale(1.02);
+  opacity: 0.9;
+}
