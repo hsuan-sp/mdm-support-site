@@ -154,10 +154,18 @@ const renderMarkdown = (text: string) => {
   width: 100%;
   padding: 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
   font-size: 1.1rem;
-  backdrop-filter: blur(10px);
+  box-shadow: var(--vp-shadow-1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.1), var(--vp-shadow-2);
 }
 
 .section-pills {
@@ -169,14 +177,26 @@ const renderMarkdown = (text: string) => {
 .pill {
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--vp-c-bg-alt);
   font-size: 0.9rem;
   transition: all 0.2s;
+  border: 1px solid transparent;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  box-shadow: var(--vp-shadow-1);
+}
+
+.pill:hover {
+  background: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-1);
+  transform: translateY(-1px);
+  box-shadow: var(--vp-shadow-2);
 }
 
 .pill.active {
   background: var(--vp-c-brand-1);
   color: white;
+  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.3);
 }
 
 .section-title {
@@ -184,6 +204,7 @@ const renderMarkdown = (text: string) => {
   font-size: 1.5rem;
   font-weight: 700;
   border: none;
+  color: var(--vp-c-brand-3);
 }
 
 .qa-list {
@@ -193,16 +214,19 @@ const renderMarkdown = (text: string) => {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: var(--vp-c-bg-alt);
+  border: 1px solid rgba(128, 128, 128, 0.1);
   border-radius: 16px;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--vp-shadow-1);
 }
 
 .glass-panel:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--vp-c-bg-elv);
+  box-shadow: var(--vp-shadow-3);
+  transform: translateY(-2px);
+  border-color: var(--vp-c-brand-1);
 }
 
 .qa-header {
@@ -233,16 +257,30 @@ const renderMarkdown = (text: string) => {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--vp-c-text-1);
 }
 
 .icon {
   font-size: 1.5rem;
   color: var(--vp-c-text-2);
+  transition: transform 0.3s ease;
+}
+
+.qa-item.open .icon {
+  transform: rotate(180deg);
+  color: var(--vp-c-brand-1);
 }
 
 .qa-body {
   padding: 0 1.5rem 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--vp-c-divider);
+  background: rgba(var(--vp-c-bg-alt), 0.5);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .tags {
@@ -256,31 +294,46 @@ const renderMarkdown = (text: string) => {
   font-size: 0.85rem;
   background: rgba(var(--vp-c-brand-1), 0.1);
   padding: 0.2rem 0.6rem;
-  border-radius: 10px;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
 /* Markdown Styles inside Accordion */
 .markdown-body {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--vp-c-text-1);
 }
 
 .markdown-body :deep(h1),
 .markdown-body :deep(h2),
 .markdown-body :deep(h3) {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 1.1rem;
   font-weight: 700;
+  color: var(--vp-c-brand-3);
 }
 
 .markdown-body :deep(ul) {
   list-style-type: disc;
   padding-left: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .markdown-body :deep(strong) {
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-brand-2);
+}
+
+/* Dark Mode Overrides */
+:global(.dark) .search-input,
+:global(.dark) .pill,
+:global(.dark) .glass-panel {
+  background: var(--vp-c-bg-alt);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .qa-body {
+  background: rgba(255, 255, 255, 0.02);
 }
 </style>

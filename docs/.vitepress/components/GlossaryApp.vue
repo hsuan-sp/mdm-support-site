@@ -132,24 +132,25 @@ const getCategoryColor = (cat: string) => {
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.5;
+  color: var(--vp-c-text-2);
 }
 
 .search-input {
   width: 100%;
   padding: 1rem 1rem 1rem 3rem;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
   font-size: 1.1rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.2s;
+  box-shadow: var(--vp-shadow-1);
+  transition: all 0.3s ease;
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.1);
-  background: #fff;
+  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.1), var(--vp-shadow-2);
 }
 
 .category-pills {
@@ -163,16 +164,20 @@ const getCategoryColor = (cat: string) => {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   border: 1px solid transparent;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--vp-c-bg-alt);
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: var(--vp-shadow-1);
 }
 
 .pill:hover {
-  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  background: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-1);
+  box-shadow: var(--vp-shadow-2);
 }
 
 .pill.active {
@@ -190,20 +195,18 @@ const getCategoryColor = (cat: string) => {
 
 /* Card */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: var(--vp-c-bg-alt);
+  border: 1px solid rgba(128, 128, 128, 0.1);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--vp-shadow-1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .glass-panel:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+  box-shadow: var(--vp-shadow-3);
+  border-color: var(--vp-c-brand-1);
 }
 
 .card-header {
@@ -238,7 +241,7 @@ const getCategoryColor = (cat: string) => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-brand-2);
   margin-bottom: 0.25rem;
   font-weight: 600;
 }
@@ -246,20 +249,21 @@ const getCategoryColor = (cat: string) => {
 .definition p {
   margin: 0;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--vp-c-text-1);
 }
 
 .analogy {
-  background: rgba(var(--vp-c-brand-1), 0.05);
-  padding: 0.75rem;
-  border-radius: 8px;
+  background: rgba(var(--vp-c-brand-1), 0.04);
+  padding: 1rem;
+  border-radius: 12px;
   border-left: 3px solid var(--vp-c-brand-1);
+  margin-top: 1.2rem;
 }
 
 .analogy p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--vp-c-text-2);
   font-style: italic;
 }
@@ -271,59 +275,14 @@ const getCategoryColor = (cat: string) => {
 }
 
 /* Dark Mode Overrides */
-:global(.dark) .search-input {
-  background: rgba(30, 30, 30, 0.6);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-:global(.dark) .search-input:focus {
-  background: rgba(30, 30, 30, 0.9);
-}
-
+:global(.dark) .search-input,
+:global(.dark) .glass-panel,
 :global(.dark) .pill {
-  color: var(--vp-c-text-1);
-  background: rgba(255, 255, 255, 0.1);
-}
-:global(.dark) .pill.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-}
-
-:global(.dark) .glass-panel {
-  background: rgba(30, 30, 30, 0.4);
+  background: var(--vp-c-bg-alt);
   border-color: rgba(255, 255, 255, 0.1);
 }
-:global(.dark) .glass-panel:hover {
-  background: rgba(40, 40, 40, 0.6);
-}
 
-:global(.dark) .bg-blue-100 {
-  background: rgba(59, 130, 246, 0.2);
-  color: #93c5fd;
-}
-:global(.dark) .bg-green-100 {
-  background: rgba(34, 197, 94, 0.2);
-  color: #86efac;
-}
-:global(.dark) .bg-gray-100 {
-  background: rgba(107, 114, 128, 0.2);
-  color: #d1d5db;
-}
-:global(.dark) .bg-red-100 {
-  background: rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
-}
-:global(.dark) .bg-purple-100 {
-  background: rgba(168, 85, 247, 0.2);
-  color: #d8b4fe;
-}
-:global(.dark) .bg-orange-100 {
-  background: rgba(249, 115, 22, 0.2);
-  color: #fdba74;
-}
-:global(.dark) .bg-pink-100 {
-  background: rgba(236, 72, 153, 0.2);
-  color: #f9a8d4;
+:global(.dark) .analogy {
+  background: rgba(var(--vp-c-brand-1), 0.1);
 }
 </style>
