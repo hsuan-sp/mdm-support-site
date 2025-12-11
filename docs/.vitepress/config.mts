@@ -71,9 +71,7 @@ export default defineConfig({
       ]
     },
 
-    footer: {
-      copyright: 'Copyright © 2025 極電資訊｜Apple 授權教育經銷商 <br> 極電資訊有限公司 | 統一編號 23756990'
-    },
+
 
 
 
