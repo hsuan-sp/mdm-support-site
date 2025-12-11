@@ -2,7 +2,7 @@ import { QASection } from '../types'
 
 export const data: QASection[] = [
   {
-    title: '第五部分：數位學習精進方案 (生生用平板) 專區',
+    title: '第五部分：數位學習精進方案專區',
     items: [
       {
         id: 'dl-1',
@@ -121,7 +121,9 @@ export const data: QASection[] = [
         question: '學生可以自行安裝遊戲嗎？',
         important: false,
         tags: ['Sideloading', 'App Store', '限制'],
-        answer: '通常不行。在精進方案的規範下，App Store 會被隱藏或限制，且描述檔會禁止「側載 (Sideloading)」App。所有 App 需經由 MDM 統一派送。'
+        answer: `
+通常不行。在精進方案的規範下，App Store 會被隱藏或限制，且描述檔會禁止「側載 (Sideloading)」App。所有 App 需經由 MDM 統一派送。
+`
       },
       {
         id: 'dl-8',

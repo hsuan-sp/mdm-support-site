@@ -8,9 +8,9 @@ export const data: QASection[] = [
         id: 'cls-1',
         question: '[常用] 「Apple 課堂」App 顯示學生「離線」或無法連接，該如何排查？',
         important: true,
-        tags: ['Apple Classroom', '離線', '故障排除'],
+        tags: ['Apple 課堂 (Classroom)', '離線', '故障排除'],
         answer: `
-**問題描述**：教師機的「課堂」App 中，部分或全部學生的 iPad 顯示為「離線」，無法進行鎖定、畫面監看等操作。
+**問題描述**：教師機的「Apple 課堂」App 中，部分或全部學生的 iPad 顯示為「離線」，無法進行鎖定、畫面監看等操作。
 
 **解決方案**：
 「Apple 課堂」的運作依賴於區域網路 (Wi-Fi) 與藍牙，請依照以下順序系統性排查：
@@ -64,7 +64,7 @@ export const data: QASection[] = [
         id: 'cls-3',
         question: 'Jamf Teacher App 與 Apple 課堂 App 有什麼不同？學校該用哪一個？',
         important: false,
-        tags: ['比較', 'Jamf Teacher', 'Apple Classroom'],
+        tags: ['比較', 'Jamf Teacher', 'Apple 課堂 (Classroom)'],
         answer: `
 **功能定位差異**：
 *   **Apple 課堂 (Classroom)**：**即時互動與監看工具**。
