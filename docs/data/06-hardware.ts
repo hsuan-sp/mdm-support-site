@@ -265,6 +265,23 @@ AirPlay 依賴 **區網連線**。
 *   **方法 B (雲端)**：若無法開機，登入 [iCloud.com/find](https://www.icloud.com/find)，點選該裝置 >「從帳號移除」。
 *   **方法 C (MDM)**：若為受管公用載具，請聯繫我們透過 MDM 解除啟用鎖定。
 `
+      },
+      {
+        id: 'hw-16',
+        question: '[資源] 哪裡可以找到更多 Apple 教育資源或參加實體研習？',
+        important: true,
+        tags: ['資源', '研習', '體驗中心'],
+        answer: `
+**Apple 校園體驗中心 (實體服務)**：
+極電資訊與大學合作設立的體驗中心，提供現場諮詢與教學體驗。
+*   **師大 APPLE 校園體驗中心**：[加 Line 好友預約](https://page.line.me/xat.0000119425.rpn?openQrModal=true)
+*   **世新 APPLE 校園體驗中心**：[加 Line 好友預約](https://page.line.me/xat.0000119425.rpn?openQrModal=true)
+
+**線上資源與政策**：
+*   **推動中小學數位學習精進方案入口網**：[點此前往](https://pads.moe.edu.tw/pads_front/index.php?action=city_links) (包含各縣市資源連結)
+*   **Apple 教育中心 (Apple Education)**：[官方網站](https://www.apple.com/tw/education/)
+*   **極電資訊官網**：[Superinfo](https://www.superinfo.com.tw)
+`
       }
     ]
   }

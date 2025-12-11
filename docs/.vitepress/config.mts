@@ -3,10 +3,11 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/mdm-support-site/',
-  title: "MDM 與裝置管理常用問答集",
+  title: "極電資訊 Apple MDM 知識庫",
   description: "專業 Apple MDM 部署與技術支援文件",
   cleanUrls: true,
   themeConfig: {
+    logo: '/superinfo_logo.png',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首頁', link: '/' },
@@ -19,8 +20,7 @@ export default defineConfig({
             items: [
               { text: '極電資訊官網', link: 'https://www.superinfo.com.tw' },
               { text: '教育部 MDM 管理平台', link: 'https://mdm.edu.tw' },
-              { text: '師大 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' },
-              { text: '世新 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' },
+              { text: '推動中小學數位學習精進方案入口網', link: 'https://pads.moe.edu.tw/pads_front/index.php?action=city_links' },
               { text: 'Apple 平台部署指南', link: 'https://support.apple.com/zh-tw/guide/deployment/welcome/web' },
               { text: 'Apple School Manager 使用手冊', link: 'https://support.apple.com/zh-tw/guide/apple-school-manager/welcome/web' },
               { text: 'Jamf Pro 官方文件', link: 'https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/Jamf_Pro_Documentation.html' },
@@ -31,7 +31,9 @@ export default defineConfig({
             text: '聯絡客服',
             items: [
               { text: '業務客服 (Line: @406ifuui)', link: 'https://line.me/R/ti/p/@406ifuui' },
-              { text: '技術客服 (Line: @257yzoxx)', link: 'https://line.me/R/ti/p/@257yzoxx' }
+              { text: '技術客服 (Line: @257yzoxx)', link: 'https://line.me/R/ti/p/@257yzoxx' },
+              { text: '師大 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' },
+              { text: '世新 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' }
             ]
           }
         ]

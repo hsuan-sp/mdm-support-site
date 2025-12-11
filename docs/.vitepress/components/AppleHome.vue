@@ -85,11 +85,11 @@ const navCards = [
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content fade-in-up">
-        <span class="eyebrow">MDM Support Center</span>
-        <h1>Designed for <br/>Education.</h1>
+        <span class="eyebrow">Superinfo Apple MDM Hub</span>
+        <h1>Empowering <br/>Education.</h1>
         <p class="intro">
-          極致簡單的 Apple 裝置管理指南。<br/>
-          專為台灣教育現場打造。
+          專為台灣教育現場打造。<br/>
+          極致簡單的 Apple 裝置管理知識庫。
         </p>
         <div class="hero-links">
            <a :href="withBase('/guide/01-account')" class="primary-btn">開始探索</a>
@@ -122,7 +122,7 @@ const navCards = [
             <h3>{{ card.title }}</h3>
             <p>{{ card.desc }}</p>
           </div>
-          <div class="hover-overlay"></div>
+          <!-- Clickable area is guaranteed by the anchor tag wrapper -->
         </a>
       </div>
     </section>
