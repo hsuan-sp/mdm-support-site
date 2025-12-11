@@ -37,7 +37,7 @@ export const data: QASection[] = [
 
 2.  **Jamf Pro 後台檢查**：
     *   搜尋該裝置序號，檢查 **「上次資產更新 (Last Inventory Update)」** 時間。若時間停留在數天前的，代表裝置與 MDM 伺服器失聯。
-    *   **嘗試發送指令**：在 Jamf Pro 對該裝置發送「更新資產 (Update Inventory)」指令。若指令一直卡在 "Pending" (擱置中)，代表裝置網路異常或 APNs 憑證有問題。
+    *   **嘗試發送指令**：在 Jamf Pro 對該裝置發送「資產更新 (Update Inventory)」指令。若指令一直卡在 "Pending" (擱置中)，代表裝置網路異常或 APNs 憑證有問題。
 
 3.  **確認序號是否異動**：
     *   若該裝置是維修後的整新機，**序號 (Serial Number)** 會改變。請確認有沒有向教育部平台回報新序號（參考 Q5）。舊序號的裝置自然不會再有新數據。
@@ -135,7 +135,7 @@ export const data: QASection[] = [
 預設的「學生限制描述檔」中，應勾選 **「禁止移除 App (Allow deleting apps)」** 的限制。設定後，學生長按 \`Jamf Trust\` 圖示時，不會出現「移除 App」的選項，僅能從主畫面移除但 App 仍存在於 App 資料庫中。
 
 **若發現可以刪除**：
-請檢查該裝置是否確實被納入「學生限制描述檔」的**範圍 (Scope)** 內。若已納入仍可刪除，請嘗試重新派送該描述檔 (Update Inventory)。
+請檢查該裝置是否確實被納入「學生限制描述檔」的**範圍 (Scope)** 內。若已納入仍可刪除，請嘗試重新發送 **「資產更新 (Update Inventory)」** 指令。
 `
       },
       {

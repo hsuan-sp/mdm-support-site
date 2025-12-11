@@ -123,6 +123,12 @@ export const glossaryData: Term[] = [
     analogy: '數位世界的「印鑑證明」。證明「我是我」，確保沒人冒充 Jamf 伺服器來騙你的平板，確保通訊安全。'
   },
   {
+    term: 'Certificate Trust (憑證信任)',
+    category: 'Security',
+    definition: 'iOS/iPadOS 安全機制。當安裝自定義根憑證（如學校內容過濾用的憑證）時，必須手動進入「關於本機」的「憑證信任設定」中啟用信任，否則 HTTPS 連線會報錯。',
+    analogy: '「通行證蓋章」。雖然你拿到了通行證（憑證），但還要給長官蓋個章（信任設定）說這張是有笑的，守衛才會放行。'
+  },
+  {
     term: 'Classroom App (Apple 課堂)',
     category: 'Apps',
     definition: 'Apple 專為教師設計的 iPad/Mac App，提供課堂管理功能，如監看學生畫面、鎖定 iPad、導引開啟特定 App。',
@@ -146,7 +152,26 @@ export const glossaryData: Term[] = [
     definition: '憑證簽署請求。在申請正式數位憑證前，需先產生的一段加密文字，包含申請者的公開金鑰與身分資訊。',
     analogy: '「申請書」。你要申請印鑑證明（憑證），要先填好這張申請書，蓋上你的私章，再拿去給戶政事務所（Apple）核發。'
   },
-  // D
+  // F
+  {
+    term: 'Force Restart (強制重新啟動)',
+    category: 'Hardware',
+    definition: '硬體層級的重開機指令。透過特定的實體按鍵組合，切斷電池供電並強制系統重啟，用於解決畫面凍結或系統無反應的問題。',
+    analogy: '「拔插頭」。當電腦當機完全不動時，直接拔掉插頭再插回去，強迫它重新開機。'
+  },
+  // G
+  {
+    term: 'Ghost Touch (觸控亂跳)',
+    category: 'Hardware',
+    definition: '硬體故障現象。指螢幕在無人觸碰時自動產生點擊訊號，導致畫面亂跳或 App 自動開啟。常見原因為靜電、螢幕受損或充電器干擾。',
+    analogy: '「鬼影觸控」。好像有看不見的手指在亂按你的螢幕一樣。'
+  },
+  {
+    term: 'Global Proxy (全域代理)',
+    category: 'Network',
+    definition: '強制裝置所有的網路流量（HTTP/HTTPS）都必須經過指定的代理伺服器 (Proxy) 進行轉發與檢查。',
+    analogy: '高速公路的「唯一檢查站」。不管你的車（流量）要去哪裡，一定要經過這個站點檢查蓋章，不能走其他小路。'
+  },
   {
     term: 'DEP Token (伺服器權杖)',
     category: 'Security',
@@ -257,7 +282,12 @@ export const glossaryData: Term[] = [
     definition: '空中傳輸。指透過無線通訊網路（Wi-Fi 或行動網路）傳送軟體更新、設定檔或指令，無需實體連接線。',
     analogy: '「隔空傳送」。不用把平板收回來插線，直接用網路發送命令解決問題。'
   },
-  // P
+  {
+    term: 'Passcode (螢幕密碼)',
+    category: 'Security',
+    definition: 'Device Passcode。用於解鎖 iPad 螢幕或啟用 FaceID/TouchID 的 4-6 位數字或英數密碼。與 Apple ID 密碼不同，僅儲存於本機。',
+    analogy: '「大門鎖密碼」。進家門（解鎖平板）前要按的密碼。弄丟了可以用 MDM 鑰匙（清除密碼指令）幫你開門，但不能幫你找回原本設定的號碼。'
+  },
   {
     term: 'Passcode Policy (密碼原則)',
     category: 'Security',
@@ -406,6 +436,12 @@ export const glossaryData: Term[] = [
     analogy: '螢幕的「變色龍」功能。在黃光下螢幕變黃一點，白光下變白一點，讓你看起來像在看紙張一樣舒服。'
   },
   // U
+  {
+    term: 'Update Inventory (資產更新)',
+    category: 'Core',
+    definition: 'MDM 指令。強制裝置立即掃描自身的狀態（包含安裝的 App、剩餘電量、OS 版本等）並回報給 MDM 伺服器，同時接收尚未執行的擱置指令。',
+    analogy: '平板的「總體檢」。資訊組長在系統按一下，叫平板立刻回報最新的健康狀況，順便看看有沒有新的工作（指令）要執行。'
+  },
   {
     term: 'USB-C',
     category: 'Hardware',
