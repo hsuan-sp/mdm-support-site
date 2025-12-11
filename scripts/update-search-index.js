@@ -60,13 +60,15 @@ function processQA() {
         for (const m of tMatches) tags.push(m[1].replace(/['"]/g, ''));
 
         // Combine all text for indexing
-        const keywords = [
+        let keywords = [
             ...questions, 
             ...answers, 
             ...tags
         ].join(' ')
          .replace(/[\r\n]+/g, ' ') // Remove newlines
-         .replace(/\s+/g, ' ');     // Collapse spaces
+         .replace(/\s+/g, ' ')     // Collapse spaces
+         .replace(/</g, '&lt;')    // Escape HTML chars
+         .replace(/>/g, '&gt;');
 
         updateFileIndex(path.join(guideDir, qaMap[tsFile]), keywords);
     });
