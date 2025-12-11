@@ -19,6 +19,8 @@ export default defineConfig({
             items: [
               { text: '極電資訊官網', link: 'https://www.superinfo.com.tw' },
               { text: '教育部 MDM 管理平台', link: 'https://mdm.edu.tw' },
+              { text: '師大 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' },
+              { text: '世新 APPLE 校園體驗中心', link: 'https://page.line.me/xat.0000119425.rpn?openQrModal=true' },
               { text: 'Apple 平台部署指南', link: 'https://support.apple.com/zh-tw/guide/deployment/welcome/web' },
               { text: 'Apple School Manager 使用手冊', link: 'https://support.apple.com/zh-tw/guide/apple-school-manager/welcome/web' },
               { text: 'Jamf Pro 官方文件', link: 'https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/Jamf_Pro_Documentation.html' },

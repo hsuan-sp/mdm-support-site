@@ -80,11 +80,30 @@ body {
   border-color: var(--vp-c-brand-1) !important;
 }
 
-/* Nav Bar Premium Feel */
+/* Nav Bar Premium/* Nav Bar */
 .VPNavBar {
   backdrop-filter: var(--vp-backdrop-filter);
   -webkit-backdrop-filter: var(--vp-backdrop-filter);
   border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+  z-index: 100 !important; /* Ensure Nav stays on top */
+}
+
+/* Fix dropdown disappearing issues */
+.VPNavScreen {
+  z-index: 100 !important;
+}
+
+.VPNavBarMenuLink, .VPNavBarMenuGroup {
+  /* Add padding to bridge hover gaps */
+  padding-bottom: 20px !important; 
+  margin-bottom: -20px !important;
+}
+
+.VPMenu {
+  z-index: 200 !important; /* Ensure dropdowns are very high */
+  margin-top: 5px !important; /* Slight offset for optics */
+  border-radius: 12px !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1) !important;
 }
 
 .dark .VPNavBar {

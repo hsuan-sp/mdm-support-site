@@ -140,6 +140,9 @@ const getCategoryColor = (cat: string) => {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.3; /* Increased to prevent clipping */
+  padding-bottom: 4px; /* Safety padding */
+  padding-top: 4px; /* Safety padding */
 }
 
 .glossary-header .subtitle {
