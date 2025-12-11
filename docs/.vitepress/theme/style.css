@@ -86,55 +86,96 @@ body {
   border-bottom: 1px solid rgba(235, 235, 245, 0.12);
 }
 
-/* Hero Section Typography */
-.VPHero .name {
-  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, #a855f7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em;
-  filter: drop-shadow(0 0 2em rgba(0, 102, 204, 0.15));
+/* Apple-inspired Clean Design */
+:root {
+  --vp-c-brand-1: #0071e3; /* Apple Blue */
+  --vp-c-brand-2: #0077ed;
+  --vp-c-brand-3: #2b8afb;
+  
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f5f5f7; /* Apple Light Gray */
+  --vp-c-text-1: #1d1d1f; /* Apple Black */
+  --vp-c-text-2: #86868b; /* Apple Gray */
+  
+  --vp-font-family-base: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
-.VPHero .text {
-  color: var(--vp-c-text-2) !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
+.dark {
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: #161617;
+  --vp-c-text-1: #f5f5f7;
+  --vp-c-text-2: #86868b;
+  
+  --glass-bg: rgba(28, 28, 30, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Buttons */
+/* Typography refinements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* Card Styling - Apple Style */
+.VPFeature, .link-card {
+  background: var(--vp-c-bg-alt) !important;
+  border: 1px solid transparent !important;
+  border-radius: 18px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: none !important;
+}
+
+.VPFeature:hover, .link-card:hover {
+  transform: scale(1.02);
+  background: var(--vp-c-bg) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Navbar Glassmorphism */
+.VPNavBar {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.dark .VPNavBar {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Button Refinement */
 .VPButton.brand {
-  border-radius: 980px !important;
-  background-color: var(--vp-c-brand-1) !important;
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-  transition: all 0.3s ease !important;
+  border-radius: 980px;
+  background-color: #0071e3 !important;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
 }
 
 .VPButton.brand:hover {
-  background-color: var(--vp-c-brand-2) !important;
-  transform: scale(1.03);
-  box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+  background-color: #0077ed !important;
+  transform: scale(1.02);
 }
 
-/* Sidebar */
-.VPSidebar {
-  backdrop-filter: var(--vp-backdrop-filter);
-  -webkit-backdrop-filter: var(--vp-backdrop-filter);
-  background-color: var(--vp-sidebar-bg-color) !important;
+/* Layout spacing */
+.VPContent {
+  max-width: 980px !important; /* Apple content width */
+  margin: 0 auto;
 }
 
-/* Custom Scrollbar for Webkit */
+/* Hero Section */
+.VPHero .image-bg {
+  display: none; /* Remove distracting blobs */
+}
+
+/* Hide scrollbar but allow scrolling */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
+  width: 0px;
   background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(134, 134, 139, 0.3);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(134, 134, 139, 0.5);
 }

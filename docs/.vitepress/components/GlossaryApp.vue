@@ -245,7 +245,15 @@ const getCategoryColor = (cat: string) => {
   margin-bottom: 0.25rem;
   font-weight: 600;
 }
-
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--vp-c-text-1);
+}
 .definition p {
   margin: 0;
   font-size: 0.95rem;
