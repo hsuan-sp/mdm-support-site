@@ -146,7 +146,74 @@ Jamf Pro 允許管理者上傳並執行 **Shell Script (Bash/Zsh)** 甚至 Pytho
 2.  **管理員手動重置**：
     *   若無 LAPS，可透過 Policy 執行 \`sysadminctl -resetPassword ...\` 指令（需 Secure Token 權限）或透過 Jamf Management Action 重置。
 `
+      },
+      {
+        id: 'mac-08',
+        question: 'Mac 安裝非 App Store 軟體時顯示「無法打開，因為它來自未識別的開發者」，該如何解決？',
+        answer: `
+**原因**：這是 macOS 的 **Gatekeeper** 安全機制，預設只允許安裝來自 App Store 或經過 Apple 公證 (Notarized) 的軟體。
+
+**解決方案**：
+1.  **單次允許**：
+    *   按住鍵盤上的 **\`Control\`** 鍵，同時點擊該 App 圖示。
+    *   在選單中按 **「打開 (Open)」**，接著在彈出視窗中再次按下 **「打開」** 即可。
+2.  **MDM setting**：
+    *   雖然可以透過 MDM 降低安全性設定 (Allow apps from anywhere)，但基於資安考量，**強烈不建議** 全面開放。
+`,
+        tags: ['Gatekeeper', 'Security', 'App Installation']
+      },
+      {
+        id: 'mac-09',
+        question: '什麼是 FileVault (檔案保險箱)？為什麼 MDM 強制要求開啟？',
+        answer: `
+**FileVault** 是 macOS 的全硬碟加密技術 (Full Disk Encryption)。
+
+**重要性**：
+*   **資料保護**：若 Mac 遺失或被竊，沒有密碼的人完全無法讀取硬碟內的資料（即使將硬碟拆出來接電腦也讀不到）。
+*   **MDM 託管金鑰**：企業/學校透過 MDM 啟用 FileVault 時，會產生一組 **「復原金鑰 (Recovery Key)」** 並自動回傳至 Jamf Pro。若使用者忘記登入密碼，IT 人員可透過此金鑰協助解鎖或重置密碼。
+`,
+        tags: ['FileVault', 'Security', 'Encryption']
+      },
+      {
+        id: 'mac-10',
+        question: 'Mac 的「管理者帳號 (Admin)」與「標準帳號 (Standard)」有什麼差別？學生應該用哪種？',
+        answer: `
+**權限差異**：
+*   **管理者 (Admin)**：擁有最高權限，可以建立新使用者、更改系統設定、安裝所有軟體。
+*   **標準使用者 (Standard)**：僅能使用 App 與存取自己的檔案，**無法** 更改系統核心設定 (如網路、安全性) 或安裝需管理員權限的軟體。
+
+**建議策略**：
+*   **學生機/公用機**：強烈建議僅給予 **「標準帳號」** 權限，避免學生誤刪系統檔或繞過 MDM 管理。
+*   **老師機**：視學校政策，通常給予標準帳號搭配 Jamf Self Service 的暫時提權功能，或給予管理者權限但配合嚴格的監控。
+`,
+        tags: ['User Accounts', 'Permissions', 'Security']
+      },
+      {
+        id: 'mac-11',
+        question: '如何遠端協助使用者操作 Mac (如 Apple Remote Desktop)？',
+        answer: `
+**工具選擇**：
+1.  **Jamf Remote** (傳統)：Jamf 提供的遠端管理工具，可執行指令或畫面共享。
+2.  **Apple Remote Desktop (ARD)**：Apple 官方的強大管理工具，可即時監看多台 Mac 畫面、控制游標、傳檔。
+3.  **TeamViewer / AnyDesk**：第三方工具，適合跨網段穿越防火牆的遠端支援。
+
+**MDM 設定關鍵**：
+要啟用 ARD，必須透過 MDM 推送 **「遠端管理 (Remote Management)」** 描述檔，預先授權特定的管理員帳號可以進行畫面控制，否則即使用者會一直跳出隱私權許可視窗。
+`,
+        tags: ['Remote Desktop', 'Support', 'ARD']
+      },
+      {
+        id: 'mac-12',
+        question: 'Mac 的系統更新 (macOS Update) 可以像 iPad 一樣強制執行嗎？',
+        answer: `
+**可以，但機制略有不同。**
+
+*   **M1/M2/M3 (Apple Silicon)**：管理機制已與 iPad 類似。MDM 可以發送指令要求下載並安裝更新，但使用者必須輸入**管理者密碼 (Volume Owner)** 才能授權開始安裝。
+*   **Deferral (延遲更新)**：管理者可以設定「延遲看到更新」的天數 (最多 90 天)，讓 IT 部門有時間測試新系統的相容性，防止使用者第一時間誤升級。
+`,
+        tags: ['macOS Update', 'Apple Silicon', 'Management']
       }
     ]
   }
-]
+];
+

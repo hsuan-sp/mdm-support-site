@@ -154,8 +154,8 @@ const getCategoryColor = (cat: string) => {
 /* Controls */
 .controls-wrapper {
   position: sticky;
-  top: 20px;
-  z-index: 100;
+  top: 80px;
+  z-index: 20;
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
