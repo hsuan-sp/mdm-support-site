@@ -139,6 +139,7 @@ const navCards = [
   </div>
 </template>
 
+<style scoped>
 /* Fonts & Variables */
 .apple-container {
   font-family: var(--vp-font-family-base);
@@ -281,12 +282,23 @@ const navCards = [
   line-height: 1.4;
 }
 
-/* Responsive Grid - The "Commercial" Fix */
+/* Responsive Grid - Strict Uniformity */
 .cards-grid {
   display: grid;
-  /* Auto-fit columns with a sensible minimum width to prevent squeezing */
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(1, 1fr);
   gap: 24px;
+}
+
+@media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .card {
@@ -368,3 +380,4 @@ const navCards = [
   .card { background: #1c1c1e; border-color: rgba(255,255,255,0.05); }
   .promo { background: #1c1c1e; }
 }
+</style>
