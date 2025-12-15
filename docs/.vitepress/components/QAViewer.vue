@@ -135,7 +135,7 @@ onMounted(async () => {
     },
     { threshold: 0.05, rootMargin: '50px' }
   );
-  document.querySelectorAll('.qa-item').forEach((el) => {
+  document.querySelectorAll('.qa-card').forEach((el) => {
     observer.observe(el);
   });
 });
