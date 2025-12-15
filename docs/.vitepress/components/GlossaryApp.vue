@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch, nextTick } from "vue";
 import { glossaryData } from "../../data/glossary";
 
 type CategoryType = "Core" | "Enrollment" | "Apple" | "Security" | "Network" | "Hardware" | "Apps" | "Other" | "Education" | "macOS" | "Jamf";
@@ -78,10 +78,22 @@ const toggleSort = () => {
 
 // Staggered animation on scroll
 onMounted(() => {
+  observeCards();
+});
+
+// Re-observe cards when filtered terms change
+watch(filteredTerms, () => {
+  // Wait for DOM to update
+  nextTick(() => {
+    observeCards();
+  });
+});
+
+function observeCards() {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !entry.target.classList.contains('card-visible')) {
           setTimeout(() => {
             entry.target.classList.add('card-visible');
           }, index * 50);
@@ -91,12 +103,11 @@ onMounted(() => {
     { threshold: 0.1 }
   );
 
-  setTimeout(() => {
-    document.querySelectorAll('.term-card').forEach((el) => {
-      observer.observe(el);
-    });
-  }, 100);
-});
+  // Observe all term cards
+  document.querySelectorAll('.term-card').forEach((el) => {
+    observer.observe(el);
+  });
+}
 </script>
 
 <template>
@@ -394,8 +405,6 @@ onMounted(() => {
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
   position: relative;
   overflow: hidden;
 }
@@ -414,8 +423,18 @@ onMounted(() => {
 }
 
 .term-card.card-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  animation: cardFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .term-card:hover {
@@ -495,8 +514,37 @@ onMounted(() => {
   margin-top: 8px;
 }
 
-.badge { font-style: italic;
+.badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
+
+/* Category color classes */
+.bg-blue-50 { background-color: rgba(59, 130, 246, 0.1); }
+.text-blue-600 { color: rgb(37, 99, 235); }
+.bg-green-50 { background-color: rgba(34, 197, 94, 0.1); }
+.text-green-600 { color: rgb(22, 163, 74); }
+.bg-gray-100 { background-color: rgba(156, 163, 175, 0.15); }
+.text-gray-600 { color: rgb(75, 85, 99); }
+.bg-red-50 { background-color: rgba(239, 68, 68, 0.1); }
+.text-red-600 { color: rgb(220, 38, 38); }
+.bg-indigo-50 { background-color: rgba(99, 102, 241, 0.1); }
+.text-indigo-600 { color: rgb(79, 70, 229); }
+.bg-orange-50 { background-color: rgba(249, 115, 22, 0.1); }
+.text-orange-600 { color: rgb(234, 88, 12); }
+.bg-pink-50 { background-color: rgba(236, 72, 153, 0.1); }
+.text-pink-600 { color: rgb(219, 39, 119); }
+.bg-yellow-50 { background-color: rgba(250, 204, 21, 0.1); }
+.text-yellow-600 { color: rgb(202, 138, 4); }
+.bg-purple-50 { background-color: rgba(168, 85, 247, 0.1); }
+.text-purple-600 { color: rgb(147, 51, 234); }
+.bg-teal-50 { background-color: rgba(20, 184, 166, 0.1); }
+.text-teal-600 { color: rgb(13, 148, 136); }
 
 /* No Results */
 .no-results {
@@ -571,5 +619,27 @@ onMounted(() => {
   }
   
   .analogy p { color: #a1a1a6; }
+  
+  /* Dark mode badge colors */
+  .bg-blue-50 { background-color: rgba(59, 130, 246, 0.2); }
+  .text-blue-600 { color: rgb(96, 165, 250); }
+  .bg-green-50 { background-color: rgba(34, 197, 94, 0.2); }
+  .text-green-600 { color: rgb(74, 222, 128); }
+  .bg-gray-100 { background-color: rgba(156, 163, 175, 0.2); }
+  .text-gray-600 { color: rgb(156, 163, 175); }
+  .bg-red-50 { background-color: rgba(239, 68, 68, 0.2); }
+  .text-red-600 { color: rgb(248, 113, 113); }
+  .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.2); }
+  .text-indigo-600 { color: rgb(129, 140, 248); }
+  .bg-orange-50 { background-color: rgba(249, 115, 22, 0.2); }
+  .text-orange-600 { color: rgb(251, 146, 60); }
+  .bg-pink-50 { background-color: rgba(236, 72, 153, 0.2); }
+  .text-pink-600 { color: rgb(244, 114, 182); }
+  .bg-yellow-50 { background-color: rgba(250, 204, 21, 0.2); }
+  .text-yellow-600 { color: rgb(250, 204, 21); }
+  .bg-purple-50 { background-color: rgba(168, 85, 247, 0.2); }
+  .text-purple-600 { color: rgb(192, 132, 252); }
+  .bg-teal-50 { background-color: rgba(20, 184, 166, 0.2); }
+  .text-teal-600 { color: rgb(45, 212, 191); }
 }
 </style>
