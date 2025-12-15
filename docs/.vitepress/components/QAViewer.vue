@@ -123,15 +123,59 @@ watch(searchQuery, () => {
 
 // Simple visibility reveal on mount
 const isLoaded = ref(false);
-onMounted(() => {
+const isWideMode = ref(false); // Default to focused reading mode
+const showWidthToggle = ref(false);
+const visibleItems = ref<Set<string>>(new Set()); // Assuming visibleItems is needed for the IntersectionObserver
+
+const checkScreenSize = () => {
+  showWidthToggle.value = window.innerWidth > 1200;
+  if (!showWidthToggle.value) {
+    isWideMode.value = false;
+  }
+};
+
+onMounted(async () => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+
   setTimeout(() => {
     isLoaded.value = true;
   }, 100);
+
+  await nextTick();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('data-id');
+          if (id) {
+            visibleItems.value.add(id);
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    },
+    { threshold: 0.05, rootMargin: '50px' }
+  );
+  document.querySelectorAll('.qa-card').forEach((el) => {
+    observer.observe(el);
+  });
 });
 </script>
 
 <template>
-  <div class="qa-container">
+  <div class="qa-container" :class="{ 'wide-mode': isWideMode }">
+    
+    <!-- Width Toggle Button (Floating) -->
+    <button 
+      v-if="showWidthToggle" 
+      class="width-toggle-btn" 
+      @click="isWideMode = !isWideMode"
+      :title="isWideMode ? '切換至閱讀模式 (窄版)' : '切換至寬版模式'"
+    >
+      <svg v-if="isWideMode" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+      <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+    </button>
     
     <!-- 1. Hero Search Area -->
     <section class="qa-hero">
@@ -233,6 +277,38 @@ onMounted(() => {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 24px 100px;
+  transition: max-width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qa-container.wide-mode {
+  max-width: 1400px;
+}
+
+/* --- Floating Toggle --- */
+.width-toggle-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  color: var(--vp-c-text-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.width-toggle-btn:hover {
+  transform: scale(1.1);
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 8px 24px rgba(var(--vp-c-brand-1), 0.2);
 }
 
 /* --- Hero Search --- */
@@ -407,7 +483,7 @@ onMounted(() => {
 }
 
 .question-text {
-  font-size: 17px;
+  font-size: 20px; /* Increased from 18px */
   font-weight: 600;
   line-height: 1.5;
   color: var(--vp-c-text-1);
@@ -416,12 +492,12 @@ onMounted(() => {
 
 .badge-important {
   display: inline-block;
-  font-size: 11px;
+  font-size: 12px;
   color: #ff3b30;
   background: rgba(255, 59, 48, 0.1);
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 700;
 }
 
@@ -452,8 +528,8 @@ onMounted(() => {
 }
 
 .answer-content {
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 18px; /* Increased from 16px */
+  line-height: 1.8;
   color: var(--vp-c-text-2);
 }
 
