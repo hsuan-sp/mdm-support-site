@@ -104,8 +104,7 @@ const filteredSections = computed(() => {
 const openItems = ref<Set<string>>(new Set());
 const visibleItems = ref<Set<string>>(new Set());
 
-// --- Selection Logic ---
-const activeSection = ref("All");
+
 
 const toggleItem = (id: string) => {
   if (openItems.value.has(id)) {
@@ -338,6 +337,7 @@ onMounted(async () => {
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--vp-c-text-1) 30%, var(--vp-c-text-2) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
