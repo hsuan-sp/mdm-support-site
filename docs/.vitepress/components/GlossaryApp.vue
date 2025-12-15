@@ -94,110 +94,104 @@ onMounted(async () => {
   <div class="glossary-app">
     <!-- Header Section -->
     <header class="glossary-header">
-      <h1>MDM Zero-Knowledge Glossary</h1>
+      <h1>零知識術語表</h1>
       <p class="subtitle">從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。</p>
     </header>
 
     <!-- Sticky Controls -->
+    <!-- Sticky Controls -->
     <div class="controls-wrapper">
-      <!-- Toggle Button -->
-      <button 
-        @click="toggleControls" 
-        class="controls-toggle"
-        :class="{ expanded: isControlsExpanded }"
-        :aria-label="isControlsExpanded ? '收起搜尋工具' : '展開搜尋工具'"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <span>{{ isControlsExpanded ? '收起搜尋' : '展開搜尋' }}</span>
-        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
+      <div class="controls-inner">
+        <!-- Toggle Button -->
+        <button 
+          @click="toggleControls" 
+          class="controls-toggle"
+          :class="{ expanded: isControlsExpanded }"
+          :aria-label="isControlsExpanded ? '收起搜尋工具' : '展開搜尋工具'"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="control-text">{{ isControlsExpanded ? '收起篩選器' : '搜尋與篩選' }}</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
 
-      <!-- Collapsible Controls -->
-      <div class="controls-container" :class="{ collapsed: !isControlsExpanded }">
-        <div class="controls glass-effect">
-          <div class="search-box">
-            <span class="search-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </span>
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="搜尋術語（如：ADE, 憑證...）"
-              class="search-input"
-            />
-            <!-- 排序按鈕 -->
-            <button
-              @click="toggleSort"
-              class="sort-button"
-              :title="sortOrder === 'asc' ? '目前：A-Z 順序 (點擊切換為 Z-A)' : '目前：Z-A 倒序 (點擊切換為 A-Z)'"
-            >
-              <svg v-if="sortOrder === 'asc'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/>
-              </svg>
-              <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 5h10M11 9h7M11 13h4M3 7l3-3 3 3M6 6v14"/>
-              </svg>
-              <span class="sort-label">{{ sortOrder === 'asc' ? 'A-Z' : 'Z-A' }}</span>
-            </button>
-          </div>
+        <!-- Collapsible Content -->
+        <div class="controls-container" :class="{ collapsed: !isControlsExpanded }">
+          <div class="controls-content">
+            <div class="search-box">
+              <span class="search-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </span>
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="搜尋術語（如：ADE, 憑證...）"
+                class="search-input"
+              />
+            </div>
 
-          <div class="category-pills">
-            <button
-              v-for="cat in categories"
-              :key="cat"
-              @click="selectedCategory = cat"
-              :class="['pill', { active: selectedCategory === cat }]"
-            >
-              {{ cat }}
-            </button>
+            <div class="categories">
+              <button
+                @click="toggleSort"
+                class="cat-btn"
+                :title="sortOrder === 'asc' ? '切換為 Z-A' : '切換為 A-Z'"
+              >
+                <span v-if="sortOrder === 'asc'">A-Z</span>
+                <span v-else>Z-A</span>
+              </button>
+              
+              <div class="divider"></div>
+
+              <button
+                v-for="cat in categories"
+                :key="cat"
+                @click="selectedCategory = cat"
+                :class="['cat-btn', { active: selectedCategory === cat }]"
+              >
+                {{ cat }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Results Grid -->
-    <div class="term-grid">
+    <div class="terms-grid">
       <div
         v-for="(item, index) in filteredTerms"
         :key="index"
         class="term-card"
       >
         <div class="card-header">
-          <div class="header-top">
-            <div class="category-badges">
-              <span 
-                v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" 
-                :key="cat"
-                :class="['badge', getCategoryColor(cat)]"
-              >
-                {{ cat }}
-              </span>
-            </div>
-          </div>
           <h3 class="term-title">{{ item.term }}</h3>
+          <div class="term-badges">
+            <span 
+              v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" 
+              :key="cat"
+              :class="['badge', getCategoryColor(cat)]"
+            >
+              {{ cat }}
+            </span>
+          </div>
         </div>
 
-        <div class="card-body">
-          <div class="section definition">
-            <p>{{ item.definition }}</p>
-          </div>
+        <p class="term-definition">{{ item.definition }}</p>
 
-          <div class="section analogy">
-            <span class="emoji">💡</span>
-            <p>{{ item.analogy }}</p>
-          </div>
+        <div v-if="item.analogy" class="term-analogy">
+          <span class="analogy-label">白話文 / 比喻</span>
+          {{ item.analogy }}
         </div>
       </div>
     </div>
 
-    <div v-if="filteredTerms.length === 0" class="no-results">
-      <div class="no-content-icon">🔍</div>
-      <p>找不到符合的術語，試試其他關鍵字？</p>
+    <!-- Empty State -->
+    <div v-if="filteredTerms.length === 0" class="empty-state">
+      沒有找到符合「{{ searchQuery }}」的術語 🧐
     </div>
   </div>
 </template>
@@ -221,110 +215,98 @@ onMounted(async () => {
   font-weight: 700;
   letter-spacing: -0.015em;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-brand-1) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 1.3; /* Increased to prevent clipping */
-  padding-bottom: 4px; /* Safety padding */
-  padding-top: 4px; /* Safety padding */
+  line-height: 1.1;
 }
 
-.glossary-header .subtitle {
-  font-size: 21px;
-  color: #86868b;
+.subtitle {
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--vp-c-text-2);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
   font-weight: 400;
 }
 
-/* Controls */
+/* --- Controls Section (Sticky & Glassmorphism) --- */
 .controls-wrapper {
   position: sticky;
-  top: 80px;
-  z-index: 20;
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  top: var(--vp-nav-height); /* Adapts to VitePress navbar */
+  z-index: 100;
+  padding: 20px 0;
+  margin: 0 -24px; /* Bleed to edges for backdrop effect */
+  background: rgba(var(--vp-c-bg), 0.8); /* Semi-transparent bg for fallback */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.controls-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* Toggle Button */
 .controls-toggle {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  border-radius: 50px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  color: #1d1d1f;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: var(--vp-c-bg-alt);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--vp-c-text-2);
   font-size: 15px;
-  font-weight: 600;
-  max-width: 200px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  margin-bottom: 0;
 }
 
 .controls-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-  background: rgba(255, 255, 255, 1);
-}
-
-.controls-toggle:active {
-  transform: translateY(0);
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-1);
 }
 
 .controls-toggle .chevron {
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .controls-toggle.expanded .chevron {
   transform: rotate(180deg);
 }
 
-/* Collapsible Container */
+.control-text {
+  font-size: 14px;
+}
+
+/* Collapsible Container Animation */
 .controls-container {
-  width: 100%;
-  max-height: 500px;
-  opacity: 1;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.3s ease,
-              margin 0.4s ease;
-  margin-top: 0;
+  transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  max-height: 500px; /* Arbitrary large height */
+  opacity: 1;
 }
 
 .controls-container.collapsed {
   max-height: 0;
   opacity: 0;
-  margin-top: -12px;
   pointer-events: none;
+  margin-top: 0;
 }
 
-.controls {
-  padding: 20px;
-  border-radius: 24px;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-  border: 1px solid rgba(255,255,255,0.4);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: all 0.3s ease;
-}
-
+/* Search Input */
 .search-box {
   position: relative;
-  width: 100%;
+  margin-bottom: 24px;
+  margin-top: 16px;
 }
 
 .search-icon {
@@ -332,142 +314,110 @@ onMounted(async () => {
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #86868b;
-  display: flex;
-  align-items: center;
+  color: var(--vp-c-text-3);
+  pointer-events: none;
 }
 
 .search-input {
   width: 100%;
   padding: 14px 16px 14px 48px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: rgba(0,0,0,0.05);
-  color: #1d1d1f;
   font-size: 17px;
-  transition: all 0.2s;
+  border-radius: 16px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
 .search-input:focus {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(0,125,250,0.2);
   outline: none;
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.15);
+  background: var(--vp-c-bg);
 }
 
-.sort-button {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(0,0,0,0.03);
-  color: #515154;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.sort-button:hover {
-  background: rgba(0,0,0,0.06);
-  border-color: rgba(0,0,0,0.15);
-}
-
-.sort-button svg {
-  width: 16px;
-  height: 16px;
-}
-
-.sort-label {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.category-pills {
+/* Categories */
+.categories {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
+  align-items: center; /* Align items vertically */
+  padding-bottom: 8px; 
 }
 
-.pill {
+.divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(128, 128, 128, 0.2);
+  margin: 0 8px;
+}
+
+.cat-btn {
   padding: 8px 16px;
-  border-radius: 980px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: transparent;
+  border-radius: 980px; /* Pilot shape */
   font-size: 14px;
   font-weight: 500;
-  color: #515154;
+  background: var(--vp-c-bg-alt);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  color: var(--vp-c-text-2);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  user-select: none;
+  white-space: nowrap;
 }
 
-.pill::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.05);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s, height 0.4s;
+.cat-btn:hover {
+  background: var(--vp-c-bg-mute);
+  transform: translateY(-1px);
 }
 
-.pill:hover::before {
-  width: 200px;
-  height: 200px;
-}
-
-.pill:hover {
-  background: rgba(0,0,0,0.05);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.pill:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.pill.active {
-  background: #1d1d1f;
+.cat-btn.active {
+  background: var(--vp-c-brand-1);
   color: #fff;
-  border-color: #1d1d1f;
-  box-shadow: 0 4px 16px rgba(29, 29, 31, 0.3);
-  transform: scale(1.05);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.3);
 }
 
-.pill.active:hover {
-  box-shadow: 0 6px 20px rgba(29, 29, 31, 0.4);
-}
 
-/* Grid */
-.term-grid {
+/* --- Grid Layout (Responsive) --- */
+.terms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
+  margin-top: 40px;
 }
 
-/* Enhanced Card Animations */
+/* Mobile: Single column is handled by minmax(300px), but let's ensure small screens are safe */
+@media (max-width: 639px) {
+  .terms-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .glossary-header {
+    padding: 40px 0 30px;
+  }
+  
+  .controls-wrapper {
+    padding: 12px 0;
+  }
+}
+
+/* 4K/Wide Screens: Limit max width of cards so they don't look stretched */
+@media (min-width: 1440px) {
+  .terms-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}
+
+
+/* --- Card Design (Apple-style) --- */
 .term-card {
-  background: #fff;
+  background: var(--vp-c-bg-alt);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-  border: 1px solid rgba(0,0,0,0.05);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
   position: relative;
   overflow: hidden;
 }
