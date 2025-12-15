@@ -48,7 +48,7 @@ export const glossaryData: Term[] = [
     term: 'ACME (Automated Certificate Management Environment)',
     category: 'Security',
     definition: '自動憑證管理環境。這是一種通訊協定，用於自動化處理數位憑證的申請、驗證、簽發與更新。在現代 MDM 管理中（尤其是配合 Managed Device Attestation），ACME 取代了部分傳統 SCEP 流程，確保裝置身分憑證永遠保持最新且有效，無需人工介入。',
-    analogy: '憑證的「自動續約機器人」。它會盯著你的數位身分證，快過期時自動幫你跑腿去戶政事務所辦理換發，你完全不用擔心證件過期失效。'
+    analogy: '「憑證自動續約機器人」。它會盯著你的數位身分證，快過期時自動幫你跑腿去換發新證，你完全不用擔心證件過期失效。就像自動繳費一樣，不用自己記日期。'
   },
   {
     term: 'ADE (Automated Device Enrollment)',
@@ -96,7 +96,7 @@ export const glossaryData: Term[] = [
     term: 'APNs (Apple Push Notification service)',
     category: 'Apple',
     definition: 'Apple 推播服務。這是 MDM 運作的心臟。MDM 伺服器無法直接「命令」裝置，必須先發送訊號給 Apple 的 APNs 伺服器，再由 APNs「叫醒」裝置去向 MDM 伺服器報到並領取指令。若此連線中斷，MDM 將完全失效。',
-    analogy: '「皇宮傳令兵」。MDM 是將軍，裝置是士兵，但將軍不能直接對士兵大吼。將軍必須把命令交給皇宮的傳令兵（Apple），由傳令兵跑去拍士兵的肩膀說：「將軍找你，快去回話！」'
+    analogy: '「郵局通知系統」。MDM 伺服器就像公司總部，裝置就像員工的家。總部不能直接跑到每個員工家門口喊話，而是透過郵局（Apple）寄出掛號信，郵差會去按員工家的門鈴說：「有公司來信，請回辦公室領取任務！」'
   },
   {
     term: 'App Config (App Configuration)',
@@ -157,7 +157,7 @@ export const glossaryData: Term[] = [
     term: 'Bootstrap Token',
     category: 'Security',
     definition: '引導代幣。這是 macOS 用來解決 FileVault 加密與安全帳號建立權限的關鍵機制。當第一位使用者啟用加密後，系統會生成此 Token 並託管給 MDM。MDM 隨後可用此 Token 授權其他帳號登入，或在無需密碼的情況下進行系統更新。',
-    analogy: '「皇室授權信物」。以前只有國王（第一個使用者）能開金庫，現在國王把信物交給管家（MDM）保管。以後新來的侍衛要開金庫，不用吵醒國王，找管家拿信物蓋章就可以了。'
+    analogy: '「系統管理授權鑰匙」。第一個設定電腦的人把管理權限的備份鑰匙託管給 IT 部門（MDM）保管。之後 IT 可以用這把鑰匙授權新員工使用電腦，或者在沒有使用者在場的情況下執行系統維護。'
   },
   {
     term: 'Bundle ID',
@@ -482,12 +482,94 @@ export const glossaryData: Term[] = [
     definition: '大量採購計畫（現整合於 ABM 的 Apps and Books）。這是企業大量購買 App 授權的機制。企業購買後獲得「虛擬授權」，可透過 MDM 分發給裝置或 Apple ID。最重要的是，企業保有授權的所有權，當員工離職或裝置回收時，MDM 可以「收回」授權並分發給下一位員工。',
     analogy: '「數位圖書館」。公司買了一百本電子書（App），借給員工看。員工看完或離職了，書就自動歸還到公司的架上，可以再借給下一個人，不用每次有人來都重新買書。'
   },
+  {
+    term: 'Profile (Configuration Profile)',
+    category: 'Core',
+    definition: '設定描述檔。這是 MDM 管理的基礎單位，是一個 XML 格式的檔案（.mobileconfig）。它可以包含多個 Payload（設定單元），用來配置 Wi-Fi、Email、VPN、限制功能等。一旦安裝到裝置上，描述檔中的所有設定會同時生效。',
+    analogy: '「設定指令包」。就像一個工具箱，裡面裝了好幾種工具（Payload）：一把 Wi-Fi 設定鑰匙、一份 Email 設定說明書、一張限制功能的規則卡。把這個工具箱發給裝置，所有工具就同時派上用場。'
+  },
+  // --- R ---
+  {
+    term: 'Remote Management',
+    category: 'Core',
+    definition: '遠端管理。這是 MDM 的核心概念。IT 管理員可以在辦公室透過網路對分散在各地的裝置進行設定、安裝軟體、查看狀態、甚至清除資料，完全無需實體接觸裝置。',
+    analogy: '「遙控器管理」。就像你可以用遙控器操作電視，IT 可以用電腦遙控全國各地的 iPad，調整設定、安裝 App，甚至緊急關機，完全不用親自跑過去。'
+  },
+  {
+    term: 'Roster (班級名冊)',
+    category: 'Education',
+    definition: '班級名冊。在教育環境中，ASM 可透過 SFTP 或手動方式匯入學生與教師的班級資料（CSV 格式）。這些資料會自動同步到 Apple Classroom App，讓老師的 iPad 一開啟課堂 App 就能看到正確的學生名單。',
+    analogy: '「數位點名簿」。就像老師手上的點名冊，系統會自動把哪些學生在哪個班、誰是導師的資料填好。老師打開 App，學生名單已經準備好了，不用手動一個個加。'
+  },
+  // --- S ---
+  {
+    term: 'Self Service',
+    category: 'Apps',
+    definition: 'Self Service（自助服務）。Jamf 提供的專屬 App，作為使用者端的「公司 App Store」。員工或學生可以在這裡瀏覽並自行安裝 IT 預先審核的 App、執行故障排除腳本，或安裝設定描述檔，無需聯絡 IT 求助。',
+    analogy: '「公司專屬應用商店」。就像 App Store，但裡面只有公司或學校准許的軟體。使用者可以自己逛、自己下載，不用每次都打電話問 IT「可以裝這個嗎？」'
+  },
+  {
+    term: 'Setup Assistant',
+    category: 'Enrollment',
+    definition: '設定輔助程式。Apple 裝置第一次開機時出現的引導畫面（Hello/哈囉畫面開始）。它會逐步詢問語言、Wi-Fi、Apple ID、定位服務等設定。透過 ADE + PreStage，IT 可以跳過大部分畫面，讓裝置直接進入可用狀態。',
+    analogy: '「新手教學關卡」。就像遊戲一開始的新手村，會問你一堆問題：選語言、連網路、創帳號。但公司可以幫你設定「跳關」，讓你直接跳到主畫面開始使用。'
+  },
+  {
+    term: 'Site (Jamf Pro Sites)',
+    category: 'Core',
+    definition: 'Sites（分站）。Jamf Pro 的多租戶架構功能。一個 Jamf 伺服器可以分割成多個虛擬「分站」，每個分站有獨立的管理員、裝置、設定，彼此資料隔離。這常用於縣市教育局集中管理數十所學校的情境。',
+    analogy: '「總公司下的分公司」。一台大型伺服器就像總公司大樓，但裡面分成好幾個獨立辦公室（分站）。台北辦公室看不到高雄辦公室的資料，各自管理自己的員工和裝置。'
+  },
+  {
+    term: 'Smart Group',
+    category: 'Core',
+    definition: '智慧型群組。一種「自動化」的裝置群組。管理員設定條件（如「電池健康度 < 80%」、「iOS 版本 < 17」），系統會自動將符合條件的裝置加入群組。當裝置狀態改變，群組成員會動態更新。',
+    analogy: '「自動分類系統」。就像郵局會自動把信件依郵遞區號分類。你設定規則「電量低於 20% 的裝置」，系統就會自動把這些裝置撈進「待充電群組」，不用你手動一台台勾選。'
+  },
+  {
+    term: 'Static Group',
+    category: 'Core',
+    definition: '靜態群組。與智慧型群組相反，這是「手動管理」的群組。管理員自己決定哪些裝置要加入，名單不會自動變動。適合用於特定專案或固定的設備清單。',
+    analogy: '「手動分組名單」。就像老師手動把學生分成 A、B 兩組做報告。除非老師親自調整，否則名單不會變動，不會因為學生成績改變就自動換組。'
+  },
+  // --- T ---
+  {
+    term: 'Temporary Session (Guest Mode)',
+    category: 'Education',
+    definition: '臨時工作階段（訪客模式）。Shared iPad 的一種使用模式。使用者點擊「訪客」即可免帳號登入使用。登出後，所有資料（瀏覽紀錄、下載檔案、App 資料）會被立即清除，確保下一位使用者拿到的是乾淨的裝置。',
+    analogy: '「圖書館公用電腦」。你不用登入帳號，坐下就能用。但你離開後，系統會自動清空你的瀏覽紀錄和下載資料，下一個人看不到你用過的痕跡。'
+  },
+  {
+    term: 'Token (代號/權杖)',
+    category: 'Security',
+    definition: 'Token（代號/權杖）。在 MDM 環境中常見的數位憑證檔案。例如 ADE Token 用於 Jamf 與 ASM 通訊、VPP Token 用於授權管理、APNs Certificate 用於推播。Token 通常有效期一年，過期後必須更新，否則相關功能會中斷。',
+    analogy: '「通行證」。就像進入管制區需要的通行證，上面有效期限和權限範圍。過期了就進不去，必須去櫃檯（Apple 網站）重新申請更新。'
+  },
+  // --- U ---
+  {
+    term: 'UIE (User-Initiated Enrollment)',
+    category: 'Enrollment',
+    definition: '使用者自行啟動註冊。這是透過網頁連結或 QR Code 讓使用者主動下載 MDM 描述檔的註冊方式。缺點是無法達到完整的監管狀態，且使用者可以隨時移除描述檔，因此不適合企業用的公配載具。',
+    analogy: '「自願報名制」。不像 ADE 是強制徵召，UIE 是使用者自己去網站報名參加管理。但既然是自願的，使用者也可以隨時退出，公司管不住。'
+  },
+  {
+    term: 'Update Inventory',
+    category: 'Core',
+    definition: '更新資產清單。這是 MDM 向裝置發送的一個指令，要求裝置立即回報最新的硬體資訊、已安裝 App 清單、電池狀態、儲存空間等資料。在排除故障時，這通常是第一個執行的動作。',
+    analogy: '「財產盤點」。就像公司定期要求員工回報辦公室裡有哪些設備、電腦裝了哪些軟體。IT 發出盤點指令，裝置就會把最新的清單回報上來。'
+  },
   // --- W ---
   {
-    term: 'Webhook',
-    category: 'Other',
-    definition: 'Webhook。這是一種「反向 API」機制。當 MDM 發生特定事件（如：偵測到電腦中毒、新裝置註冊成功）時，MDM 會主動發送一個 HTTP POST 訊息到指定的網址（如 Slack 或自動化伺服器）。這讓 IT 能實現即時監控與自動化告警。',
-    analogy: '「事件通知鈴」。不用一直打電話問 MDM「有沒有新消息？」，而是裝個門鈴。一旦有事發生（如包裹到了），MDM 就會主動按鈴通知你，你再處理就好。'
+    term: 'Wi-Fi Payload',
+    category: 'Network',
+    definition: 'Wi-Fi 設定單元。Configuration Profile 中的一種 Payload 類型。它可以預先配置 Wi-Fi 的 SSID、密碼、加密方式（WPA2/WPA3）、是否自動連線，甚至可以設定 802.1x 憑證認證，讓裝置開機就自動連上企業網路。',
+    analogy: '「網路設定懶人包」。就像把 Wi-Fi 名稱和密碼事先寫在一張紙條上塞進裝置。裝置一開機，看到紙條就自動連上網路，不用使用者手動輸入密碼。'
+  },
+  {
+    term: 'Wipe (清除裝置)',
+    category: 'Core',
+    definition: '清除裝置。MDM 的一個遠端指令，會將裝置恢復到原廠出廠狀態。所有資料、App、照片、設定全部清除，裝置重啟後會回到 Hello 歡迎畫面。這用於裝置遺失、回收或轉移給其他使用者。',
+    analogy: '「重置鍵」。就像按下工廠重置按鈕，把手機洗成一台全新的樣子，裡面什麼都沒有，就像剛從商店買回來一樣。'
   },
   // --- Z ---
   {
