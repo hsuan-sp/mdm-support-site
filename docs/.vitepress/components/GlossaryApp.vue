@@ -4,6 +4,7 @@ import { glossaryData } from "../../data/glossary";
 
 const searchQuery = ref("");
 const selectedCategory = ref("All");
+const sortOrder = ref<'asc' | 'desc'>('asc'); // 新增排序狀態
 
 const categories = [
   "All",
@@ -16,10 +17,12 @@ const categories = [
   "Apps",
   "Other",
   "Education",
+  "macOS",    // 新增
+  "Jamf",     // 新增
 ];
 
 const filteredTerms = computed(() => {
-  return glossaryData.filter((item) => {
+  let filtered = glossaryData.filter((item) => {
     const matchesSearch =
       item.term.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.definition.includes(searchQuery.value) ||
@@ -29,6 +32,18 @@ const filteredTerms = computed(() => {
       item.category === selectedCategory.value;
 
     return matchesSearch && matchesCategory;
+  });
+  
+  // 應用排序
+  return filtered.sort((a, b) => {
+    const termA = a.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
+    const termB = b.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
+    
+    if (sortOrder.value === 'asc') {
+      return termA.localeCompare(termB);
+    } else {
+      return termB.localeCompare(termA);
+    }
   });
 });
 
@@ -44,8 +59,15 @@ const getCategoryColor = (cat: string) => {
     Apps: "bg-pink-50 text-pink-600 dark:bg-pink-900/30 dark:text-pink-300",
     Other: "bg-gray-50 text-gray-500 dark:bg-gray-900/30 dark:text-gray-400",
     Education: "bg-yellow-50 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-300",
+    macOS: "bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-300",
+    Jamf: "bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-300",
   };
   return map[cat] || "bg-gray-100 text-gray-600";
+};
+
+// 切換排序順序
+const toggleSort = () => {
+  sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
 };
 </script>
 
@@ -70,6 +92,20 @@ const getCategoryColor = (cat: string) => {
             placeholder="搜尋術語（如：ADE, 憑證...）"
             class="search-input"
           />
+          <!-- 排序按鈕 -->
+          <button
+            @click="toggleSort"
+            class="sort-button"
+            :title="sortOrder === 'asc' ? '目前：A-Z 順序 (點擊切換為 Z-A)' : '目前：Z-A 倒序 (點擊切換為 A-Z)'"
+          >
+            <svg v-if="sortOrder === 'asc'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/>
+            </svg>
+            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 5h10M11 9h7M11 13h4M3 7l3-3 3 3M6 6v14"/>
+            </svg>
+            <span class="sort-label">{{ sortOrder === 'asc' ? 'A-Z' : 'Z-A' }}</span>
+          </button>
         </div>
 
         <div class="category-pills">
@@ -207,6 +243,40 @@ const getCategoryColor = (cat: string) => {
   background: #fff;
   box-shadow: 0 0 0 4px rgba(0,125,250,0.2);
   outline: none;
+}
+
+.sort-button {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.03);
+  color: #515154;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sort-button:hover {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.15);
+}
+
+.sort-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sort-label {
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .category-pills {
@@ -357,6 +427,17 @@ const getCategoryColor = (cat: string) => {
   }
   
   .search-icon { color: #a1a1a6; }
+  
+  .sort-button {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.1);
+    color: #a1a1a6;
+  }
+  
+  .sort-button:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.15);
+  }
   
   .pill {
     color: #a1a1a6;
