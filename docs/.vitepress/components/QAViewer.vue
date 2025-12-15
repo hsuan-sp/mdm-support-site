@@ -123,21 +123,9 @@ watch(searchQuery, () => {
 
 // Simple visibility reveal on mount
 const isLoaded = ref(false);
-const isWideMode = ref(false); // Default to focused reading mode
-const showWidthToggle = ref(false);
 const visibleItems = ref<Set<string>>(new Set()); // Assuming visibleItems is needed for the IntersectionObserver
 
-const checkScreenSize = () => {
-  showWidthToggle.value = window.innerWidth > 1200;
-  if (!showWidthToggle.value) {
-    isWideMode.value = false;
-  }
-};
-
 onMounted(async () => {
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
-
   setTimeout(() => {
     isLoaded.value = true;
   }, 100);
@@ -164,18 +152,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="qa-container" :class="{ 'wide-mode': isWideMode }">
-    
-    <!-- Width Toggle Button (Floating) -->
-    <button 
-      v-if="showWidthToggle" 
-      class="width-toggle-btn" 
-      @click="isWideMode = !isWideMode"
-      :title="isWideMode ? '切換至閱讀模式 (窄版)' : '切換至寬版模式'"
-    >
-      <svg v-if="isWideMode" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
-      <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
-    </button>
+  <div class="qa-container">
     
     <!-- 1. Hero Search Area -->
     <section class="qa-hero">
@@ -274,51 +251,20 @@ onMounted(async () => {
 <style scoped>
 /* --- Layout & Reset --- */
 .qa-container {
-  max-width: 900px;
+  width: 100%;
   margin: 0 auto;
-  padding: 40px 24px 100px;
-  transition: max-width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.qa-container.wide-mode {
-  max-width: 1400px;
-}
-
-/* --- Floating Toggle --- */
-.width-toggle-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  color: var(--vp-c-text-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 100;
-  transition: all 0.3s ease;
-}
-
-.width-toggle-btn:hover {
-  transform: scale(1.1);
-  color: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 8px 24px rgba(var(--vp-c-brand-1), 0.2);
+  padding: 40px 0 100px;
 }
 
 /* --- Hero Search --- */
 .qa-hero {
   text-align: center;
   margin-bottom: 40px;
+  padding: 0 24px;
 }
 
 .hero-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   margin-bottom: 24px;
   background: linear-gradient(120deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
@@ -336,7 +282,7 @@ onMounted(async () => {
 .search-input {
   width: 100%;
   padding: 16px 48px;
-  font-size: 17px;
+  font-size: 16px;
   border-radius: 12px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-alt);
@@ -380,7 +326,7 @@ onMounted(async () => {
   z-index: 20;
   background: rgba(var(--vp-c-bg-rgb), 0.85); /* Use RGB var if available, else standard color */
   backdrop-filter: blur(10px);
-  margin: 0 -24px 40px -24px; /* Bleed to edges */
+  margin: 0 0 40px 0; /* Align with container */
   padding: 16px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
 }
@@ -428,6 +374,7 @@ onMounted(async () => {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  padding: 0 24px; /* Add padding here if container is full width */
 }
 
 .qa-results.fade-in {
@@ -469,7 +416,7 @@ onMounted(async () => {
 }
 
 .card-header {
-  padding: 20px 24px;
+  padding: 16px 20px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -483,7 +430,7 @@ onMounted(async () => {
 }
 
 .question-text {
-  font-size: 20px; /* Increased from 18px */
+  font-size: 17px; /* Reduced from 20px */
   font-weight: 600;
   line-height: 1.5;
   color: var(--vp-c-text-1);
@@ -523,19 +470,19 @@ onMounted(async () => {
 }
 
 .card-body {
-  padding: 24px;
+  padding: 20px;
   background: var(--vp-c-bg-alt);
 }
 
 .answer-content {
-  font-size: 18px; /* Increased from 16px */
-  line-height: 1.8;
+  font-size: 16px; /* Reduced from 18px */
+  line-height: 1.7;
   color: var(--vp-c-text-2);
 }
 
 /* --- Tags --- */
 .card-footer {
-  margin-top: 24px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -565,12 +512,16 @@ onMounted(async () => {
 /* --- Mobile / Dark Mode Fixes --- */
 @media (max-width: 600px) {
   .qa-container {
-    padding: 20px 16px 80px;
+    padding: 20px 0 80px;
   }
   
   .filter-bar-sticky {
-    margin: 0 -16px 30px -16px;
+    margin: 0 0 30px 0;
     padding: 12px 16px;
+  }
+
+  .qa-results {
+    padding: 0 16px;
   }
 }
 </style>
