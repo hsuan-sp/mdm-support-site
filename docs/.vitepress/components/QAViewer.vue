@@ -308,43 +308,91 @@ onMounted(async () => {
   gap: 1rem;
 }
 
-.glass-panel {
-  background: var(--vp-c-bg-alt);
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: var(--vp-shadow-1);
-  opacity: 0;
-  transform: translateY(15px) scale(0.98);
+/* --- Liquid Glass & Floating Aesthetics --- */
+
+.qa-container {
   position: relative;
-  will-change: opacity, transform;
+  /* overflow: hidden; Removed to allow sticky headers or tooltips if any */
+  z-index: 1;
+}
+
+/* Background Orbs Effect */
+.qa-container::before {
+  content: '';
+  position: fixed;
+  top: 10%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,122,255,0.12), transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+  animation: floatOrb 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.qa-container::after {
+  content: '';
+  position: fixed;
+  bottom: 20%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,45,85,0.08), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  animation: floatOrb 15s ease-in-out infinite alternate-reverse;
+  pointer-events: none;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+/* Glass Panel - Pure & Clean */
+.glass-panel {
+  background: rgba(var(--vp-c-bg-alt-rgb, 255,255,255), 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  will-change: transform, opacity, box-shadow;
 }
 
 .glass-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(var(--vp-c-brand-1), 0.03) 0%, rgba(var(--vp-c-brand-1), 0) 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 0;
+  display: none; /* Remove old gradient overlay */
 }
 
 .glass-panel.item-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 .glass-panel:hover {
-  background: var(--vp-c-bg-elv);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-  transform: translateY(-6px) scale(1.01);
-  border-color: var(--vp-c-brand-1);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Floating elevation */
+  border-color: rgba(var(--vp-c-brand-rgb, 0,122,255), 0.3);
+  background: rgba(var(--vp-c-bg-rgb, 255,255,255), 0.8);
+  z-index: 5;
+}
+
+/* Dark Mode Support for Glass */
+@media (prefers-color-scheme: dark) {
+  .glass-panel {
+    background: rgba(30, 30, 30, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .glass-panel:hover {
+    background: rgba(40, 40, 40, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
 }
 
 .glass-panel:hover::before {
@@ -405,7 +453,7 @@ onMounted(async () => {
 .qa-content-wrapper {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: grid-template-rows 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .qa-content-wrapper.is-open {
@@ -415,18 +463,20 @@ onMounted(async () => {
 .qa-body {
   overflow: hidden;
   padding: 0 1.5rem;
-  border-top: 1px solid transparent;
-  background: rgba(var(--vp-c-bg-alt), 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  visibility: hidden;
+  /* FIX: Removed opacity:0/visibility:hidden to prevent disappearing content */
+  opacity: 1; 
+  transition: opacity 0.3s ease;
+}
+
+/* Optional: Slight fade out when closed for smoothness */
+.qa-content-wrapper:not(.is-open) .qa-body {
+  opacity: 0.5;
+  padding-bottom: 0;
 }
 
 .qa-content-wrapper.is-open .qa-body {
   padding-bottom: 1.5rem;
-  border-top-color: var(--vp-c-divider);
   opacity: 1;
-  visibility: visible;
 }
 
 .qa-tags {
@@ -438,12 +488,15 @@ onMounted(async () => {
   color: var(--vp-c-brand);
   font-size: 0.85rem;
   margin-right: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  background: rgba(var(--vp-c-brand-rgb), 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
 .qa-answer {
   line-height: 1.7;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
 }
 
 .tags {
