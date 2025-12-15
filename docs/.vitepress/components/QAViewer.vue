@@ -102,6 +102,7 @@ const filteredSections = computed(() => {
 
 // Accordion Logic
 const openItems = ref<Set<string>>(new Set());
+const visibleItems = ref<Set<string>>(new Set()); // Fix: Reactive visibility tracking
 
 const toggleItem = (id: string) => {
   if (openItems.value.has(id)) {
@@ -123,10 +124,13 @@ onMounted(async () => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add visible class immediately when card enters viewport
-          requestAnimationFrame(() => {
-            entry.target.classList.add('item-visible');
-          });
+          // Use data-id attribute to track visibility reactively
+          const id = entry.target.getAttribute('data-id');
+          if (id) {
+            visibleItems.value.add(id);
+            // Once visible, we can stop observing it to save performance
+            observer.unobserve(entry.target);
+          }
         }
       });
     },
@@ -143,12 +147,15 @@ onMounted(async () => {
   <div class="qa-app">
     <!-- Controls -->
     <div class="controls">
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="搜尋問題..."
-        class="search-input"
-      />
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="搜尋常見問題與錯誤代碼..."
+          class="search-input"
+        />
+      </div>
 
       <div class="section-pills">
         <button
@@ -157,7 +164,7 @@ onMounted(async () => {
           @click="activeSection = s"
           :class="['pill', { active: activeSection === s }]"
         >
-          {{ s }}
+          {{ s === 'All' ? '全部' : s }}
         </button>
       </div>
     </div>
@@ -169,33 +176,43 @@ onMounted(async () => {
         :key="section.title"
         class="qa-section"
       >
-        <h2 class="section-title">{{ section.title }}</h2>
+        <div class="section-header">
+          <h2 class="section-title">{{ section.title }}</h2>
+          <div class="section-line"></div>
+        </div>
 
         <div class="qa-list">
           <div
             v-for="item in section.items"
             :key="item.id"
             class="qa-item glass-panel"
-            :class="{ open: openItems.has(item.id) }"
+            :class="{ 
+              'open': openItems.has(item.id),
+              'item-visible': visibleItems.has(item.id) 
+            }"
+            :data-id="item.id"
           >
             <div 
               class="qa-header" 
               @click="toggleItem(item.id)"
               :aria-expanded="openItems.has(item.id)"
+              role="button"
             >
-              <h3 class="qa-question">{{ item.question }}</h3>
-              <div class="qa-header-right">
+              <div class="header-left">
+                <h3 class="qa-question">{{ item.question }}</h3>
                 <span v-if="item.important" class="badge-important">重要</span>
-                <span class="icon">{{ openItems.has(item.id) ? "−" : "+" }}</span>
               </div>
+              <span class="expand-icon" :class="{ rotated: openItems.has(item.id) }">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
             </div>
 
             <div class="qa-content-wrapper" :class="{ 'is-open': openItems.has(item.id) }">
               <div class="qa-body">
                 <div v-if="item.tags && item.tags.length" class="qa-tags">
-                  <span v-for="tag in item.tags" :key="tag" class="qa-tag">#{{ tag }}</span>
+                  <span v-for="tag in item.tags" :key="tag" class="qa-tag">{{ tag }}</span>
                 </div>
-                <div class="qa-answer" v-html="renderMarkdown(item.answer)"></div>
+                <div class="qa-answer markdown-body" v-html="renderMarkdown(item.answer)"></div>
               </div>
             </div>
           </div>
@@ -203,103 +220,119 @@ onMounted(async () => {
       </div>
 
       <div v-if="filteredSections.length === 0" class="no-results">
-        無符合結果
+        <div class="empty-state-icon">🧐</div>
+        <p>找不到相關結果，試試其他關鍵字？</p>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+/* Main Layout */
 .qa-app {
-  padding: 2rem 0;
+  padding: 0 0 60px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
+/* Controls */
 .controls {
-  margin-bottom: 2rem;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 20px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  font-size: 18px;
+  pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  padding: 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(128, 128, 128, 0.1);
+  padding: 16px 20px 16px 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
   background: var(--vp-c-bg-alt);
   color: var(--vp-c-text-1);
-  font-size: 1.1rem;
-  box-shadow: var(--vp-shadow-1);
-  transition: all 0.3s ease;
+  font-size: 17px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.1), var(--vp-shadow-2);
+  background: var(--vp-c-bg);
+  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.15);
 }
 
 .section-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 10px;
 }
 
 .pill {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 99px;
   background: var(--vp-c-bg-alt);
-  font-size: 0.9rem;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgba(128, 128, 128, 0.1);
   color: var(--vp-c-text-2);
   cursor: pointer;
-  box-shadow: var(--vp-shadow-1);
-  position: relative;
-  overflow: hidden;
-}
-
-.pill::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(var(--vp-c-brand-1), 0.1);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s, height 0.4s;
-}
-
-.pill:hover::before {
-  width: 200px;
-  height: 200px;
+  transition: all 0.2s ease;
 }
 
 .pill:hover {
-  background: var(--vp-c-bg-elv);
-  color: var(--vp-c-text-1);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-}
-
-.pill:active {
-  transform: translateY(-1px) scale(0.98);
+  background: var(--vp-c-bg-mute);
+  transform: translateY(-1px);
 }
 
 .pill.active {
   background: var(--vp-c-brand-1);
   color: white;
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.3);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.25);
+}
+
+/* Sections */
+.qa-section {
+  margin-bottom: 60px;
+}
+
+.section-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .section-title {
-  margin: 2rem 0 1rem;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 700;
-  border: none;
-  color: var(--vp-c-brand-3);
+  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-text-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.section-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, rgba(128,128,128,0.2), transparent);
 }
 
 .qa-list {
