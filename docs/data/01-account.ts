@@ -2,340 +2,175 @@ import { QASection } from '../types'
 
 export const data: QASection[] = [
   {
-    title: '第一部分：帳號、憑證與伺服器管理 (Account & Server Management)',
+    title: '第一部分：帳號與伺服器管理 (Account & Server Management)',
     items: [
       {
-        id: 'acc-1',
-        question: '[緊急] 登入 Jamf Pro/School 時顯示「您的帳戶已被鎖定 (Account locked)」或密碼錯誤，該如何處理？',
+        id: 'acc-4',
+        question: '登入 Apple 校務管理 (ASM) 時，系統提示需同意新的條款與約定，這很重要嗎？',
         important: true,
-        tags: ['帳號鎖定', '密碼重置', '緊急'],
+        tags: ['ASM', '條款更新'],
         answer: `
-**問題描述**：嘗試登入 MDM 後台時，顯示 "Account locked" 或密碼錯誤，即使嘗試多次仍無法登入。
+**為什麼需要同意條款？**
+Apple 會不定期更新服務條款，以支援新的教育功能或符合隱私法規。及時同意這些條款，能確保您的學校持續享有完整的 Apple 服務。
 
-**解決方案**：
-1.  **Jamf Pro (精進方案/校內自購)**：
-    *   **教育部統一配發帳號** (如 \`schooladmin\`)：請立即聯繫教育部數位學習推動辦公室或極電資訊客服協助解鎖。
-    *   **學校自建帳號**：請聯絡校內擁有「管理員 (Administrator)」權限的同仁登入後台，前往 **設定 (Settings) > 系統設定 (System Settings) > 管理員帳戶 (Jamf Pro User Accounts & Groups)**，找到被鎖定的帳號進行解鎖或重置密碼。
-    *   **全面鎖定**：若所有管理員皆無法登入，請立即聯繫我們，我們將透過後端支援協助處理。
+**若未同意的影響**：
+暫時性的影響包括：
+1.  **自動化部署**：新的裝置可能無法自動同步到 Jamf (ADE)。
+2.  **App 派送**：新的 App 授權可能無法指派 (VPP)。
 
-2.  **Jamf School**：
-    *   Jamf School 執行嚴格的密碼安全性政策（需 15 碼以上），若久未登入可能需強制重置。
-    *   請點擊登入畫面下方的 **「Forgot Password?」**，輸入您的 Email。系統會寄送重置信件，請依照信中連結設定新密碼即可。
+**如何完成操作**：
+1.  請由具備 **「管理員 (Administrator)」** 權限的同仁登入 [school.apple.com](https://school.apple.com/)。
+2.  系統會自動彈出新條款視窗，或在頁面頂端顯示提示橫幅。
+3.  閱讀後點選 **「同意 (Agree)」** 即可恢復所有功能。
 `
       },
       {
         id: 'acc-2',
-        question: '[緊急] 收到「Apple 推播通知服務 (APNs) 憑證即將到期」或已過期的通知，會影響平板運作嗎？如何更新？',
+        question: '收到「Apple 推播通知服務 (APNs) 憑證即將到期」的通知，我該如何續約？',
         important: true,
-        tags: ['APNs', '憑證更新', '緊急', '嚴重'],
+        tags: ['APNs', '憑證續約', '年度維護'],
         answer: `
-**嚴重性說明**：
-**⚠️ 絕對禁止：切勿點選「Create New (建立新的)」憑證！這將導致需要將所有已註冊的 iPad 收回並重新清除重置 (Erase)！**
-**若 APNs 憑證過期，MDM 將完全失去對裝置的控制能力，無法發送任何指令。**
+**什麼是 APNs 憑證？**
+這張憑證是 MDM 伺服器與 Apple 裝置之間的「通訊證」。為了安全起見，Apple 規定每年需更新一次。
 
-**解決方案**：
-**若當初施作時是由我們負責更新憑證，請勿自行進行任何操作，立刻聯絡我們協助更新 Apple 推播通知服務 (APNs) 憑證。**
+**續約前的關鍵提醒**：
+*   **請選用「Renew (續約/更新)」**：在 Apple 網站操作時，請務必點選原本憑證旁邊的 Renew 按鈕。
+*   **避免點選 Create New**：若建立新憑證，將導致目前的 iPad 失去連線，需重新註冊才能恢復管理。
 
-**自行操作步驟 (Jamf Pro 為例)**：
-1.  登入 **Jamf Pro** > **設定 (齒輪圖示)** > **全域管理 (Global Management)** > **推播憑證 (Push Certificates)**。
-2.  點選即將到期的憑證名稱（確認 Apple ID 是否吻合），按一下右下角的 **「更新 (Renew)」**。
-3.  **下載簽署要求 (CSR)**：點選 **Download signed CSR from Jamf**，下載 \`JAMFSignedCSR.plist\` 檔案。
-4.  **前往 Apple 入口網站**：點選連結前往 [Apple Push Certificates Portal](https://identity.apple.com/pushcert/)。
-5.  **登入 Apple ID**：**務必使用「當初建立此憑證的同一個 Apple ID」登入**。
-    *   *檢查點：登入後，憑證列表中的 Serial Number 必須與 Jamf Pro 上顯示的一致。*
-6.  **更新憑證**：在 Apple 網站列表中找到對應的憑證，點選 **"Renew"**，上傳剛剛下載的 \`JAMFSignedCSR.plist\`。
-7.  **下載並上傳**：Apple 網站會生成一個新的 \`.pem\` 檔案 (通常名為 \`MDM_ JAMF Software_Certificate.pem\`)。下載後回到 Jamf Pro 介面，上傳此檔案並儲存。
+**標準續約步驟 (以 Jamf Pro 為例)**：
+1.  登入 **Jamf Pro** > **設定** > **全域管理** > **推播憑證**。
+2.  點選即將到期的憑證，按一下 **「更新 (Renew)」** 並下載 \`.plist\` 檔。
+3.  前往 [Apple Push Certificates Portal](https://identity.apple.com/pushcert/)，使用 **原本的 Apple ID** 登入。
+4.  找到對應的憑證，點選 **Renew** 並上傳剛下載的檔案。
+5.  將 Apple 網站產生的新 \`.pem\` 檔下載回來，上傳至 Jamf Pro 即可完成年度維護。
+`
+      },
+      {
+        id: 'acc-1',
+        question: '登入 Jamf Pro/School 時顯示「帳戶已被鎖定 (Account locked)」或忘記密碼',
+        important: true,
+        tags: ['帳號救援', '登入問題'],
+        answer: `
+**發生了什麼事？**
+為了保護學校資料安全，系統在多次登入失敗後會暫時鎖定帳號。這是一個標準的安全機制。
+
+**如何恢復存取權**：
+
+**1. 對於 Jamf Pro 使用者**
+*   **校內自建帳號**：請聯絡校內其他擁有「管理員」權限的同事。他們可以登入後台 (前往 **使用者與群組** 設定)，協助您解鎖帳號或重置密碼。
+*   **教育部配發帳號**：若您使用的是統一配發的帳號，請聯繫教育部數位學習推動辦公室或我們的客服團隊，我們將協助您恢復權限。
+
+**2. 對於 Jamf School 使用者**
+*   請直接點選登入畫面下方的 **「Forgot Password?」** 連結。
+*   輸入您的 Email，系統將自動寄送密碼重置信件給您。
 `
       },
       {
         id: 'acc-3',
-        question: '[緊急] Jamf 後台顯示「自動裝置註冊 (ADE) 伺服器代號」或「App 與書籍 (VPP) 伺服器代號」過期，該如何更新？',
+        question: 'Jamf 後台提示「ADE 伺服器代號」或「VPP 伺服器代號」即將過期',
         important: true,
-        tags: ['ADE', 'VPP', '代號更新', 'Token'],
+        tags: ['代號更新', '年度維護', 'ASM'],
         answer: `
-**影響說明**：
-*   **ADE (自動裝置註冊) 代號過期**：新購或清除重置後的 iPad 無法進行自動註冊流程。
-*   **App 與書籍 (大量採購) 代號過期**：無法購買新 App，也無法派送或更新現有 App。
+**這是正常的年度維護流程。**
+就像 APNs 憑證一樣，Apple 校務管理 (ASM) 的連線代號 (Tokens) 也需要每年更新，以確保資料同步的安全性。
 
-**解決方案**：
-這兩個代號 (Token) 可以由任何具備「管理員」、「機構經理」或「內容經理(僅VPP)」權限的帳號更換。請登入 **[Apple 校務管理 (ASM)](https://school.apple.com/)** 取得新的代號 (Token)。
+**更新步驟**：
+請登入 **[Apple 校務管理 (ASM)](https://school.apple.com/)** 下載最新的代號，並上傳至 Jamf 後台。
 
-**1. 更新自動裝置註冊 (ADE) 代號**：
-*   **ASM 端**：登入 ASM > 左下角帳戶名稱 > **偏好設定 (Preferences)** > **MDM 伺服器指派 (MDM Server Assignment)** > 點選對應的伺服器 (常命名為 Jamf Pro) > **下載代號 (Download Token)**。
-*   **Jamf Pro 端**：**設定** > **全域管理** > **自動裝置註冊 (Automated Device Enrollment)** > 點選該實例 > **編輯** > 上傳剛剛下載的 \`.p7m\` 檔案 > **儲存**。
+*   **ADE 代號 (伺服器指派)**：
+    *   ASM 路徑：**偏好設定** > **MDM 伺服器指派** > 點選伺服器 > **下載代號**。
+    *   Jamf 路徑：**自動裝置註冊 (ADE)** 設定頁面 > 上傳新代號。
 
-**2. 更新 App 與書籍 (Apps & Books / VPP) 代號**：
-*   **ASM 端**：登入 ASM > 左下角帳戶名稱 > **偏好設定** > **付款與帳單 (Payments & Billing)** > **App 與書籍** > 滾動至 **內容代號 (Content Tokens)** > 找到對應的位置 (Location) > **下載 (Download)**。
-*   **Jamf Pro 端**：**設定** > **全域管理** > **大量採購 (Volume Purchasing)** > 點選對應的位置名稱 > **編輯** > 上傳 \`.vpptoken\` 檔案 > **儲存** > **點選「回收服務代號 (Reclaim Service Token)」** 以確保立即生效。
-`
-      },
-      {
-        id: 'acc-4',
-        question: '登入 Apple 校務管理 (ASM) 時，系統要求同意新的條款與約定，若不同意會有什麼影響？',
-        important: true,
-        tags: ['ASM', '條款', '重要'],
-        answer: `
-**影響**：
-若未同意新版條款與約定 (T&Cs)，Apple 將會**暫停**該組織 ASM 的 API 存取權限。這會直接導致：
-1.  Jamf 無法同步新購的裝置 (ADE 失效)。
-2.  Jamf 無法同步或指派 App 授權 (VPP 失效)。
-
-**解決方案**：
-1.  請使用具備 **「管理員 (Administrator)」** 權限的 Apple ID 登入 [https://school.apple.com/](https://school.apple.com/)。
-    *   *注意：「人員經理」、「內容經理」或「機構經理」通常無法執行此簽署動作。*
-2.  登入後，網頁會自動跳出新的條款視窗，或在上方顯示黃色橫幅。
-3.  請檢視內容並勾選 **「同意 (Agree)」**。
-4.  完成後，建議回到 Jamf Pro 手動執行一次 **更新資產**，確保連線狀態恢復綠燈。
-`
-      },
-      {
-        id: 'fed-auth',
-        question: '什麼是「聯合驗證 (Federated Authentication)」？',
-        tags: ['聯合驗證', 'Google', 'Entra ID', 'SSO'],
-        answer: '聯合驗證允許組織將 **Apple 校務管理 (ASM)** 與 **Google Workspace** 或 **Microsoft Entra ID (Azure AD)** 連結。設定後，教職員與學生可以直接使用原本學校的 Google 或微軟帳號密碼來登入「管理式 Apple ID」，無需另外記憶一組 Apple 專用密碼，大幅降低忘記密碼的管理成本。'
-      },
-      {
-        id: 'acc-5',
-        question: 'Apple 校務管理 (ASM) 的「管理式 Apple ID」密碼遺失或被鎖定，如何重置？',
-        important: false,
-        tags: ['管理式 Apple ID', '密碼重置'],
-        answer: `
-**適用對象**：忘記密碼的老師、學生、行政人員，以及**管理員本人**。
-
-**解決方案**：
-
-#### 情況一：一般使用者（老師、學生、職員）忘記密碼
-由學校的「管理員 (Administrator)」或「人員經理 (People Manager)」協助重置。
-1.  管理員登入 **[Apple 校務管理 (ASM)](https://school.apple.com/)**。
-2.  點選左側選單的 **「使用者 (Users)」**。
-3.  搜尋該使用者的姓名、Email 或學號。
-4.  點選該帳號，點擊 **「重置密碼 (Reset Password)」**。
-5.  系統會生成一組臨時密碼，請選擇「下載 PDF」或「拷貝」並提供給使用者。使用者下次登入時需強制更改密碼。
-
-#### 情況二：管理員 (Administrator) 本人忘記密碼
-若您是最高權限管理員，請依序嘗試：
-
-**1. 透過系統「自助重置」 (優先)**
-*   前往 ASM 登入頁面，點選 **「忘記 Apple ID 或密碼？」**。
-*   輸入您的管理式 Apple ID 與綁定的 **受信任電話號碼**。
-*   輸入收到的簡訊/語音驗證碼後即可重設。
-
-**2. 尋求校內「其他管理員」協助**
-*   若貴校有 2 位以上的管理員（Strongly Recommended），請另一位登入協助重置您的密碼。
-
-**3. 聯繫 Apple 官方支援 (最後手段)**
-*   若上述皆失效，請準備好學校的 **機構 ID (Organization ID)** 與申請公文副本，致電 Apple 教育支援專線：**0800-095-998** (週一至週五 09:00-18:00)。
-`
-      },
-      {
-        id: 'acc-6',
-        question: '如何新增或移除 Apple 校務管理 (ASM) 中的管理員帳號？',
-        important: false,
-        tags: ['ASM', '管理員', '帳號管理'],
-        answer: `
-**最佳實務**：為了避免單點故障 (Bus Factor)，強烈建議學校隨時保持 **至少 2 位** 管理員帳號 (主責老師 + 職務代理人)。
-
-**操作步驟**：
-1.  **登入**：使用現有管理員帳號登入 ASM。
-2.  **新增管理員**：
-    *   點選 **「使用者」** > **「+」**。
-    *   輸入姓名與 **校內 Email** (建議公務信箱)。
-    *   在「角色」欄位選擇 **「管理員 (Administrator)」**，完成建立。
-3.  **停用/刪除舊管理員前的「關鍵檢查」**：
-
-**⚠️ 嚴重警告：刪除帳號前的必做檢查**
-
-**1. 檢查 APNs 推播憑證歸屬 (最重要！)**
-*   **風險**：APNs 憑證**綁定於建立它的 Apple ID**。若刪除了該帳號，未來將無法「更新 (Renew)」憑證，導致全校裝置必須重新註冊。
-*   **檢查**：登入 Jamf Pro > **全域管理** > **推播憑證** > 查看 **Apple ID** 欄位。
-*   **判斷**：若該 Email 正是您要刪除的帳號，**絕對不可刪除**。請保留帳號並交接密碼，或聯繫極電資訊協助轉移憑證 (需原廠介入，流程繁瑣)。
-
-**2. 關於 App 與書籍 (VPP) 代號**
-*   ASM 中的內容代號是綁定於**「位置 (Location)」**，不受刪除管理員影響。只要新管理員有權限存取該位置即可。
-
-**結論**：確認 APNs 安全後，即可在 ASM 使用者列表中搜尋該人員，點選 **「停用 (Deactivate)」**。
-`
-      },
-      {
-        id: 'acc-7',
-        question: '學校的 Jamf Pro 授權席次 (License) 顯示不足，該如何處理？',
-        important: false,
-        tags: ['授權', 'License', '席次'],
-        answer: `
-**可能原因**：
-1.  新採購的授權尚未啟用。
-2.  已報廢或遺失的舊裝置未從 Jamf Pro 中徹底移除，佔用了席次。
-
-**解決方案**：
-1.  **釋放舊席次**：
-    *   **ASM 端**：登入 ASM > **裝置** > 搜尋該裝置 > **編輯 MDM 伺服器** > 選擇 **「取消指派 (Unassign)」**。
-    *   **Jamf Pro 端**：搜尋該裝置 > 進入詳細頁面 > 點選右下角 **「刪除 (Delete)」**。
-    *   *注意：僅在 ASM 取消指派是不夠的，必須在 Jamf Pro 執行刪除才會釋放授權。*
-
-2.  **更新授權數量**：
-    *   若有新購授權，請聯繫我們取得新的 **啟用代碼 (Activation Code)**。
-    *   前往 **設定** > **系統設定** > **啟用代碼**，輸入新代碼並儲存。
-`
-      },
-      {
-        id: 'acc-8',
-        question: '如何查詢目前學校 Jamf 授權的到期日與剩餘數量？',
-        important: false,
-        tags: ['授權', '到期日'],
-        answer: `
-**Jamf Pro**：
-*   前往 **設定 (右上角齒輪)** > **系統設定** > **啟用代碼 (Activation Code)**。
-*   頁面中會顯示授權總數 (Total License Count)、已使用數量 (Used License Count) 以及授權到期日 (Expiration Date)。
-
-**Jamf School**：
-*   登入後台，點選左下角的 **「Organization」** > **「Licenses」**。
-`
-      },
-      {
-        id: 'acc-9',
-        question: '原生 macOS Server (Profile Manager) 停止服務後，舊有裝置該如何遷移至 Jamf？',
-        important: false,
-        tags: ['macOS Server', '遷移', 'Profile Manager'],
-        answer: `
-**背景說明**：
-Apple 已於 2022 年正式終止 macOS Server 的 Profile Manager 功能。**2024 年 10 月起**，舊有的推播通知憑證已無法更新。若憑證過期，伺服器將完全失去對裝置的控制。
-
-請依據規劃選擇遷移方式：
-
-#### **情境 A：遷移至雲端 MDM (推薦，如 Jamf Pro)**
-若要將裝置納入 Jamf Pro 管理：
-1.  **備份資料**：遷移過程必須**清除重置 (Erase)** 裝置，請務必先備份重要資料。
-2.  **ASM 轉移**：
-    *   登入 **Apple 校務管理 (ASM)** > **裝置** > 搜尋該批裝置。
-    *   點選 **「編輯 MDM 伺服器」** > 指派給 **Jamf Pro**。
-3.  **清除裝置**：
-    *   手動執行「清除所有內容與設定」，或連接電腦透過 Apple Configurator / Finder 進行回復。
-4.  **重新註冊**：
-    *   裝置重啟後連上 Wi-Fi，進入「遠端管理」畫面，即會自動下載 Jamf Pro 的設定檔完成註冊。
-
-#### **情境 B：轉為 Apple Configurator 本地管理**
-若不打算使用 MDM，改為單機維護：
-1.  準備一台 Mac 安裝 **Apple Configurator**。
-2.  連接 iPad，點選 **「準備 (Prepare)」**。
-3.  勾選 **「監管裝置 (Supervise devices)」** 與 **「加入 Apple 校務管理」**。
-4.  在 MDM 伺服器選項選擇 **「不要註冊 MDM」**。
-5.  完成後，這台 iPad 即可透過 USB 線連接此 Mac 進行 App 安裝與描述檔管理。
-`
-      },
-      {
-        id: 'acc-10',
-        question: 'Jamf ID (Jamf Account) 的密碼忘記了，與 Jamf Pro 的登入密碼有何不同？',
-        important: false,
-        tags: ['Jamf ID', '密碼'],
-        answer: `
-**區分說明**：
-*   **Jamf Pro 帳號**：這是您日常登入學校 MDM 後台 (如 \`schoolname.jamfcloud.com\`) 用的帳號。
-*   **Jamf ID (Jamf Account)**：這是登入 Jamf 官方入口網站 (如 \`account.jamf.com\`) 用的全域帳號，用於管理授權、查看訂閱狀態或存取 Jamf Nation 論壇。
-
-**解決方案**：
-*   若忘記 **Jamf ID** 密碼，請前往 [account.jamf.com](https://account.jamf.com) 點選 **「Forgot Password?」**。
-*   Jamf 近期更新了密碼強度政策，若舊密碼失效，請直接執行重置流程設定新密碼。
-`
-      },
-      {
-        id: 'acc-11',
-        question: '如何更改 Jamf Pro 控制台的網頁語言（中/英文切換）？',
-        important: false,
-        tags: ['語言', '繁體中文'],
-        answer: `
-**操作步驟**：
-1.  登入 Jamf Pro。
-2.  點選畫面右上角的人像圖示（或帳戶名稱）。
-3.  選擇 **「帳戶偏好設定 (Account Preferences)」**。
-4.  在 **「語言 (Language)」** 下拉選單中，選擇 **「Chinese (Traditional) / 繁體中文」**。
-5.  點選 **「儲存 (Save)」**，網頁重新整理後介面即會中文化。
-`
-      },
-      {
-        id: 'acc-12',
-        question: '遇到 Jamf Cloud 網頁無法開啟或顯示 503 Service Unavailable 時，該如何確認服務狀態？',
-        important: false,
-        tags: ['故障排除', '503', '狀態檢查'],
-        answer: `
-**說明**：Jamf Cloud 可能會進行預定維護或遭遇臨時服務中斷。
-
-**檢測步驟**：
-1.  前往 **[Jamf Status Page](https://status.jamf.com/)**。
-2.  查看是否有公告 **"Cloud Maintenance"** 或 **"Service Interruption"**。
-3.  若狀態顯示 **All Systems Operational** 但您仍無法登入：
-    *   清除瀏覽器快取 (Cookie/Cache) 或嘗試「無痕模式」。
-    *   確認學校防火牆是否阻擋了 \`jamfcloud.com\` 網域。
-    *   若問題持續，請截圖錯誤畫面並聯繫極電資訊客服。
+*   **VPP 代號 (App 與書籍)**：
+    *   ASM 路徑：**偏好設定** > **付款與帳單** > **內容代號** > 點選位置 > **下載**。
+    *   Jamf 路徑：**大量採購 (Volume Purchasing)** 設定頁面 > 上傳新代號 > 點選 **「回收服務代號」** 立即生效。
 `
       },
       {
         id: 'acc-13',
-        question: '我都還沒收到過期通知，可以「提早」更新 APNs 或 VPP 代號嗎？',
-        important: false,
-        tags: ['憑證更新', '最佳實務'],
+        question: '我可以提早更新這些憑證與代號嗎？',
+        tags: ['最佳實務', '維護建議'],
         answer: `
-**答案**：**絕對可以，且強烈建議這麼做。**
+**當然可以，這是一個很棒的管理習慣！**
 
-**最佳實務建議**：
-許多資深管理員會固定在 **「暑假期間 (7-8月)」** 統一更新所有憑證與代號 (APNs, ADE, Apps & Books)。
-*   **優點 1**：避開學期中教學繁忙時段。
-*   **優點 2**：確保未來一整學年都不會跳出過期通知，避免突發性服務中斷。
-*   **優點 3**：此時若遇到問題，有充裕時間聯繫客服處理。
+許多經驗豐富的管理員會選擇在 **暑假期間 (7月-8月)** 統一更新所有憑證 (APNs, ADE, VPP)。
+*   **主動管理**：您可以依照自己的時間表進行維護，而不是被過期通知追著跑。
+*   **安心開學**：確保開學期間系統運作順暢，不會有任何突發的服務中斷。
 `
       },
       {
-        id: 'acc-14',
-        question: '學校地址或電話變更了，如何在 Apple 校務管理 (ASM) 中修改？',
-        important: false,
-        tags: ['ASM', '基本資料'],
+        id: 'acc-5',
+        question: '如何重置 Apple 校務管理 (ASM) 的密碼？',
+        tags: ['ASM', '密碼重置'],
         answer: `
-**操作步驟**：
-1.  以管理員身分登入 ASM。
-2.  點選左下角帳戶名稱 > **「偏好設定 (Preferences)」**。
-3.  選擇 **「註冊資訊 (Enrollment Information)」**。
-4.  在地址或電話欄位點選 **「編輯」** 進行修改。
-5.  **注意**：此修改可能觸發 Apple 的重新審核機制 (D-U-N-S 資料核對)，通常需 1-3 個工作天生效。
-`
-      },
-      {
-        id: 'acc-15',
-        question: 'ASM 中的「人員經理」、「內容經理」與「管理員」權限有何不同？',
-        important: false,
-        tags: ['角色權限', 'ASM'],
-        answer: `
-**權限分級說明**：
-*   **管理員 (Administrator)**：擁有最高權限。可管理所有帳號、同意條款、管理 MDM 伺服器連結、重置任何人密碼。學校應嚴格控管此角色數量。
-*   **地點經理 (Site Manager)**：擁有特定「地點 (Location)」的所有權限。適合分校區負責人，可管理該地點的人員與裝置。
-*   **人員經理 (People Manager)**：僅能管理使用者帳號 (建立學生、老師 ID)，**無法**存取 VPP 或 ADE 功能。
-*   **內容經理 (Content Manager)**：僅能購買 App 與書籍 (Apps & Books)。適合指派給教務處採購人員或會計。
-`
-      },
-      {
-        id: 'acc-16',
-        question: 'Jamf Pro 可以整合學校的 Google 或微軟帳號進行「單一登入 (SSO)」嗎？',
-        important: false,
-        tags: ['SSO', 'Google', 'Entra ID'],
-        answer: `
-**可以。**
+**協助他人重置**：
+若老師或行政人員忘記密碼，身為管理員的您可以在 ASM 的 **「使用者」** 列表中找到該帳號，點選 **「重置密碼」** 並提供臨時密碼給對方。
 
-Jamf Pro 完整支援 **SAML 2.0** 與 **OIDC** 標準。
-*   **整合優勢**：管理員登入 Jamf 後台時，可直接使用學校原本的 Google Workspace 或 Microsoft Entra ID 帳號驗證。
-*   **安全性提升**：可直接沿用貴校在 Google/Microsoft 端設定的雙重驗證 (2FA/MFA) 機制，無需額外設定。
+**管理員自己忘記密碼**：
+1.  優先使用 ASM 登入頁面的 **「忘記 Apple ID 或密碼？」** 功能，透過綁定的手機驗證碼自助重置。
+2.  若自助重置無效，請校內另一位管理員協助重置。
+3.  若以上皆不可行，請準備好學校的機構資訊，聯繫 Apple 教育支援團隊 (0800-095-998) 尋求協助。
 `
       },
       {
-        id: 'acc-17',
-        question: '一個 Apple 校務管理 (ASM) 帳號，可以連結到多個 MDM 伺服器嗎？',
-        important: false,
-        tags: ['多伺服器', 'ASM'],
+        id: 'acc-6',
+        question: '人員異動時，如何安全地管理 ASM 管理員帳號？',
+        tags: ['帳號交接', '最佳實務'],
         answer: `
-**可以。**
+**交接前的溫馨提醒**：
+在刪除或停用任何「管理員」帳號之前，請務必檢查：**是否有任何 APNs 推播憑證是使用該帳號建立的？**
 
-**應用情境**：
-若貴校同時有 Jamf Pro (用於管理公用載具) 與另一個測試用的 MDM，您可以在 ASM 中新增多個 **「MDM 伺服器」**。
-*   **裝置分配**：在 ASM 的「裝置」頁面，您可以自由選擇將哪幾台 iPad 指派給 Jamf Pro，哪幾台給測試服。
-*   **授權區隔**：建議為不同的 MDM 伺服器建立不同的 **「位置 (Location)」**，以避免 App 授權 (VPP) 混用或搶佔。
+*   **為什麼這很重要？** APNs 憑證必須使用當初建立它的同一個 Apple ID 來續約。若該帳號被刪除，未來的續約可能會變得複雜。
+*   **建議作法**：若該帳號與重要憑證綁定，建議將其保留並更改密碼作為公用帳號，或聯繫 Apple 支援協助轉移憑證歸屬。
+
+**建立備援機制**：
+我們建議學校保持至少 **2 位** 管理員帳號。這樣當其中一位休假或無法登入時，另一位可以立即補位，確保管理工作不中斷。
 `
+      },
+      {
+        id: 'acc-7',
+        question: 'Jamf Pro 授權數量不足，如何釋放佔用的授權？',
+        tags: ['授權管理', '資源最佳化'],
+        answer: `
+若您發現授權席次已滿，通常是因為舊的或遺失的裝置未從系統中移除。
+
+**釋放步驟**：
+1.  **在 ASM 解除指派**：登入 ASM，將該裝置從 MDM 伺服器指派中移除 (Unassign)。
+2.  **在 Jamf Pro 刪除紀錄**：登入 Jamf Pro，搜尋該裝置並執行 **「刪除 (Delete)」**。只有在 Jamf Pro 中刪除紀錄，才會正式釋放授權席次供新裝置使用。
+`
+      },
+      {
+        id: 'acc-9',
+        question: '我們學校還有舊的 macOS Server，該如何規劃遷移？',
+        tags: ['現代化管理', '遷移指南'],
+        answer: `
+隨著 macOS Server 服務轉型，現在是升級到雲端 MDM (如 Jamf Pro) 的好時機。
+
+**遷移優勢**：
+*   **雲端管理**：不再需要維護校內實體伺服器與網路設定。
+*   **功能更強**：享有完整的遠端部署與 App 管理功能。
+
+**遷移建議**：
+由於 MDM 架構不同，裝置通常需要重新註冊。建議利用暑假期間將裝置備份後，透過 ASM 指派給新的 Jamf Pro 伺服器，並進行重置註冊。這將能讓您的裝置管理煥然一新。
+`
+      },
+      {
+        id: 'fed-auth',
+        question: '能否使用學校原本的 Google 或微軟帳號登入？(聯合驗證)',
+        tags: ['SSO', '帳號整合', 'Google', 'Azure'],
+        answer: '**沒問題！** Jamf Pro 與 Apple 校務管理皆支援與 Google Workspace 或 Microsoft Entra ID 整合。設定「聯合驗證 (Federated Authentication)」後，師生可以使用原本熟悉的校內帳號密碼登入，享受單一登入 (SSO) 的便利體驗。'
+      },
+      {
+        id: 'acc-11',
+        question: '如何將 Jamf Pro 介面切換為繁體中文？',
+        tags: ['介面設定', '語言'],
+        answer: '請登入 Jamf Pro 後，點選右上角的 **人像圖示** > **帳戶偏好設定 (Account Preferences)**。在語言選單中選擇 **Chinese (Traditional)** 並儲存，介面即會切換為您熟悉的繁體中文。'
+      },
+      {
+        id: 'acc-12',
+        question: '無法開啟 Jamf 網頁時，如何確認是網路問題還是系統維護？',
+        tags: ['系統狀態', '故障排除'],
+        answer: '您可以隨時造訪 **[Jamf Status](https://status.jamf.com/)** 頁面。這裡會即時顯示所有 Jamf 雲端服務的運作燈號。若燈號顯示綠色但您仍無法連線，建議您檢查校內網路防火牆設定，或清除瀏覽器快取後重試。'
       }
     ]
   }

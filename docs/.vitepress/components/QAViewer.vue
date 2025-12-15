@@ -102,7 +102,10 @@ const filteredSections = computed(() => {
 
 // Accordion Logic
 const openItems = ref<Set<string>>(new Set());
-const visibleItems = ref<Set<string>>(new Set()); // Fix: Reactive visibility tracking
+const visibleItems = ref<Set<string>>(new Set());
+
+// --- Selection Logic ---
+const activeSection = ref("All");
 
 const toggleItem = (id: string) => {
   if (openItems.value.has(id)) {
@@ -116,19 +119,16 @@ const renderMarkdown = (text: string) => {
   return md.render(text);
 };
 
-// Smooth card reveal animation on scroll
+// Smooth card reveal animation
 onMounted(async () => {
   await nextTick();
-  
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Use data-id attribute to track visibility reactively
           const id = entry.target.getAttribute('data-id');
           if (id) {
             visibleItems.value.add(id);
-            // Once visible, we can stop observing it to save performance
             observer.unobserve(entry.target);
           }
         }
@@ -136,7 +136,6 @@ onMounted(async () => {
     },
     { threshold: 0.05, rootMargin: '50px' }
   );
-
   document.querySelectorAll('.qa-item').forEach((el) => {
     observer.observe(el);
   });
@@ -144,445 +143,447 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="qa-app">
-    <!-- Controls -->
-    <div class="controls">
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="搜尋常見問題與錯誤代碼..."
-          class="search-input"
-        />
+  <div class="qa-layout">
+    <!-- Sidebar Navigation (Desktop) / Horizontal Scroll (Mobile) -->
+    <aside class="qa-sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">分類導覽</span>
       </div>
-
-      <div class="section-pills">
+      <nav class="sidebar-nav">
         <button
           v-for="s in sections"
           :key="s"
           @click="activeSection = s"
-          :class="['pill', { active: activeSection === s }]"
+          class="nav-item"
+          :class="{ active: activeSection === s }"
         >
-          {{ s === 'All' ? '全部' : s }}
+          <span class="nav-text">{{ s === 'All' ? '全部主題' : s.split('：')[1]?.split('(')[0] || s }}</span>
+          <span class="nav-indicator" v-if="activeSection === s"></span>
         </button>
-      </div>
-    </div>
+      </nav>
+    </aside>
 
-    <!-- Results -->
-    <div class="qa-content">
-      <div
-        v-for="section in filteredSections"
-        :key="section.title"
-        class="qa-section"
-      >
-        <div class="section-header">
-          <h2 class="section-title">{{ section.title }}</h2>
-          <div class="section-line"></div>
-        </div>
-
-        <div class="qa-list">
-          <div
-            v-for="item in section.items"
-            :key="item.id"
-            class="qa-item glass-panel"
-            :class="{ 
-              'open': openItems.has(item.id),
-              'item-visible': visibleItems.has(item.id) 
-            }"
-            :data-id="item.id"
-          >
-            <div 
-              class="qa-header" 
-              @click="toggleItem(item.id)"
-              :aria-expanded="openItems.has(item.id)"
-              role="button"
-            >
-              <div class="header-left">
-                <h3 class="qa-question">{{ item.question }}</h3>
-                <span v-if="item.important" class="badge-important">重要</span>
-              </div>
-              <span class="expand-icon" :class="{ rotated: openItems.has(item.id) }">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </span>
-            </div>
-
-            <div class="qa-content-wrapper" :class="{ 'is-open': openItems.has(item.id) }">
-              <div class="qa-body">
-                <div v-if="item.tags && item.tags.length" class="qa-tags">
-                  <span v-for="tag in item.tags" :key="tag" class="qa-tag">{{ tag }}</span>
-                </div>
-                <div class="qa-answer markdown-body" v-html="renderMarkdown(item.answer)"></div>
-              </div>
-            </div>
+    <!-- Main Content Area -->
+    <main class="qa-main">
+      <!-- Hero Search Header -->
+      <div class="hero-search">
+        <h1 class="page-title">需要什麼協助？</h1>
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="搜尋關鍵字，例如『帳號鎖定』或『VPP』..."
+              class="search-input"
+            />
           </div>
         </div>
       </div>
 
-      <div v-if="filteredSections.length === 0" class="no-results">
-        <div class="empty-state-icon">🧐</div>
-        <p>找不到相關結果，試試其他關鍵字？</p>
+      <!-- Results Grid -->
+      <div class="qa-content-area">
+        <div
+          v-for="section in filteredSections"
+          :key="section.title"
+          class="qa-section-group"
+        >
+          <div class="section-header-modern">
+            <h2 class="modern-title">{{ section.title }}</h2>
+          </div>
+
+          <div class="qa-list-modern">
+            <div
+              v-for="item in section.items"
+              :key="item.id"
+              class="qa-card"
+              :class="{ 
+                'is-expanded': openItems.has(item.id),
+                'is-visible': visibleItems.has(item.id) 
+              }"
+              :data-id="item.id"
+            >
+              <div 
+                class="card-header" 
+                @click="toggleItem(item.id)"
+                role="button"
+                :aria-expanded="openItems.has(item.id)"
+              >
+                <div class="header-content">
+                  <div class="question-row">
+                    <span v-if="item.important" class="status-dot important" title="重要"></span>
+                    <h3 class="question-text">{{ item.question }}</h3>
+                  </div>
+                  <div class="tags-row" v-if="!openItems.has(item.id) && item.tags.length">
+                    <span class="mini-tag" v-for="t in item.tags.slice(0,3)" :key="t">{{ t }}</span>
+                  </div>
+                </div>
+                
+                <div class="toggle-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9L12 15L18 9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+
+              <div class="card-body-wrapper" :style="{ maxHeight: openItems.has(item.id) ? '2000px' : '0' }">
+                <div class="card-body">
+                  <div class="answer-content markdown-body" v-html="renderMarkdown(item.answer)"></div>
+                  <div class="card-footer" v-if="item.tags.length">
+                    <span class="footer-label">相關標籤：</span>
+                    <div class="footer-tags">
+                      <span v-for="tag in item.tags" :key="tag" class="footer-tag">{{ tag }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div v-if="filteredSections.length === 0" class="empty-state">
+           <div class="empty-icon">🔍</div>
+           <p class="empty-text">找不到符合的結果</p>
+           <button class="clear-search" @click="searchQuery = ''">清除搜尋</button>
+        </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <style scoped>
-/* Main Layout */
-.qa-app {
-  padding: 0 0 60px;
-  max-width: 1000px;
+/* --- Layout --- */
+.qa-layout {
+  display: flex;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  align-items: flex-start;
+}
+
+/* --- Sidebar --- */
+.qa-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+  background: var(--vp-c-bg-alt);
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid rgba(128,128,128,0.08);
+}
+
+.sidebar-header {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(128,128,128,0.1);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-text-3);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 15px;
+  color: var(--vp-c-text-2);
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none; /* Reset button borders */
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-1);
+}
+
+.nav-item.active {
+  background: var(--vp-c-brand-1);
+  color: white;
+  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.2);
+}
+
+.nav-indicator {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* --- Main Content --- */
+.qa-main {
+  flex: 1;
+  min-width: 0; /* Prevent flex overflow */
+}
+
+/* --- Hero Search --- */
+.hero-search {
+  margin-bottom: 60px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.page-title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--vp-c-text-1) 30%, var(--vp-c-text-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-container {
+  max-width: 600px;
   margin: 0 auto;
 }
 
-/* Controls */
-.controls {
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.search-wrapper {
+.search-input-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .search-icon {
   position: absolute;
   left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.5;
-  font-size: 18px;
+  color: var(--vp-c-text-3);
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  padding: 16px 20px 16px 52px;
-  border-radius: 16px;
-  border: 1px solid rgba(128, 128, 128, 0.15);
-  background: var(--vp-c-bg-alt);
-  color: var(--vp-c-text-1);
+  height: 60px;
+  padding: 0 24px 0 56px;
   font-size: 17px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  border-radius: 99px; /* Pill shape */
+  border: 1px solid rgba(128,128,128,0.15);
+  background: var(--vp-c-bg);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.04);
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  color: var(--vp-c-text-1);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-bg);
-  box-shadow: 0 0 0 4px rgba(var(--vp-c-brand-1), 0.15);
+  box-shadow: 0 12px 40px rgba(var(--vp-c-brand-1), 0.12);
+  transform: translateY(-2px);
 }
 
-.section-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+/* --- Section Headers --- */
+.section-header-modern {
+  margin-bottom: 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(128,128,128,0.1);
+  padding-bottom: 12px;
 }
 
-.pill {
-  padding: 8px 16px;
-  border-radius: 99px;
-  background: var(--vp-c-bg-alt);
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-  transition: all 0.2s ease;
+.modern-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.pill:hover {
-  background: var(--vp-c-bg-mute);
-  transform: translateY(-1px);
-}
-
-.pill.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.25);
-}
-
-/* Sections */
-.qa-section {
+/* --- Card Design Refined --- */
+.qa-section-group {
   margin-bottom: 60px;
 }
 
-.section-header {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-text-2) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.section-line {
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(90deg, rgba(128,128,128,0.2), transparent);
-}
-
-.qa-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* --- Liquid Glass & Floating Aesthetics --- */
-
-.qa-container {
-  position: relative;
-  /* overflow: hidden; Removed to allow sticky headers or tooltips if any */
-  z-index: 1;
-}
-
-/* Background Orbs Effect */
-.qa-container::before {
-  content: '';
-  position: fixed;
-  top: 10%;
-  left: -5%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0,122,255,0.12), transparent 70%);
-  filter: blur(80px);
-  z-index: -1;
-  animation: floatOrb 20s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-.qa-container::after {
-  content: '';
-  position: fixed;
-  bottom: 20%;
-  right: -5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255,45,85,0.08), transparent 70%);
-  filter: blur(60px);
-  z-index: -1;
-  animation: floatOrb 15s ease-in-out infinite alternate-reverse;
-  pointer-events: none;
-}
-
-@keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 30px) scale(1.1); }
-}
-
-/* Glass Panel - Pure & Clean */
-.glass-panel {
-  background: rgba(var(--vp-c-bg-alt-rgb, 255,255,255), 0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(128, 128, 128, 0.15);
-  border-radius: 20px;
+.qa-card {
+  background: var(--vp-c-bg-alt);
+  border: 1px solid rgba(128,128,128,0.1);
+  border-radius: 16px;
+  margin-bottom: 16px;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   opacity: 0;
   transform: translateY(20px);
   position: relative;
-  will-change: transform, opacity, box-shadow;
 }
 
-.glass-panel::before {
-  display: none; /* Remove old gradient overlay */
-}
-
-.glass-panel.item-visible {
+.qa-card.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.glass-panel:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Floating elevation */
-  border-color: rgba(var(--vp-c-brand-rgb, 0,122,255), 0.3);
-  background: rgba(var(--vp-c-bg-rgb, 255,255,255), 0.8);
-  z-index: 5;
+.qa-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  border-color: rgba(128,128,128,0.2);
 }
 
-/* Dark Mode Support for Glass */
-@media (prefers-color-scheme: dark) {
-  .glass-panel {
-    background: rgba(30, 30, 30, 0.5);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  .glass-panel:hover {
-    background: rgba(40, 40, 40, 0.7);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
+.qa-card.is-expanded {
+  background: var(--vp-c-bg);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  border-color: var(--vp-c-brand-1);
+  transform: scale(1.005);
+  z-index: 10;
 }
 
-.glass-panel:hover::before {
-  opacity: 1;
-}
-
-.qa-header {
-  padding: 1.5rem;
+.card-header {
+  padding: 20px 24px;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  user-select: none;
-  gap: 1rem;
+  gap: 16px;
 }
 
-.qa-header-right {
+.question-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+/* Status Dot for Urgent items */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   flex-shrink: 0;
 }
-
-.badge-important {
-  background: rgba(255, 59, 48, 0.1);
-  color: #ff3b30;
-  border: 1px solid rgba(255, 59, 48, 0.2);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
+.status-dot.important {
+  background: #ff3b30;
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.15);
 }
 
-.qa-question {
-  margin: 0;
-  font-size: 1.1rem;
+.question-text {
+  font-size: 18px;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  flex: 1;
+  margin: 0;
+  line-height: 1.4;
 }
 
-.icon {
-  font-size: 1.5rem;
-  color: var(--vp-c-text-2);
-  transition: transform 0.3s ease;
+.tags-row {
+  display: flex;
+  gap: 8px;
+  margin-left: 20px; /* Align with text */
 }
 
-.qa-item.open .icon {
-  transform: rotate(180deg);
-  color: var(--vp-c-brand-1);
-}
-
-/* Smooth expansion animation using CSS Grid */
-.qa-content-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.qa-content-wrapper.is-open {
-  grid-template-rows: 1fr;
-}
-
-.qa-body {
-  overflow: hidden;
-  padding: 0 1.5rem;
-  /* FIX: Removed opacity:0/visibility:hidden to prevent disappearing content */
-  opacity: 1; 
-  transition: opacity 0.3s ease;
-}
-
-/* Optional: Slight fade out when closed for smoothness */
-.qa-content-wrapper:not(.is-open) .qa-body {
-  opacity: 0.5;
-  padding-bottom: 0;
-}
-
-.qa-content-wrapper.is-open .qa-body {
-  padding-bottom: 1.5rem;
-  opacity: 1;
-}
-
-.qa-tags {
-  margin-bottom: 0.8rem;
-  padding-top: 1rem;
-}
-
-.qa-tag {
-  color: var(--vp-c-brand);
-  font-size: 0.85rem;
-  margin-right: 0.5rem;
-  font-weight: 600;
-  background: rgba(var(--vp-c-brand-rgb), 0.1);
+.mini-tag {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  background: rgba(128,128,128,0.08);
   padding: 2px 8px;
   border-radius: 6px;
 }
 
-.qa-answer {
-  line-height: 1.7;
-  color: var(--vp-c-text-1);
+.toggle-icon {
+  color: var(--vp-c-text-3);
+  transition: transform 0.4s ease;
 }
 
-.tags {
-  margin: 1rem 0;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.tag {
+.qa-card.is-expanded .toggle-icon {
+  transform: rotate(180deg);
   color: var(--vp-c-brand-1);
-  font-size: 0.85rem;
-  background: rgba(var(--vp-c-brand-1), 0.1);
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  font-weight: 600;
 }
 
-/* Markdown Styles inside Accordion */
-.markdown-body {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--vp-c-text-1);
+/* --- Card Body --- */
+.card-body-wrapper {
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.markdown-body :deep(h1),
-.markdown-body :deep(h2),
-.markdown-body :deep(h3) {
-  margin-top: 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--vp-c-brand-3);
+.card-body {
+  padding: 0 24px 32px;
+  border-top: 1px solid rgba(128,128,128,0.05);
 }
 
-.markdown-body :deep(ul) {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
+.answer-content {
+  padding-top: 24px;
+  /* Removed 'opacity' transition trick to avoid visual bugs */
 }
 
-.markdown-body :deep(strong) {
-  font-weight: 700;
-  color: var(--vp-c-brand-2);
+.card-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(128,128,128,0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-/* Dark Mode Overrides */
-:global(.dark) .search-input,
-:global(.dark) .pill,
-:global(.dark) .glass-panel {
-  background: var(--vp-c-bg-alt);
-  border-color: rgba(255, 255, 255, 0.1);
+.footer-label {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
 }
 
-:global(.dark) .qa-body {
-  background: rgba(255, 255, 255, 0.02);
+.footer-tag {
+  font-size: 13px;
+  color: var(--vp-c-brand-1);
+  background: rgba(var(--vp-c-brand-1), 0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* --- Mobile / Responsive --- */
+@media (max-width: 960px) {
+  .qa-layout {
+    flex-direction: column;
+    padding: 20px 20px 60px;
+  }
+  
+  .qa-sidebar {
+    width: 100%;
+    position: static;
+    margin-bottom: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+  
+  .sidebar-header {
+    display: none;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 12px; /* Scrollbar space */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .nav-item {
+    width: auto;
+    white-space: nowrap;
+    background: var(--vp-c-bg-alt);
+    border: 1px solid rgba(128,128,128,0.1);
+    border-radius: 99px;
+    padding: 8px 20px;
+  }
+  
+  .nav-indicator { display: none; }
+  
+  .nav-item.active {
+    background: var(--vp-c-brand-1);
+    color: white;
+  }
+
+  .page-title {
+    font-size: 32px;
+  }
+  
+  .question-text {
+    font-size: 16px;
+  }
 }
 </style>
