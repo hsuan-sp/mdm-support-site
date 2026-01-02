@@ -244,14 +244,12 @@ onMounted(async () => {
 /* --- Controls Section (Sticky & Glassmorphism) --- */
 .controls-wrapper {
   position: sticky;
-  top: var(--vp-nav-height); /* Adapts to VitePress navbar */
-  z-index: 100;
-  padding: 20px 0;
-  margin: 0 -24px; /* Bleed to edges for backdrop effect */
-  background: rgba(var(--vp-c-bg), 0.8); /* Semi-transparent bg for fallback */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  top: var(--vp-nav-height); /* Below VitePress navbar */
+  z-index: 10; /* Lower than navbar items but above grid */
+  padding: 16px 0;
+  margin: 0 -24px 30px -24px;
+  background: var(--vp-c-bg); /* Match site background */
+  border-bottom: 1px solid var(--vp-c-divider);
   transition: all 0.3s ease;
 }
 

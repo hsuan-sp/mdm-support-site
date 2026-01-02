@@ -251,16 +251,17 @@ onMounted(async () => {
 <style scoped>
 /* --- Layout & Reset --- */
 .qa-container {
+  max-width: 1400px; /* Increased from 1200px for wider display */
   width: 100%;
   margin: 0 auto;
-  padding: 40px 0 100px;
+  padding: 40px 24px 100px; /* Add horizontal padding */
 }
 
 /* --- Hero Search --- */
 .qa-hero {
   text-align: center;
   margin-bottom: 40px;
-  padding: 0 24px;
+  padding: 0; /* Remove padding, parent has it */
 }
 
 .hero-title {
@@ -322,11 +323,10 @@ onMounted(async () => {
 /* --- Sticky Filter Pills --- */
 .filter-bar-sticky {
   position: sticky;
-  top: var(--vp-nav-height); /* Adapts to VitePress navbar */
-  z-index: 20;
-  background: rgba(var(--vp-c-bg-rgb), 0.85); /* Use RGB var if available, else standard color */
-  backdrop-filter: blur(10px);
-  margin: 0 0 40px 0; /* Align with container */
+  top: var(--vp-nav-height); /* Below VitePress navbar */
+  z-index: 10;
+  background: var(--vp-c-bg);
+  margin: 0 -24px 30px -24px;
   padding: 16px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
 }
@@ -374,7 +374,7 @@ onMounted(async () => {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
-  padding: 0 24px; /* Add padding here if container is full width */
+  padding: 0; /* Remove padding, parent container has it */
 }
 
 .qa-results.fade-in {
@@ -512,16 +512,12 @@ onMounted(async () => {
 /* --- Mobile / Dark Mode Fixes --- */
 @media (max-width: 600px) {
   .qa-container {
-    padding: 20px 0 80px;
+    padding: 20px 16px 80px; /* Add horizontal padding for mobile */
   }
   
   .filter-bar-sticky {
-    margin: 0 0 30px 0;
+    margin: 0 -16px 30px -16px; /* Negative margin to bleed to edges */
     padding: 12px 16px;
-  }
-
-  .qa-results {
-    padding: 0 16px;
   }
 }
 </style>
