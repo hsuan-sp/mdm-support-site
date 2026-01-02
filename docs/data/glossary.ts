@@ -1,19 +1,19 @@
-/**
- * 維護指南 (2025/12/11 更新)：
- * 1. 本表已更新至最新技術標準。
- * 2. 定義區塊大幅擴充，旨在讓無背景知識的新手也能理解技術脈絡。
- * 3. 包含 Apple 裝置管理、網路基礎、Jamf 生態系與通用 IT 術語。
- */
+    /**
+    * 維護指南 (2025/12/11 更新)：
+    * 1. 本表已更新至最新技術標準。
+    * 2. 定義區塊大幅擴充，旨在讓無背景知識的新手也能理解技術脈絡。
+    * 3. 包含 Apple 裝置管理、網路基礎、Jamf 生態系與通用 IT 術語。
+    */
 
 export interface Term {
-  term: string;
-  category: ('Core' | 'Enrollment' | 'Apple' | 'Network' | 'Security' | 'Hardware' | 'Apps' | 'Other' | 'Education' | 'Jamf' | 'macOS')[];
-  definition: string;
-  analogy: string; // "白話文/比喻"
+    term: string;
+    category: ('Core' | 'Enrollment' | 'Apple' | 'Network' | 'Security' | 'Hardware' | 'Apps' | 'Other' | 'Education' | 'Jamf' | 'macOS')[];
+    definition: string;
+    analogy: string; // "白話文/比喻"
 }
 
 export const glossaryData: Term[] = [
-  // --- 8 ---
+    // --- 8 ---
   {
 
     term: '802.1X',
@@ -26,7 +26,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- A ---
+    // --- A ---
   {
 
     term: 'AAS (Automatic Assessment Configuration)',
@@ -314,7 +314,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- B ---
+    // --- B ---
   {
 
     term: 'Battery Health (電池健康度)',
@@ -360,7 +360,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- C ---
+    // --- C ---
   {
 
     term: 'CDN (Content Delivery Network)',
@@ -450,7 +450,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- D ---
+    // --- D ---
   {
 
     term: 'DDM (Declarative Device Management)',
@@ -551,7 +551,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- E ---
+    // --- E ---
   {
 
     term: 'Domain Capture (域名擷取)',
@@ -586,7 +586,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- F ---
+    // --- F ---
   {
 
     term: 'Face ID',
@@ -643,7 +643,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- G ---
+    // --- G ---
   {
 
     term: 'Gatekeeper',
@@ -667,7 +667,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- I ---
+    // --- I ---
   {
 
     term: 'Identity Provider (IdP)',
@@ -691,7 +691,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- J ---
+    // --- J ---
   {
 
     term: 'Jamf Connect',
@@ -759,7 +759,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- K ---
+    // --- K ---
   {
 
     term: 'Kernel Extension (Kext)',
@@ -783,7 +783,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- L ---
+    // --- L ---
   {
 
     term: 'LAPS (Local Administrator Password Solution)',
@@ -845,7 +845,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- M ---
+    // --- M ---
   {
 
     term: 'MAC Address',
@@ -902,7 +902,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- N ---
+    // --- N ---
   {
 
     term: 'N-1 Strategy',
@@ -937,7 +937,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- O ---
+    // --- O ---
   {
 
     term: 'OIDC (OpenID Connect)',
@@ -961,7 +961,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- P ---
+    // --- P ---
   {
 
     term: 'Package (.pkg)',
@@ -1084,7 +1084,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- Q ---
+    // --- Q ---
   {
 
     term: 'QR Code Enrollment',
@@ -1097,7 +1097,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- R ---
+    // --- R ---
   {
 
     term: 'RADIUS',
@@ -1198,7 +1198,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- S ---
+    // --- S ---
   {
 
     term: 'SCEP (Simple Certificate Enrollment Protocol)',
@@ -1365,7 +1365,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- T ---
+    // --- T ---
   {
 
     term: 'Temporary Session (Guest Mode)',
@@ -1422,7 +1422,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- U ---
+    // --- U ---
   {
 
     term: 'UIE (User-Initiated Enrollment)',
@@ -1479,7 +1479,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- V ---
+    // --- V ---
   {
 
     term: 'VLAN',
@@ -1514,7 +1514,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- W ---
+    // --- W ---
   {
 
     term: 'Wi-Fi Payload',
@@ -1538,7 +1538,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- Z ---
+    // --- Z ---
   {
 
     term: 'Zero-Touch Deployment',
@@ -1562,7 +1562,7 @@ export const glossaryData: Term[] = [
 
   },
 
-  // --- B ---
+    // --- B ---
   {
     term: 'Blueprints',
     category: ['Jamf', 'Core'],
@@ -1570,7 +1570,7 @@ export const glossaryData: Term[] = [
     analogy: '就像「自動駕駛模式」。你設定「時速100公里,保持車道中央」,車子就自動維持;Blueprints 讓你設定「必須有防毒+加密」,裝置就自動保持合規狀態,偏離了會自動拉回來。'
   },
 
-  // --- E ---
+    // --- E ---
   {
     term: 'Enrollment Invitation',
     category: ['Jamf', 'Enrollment'],
@@ -1584,7 +1584,7 @@ export const glossaryData: Term[] = [
     analogy: '就像「客製化調查問卷」。標準健康檢查只問身高體重,但你可以加問「有無接種疫苗」「最近一次看牙醫」等客製問題,然後依答案自動分組管理。'
   },
 
-  // --- I ---
+    // --- I ---
   {
     term: 'Inventory Collection',
     category: ['Jamf', 'Core'],
@@ -1592,7 +1592,7 @@ export const glossaryData: Term[] = [
     analogy: '就像「定期健康檢查」。每天自動量體溫血壓(收集資料),醫生(管理員)就能看到最新健康狀態;也可以說「現在馬上給我量!」立即更新,不用等明天。'
   },
 
-  // --- J ---
+    // --- J ---
   {
     term: 'Jamf Connect',
     category: ['Jamf', 'Security', 'macOS'],
@@ -1678,7 +1678,7 @@ export const glossaryData: Term[] = [
     analogy: '就像「舊品牌名稱」。就像Facebook改名Meta,Casper Suite就是Jamf Pro的舊名字。看到有人講Casper,不用困惑,他們講的就是Jamf Pro。'
   },
 
-  // --- P ---
+    // --- P ---
   {
     term: 'Package',
     category: ['Jamf', 'macOS', 'Apps'],
@@ -1686,7 +1686,7 @@ export const glossaryData: Term[] = [
     analogy: '就像「軟體快遞箱」。IT 把軟體裝進標準化包裹(Package),貼上標籤「僅限行銷部」,Jamf 就會自動配送到正確的 Mac 桌面,使用者點兩下就安裝完成。'
   },
 
-  // --- R ---
+    // --- R ---
   {
     term: 'Restrict Software',
     category: ['Jamf', 'Security', 'macOS'],
