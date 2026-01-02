@@ -244,19 +244,18 @@ onMounted(async () => {
 /* --- Controls Section (Sticky & Glassmorphism) --- */
 .controls-wrapper {
   position: sticky;
-  top: var(--vp-nav-height); /* Below VitePress navbar */
-  z-index: 10; /* Lower than navbar items but above grid */
-  padding: 16px 0;
-  margin: 0 -24px 30px -24px;
-  background: var(--vp-c-bg); /* Match site background */
+  top: var(--vp-nav-height);
+  z-index: 10;
+  padding: 24px 0;
+  margin: 0 -40px 40px -40px;
+  background: var(--vp-c-bg);
   border-bottom: 1px solid var(--vp-c-divider);
   transition: all 0.3s ease;
 }
 
 .controls-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
+  max-width: 100%;
+  padding: 0 5%;
 }
 
 /* Toggle Button */
@@ -389,12 +388,13 @@ onMounted(async () => {
 }
 
 
-/* --- Grid Layout (Responsive) --- */
+/* --- Grid Layout --- */
 .terms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 32px;
+  max-width: 100%;
+  padding: 0 5% 100px;
 }
 
 /* Mobile: Single column is handled by minmax(300px), but let's ensure small screens are safe */

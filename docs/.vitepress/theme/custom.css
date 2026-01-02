@@ -48,6 +48,17 @@
   color: var(--vp-c-brand-1);
 }
 
+/* Global Layout Expansion */
+:root {
+  --vp-layout-max-width: 1720px; /* Increase global width for wider screens */
+}
+
+@media (min-width: 1440px) {
+  .VPDoc .container {
+    max-width: 100% !important;
+  }
+}
+
 /* Custom Hero Button */
 .VPButton.brand {
   border-radius: 30px;
@@ -56,4 +67,19 @@
 }
 .VPButton.brand:hover {
   box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+}
+
+/* Subtle page-level background touch for "Premium" feel */
+body {
+  background-image: radial-gradient(
+      at 0% 0%,
+      hsla(243, 75%, 58%, 0.05) 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 100% 100%,
+      hsla(243, 75%, 58%, 0.03) 0px,
+      transparent 50%
+    );
+  background-attachment: fixed;
 }
