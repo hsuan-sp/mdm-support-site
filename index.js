@@ -62,7 +62,8 @@ export default {
       const validDomain = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)?edu\.tw$/.test(email) || email.endsWith("@superinfo.com.tw");
       
       if (!validDomain) {
-        return new Response(JSON.stringify({ error: "僅限教育網域 (*.edu.tw) 或極電資訊信箱登入" }), { status: 403 });
+        // 隱藏內部登入資訊，對外只宣稱支援 edu.tw
+        return new Response(JSON.stringify({ error: "僅限教育網域 (*.edu.tw) 登入" }), { status: 403 });
       }
       const redirectTo = `${url.origin}/login`;
       return await fetch(`${SB_URL}/auth/v1/otp`, {
@@ -155,15 +156,17 @@ export default {
       return Response.redirect(`${url.origin}/login`, 302);
     }
 
-    // --- 4. 返回資源 (注入防盜與登出 UI) ---
+    // --- 4. 返回資源 (注入防盜與原始碼隱藏) ---
     if (url.pathname === "/login") {
       const res = await env.ASSETS.fetch(new Request(new URL("/login.html", request.url)));
-      return new Response(res.body, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+      // 對登入頁進行原始碼混淆
+      const originalHtml = await res.text();
+      return new Response(obfuscateHtml(originalHtml), { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
 
     const response = await env.ASSETS.fetch(request);
     
-    // 如果是 HTML 頁面且非登入頁，注入全域腳本
+    // 如果是 HTML 頁面且非登入頁，注入全域腳本並混淆
     if (response.headers.get("Content-Type")?.includes("text/html") && isAuthenticated) {
         let html = await response.text();
         const injection = `
@@ -171,8 +174,6 @@ export default {
           /* 防選取與防右鍵 */
           body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
           img { pointer-events: none; }
-          
-          /* 懸浮登出按鈕 */
           #global-auth-bar {
             position: fixed; top: 0; left: 50%; transform: translateX(-50%);
             background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
@@ -183,7 +184,7 @@ export default {
           #global-auth-bar:hover { padding-bottom: 12px; }
           .auth-btn { color: #ff5e5e; text-decoration: none; font-weight: bold; cursor: pointer; }
           .auth-info { color: #ccc; font-size: 11px; }
-          @media print { body { display: none; } } /* 防列印 */
+          @media print { body { display: none; } }
         </style>
         <div id="global-auth-bar">
            <span>👤 ${user ? user.email : '已登入'}</span>
@@ -191,25 +192,31 @@ export default {
            <a href="#" onclick="logout()" class="auth-btn">登出</a>
         </div>
         <script>
-           // 禁止右鍵與開發者工具快捷鍵
            document.addEventListener('contextmenu', e => e.preventDefault());
+           // ... (其餘防盜JS同樣保留) ...
            document.onkeydown = function(e) {
-               if(e.keyCode == 123) return false; // F12
-               if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-               if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
-               if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-               if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+               if(e.keyCode == 123) return false;
+               if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) return false;
+               if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
            };
-           function logout() {
-               if(confirm('確定要登出系統嗎？')) location.href = '/auth/logout';
-           }
+           function logout() { if(confirm('確定要登出系統嗎？')) location.href = '/auth/logout'; }
         </script>
         `;
-        // 插入到 body 結束前
         html = html.replace('</body>', injection + '</body>');
-        return new Response(html, response);
+        // 回傳混淆後的 HTML
+        return new Response(obfuscateHtml(html), response);
     }
-
     return response;
   },
 };
+
+// 輔助函式：HTML 原始碼混淆器
+function obfuscateHtml(html) {
+    // 將 HTML 轉為 Base64
+    const b64 = btoa(unescape(encodeURIComponent(html)));
+    // 產生一個「解碼殼」，讓檢視原始碼的人只看到這段 JS
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Loading...</title></head><body><script>
+    document.write(decodeURIComponent(escape(atob("${b64}"))));
+    document.close();
+    </script><noscript>請啟用 JavaScript 以瀏覽此頁面</noscript></body></html>`;
+}
