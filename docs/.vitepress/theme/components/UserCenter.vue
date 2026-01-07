@@ -101,7 +101,9 @@ const logout = () => {
                                 <div class="item-text">
                                     <div class="label">{{ item.text }}</div>
                                 </div>
-                                <div class="item-icon-right">New Tab ↗</div>
+                                <div class="item-icon-right">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
                             </a>
                             
                             <!-- Dropdown Group -->
@@ -122,33 +124,24 @@ const logout = () => {
                         <div class="divider-horizontal"></div>
                     </template>
 
-                    <!-- Layout Mode -->
-                    <div class="menu-item" @click="toggleLayout(); isMenuOpen = false">
-                        <div class="item-icon">
-                            <svg v-if="isMobileView" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    <!-- Settings Grid (Compact Row) -->
+                    <div class="settings-grid">
+                        <div class="menu-item compact" @click="toggleLayout(); isMenuOpen = false">
+                            <div class="compact-icon">
+                                <svg v-if="isMobileView" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                            </div>
+                            <div class="compact-label">版面模式</div>
+                            <div class="compact-status">{{ isMobileView ? '行動版' : '電腦版' }}</div>
                         </div>
-                        <div class="item-text">
-                            <div class="label">版面模式</div>
-                            <div class="sublabel">{{ isMobileView ? '目前為：行動版' : '目前為：電腦版' }}</div>
-                        </div>
-                        <div class="toggle-track" :class="{ active: isMobileView }">
-                            <div class="toggle-thumb"></div>
-                        </div>
-                    </div>
 
-                    <!-- Dark Mode -->
-                    <div class="menu-item" @click="toggleDarkMode">
-                        <div class="item-icon">
-                            <svg v-if="isDark" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                        </div>
-                        <div class="item-text">
-                            <div class="label">外觀模式開關</div>
-                            <div class="sublabel">{{ isDark ? '目前為：深色' : '目前為：淡色' }}</div>
-                        </div>
-                        <div class="toggle-track" :class="{ active: isDark }">
-                            <div class="toggle-thumb"></div>
+                        <div class="menu-item compact" @click="toggleDarkMode">
+                            <div class="compact-icon">
+                                <svg v-if="isDark" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                            </div>
+                            <div class="compact-label">外觀模式</div>
+                            <div class="compact-status">{{ isDark ? '深色' : '淡色' }}</div>
                         </div>
                     </div>
                 </div>
@@ -433,4 +426,39 @@ const logout = () => {
 .mobile-dropdown-card {
     max-height: calc(100vh - 120px); /* Ensure space for top/bottom */
 }
+/* Settings Grid (Side-by-Side) */
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 0;
+}
+
+.menu-item.compact {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    padding: 16px 10px;
+}
+
+.compact-icon {
+    color: var(--vp-c-text-2);
+    margin-bottom: 4px;
+}
+.menu-item.compact:hover .compact-icon { color: var(--vp-c-brand); }
+
+.compact-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+}
+
+.compact-status {
+    font-size: 11px;
+    color: var(--vp-c-text-3);
+}
+
+.menu-item.compact .toggle-track { display: none; } /* Hide toggle in compact mode */
 </style>
