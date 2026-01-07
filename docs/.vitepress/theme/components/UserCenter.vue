@@ -37,7 +37,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <div class="user-center" v-if="user">
+  <div class="user-center">
     <!-- Desktop Horizontal View -->
     <div class="desktop-actions">
         <!-- Layout Toggle -->
@@ -48,15 +48,19 @@ const closeMenu = () => {
 
         <div class="divider"></div>
 
-        <div class="user-info">
+        <div class="user-info" v-if="user">
             <span class="username">{{ user.split('@')[0] }}</span>
             <button @click="logout" class="logout-link">登出</button>
+        </div>
+        <div class="user-info" v-else>
+            <a href="/login.html" class="login-link">登入</a>
         </div>
     </div>
 
     <!-- Mobile Integrated Menu Button -->
     <button class="mobile-menu-trigger" @click="isMenuOpen = !isMenuOpen">
-        <span class="user-init">{{ user[0].toUpperCase() }}</span>
+        <span v-if="user" class="user-init">{{ user[0].toUpperCase() }}</span>
+        <span v-else class="user-init">⚙️</span>
     </button>
 
     <!-- Mobile Dropdown Panel -->
@@ -64,10 +68,10 @@ const closeMenu = () => {
         <div v-if="isMenuOpen" class="mobile-dropdown-overlay" @click="isMenuOpen = false">
             <div class="mobile-dropdown-card" @click.stop>
                 <div class="dropdown-header">
-                    <div class="user-circle">{{ user[0].toUpperCase() }}</div>
+                    <div class="user-circle">{{ user ? user[0].toUpperCase() : '?' }}</div>
                     <div class="user-detail">
-                        <div class="name">{{ user.split('@')[0] }}</div>
-                        <div class="full-email">{{ user }}</div>
+                        <div class="name">{{ user ? user.split('@')[0] : '訪客' }}</div>
+                        <div class="full-email">{{ user || '未登入系統' }}</div>
                     </div>
                 </div>
 
@@ -94,8 +98,8 @@ const closeMenu = () => {
                             <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                         </div>
                         <div class="item-text">
-                            <div class="label">外觀模式</div>
-                            <div class="sublabel">{{ isDark ? '深色模式' : '淡色模式' }}</div>
+                            <div class="label">外觀模式開關</div>
+                            <div class="sublabel">{{ isDark ? '目前為：深色' : '目前為：淡色' }}</div>
                         </div>
                         <div class="toggle-track" :class="{ active: isDark }">
                             <div class="toggle-thumb"></div>
@@ -104,7 +108,8 @@ const closeMenu = () => {
                 </div>
 
                 <div class="dropdown-footer">
-                    <button class="logout-btn-full" @click="logout">登出帳號</button>
+                    <button v-if="user" class="logout-btn-full" @click="logout">登出帳號</button>
+                    <a v-else href="/login.html" class="logout-btn-full login-btn-full">由此登入</a>
                     <button class="close-btn" @click="isMenuOpen = false">取消</button>
                 </div>
             </div>
@@ -153,9 +158,11 @@ const closeMenu = () => {
 
 .user-info { display: flex; align-items: center; gap: 12px; font-size: 14px; }
 .username { color: var(--vp-c-text-2); font-weight: 500; }
-.logout-link { 
+.logout-link, .login-link { 
     color: var(--vp-c-brand); cursor: pointer; background: none; border: none; padding: 0; font-weight: 600;
+    text-decoration: none;
 }
+.login-link:hover { text-decoration: underline; }
 
 /* Mobile Trigger */
 .mobile-menu-trigger {
@@ -168,6 +175,10 @@ const closeMenu = () => {
     font-weight: 700;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
 }
 
 /* Mobile Dropdown */
@@ -238,10 +249,12 @@ const closeMenu = () => {
 .toggle-track.active .toggle-thumb { transform: translateX(20px); }
 
 .dropdown-footer { display: flex; flex-direction: column; gap: 12px; }
-.logout-btn-full {
+.logout-btn-full, .login-btn-full {
     width: 100%; padding: 14px; border-radius: 12px;
-    background: #ff3b30; color: white; font-weight: 700; border: none;
+    background: #ff3b30; color: white !important; font-weight: 700; border: none;
+    text-align: center; text-decoration: none;
 }
+.login-btn-full { background: var(--vp-c-brand); }
 .close-btn {
     width: 100%; padding: 14px; border-radius: 12px;
     background: var(--vp-c-bg-mute); color: var(--vp-c-text-1);
