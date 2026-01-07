@@ -2,11 +2,11 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/mdm-support-site/',
+  base: '/',
   title: "極電資訊 Apple MDM 知識庫",
   description: "全方位的 Apple 教育場域行動裝置管理指南",
   head: [
-    ['link', { rel: 'icon', href: '/mdm-support-site/superinfo_favicon.jpeg' }]
+    ['link', { rel: 'icon', href: '/superinfo_favicon.jpeg' }]
   ],
   cleanUrls: true,
   themeConfig: {
