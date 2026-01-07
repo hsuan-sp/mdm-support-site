@@ -252,6 +252,15 @@ const logout = () => {
     .mobile-menu-trigger {
         display: flex;
     }
+    
+    /* Force hide standard VitePress Desktop Menu on mobile */
+    :global(.VPNavBarMenu) {
+        display: none !important;
+    }
+    /* Force hide standard VitePress Search on mobile if it overlaps (optional, but safer) */
+    :global(.VPNavBarSearch) {
+        /* We can leave search if it adapts, but often it's better to hide if using bottom sheet */
+    }
 }
 
 /* Mobile Dropdown - Bottom Sheet Style */
