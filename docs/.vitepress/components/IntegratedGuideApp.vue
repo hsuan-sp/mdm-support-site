@@ -3,7 +3,9 @@ import { ref, computed, onMounted, nextTick, watch } from "vue";
 import { allQAData } from "../../data/all-data";
 import type { QAItem, QASection } from "../types";
 import MarkdownIt from "markdown-it";
+import { useLayoutMode } from '../theme/composables/useLayoutMode';
 
+const { isMobileView } = useLayoutMode();
 const md = new MarkdownIt({
   html: true,
   linkify: true,
@@ -76,7 +78,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="guide-app">
+  <div class="guide-app" :class="{ 'is-mobile-device': isMobileView }">
     <!-- Header (Title Only) -->
     <div class="page-header">
         <h1>MDM 實戰指南</h1>
@@ -200,12 +202,13 @@ onMounted(async () => {
 .page-header {
     text-align: center;
     margin-bottom: 60px;
-    margin-top: 60px; /* Force extra space */
 }
 .page-header h1 {
     font-size: 36px;
     font-weight: 800;
     margin-bottom: 12px;
+    line-height: 1.4; /* Fix clipping */
+    padding-top: 10px; /* Fix clipping */
 }
 .page-header p {
     color: var(--vp-c-text-2);
@@ -372,12 +375,19 @@ onMounted(async () => {
 .tags { margin-top: 16px; display: flex; gap: 8px; }
 .tag { font-size: 12px; background: var(--vp-c-bg); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--vp-c-divider); }
 
-/* Mobile Responsive */
+/* Mobile Responsive Logic */
 .mobile-nav-header { display: none; }
+
 @media (max-width: 960px) {
-    .app-layout { flex-direction: column; gap: 30px; }
-    .app-sidebar { width: 100%; top: 60px; z-index: 100; }
-    .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; }
-    .sidebar-inner.mobile-hidden { display: none; }
+    .guide-app:not(.is-mobile-device) .app-layout { flex-direction: column; gap: 30px; }
+    .guide-app:not(.is-mobile-device) .app-sidebar { width: 100%; top: 60px; z-index: 100; }
+    .guide-app:not(.is-mobile-device) .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; }
+    .guide-app:not(.is-mobile-device) .sidebar-inner.mobile-hidden { display: none; }
 }
+
+/* Forced Mobile Layout */
+.is-mobile-device .app-layout { flex-direction: column; gap: 30px; }
+.is-mobile-device .app-sidebar { width: 100%; top: 60px; z-index: 100; }
+.is-mobile-device .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; }
+.is-mobile-device .sidebar-inner.mobile-hidden { display: none; }
 </style>

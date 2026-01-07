@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from "vue";
 import { glossaryData } from "../../data/glossary";
+import { useLayoutMode } from '../theme/composables/useLayoutMode';
 
+const { isMobileView } = useLayoutMode();
 type CategoryType = "Core" | "Enrollment" | "Apple" | "Security" | "Network" | "Hardware" | "Apps" | "Other" | "Education" | "macOS" | "Jamf";
 
 const searchQuery = ref("");
@@ -99,38 +101,11 @@ const getCategoryCount = (cat: string) => {
   ).length;
 };
 
-// Platform Detection
-const isMobilePlatform = ref(false);
-const preferDesktop = ref(false);
-const windowWidth = ref(0); // Track width for prompt logic
 
-onMounted(() => {
-    // 判定是否為行動裝置 (包含 iPadOS Desktop Mode)
-    const nav = navigator as any;
-    const isTouch = navigator.maxTouchPoints > 0 || (nav.msMaxTouchPoints > 0);
-    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    // iPadOS 13+ often lies and says it's Macintosh, so check touch points
-    const isIpadOS = navigator.userAgent.includes("Mac") && isTouch;
-    
-    isMobilePlatform.value = isMobileUA || isIpadOS;
-    windowWidth.value = window.innerWidth;
-
-    window.addEventListener('resize', () => {
-        windowWidth.value = window.innerWidth;
-    });
-});
 </script>
 
 <template>
-  <div class="glossary-app" :class="{ 'is-mobile-device': isMobilePlatform && !preferDesktop }">
-    <!-- Desktop Switch Prompt (Only on High-Res Tablets) -->
-    <div class="desktop-switch-toast" v-if="isMobilePlatform && windowWidth > 1200 && !preferDesktop">
-        <span class="toast-text">偵測到大螢幕裝置，是否切換至電腦版佈局？</span>
-        <div class="toast-actions">
-            <button class="toast-btn primary" @click="preferDesktop = true">切換電腦版</button>
-            <button class="toast-btn secondary" @click="windowWidth = 0">維持行動版</button>
-        </div>
-    </div>
+  <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView }">
     <!-- Header Section -->
     <header class="glossary-header">
       <h1>零知識術語表</h1>
@@ -425,7 +400,6 @@ onMounted(() => {
   text-align: center;
   margin-bottom: 40px;
   padding: 80px 0 20px; 
-  margin-top: 60px; /* Force extra space for navbar */
 }
 .glossary-header h1 {
   font-size: clamp(32px, 5vw, 48px);
@@ -433,6 +407,8 @@ onMounted(() => {
   letter-spacing: -0.02em;
   margin-bottom: 20px;
   color: var(--vp-c-text-1);
+  line-height: 1.4; /* Fix clipping */
+  padding-top: 10px; /* Fix clipping */
 }
 .subtitle {
   font-size: clamp(16px, 2vw, 19px);

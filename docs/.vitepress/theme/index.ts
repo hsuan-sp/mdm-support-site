@@ -8,7 +8,7 @@ import AppleHome from '../components/AppleHome.vue'
 import BackToTop from '../components/BackToTop.vue'
 import GlobalFooter from '../components/GlobalFooter.vue'
 
-import LoginStatus from './components/LoginStatus.vue'
+import UserCenter from './components/UserCenter.vue'
 
 import IntegratedGuideApp from '../components/IntegratedGuideApp.vue'
 
@@ -16,7 +16,7 @@ export default {
   extends: Theme,
   Layout: () => {
     return h(Theme.Layout, null, {
-      'nav-bar-content-after': () => h(LoginStatus),
+      'nav-bar-content-after': () => h(UserCenter),
       'layout-bottom': () => [h(GlobalFooter), h(BackToTop)]
     })
   },
