@@ -71,9 +71,13 @@ const logout = () => {
         </div>
     </div>
 
-    <!-- Mobile Integrated Menu Button -->
-    <button class="mobile-menu-trigger" @click="isMenuOpen = !isMenuOpen">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    <!-- Mobile Menu Trigger - Only visible on mobile -->
+    <button class="mobile-menu-trigger" @click="isMenuOpen = !isMenuOpen" aria-label="開啟選單">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
     </button>
 
     <!-- Mobile Dropdown Panel -->
@@ -182,21 +186,42 @@ const logout = () => {
 }
 .login-link:hover { text-decoration: underline; }
 
-/* Mobile Trigger */
+/* Mobile Trigger - Liquid Glass FAB */
 .mobile-menu-trigger {
-    width: 34px;
-    height: 34px;
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 28px;
+    left: 24px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: var(--vp-c-brand);
+    background: rgba(var(--vp-c-brand-rgb), 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     color: white;
-    border: none;
-    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(var(--vp-c-brand-rgb), 0.3);
+    z-index: 100;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-menu-trigger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(var(--vp-c-brand-rgb), 0.4);
+}
+
+.mobile-menu-trigger:active {
+    transform: scale(0.95);
+}
+
+/* Show only on mobile */
+@media (max-width: 959px) {
+    .mobile-menu-trigger {
+        display: flex;
+    }
 }
 
 /* Mobile Dropdown - Liquid Glass */
