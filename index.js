@@ -159,9 +159,9 @@ export default {
     // --- 4. 返回資源 (注入防盜與原始碼隱藏) ---
     if (url.pathname === "/login") {
       const res = await env.ASSETS.fetch(new Request(new URL("/login.html", request.url)));
-      // 對登入頁進行原始碼混淆
+      // 對登入頁進行原始碼混淆 (暫停使用)
       const originalHtml = await res.text();
-      return new Response(obfuscateHtml(originalHtml), { headers: { "Content-Type": "text/html; charset=utf-8" } });
+      return new Response(originalHtml, { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
 
     const response = await env.ASSETS.fetch(request);
@@ -203,8 +203,8 @@ export default {
         </script>
         `;
         html = html.replace('</body>', injection + '</body>');
-        // 回傳混淆後的 HTML
-        return new Response(obfuscateHtml(html), response);
+        // 暫時移除 Obfuscation 以恢復服務
+        return new Response(html, response);
     }
     return response;
   },
