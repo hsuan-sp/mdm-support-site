@@ -8,11 +8,32 @@ export default {
 
     // --- 2. 靜態資源、登入頁不攔截 ---
     const isLoginPage = url.pathname === "/login";
+    const isHealthCheck = url.pathname === "/auth/health";
     const isPublicAsset = url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?|json)$/);
     
     // 這裡我們也放行 login.html 檔案本身
-    if (isLoginPage || isPublicAsset || url.pathname === "/login.html") {
+    if (isLoginPage || isHealthCheck || isPublicAsset || url.pathname === "/login.html") {
       return await env.ASSETS.fetch(request);
+    }
+
+    // --- 2.5 API: 檢查 Supabase 連線狀態 ---
+    if (url.pathname === "/auth/health") {
+      try {
+        const res = await fetch(`${env.SUPABASE_URL}/auth/v1/health`, {
+          headers: { "apikey": env.SUPABASE_ANON_KEY }
+        });
+        const isOk = res.ok;
+        return new Response(JSON.stringify({ 
+          status: isOk ? "online" : "error",
+          supabase_url: env.SUPABASE_URL ? "Configured" : "Missing",
+          supabase_key: env.SUPABASE_ANON_KEY ? "Configured" : "Missing"
+        }), { 
+          status: 200, 
+          headers: { "Content-Type": "application/json" } 
+        });
+      } catch (e) {
+        return new Response(JSON.stringify({ status: "offline", error: e.message }), { status: 500 });
+      }
     }
 
     // --- 3. API: 傳送 OTP ---

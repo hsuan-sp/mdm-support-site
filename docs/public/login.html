@@ -65,6 +65,9 @@
         .success { color: #1d1d1f; }
         .error { color: #ff3b30; }
         .logo { max-width: 140px; height: auto; margin-bottom: 20px; border-radius: 8px; }
+        .status-badge { font-size: 10px; padding: 4px 8px; border-radius: 10px; display: inline-block; margin-top: 10px; background: #eee; color: #666; }
+        .status-online { background: #e3f9e5; color: #1f7a1f; }
+        .status-offline { background: #ffe5e5; color: #cc0000; }
     </style>
 </head>
 <body>
@@ -72,6 +75,8 @@
         <img src="/superinfo_logo.png" alt="Logo" class="logo">
         <h1>身分驗證</h1>
         <p>請使用教育網域信箱 (@*.edu.tw) <br> 或極電資訊信箱登入</p>
+        <div id="status" class="status-badge">正在檢查服務狀態...</div>
+        <br><br>
         
         <div id="step-email">
             <input type="email" id="email" placeholder="電子郵件地址" required>
@@ -94,6 +99,25 @@
         const emailInput = document.getElementById('email');
         const otpInput = document.getElementById('otp');
         const msg = document.getElementById('message');
+        const statusBadge = document.getElementById('status');
+
+        // 啟動時檢查服務狀態
+        (async () => {
+            try {
+                const res = await fetch('/auth/health');
+                const data = await res.json();
+                if (data.status === 'online') {
+                    statusBadge.innerText = '● 驗證服務連線正常';
+                    statusBadge.className = 'status-badge status-online';
+                } else {
+                    statusBadge.innerText = '● 驗證服務異常';
+                    statusBadge.className = 'status-badge status-offline';
+                }
+            } catch (e) {
+                statusBadge.innerText = '● 無法連線至驗證伺服器';
+                statusBadge.className = 'status-badge status-offline';
+            }
+        })();
 
         document.getElementById('btn-send').onclick = async () => {
             const email = emailInput.value.trim();
