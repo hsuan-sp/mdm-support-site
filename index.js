@@ -19,6 +19,9 @@ export default {
     // --- 2.5 API: 檢查 Supabase 連線狀態 ---
     if (url.pathname === "/auth/health") {
       try {
+        if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
+          return new Response(JSON.stringify({ status: "error", error: "Environment variables missing" }), { status: 200 });
+        }
         const res = await fetch(`${env.SUPABASE_URL}/auth/v1/health`, {
           headers: { "apikey": env.SUPABASE_ANON_KEY }
         });
@@ -32,7 +35,7 @@ export default {
           headers: { "Content-Type": "application/json" } 
         });
       } catch (e) {
-        return new Response(JSON.stringify({ status: "offline", error: e.message }), { status: 500 });
+        return new Response(JSON.stringify({ status: "offline", error: e.message }), { status: 200 });
       }
     }
 
