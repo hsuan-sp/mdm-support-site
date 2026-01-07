@@ -210,13 +210,30 @@ export default {
   },
 };
 
-// 輔助函式：HTML 原始碼混淆器
+// 輔助函式：HTML 原始碼混淆器 (Worker Safe Version)
 function obfuscateHtml(html) {
-    // 將 HTML 轉為 Base64
-    const b64 = btoa(unescape(encodeURIComponent(html)));
-    // 產生一個「解碼殼」，讓檢視原始碼的人只看到這段 JS
+    // 使用簡單的字元編碼進行混淆，避免 Worker Runtime Error
+    // 這裡不使用 btoa/unescape，改用標準的 UTF-8 轉 Base64 邏輯
+    const encoder = new TextEncoder();
+    const data = encoder.encode(html);
+    let binary = '';
+    const len = data.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(data[i]);
+    }
+    // Worker 環境下通常有 btoa，若是 Node.js 環境則需 Buffer，此前 Cloudflare 支援 btoa
+    const b64 = btoa(binary);
+
     return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Loading...</title></head><body><script>
-    document.write(decodeURIComponent(escape(atob("${b64}"))));
+    // Client-side decoding
+    const b64 = "${b64}";
+    const binary = atob(b64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    const decoder = new TextDecoder();
+    document.write(decoder.decode(bytes));
     document.close();
     </script><noscript>請啟用 JavaScript 以瀏覽此頁面</noscript></body></html>`;
 }
