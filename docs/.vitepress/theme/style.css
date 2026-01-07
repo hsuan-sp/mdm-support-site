@@ -53,10 +53,22 @@
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
-body {
+/* GLOBAL LAYOUT FIXES For Safari/Mobile */
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Fix horizontal scrolling/gap */
+  margin: 0;
+  padding: 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  /* Removed scrollbar hiding for better UX */
+}
+
+/* HIDE Default VitePress "Return to Top" link/text */
+.VPBackToTop {
+    display: none !important;
+}
+.return-to-top {
+    display: none !important;
 }
 
 /* Feature Cards - Strictly Responsive */
@@ -82,8 +94,10 @@ body {
   border-color: var(--vp-c-brand-1) !important;
 }
 
-/* Nav Bar Premium/* Nav Bar */
+/* Nav Bar Premium */
 .VPNavBar {
+  width: 100% !important;
+  max-width: 100vw !important;
   backdrop-filter: var(--vp-backdrop-filter);
   -webkit-backdrop-filter: var(--vp-backdrop-filter);
   border-bottom: 1px solid rgba(0,0,0,0.05) !important;
@@ -175,9 +189,6 @@ h1 {
     width: 100%;
     max-width: 400px; /* Wider search bar */
   }
-
-  /* Adjust Nav Content to not overlap centered search if possible */
-  /* This is tricky, but absolute positioning usually floats over */
 }
 
 /* 2. Logo Separator Line */
@@ -187,8 +198,6 @@ h1 {
   gap: 16px;
 }
 
-/* Target the Logo Image specifically if possible, or just use ::before on text */
-/* VitePress puts logo in A > IMG. */
 .VPNavBarTitle .logo {
   height: 28px; /* Ensure size */
   width: auto;
