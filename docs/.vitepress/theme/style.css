@@ -201,13 +201,18 @@ h1 {
 .VPNavBarTitle .logo {
   height: 28px; /* Ensure size */
   width: auto;
-  padding-right: 18px;
-  margin-right: 0 !important;
-  border-right: 1px solid rgba(0,0,0,0.1);
+  padding-right: 8px; /* Adjusted padding */
+  padding-left: 8px;  /* Added for balance */
+  margin-right: 10px !important; /* Spacing after decor */
+  background: white; /* Force white background for transp logo */
+  border-radius: 6px; /* Soft edges */
+  padding: 2px 6px; /* Inner clearance */
 }
 
 .dark .VPNavBarTitle .logo {
-  border-right: 1px solid rgba(255,255,255,0.15);
+  /* Keep white bg in dark mode so black logo pops, or adjust if logo differs */
+  background: rgba(255, 255, 255, 0.9); 
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Adjust Site Title Text */
