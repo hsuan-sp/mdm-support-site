@@ -472,11 +472,8 @@ const logout = () => {
 
 .menu-item.compact .toggle-track { display: none; } /* Hide toggle in compact mode */
 
-/* Global Override to hide default VitePress Hamburger */
+/* Global Override to hide default VitePress Hamburger only */
 :global(.VPNavBarHamburger) {
-    display: none !important;
-}
-:global(.VPNavBarMenu) {
     display: none !important;
 }
 </style>
