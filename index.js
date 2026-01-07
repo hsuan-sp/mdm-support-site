@@ -16,24 +16,35 @@ async function verifyUserWithSupabase(token, url, anonKey) {
 
 // 紀錄日誌 (抓取 IP, 國家, 裝置)
 async function logLogin(user, request, actionType, SB_URL, SB_ANON, SB_SERVICE) {
-  const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip") || "unknown";
+  const ip = request.headers.get("cf-connecting-ip") || "unknown";
   const country = request.headers.get("cf-ipcountry") || "unknown";
   const ua = request.headers.get("user-agent") || "unknown";
   
+  console.log(`[Attempting Log] User: ${user.email}, IP: ${ip}, Action: ${actionType}`);
+
   try {
-    await fetch(`${SB_URL}/rest/v1/login_logs`, {
+    const res = await fetch(`${SB_URL}/rest/v1/login_logs`, {
       method: "POST",
       headers: { 
-        "Content-Type": "application/json", "apikey": SB_ANON, 
-        "Authorization": `Bearer ${SB_SERVICE}`, "Prefer": "return=minimal"
+        "Content-Type": "application/json", 
+        "apikey": SB_ANON, 
+        "Authorization": `Bearer ${SB_SERVICE}`, 
+        "Prefer": "return=minimal"
       },
       body: JSON.stringify({ 
-          email: user.email, user_id: user.id, ip_address: ip, 
-          country: country, user_agent: ua, action: actionType,
+          email: user.email, 
+          user_id: user.id, 
+          ip_address: ip, 
+          country: country, 
+          user_agent: ua, 
+          action: actionType,
           meta_data: { method: actionType === "manual" ? "OTP 驗證" : "自動快取" }
       })
     });
-  } catch (e) { console.error(`[Log Error] ${e.message}`); }
+    console.log(`[Log Result] Status: ${res.status} ${res.statusText}`);
+  } catch (e) {
+    console.error(`[Log Error] ${e.message}`);
+  }
 }
 
 // --- 2. Worker 主邏輯 ---
