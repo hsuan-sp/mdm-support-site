@@ -159,6 +159,15 @@
             }
         })();
 
+        // 初始化：檢查是否有先前輸入的 Email (如果使用者按上一頁回來)
+        if (emailInput.value && !stepOtp.classList.contains('hidden')) {
+            // 如果已經在 OTP 步驟且有 Email，保持現狀
+        } else {
+             // 否則重置為初始狀態
+            stepEmail.classList.remove('hidden');
+            stepOtp.classList.add('hidden');
+        }
+
         document.getElementById('btn-send').onclick = async () => {
             const email = emailInput.value.trim();
             if (!email) return;
