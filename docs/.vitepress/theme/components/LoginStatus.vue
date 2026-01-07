@@ -24,7 +24,7 @@ const logout = () => {
 
 <template>
   <div v-if="user" class="auth-box">
-    <span class="email">👤 {{ user }}</span>
+    <span class="email">👤 {{ user.split('@')[0] }}</span>
     <button @click="logout" class="logout-btn">登出</button>
   </div>
 </template>

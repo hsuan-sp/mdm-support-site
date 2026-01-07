@@ -7,7 +7,7 @@ type CategoryType = "Core" | "Enrollment" | "Apple" | "Security" | "Network" | "
 const searchQuery = ref("");
 const selectedCategory = ref<CategoryType | "All">("All");
 const sortOrder = ref<'asc' | 'desc'>('asc'); // 新增排序狀態
-const isControlsExpanded = ref(true); // 控制搜尋工具的展開/收起
+const isControlsExpanded = ref(false); // 控制搜尋工具的展開/收起，預設收起
 
 const categories = [
   "All",
@@ -217,8 +217,8 @@ onMounted(async () => {
 /* Header */
 .glossary-header {
   text-align: center;
-  margin-bottom: 60px;
-  padding: 60px 0 20px;
+  margin-bottom: 40px;
+  padding: 80px 0 20px; /* 增加頂部間距，避免被切到 */
 }
 
 .glossary-header h1 {

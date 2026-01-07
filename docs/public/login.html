@@ -140,12 +140,15 @@
             document.getElementById('message').innerText = hashParams.get('error_description');
         }
 
-        // 啟動時檢查服務狀態 (僅在錯誤時顯示)
+        // 啟動時檢查服務狀態
         (async () => {
             try {
                 const res = await fetch('/auth/health');
                 const data = await res.json();
-                if (data.status !== 'online') {
+                if (data.status === 'online') {
+                    statusBadge.innerText = '🟢 驗證服務運作中';
+                    statusBadge.className = 'status-badge status-online';
+                } else {
                     statusBadge.innerText = '⚠️ 驗證服務暫時無法使用';
                     statusBadge.className = 'status-badge status-offline';
                 }
