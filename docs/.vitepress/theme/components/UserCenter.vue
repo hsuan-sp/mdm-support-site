@@ -252,16 +252,17 @@ const logout = () => {
 
 .mobile-dropdown-card {
     width: 100%;
-    max-width: 100%; /* Full Width */
-    background: rgba(255, 255, 255, 0.96); /* Slightly more opaque */
+    max-width: 600px; /* Limit width on tablets */
+    margin: 0 auto; /* Center horizontally */
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-radius: 28px 28px 0 0; /* Top corners only */
-    padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px; /* Safe Area Padding */
+    padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px;
     box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.5);
-    max-height: 85vh; /* Max height limit */
+    max-height: 85vh;
     overflow-y: auto;
     position: relative;
 }
