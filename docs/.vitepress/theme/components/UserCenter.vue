@@ -76,83 +76,101 @@ const logout = () => {
         </div>
     </div>
 
-    <!-- Mobile Menu Trigger - Integrated in Navbar -->
+    <!-- Mobile Menu Trigger - Hamburger Icon -->
     <button class="mobile-menu-trigger" @click="isMenuOpen = !isMenuOpen" aria-label="開啟選單">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
     </button>
 
-    <!-- Mobile Dropdown Panel -->
-    <Transition name="slide-up">
-        <div v-if="isMenuOpen" class="mobile-dropdown-overlay" @click="isMenuOpen = false">
-            <div class="mobile-dropdown-card" @click.stop>
-                <div class="dropdown-header">
-                    <div class="user-detail no-avatar">
-                        <div class="name">{{ user ? (user || '').split('@')[0] : '訪客' }}</div>
-                        <div class="full-email">{{ user || '未登入系統' }}</div>
-                    </div>
-                </div>
-
-                <div class="menu-items">
-                    <!-- Navigation Links (Integrated) -->
-                    <template v-if="theme.nav">
-                        <div v-for="(item, index) in theme.nav" :key="index" class="nav-group">
-                            <!-- Single Link -->
-                            <a v-if="item.link" :href="item.link" class="menu-item nav-link" @click="isMenuOpen = false">
-                                <div class="item-text">
-                                    <div class="label">{{ item.text }}</div>
-                                </div>
-                                <div class="item-icon-right">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </div>
-                            </a>
-                            
-                            <!-- Dropdown Group -->
-                            <div v-else class="menu-item nav-group-header" :class="{ expanded: expandedNav === index }" @click="toggleNav(index)">
-                                <div class="item-text">
-                                    <div class="label">{{ item.text }}</div>
-                                </div>
-                                <div class="item-icon-right chevron">▼</div>
-                            </div>
-                            
-                            <!-- Submenu Items -->
-                            <div v-if="!item.link && expandedNav === index" class="submenu-container">
-                                <a v-for="sub in item.items" :key="sub.text" :href="sub.link" class="submenu-item" @click="isMenuOpen = false">
-                                    {{ sub.text }}
+    <!-- Mobile Dropdown Panel (Teleported to body to avoid clipping) -->
+    <Teleport to="body">
+        <Transition name="slide-up">
+            <div v-if="isMenuOpen" class="mobile-dropdown-overlay" @click="isMenuOpen = false">
+                <div class="mobile-dropdown-card" @click.stop>
+                    
+                    <div class="menu-items">
+                        <!-- Navigation Links (Integrated with Deep Nesting) -->
+                        <template v-if="theme.nav">
+                            <div v-for="(item, index) in theme.nav" :key="index" class="nav-group">
+                                <!-- Level 1: Single Link -->
+                                <a v-if="item.link" :href="item.link" class="menu-item nav-link" @click="isMenuOpen = false">
+                                    <div class="item-text">
+                                        <div class="label">{{ item.text }}</div>
+                                    </div>
+                                    <div class="item-icon-right">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </div>
                                 </a>
-                            </div>
-                        </div>
-                        <div class="divider-horizontal"></div>
-                    </template>
+                                
+                                <!-- Level 1: Group Header -->
+                                <div v-else class="menu-item nav-group-header" :class="{ expanded: expandedNav === index }" @click="toggleNav(index)">
+                                    <div class="item-text">
+                                        <div class="label">{{ item.text }}</div>
+                                    </div>
+                                    <div class="item-icon-right chevron">▼</div>
+                                </div>
+                                
+                                <!-- Level 1: Submenu Container -->
+                                <div v-if="!item.link && expandedNav === index" class="submenu-container">
+                                    <div v-for="(subItem, subIndex) in item.items" :key="subIndex">
+                                        
+                                        <!-- Level 2: Sub-Group Header -->
+                                        <div v-if="subItem.items" class="submenu-group-label">
+                                            {{ subItem.text }}
+                                        </div>
 
-                    <!-- Settings Grid (Compact Row) -->
-                    <div class="settings-grid">
-                        <div class="menu-item compact" @click="toggleLayout(); isMenuOpen = false">
-                            <div class="compact-icon">
-                                <svg v-if="isMobileView" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                            </div>
-                            <div class="compact-label">版面模式</div>
-                            <div class="compact-status">{{ isMobileView ? '行動版' : '電腦版' }}</div>
-                        </div>
+                                        <!-- Level 2: Sub-Group Items -->
+                                        <template v-if="subItem.items">
+                                            <a v-for="leaf in subItem.items" :key="leaf.text" :href="leaf.link" class="submenu-item nested" @click="isMenuOpen = false">
+                                                {{ leaf.text }}
+                                            </a>
+                                        </template>
 
-                        <div class="menu-item compact" @click="toggleDarkMode">
-                            <div class="compact-icon">
-                                <svg v-if="isDark" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                                        <!-- Level 2: Direct Link -->
+                                        <a v-else :href="subItem.link" class="submenu-item" @click="isMenuOpen = false">
+                                            {{ subItem.text }}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="compact-label">外觀模式</div>
-                            <div class="compact-status">{{ isDark ? '深色' : '淡色' }}</div>
+                            <div class="divider-horizontal"></div>
+                        </template>
+
+                        <!-- Settings Grid (Compact Row) -->
+                        <div class="settings-grid">
+                            <div class="menu-item compact" @click="toggleLayout(); isMenuOpen = false">
+                                <div class="compact-icon">
+                                    <svg v-if="isMobileView" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                    <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                </div>
+                                <div class="compact-label">版面模式</div>
+                                <div class="compact-status">{{ isMobileView ? '行動版' : '電腦版' }}</div>
+                            </div>
+
+                            <div class="menu-item compact" @click="toggleDarkMode">
+                                <div class="compact-icon">
+                                    <svg v-if="isDark" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                                    <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                                </div>
+                                <div class="compact-label">外觀模式</div>
+                                <div class="compact-status">{{ isDark ? '深色' : '淡色' }}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="dropdown-footer">
-                    <button v-if="!isGuest" class="logout-btn-full" @click="logout">登出帳號</button>
-                    <button class="close-btn" @click="isMenuOpen = false">關閉選單</button>
+                    <div class="dropdown-footer">
+                        <!-- User Info moved to Footer -->
+                        <div class="user-detail-footer">
+                            <div class="current-user-label">目前登入</div>
+                            <div class="name">{{ user ? (user || '').split('@')[0] : '訪客' }}</div>
+                        </div>
+
+                        <button v-if="!isGuest" class="logout-btn-full" @click="logout">登出帳號</button>
+                        <button class="close-btn" @click="isMenuOpen = false">關閉選單</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </Transition>
+        </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -243,11 +261,11 @@ const logout = () => {
     background: rgba(0,0,0,0.4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    z-index: 9999;
+    z-index: 20000; /* Extremely high Z-index to beat navbar */
     display: flex;
     align-items: flex-end; /* Align to Bottom */
     justify-content: center;
-    padding: 0; /* Full width touches edges */
+    padding: 0;
 }
 
 .mobile-dropdown-card {
@@ -265,6 +283,8 @@ const logout = () => {
     max-height: 85vh;
     overflow-y: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .dark .mobile-dropdown-card {
@@ -272,27 +292,7 @@ const logout = () => {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.dropdown-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.dark .dropdown-header {
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.user-detail.no-avatar {
-    padding-left: 4px;
-}
-
-.user-detail .name { font-size: 18px; font-weight: 700; color: var(--vp-c-text-1); line-height: 1.2; }
-.user-detail .full-email { font-size: 13px; color: var(--vp-c-text-3); margin-top: 4px; }
-
-.menu-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.menu-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; margin-top: 12px; }
 
 .menu-item {
     display: flex; align-items: center; gap: 16px;
@@ -320,23 +320,22 @@ const logout = () => {
 .item-icon { color: var(--vp-c-text-2); display: flex; align-items: center; }
 .item-text { flex: 1; }
 .item-text .label { font-size: 15px; font-weight: 600; color: var(--vp-c-text-1); }
-.item-text .sublabel { font-size: 12px; color: var(--vp-c-text-3); }
 
 /* Switch Toggle Style */
-.toggle-track {
-    width: 44px; height: 24px; border-radius: 12px;
-    background: var(--vp-c-divider);
-    position: relative; transition: background 0.3s;
-}
-.toggle-track.active { background: var(--vp-c-brand); }
-.toggle-thumb {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: white; position: absolute; top: 2px; left: 2px;
-    transition: transform 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-.toggle-track.active .toggle-thumb { transform: translateX(20px); }
+.toggle-track { display: none; } /* Using compact mode now */
 
-.dropdown-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+.dropdown-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px solid var(--vp-c-divider); }
+
+.user-detail-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.current-user-label { font-size: 11px; color: var(--vp-c-text-3); margin-bottom: 2px; }
+.user-detail-footer .name { font-size: 16px; font-weight: 600; color: var(--vp-c-text-1); }
+
+
 .logout-btn-full {
     width: 100%; padding: 16px; border-radius: 16px;
     background: #ff3b30; color: white !important; font-weight: 700; border: none;
@@ -367,7 +366,7 @@ const logout = () => {
 
 .slide-up-enter-active .mobile-dropdown-card,
 .slide-up-leave-active .mobile-dropdown-card {
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1.05);
+    transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.2, 1.05); /* Faster physics */
 }
 
 .slide-up-enter-from,
@@ -377,13 +376,12 @@ const logout = () => {
 
 .slide-up-enter-from .mobile-dropdown-card {
     transform: translateY(100%);
-    opacity: 0;
 }
 
 .slide-up-leave-to .mobile-dropdown-card {
     transform: translateY(100%);
-    opacity: 0;
 }
+
 /* Navigation Styles */
 .nav-link { text-decoration: none; color: inherit; }
 .nav-group-header { justify-content: space-between; }
@@ -392,28 +390,43 @@ const logout = () => {
 .nav-group-header.expanded .chevron { transform: rotate(180deg); color: var(--vp-c-brand); }
 
 .submenu-container {
-    padding-left: 52px; /* Indent to align with text */
+    padding-left: 20px; /* Aligned left but indented */
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: -8px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    border-left: 2px solid var(--vp-c-divider);
+    margin-left: 24px;
+}
+
+.submenu-group-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--vp-c-text-3);
+    margin-bottom: 6px;
+    padding-left: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .submenu-item {
-    padding: 10px 14px;
-    background: rgba(0,0,0,0.02);
-    border-radius: 12px;
-    font-size: 14px;
-    color: var(--vp-c-text-2);
+    display: block;
+    padding: 12px 14px;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--vp-c-text-1);
     text-decoration: none;
     transition: all 0.2s;
-    border-left: 2px solid transparent;
+}
+.submenu-item.nested {
+    font-size: 14px;
+    color: var(--vp-c-text-2);
 }
 .submenu-item:hover {
-    background: rgba(0,0,0,0.05);
-    color: var(--vp-c-text-1);
-    border-left-color: var(--vp-c-brand);
+    background: rgba(0,0,0,0.04);
+    color: var(--vp-c-brand);
 }
 
 .divider-horizontal {
@@ -423,10 +436,6 @@ const logout = () => {
     opacity: 0.5;
 }
 
-/* Adjust Card Max Height for Safe Area */
-.mobile-dropdown-card {
-    max-height: calc(100vh - 120px); /* Ensure space for top/bottom */
-}
 /* Settings Grid (Side-by-Side) */
 .settings-grid {
     display: grid;
