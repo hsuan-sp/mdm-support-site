@@ -101,6 +101,16 @@
         const msg = document.getElementById('message');
         const statusBadge = document.getElementById('status');
 
+        // Magic Link 處理：檢查 URL 是否帶有 #access_token=...
+        if (window.location.hash.includes('access_token=')) {
+            const params = new URLSearchParams(window.location.hash.substring(1));
+            const accessToken = params.get('access_token');
+            if (accessToken) {
+                document.cookie = `sb-access-token=${accessToken}; Path=/; Max-Age=86400; SameSite=Lax; Secure`;
+                location.href = '/';
+            }
+        }
+
         // 啟動時檢查服務狀態
         (async () => {
             try {

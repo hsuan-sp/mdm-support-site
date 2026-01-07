@@ -23,34 +23,37 @@ export default {
     const url = new URL(request.url);
     const cookie = request.headers.get("Cookie") || "";
     
-    console.log(`[Request] ${request.method} ${url.pathname}`);
+    // --- 1. 特別處理：從網址獲取 Token (Magic Link) ---
+    // Supabase Magic Link 通常會跳轉回 /#access_token=... 或是 /?code=...
+    // 為了讓 Worker 攔截到，前端會需要把這個送到後端，
+    // 但因為 # 後面的東西後端看不到，我們這裡先處理 ?code= 的部分
+    const code = url.searchParams.get("code");
+    if (code) {
+      // 這裡可以透過 exchange code 邏輯處理，但為了簡單，我們建議使用者
+      // 進入登入頁後，前端會處理 # 之後的 fragment。
+    }
 
-    // --- 1. 定義 API 邏輯 (優先處理，不要被靜態資源攔截) ---
+    // --- 2. API 路由 (健康檢查、寄送、驗證) ---
 
     // 健康檢查
     if (url.pathname === "/auth/health") {
-      const hasUrl = !!env.SUPABASE_URL;
-      const hasKey = !!env.SUPABASE_ANON_KEY;
-      console.log(`[Health] URL:${hasUrl}, Key:${hasKey}`);
-      
       try {
         const res = await fetch(`${env.SUPABASE_URL}/auth/v1/health`, {
           headers: { "apikey": env.SUPABASE_ANON_KEY }
         });
-        return new Response(JSON.stringify({ 
-          status: res.ok ? "online" : "error",
-          details: `Supabase status: ${res.status}`
-        }), { headers: { "Content-Type": "application/json" } });
+        return new Response(JSON.stringify({ status: res.ok ? "online" : "error" }), { 
+          headers: { "Content-Type": "application/json" } 
+        });
       } catch (e) {
-        return new Response(JSON.stringify({ status: "offline", error: e.message }), { status: 200 });
+        return new Response(JSON.stringify({ status: "offline" }), { status: 200 });
       }
     }
 
-    // 發送 OTP
+    // 發送 OTP / Magic Link
     if (url.pathname === "/auth/otp" && request.method === "POST") {
       const { email } = await request.json();
       if (!email.endsWith("@superinfo.com.tw") && !email.endsWith(".edu.tw")) {
-        return new Response(JSON.stringify({ error: "禁止登入：僅限指定網域" }), { status: 403 });
+        return new Response(JSON.stringify({ error: "禁止登入" }), { status: 403 });
       }
       return await fetch(`${env.SUPABASE_URL}/auth/v1/otp`, {
         method: "POST",
@@ -86,31 +89,27 @@ export default {
       return new Response(JSON.stringify({ error: "驗證失敗" }), { status: 401 });
     }
 
-    // --- 2. 處理頁面與靜態資源 ---
-
-    // 登入狀態檢查
+    // --- 3. 登入狀態檢查 (JWT 驗證) ---
     const tokenMatch = cookie.match(/sb-access-token=([^;]+)/);
     const user = tokenMatch ? await verifyJWT(tokenMatch[1], env.JWT_SECRET) : null;
     const isAuthenticated = !!user;
 
-    // 登入頁面
+    // --- 4. 靜態資源與路由 ---
     if (url.pathname === "/login") {
       const res = await env.ASSETS.fetch(new Request(new URL("/login.html", request.url)));
       return new Response(res.body, { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
 
-    // 靜態資源放行
     const isPublicAsset = url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?|json)$/);
     if (isPublicAsset || url.pathname === "/login.html") {
       return await env.ASSETS.fetch(request);
     }
 
-    // 攔截未登入者
     if (!isAuthenticated) {
+      // 如果網址出現了 Supabase 的 fragment (#access_token=...)，讓網頁透過前端處理
       return Response.redirect(`${url.origin}/login`, 302);
     }
 
-    // 正常存取內容
     return await env.ASSETS.fetch(request);
   },
 };
