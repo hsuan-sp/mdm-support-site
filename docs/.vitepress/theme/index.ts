@@ -10,6 +10,8 @@ import GlobalFooter from '../components/GlobalFooter.vue'
 
 import LoginStatus from './components/LoginStatus.vue'
 
+import IntegratedGuideApp from '../components/IntegratedGuideApp.vue'
+
 export default {
   extends: Theme,
   Layout: () => {
@@ -21,6 +23,7 @@ export default {
   enhanceApp({ app, router, siteData }: EnhanceAppContext) {
     app.component('GlossaryApp', GlossaryApp)
     app.component('QAViewer', QAViewer)
+    app.component('IntegratedGuideApp', IntegratedGuideApp)
     app.component('AppleHome', AppleHome)
     app.component('GlobalFooter', GlobalFooter)
   }

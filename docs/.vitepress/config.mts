@@ -14,7 +14,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首頁', link: '/' },
-      { text: '指南', link: '/guide/01-account' },
+      { text: '指南', link: '/guide/' },
       { text: '術語表', link: '/glossary' },
       {
         text: '資源與服務',

@@ -88,6 +88,16 @@ onMounted(async () => {
     observer.observe(el);
   });
 });
+
+// Helper to count items per category
+const getCategoryCount = (cat: string) => {
+  if (cat === 'All') return glossaryData.length;
+  return glossaryData.filter(item => 
+    Array.isArray(item.category) 
+      ? item.category.includes(cat as any)
+      : item.category === cat
+  ).length;
+};
 </script>
 
 <template>
@@ -98,67 +108,61 @@ onMounted(async () => {
       <p class="subtitle">從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。</p>
     </header>
 
-    <!-- Sticky Controls -->
-    <!-- Sticky Controls -->
-    <div class="controls-wrapper">
-      <div class="controls-inner">
-        <!-- Toggle Button -->
-        <button 
-          @click="toggleControls" 
-          class="controls-toggle"
-          :class="{ expanded: isControlsExpanded }"
-          :aria-label="isControlsExpanded ? '收起搜尋工具' : '展開搜尋工具'"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span class="control-text">{{ isControlsExpanded ? '收起篩選器' : '搜尋與篩選' }}</span>
-          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
+    <div class="app-layout">
+      <!-- Left Sidebar: Filters & Search -->
+      <!-- Left Sidebar: Filters & Search -->
+      <aside class="app-sidebar">
+        
+        <!-- Mobile Toggle -->
+        <div class="mobile-filter-header">
+           <span>篩選與搜尋</span>
+           <button class="menu-toggle" @click="isControlsExpanded = !isControlsExpanded">
+             {{ isControlsExpanded ? '✕' : '☰' }}
+           </button>
+        </div>
 
-        <!-- Collapsible Content -->
-        <div class="controls-container" :class="{ collapsed: !isControlsExpanded }">
-          <div class="controls-content">
+        <div class="sidebar-inner" :class="{ 'mobile-hidden': !isControlsExpanded }">
+            <div class="sidebar-header">
+            <h2>篩選與搜尋</h2>
+            </div>
+            
             <div class="search-box">
-              <span class="search-icon">
+            <span class="search-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              </span>
-              <input
+            </span>
+            <input
                 v-model="searchQuery"
                 type="text"
-                placeholder="搜尋術語（如：ADE, 憑證...）"
+                placeholder="搜尋術語..."
                 class="search-input"
-              />
+            />
             </div>
-
-            <div class="categories">
-              <button
-                @click="toggleSort"
-                class="cat-btn"
-                :title="sortOrder === 'asc' ? '切換為 Z-A' : '切換為 A-Z'"
-              >
-                <span v-if="sortOrder === 'asc'">A-Z</span>
-                <span v-else>Z-A</span>
-              </button>
-              
-              <div class="divider"></div>
-
-              <button
+    
+            <div class="categories-wrapper">
+            <div class="categories-header">
+                <span>分類</span>
+                <button @click="toggleSort" class="sort-btn" :title="sortOrder === 'asc' ? 'A-Z' : 'Z-A'">
+                {{ sortOrder === 'asc' ? 'A-Z' : 'Z-A' }}
+                </button>
+            </div>
+            
+            <div class="categories-list">
+                <button
                 v-for="cat in categories"
                 :key="cat"
                 @click="selectedCategory = cat"
-                :class="['cat-btn', { active: selectedCategory === cat }]"
-              >
-                {{ cat }}
-              </button>
+                :class="['cat-item', { active: selectedCategory === cat }]"
+                >
+                {{ cat === 'All' ? '全部顯示' : cat }}
+                <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{ getCategoryCount(cat) }}</span>
+                </button>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
+      </aside>
+
+      <!-- Right Content: Grid -->
+      <main class="app-content">
 
     <div class="terms-grid">
       <div
@@ -198,6 +202,8 @@ onMounted(async () => {
     <div v-if="filteredTerms.length === 0" class="empty-state">
       沒有找到符合「{{ searchQuery }}」的術語 🧐
     </div>
+      </main>
+    </div> <!-- End of app-layout -->
   </div>
 </template>
 
@@ -237,165 +243,160 @@ onMounted(async () => {
   line-height: 1.6;
 }
 
-/* --- Controls Section (Sticky & Glassmorphism) --- */
-.controls-wrapper {
-  position: sticky;
-  top: var(--vp-nav-height);
-  z-index: 10;
-  padding: 24px 0;
-  margin: 0 -40px 40px -40px;
-  background: var(--vp-c-bg);
-  border-bottom: 1px solid var(--vp-c-divider);
-  transition: all 0.3s ease;
-}
-
-.controls-inner {
-  max-width: 100%;
-  padding: 0 2%;
-}
-
-/* Toggle Button */
-.controls-toggle {
+/* 2-Column Layout */
+.app-layout {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 16px; /* Slightly larger */
-  background: var(--vp-c-bg-alt);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  color: var(--vp-c-text-2);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  margin-bottom: 0;
-}
-
-.controls-toggle:hover {
-  background: var(--vp-c-bg-mute);
-  color: var(--vp-c-text-1);
-}
-
-.controls-toggle .chevron {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.controls-toggle.expanded .chevron {
-  transform: rotate(180deg);
-}
-
-.control-text {
-  font-size: 14px;
-}
-
-/* Collapsible Container Animation */
-.controls-container {
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-  max-height: 500px; /* Arbitrary large height */
-  opacity: 1;
-}
-
-.controls-container.collapsed {
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
-  margin-top: 0;
-}
-
-/* Search Input */
-.search-box {
+  align-items: flex-start;
+  gap: 40px;
   position: relative;
-  margin-bottom: 24px;
-  margin-top: 16px;
 }
 
-.search-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--vp-c-text-3);
-  pointer-events: none;
+.app-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px; /* Adjust based on navbar height */
+  background: var(--vp-c-bg-alt);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.app-content {
+  flex-grow: 1;
+  min-width: 0; /* Prevent flex overflow */
+}
+
+/* Sidebar Styles */
+.sidebar-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    width: 100%;
+}
+
+.cat-item:hover {
+    background: var(--vp-c-bg-mute);
+    color: var(--vp-c-brand);
+}
+
+.cat-item.active {
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand);
+    font-weight: 600;
+}
+
+.cat-count {
+    font-size: 11px;
+    background: rgba(128,128,128,0.1);
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--vp-c-text-3);
+    letter-spacing: 0.05em;
+}
+
+.sort-btn {
+    font-size: 11px;
+    color: var(--vp-c-brand);
+    cursor: pointer;
 }
 
 .search-input {
-  width: 100%;
-  padding: 16px 20px 16px 52px;
-  font-size: 18px;
-  border-radius: 20px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1), 0 10px 30px rgba(0,0,0,0.08);
-  background: var(--vp-c-bg);
-  transform: translateY(-2px);
+.search-icon {
+    left: 14px;
+    width: 16px; 
+    height: 16px;
 }
 
-/* Categories */
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
+/* Responsive: Stack sidebar on top for mobile */
+.mobile-filter-header { display: none; }
+
+@media (max-width: 960px) {
+    .app-layout {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .app-sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 16px; 
+    }
+    
+    .mobile-filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--vp-c-text-1);
+    }
+    
+    .menu-toggle {
+        background: transparent;
+        border: none;
+        font-size: 20px;
+        color: var(--vp-c-text-1);
+        cursor: pointer;
+    }
+
+    .sidebar-inner.mobile-hidden {
+        display: none;
+    }
+    
+    /* Revert to vertical list even on mobile if expanded */
+    .categories-list {
+        display: flex; /* Ensure it's flex */
+        flex-direction: column; /* Vertical stack */
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+    .cat-item {
+        white-space: normal; /* Allow wrap */
+        width: 100%;
+    }
 }
 
-@media (max-width: 768px) {
-  .categories {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding: 10px 4px;
-    margin: 0 -10px;
-  }
-  .categories::-webkit-scrollbar { display: none; }
-}
-
-.divider {
-  width: 1px;
-  height: 24px;
-  background: var(--vp-c-divider);
-  margin: 0 4px;
-  flex-shrink: 0;
-}
-
-.cat-btn {
-  padding: 8px 16px;
-  border-radius: 980px; /* Pilot shape */
-  font-size: 14px;
-  font-weight: 500;
-  background: var(--vp-c-bg-alt);
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  user-select: none;
-  white-space: nowrap;
-}
-
-.cat-btn:hover {
-  background: var(--vp-c-bg-mute);
-  transform: translateY(-1px);
-}
-
-.cat-btn.active {
-  background: var(--vp-c-brand-1);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1), 0.3);
-}
 
 
 /* --- Grid Layout --- */
