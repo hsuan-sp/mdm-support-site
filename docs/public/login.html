@@ -163,8 +163,10 @@
             const email = emailInput.value.trim();
             if (!email) return;
             
+            const btn = document.getElementById('btn-send');
             msg.className = '';
-            msg.innerText = '正在檢查網域...';
+            msg.innerText = '正在發送驗證碼...';
+            btn.disabled = true;
             
             try {
                 const res = await fetch('/auth/otp', {
@@ -182,11 +184,26 @@
                     msg.innerText = '';
                 } else {
                     msg.className = 'error';
-                    msg.innerText = data.error || '發生錯誤';
+                    // 具體顯示 Supabase 的錯誤訊息 (例如速率限制)
+                    msg.innerText = data.error_description || data.error || data.msg || '發送失敗，請稍候再試';
+                    
+                    // 啟動倒數計時 60 秒
+                    let countdown = 60;
+                    const timer = setInterval(() => {
+                        btn.innerText = `請等待 ${countdown} 秒`;
+                        if (countdown <= 0) {
+                            clearInterval(timer);
+                            btn.disabled = false;
+                            btn.innerText = '傳送驗證碼';
+                            msg.innerText = '';
+                        }
+                        countdown--;
+                    }, 1000);
                 }
             } catch (e) {
                 msg.className = 'error';
                 msg.innerText = '連線失敗';
+                btn.disabled = false;
             }
         };
 
