@@ -40,6 +40,14 @@ export default {
         return new Response("Supabase Config Missing", { status: 500 });
     }
 
+    // --- 0. 安全防護層 ---
+    
+    // 阻擋常見惡意爬蟲 User-Agent
+    const ua = request.headers.get("User-Agent") || "";
+    if (ua.match(/(GPTBot|ChatGPT|Bytespider|CCBot|FacebookBot|Google-Extended)/i)) {
+       return new Response("Access Denied", { status: 403 });
+    }
+
     // --- 1. API 路由優先 ---
     if (url.pathname === "/auth/health") {
       try {
@@ -50,8 +58,11 @@ export default {
 
     if (url.pathname === "/auth/otp" && request.method === "POST") {
       const { email } = await request.json();
-      if (!email.endsWith("@superinfo.com.tw") && !email.endsWith(".edu.tw")) {
-        return new Response(JSON.stringify({ error: "禁止登入" }), { status: 403 });
+      // 後端強制檢查：嚴格驗證網域
+      const validDomain = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)?edu\.tw$/.test(email) || email.endsWith("@superinfo.com.tw");
+      
+      if (!validDomain) {
+        return new Response(JSON.stringify({ error: "僅限教育網域 (*.edu.tw) 或極電資訊信箱登入" }), { status: 403 });
       }
       const redirectTo = `${url.origin}/login`;
       return await fetch(`${SB_URL}/auth/v1/otp`, {
@@ -144,12 +155,61 @@ export default {
       return Response.redirect(`${url.origin}/login`, 302);
     }
 
-    // --- 4. 返回資源 ---
+    // --- 4. 返回資源 (注入防盜與登出 UI) ---
     if (url.pathname === "/login") {
       const res = await env.ASSETS.fetch(new Request(new URL("/login.html", request.url)));
       return new Response(res.body, { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
 
-    return await env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+    
+    // 如果是 HTML 頁面且非登入頁，注入全域腳本
+    if (response.headers.get("Content-Type")?.includes("text/html") && isAuthenticated) {
+        let html = await response.text();
+        const injection = `
+        <style>
+          /* 防選取與防右鍵 */
+          body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+          img { pointer-events: none; }
+          
+          /* 懸浮登出按鈕 */
+          #global-auth-bar {
+            position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            color: white; padding: 8px 16px; border-radius: 0 0 12px 12px;
+            font-size: 13px; z-index: 99999; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: top 0.3s;
+          }
+          #global-auth-bar:hover { padding-bottom: 12px; }
+          .auth-btn { color: #ff5e5e; text-decoration: none; font-weight: bold; cursor: pointer; }
+          .auth-info { color: #ccc; font-size: 11px; }
+          @media print { body { display: none; } } /* 防列印 */
+        </style>
+        <div id="global-auth-bar">
+           <span>👤 ${user ? user.email : '已登入'}</span>
+           <span class="auth-info">| 系統僅暫存身分識別</span>
+           <a href="#" onclick="logout()" class="auth-btn">登出</a>
+        </div>
+        <script>
+           // 禁止右鍵與開發者工具快捷鍵
+           document.addEventListener('contextmenu', e => e.preventDefault());
+           document.onkeydown = function(e) {
+               if(e.keyCode == 123) return false; // F12
+               if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+               if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+               if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+               if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+           };
+           function logout() {
+               if(confirm('確定要登出系統嗎？')) location.href = '/auth/logout';
+           }
+        </script>
+        `;
+        // 插入到 body 結束前
+        html = html.replace('</body>', injection + '</body>');
+        return new Response(html, response);
+    }
+
+    return response;
   },
 };
