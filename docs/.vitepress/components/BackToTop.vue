@@ -47,9 +47,9 @@ onUnmounted(() => {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(var(--vp-c-brand-rgb), 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: #0071e3; /* Original Blue */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex !important; /* Force visible */
@@ -57,7 +57,7 @@ onUnmounted(() => {
   justify-content: center;
   cursor: pointer;
   z-index: 90; /* Lower than UserCenter drawer */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(var(--vp-c-brand-rgb), 0.3);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.4);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
