@@ -39,11 +39,10 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Liquid Glass Back to Top - Desktop Only */
+/* Liquid Glass Back to Top */
 .back-to-top {
-  display: none; /* Hidden on mobile */
   position: fixed;
-  bottom: 28px;
+  bottom: 24px;
   right: 24px;
   width: 56px;
   height: 56px;
@@ -53,19 +52,13 @@ onUnmounted(() => {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex !important; /* Force visible */
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 100;
+  z-index: 90; /* Lower than UserCenter drawer */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(var(--vp-c-brand-rgb), 0.3);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Show only on desktop */
-@media (min-width: 960px) {
-  .back-to-top {
-    display: flex;
-  }
 }
 
 .back-to-top svg {
