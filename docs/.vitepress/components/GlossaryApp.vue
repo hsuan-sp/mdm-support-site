@@ -430,11 +430,12 @@ const getCategoryCount = (cat: string) => {
   width: 280px;
   flex-shrink: 0;
   position: sticky;
-  top: 100px; 
+  top: var(--vp-nav-height); 
   background: var(--vp-c-bg-alt);
   border-radius: 12px;
   padding: 24px;
   border: 1px solid var(--vp-c-divider);
+  z-index: 5;
 }
 
 .app-content {

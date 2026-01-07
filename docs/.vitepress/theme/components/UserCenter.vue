@@ -118,6 +118,8 @@ const closeMenu = () => {
     display: flex;
     align-items: center;
     margin-left: 12px;
+    flex-shrink: 0; /* Never shrink */
+    z-index: 100;
 }
 
 /* Desktop View */

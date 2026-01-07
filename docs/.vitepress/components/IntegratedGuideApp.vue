@@ -225,12 +225,13 @@ onMounted(async () => {
     width: 280px;
     flex-shrink: 0;
     position: sticky;
-    top: 100px;
+    top: var(--vp-nav-height);
     background: var(--vp-c-bg-alt);
     border-radius: 16px;
     padding: 24px;
     border: 1px solid var(--vp-c-divider);
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    z-index: 5; /* Lowered to prevent menu overlap */
 }
 
 .sidebar-section {
@@ -380,14 +381,14 @@ onMounted(async () => {
 
 @media (max-width: 960px) {
     .guide-app:not(.is-mobile-device) .app-layout { flex-direction: column; gap: 30px; }
-    .guide-app:not(.is-mobile-device) .app-sidebar { width: 100%; top: 60px; z-index: 100; }
+    .guide-app:not(.is-mobile-device) .app-sidebar { width: 100%; top: 0; z-index: 5; position: relative; }
     .guide-app:not(.is-mobile-device) .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; }
     .guide-app:not(.is-mobile-device) .sidebar-inner.mobile-hidden { display: none; }
 }
 
 /* Forced Mobile Layout */
 .is-mobile-device .app-layout { flex-direction: column; gap: 30px; }
-.is-mobile-device .app-sidebar { width: 100%; top: 60px; z-index: 100; }
+.is-mobile-device .app-sidebar { width: 100%; top: 0; z-index: 5; position: relative; }
 .is-mobile-device .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: bold; }
 .is-mobile-device .sidebar-inner.mobile-hidden { display: none; }
 </style>
