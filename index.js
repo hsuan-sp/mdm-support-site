@@ -50,15 +50,24 @@ export default {
     }
 
     // 發送 OTP / Magic Link
+    // 發送 OTP / Magic Link
     if (url.pathname === "/auth/otp" && request.method === "POST") {
       const { email } = await request.json();
       if (!email.endsWith("@superinfo.com.tw") && !email.endsWith(".edu.tw")) {
-        return new Response(JSON.stringify({ error: "禁止登入" }), { status: 403 });
+        return new Response(JSON.stringify({ error: "禁止登入：僅限指定網域" }), { status: 403 });
       }
+      
+      // 明確指定 redirect_to 到 /login，這樣 Magic Link 帶的 hash fragment 才會保留在客戶端
+      const redirectTo = `${url.origin}/login`;
+
       return await fetch(`${env.SUPABASE_URL}/auth/v1/otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "apikey": env.SUPABASE_ANON_KEY },
-        body: JSON.stringify({ email, create_user: true })
+        body: JSON.stringify({ 
+          email, 
+          create_user: true,
+          data: { redirect_to: redirectTo }
+        })
       });
     }
 
@@ -91,7 +100,15 @@ export default {
 
     // --- 3. 登入狀態檢查 (JWT 驗證) ---
     const tokenMatch = cookie.match(/sb-access-token=([^;]+)/);
-    const user = tokenMatch ? await verifyJWT(tokenMatch[1], env.JWT_SECRET) : null;
+    // 詳細 Log: 偵測到的 Cookie 狀態
+    console.log(`[Auth Check] Cookie present: ${!!cookie}, Token match: ${!!tokenMatch}`);
+    
+    let user = null;
+    if (tokenMatch) {
+       console.log(`[Auth Check] Verifying token signature...`);
+       user = await verifyJWT(tokenMatch[1], env.JWT_SECRET);
+       console.log(`[Auth Check] User verified: ${!!user}`);
+    }
     const isAuthenticated = !!user;
 
     // --- 4. 靜態資源與路由 ---
