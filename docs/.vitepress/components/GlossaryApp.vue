@@ -299,43 +299,49 @@ const getCategoryCount = (cat: string) => {
     to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* Mobile Drawer & Floating Button */
+/* Liquid Glass FAB */
 .mobile-floating-btn {
   display: none; /* Desktop hidden */
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: var(--vp-c-brand);
+  bottom: 34px;
+  right: 24px;
+  background: rgba(var(--vp-c-brand-rgb), 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 600;
-  box-shadow: 0 8px 24px rgba(var(--vp-c-brand-rgb), 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15), 0 4px 12px rgba(var(--vp-c-brand-rgb), 0.3);
   z-index: 100;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.mobile-floating-btn:hover {
-  transform: scale(1.05);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .mobile-floating-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.92) translateY(4px);
+  background: var(--vp-c-brand);
 }
 
+/* Liquid Glass Drawer */
 .mobile-drawer-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 200;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
 .mobile-drawer-overlay.open {
@@ -344,30 +350,59 @@ const getCategoryCount = (cat: string) => {
 }
 
 .mobile-drawer {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: var(--vp-c-bg);
-  border-radius: 24px 24px 0 0;
-  padding: 24px;
-  max-height: 85vh;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: 32px;
+  padding: 30px;
+  max-height: 80vh;
   overflow-y: auto;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+  transform: translateY(30px) scale(0.95);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.2, 0.9, 0.2, 1.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.dark .mobile-drawer {
+  background: rgba(28, 28, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-drawer-overlay.open .mobile-drawer {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .drawer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
-.drawer-header h3 { font-size: 20px; font-weight: 700; margin: 0; }
-.close-btn { background: none; border: none; font-size: 24px; color: var(--vp-c-text-2); cursor: pointer; }
+
+.drawer-header h3 { 
+  font-size: 22px; 
+  font-weight: 800; 
+  margin: 0; 
+  letter-spacing: -0.03em;
+}
+
+.close-btn { 
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--vp-c-text-2);
+}
+.dark .close-btn { background: rgba(255,255,255,0.1); }
 
 .categories-grid {
   display: flex;
