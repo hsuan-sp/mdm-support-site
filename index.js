@@ -1,85 +1,76 @@
-// 硬編碼的 Supabase 設定 (請將您的數值填入下方)
+// --- 1. 設定與工具函式 ---
 const SUPABASE_CONFIG = {
-  URL: "https://your-project-id.supabase.co", // 請替換您的 Project URL
-  ANON_KEY: "your-anon-key", // 請替換您的 Anon Key
-  // 強制定義：如果不填，也會嘗試讀取 env，但硬編碼最穩
+  URL: "https://your-project-id.supabase.co", 
+  ANON_KEY: "your-anon-key",
 };
 
-// 驗證 Token 的新方法：直接問 Supabase
+// 驗證 Token
 async function verifyUserWithSupabase(token, url, anonKey) {
   try {
     const res = await fetch(`${url}/auth/v1/user`, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "apikey": anonKey
-      }
+      headers: { "Authorization": `Bearer ${token}`, "apikey": anonKey }
     });
-    
-    if (res.ok) {
-        const data = await res.json();
-        return data; // 回傳使用者物件 { id, email, ... }
-    }
-    return null;
-  } catch (e) {
-    console.error(`[Auth Error] ${e.message}`);
-    return null;
-  }
+    return res.ok ? await res.json() : null;
+  } catch (e) { return null; }
 }
 
+// 紀錄日誌 (抓取 IP, 國家, 裝置)
+async function logLogin(user, request, actionType, SB_URL, SB_ANON, SB_SERVICE) {
+  const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip") || "unknown";
+  const country = request.headers.get("cf-ipcountry") || "unknown";
+  const ua = request.headers.get("user-agent") || "unknown";
+  
+  try {
+    await fetch(`${SB_URL}/rest/v1/login_logs`, {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json", "apikey": SB_ANON, 
+        "Authorization": `Bearer ${SB_SERVICE}`, "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({ 
+          email: user.email, user_id: user.id, ip_address: ip, 
+          country: country, user_agent: ua, action: actionType,
+          meta_data: { method: actionType === "manual" ? "OTP 驗證" : "自動快取" }
+      })
+    });
+  } catch (e) { console.error(`[Log Error] ${e.message}`); }
+}
+
+// --- 2. Worker 主邏輯 ---
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const cookie = request.headers.get("Cookie") || "";
     
-    // 優先使用硬編碼設定，若無則使用環境變數
     const SB_URL = (SUPABASE_CONFIG.URL.includes("your-project") ? env.SUPABASE_URL : SUPABASE_CONFIG.URL)?.replace(/\/$/, "");
     const SB_ANON = SUPABASE_CONFIG.ANON_KEY.includes("your-anon") ? env.SUPABASE_ANON_KEY : SUPABASE_CONFIG.ANON_KEY;
-    const SB_SERVICE = env.SUPABASE_SERVICE_ROLE_KEY; // Service Role 還是建議放 env 比較安全
+    const SB_SERVICE = env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!SB_URL || !SB_ANON) {
-        return new Response("Supabase Config Missing", { status: 500 });
-    }
-
-    // --- 0. 安全防護層 ---
+    if (!SB_URL || !SB_ANON) return new Response("Config Missing", { status: 500 });
     
-    // 阻擋常見惡意爬蟲 User-Agent
-    const ua = request.headers.get("User-Agent") || "";
-    if (ua.match(/(GPTBot|ChatGPT|Bytespider|CCBot|FacebookBot|Google-Extended)/i)) {
-       return new Response("Access Denied", { status: 403 });
-    }
+    // API: 健康檢查
+    if (url.pathname === "/auth/health") return new Response("OK");
 
-    // --- 1. API 路由優先 ---
-    if (url.pathname === "/auth/health") {
-      try {
-        const res = await fetch(`${SB_URL}/auth/v1/health`, { headers: { "apikey": SB_ANON } });
-        return new Response(JSON.stringify({ status: res.ok ? "online" : "error" }), { headers: { "Content-Type": "application/json" } });
-      } catch (e) { return new Response(JSON.stringify({ status: "offline" }), { status: 200 }); }
-    }
-
+    // API: 發送 OTP
     if (url.pathname === "/auth/otp" && request.method === "POST") {
       const { email } = await request.json();
-      // 後端強制檢查：嚴格驗證網域
-      const validDomain = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)?edu\.tw$/.test(email) || email.endsWith("@superinfo.com.tw");
-      
-      if (!validDomain) {
-        // 隱藏內部登入資訊，對外只宣稱支援 edu.tw
-        return new Response(JSON.stringify({ error: "僅限教育網域 (*.edu.tw) 登入" }), { status: 403 });
+      if (!email.match(/@.*\.edu\.tw$/) && !email.endsWith("@superinfo.com.tw")) {
+        return new Response(JSON.stringify({ error: "僅限教育網域登入" }), { status: 403 });
       }
-      const redirectTo = `${url.origin}/login`;
       return await fetch(`${SB_URL}/auth/v1/otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "apikey": SB_ANON },
-        body: JSON.stringify({ email, create_user: true, data: { redirect_to: redirectTo } })
+        body: JSON.stringify({ email, create_user: true, data: { redirect_to: `${url.origin}/login` } })
       });
     }
 
+    // API: 驗證與紀錄
     if ((url.pathname === "/auth/verify" || url.pathname === "/auth/session") && request.method === "POST") {
       const body = await request.json();
       let access_token, user;
 
       if (url.pathname === "/auth/session") {
         access_token = body.access_token;
-        // 直接用 Token 問 Supabase 取得使用者資料
         user = await verifyUserWithSupabase(access_token, SB_URL, SB_ANON);
       } else {
         const res = await fetch(`${SB_URL}/auth/v1/verify`, {
@@ -93,103 +84,40 @@ export default {
       }
 
       if (access_token && user) {
-        ctx.waitUntil(fetch(`${SB_URL}/rest/v1/login_logs`, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json", 
-            "apikey": SB_ANON, 
-            "Authorization": `Bearer ${SB_SERVICE}`,
-            "Prefer": "return=minimal"
-          },
-          body: JSON.stringify({ email: user.email })
-        }));
-        
+        ctx.waitUntil(logLogin(user, request, url.pathname === "/auth/session" ? "auto" : "manual", SB_URL, SB_ANON, SB_SERVICE));
         return new Response(JSON.stringify({ success: true }), {
           status: 200,
           headers: { "Set-Cookie": `sb-access-token=${access_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=31536000` }
         });
       }
-      return new Response(JSON.stringify({ error: "驗證失敗" }), { status: 401 });
+      return new Response("Unauthorized", { status: 401 });
     }
 
-    // 取得當前使用者資訊 (Email)
+    // API: 取得使用者
     if (url.pathname === "/auth/me") {
-        const tokenMatch = cookie.match(/sb-access-token=([^;]+)/);
-        if (tokenMatch) {
-            // 嘗試快取驗證或直接問 Supabase
-            const user = await verifyUserWithSupabase(tokenMatch[1], SB_URL, SB_ANON);
-            if (user) {
-                return new Response(JSON.stringify({ email: user.email }), { headers: { "Content-Type": "application/json" } });
-            }
-        }
-        return new Response(JSON.stringify({ email: null }), { headers: { "Content-Type": "application/json" } });
+        const token = cookie.match(/sb-access-token=([^;]+)/)?.[1];
+        const user = token ? await verifyUserWithSupabase(token, SB_URL, SB_ANON) : null;
+        return new Response(JSON.stringify({ email: user?.email || null }), { headers: { "Content-Type": "application/json" } });
     }
 
-    // 登出 (清除 Cookie)
+    // 登出
     if (url.pathname === "/auth/logout") {
-        return new Response(null, {
-            status: 302,
-            headers: {
-                "Location": "/login",
-                "Set-Cookie": "sb-access-token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0" // 立即過期
-            }
-        });
+        return new Response(null, { status: 302, headers: { "Location": "/login", "Set-Cookie": "sb-access-token=; Path=/; HttpOnly; Max-Age=0" } });
     }
 
-    // --- 2. 登入狀態檢查 (透過 API 驗證) ---
-    const tokenMatch = cookie.match(/sb-access-token=([^;]+)/);
-    let isAuthenticated = false;
+    // --- 3. 靜態資源與重定向 ---
+    const token = cookie.match(/sb-access-token=([^;]+)/)?.[1];
+    const isAuth = token ? !!(await verifyUserWithSupabase(token, SB_URL, SB_ANON)) : false;
 
-    if (tokenMatch) {
-       // 為了效能，我們可以加一個極短的 Cache，但這裡為了準確性先直連
-       const user = await verifyUserWithSupabase(tokenMatch[1], SB_URL, SB_ANON);
-       isAuthenticated = !!user;
-    }
+    if (isAuth && url.pathname === "/login") return Response.redirect(`${url.origin}/`, 302);
+    const isPublic = url.pathname.match(/\.(css|js|png|jpg|ico|svg|json)$/) || url.pathname === "/login.html";
+    if (!isAuth && !isPublic && url.pathname !== "/login") return Response.redirect(`${url.origin}/login`, 302);
 
-    // --- 3. 路由重定向 ---
-    if (isAuthenticated && url.pathname === "/login") {
-      return Response.redirect(`${url.origin}/`, 302);
-    }
-
-    const isPublicAsset = url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?|json)$/) || url.pathname === "/login.html";
-    if (!isAuthenticated && !isPublicAsset && url.pathname !== "/login") {
-      return Response.redirect(`${url.origin}/login`, 302);
-    }
-
-    // --- 4. 返回資源 ---
     if (url.pathname === "/login") {
       const res = await env.ASSETS.fetch(new Request(new URL("/login.html", request.url)));
-      return new Response(res.body, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+      return new Response(res.body, { headers: { "Content-Type": "text/html" } });
     }
 
     return await env.ASSETS.fetch(request);
   },
 };
-
-// 輔助函式：HTML 原始碼混淆器 (Worker Safe Version)
-function obfuscateHtml(html) {
-    // 使用簡單的字元編碼進行混淆，避免 Worker Runtime Error
-    // 這裡不使用 btoa/unescape，改用標準的 UTF-8 轉 Base64 邏輯
-    const encoder = new TextEncoder();
-    const data = encoder.encode(html);
-    let binary = '';
-    const len = data.byteLength;
-    for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(data[i]);
-    }
-    // Worker 環境下通常有 btoa，若是 Node.js 環境則需 Buffer，此前 Cloudflare 支援 btoa
-    const b64 = btoa(binary);
-
-    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Loading...</title></head><body><script>
-    // Client-side decoding
-    const b64 = "${b64}";
-    const binary = atob(b64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-        bytes[i] = binary.charCodeAt(i);
-    }
-    const decoder = new TextDecoder();
-    document.write(decoder.decode(bytes));
-    document.close();
-    </script><noscript>請啟用 JavaScript 以瀏覽此頁面</noscript></body></html>`;
-}
