@@ -77,7 +77,7 @@ const closeMenu = () => {
     </button>
 
     <!-- Mobile Dropdown Panel -->
-    <Transition name="fade">
+    <Transition name="slide-up">
         <div v-if="isMenuOpen" class="mobile-dropdown-overlay" @click="isMenuOpen = false">
             <div class="mobile-dropdown-card" @click.stop>
                 <div class="dropdown-header">
@@ -318,7 +318,29 @@ const closeMenu = () => {
 }
 .close-btn:active { transform: scale(0.96); }
 
-/* Transitions */
-.fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+/* Slide Up Transition */
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.slide-up-enter-active .mobile-dropdown-card,
+.slide-up-leave-active .mobile-dropdown-card {
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1.05);
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+    opacity: 0;
+}
+
+.slide-up-enter-from .mobile-dropdown-card {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.slide-up-leave-to .mobile-dropdown-card {
+    transform: translateY(100%);
+    opacity: 0;
+}
 </style>
