@@ -4,11 +4,16 @@ import { useLayoutMode } from '../composables/useLayoutMode';
 import { useData } from 'vitepress';
 
 const { isMobileView, toggleLayout } = useLayoutMode();
-const { isDark } = useData();
+const { isDark, theme } = useData();
 
 const user = ref<string | null>(null);
 const isGuest = ref(false);
 const isMenuOpen = ref(false);
+const expandedNav = ref<number | null>(null);
+
+const toggleNav = (index: any) => {
+    expandedNav.value = expandedNav.value === index ? null : index;
+};
 
 // Ensure user is always set for consistent UI
 onMounted(async () => {
@@ -88,6 +93,35 @@ const logout = () => {
                 </div>
 
                 <div class="menu-items">
+                    <!-- Navigation Links (Integrated) -->
+                    <template v-if="theme.nav">
+                        <div v-for="(item, index) in theme.nav" :key="index" class="nav-group">
+                            <!-- Single Link -->
+                            <a v-if="item.link" :href="item.link" class="menu-item nav-link" @click="isMenuOpen = false">
+                                <div class="item-text">
+                                    <div class="label">{{ item.text }}</div>
+                                </div>
+                                <div class="item-icon-right">New Tab ↗</div>
+                            </a>
+                            
+                            <!-- Dropdown Group -->
+                            <div v-else class="menu-item nav-group-header" :class="{ expanded: expandedNav === index }" @click="toggleNav(index)">
+                                <div class="item-text">
+                                    <div class="label">{{ item.text }}</div>
+                                </div>
+                                <div class="item-icon-right chevron">▼</div>
+                            </div>
+                            
+                            <!-- Submenu Items -->
+                            <div v-if="!item.link && expandedNav === index" class="submenu-container">
+                                <a v-for="sub in item.items" :key="sub.text" :href="sub.link" class="submenu-item" @click="isMenuOpen = false">
+                                    {{ sub.text }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="divider-horizontal"></div>
+                    </template>
+
                     <!-- Layout Mode -->
                     <div class="menu-item" @click="toggleLayout(); isMenuOpen = false">
                         <div class="item-icon">
@@ -355,5 +389,48 @@ const logout = () => {
 .slide-up-leave-to .mobile-dropdown-card {
     transform: translateY(100%);
     opacity: 0;
+}
+/* Navigation Styles */
+.nav-link { text-decoration: none; color: inherit; }
+.nav-group-header { justify-content: space-between; }
+.item-icon-right { color: var(--vp-c-text-3); font-size: 12px; display: flex; align-items: center; }
+.chevron { transition: transform 0.3s; }
+.nav-group-header.expanded .chevron { transform: rotate(180deg); color: var(--vp-c-brand); }
+
+.submenu-container {
+    padding-left: 52px; /* Indent to align with text */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+
+.submenu-item {
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.02);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+.submenu-item:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--vp-c-text-1);
+    border-left-color: var(--vp-c-brand);
+}
+
+.divider-horizontal {
+    height: 1px;
+    background: var(--vp-c-divider);
+    margin: 8px 16px 20px;
+    opacity: 0.5;
+}
+
+/* Adjust Card Max Height for Safe Area */
+.mobile-dropdown-card {
+    max-height: calc(100vh - 120px); /* Ensure space for top/bottom */
 }
 </style>
