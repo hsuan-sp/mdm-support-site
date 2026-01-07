@@ -6,12 +6,9 @@ export default {
     // 1. 檢查是否已登入 (透過驗證 Cookie 中的 JWT)
     const isAuthenticated = cookie.includes("sb-access-token");
 
-    // 2. 靜態資源、Logo、Favicon 不攔截
-    if (
-      url.pathname.includes(".") || 
-      url.pathname.startsWith("/assets/") || 
-      url.pathname === "/superinfo_logo.png"
-    ) {
+    // 2. 靜態資源排除 (僅限真的資源，不排除 HTML)
+    const isStaticAsset = url.pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff2?|json)$/);
+    if (isStaticAsset || url.pathname === "/superinfo_logo.png") {
       return await env.ASSETS.fetch(request);
     }
 
