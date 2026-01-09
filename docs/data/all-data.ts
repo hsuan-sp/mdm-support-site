@@ -2,7 +2,7 @@
  * Central Data Registry for Global Search
  *
  * This file aggregates all Q&A sections and Glossary terms into a single
- * data source. The QAViewer component imports this to perform client-side
+ * data source. The IntegratedGuideApp component imports this to perform client-side
  * searching across the entire knowledge base.
  */
 
