@@ -82,6 +82,13 @@ export default defineConfig({
 
     outline: {
       label: '本頁目錄'
+    },
+
+    notFound: {
+      title: '找不到頁面',
+      quote: '抱歉，您訪問的頁面不存在。可能已經被移動或刪除了。',
+      linkLabel: '返回首頁',
+      linkText: '回到首頁'
     }
   }
 })
