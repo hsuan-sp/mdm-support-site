@@ -19,6 +19,15 @@ const md = new MarkdownIt({
 const searchQuery = ref("");
 const activeSource = ref(allQAData[0].source);
 const isSidebarOpen = ref(false);
+const fontSize = ref<'small' | 'medium' | 'large'>('medium');
+
+// Font size mapping
+const fontSizeMap = {
+  small: { base: '14px', markdown: '15px' },
+  medium: { base: '16px', markdown: '17px' },
+  large: { base: '18px', markdown: '19px' }
+};
+
 
 const handleHashChange = () => {
   const hash = window.location.hash.replace('#', '').toLowerCase();
@@ -98,19 +107,35 @@ const toggleItem = (id: string) => {
 const preprocessMarkdown = (text: string): string => {
   if (!text) return "";
   
-  let processed = text;
+  const lines = text.split('\n');
+  const result: string[] = [];
   
-  // 1. 在連續的列表項之間添加空行（如果沒有的話）
-  // 匹配 "* item\n* item" 或 "- item\n- item" 模式
-  processed = processed.replace(/(\n[*-]\s+.+?)(\n[*-]\s+)/g, '$1\n$2');
+  for (let i = 0; i < lines.length; i++) {
+    const currentLine = lines[i];
+    const nextLine = lines[i + 1];
+    
+    result.push(currentLine);
+    
+    // 如果當前行是列表項（* 或 - 或數字開頭）
+    // 且下一行也是列表項，且它們之間沒有空行
+    // 則添加一個空行
+    const isCurrentList = /^\s*[*\-•]\s+/.test(currentLine) || /^\s*\d+\.\s+/.test(currentLine);
+    const isNextList = nextLine && (/^\s*[*\-•]\s+/.test(nextLine) || /^\s*\d+\.\s+/.test(nextLine));
+    
+    if (isCurrentList && isNextList) {
+      result.push(''); // 添加空行
+    }
+    
+    // 如果當前行是 **標題**： 格式，且下一行不是空行，則添加空行
+    const isBoldTitle = /^\*\*[^*]+\*\*[：:]\s*$/.test(currentLine.trim());
+    const nextLineNotEmpty = nextLine && nextLine.trim() !== '';
+    
+    if (isBoldTitle && nextLineNotEmpty) {
+      result.push(''); // 添加空行
+    }
+  }
   
-  // 2. 在「**標題**：」格式後面確保有空行
-  processed = processed.replace(/(\*\*[^*]+\*\*[：:]\s*)(\n)(?!\n)/g, '$1\n\n');
-  
-  // 3. 在編號列表項之間添加空行
-  processed = processed.replace(/(\n\d+\.\s+.+?)(\n\d+\.\s+)/g, '$1\n$2');
-  
-  return processed;
+  return result.join('\n');
 };
 
 // Markdown rendering with safety check and preprocessing
@@ -174,11 +199,37 @@ const switchModule = (source: string) => {
 </script>
 
 <template>
-  <div class="guide-app">
+  <div class="guide-app" :style="{ '--font-size-base': fontSizeMap[fontSize].base, '--font-size-markdown': fontSizeMap[fontSize].markdown }">
     <!-- Header -->
     <header class="page-header">
         <h1>MDM 實戰指南</h1>
         <p>完整收錄 8 大管理模組，超過 100+ 實務常見問答。</p>
+        
+        <!-- 字體大小調整 -->
+        <div class="font-size-controls" role="group" aria-label="字體大小調整">
+          <span class="control-label">字體大小：</span>
+          <button 
+            @click="fontSize = 'small'" 
+            :class="['font-btn', { active: fontSize === 'small' }]"
+            aria-label="小字體"
+          >
+            小
+          </button>
+          <button 
+            @click="fontSize = 'medium'" 
+            :class="['font-btn', { active: fontSize === 'medium' }]"
+            aria-label="中字體"
+          >
+            中
+          </button>
+          <button 
+            @click="fontSize = 'large'" 
+            :class="['font-btn', { active: fontSize === 'large' }]"
+            aria-label="大字體"
+          >
+            大
+          </button>
+        </div>
     </header>
 
     <div class="app-layout">
