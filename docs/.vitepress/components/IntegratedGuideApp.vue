@@ -350,11 +350,13 @@ const switchModule = (source: string) => {
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 800;
     margin-bottom: 16px;
-    line-height: 1.2;
+    line-height: 1.25;
     background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    padding: 0.1em 0;
+    margin-top: -0.1em;
 }
 
 .page-header p {

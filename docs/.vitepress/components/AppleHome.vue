@@ -245,7 +245,7 @@ const navCards = [
 
 .hero h1 {
   font-size: clamp(40px, 7vw, 84px);
-  line-height: 1.05; 
+  line-height: 1.2; 
   font-weight: 800;
   letter-spacing: -0.025em;
   margin-bottom: 24px;
@@ -255,6 +255,8 @@ const navCards = [
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding: 0.1em 0;
+  margin-top: -0.1em;
 }
 
 .intro {

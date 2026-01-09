@@ -381,10 +381,13 @@ const getCategoryCount = (cat: string) => {
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 20px;
+  line-height: 1.2;
   background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding: 0.1em 0; /* 預留溢出空間避免切字 */
+  margin-top: -0.1em; /* 補償 padding 造成的位移 */
 }
 
 .subtitle {
