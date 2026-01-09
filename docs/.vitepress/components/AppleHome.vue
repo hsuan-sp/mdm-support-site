@@ -487,7 +487,7 @@ const navCards = [
 }
 
 .card:hover .card-icon {
-  transform: scale(1.1) rotat(-5deg);
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .card-text {
