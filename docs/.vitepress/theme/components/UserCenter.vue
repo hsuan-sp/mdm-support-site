@@ -3,7 +3,7 @@ import { ref, onMounted, computed } from 'vue';
 import { useLayoutMode } from '../composables/useLayoutMode';
 import { useData, useRouter } from 'vitepress';
 
-const { isMobileView, toggleLayout } = useLayoutMode();
+const { isMobileView } = useLayoutMode();
 const { isDark, theme } = useData();
 const router = useRouter();
 
@@ -68,11 +68,7 @@ const logout = () => {
   <div class="user-center">
     <!-- Desktop Horizontal View -->
     <div class="desktop-actions">
-        <!-- Layout Toggle -->
-        <button @click="toggleLayout" class="action-btn" :title="isMobileView ? '切換至電腦版介面' : '切換至行動版介面'">
-            <svg v-if="isMobileView" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-        </button>
+
 
         <!-- Dark Mode Toggle -->
         <button @click="toggleDarkMode" class="action-btn" :title="isDark ? '切換至淡色模式' : '切換至深色模式'">
@@ -149,14 +145,7 @@ const logout = () => {
 
                         <!-- Settings Grid (Compact Row) -->
                         <div class="settings-grid">
-                            <div class="menu-item compact" @click="toggleLayout(); isMenuOpen = false">
-                                <div class="compact-icon">
-                                    <svg v-if="isMobileView" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                                    <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                                </div>
-                                <div class="compact-label">版面模式</div>
-                                <div class="compact-status">{{ isMobileView ? '行動版' : '電腦版' }}</div>
-                            </div>
+
 
                             <div class="menu-item compact" @click="toggleDarkMode">
                                 <div class="compact-icon">
@@ -268,10 +257,6 @@ const logout = () => {
     /* Force hide standard VitePress Desktop Menu on mobile */
     :global(.VPNavBarMenu) {
         display: none !important;
-    }
-    /* Force hide standard VitePress Search on mobile if it overlaps (optional, but safer) */
-    :global(.VPNavBarSearch) {
-        /* We can leave search if it adapts, but often it's better to hide if using bottom sheet */
     }
 }
 
@@ -491,7 +476,7 @@ const logout = () => {
     color: var(--vp-c-text-3);
 }
 
-.menu-item.compact .toggle-track { display: none; } /* Hide toggle in compact mode */
+
 
 /* Global Override to hide default VitePress Hamburger only */
 :global(.VPNavBarHamburger) {

@@ -1,31 +1,33 @@
-@import './custom.css';
+@import "./custom.css";
 
 :root {
   /* Apple-like Color Palette */
   --vp-c-brand-1: #0071e3; /* Apple Blue */
   --vp-c-brand-2: #0077ed;
   --vp-c-brand-3: #2b8afb;
-  
+
   --vp-c-bg: #f5f5f7; /* Global Apple Light Gray Background */
   --vp-c-bg-alt: #ffffff; /* Cards are White */
   --vp-c-bg-elv: #ffffff; /* Elevated */
-  
+
   --vp-c-text-1: #1d1d1f; /* Apple Black */
   --vp-c-text-2: #86868b; /* Apple Gray */
-  
-  --vp-font-family-base: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
-  
+
+  --vp-font-family-base: "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
+    "Helvetica", "Arial", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC",
+    sans-serif;
+
   /* Glassmorphism Logic */
   --vp-nav-bg-color: rgba(251, 251, 253, 0.8) !important;
   --vp-local-nav-bg-color: rgba(251, 251, 253, 0.8) !important;
   --vp-sidebar-bg-color: rgba(251, 251, 253, 0.8) !important;
   --vp-backdrop-filter: blur(20px) saturate(180%);
-  
+
   /* Custom Glass Variables */
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 0.1);
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-  
+
   /* Shadows - Soft & Diffused */
   --vp-shadow-1: 0 2px 8px rgba(0, 0, 0, 0.04);
   --vp-shadow-2: 0 8px 16px rgba(0, 0, 0, 0.08);
@@ -36,25 +38,26 @@
   --vp-c-bg: #000000;
   --vp-c-bg-alt: #1c1c1e;
   --vp-c-bg-elv: #1c1c1e;
-  
+
   --vp-c-text-1: #f5f5f7;
   --vp-c-text-2: #86868b;
-  
+
   --vp-c-brand-1: #2997ff;
   --vp-c-brand-2: #5ac8fa;
   --vp-c-brand-3: #007aff;
-  
+
   --vp-nav-bg-color: rgba(28, 28, 30, 0.8) !important;
   --vp-local-nav-bg-color: rgba(28, 28, 30, 0.8) !important;
   --vp-sidebar-bg-color: rgba(28, 28, 30, 0.8) !important;
-  
+
   --glass-bg: rgba(28, 28, 30, 0.75);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
 /* GLOBAL LAYOUT FIXES For Safari/Mobile */
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden; /* Fix horizontal scrolling/gap */
   margin: 0;
@@ -65,14 +68,15 @@ html, body {
 
 /* HIDE Default VitePress "Return to Top" link/text */
 .VPBackToTop {
-    display: none !important;
+  display: none !important;
 }
 .return-to-top {
-    display: none !important;
+  display: none !important;
 }
 
 /* Feature Cards - Strictly Responsive */
-.VPFeature, .link-card {
+.VPFeature,
+.link-card {
   border-radius: 20px !important;
   background-color: var(--vp-c-bg-alt) !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
@@ -83,12 +87,14 @@ html, body {
   flex: 1 1 300px; /* Grow, Shrink, Basis */
 }
 
-.dark .VPFeature, .dark .link-card {
+.dark .VPFeature,
+.dark .link-card {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-.VPFeature:hover, .link-card:hover {
+.VPFeature:hover,
+.link-card:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: var(--vp-shadow-3) !important;
   border-color: var(--vp-c-brand-1) !important;
@@ -100,7 +106,7 @@ html, body {
   max-width: 100vw !important;
   backdrop-filter: var(--vp-backdrop-filter);
   -webkit-backdrop-filter: var(--vp-backdrop-filter);
-  border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
   z-index: 100 !important; /* Ensure Nav stays on top */
 }
 
@@ -109,9 +115,10 @@ html, body {
   z-index: 100 !important;
 }
 
-.VPNavBarMenuLink, .VPNavBarMenuGroup {
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup {
   /* Add padding to bridge hover gaps */
-  padding-bottom: 20px !important; 
+  padding-bottom: 20px !important;
   margin-bottom: -20px !important;
 }
 
@@ -119,11 +126,11 @@ html, body {
   z-index: 200 !important; /* Ensure dropdowns are very high */
   margin-top: 5px !important; /* Slight offset for optics */
   border-radius: 12px !important;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
 .dark .VPNavBar {
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Button Refinement */
@@ -149,7 +156,12 @@ html, body {
 }
 
 /* Typography refinements */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -184,7 +196,7 @@ h1 {
     display: flex;
     justify-content: center;
   }
-  
+
   .VPNavBarSearch .DocSearch {
     width: 100%;
     max-width: 400px; /* Wider search bar */
@@ -202,7 +214,7 @@ h1 {
   height: 28px; /* Ensure size */
   width: auto;
   padding-right: 8px; /* Adjusted padding */
-  padding-left: 8px;  /* Added for balance */
+  padding-left: 8px; /* Added for balance */
   margin-right: 10px !important; /* Spacing after decor */
   background: white; /* Force white background for transp logo */
   border-radius: 6px; /* Soft edges */
@@ -211,8 +223,8 @@ h1 {
 
 .dark .VPNavBarTitle .logo {
   /* Keep white bg in dark mode so black logo pops, or adjust if logo differs */
-  background: rgba(255, 255, 255, 0.9); 
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Adjust Site Title Text */
@@ -223,23 +235,23 @@ h1 {
   opacity: 0.9;
 }
 
-@media (max-width: 600px) {
-    /* Hide Text Title */
-    .VPNavBarTitle .title {
-        display: none !important;
-    }
-    
-    /* Ensure Logo is Visible & Not Shrunk */
-    :deep(.VPNavBarTitle .logo), 
-    .VPNavBarTitle .logo {
-        display: block !important;
-        flex-shrink: 0 !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    /* Allow Title Container to shrink to fit logo */
-    .VPNavBarTitle {
-        flex-shrink: 0;
-    }
+@media (max-width: 959px) {
+  /* Ensure Title & Logo are Visible */
+  .VPNavBarTitle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 1 !important;
+  }
+
+  .VPNavBarTitle .title {
+    display: block !important;
+    font-size: 14px !important;
+    white-space: nowrap;
+  }
+
+  .VPNavBarTitle .logo {
+    display: block !important;
+    height: 24px !important;
+  }
 }
