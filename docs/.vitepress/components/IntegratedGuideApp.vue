@@ -65,10 +65,15 @@ const renderMarkdown = (text: string) => {
   }, Infinity);
   const cleaned = lines.map(line => line.slice(minIndent)).join('\n');
   
-  // 核心修復：在列表與文字之間強制補上空行，解決渲染問題
-  const processed = cleaned
+  // 排版增強處理
+  let processed = cleaned
+    // 1. 在列表項目前確保有空行（無論是 *、-、+ 或數字列表）
     .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
-    .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
+    .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2')
+    // 2. 在粗體標題行（如 **標題**：）後面如果直接接內容，確保段落分隔
+    .replace(/(\*\*[^*]+\*\*[：:]\s*)\n([^\n*\d-])/g, '$1\n\n$2')
+    // 3. 在引用區塊前確保有空行
+    .replace(/([^\n])\n(>)/g, '$1\n\n$2');
   
   return md.render(processed);
 };
