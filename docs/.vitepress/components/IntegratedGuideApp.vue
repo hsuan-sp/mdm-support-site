@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, nextTick, watch } from "vue";
 import { useRoute } from "vitepress";
 import { allQAData } from "../../data/all-data";
-import type { QAItem } from "../types";
+import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
 
 const route = useRoute();

@@ -1,14 +1,30 @@
-# 極電資訊 Apple MDM 知識庫
+# 極電資訊 Apple MDM 知識庫 (MDM Knowledge Base)
 
-專為台灣教育場域設計的 Apple MDM 知識庫。
+本專案是專為台灣教育場域設計的專業 Apple 行動裝置管理 (MDM) 知識庫。整合了多年來在校園現場解決各類 Apple 裝置管理問題的實戰經驗，旨在協助學校資訊組長、技術人員及教師能快速排解問題，並掌握最新的 Apple 推署技術。
 
-## 開發
+## 核心功能
 
-```bash
-npm install
-npm run docs:dev
-```
+*   **全方位問答指南 (Integrated Guide)**：涵蓋帳號管理、裝置註冊 (ADE)、App 派送、課堂管理 (Apple Classroom) 到硬體故障排除等八大核心範疇。
+*   **零知識術語表 (Glossary)**：將艱澀的 Apple 與 Jamf 專業術語轉化為白話文與生活化比喻，降低管理門檻。
+*   **高性能搜尋引擎**：基於動態資料結構的即時搜尋，支援快速查找 Q&A 內容與術語定義。
+*   **響應式設計**：針對電腦與行動裝置優化，支援字體大小調整，方便管理員在機房、教室現場隨時存取。
 
-## 部署
+## 技術架構
 
-Push to `main` 自動部署至 GitHub Pages。
+*   **前端框架**：[VitePress](https://vitepress.dev/) - 提供高速的靜態頁面生成與優異的閱讀體驗。
+*   **核心組件**：Vue 3 + TypeScript - 構建高度互動的客製化應用組件。
+*   **內容驅動**：結構化 TypeScript 資料模組 - 確保內容的強型別校驗與易於維護性。
+*   **安全與認證**：Cloudflare Workers + Supabase Auth - 提供安全、快速的身份驗證機制（僅限教育與公司內部網域）。
+
+## 專案結構說明
+
+*   `docs/`：VitePress 核心目錄，包含所有 Markdown 頁面。
+    *   `.vitepress/`：站點配置、共用組件與主題樣式。
+    *   `data/`：知識庫的核心數據模組 (TypeScript)，包含 Q&A 內容與術語數據。
+    *   `public/`：靜態資產文件。
+*   `worker/`：Cloudflare Worker 原始碼，負責身份驗證與安全日誌轉發。
+*   `scripts/`：輔助腳本，用於內容管理與自動化維護。
+
+## 開發參與
+
+本知識庫內容持續更新，以符合 Apple 每年度作業系統 (iOS/macOS) 的重大異動。所有功能異動均經過嚴格測試，確保與身份驗證系統的聯動穩定性。
