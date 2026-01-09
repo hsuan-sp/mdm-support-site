@@ -83,11 +83,14 @@ const currentModule = computed(() => {
     return allQAData.find(d => d.source === activeSource.value);
 });
 
-// Accordion state
-const openItems = ref<Set<string>>(new Set());
+// Accordion state - Use reactive Set for better Vue 3 reactivity tracking
+const openItems = ref(new Set<string>());
 const toggleItem = (id: string) => {
-  if (openItems.value.has(id)) openItems.value.delete(id);
-  else openItems.value.add(id);
+  // Create a new Set instance to ensure reactivity triggers correctly
+  const next = new Set(openItems.value);
+  if (next.has(id)) next.delete(id);
+  else next.add(id);
+  openItems.value = next;
 };
 
 // Markdown rendering
@@ -99,6 +102,7 @@ onMounted(() => {
     window.addEventListener('hashchange', handleHashChange);
     
     // Intersection Observer for animation trigger
+    // Move to a wider scope if needed, but keeping it here is fine as long as we watch correctly
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
@@ -106,13 +110,22 @@ onMounted(() => {
               observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '50px' });
+    }, { threshold: 0.05, rootMargin: '100px' });
 
-    // Watch for internal navigation
-    watch([activeSource, searchQuery], async () => {
+    // Watch for internal navigation and search results
+    watch([activeSource, searchQuery, searchResults], async () => {
         await nextTick();
-        document.querySelectorAll('.qa-card').forEach(el => observer.observe(el));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Force a re-scan of all cards
+        const cards = document.querySelectorAll('.qa-card');
+        cards.forEach(el => {
+            // Remove visible class briefly to re-trigger if needed? No, just observe.
+            observer.observe(el);
+        });
+        
+        // Scroll to top on module switch, but not necessarily on search typing
+        if (!searchQuery.value) {
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }, { immediate: true });
 });
 
@@ -185,31 +198,31 @@ const switchModule = (source: string) => {
                     <h3 class="group-title">{{ group.source }}</h3>
                     <div class="cards-stack">
                         <article 
-                          v-for="item in group.items" 
-                          :key="item.id" 
+                          v-for="qaItem in group.items" 
+                          :key="qaItem.id" 
                           class="qa-card" 
-                          :class="{ 'is-open': openItems.has(item.id) }"
+                          :class="{ 'is-open': openItems.has(qaItem.id) }"
                         >
                             <div 
                               class="card-header" 
-                              @click="toggleItem(item.id)"
+                              @click="toggleItem(qaItem.id)"
                               role="button"
-                              :aria-expanded="openItems.has(item.id)"
+                              :aria-expanded="openItems.has(qaItem.id)"
                               tabindex="0"
-                              @keydown.enter="toggleItem(item.id)"
-                              @keydown.space.prevent="toggleItem(item.id)"
+                              @keydown.enter="toggleItem(qaItem.id)"
+                              @keydown.space.prevent="toggleItem(qaItem.id)"
                             >
                                 <div class="header-main">
-                                  <span v-if="item.important" class="badge-important" aria-label="重要問題">⭐ 重要</span>
-                                  <h3>{{ item.question }}</h3>
+                                  <span v-if="qaItem.important" class="badge-important" aria-label="重要問題">⭐ 重要</span>
+                                  <h3>{{ qaItem.question }}</h3>
                                 </div>
                                 <span class="chevron" aria-hidden="true">▼</span>
                             </div>
-                            <div class="card-body-wrapper" :style="{ maxHeight: openItems.has(item.id) ? '3000px' : '0px' }">
+                            <div class="card-body-wrapper" :style="{ maxHeight: openItems.has(qaItem.id) ? '3000px' : '0px' }">
                               <div class="card-body">
-                                <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
-                                <div class="tags" v-if="item.tags && item.tags.length">
-                                    <span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span>
+                                <div class="markdown-body" v-html="renderMarkdown(qaItem.answer)"></div>
+                                <div class="tags" v-if="qaItem.tags && qaItem.tags.length">
+                                    <span v-for="tag in qaItem.tags" :key="tag" class="tag">{{ tag }}</span>
                                 </div>
                               </div>
                             </div>
@@ -232,31 +245,31 @@ const switchModule = (source: string) => {
                 
                 <div class="cards-stack">
                     <article 
-                      v-for="item in section.items" 
-                      :key="item.id" 
+                      v-for="qaItem in section.items" 
+                      :key="qaItem.id" 
                       class="qa-card"
-                      :class="{ 'is-open': openItems.has(item.id) }"
+                      :class="{ 'is-open': openItems.has(qaItem.id) }"
                     >
                         <div 
                           class="card-header" 
-                          @click="toggleItem(item.id)"
+                          @click="toggleItem(qaItem.id)"
                           role="button"
-                          :aria-expanded="openItems.has(item.id)"
+                          :aria-expanded="openItems.has(qaItem.id)"
                           tabindex="0"
-                          @keydown.enter="toggleItem(item.id)"
-                          @keydown.space.prevent="toggleItem(item.id)"
+                          @keydown.enter="toggleItem(qaItem.id)"
+                          @keydown.space.prevent="toggleItem(qaItem.id)"
                         >
                             <div class="header-main">
-                              <span v-if="item.important" class="badge-important" aria-label="重要問題">⭐ 重要</span>
-                              <h3>{{ item.question }}</h3>
+                              <span v-if="qaItem.important" class="badge-important" aria-label="重要問題">⭐ 重要</span>
+                              <h3>{{ qaItem.question }}</h3>
                             </div>
                             <span class="chevron" aria-hidden="true">▼</span>
                         </div>
-                        <div class="card-body-wrapper" :style="{ maxHeight: openItems.has(item.id) ? '3000px' : '0px' }">
+                        <div class="card-body-wrapper" :style="{ maxHeight: openItems.has(qaItem.id) ? '3000px' : '0px' }">
                           <div class="card-body">
-                            <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
-                            <div class="tags" v-if="item.tags && item.tags.length">
-                                <span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span>
+                            <div class="markdown-body" v-html="renderMarkdown(qaItem.answer)"></div>
+                            <div class="tags" v-if="qaItem.tags && qaItem.tags.length">
+                                <span v-for="tag in qaItem.tags" :key="tag" class="tag">{{ tag }}</span>
                             </div>
                           </div>
                         </div>
