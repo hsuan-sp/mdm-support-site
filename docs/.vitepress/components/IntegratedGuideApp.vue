@@ -11,7 +11,8 @@ const router = useRouter();
 const md = new MarkdownIt({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
+  breaks: false  // 不將單換行轉為 <br>，保持標準 Markdown 行為（需要空行才換段）
 });
 
 // State
@@ -93,11 +94,31 @@ const toggleItem = (id: string) => {
   openItems.value = next;
 };
 
-// Markdown rendering with safety check
+// Markdown 預處理：自動改善格式以提升可讀性
+const preprocessMarkdown = (text: string): string => {
+  if (!text) return "";
+  
+  let processed = text;
+  
+  // 1. 在連續的列表項之間添加空行（如果沒有的話）
+  // 匹配 "* item\n* item" 或 "- item\n- item" 模式
+  processed = processed.replace(/(\n[*-]\s+.+?)(\n[*-]\s+)/g, '$1\n$2');
+  
+  // 2. 在「**標題**：」格式後面確保有空行
+  processed = processed.replace(/(\*\*[^*]+\*\*[：:]\s*)(\n)(?!\n)/g, '$1\n\n');
+  
+  // 3. 在編號列表項之間添加空行
+  processed = processed.replace(/(\n\d+\.\s+.+?)(\n\d+\.\s+)/g, '$1\n$2');
+  
+  return processed;
+};
+
+// Markdown rendering with safety check and preprocessing
 const renderMarkdown = (text: string | undefined | null) => {
   if (!text) return "";
   try {
-    return md.render(text);
+    const preprocessed = preprocessMarkdown(text);
+    return md.render(preprocessed);
   } catch (e) {
     console.error("Markdown rendering error:", e);
     return text;
