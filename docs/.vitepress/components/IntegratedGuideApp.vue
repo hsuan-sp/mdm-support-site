@@ -14,6 +14,13 @@ const md = new MarkdownIt({
   breaks: true // 確保單次換行也會生效
 });
 
+// Helper to count items per chapter
+const getChapterCount = (source: string) => {
+  const module = allQAData.find(m => m.source === source);
+  if (!module) return 0;
+  return module.sections.reduce((total, section) => total + section.items.length, 0);
+};
+
 // State
 const searchQuery = ref("");
 const activeSource = ref(allQAData[0].source);
@@ -22,13 +29,10 @@ const fontScale = ref(1); // 使用比例來控制全域大小
 
 const handleHashChange = () => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    const hashMap: Record<string, string> = {
-        'account': '帳號與伺服器', 'enrollment': '裝置註冊', 'apps': 'App 管理',
-        'classroom': '課堂管理', 'digital': '數位精進', 'hardware': '硬體排除',
-        'mac': 'Mac 管理', 'education': '教育實戰'
-    };
-    if (hashMap[hash]) {
-        activeSource.value = hashMap[hash];
+    // 直接從數據源比對鏈結標記（如果需要更精確的比對可以擴充路徑屬性）
+    const target = allQAData.find(m => m.source.toLowerCase().includes(hash));
+    if (target) {
+        activeSource.value = target.source;
         searchQuery.value = '';
     }
 };
@@ -92,7 +96,7 @@ const switchModule = (source: string) => {
 <template>
   <div class="guide-app" :style="{ '--app-scale': fontScale }">
     <div class="app-layout">
-      <!-- 重新設計的側邊欄：固定位置 + 功能整合 -->
+      <!-- 重新設計的側邊欄：加入統計數字 -->
       <aside class="app-sidebar">
         <div class="sidebar-top">
             <div class="search-section">
@@ -104,7 +108,8 @@ const switchModule = (source: string) => {
                     @click="switchModule(module.source)"
                     :class="['nav-item', { active: activeSource === module.source && !searchQuery }]"
                 >
-                    {{ module.source }}
+                    <span class="nav-text">{{ module.source }}</span>
+                    <span class="nav-count">{{ getChapterCount(module.source) }}</span>
                 </button>
             </nav>
         </div>
@@ -173,7 +178,8 @@ const switchModule = (source: string) => {
       <div class="mobile-nav-content" @click.stop>
         <div class="mobile-search"><input v-model="searchQuery" type="text" placeholder="搜尋..." /></div>
         <div v-for="m in allQAData" :key="m.source" @click="switchModule(m.source)" class="m-nav-item" :class="{active: activeSource === m.source}">
-          {{ m.source }}
+          <span class="nav-text">{{ m.source }}</span>
+          <span class="nav-count">{{ getChapterCount(m.source) }}</span>
         </div>
       </div>
     </div>
@@ -238,12 +244,38 @@ const switchModule = (source: string) => {
 }
 
 .nav-item { 
-    display: block; width: 100%; text-align: left; padding: 10px 15px; border: none; 
-    background: transparent; cursor: pointer; border-radius: 8px; margin-bottom: 2px;
-    font-size: 0.95em; color: var(--vp-c-text-2); transition: 0.2s;
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; text-align: left; padding: 12px 16px; border: none; 
+    background: transparent; cursor: pointer; border-radius: 12px; margin-bottom: 4px;
+    font-size: 0.9em; color: var(--vp-c-text-2); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.nav-item:hover { background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); }
+.nav-item:hover { background: var(--vp-c-bg-mute); color: var(--vp-c-text-1); transform: translateX(4px); }
 .nav-item.active { background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); font-weight: 700; }
+
+.nav-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.nav-count {
+    font-size: 11px;
+    background: var(--vp-c-bg-alt);
+    padding: 2px 8px;
+    border-radius: 10px;
+    min-width: 28px;
+    text-align: center;
+    border: 1px solid var(--vp-c-divider);
+    color: var(--vp-c-text-3);
+    transition: all 0.2s;
+}
+.nav-item.active .nav-count {
+    border-color: var(--vp-c-brand-1);
+    color: var(--vp-c-brand-1);
+    background: white;
+}
 
 /* 側邊欄字體控制 */
 .font-controls { display: flex; flex-direction: column; gap: 8px; }
@@ -301,6 +333,10 @@ const switchModule = (source: string) => {
 .mobile-nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99; backdrop-filter: blur(4px); }
 .mobile-nav-content { width: 80%; max-width: 300px; height: 100%; background: var(--vp-c-bg); padding: 40px 20px; }
 .mobile-search input { width: 100%; padding: 12px; margin-bottom: 30px; border-radius: 8px; border: 1px solid var(--vp-c-divider); }
-.m-nav-item { padding: 15px; border-bottom: 1px solid var(--vp-c-divider); }
-.m-nav-item.active { color: var(--vp-c-brand-1); font-weight: 700; }
+.m-nav-item { 
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px; border-bottom: 1px solid var(--vp-c-divider); 
+}
+.m-nav-item.active { color: var(--vp-c-brand-1); font-weight: 700; background: var(--vp-c-brand-soft); }
+.m-nav-item .nav-count { font-size: 12px; }
 </style>
