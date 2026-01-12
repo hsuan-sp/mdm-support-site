@@ -117,6 +117,21 @@ textarea,
 .VPBackToTop {
   display: none !important;
 }
+
+/* 
+   CRITICAL FIX: Force overflow visible to ensure position: sticky works 
+   for the Sidebar. VitePress default theme sometimes applies overflow: hidden
+   which breaks sticky positioning.
+*/
+html, body, #app, .Layout, .VPContent, .VPDoc, .main {
+  overflow: visible !important;
+}
+
+/* Ensure the sticky sidebar has enough Z-index but stays under Navbar */
+.app-sidebar {
+  z-index: 15 !important;
+}
+
 .return-to-top {
   display: none !important;
 }
