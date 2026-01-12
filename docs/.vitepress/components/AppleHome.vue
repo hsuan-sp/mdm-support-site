@@ -133,9 +133,6 @@ const navCards = [
            </a>
         </div>
       </div>
-      <div class="hero-visual fade-in delay-2">
-        <img :src="withBase('/mdm_hero_premium.png')" alt="MDM Abstract Art with iPad" loading="eager" />
-      </div>
     </header>
 
     <!-- Grid Section -->
@@ -221,8 +218,9 @@ const navCards = [
 .fade-in-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Initial entry transition - only for opacity/transform */
+  transition: opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .fade-in-on-scroll.is-visible {
@@ -374,32 +372,6 @@ const navCards = [
   border-radius: 4px;
 }
 
-.hero-visual {
-  width: 100%;
-  max-width: 1000px;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-  border: 1px solid var(--vp-c-divider-light);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  container-type: inline-size;
-}
-
-.hero-visual:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.15);
-}
-
-.hero-visual img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.hero-visual:hover img {
-  transform: scale(1.03);
-}
 
 /* Grid Section */
 .grid-section {
@@ -454,9 +426,13 @@ const navCards = [
   flex-direction: column;
   justify-content: space-between;
   min-height: 280px;
-  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border: 1px solid rgba(0,0,0,0.05);
+  /* Ultra-smooth transition definition */
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.4s ease,
+              background-color 0.4s ease;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
   container-type: inline-size;
   will-change: transform, box-shadow;
 }
@@ -467,7 +443,7 @@ const navCards = [
   inset: 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.6s ease;
   pointer-events: none;
 }
 
@@ -477,8 +453,8 @@ const navCards = [
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.05);
-  border-color: var(--vp-c-brand-soft);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  border-color: rgba(255,255,255,0.2);
 }
 
 .card:focus-visible {
@@ -491,12 +467,11 @@ const navCards = [
 }
 
 .card-icon {
-  font-size: 52px;
-  margin-bottom: 24px;
+  font-size: 48px;
+  margin-bottom: 20px;
   display: block;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2);
-  will-change: transform;
 }
 
 .card:hover .card-icon {
@@ -553,12 +528,12 @@ const navCards = [
   font-weight: 600;
   align-self: flex-end;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateX(-15px);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .card:hover .card-arrow {
-  opacity: 0.8;
+  opacity: 0.9;
   transform: translateX(0);
 }
 
@@ -566,11 +541,6 @@ const navCards = [
 @media (prefers-color-scheme: dark) {
   .apple-container { 
     background: #000;
-  }
-  
-  .hero-visual { 
-    box-shadow: 0 40px 100px rgba(255,255,255,0.03);
-    border-color: rgba(255,255,255,0.1);
   }
   
   .card { 
