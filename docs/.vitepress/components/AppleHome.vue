@@ -454,10 +454,11 @@ const navCards = [
   flex-direction: column;
   justify-content: space-between;
   min-height: 280px;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
   container-type: inline-size;
+  will-change: transform, box-shadow;
 }
 
 .card::before {
@@ -475,9 +476,9 @@ const navCards = [
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.12);
-  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.05);
+  border-color: var(--vp-c-brand-soft);
 }
 
 .card:focus-visible {
@@ -490,24 +491,25 @@ const navCards = [
 }
 
 .card-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 52px;
+  margin-bottom: 24px;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  will-change: transform;
 }
 
 .card:hover .card-icon {
-  transform: scale(1.1) rotate(-5deg);
+  transform: scale(1.15) rotate(-8deg) translateY(-5px);
 }
 
 .card-text {
   flex: 1;
-  transition: transform 0.3s;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .card:hover .card-text {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .card-subtitle {
