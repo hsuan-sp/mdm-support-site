@@ -6,7 +6,10 @@ export default defineConfig({
   title: "極電資訊 Apple MDM 知識庫",
   description: "全方位的 Apple 教育場域行動裝置管理指南",
   head: [
-    ['link', { rel: 'icon', href: '/superinfo_favicon.jpeg' }]
+    ['link', { rel: 'icon', href: '/superinfo_favicon.jpeg' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap', rel: 'stylesheet' }]
   ],
   cleanUrls: true,
   vite: {

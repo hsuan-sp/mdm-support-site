@@ -1,162 +1,418 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>登入 | 極電資訊 Apple MDM 知識庫</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        :root {
-            --primary: #0071e3;
-            --glass: rgba(255, 255, 255, 0.8);
-            --bg: #f5f5f7;
+      :root {
+        --primary: #007aff;
+        --primary-hover: #0062cc;
+        --bg-gradient: radial-gradient(
+          circle at 50% 0%,
+          #f0f4ff 0%,
+          #f5f5f7 100%
+        );
+        --glass-bg: rgba(255, 255, 255, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.6);
+        --glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); /* Softer shadow */
+        --text-main: #1d1d1f;
+        --text-sec: #86868b;
+        --error: #ff3b30;
+        --success: #34c759;
+      }
+
+      body {
+        font-family: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--text-main);
+        /* Subtle background animation */
+        background-size: 200% 200%;
+        animation: bgBreath 15s ease infinite;
+      }
+
+      @keyframes bgBreath {
+        0% {
+          background-position: 50% 0%;
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-image: radial-gradient(circle at 50% -20%, #ffffff 0%, #d2d2d7 100%);
+        50% {
+          background-position: 50% 100%;
         }
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 360px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.3);
+        100% {
+          background-position: 50% 0%;
         }
-        h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
-        p { color: #86868b; font-size: 14px; margin-bottom: 30px; line-height: 1.4; }
-        input {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border: 1px solid #d2d2d7;
-            border-radius: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+      }
+
+      .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        padding: 48px 40px;
+        border-radius: 24px;
+        box-shadow: var(--glass-shadow);
+        border: 1px solid var(--glass-border);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-2px);
+      }
+
+      .logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 24px;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.01em;
+        background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      p.subtitle {
+        color: var(--text-sec);
+        font-size: 15px;
+        margin: 0 0 32px 0;
+        line-height: 1.5;
+        font-weight: 400;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+        position: relative;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-sec);
+        margin-bottom: 8px;
+        margin-left: 4px;
+      }
+
+      input {
+        width: 100%;
+        padding: 16px 16px;
+        border: 1px solid #d1d1d6;
+        border-radius: 14px;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.8);
+        box-sizing: border-box;
+        outline: none;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        font-family: inherit;
+      }
+
+      input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+        background: #fff;
+      }
+
+      input::placeholder {
+        color: #aaa;
+      }
+
+      button {
+        width: 100%;
+        padding: 16px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 8px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+      button:disabled {
+        background: #e5e5ea;
+        color: #aeaeb2;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* Status Badge */
+      .status-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.04);
+        color: var(--text-sec);
+        font-weight: 500;
+        margin-top: 24px;
+      }
+      .status-badge.online::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+      }
+      .status-badge.offline::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--error);
+      }
+
+      /* Utility */
+      .hidden {
+        display: none !important;
+      }
+      .link-text {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 16px;
+        display: inline-block;
+        transition: opacity 0.2s;
+      }
+      .link-text:hover {
+        opacity: 0.8;
+      }
+
+      .message-box {
+        min-height: 24px;
+        margin-top: 16px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .success {
+        color: var(--success);
+      }
+      .error {
+        color: var(--error);
+      }
+
+      .footer-note {
+        margin-top: 32px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 12px;
+        color: #98989d;
+        line-height: 1.6;
+      }
+
+      /* Loading Spinner */
+      .spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 0.8s ease-in-out infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+        display: none; /* hidden by default */
+      }
+      button.loading .spinner {
+        display: inline-block;
+      }
+      button.loading span {
+        opacity: 0.8;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0,113,227,0.15); }
-        button {
-            width: 100%;
-            padding: 14px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        button:hover { background: #0077ed; transform: scale(1.02); }
-        button:disabled { background: #d2d2d7; cursor: not-allowed; }
-        .hidden { display: none; }
-        #message { margin-top: 15px; font-size: 13px; min-height: 1.2em; }
-        .success { color: #1d1d1f; }
-        .error { color: #ff3b30; }
-        .logo { max-width: 140px; height: auto; margin-bottom: 20px; border-radius: 8px; }
-        .status-badge { font-size: 10px; padding: 4px 8px; border-radius: 10px; display: inline-block; margin-top: 10px; background: #eee; color: #666; }
-        .status-online { background: #e3f9e5; color: #1f7a1f; }
-        .status-offline { background: #ffe5e5; color: #cc0000; }
+      }
     </style>
-</head>
-<body>
-    <div class="card">
-        <img src="/superinfo_logo.png" alt="Logo" class="logo">
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <img src="/superinfo_logo.png" alt="Logo" class="logo" />
         <h1>身分驗證</h1>
-        <p>請使用教育網域信箱 (@*.edu.tw) 登入</p>
-        <div id="status" class="status-badge hidden"></div>
-        <br><br>
-        
+        <p class="subtitle">
+          請使用教育網域信箱 (@*.edu.tw) 登入<br />以存取 MDM 專業知識庫
+        </p>
+
         <div id="step-email">
-            <input type="email" id="email" placeholder="電子郵件地址" required>
-            <button id="btn-send">傳送驗證碼</button>
+          <div class="input-group">
+            <label for="email">電子郵件</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="name@school.edu.tw"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <button id="btn-send">
+            <div class="spinner"></div>
+            <span>傳送驗證碼</span>
+          </button>
         </div>
 
         <div id="step-otp" class="hidden">
-            <p id="otp-hint" style="margin-bottom: 15px; font-size: 14px; color: #333;"></p>
-            <input type="text" id="otp" placeholder="輸入 6 位數驗證碼" maxlength="6">
-            <button id="btn-verify">登入</button>
-            <a href="#" id="link-retry" style="display:block; margin-top:15px; font-size:14px; color:var(--primary); text-decoration:none;">重新輸入 Email</a>
+          <p
+            id="otp-hint"
+            style="color: var(--text-sec); margin-bottom: 20px; font-size: 14px"
+          ></p>
+          <div class="input-group">
+            <label for="otp">驗證碼</label>
+            <input
+              type="text"
+              id="otp"
+              placeholder="6 位數代碼"
+              maxlength="6"
+              autocomplete="one-time-code"
+              style="
+                letter-spacing: 4px;
+                text-align: center;
+                font-weight: 600;
+                font-size: 20px;
+              "
+            />
+          </div>
+          <button id="btn-verify">
+            <div class="spinner"></div>
+            <span>登入系統</span>
+          </button>
+          <a href="#" id="link-retry" class="link-text">更換 Email</a>
         </div>
 
-        <div id="message"></div>
+        <div id="message" class="message-box"></div>
 
-        <div style="margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
-            <p style="font-size: 11px; color: #999; line-height: 1.5; margin: 0;">
-                <strong style="color: #666;">隱私權與資安聲明</strong><br>
-                本系統僅使用您的 Email 作為身分識別，並透過 Cookie 維持登入狀態。<br>
-                我們不會儲存您的密碼、信用卡號或其他敏感個資，請安心使用。
-            </p>
+        <div id="status" class="status-badge hidden">...</div>
+
+        <div class="footer-note">
+          本系統使用安全 Cookie 技術維持登入狀態<br />
+          我們不會儲存您的任何敏感個資
         </div>
+      </div>
     </div>
 
     <script>
-        const stepEmail = document.getElementById('step-email');
-        const stepOtp = document.getElementById('step-otp');
-        const emailInput = document.getElementById('email');
-        const otpInput = document.getElementById('otp');
-        const msg = document.getElementById('message');
-        const statusBadge = document.getElementById('status');
+      const stepEmail = document.getElementById("step-email");
+      const stepOtp = document.getElementById("step-otp");
+      const emailInput = document.getElementById("email");
+      const otpInput = document.getElementById("otp");
+      const msg = document.getElementById("message");
+      const statusBadge = document.getElementById("status");
 
-        function log(msg) {
-            console.log(`[Auth] ${msg}`);
+      function log(msg) {
+        console.log(`[Auth] ${msg}`);
+      }
+
+      // Magic Link 處理
+      const hash = window.location.hash.substring(1);
+      const search = window.location.search.substring(1);
+
+      // ... (Magic Link logic remains same) ...
+      const hashParams = new URLSearchParams(hash);
+      const searchParams = new URLSearchParams(search);
+      let accessToken =
+        hashParams.get("access_token") || searchParams.get("access_token");
+
+      if (accessToken) {
+        log("正在登入並紀錄...");
+        fetch("/auth/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ access_token: accessToken }),
+        }).then((res) => {
+          if (res.ok) {
+            location.href = "/";
+          } else {
+            log("登入失敗，請重試");
+          }
+        });
+      } else if (hashParams.get("error_description")) {
+        document.getElementById("message").className = "error";
+        document.getElementById("message").innerText =
+          hashParams.get("error_description");
+      }
+
+      // 啟動時檢查服務狀態
+      (async () => {
+        try {
+          const res = await fetch("/auth/health");
+          const data = await res.json();
+          if (data.status === "online") {
+            statusBadge.innerText = "🟢 驗證服務運作中";
+            statusBadge.className = "status-badge status-online";
+          } else {
+            statusBadge.innerText = "⚠️ 驗證服務暫時無法使用";
+            statusBadge.className = "status-badge status-offline";
+          }
+        } catch (e) {
+          statusBadge.innerText = "⚠️ 無法連線至伺服器";
+          statusBadge.className = "status-badge status-offline";
         }
+      })();
 
-        // Magic Link 處理
-        const hash = window.location.hash.substring(1);
-        const search = window.location.search.substring(1);
-        
-        // ... (Magic Link logic remains same) ...
-        const hashParams = new URLSearchParams(hash);
-        const searchParams = new URLSearchParams(search);
-        let accessToken = hashParams.get('access_token') || searchParams.get('access_token');
-
-        if (accessToken) {
-            log('正在登入並紀錄...');
-            fetch('/auth/session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ access_token: accessToken })
-            }).then(res => {
-                if (res.ok) {
-                    location.href = '/';
-                } else {
-                    log('登入失敗，請重試');
-                }
-            });
-        } else if (hashParams.get('error_description')) {
-            document.getElementById('message').className = 'error';
-            document.getElementById('message').innerText = hashParams.get('error_description');
-        }
-
-        // 啟動時檢查服務狀態
-        (async () => {
-            try {
-                const res = await fetch('/auth/health');
-                const data = await res.json();
-                if (data.status === 'online') {
-                    statusBadge.innerText = '🟢 驗證服務運作中';
-                    statusBadge.className = 'status-badge status-online';
-                } else {
-                    statusBadge.innerText = '⚠️ 驗證服務暫時無法使用';
-                    statusBadge.className = 'status-badge status-offline';
-                }
-            } catch (e) {
-                statusBadge.innerText = '⚠️ 無法連線至伺服器';
-                statusBadge.className = 'status-badge status-offline';
+        // Helper to toggle loading state
+        function setLoading(btnId, isLoading, text) {
+            const btn = document.getElementById(btnId);
+            const span = btn.querySelector('span');
+            if (isLoading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+                if (text) span.innerText = text;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                if (text) span.innerText = text;
             }
-        })();
+        }
 
         // 初始化：點擊重新輸入時的行為
         document.getElementById('link-retry').onclick = (e) => {
@@ -167,11 +423,10 @@
             document.getElementById('otp').value = '';
         };
 
-        // 初始化：檢查是否有先前輸入的 Email (如果使用者按上一頁回來)
+        // 初始化：檢查是否有先前輸入的 Email
         if (emailInput.value && !stepOtp.classList.contains('hidden')) {
-            // 如果已經在 OTP 步驟且有 Email，保持現狀
+            // Pass
         } else {
-             // 否則重置為初始狀態
             stepEmail.classList.remove('hidden');
             stepOtp.classList.add('hidden');
         }
@@ -180,10 +435,9 @@
             const email = emailInput.value.trim();
             if (!email) return;
             
-            const btn = document.getElementById('btn-send');
-            msg.className = '';
-            msg.innerText = '正在發送驗證碼...';
-            btn.disabled = true;
+            msg.className = 'message-box';
+            msg.innerText = '';
+            setLoading('btn-send', true, '發送中...');
             
             try {
                 const res = await fetch('/auth/otp', {
@@ -197,30 +451,34 @@
                     stepEmail.classList.add('hidden');
                     stepOtp.classList.remove('hidden');
                     document.getElementById('otp-hint').innerText = `驗證碼已寄送到 ${email}`;
-                    msg.className = 'success';
+                    msg.className = 'message-box success';
                     msg.innerText = '';
+                    setLoading('btn-send', false, '傳送驗證碼');
                 } else {
-                    msg.className = 'error';
-                    // 具體顯示 Supabase 的錯誤訊息 (例如速率限制)
+                    msg.className = 'message-box error';
                     msg.innerText = data.error_description || data.error || data.msg || '發送失敗，請稍候再試';
                     
-                    // 啟動倒數計時 60 秒
+                    // 倒數計時
                     let countdown = 60;
+                    setLoading('btn-send', true, `請等待 ${countdown} 秒`); // Keep disabled
+                    
                     const timer = setInterval(() => {
-                        btn.innerText = `請等待 ${countdown} 秒`;
+                        const btn = document.getElementById('btn-send');
+                        const span = btn.querySelector('span');
+                        span.innerText = `請等待 ${countdown} 秒`;
+                        
                         if (countdown <= 0) {
                             clearInterval(timer);
-                            btn.disabled = false;
-                            btn.innerText = '傳送驗證碼';
+                            setLoading('btn-send', false, '傳送驗證碼');
                             msg.innerText = '';
                         }
                         countdown--;
                     }, 1000);
                 }
             } catch (e) {
-                msg.className = 'error';
+                msg.className = 'message-box error';
                 msg.innerText = '連線失敗';
-                btn.disabled = false;
+                setLoading('btn-send', false, '傳送驗證碼');
             }
         };
 
@@ -228,8 +486,9 @@
             const email = emailInput.value.trim();
             const token = otpInput.value.trim();
             
-            msg.className = '';
-            msg.innerText = '正在登入...';
+            msg.className = 'message-box';
+            msg.innerText = '';
+            setLoading('btn-verify', true, '驗證中...');
             
             try {
                 const res = await fetch('/auth/verify', {
@@ -239,19 +498,21 @@
                 });
                 
                 if (res.ok) {
-                    msg.className = 'success';
+                    msg.className = 'message-box success';
                     msg.innerText = '登入成功！正在跳轉...';
                     setTimeout(() => location.href = '/', 500);
                 } else {
                     const data = await res.json();
-                    msg.className = 'error';
+                    msg.className = 'message-box error';
                     msg.innerText = data.error || '驗證碼錯誤';
+                    setLoading('btn-verify', false, '登入系統');
                 }
             } catch (e) {
-                msg.className = 'error';
+                msg.className = 'message-box error';
                 msg.innerText = '驗證失敗';
+                setLoading('btn-verify', false, '登入系統');
             }
         };
     </script>
-</body>
+  </body>
 </html>

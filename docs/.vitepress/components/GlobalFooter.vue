@@ -24,109 +24,83 @@ import { withBase } from 'vitepress'
 </template>
 
 <style scoped>
-@keyframes fadeInFooter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .global-footer {
-  background-color: var(--vp-c-bg-alt);
-  padding: 60px 24px 40px;
+  background: var(--vp-c-bg-alt);
+  padding: 80px 24px 60px;
   text-align: center;
-  border-top: 1px solid var(--glass-border);
-  margin-top: 60px;
-  position: relative;
-  z-index: 200;
-  animation: fadeInFooter 0.8s ease-out;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  /* Softer border */
+  margin-top: 80px;
 }
 
-/* Promo Section */
-.footer-promo {
-  margin-bottom: 40px;
+:global(.dark) .global-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--vp-c-bg);
+  /* Blend with background in dark mode */
 }
 
+/* Typography */
 .company-name {
-  font-size: 28px;
+  font-size: 20px;
+  /* Reduced from 28px for elegance */
   font-weight: 700;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   color: var(--vp-c-text-1);
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  letter-spacing: -0.01em;
 }
 
 .service-badges {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--vp-c-text-2);
-  margin: 0 0 12px;
-  font-weight: 500;
-  line-height: 1.6;
-  transition: color 0.3s ease;
+  margin: 0 0 24px;
+  font-weight: 400;
 }
 
 .slogan-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--vp-c-bg-soft);
+  transition: all 0.2s ease;
 }
 
 .slogan {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--vp-c-brand-1);
-  font-weight: 600;
-  opacity: 0.95;
+  font-weight: 500;
   margin: 0;
-  transition: all 0.3s ease;
-}
-
-.slogan-link:hover .slogan {
-  opacity: 1;
-  transform: translateY(-2px);
-  text-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
 }
 
 .slogan-link:hover {
-  transform: scale(1.02);
+  background: var(--vp-c-brand-soft);
+  transform: translateY(-1px);
 }
 
-/* Divider */
+/* Subtle Divider */
 .divider {
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--vp-c-brand-1) 50%, 
-    transparent 100%);
-  max-width: 200px;
-  margin: 0 auto 30px;
-  opacity: 0.3;
-  transition: opacity 0.3s ease;
+  height: 1px;
+  width: 60px;
+  background: var(--vp-c-divider);
+  margin: 40px auto;
 }
 
-.global-footer:hover .divider {
-  opacity: 0.6;
-}
-
-/* Copyright Section */
+/* Copyright */
 .footer-copyright p {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--vp-c-text-3);
-  margin: 6px 0;
-  line-height: 1.6;
-  transition: color 0.3s ease;
+  margin: 4px 0;
+  font-weight: 400;
 }
 
-.footer-copyright p:hover {
-  color: var(--vp-c-text-2);
-}
-
-/* Dark Mode Adjustments */
-.dark .global-footer {
-  background-color: var(--vp-c-bg);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* Responsive */
+@media (min-width: 768px) {
+  .global-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
