@@ -108,6 +108,15 @@ const navCards = [
     icon: '📖'
   }
 ]
+import { onMounted, onUnmounted } from 'vue'
+
+onMounted(() => {
+  document.body.classList.add('is-home')
+})
+
+onUnmounted(() => {
+  document.body.classList.remove('is-home')
+})
 </script>
 
 <template>

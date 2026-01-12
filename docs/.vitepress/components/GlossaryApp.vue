@@ -79,12 +79,17 @@ watch(fontScale, (val) => {
   localStorage.setItem('mdm-glossary-font-scale', val.toString());
 });
 
+
+import { onUnmounted } from 'vue';
+
 onMounted(async () => {
   const savedScale = localStorage.getItem('mdm-glossary-font-scale');
   if (savedScale) fontScale.value = parseFloat(savedScale);
 
   const savedCollapsed = localStorage.getItem('mdm-glossary-sidebar-collapsed');
   if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
+
+  document.body.classList.add('is-app');
 
   await nextTick();
   
@@ -102,6 +107,10 @@ onMounted(async () => {
   document.querySelectorAll('.term-card').forEach((el) => {
     observer.observe(el);
   });
+});
+
+onUnmounted(() => {
+    document.body.classList.remove('is-app');
 });
 
 // Helper to count items per category
@@ -674,6 +683,7 @@ const toggleSidebar = () => {
   display: flex; 
   flex-direction: column; 
   height: 100%;
+  overflow: hidden; /* Fix: ensures bottom rounded corners are not covered */
 }
 
 .term-card:hover {

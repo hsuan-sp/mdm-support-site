@@ -124,8 +124,8 @@ body {
   position: relative;
 }
 
-/* Global Misty Background Layer - Mostly Clear */
-body::before {
+/* 1. Homepage: Premium Misty Background */
+body.is-home::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -139,9 +139,32 @@ body::before {
   transition: opacity 0.8s ease;
 }
 
-.dark body::before {
+.dark body.is-home::before {
   opacity: 0.8;
   filter: blur(8px) saturate(100%) brightness(0.6);
+}
+
+/* 2. App Pages: Clean Geometric Background */
+body.is-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--vp-c-bg);
+  background-image: 
+    radial-gradient(var(--vp-c-brand-soft) 1px, transparent 1px),
+    radial-gradient(var(--vp-c-brand-soft) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.4;
+}
+
+.dark body.is-app::before {
+  opacity: 0.2;
+  background-image: 
+    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
 }
 
 .VPButton {

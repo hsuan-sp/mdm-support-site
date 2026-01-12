@@ -23,7 +23,7 @@ const getChapterCount = (source: string) => {
 
 // State
 const searchQuery = ref("");
-const activeSource = ref(allQAData[0].source);
+const activeSource = ref<string | "All">("All");
 const isSidebarOpen = ref(false);
 const fontScale = ref(1); // 使用比例來控制全域大小
 const isSidebarCollapsed = ref(false); // 側邊欄是否收合
@@ -47,6 +47,9 @@ const handleHashChange = () => {
     if (targetSource) {
         activeSource.value = targetSource;
         searchQuery.value = '';
+    } else if (hash === 'all') {
+        activeSource.value = 'All';
+        searchQuery.value = '';
     }
 };
 
@@ -64,7 +67,16 @@ const searchResults = computed(() => {
   return results;
 });
 
-const currentModule = computed(() => allQAData.find(d => d.source === activeSource.value));
+const currentModule = computed(() => {
+  if (activeSource.value === 'All') return null;
+  return allQAData.find(d => d.source === activeSource.value);
+});
+
+// For "All" mode
+const allQuestions = computed(() => {
+  if (activeSource.value !== 'All') return null;
+  return allQAData;
+});
 const openItems = ref(new Set<string>());
 
 const toggleItem = (id: string) => {
@@ -93,12 +105,21 @@ const renderMarkdown = (text: string) => {
   return md.render(processed);
 };
 
+
+import { onUnmounted } from 'vue'
+
 onMounted(() => {
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
+    document.body.classList.add('is-app');
 });
 
-const switchModule = (source: string) => {
+onUnmounted(() => {
+    window.removeEventListener('hashchange', handleHashChange);
+    document.body.classList.remove('is-app');
+});
+
+const switchModule = (source: string | "All") => {
   activeSource.value = source;
   searchQuery.value = '';
   isSidebarOpen.value = false;
@@ -139,6 +160,14 @@ const toggleSidebar = () => {
                 </div>
             </div>
             <nav class="nav-menu">
+                <button 
+                    @click="switchModule('All')"
+                    :class="['nav-item', { active: activeSource === 'All' && !searchQuery }]"
+                >
+                    <span class="nav-text">全部題目</span>
+                    <span class="nav-count">{{ allQAData.reduce((t, m) => t + getChapterCount(m.source), 0) }}</span>
+                </button>
+                <div class="sidebar-divider"></div>
                 <button 
                     v-for="module in allQAData" :key="module.source"
                     @click="switchModule(module.source)"
@@ -191,22 +220,48 @@ const toggleSidebar = () => {
 
         <!-- 模組瀏覽模式 -->
         <div v-else class="module-view">
-            <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
-                <h3 class="section-label">{{ section.title }}</h3>
-                <div v-for="item in section.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
-                    <div class="qa-trigger" @click="toggleItem(item.id)">
-                        <div class="q-main">
-                          <span v-if="item.important" class="imp-tag">重要</span>
-                          <span class="q-text">{{ item.question }}</span>
+            <!-- 章節內容 -->
+            <template v-if="activeSource !== 'All'">
+                <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
+                    <h3 class="section-label">{{ section.title }}</h3>
+                    <div v-for="item in section.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
+                        <div class="qa-trigger" @click="toggleItem(item.id)">
+                            <div class="q-main">
+                                <span v-if="item.important" class="imp-tag">重要</span>
+                                <span class="q-text">{{ item.question }}</span>
+                            </div>
+                            <span class="arrow">▼</span>
                         </div>
-                        <span class="arrow">▼</span>
-                    </div>
-                    <div v-if="openItems.has(item.id)" class="qa-content">
-                        <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
-                        <div class="tags"><span v-for="t in item.tags" :key="t" class="tag">#{{ t }}</span></div>
+                        <div v-if="openItems.has(item.id)" class="qa-content">
+                            <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
+                            <div class="tags"><span v-for="t in item.tags" :key="t" class="tag">#{{ t }}</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
+
+            <!-- 全部題目模式 -->
+            <template v-else>
+                <div v-for="module in allQuestions" :key="module.source" class="chapter-group">
+                    <h2 class="chapter-title">{{ module.source }}</h2>
+                    <div v-for="section in module.sections" :key="section.title" class="section-block">
+                        <h3 class="section-label">{{ section.title }}</h3>
+                        <div v-for="item in section.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
+                            <div class="qa-trigger" @click="toggleItem(item.id)">
+                                <div class="q-main">
+                                    <span v-if="item.important" class="imp-tag">重要</span>
+                                    <span class="q-text">{{ item.question }}</span>
+                                </div>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div v-if="openItems.has(item.id)" class="qa-content">
+                                <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
+                                <div class="tags"><span v-for="t in item.tags" :key="t" class="tag">#{{ t }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
       </main>
     </div>
@@ -306,15 +361,20 @@ const toggleSidebar = () => {
 /* 側邊欄視覺與固定邏輯 */
 .app-sidebar { 
     position: sticky; 
-    top: 100px; 
+    top: 100px; /* 修正：確保在頂部導覽列下方 */
     width: 280px;
     height: calc(100vh - 140px); 
     display: flex; 
     flex-direction: column;
+    background: var(--vp-c-bg-soft);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid var(--vp-c-divider);
     transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
                 opacity 0.4s,
                 margin 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     overflow: hidden;
+    z-index: 10;
 }
 
 .guide-app.sidebar-collapsed .app-sidebar {
@@ -360,8 +420,15 @@ const toggleSidebar = () => {
 
 .sidebar-bottom { 
     padding-top: 24px; 
-    margin-top: 8px;
+    margin-top: 32px;
     border-top: 1px solid var(--vp-c-divider); 
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: var(--vp-c-divider);
+    margin: 12px 0;
+    opacity: 0.6;
 }
 
 .search-input { 
@@ -453,6 +520,17 @@ const toggleSidebar = () => {
 .markdown-body :deep(blockquote) { margin: 1.5em 0; padding: 12px 24px; border-left: 4px solid var(--vp-c-brand-1); background: var(--vp-c-bg-alt); border-radius: 8px; }
 
 .section-label { font-size: 1.6em; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid var(--vp-c-divider); font-weight: 800; color: var(--vp-c-text-1); }
+
+.chapter-title {
+    font-size: 2.2em;
+    margin: 64px 0 24px;
+    padding: 12px 24px;
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    border-radius: 12px;
+    font-weight: 900;
+}
+.chapter-group:first-child .chapter-title { margin-top: 0; }
 
 /* 行動版 */
 .mobile-menu-btn { 
