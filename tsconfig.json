@@ -12,7 +12,11 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["docs/.vitepress/*"]
+    }
   },
   "include": ["docs/**/*.ts", "docs/**/*.mts", "docs/**/*.d.ts", "docs/**/*.tsx", "docs/**/*.vue", "docs/.vitepress/**/*.ts", "docs/.vitepress/**/*.mts", "docs/.vitepress/**/*.vue"],
   "exclude": ["node_modules"]

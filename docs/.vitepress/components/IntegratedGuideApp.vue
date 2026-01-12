@@ -135,7 +135,6 @@ const switchModule = (source: string | "All") => {
   <div class="guide-app" :style="{ '--app-scale': fontScale }" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
     <div class="app-layout">
       <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
-      <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
       <AppSidebar 
         title="指南導覽" 
         :is-open="!isSidebarCollapsed" 
