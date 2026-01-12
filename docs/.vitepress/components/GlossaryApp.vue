@@ -35,23 +35,23 @@ const filteredTerms = computed(() => {
       item.term.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       item.definition.includes(searchQuery.value) ||
       item.analogy.includes(searchQuery.value);
-    
+
     // 修復: 處理category為數組的情況
     const currentCategory = selectedCategory.value;
     const matchesCategory =
       currentCategory === "All" ||
-      (Array.isArray(item.category) 
+      (Array.isArray(item.category)
         ? item.category.includes(currentCategory as any)
         : item.category === currentCategory);
 
     return matchesSearch && matchesCategory;
   });
-  
+
   // 應用排序
   return filtered.sort((a, b) => {
     const termA = a.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
     const termB = b.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
-    
+
     if (sortOrder.value === 'asc') {
       return termA.localeCompare(termB);
     } else {
@@ -79,7 +79,7 @@ const toggleControls = () => {
 onMounted(async () => {
 
   await nextTick();
-  
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -101,8 +101,8 @@ onMounted(async () => {
 // Helper to count items per category
 const getCategoryCount = (cat: string) => {
   if (cat === 'All') return glossaryData.length;
-  return glossaryData.filter(item => 
-    Array.isArray(item.category) 
+  return glossaryData.filter(item =>
+    Array.isArray(item.category)
       ? item.category.includes(cat as any)
       : item.category === cat
   ).length;
@@ -114,26 +114,26 @@ const getCategoryCount = (cat: string) => {
 </script>
 
 <template>
-  <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }" :style="{ '--app-scale': fontScale }">
+  <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }"
+    :style="{ '--app-scale': fontScale }">
     <div class="app-layout">
       <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
       <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
-      <AppSidebar 
-        title="術語庫分類" 
-        :is-open="!isSidebarCollapsed" 
-        class="desktop-only"
-        @toggle="toggleSidebar"
-        @update:scale="val => fontScale = val"
-      >
+      <AppSidebar title="術語庫分類" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
+        @update:scale="val => fontScale = val">
         <template #search>
           <div class="search-box">
-             <span class="search-icon">
-               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-             </span>
-             <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" />
+            <span class="search-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" />
           </div>
         </template>
-        
+
         <template #nav-items>
           <div class="categories-header">
             <span>分類</span>
@@ -141,16 +141,12 @@ const getCategoryCount = (cat: string) => {
               {{ sortOrder === 'asc' ? 'A-Z' : 'Z-A' }}
             </button>
           </div>
-          
+
           <div class="categories-list">
-            <button
-               v-for="cat in categories"
-               :key="cat"
-               @click="selectedCategory = cat"
-               :class="['cat-item', { active: selectedCategory === cat }]"
-            >
-               {{ cat === 'All' ? '全部顯示' : cat }}
-               <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{ getCategoryCount(cat) }}</span>
+            <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat"
+              :class="['cat-item', { active: selectedCategory === cat }]">
+              {{ cat === 'All' ? '全部顯示' : cat }}
+              <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{ getCategoryCount(cat) }}</span>
             </button>
           </div>
         </template>
@@ -160,31 +156,20 @@ const getCategoryCount = (cat: string) => {
         <!-- 內容頁首：頂部控制行 -->
         <header class="content-header">
 
-            <div class="view-status-bar">
-                <span class="status-label">{{ selectedCategory === 'All' ? '所有分類' : selectedCategory }}</span>
-                <span class="status-count">共 {{ filteredTerms.length }} 個術語</span>
-            </div>
+          <div class="view-status-bar">
+            <span class="status-label">{{ selectedCategory === 'All' ? '所有分類' : selectedCategory }}</span>
+            <span class="status-count">共 {{ filteredTerms.length }} 個術語</span>
+          </div>
         </header>
-        <TransitionGroup 
-          name="list" 
-          tag="div" 
-          class="terms-grid"
-        >
-          <article
-            v-for="(item, index) in filteredTerms"
-            :key="item.term"
-            class="term-card"
-            :style="{ '--delay': index % 10 }"
-          >
+        <TransitionGroup name="list" tag="div" class="terms-grid">
+          <article v-for="(item, index) in filteredTerms" :key="item.term" class="term-card"
+            :style="{ '--delay': index % 10 }">
             <div class="card-main">
               <header class="card-header">
                 <h3 class="term-title">{{ item.term }}</h3>
                 <div class="term-badges">
-                  <span 
-                    v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" 
-                    :key="cat"
-                    :class="['badge', getCategoryColor(cat)]"
-                  >
+                  <span v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" :key="cat"
+                    :class="['badge', getCategoryColor(cat)]">
                     {{ cat }}
                   </span>
                 </div>
@@ -213,12 +198,8 @@ const getCategoryCount = (cat: string) => {
     </div>
 
     <!-- Mobile Floating Filter Button -->
-    <button 
-      class="mobile-floating-btn" 
-      @click="isControlsExpanded = true" 
-      v-if="!isControlsExpanded"
-      aria-label="開啟搜尋與篩選"
-    >
+    <button class="mobile-floating-btn" @click="isControlsExpanded = true" v-if="!isControlsExpanded"
+      aria-label="開啟搜尋與篩選">
       <span class="icon" aria-hidden="true">🔍</span>
       <span class="label">篩選與搜尋</span>
     </button>
@@ -230,41 +211,37 @@ const getCategoryCount = (cat: string) => {
           <h3>篩選與搜尋</h3>
           <button class="close-btn" @click="isControlsExpanded = false" aria-label="關閉">✕</button>
         </div>
-        
+
         <div class="drawer-content">
-            <div class="search-box">
-                <span class="search-icon" aria-hidden="true">🔍</span>
-                <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" aria-label="搜尋術語" />
-            </div>
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" aria-label="搜尋術語" />
+          </div>
 
-            <div class="categories-wrapper">
-              <div class="categories-header">
-                  <span>分類選擇</span>
-                  <button @click="toggleSort" class="sort-btn">
-                      {{ sortOrder === 'asc' ? '排序 A-Z' : '排序 Z-A' }}
-                  </button>
-              </div>
-              <div class="categories-chips">
-                  <button
-                    v-for="cat in categories"
-                    :key="cat"
-                    @click="selectedCategory = cat; isControlsExpanded = false"
-                    :class="['cat-chip', { active: selectedCategory === cat }]"
-                  >
-                    {{ cat === 'All' ? '全部' : cat }}
-                  </button>
-              </div>
+          <div class="categories-wrapper">
+            <div class="categories-header">
+              <span>分類選擇</span>
+              <button @click="toggleSort" class="sort-btn">
+                {{ sortOrder === 'asc' ? '排序 A-Z' : '排序 Z-A' }}
+              </button>
             </div>
+            <div class="categories-chips">
+              <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat; isControlsExpanded = false"
+                :class="['cat-chip', { active: selectedCategory === cat }]">
+                {{ cat === 'All' ? '全部' : cat }}
+              </button>
+            </div>
+          </div>
 
-            <!-- Mobile Font Adjust -->
-            <div class="font-controls-mobile">
-                <div class="categories-header"><span>字體大小調整</span></div>
-                <div class="btn-group-mobile">
-                    <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">小</button>
-                    <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">中</button>
-                    <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">大</button>
-                </div>
+          <!-- Mobile Font Adjust -->
+          <div class="font-controls-mobile">
+            <div class="categories-header"><span>字體大小調整</span></div>
+            <div class="btn-group-mobile">
+              <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">小</button>
+              <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">中</button>
+              <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">大</button>
             </div>
+          </div>
         </div>
       </aside>
     </div>
@@ -303,7 +280,7 @@ const getCategoryCount = (cat: string) => {
 .mobile-drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -328,7 +305,7 @@ const getCategoryCount = (cat: string) => {
   padding-bottom: calc(32px + env(safe-area-inset-bottom));
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-drawer-overlay.open .mobile-drawer {
@@ -342,13 +319,13 @@ const getCategoryCount = (cat: string) => {
   margin-bottom: 24px;
 }
 
-.drawer-header h3 { 
-  font-size: 22px; 
-  font-weight: 800; 
-  margin: 0; 
+.drawer-header h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
 }
 
-.close-btn { 
+.close-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -391,64 +368,115 @@ const getCategoryCount = (cat: string) => {
 }
 
 /* Local Font Controls Styles */
-.font-controls { margin-top: 32px; }
-.btn-group { display: flex; gap: 4px; background: var(--vp-c-bg-mute); padding: 4px; border-radius: 12px; }
-.btn-group button { 
-    flex: 1; padding: 8px; border: none; background: transparent; border-radius: 8px; 
-    cursor: pointer; font-size: 14px; transition: 0.2s; color: var(--vp-c-text-2); font-weight: 600;
+.font-controls {
+  margin-top: 32px;
 }
-.btn-group button.active { background: var(--vp-c-bg-alt); color: var(--vp-c-brand-1); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-.font-controls-mobile { margin-top: 32px; }
-.btn-group-mobile { display: flex; gap: 8px; }
-.btn-group-mobile button {
-    flex: 1; padding: 12px; background: var(--vp-c-bg-mute); border: none; border-radius: 12px;
-    font-size: 15px; font-weight: 600; color: var(--vp-c-text-2); cursor: pointer;
+.btn-group {
+  display: flex;
+  gap: 4px;
+  background: var(--vp-c-bg-mute);
+  padding: 4px;
+  border-radius: 12px;
 }
-.btn-group-mobile button.active { background: var(--vp-c-brand-1); color: white; }
+
+.btn-group button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  color: var(--vp-c-text-2);
+  font-weight: 600;
+}
+
+.btn-group button.active {
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-brand-1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.font-controls-mobile {
+  margin-top: 32px;
+}
+
+.btn-group-mobile {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-group-mobile button {
+  flex: 1;
+  padding: 12px;
+  background: var(--vp-c-bg-mute);
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+}
+
+.btn-group-mobile button.active {
+  background: var(--vp-c-brand-1);
+  color: white;
+}
 
 /* Header section refined */
-.glossary-header { display: none; } 
-.hero-title { display: none; }
-.subtitle { display: none; }
+.glossary-header {
+  display: none;
+}
+
+.hero-title {
+  display: none;
+}
+
+.subtitle {
+  display: none;
+}
 
 /* 2-Column Layout */
 /* 2-Column Layout Refined */
 .app-layout {
   display: flex;
   gap: 40px;
-  justify-content: center; /* 居中展開 */
-  align-items: start;
+  justify-content: center;
+  align-items: flex-start;
+  /* Critical for sticky to work */
   padding: 40px 24px 100px;
   position: relative;
   max-width: 1600px;
   margin: 0 auto;
+  min-height: 100vh;
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* 內容區頂部控制列 */
 .content-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 32px;
-    height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  height: 44px;
 }
 
 .view-status-bar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    font-size: 14px;
-    color: var(--vp-c-text-3);
-    font-weight: 700;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  color: var(--vp-c-text-3);
+  font-weight: 700;
 }
 
 .status-label {
-    background: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-    padding: 2px 10px;
-    border-radius: 6px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  padding: 2px 10px;
+  border-radius: 6px;
 }
 
 
@@ -457,82 +485,82 @@ const getCategoryCount = (cat: string) => {
 
 .app-content {
   flex: 1;
-  min-width: 0; 
+  min-width: 0;
 }
 
 /* Sidebar Elements */
 .sidebar-header h2 {
-    font-size: 16px; 
-    font-weight: 700; 
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 20px; 
-    color: var(--vp-c-text-2);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  color: var(--vp-c-text-2);
 }
 
-.categories-list { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 4px; 
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .cat-item {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 16px; 
-    border-radius: 12px; 
-    font-size: 14px; 
-    color: var(--vp-c-text-2);
-    cursor: pointer; 
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    width: 100%;
-    border: none;
-    background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  border: none;
+  background: transparent;
 }
 
-.cat-item:hover { 
-  background: var(--vp-c-bg-mute); 
-  color: var(--vp-c-text-1); 
+.cat-item:hover {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-1);
   transform: translateX(4px) scale(1.02);
 }
 
-.cat-item.active { 
-  background: var(--vp-c-brand-soft); 
-  color: var(--vp-c-brand-1); 
-  font-weight: 600; 
+.cat-item.active {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
   transform: scale(1.02);
 }
 
 .cat-count {
-    font-size: 11px; 
-    background: var(--vp-c-bg-alt); 
-    padding: 2px 8px;
-    border-radius: 10px; 
-    min-width: 28px; 
-    text-align: center;
-    border: 1px solid var(--vp-c-divider);
+  font-size: 11px;
+  background: var(--vp-c-bg-alt);
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 28px;
+  text-align: center;
+  border: 1px solid var(--vp-c-divider);
 }
 
 .categories-header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    margin-top: 32px; 
-    margin-bottom: 12px; 
-    font-size: 12px; 
-    font-weight: 700;
-    text-transform: uppercase; 
-    color: var(--vp-c-text-3); 
-    letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  letter-spacing: 0.05em;
 }
 
-.sort-btn { 
-  font-size: 12px; 
-  color: var(--vp-c-brand-1); 
+.sort-btn {
+  font-size: 12px;
+  color: var(--vp-c-brand-1);
   background: none;
   border: none;
-  cursor: pointer; 
+  cursor: pointer;
   font-weight: 600;
 }
 
@@ -540,29 +568,29 @@ const getCategoryCount = (cat: string) => {
   position: relative;
 }
 
-.search-input { 
-  width: 100%; 
-  padding: 12px 16px 12px 40px; 
-  border-radius: 12px; 
-  font-size: 14px; 
-  transition: all 0.2s; 
-  border: 1px solid var(--vp-c-divider); 
-  background: var(--vp-c-bg); 
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.2s;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
 }
 
-.search-input:focus { 
-  border-color: var(--vp-c-brand-1); 
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1); 
+.search-input:focus {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
   outline: none;
 }
 
-.search-icon { 
+.search-icon {
   position: absolute;
-  left: 12px; 
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0.5; 
+  opacity: 0.5;
 }
 
 /* Grid Layout with Transition */
@@ -595,106 +623,154 @@ const getCategoryCount = (cat: string) => {
   border-radius: 24px;
   border: 1px solid var(--vp-c-divider);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  overflow: hidden; /* Fix: ensures bottom rounded corners are not covered */
+  overflow: hidden;
+  /* Fix: ensures bottom rounded corners are not covered */
 }
 
 .term-card:hover {
   border-color: var(--vp-c-brand-soft);
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
-.card-main { 
-  padding: 32px; 
-  flex: 1; 
+.card-main {
+  padding: 32px;
+  flex: 1;
 }
 
-.card-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: flex-start; 
-  gap: 16px; 
-  margin-bottom: 20px; 
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .term-title {
-  font-size: 22px; 
-  font-weight: 800; 
-  margin: 0; 
-  color: var(--vp-c-text-1); 
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--vp-c-text-1);
   line-height: 1.3;
 }
 
 .term-definition {
-  font-size: 16px; 
-  line-height: 1.6; 
-  color: var(--vp-c-text-2); 
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
 }
 
 .analogy-wrapper {
-  background: var(--vp-c-bg-soft); 
+  background: var(--vp-c-bg-soft);
   padding: 24px 32px;
   border-top: 1px solid var(--vp-c-divider);
-  display: flex; 
+  display: flex;
   gap: 16px;
 }
 
-.analogy-icon { 
-  font-size: 20px; 
-  flex-shrink: 0; 
+.analogy-icon {
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
-.analogy-label { 
-  display: block; 
-  font-weight: 800; 
-  font-size: 11px; 
-  color: var(--vp-c-brand-1); 
-  text-transform: uppercase; 
-  margin-bottom: 6px; 
-  letter-spacing: 0.1em; 
+.analogy-label {
+  display: block;
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--vp-c-brand-1);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 0.1em;
 }
 
-.analogy-text { 
-  font-size: 15px; 
-  line-height: 1.6; 
-  color: var(--vp-c-text-1); 
-  margin: 0; 
-  font-weight: 500; 
+.analogy-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--vp-c-text-1);
+  margin: 0;
+  font-weight: 500;
 }
 
-.term-badges { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 6px; 
-  justify-content: flex-end; 
+.term-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
 }
 
-.badge { 
-  font-size: 10px; 
-  padding: 4px 10px; 
-  border-radius: 8px; 
-  font-weight: 700; 
-  text-transform: uppercase; 
+.badge {
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 /* Badge Color System */
-.badge-core { background: rgba(0, 113, 227, 0.1); color: #0071e3; }
-.badge-enrollment { background: rgba(52, 199, 89, 0.1); color: #28cd41; }
-.badge-apple { background: rgba(0, 0, 0, 0.05); color: #1d1d1f; }
-.badge-security { background: rgba(255, 59, 48, 0.1); color: #ff3b30; }
-.badge-network { background: rgba(88, 86, 214, 0.1); color: #5856d6; }
-.badge-hardware { background: rgba(255, 149, 0, 0.1); color: #ff9500; }
-.badge-apps { background: rgba(255, 45, 85, 0.1); color: #ff2d55; }
-.badge-other { background: rgba(142, 142, 147, 0.1); color: #8e8e93; }
-.badge-education { background: rgba(255, 204, 0, 0.1); color: #cca300; }
-.badge-macos { background: rgba(175, 82, 222, 0.1); color: #af52de; }
-.badge-jamf { background: rgba(0, 0, 0, 0.1); color: #1d1d1f; }
+.badge-core {
+  background: rgba(0, 113, 227, 0.1);
+  color: #0071e3;
+}
 
-.dark .badge-apple, .dark .badge-jamf { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.badge-enrollment {
+  background: rgba(52, 199, 89, 0.1);
+  color: #28cd41;
+}
+
+.badge-apple {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1d1d1f;
+}
+
+.badge-security {
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+}
+
+.badge-network {
+  background: rgba(88, 86, 214, 0.1);
+  color: #5856d6;
+}
+
+.badge-hardware {
+  background: rgba(255, 149, 0, 0.1);
+  color: #ff9500;
+}
+
+.badge-apps {
+  background: rgba(255, 45, 85, 0.1);
+  color: #ff2d55;
+}
+
+.badge-other {
+  background: rgba(142, 142, 147, 0.1);
+  color: #8e8e93;
+}
+
+.badge-education {
+  background: rgba(255, 204, 0, 0.1);
+  color: #cca300;
+}
+
+.badge-macos {
+  background: rgba(175, 82, 222, 0.1);
+  color: #af52de;
+}
+
+.badge-jamf {
+  background: rgba(0, 0, 0, 0.1);
+  color: #1d1d1f;
+}
+
+.dark .badge-apple,
+.dark .badge-jamf {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
 
 /* Empty State */
 .empty-state {
@@ -723,21 +799,48 @@ const getCategoryCount = (cat: string) => {
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .app-layout { display: block; }
-  .app-sidebar { display: none !important; }
-  .expand-sidebar-btn { display: none !important; }
-  .mobile-floating-btn { display: flex; }
-  .glossary-app { padding: 0 24px 100px; }
-  .terms-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .app-layout {
+    display: block;
+  }
+
+  .app-sidebar {
+    display: none !important;
+  }
+
+  .expand-sidebar-btn {
+    display: none !important;
+  }
+
+  .mobile-floating-btn {
+    display: flex;
+  }
+
+  .glossary-app {
+    padding: 0 24px 100px;
+  }
+
+  .terms-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
-  .glossary-header { padding-top: 40px; }
-  .terms-grid { grid-template-columns: 1fr; }
+  .glossary-header {
+    padding-top: 40px;
+  }
+
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .list-move, .list-enter-active, .list-leave-active { transition: none !important; }
+
+  .list-move,
+  .list-enter-active,
+  .list-leave-active {
+    transition: none !important;
+  }
 }
 </style>

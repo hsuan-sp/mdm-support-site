@@ -69,11 +69,16 @@ export default defineComponent({
 <style scoped>
 /* Commercial-Grade Sidebar Styling */
 .app-sidebar {
+  position: -webkit-sticky;
+  /* Safari support */
   position: sticky;
-  top: 100px;
-  /* Aligned with header */
+  top: 84px;
+  /* Fixed distance from viewport top (below navbar) */
   width: 280px;
-  height: calc(100vh - 120px);
+  /* Instead of fixed height, use max-height to fit viewport */
+  max-height: calc(100vh - 104px);
+  /* 84px top + 20px bottom padding */
+  height: auto;
   display: flex;
   flex-direction: column;
 
@@ -83,14 +88,15 @@ export default defineComponent({
   -webkit-backdrop-filter: blur(20px) saturate(180%);
 
   border-radius: 20px;
-  padding: 20px;
+  padding: 24px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
 
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   z-index: 10;
+
+  /* Important for child scrolling */
   overflow: hidden;
-  /* For rounded corners */
 }
 
 /* Dark Mode Adaptation */
