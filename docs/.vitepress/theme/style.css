@@ -100,6 +100,19 @@ body {
   line-height: 1.7;
 }
 
+/* Allow selection in Code Blocks and Inputs for usability */
+.vp-doc pre, 
+.vp-doc code,
+input,
+textarea,
+.vp-code-group {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    cursor: text;
+}
+
 /* HIDE Default VitePress "Return to Top" link/text */
 .VPBackToTop {
   display: none !important;

@@ -17,6 +17,16 @@ export default defineConfig({
       alias: {
         'punycode': 'punycode'
       }
+    },
+    build: {
+      sourcemap: false, // Hide source code structure
+      minify: 'terser', // Use Terser for better minification
+      terserOptions: {
+        compress: {
+          drop_console: true, // Remove console.log
+          drop_debugger: true
+        }
+      }
     }
   },
   themeConfig: {
