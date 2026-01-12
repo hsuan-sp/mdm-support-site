@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch } from "vue";
+import { ref, computed, onMounted, nextTick, watch, onUnmounted } from "vue";
 import { useRoute } from "vitepress";
+import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { allQAData } from "../../data/all-data";
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
@@ -25,8 +26,9 @@ const getChapterCount = (source: string) => {
 const searchQuery = ref("");
 const activeSource = ref<string | "All">("All");
 const isSidebarOpen = ref(false);
-const fontScale = ref(1); // 使用比例來控制全域大小
-const isSidebarCollapsed = ref(false); // 側邊欄是否收合
+// const fontScale = ref(1); // Replaced by composable
+// const isSidebarCollapsed = ref(false); // Replaced by composable
+const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-qa');
 
 const handleHashChange = () => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
@@ -106,17 +108,16 @@ const renderMarkdown = (text: string) => {
 };
 
 
-import { onUnmounted } from 'vue'
+
 
 onMounted(() => {
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
-    document.body.classList.add('is-app');
+    // Body class added by useAppFeatures
 });
 
 onUnmounted(() => {
     window.removeEventListener('hashchange', handleHashChange);
-    document.body.classList.remove('is-app');
 });
 
 const switchModule = (source: string | "All") => {
@@ -126,23 +127,7 @@ const switchModule = (source: string | "All") => {
   openItems.value.clear();
 };
 
-// Persistence
-watch(fontScale, (val) => {
-  localStorage.setItem('mdm-qa-font-scale', val.toString());
-});
 
-onMounted(() => {
-  const savedScale = localStorage.getItem('mdm-qa-font-scale');
-  if (savedScale) fontScale.value = parseFloat(savedScale);
-
-  const savedCollapsed = localStorage.getItem('mdm-qa-sidebar-collapsed');
-  if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
-});
-
-const toggleSidebar = () => {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value;
-  localStorage.setItem('mdm-qa-sidebar-collapsed', isSidebarCollapsed.value.toString());
-};
 </script>
 
 <template>

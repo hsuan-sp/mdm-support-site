@@ -1,10 +1,12 @@
 <script setup>
 import { useRouter, withBase } from 'vitepress'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 const router = useRouter()
 
 onMounted(() => {
+  document.body.classList.add('is-home')
+
   // Staggered animation for cards with improved performance
   const observer = new IntersectionObserver(
     (entries) => {
@@ -23,6 +25,10 @@ onMounted(() => {
   document.querySelectorAll('.fade-in-on-scroll').forEach((el) => {
     observer.observe(el)
   })
+})
+
+onUnmounted(() => {
+  document.body.classList.remove('is-home')
 })
 
 const navCards = [
@@ -108,15 +114,6 @@ const navCards = [
     icon: '📖'
   }
 ]
-import { onMounted, onUnmounted } from 'vue'
-
-onMounted(() => {
-  document.body.classList.add('is-home')
-})
-
-onUnmounted(() => {
-  document.body.classList.remove('is-home')
-})
 </script>
 
 <template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from "vue";
+import { ref, computed, onMounted, nextTick, watch, onUnmounted } from "vue";
 import { glossaryData } from "../../data/glossary";
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
+import { useAppFeatures } from '../theme/composables/useAppFeatures';
 
 const { isMobileView } = useLayoutMode();
+const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-glossary');
 type CategoryType = "Core" | "Enrollment" | "Apple" | "Security" | "Network" | "Hardware" | "Apps" | "Other" | "Education" | "macOS" | "Jamf";
 
 const searchQuery = ref("");
 const selectedCategory = ref<CategoryType | "All">("All");
 const sortOrder = ref<'asc' | 'desc'>('asc'); // 新增排序狀態
 const isControlsExpanded = ref(false); // 控制搜尋工具的展開/收起，預設收起
-const fontScale = ref(1.0); // 術語表獨立的字體比例
-const isSidebarCollapsed = ref(false); // 側邊欄是否收合
 
 const categories = [
   "All",
@@ -73,23 +73,9 @@ const toggleControls = () => {
   isControlsExpanded.value = !isControlsExpanded.value;
 };
 
-// Persistence
-import { watch } from 'vue';
-watch(fontScale, (val) => {
-  localStorage.setItem('mdm-glossary-font-scale', val.toString());
-});
 
-
-import { onUnmounted } from 'vue';
 
 onMounted(async () => {
-  const savedScale = localStorage.getItem('mdm-glossary-font-scale');
-  if (savedScale) fontScale.value = parseFloat(savedScale);
-
-  const savedCollapsed = localStorage.getItem('mdm-glossary-sidebar-collapsed');
-  if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
-
-  document.body.classList.add('is-app');
 
   await nextTick();
   
@@ -109,9 +95,7 @@ onMounted(async () => {
   });
 });
 
-onUnmounted(() => {
-    document.body.classList.remove('is-app');
-});
+
 
 // Helper to count items per category
 const getCategoryCount = (cat: string) => {
@@ -123,10 +107,7 @@ const getCategoryCount = (cat: string) => {
   ).length;
 };
 
-const toggleSidebar = () => {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value;
-  localStorage.setItem('mdm-glossary-sidebar-collapsed', isSidebarCollapsed.value.toString());
-};
+
 
 
 </script>
