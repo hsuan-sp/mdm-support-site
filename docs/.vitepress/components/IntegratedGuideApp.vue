@@ -367,6 +367,8 @@ const toggleSidebar = () => {
     display: flex; 
     flex-direction: column;
     background: var(--vp-c-bg-soft);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-radius: 24px;
     padding: 24px;
     border: 1px solid var(--vp-c-divider);
@@ -522,13 +524,14 @@ const toggleSidebar = () => {
 .section-label { font-size: 1.6em; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid var(--vp-c-divider); font-weight: 800; color: var(--vp-c-text-1); }
 
 .chapter-title {
-    font-size: 2.2em;
+    font-size: 2em;
     margin: 64px 0 24px;
-    padding: 12px 24px;
-    background: var(--vp-c-brand-soft);
+    padding: 16px 24px;
+    background: var(--vp-c-bg-soft);
     color: var(--vp-c-brand-1);
-    border-radius: 12px;
-    font-weight: 900;
+    border-radius: 20px;
+    font-weight: 800;
+    border: 1px solid var(--vp-c-divider);
 }
 .chapter-group:first-child .chapter-title { margin-top: 0; }
 

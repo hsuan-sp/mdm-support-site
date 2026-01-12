@@ -499,6 +499,8 @@ const toggleSidebar = () => {
   width: 280px;
   height: calc(100vh - 140px);
   background: var(--vp-c-bg-soft);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-radius: 20px;
   padding: 24px;
   border: 1px solid var(--vp-c-divider);

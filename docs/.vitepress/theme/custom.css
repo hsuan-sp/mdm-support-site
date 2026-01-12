@@ -1,32 +1,23 @@
 :root {
-  /* Premium Color Palette (Indigo & Slate) */
-  --vp-c-brand-1: #4f46e5;
-  --vp-c-brand-2: #4338ca;
-  --vp-c-brand-3: #3730a3;
-  --vp-c-brand-soft: rgba(79, 70, 229, 0.14);
-
-  /* Backgrounds */
+  /* Overrides for Redesigned Palette */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
     120deg,
-    #4f46e5 30%,
-    #ec4899
+    #007aff 30%,
+    #5ac8fa
   );
 
-  /* Feature Cards */
-  --vp-c-bg-soft: #f8fafc;
-  --vp-c-bg-soft-up: #ffffff;
+  /* Feature Cards Glass Styles */
+  --vp-c-bg-soft: rgba(245, 245, 247, 0.4);
+  --vp-c-bg-soft-up: rgba(255, 255, 255, 0.82);
 
-  /* Typography */
-  --vp-font-family-base: "Inter", "Noto Sans TC", system-ui, sans-serif;
-
-  /* Global Layout Expansion - Force Full Width for Wide Screens */
+  /* Layout */
   --vp-layout-max-width: 100% !important;
 }
 
 .dark {
-  --vp-c-bg-soft: #1e293b;
-  --vp-c-bg-soft-up: #334155;
+  --vp-c-bg-soft: rgba(28, 28, 30, 0.5);
+  --vp-c-bg-soft-up: rgba(28, 28, 30, 0.85);
 }
 
 /* Glassmorphism Effect for Feature Cards */
@@ -54,11 +45,11 @@
 /* Custom Hero Button */
 .VPButton.brand {
   border-radius: 30px;
-  background-image: linear-gradient(to right, #4f46e5, #4338ca);
-  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+  background-image: linear-gradient(to right, #007aff, #0051af);
+  box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
 }
 .VPButton.brand:hover {
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.6);
 }
 
 /* Force Layout width overrides to break VitePress default 1152px limit */
@@ -124,7 +115,7 @@ body {
   position: relative;
 }
 
-/* 1. Homepage: Premium Misty Background */
+/* 1. Homepage: Premium Misty Background - Refined */
 body.is-home::before {
   content: "";
   position: fixed;
@@ -132,19 +123,19 @@ body.is-home::before {
   background-image: url('/mdm_hero_premium.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.7;
-  filter: blur(6px) saturate(110%);
+  opacity: 0.6;
+  filter: blur(12px) saturate(140%);
   z-index: -1;
   pointer-events: none;
   transition: opacity 0.8s ease;
 }
 
 .dark body.is-home::before {
-  opacity: 0.8;
-  filter: blur(8px) saturate(100%) brightness(0.6);
+  opacity: 0.7;
+  filter: blur(15px) saturate(110%) brightness(0.4);
 }
 
-/* 2. App Pages: Clean Geometric Background */
+/* 2. App Pages: Professional Geometric Pattern */
 body.is-app::before {
   content: "";
   position: fixed;
@@ -153,18 +144,18 @@ body.is-app::before {
   pointer-events: none;
   background-color: var(--vp-c-bg);
   background-image: 
-    radial-gradient(var(--vp-c-brand-soft) 1px, transparent 1px),
-    radial-gradient(var(--vp-c-brand-soft) 1px, transparent 1px);
+    linear-gradient(rgba(0,122,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,122,255,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
-  opacity: 0.4;
+  background-position: center center;
+  opacity: 0.8;
 }
 
 .dark body.is-app::before {
-  opacity: 0.2;
+  opacity: 0.3;
   background-image: 
-    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
 }
 
 .VPButton {
