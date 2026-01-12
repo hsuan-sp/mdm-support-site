@@ -124,38 +124,19 @@ const toggleSidebar = () => {
 
 <template>
   <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }" :style="{ '--app-scale': fontScale }">
-    <!-- Header Section -->
-    <header class="glossary-header">
-      <h1>零知識術語表</h1>
-      <p class="subtitle">從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。</p>
-    </header>
-
     <div class="app-layout">
-      <!-- 側邊欄切換鈕 (位置固定) -->
-      <button class="global-sidebar-toggle desktop-only" @click="toggleSidebar" :title="isSidebarCollapsed ? '展開側邊欄' : '收合側邊欄'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <path v-if="isSidebarCollapsed" d="M12 9l3 3-3 3"></path>
-          </svg>
-      </button>
-
       <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
       <aside class="app-sidebar desktop-only">
-        <div class="sidebar-header">
-           <h2>篩選與搜尋</h2>
-        </div>
-        
-        <div class="search-box">
-           <span class="search-icon">
-             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-           </span>
-           <input
-             v-model="searchQuery"
-             type="text"
-             placeholder="搜尋術語..."
-             class="search-input"
-           />
+        <div class="sidebar-ctrls">
+            <button class="sidebar-toggle-btn" @click="toggleSidebar" title="收合側邊欄">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+            </button>
+            <div class="search-box">
+               <span class="search-icon">
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+               </span>
+               <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" />
+            </div>
         </div>
 
         <div class="categories-wrapper">
@@ -193,6 +174,21 @@ const toggleSidebar = () => {
       </aside>
 
       <main class="app-content">
+        <!-- 內容頁首：Hero Section 整合進內容區 -->
+        <header class="content-header">
+            <button v-if="isSidebarCollapsed && !isMobileView" class="expand-toggle-btn" @click="toggleSidebar" title="展開篩選器">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><path d="M12 9l3 3-3 3"></path></svg>
+            </button>
+            <div class="header-text-group">
+                <h1 class="hero-title">零知識術語表</h1>
+                <p class="subtitle">從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。</p>
+            </div>
+        </header>
+
+        <div class="view-status-bar">
+            <span class="status-label">{{ selectedCategory === 'All' ? '所有分類' : selectedCategory }}</span>
+            <span class="status-count">共 {{ filteredTerms.length }} 個項目</span>
+        </div>
         <TransitionGroup 
           name="list" 
           tag="div" 
@@ -437,49 +433,71 @@ const toggleSidebar = () => {
 }
 .btn-group-mobile button.active { background: var(--vp-c-brand-1); color: white; }
 
-/* Header */
-.glossary-header {
-  text-align: center;
-  padding: 80px 0 60px; 
-}
+/* Header section refined */
+.glossary-header { display: none; } /* 移動到內容區 */
 
-.glossary-header h1 {
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 800;
+.hero-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 850;
   letter-spacing: -0.03em;
-  margin-bottom: 20px;
-  line-height: 1.2;
+  margin: 0 0 8px 0;
   background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  padding: 0.1em 0; /* 預留溢出空間避免切字 */
-  margin-top: -0.1em; /* 補償 padding 造成的位移 */
 }
 
 .subtitle {
-  font-size: clamp(16px, 2vw, 20px);
+  font-size: 15px;
   color: var(--vp-c-text-2);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
+  margin: 0;
+  line-height: 1.5;
 }
 
 /* 2-Column Layout */
+/* 2-Column Layout Refined */
 .app-layout {
   display: flex;
-  gap: 0;
+  gap: 40px;
   align-items: start;
-  padding-top: 60px; /* 為固定按鈕留出頂部空間 */
+  padding-top: 40px;
   position: relative;
+  max-width: 1400px;
 }
 
-/* 全域切換按鈕：保持固定位置 */
-.global-sidebar-toggle {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    z-index: 150;
+.app-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 內容區頁首細節 */
+.content-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.header-text-group { flex: 1; }
+
+.view-status-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--vp-c-text-3);
+    font-weight: 600;
+}
+
+.status-label {
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
+    padding: 2px 10px;
+    border-radius: 6px;
+}
+
+.expand-toggle-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -488,44 +506,56 @@ const toggleSidebar = () => {
     border-radius: 12px;
     border: 1px solid var(--vp-c-divider);
     background: var(--vp-c-bg-alt);
-    color: var(--vp-c-text-2);
+    color: var(--vp-c-brand-1);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.global-sidebar-toggle:hover {
-    background: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-    transform: scale(1.05);
-}
-
-.glossary-app.sidebar-collapsed .global-sidebar-toggle {
-    color: var(--vp-c-brand-1);
+    flex-shrink: 0;
 }
 
 .app-sidebar {
   position: sticky;
-  top: 80px; 
+  top: 100px; 
   width: 280px;
+  height: calc(100vh - 140px);
   background: var(--vp-c-bg-soft);
-  border-radius: 24px;
+  border-radius: 20px;
   padding: 24px;
   border: 1px solid var(--vp-c-divider);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  margin-right: 48px;
 }
 
 .glossary-app.sidebar-collapsed .app-sidebar {
   width: 0;
-  margin-right: 0;
+  margin-right: -40px;
   opacity: 0;
   padding: 0;
-  border: none;
   pointer-events: none;
+}
+
+.sidebar-ctrls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: var(--vp-c-bg-mute);
+    color: var(--vp-c-text-2);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sidebar-toggle-btn:hover {
+    background: var(--vp-c-brand-soft);
+    color: var(--vp-c-brand-1);
 }
 
 .app-content {

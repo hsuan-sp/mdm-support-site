@@ -115,19 +115,15 @@ const toggleSidebar = () => {
 <template>
   <div class="guide-app" :style="{ '--app-scale': fontScale }" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
     <div class="app-layout">
-      <!-- 側邊欄切換鈕 (位置固定) -->
-      <button class="global-sidebar-toggle" @click="toggleSidebar" :title="isSidebarCollapsed ? '展開側邊欄' : '收合側邊欄'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <path v-if="isSidebarCollapsed" d="M12 9l3 3-3 3"></path>
-          </svg>
-      </button>
-
       <aside class="app-sidebar">
         <div class="sidebar-top">
-            <div class="search-section">
-                <input v-model="searchQuery" type="text" placeholder="搜尋..." class="search-input" />
+            <div class="sidebar-ctrls">
+                <button class="sidebar-toggle-btn" @click="toggleSidebar" title="收合側邊欄">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                </button>
+                <div class="search-section">
+                    <input v-model="searchQuery" type="text" placeholder="搜尋..." class="search-input" />
+                </div>
             </div>
             <nav class="nav-menu">
                 <button 
@@ -154,9 +150,16 @@ const toggleSidebar = () => {
       </aside>
 
       <main class="app-content">
+        <!-- 頂部標題與切換鈕行 -->
+        <header class="content-header">
+            <button v-if="isSidebarCollapsed" class="expand-toggle-btn" @click="toggleSidebar" title="展開側邊欄">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><path d="M12 9l3 3-3 3"></path></svg>
+            </button>
+            <h2 class="title-text">{{ searchQuery ? '搜尋結果：' + searchQuery : currentModule?.source }}</h2>
+        </header>
+
         <!-- 搜尋模式 -->
         <div v-if="searchQuery" class="result-container">
-            <h2 class="title-text">搜尋結果：{{ searchQuery }}</h2>
             <div v-for="group in searchResults" :key="group.source" class="module-group">
                 <h3 class="group-label">{{ group.source }}</h3>
                 <div v-for="item in group.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
@@ -175,7 +178,6 @@ const toggleSidebar = () => {
 
         <!-- 模組瀏覽模式 -->
         <div v-else class="module-view">
-            <h2 class="title-text">{{ currentModule?.source }}</h2>
             <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
                 <h3 class="section-label">{{ section.title }}</h3>
                 <div v-for="item in section.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
@@ -224,189 +226,189 @@ const toggleSidebar = () => {
     line-height: 1.6;
 }
 
-/* 主要内容區域 */
+/* 主要內容區域 */
 .app-content {
     flex: 1;
     min-width: 0;
+    max-width: 920px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 佈局：電腦版固定側邊欄 */
 .app-layout { 
     display: flex; 
-    gap: 0; 
+    gap: 48px; 
     align-items: start;
-    padding-top: 60px; /* 為固定按鈕留出頂部空間 */
+    padding-top: 40px;
     position: relative;
-    max-width: 1200px;
+    max-width: 1260px;
 }
 
-/* 全域切換按鈕：保持固定位置 */
-.global-sidebar-toggle {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    z-index: 150;
+/* 統一頁首樣式 */
+.content-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    min-height: 48px;
+}
+
+.title-text { 
+    font-size: 2.2em; 
+    margin: 0; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: var(--vp-c-text-1);
+}
+
+/* 展開切換鈕 */
+.expand-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg-alt);
+    color: var(--vp-c-brand-1);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.expand-toggle-btn:hover {
+    background: var(--vp-c-bg-mute);
+    transform: scale(1.05);
+}
+
+@media (max-width: 900px) { 
+    .app-layout { display: block; padding-top: 10px; } 
+    .app-sidebar { display: none !important; } 
+    .content-header { gap: 10px; margin-bottom: 20px; }
+    .title-text { font-size: 1.8em; }
+}
+
+/* 側邊欄視覺與固定邏輯 */
+.app-sidebar { 
+    position: sticky; 
+    top: 100px; 
+    width: 280px;
+    height: calc(100vh - 140px); 
+    display: flex; 
+    flex-direction: column;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s,
+                margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.guide-app.sidebar-collapsed .app-sidebar {
+    width: 0;
+    margin-right: -48px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar-ctrls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.sidebar-toggle-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    border: 1px solid var(--vp-c-divider);
-    background: var(--vp-c-bg-alt);
+    border: none;
+    background: var(--vp-c-bg-mute);
     color: var(--vp-c-text-2);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
 
-.global-sidebar-toggle:hover {
+.sidebar-toggle-btn:hover {
     background: var(--vp-c-brand-soft);
     color: var(--vp-c-brand-1);
-    transform: scale(1.05);
 }
-
-.guide-app.sidebar-collapsed .global-sidebar-toggle {
-    /* 即使側邊欄消失，按鈕也留在原地 (left: 0) */
-    color: var(--vp-c-brand-1);
-}
-
-@media (max-width: 900px) { 
-    .app-layout { display: block; padding-top: 0; } 
-    .app-sidebar { display: none !important; } 
-    .global-sidebar-toggle { display: none !important; }
-}
-
-/* 側邊欄視覺與固定邏輯 */
-.app-sidebar { 
-    position: sticky; 
-    top: 80px; 
-    width: 280px;
-    height: calc(100vh - 120px); 
-    display: flex; 
-    flex-direction: column;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s;
-    overflow: hidden;
-    background: transparent;
-}
-
-.guide-app.sidebar-collapsed .app-sidebar {
-    width: 0;
-    opacity: 0;
-    padding: 0;
-    pointer-events: none;
-}
-
-.sidebar-top { flex: 1; display: flex; flex-direction: column; min-height: 0; margin-top: 10px; }
 
 .sidebar-top { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-.nav-menu { flex: 1; overflow-y: auto; margin: 10px 0; padding-right: 8px; }
+.nav-menu { flex: 1; overflow-y: auto; margin-top: 8px; padding-right: 8px; }
 
 /* 滾動條樣式 */
 .nav-menu::-webkit-scrollbar { width: 4px; }
 .nav-menu::-webkit-scrollbar-thumb { background: var(--vp-c-divider); border-radius: 4px; }
 
 .sidebar-bottom { 
-    padding-top: 20px; 
+    padding-top: 24px; 
+    margin-top: 8px;
     border-top: 1px solid var(--vp-c-divider); 
 }
 
 .search-input { 
     width: 100%; 
-    padding: 12px; 
+    padding: 10px 16px; 
     border-radius: 10px; 
     border: 1px solid var(--vp-c-divider); 
-    margin-bottom: 5px; 
     background: var(--vp-c-bg-soft); 
     font-size: 0.9em;
+    color: var(--vp-c-text-1);
+    transition: border-color 0.2s;
 }
+.search-input:focus { border-color: var(--vp-c-brand-1); outline: none; }
 
 .nav-item { 
     display: flex; justify-content: space-between; align-items: center;
-    width: 100%; text-align: left; padding: 12px 16px; border: none; 
-    background: transparent; cursor: pointer; border-radius: 12px; margin-bottom: 4px;
-    font-size: 0.9em; color: var(--vp-c-text-2); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%; text-align: left; padding: 10px 14px; border: none; 
+    background: transparent; cursor: pointer; border-radius: 10px; margin-bottom: 4px;
+    font-size: 0.9em; color: var(--vp-c-text-2); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-item:hover { background: var(--vp-c-bg-mute); color: var(--vp-c-text-1); transform: translateX(4px); }
 .nav-item.active { background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); font-weight: 700; }
 
-.nav-text {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-right: 10px;
-}
+.nav-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px; }
+.nav-count { font-size: 11px; background: var(--vp-c-bg-alt); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--vp-c-divider); transition: all 0.2s; }
 
-.nav-count {
-    font-size: 11px;
-    background: var(--vp-c-bg-alt);
-    padding: 2px 8px;
-    border-radius: 10px;
-    min-width: 28px;
-    text-align: center;
-    border: 1px solid var(--vp-c-divider);
-    color: var(--vp-c-text-3);
-    transition: all 0.2s;
-}
-.nav-item.active .nav-count {
-    border-color: var(--vp-c-brand-1);
-    color: var(--vp-c-brand-1);
-    background: white;
-}
+.nav-item.active .nav-count { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
 
 /* 側邊欄字體控制 */
 .font-controls { display: flex; flex-direction: column; gap: 8px; }
-.ctrl-label { font-size: 0.75em; color: var(--vp-c-text-3); font-weight: 600; text-transform: uppercase; }
+.ctrl-label { font-size: 0.75em; color: var(--vp-c-text-3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 .btn-group { display: flex; gap: 2px; background: var(--vp-c-bg-soft); padding: 3px; border-radius: 8px; border: 1px solid var(--vp-c-divider); }
 .btn-group button { 
     flex: 1; padding: 6px; border: none; background: transparent; border-radius: 6px; 
-    cursor: pointer; font-size: 0.8em; transition: 0.2s; color: var(--vp-c-text-2);
+    cursor: pointer; font-size: 0.85em; transition: 0.2s; color: var(--vp-c-text-2); font-weight: 600;
 }
-.btn-group button.active { background: var(--vp-c-bg); color: var(--vp-c-brand-1); box-shadow: 0 2px 6px rgba(0,0,0,0.06); font-weight: 700; }
+.btn-group button.active { background: var(--vp-c-bg); color: var(--vp-c-brand-1); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
 
 /* 問答卡片 */
-.qa-item { border: 1px solid var(--vp-c-divider); border-radius: 12px; margin-bottom: 15px; overflow: hidden; background: var(--vp-c-bg-alt); transition: 0.3s; }
-.qa-item.open { border-color: var(--vp-c-brand-1); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.qa-trigger { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
-.q-main { display: flex; align-items: flex-start; gap: 10px; flex: 1; }
-.q-text { font-size: 1.1em; font-weight: 700; line-height: 1.4; color: var(--vp-c-text-1); }
-.imp-tag { font-size: 0.7em; background: #ff3b30; color: white; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
-.arrow { color: var(--vp-c-text-3); transition: 0.3s; }
+.qa-item { border: 1px solid var(--vp-c-divider); border-radius: 16px; margin-bottom: 16px; overflow: hidden; background: var(--vp-c-bg-alt); transition: all 0.3s; }
+.qa-item.open { border-color: var(--vp-c-brand-1); box-shadow: 0 4px 20px rgba(0,0,0,0.06); transform: translateY(-2px); }
+.qa-trigger { padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.q-main { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
+.q-text { font-size: 1.15em; font-weight: 700; line-height: 1.45; color: var(--vp-c-text-1); }
+.imp-tag { font-size: 0.75em; background: #ff3b30; color: white; padding: 2px 8px; border-radius: 6px; flex-shrink: 0; font-weight: 800; margin-top: 2px; }
+.arrow { color: var(--vp-c-text-3); transition: transform 0.3s; margin-top: 4px; }
 .qa-item.open .arrow { transform: rotate(180deg); color: var(--vp-c-brand-1); }
 
 /* 內容樣式 */
-.qa-content { padding: 0 24px 24px; border-top: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); }
-.markdown-body { 
-    font-size: 1.05em; line-height: 1.8; color: var(--vp-c-text-1); 
-    padding-top: 24px;
-}
-.markdown-body :deep(p) { margin-bottom: 1.5em; }
-.markdown-body :deep(ul), .markdown-body :deep(ol) { margin-bottom: 1.5em; padding-left: 1.5em; }
-.markdown-body :deep(li) { margin-bottom: 0.8em; }
-.markdown-body :deep(li:last-child) { margin-bottom: 0; }
+.qa-content { padding: 0 24px 32px; border-top: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); }
+.markdown-body { font-size: 1.05em; line-height: 1.8; color: var(--vp-c-text-1); padding-top: 24px; }
 .markdown-body :deep(strong) { color: var(--vp-c-brand-1); font-weight: 800; }
-.markdown-body :deep(blockquote) { 
-    margin: 1.5em 0; padding: 12px 20px; 
-    border-left: 4px solid var(--vp-c-brand-1); 
-    background: var(--vp-c-bg-alt); 
-    border-radius: 4px;
-}
-.markdown-body :deep(blockquote p) { margin-bottom: 0; }
+.markdown-body :deep(blockquote) { margin: 1.5em 0; padding: 12px 24px; border-left: 4px solid var(--vp-c-brand-1); background: var(--vp-c-bg-alt); border-radius: 8px; }
 
-.tags { margin-top: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
-.tag { font-size: 0.8em; color: var(--vp-c-text-3); font-style: italic; }
-
-.section-label { font-size: 1.5em; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--vp-c-divider); font-weight: 800; line-height: 1.4; }
-.title-text { font-size: 2em; margin: 0 0 30px 0; font-weight: 800; line-height: 1.2; }
+.section-label { font-size: 1.6em; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid var(--vp-c-divider); font-weight: 800; color: var(--vp-c-text-1); }
 
 /* 行動版 */
 .mobile-menu-btn { 
-    position: fixed; bottom: 20px; right: 20px; z-index: 100; padding: 12px 24px;
-    background: var(--vp-c-brand-1); color: white; border-radius: 50px; border: none; font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: none;
+    position: fixed; bottom: 24px; right: 24px; z-index: 100; padding: 14px 28px;
+    background: var(--vp-c-brand-1); color: white; border-radius: 100px; border: none; font-weight: 700;
+    box-shadow: 0 8px 25px rgba(0,113,227,0.3); display: none;
 }
 @media (max-width: 900px) { .mobile-menu-btn { display: block; } }
 
