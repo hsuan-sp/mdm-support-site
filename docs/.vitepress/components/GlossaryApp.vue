@@ -3,7 +3,7 @@ import { ref, computed, onMounted, nextTick, watch, onUnmounted } from "vue";
 import { glossaryData } from "../../data/glossary";
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
-import AppSidebar from './ui/AppSidebar.vue';
+import AppSidebar from './AppSidebar.vue';
 
 const { isMobileView } = useLayoutMode();
 const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-glossary');

@@ -5,7 +5,7 @@ import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { allQAData } from "../../data/all-data";
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
-import AppSidebar from './ui/AppSidebar.vue';
+import AppSidebar from './AppSidebar.vue';
 
 const route = useRoute();
 
