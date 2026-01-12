@@ -26,6 +26,7 @@ const searchQuery = ref("");
 const activeSource = ref(allQAData[0].source);
 const isSidebarOpen = ref(false);
 const fontScale = ref(1); // 使用比例來控制全域大小
+const isSidebarCollapsed = ref(false); // 側邊欄是否收合
 
 const handleHashChange = () => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
@@ -98,16 +99,29 @@ watch(fontScale, (val) => {
 });
 
 onMounted(() => {
-  const saved = localStorage.getItem('mdm-qa-font-scale');
-  if (saved) fontScale.value = parseFloat(saved);
+  const savedScale = localStorage.getItem('mdm-qa-font-scale');
+  if (savedScale) fontScale.value = parseFloat(savedScale);
+
+  const savedCollapsed = localStorage.getItem('mdm-qa-sidebar-collapsed');
+  if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
 });
+
+const toggleSidebar = () => {
+  isSidebarCollapsed.value = !isSidebarCollapsed.value;
+  localStorage.setItem('mdm-qa-sidebar-collapsed', isSidebarCollapsed.value.toString());
+};
 </script>
 
 <template>
-  <div class="guide-app" :style="{ '--app-scale': fontScale }">
+  <div class="guide-app" :style="{ '--app-scale': fontScale }" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
     <div class="app-layout">
       <!-- 重新設計的側邊欄：加入統計數字 -->
       <aside class="app-sidebar">
+        <!-- 收合按鈕 -->
+        <button class="collapse-toggle" @click="toggleSidebar" :title="isSidebarCollapsed ? '展開側邊欄' : '收合側邊欄'">
+          <svg v-if="isSidebarCollapsed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+          <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+        </button>
         <div class="sidebar-top">
             <div class="search-section">
                 <input v-model="searchQuery" type="text" placeholder="🔍 搜尋問答..." class="search-input" />
@@ -215,11 +229,18 @@ onMounted(() => {
     gap: 40px; 
     align-items: start;
     padding-top: 20px;
+    transition: grid-template-columns 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.guide-app.sidebar-collapsed .app-layout {
+    grid-template-columns: 20px 1fr;
+    gap: 20px;
 }
 
 @media (max-width: 900px) { 
-    .app-layout { grid-template-columns: 1fr; } 
-    .app-sidebar { display: none; } 
+    .app-layout { grid-template-columns: 1fr !important; gap: 20px; } 
+    .app-sidebar { display: none !important; } 
+    .guide-app.sidebar-collapsed .app-layout { grid-template-columns: 1fr !important; }
 }
 
 /* 側邊欄視覺與固定邏輯 */
@@ -229,6 +250,46 @@ onMounted(() => {
     height: calc(100vh - 120px); 
     display: flex; 
     flex-direction: column;
+    transition: transform 0.4s, opacity 0.3s;
+}
+
+.guide-app.sidebar-collapsed .app-sidebar {
+    transform: translateX(-240px);
+    opacity: 0.2;
+}
+
+.guide-app.sidebar-collapsed .app-sidebar:hover {
+    opacity: 1;
+}
+
+/* 收合按鈕 */
+.collapse-toggle {
+    position: absolute;
+    right: -12px;
+    top: 10px;
+    width: 24px;
+    height: 24px;
+    background: var(--vp-c-bg-alt);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    color: var(--vp-c-text-3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.collapse-toggle:hover {
+    color: var(--vp-c-brand-1);
+    transform: scale(1.1);
+    background: var(--vp-c-bg);
+}
+
+.guide-app.sidebar-collapsed .collapse-toggle {
+    right: -32px;
 }
 
 .sidebar-top { flex: 1; display: flex; flex-direction: column; min-height: 0; }

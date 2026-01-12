@@ -11,6 +11,7 @@ const selectedCategory = ref<CategoryType | "All">("All");
 const sortOrder = ref<'asc' | 'desc'>('asc'); // 新增排序狀態
 const isControlsExpanded = ref(false); // 控制搜尋工具的展開/收起，預設收起
 const fontScale = ref(1.0); // 術語表獨立的字體比例
+const isSidebarCollapsed = ref(false); // 側邊欄是否收合
 
 const categories = [
   "All",
@@ -79,8 +80,11 @@ watch(fontScale, (val) => {
 });
 
 onMounted(async () => {
-  const saved = localStorage.getItem('mdm-glossary-font-scale');
-  if (saved) fontScale.value = parseFloat(saved);
+  const savedScale = localStorage.getItem('mdm-glossary-font-scale');
+  if (savedScale) fontScale.value = parseFloat(savedScale);
+
+  const savedCollapsed = localStorage.getItem('mdm-glossary-sidebar-collapsed');
+  if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
 
   await nextTick();
   
@@ -110,11 +114,16 @@ const getCategoryCount = (cat: string) => {
   ).length;
 };
 
+const toggleSidebar = () => {
+  isSidebarCollapsed.value = !isSidebarCollapsed.value;
+  localStorage.setItem('mdm-glossary-sidebar-collapsed', isSidebarCollapsed.value.toString());
+};
+
 
 </script>
 
 <template>
-  <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView }" :style="{ '--app-scale': fontScale }">
+  <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }" :style="{ '--app-scale': fontScale }">
     <!-- Header Section -->
     <header class="glossary-header">
       <h1>零知識術語表</h1>
@@ -124,6 +133,11 @@ const getCategoryCount = (cat: string) => {
     <div class="app-layout">
       <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
       <aside class="app-sidebar desktop-only">
+        <!-- 收合按鈕 -->
+        <button class="collapse-toggle" @click="toggleSidebar" :title="isSidebarCollapsed ? '展開側邊欄' : '收合側邊欄'">
+          <svg v-if="isSidebarCollapsed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+          <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+        </button>
         <div class="sidebar-header">
            <h2>篩選與搜尋</h2>
         </div>
@@ -454,6 +468,12 @@ const getCategoryCount = (cat: string) => {
   grid-template-columns: 280px 1fr;
   gap: 48px;
   align-items: start;
+  transition: grid-template-columns 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glossary-app.sidebar-collapsed .app-layout {
+  grid-template-columns: 20px 1fr;
+  gap: 20px;
 }
 
 .app-sidebar {
@@ -463,6 +483,46 @@ const getCategoryCount = (cat: string) => {
   border-radius: 24px;
   padding: 24px;
   border: 1px solid var(--vp-c-divider);
+  transition: transform 0.4s, opacity 0.3s;
+}
+
+.glossary-app.sidebar-collapsed .app-sidebar {
+  transform: translateX(-260px);
+  opacity: 0.2;
+}
+
+.glossary-app.sidebar-collapsed .app-sidebar:hover {
+  opacity: 1;
+}
+
+/* 收合按鈕 */
+.collapse-toggle {
+    position: absolute;
+    right: -12px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    background: var(--vp-c-bg-alt);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    color: var(--vp-c-text-3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.collapse-toggle:hover {
+    color: var(--vp-c-brand-1);
+    transform: scale(1.1);
+    background: var(--vp-c-bg);
+}
+
+.glossary-app.sidebar-collapsed .collapse-toggle {
+    right: -32px;
 }
 
 .app-content {
