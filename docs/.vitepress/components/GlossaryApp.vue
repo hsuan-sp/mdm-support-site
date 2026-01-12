@@ -159,9 +159,7 @@ const getCategoryCount = (cat: string) => {
       <main class="app-content">
         <!-- 內容頁首：頂部控制行 -->
         <header class="content-header">
-            <button v-if="isSidebarCollapsed && !isMobileView" class="expand-toggle-btn" @click="toggleSidebar" title="展開篩選器">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><path d="M12 9l3 3-3 3"></path></svg>
-            </button>
+
             <div class="view-status-bar">
                 <span class="status-label">{{ selectedCategory === 'All' ? '所有分類' : selectedCategory }}</span>
                 <span class="status-count">共 {{ filteredTerms.length }} 個術語</span>
@@ -453,19 +451,7 @@ const getCategoryCount = (cat: string) => {
     border-radius: 6px;
 }
 
-.expand-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid var(--vp-c-divider);
-    background: var(--vp-c-bg-alt);
-    color: var(--vp-c-brand-1);
-    cursor: pointer;
-    flex-shrink: 0;
-}
+
 
 
 

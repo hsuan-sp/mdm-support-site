@@ -172,9 +172,7 @@ const switchModule = (source: string | "All") => {
       <main class="app-content">
         <!-- 頂部標題與切換鈕行 -->
         <header class="content-header">
-            <button v-if="isSidebarCollapsed" class="expand-toggle-btn" @click="toggleSidebar" title="展開側邊欄">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><path d="M12 9l3 3-3 3"></path></svg>
-            </button>
+
             <h2 class="title-text">{{ searchQuery ? '搜尋結果：' + searchQuery : currentModule?.source }}</h2>
         </header>
 
@@ -308,31 +306,13 @@ const switchModule = (source: string | "All") => {
     color: var(--vp-c-text-1);
 }
 
-/* 展開切換鈕 */
-.expand-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid var(--vp-c-divider);
-    background: var(--vp-c-bg-alt);
-    color: var(--vp-c-brand-1);
-    cursor: pointer;
-    transition: all 0.2s;
-    flex-shrink: 0;
-}
 
-.expand-toggle-btn:hover {
-    background: var(--vp-c-bg-mute);
-    transform: scale(1.05);
-}
 
 @media (max-width: 900px) { 
     .app-layout { display: block; padding-top: 10px; } 
     .app-sidebar { display: none !important; } 
     .content-header { gap: 10px; margin-bottom: 20px; }
+}
 
 
 /* 側邊欄視覺與固定邏輯 */
