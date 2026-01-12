@@ -3,12 +3,13 @@ import { ref, onMounted, computed } from 'vue';
 import { useLayoutMode } from '../composables/useLayoutMode';
 import { useData, useRouter } from 'vitepress';
 
+import { useAuth } from '../composables/useAuth';
+
 const { isMobileView } = useLayoutMode();
 const { isDark, theme } = useData();
+const { user, isGuest, username, checkAuth, logout } = useAuth();
 const router = useRouter();
 
-const user = ref<string | null>(null);
-const isGuest = ref(false);
 const isMenuOpen = ref(false);
 const expandedNav = ref<number | null>(null);
 const fontSizeScale = ref(1.0);
@@ -26,30 +27,9 @@ const toggleNav = (index: any) => {
     expandedNav.value = expandedNav.value === index ? null : index;
 };
 
-// (applyFontSize removed as requested)
-
 // Ensure user is always set for consistent UI
 onMounted(async () => {
-  // (localStorage font loading removed from global context)
-
-  try {
-// ... (後續原有的 Auth 邏輯)
-    const res = await fetch('/auth/me');
-    if (res.ok) {
-        const data = await res.json();
-        if (data.email) {
-            user.value = data.email;
-            isGuest.value = false;
-        } else {
-            throw new Error();
-        }
-    } else {
-        throw new Error();
-    }
-  } catch (e) {
-    user.value = 'sample@edu.tw';
-    isGuest.value = true;
-  }
+    await checkAuth();
 });
 
 const toggleDarkMode = () => {
@@ -58,13 +38,6 @@ const toggleDarkMode = () => {
   html.classList.toggle('dark');
   const newValue = html.classList.contains('dark');
   localStorage.setItem('vitepress-theme-appearance', newValue ? 'dark' : 'light');
-};
-
-const logout = () => {
-    if (isGuest.value) return;
-    if (confirm('確定要登出系統嗎？')) {
-        location.href = '/auth/logout';
-    }
 };
 </script>
 
@@ -85,7 +58,7 @@ const logout = () => {
         <div class="divider"></div>
 
         <div class="user-info" v-if="user">
-            <span class="username">{{ (user || '').split('@')[0] }}</span>
+            <span class="username">{{ username }}</span>
             <button v-if="!isGuest" @click="logout" class="logout-link">登出</button>
         </div>
     </div>
@@ -168,7 +141,7 @@ const logout = () => {
                         <!-- User Info moved to Footer -->
                         <div class="user-detail-footer">
                             <div class="current-user-label">目前登入</div>
-                            <div class="name">{{ user ? (user || '').split('@')[0] : '訪客' }}</div>
+                            <div class="name">{{ username }}</div>
                         </div>
 
                         <button v-if="!isGuest" class="logout-btn-full" @click="logout">登出帳號</button>
