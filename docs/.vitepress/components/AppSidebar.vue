@@ -1,14 +1,28 @@
-<script setup lang="ts">
-import { ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-defineProps<{
-  title: string;
-  isOpen: boolean;
-}>();
-
-const emit = defineEmits(['toggle', 'close', 'update:scale']);
-
-const fontScale = ref(1.0); // Manage locally or pass as prop if needed globally
+export default defineComponent({
+  name: 'AppSidebar',
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    isOpen: {
+      type: Boolean,
+      required: true
+    }
+  },
+  emits: ['toggle', 'close', 'update:scale'],
+  setup(props, { emit }) {
+    const fontScale = ref(1.0);
+    
+    return {
+      fontScale,
+      emit
+    };
+  }
+});
 </script>
 
 <template>
