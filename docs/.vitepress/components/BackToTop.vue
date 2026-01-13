@@ -25,14 +25,10 @@ onUnmounted(() => {
 
 <template>
   <transition name="slide-fade">
-    <button
-      v-if="visible"
-      class="back-to-top"
-      aria-label="返回頂部"
-      @click="scrollToTop"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 15l-6-6-6 6"/>
+    <button v-if="visible" class="back-to-top" aria-label="返回頂部" @click="scrollToTop">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6" />
       </svg>
     </button>
   </transition>
@@ -47,18 +43,30 @@ onUnmounted(() => {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #0071e3; /* Original Blue */
+  background: #0071e3;
+  /* Original Blue */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex !important; /* Force visible */
+  display: flex !important;
+  /* Force visible */
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 90; /* Lower than UserCenter drawer */
+  z-index: 90;
+  /* Lower than UserCenter drawer */
   box-shadow: 0 4px 12px rgba(0, 113, 227, 0.4);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (max-width: 640px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .back-to-top svg {
@@ -81,8 +89,8 @@ onUnmounted(() => {
 /* Smooth Slide Fade Transition */
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .slide-fade-enter-from {

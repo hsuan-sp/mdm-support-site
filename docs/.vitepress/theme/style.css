@@ -113,8 +113,10 @@ textarea,
     cursor: text;
 }
 
-/* HIDE Default VitePress "Return to Top" link/text */
-.VPBackToTop {
+/* HIDE Default VitePress "Return to Top" link/text on both desktop and mobile */
+.VPBackToTop,
+.VPLocalNav-top-link,
+.VPLocalNav .top-link {
   display: none !important;
 }
 

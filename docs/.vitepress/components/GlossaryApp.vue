@@ -254,7 +254,7 @@ const getCategoryCount = (cat: string) => {
   display: none;
   position: fixed;
   bottom: 32px;
-  right: 24px;
+  left: 24px;
   background: var(--vp-c-brand-1);
   color: white;
   border: none;

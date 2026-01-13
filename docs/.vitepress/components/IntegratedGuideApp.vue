@@ -449,7 +449,7 @@ const switchModule = (source: string | "All") => {
 .mobile-menu-btn {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  left: 24px;
   z-index: 100;
   padding: 14px 28px;
   background: var(--vp-c-brand-1);
