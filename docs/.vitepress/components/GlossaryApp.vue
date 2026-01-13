@@ -31,10 +31,13 @@ const categories = [
 
 const filteredTerms = computed(() => {
   let filtered = glossaryData.filter((item) => {
-    const matchesSearch =
-      item.term.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.definition.includes(searchQuery.value) ||
-      item.analogy.includes(searchQuery.value);
+    const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
+
+    const matchesSearch = queries.every(q => {
+      return item.term.toLowerCase().includes(q) ||
+        item.definition.toLowerCase().includes(q) ||
+        item.analogy.toLowerCase().includes(q);
+    });
 
     // 修復: 處理category為數組的情況
     const currentCategory = selectedCategory.value;
@@ -69,10 +72,24 @@ const toggleSort = () => {
   sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
 };
 
-
+// Keyboard shortcuts
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === '/' && (e.target as HTMLElement).tagName !== 'INPUT') {
+    e.preventDefault();
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    searchInput?.focus();
+  }
+  if (e.key === 'Escape') {
+    if (searchQuery.value) {
+      searchQuery.value = '';
+    } else if (isControlsExpanded.value) {
+      isControlsExpanded.value = false;
+    }
+  }
+};
 
 onMounted(async () => {
-
+  window.addEventListener('keydown', handleKeyDown);
   await nextTick();
 
   const observer = new IntersectionObserver(
@@ -89,6 +106,11 @@ onMounted(async () => {
   document.querySelectorAll('.term-card').forEach((el) => {
     observer.observe(el);
   });
+});
+
+import { onUnmounted } from 'vue';
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown);
 });
 
 
@@ -125,7 +147,7 @@ const getCategoryCount = (cat: string) => {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </span>
-            <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" />
+            <input v-model="searchQuery" type="text" placeholder="搜尋術語... (按 / 聚焦)" class="search-input" />
           </div>
         </template>
 

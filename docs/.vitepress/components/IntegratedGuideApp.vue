@@ -24,8 +24,6 @@ const getChapterCount = (source: string) => {
 const searchQuery = ref("");
 const activeSource = ref<string | "All">("All");
 const isSidebarOpen = ref(false);
-// const fontScale = ref(1); // Replaced by composable
-// const isSidebarCollapsed = ref(false); // Replaced by composable
 const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-qa');
 
 const handleHashChange = () => {
@@ -55,14 +53,46 @@ const handleHashChange = () => {
 
 const searchResults = computed(() => {
   if (!searchQuery.value.trim()) return null;
-  const query = searchQuery.value.trim().toLowerCase();
-  const results: { source: string, items: QAItem[] }[] = [];
+  const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
+  const results: { source: string, items: (QAItem & { relevance: number })[] }[] = [];
+
   allQAData.forEach(file => {
-    const matches: QAItem[] = [];
+    const matches: (QAItem & { relevance: number })[] = [];
     file.sections.forEach(s => s.items.forEach(i => {
-      if ((i.question + i.answer).toLowerCase().includes(query)) matches.push({ ...i, tags: [...i.tags, file.source] });
+      let relevance = 0;
+      const tags = i.tags.join(' ').toLowerCase();
+
+      const allMatch = queries.every(q => {
+        let match = false;
+        if (i.question.toLowerCase().includes(q)) {
+          relevance += 10;
+          match = true;
+        }
+        if (tags.includes(q)) {
+          relevance += 5;
+          match = true;
+        }
+        if (i.answer.toLowerCase().includes(q)) {
+          relevance += 1;
+          match = true;
+        }
+        return match;
+      });
+
+      if (allMatch) {
+        matches.push({
+          ...i,
+          tags: [...i.tags, file.source],
+          relevance
+        });
+      }
     }));
-    if (matches.length) results.push({ source: file.source, items: matches });
+
+    if (matches.length) {
+      // Sort matches by relevance
+      matches.sort((a, b) => b.relevance - a.relevance);
+      results.push({ source: file.source, items: matches });
+    }
   });
   return results;
 });
@@ -97,7 +127,6 @@ const renderMarkdown = (text: string) => {
   let cleaned = lines.map(line => line.slice(minIndent)).join('\n').trim();
 
   // 優化排版：僅針對 Markdown 解析必須的「列表前置空行」做補強
-  // 這樣您在內文中「有沒有空行」就會直接反映在畫面上
   let processed = cleaned
     .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
     .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
@@ -105,17 +134,32 @@ const renderMarkdown = (text: string) => {
   return md.render(processed);
 };
 
-
-
+// Keyboard shortcuts
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === '/' && (e.target as HTMLElement).tagName !== 'INPUT') {
+    e.preventDefault();
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    searchInput?.focus();
+  }
+  if (e.key === 'Escape') {
+    if (searchQuery.value) {
+      searchQuery.value = '';
+    } else if (isSidebarOpen.value) {
+      isSidebarOpen.value = false;
+    }
+  }
+};
 
 onMounted(() => {
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
+  window.addEventListener('keydown', handleKeyDown);
   // Body class added by useAppFeatures
 });
 
 onUnmounted(() => {
   window.removeEventListener('hashchange', handleHashChange);
+  window.removeEventListener('keydown', handleKeyDown);
 });
 
 const switchModule = (source: string | "All") => {
@@ -136,7 +180,7 @@ const switchModule = (source: string | "All") => {
         @update:scale="val => fontScale = val">
         <template #search>
           <div class="search-section">
-            <input v-model="searchQuery" type="text" placeholder="搜尋..." class="search-input" />
+            <input v-model="searchQuery" type="text" placeholder="搜尋... (按 / 聚焦)" class="search-input" />
           </div>
         </template>
 
@@ -164,19 +208,27 @@ const switchModule = (source: string | "All") => {
 
         <!-- 搜尋模式 -->
         <div v-if="searchQuery" class="result-container">
-          <div v-for="group in searchResults" :key="group.source" class="module-group">
-            <h3 class="group-label">{{ group.source }}</h3>
-            <div v-for="item in group.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
-              <div class="qa-trigger" @click="toggleItem(item.id)">
-                <span v-if="item.important" class="imp-tag">重要</span>
-                <span class="q-text">{{ item.question }}</span>
-                <span class="arrow">▼</span>
-              </div>
-              <div v-if="openItems.has(item.id)" class="qa-content">
-                <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
-                <div class="tags"><span v-for="t in item.tags" :key="t" class="tag">#{{ t }}</span></div>
+          <div v-if="searchResults && searchResults.length > 0">
+            <div v-for="group in searchResults" :key="group.source" class="module-group">
+              <h3 class="group-label">{{ group.source }}</h3>
+              <div v-for="item in group.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
+                <div class="qa-trigger" @click="toggleItem(item.id)">
+                  <span v-if="item.important" class="imp-tag">重要</span>
+                  <span class="q-text">{{ item.question }}</span>
+                  <span class="arrow">▼</span>
+                </div>
+                <div v-if="openItems.has(item.id)" class="qa-content">
+                  <div class="markdown-body" v-html="renderMarkdown(item.answer)"></div>
+                  <div class="tags"><span v-for="t in item.tags" :key="t" class="tag">#{{ t }}</span></div>
+                </div>
               </div>
             </div>
+          </div>
+          <div v-else class="empty-results">
+            <div class="empty-icon">🔍</div>
+            <h3>找不到相關結果</h3>
+            <p>請嘗試使用不同的關鍵字，或者檢查拼字是否正確。</p>
+            <button @click="searchQuery = ''" class="clear-btn">清除搜尋</button>
           </div>
         </div>
 
@@ -619,5 +671,47 @@ const switchModule = (source: string | "All") => {
 :global(.slide-up-enter-from .mobile-nav-content),
 :global(.slide-up-leave-to .mobile-nav-content) {
   transform: translateY(100%);
+}
+
+/* Empty Results */
+.empty-results {
+  text-align: center;
+  padding: 80px 24px;
+  background: var(--vp-c-bg-alt);
+  border-radius: 24px;
+  border: 1px dashed var(--vp-c-divider);
+  margin-top: 40px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.empty-results h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.empty-results p {
+  color: var(--vp-c-text-3);
+  margin-bottom: 24px;
+}
+
+.clear-btn {
+  padding: 10px 24px;
+  background: var(--vp-c-brand-1);
+  color: white;
+  border-radius: 99px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
 }
 </style>
