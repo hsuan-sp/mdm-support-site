@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch, onUnmounted } from "vue";
-import { useRoute } from "vitepress";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { allQAData } from "../../data/all-data";
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
 import AppSidebar from './AppSidebar.vue';
-
-const route = useRoute();
 
 const md = new MarkdownIt({
   html: true,

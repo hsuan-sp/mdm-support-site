@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch, onUnmounted } from "vue";
+import { ref, computed, onMounted, nextTick } from "vue";
 import { glossaryData } from "../../data/glossary";
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
@@ -67,11 +67,6 @@ const getCategoryColor = (cat: string) => {
 // 切換排序順序
 const toggleSort = () => {
   sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
-};
-
-// 切換搜尋工具展開/收起
-const toggleControls = () => {
-  isControlsExpanded.value = !isControlsExpanded.value;
 };
 
 

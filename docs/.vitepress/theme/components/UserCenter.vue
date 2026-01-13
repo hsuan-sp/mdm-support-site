@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useLayoutMode } from '../composables/useLayoutMode';
 import { useData, useRouter } from 'vitepress';
 
 import { useAuth } from '../composables/useAuth';
 
-const { isMobileView } = useLayoutMode();
+useLayoutMode();
 const { isDark, theme } = useData();
 const { user, isGuest, username, checkAuth, logout } = useAuth();
 const router = useRouter();
 
 const isMenuOpen = ref(false);
 const expandedNav = ref<number | null>(null);
-const fontSizeScale = ref(1.0);
 
 const handleLinkClick = (e: Event, link: string) => {
     isMenuOpen.value = false;

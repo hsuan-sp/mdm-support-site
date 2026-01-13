@@ -9,7 +9,12 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/superinfo_favicon.jpeg' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap', rel: 'stylesheet' }]
+    ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap', rel: 'stylesheet' }],
+    ['meta', { name: 'keywords', content: 'Apple, MDM, Jamf Pro, Jamf School, 教育, 教育部, 數位學習, 極電資訊' }],
+    ['meta', { property: 'og:title', content: '極電資訊 Apple MDM 知識庫' }],
+    ['meta', { property: 'og:description', content: '全方位的 Apple 教育場域行動裝置管理指南，專業的 MDM 疑難排解與術語解析。' }],
+    ['meta', { property: 'og:image', content: '/superinfo_logo.png' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }]
   ],
   cleanUrls: true,
   vite: {

@@ -10,20 +10,20 @@
 
 ### 核心特性
 
-*   **身份驗證與存取控制**
-    *   整合 Cloudflare Workers 與 Supabase Auth 實作無伺服器身份驗證。
-    *   支援 Email Magic Link 登入機制，僅限特定教育網域存取。
-    *   具備獨立的身分驗證介面 (Login Portal)，採用 Glassmorphism 設計規範。
+- **身份驗證與存取控制**
+  - 整合 Cloudflare Workers 與 Supabase Auth 實作無伺服器身份驗證。
+  - 支援 Email Magic Link 登入機制，僅限特定教育網域存取。
+  - 具備獨立的身分驗證介面 (Login Portal)，採用 Glassmorphism 設計規範。
 
-*   **資訊安全機制**
-    *   **原始碼防護**：構建過程強制關閉 Source Map 並啟用 Terser 混淆，防止逆向工程。
-    *   **內容保護**：全站實作 CSS 層級的防選取與防複製機制 (User-Select Protection)，代碼區塊 (Code Blocks) 除外以保留操作便利性。
-    *   **爬蟲阻擋**：配置嚴格的 `robots.txt` 宣告，禁止搜尋引擎索引 (Noindex Policy)。
+- **資訊安全機制**
+  - **原始碼防護**：構建過程強制關閉 Source Map 並啟用 Terser 混淆，防止逆向工程。
+  - **內容保護**：全站實作 CSS 層級的防選取與防複製機制 (User-Select Protection)，代碼區塊 (Code Blocks) 除外以保留操作便利性。
+  - **爬蟲阻擋**：配置嚴格的 `robots.txt` 宣告，禁止搜尋引擎索引 (Noindex Policy)。
 
-*   **使用者介面設計**
-    *   **字體系統**：整合 Google Fonts (`Inter` / `Noto Sans TC` / `JetBrains Mono`)，確保跨平台渲染一致性。
-    *   **響應式佈局**：客製化側邊欄 (Sidebar) 與導航系統，支援 Desktop 與 Mobile 裝置自適應顯示。
-    *   **閱讀體驗**：針對 Markdown 內容優化的排版樣式 (`markdown-styles.css`)，定義標準化的行高、間距與表格樣式。
+- **使用者介面設計**
+  - **字體系統**：整合 Google Fonts (`Inter` / `Noto Sans TC` / `JetBrains Mono`)，確保跨平台渲染一致性。
+  - **響應式佈局**：客製化側邊欄 (Sidebar) 與導航系統，支援 Desktop 與 Mobile 裝置自適應顯示。
+  - **閱讀體驗**：針對 Markdown 內容優化的排版樣式 (`markdown-styles.css`)，定義標準化的行高、間距與表格樣式。
 
 ## 技術架構
 
@@ -37,19 +37,20 @@
 
 ## 專案結構
 
-*   `docs/`：系統核心目錄。
-    *   `.vitepress/`：系統配置、主題樣式與 Vue 組件。
-    *   `data/`：TypeScript 結構化資料模組 (Q&A, Glossary)。
-    *   `public/`：靜態資產 (Robots.txt, Login Portal)。
-*   `worker/`：Cloudflare Worker 邊緣運算邏輯。
+- `docs/`：系統核心目錄。
+  - `.vitepress/`：系統配置、主題樣式與 Vue 組件。
+  - `data/`：TypeScript 結構化資料模組 (Q&A, Glossary)。
+  - `public/`：靜態資產 (Robots.txt, Login Portal)。
+- `worker/`：Cloudflare Worker 邊緣運算邏輯。
 
 ## 開發指南
 
 本專案採用 **Volar** 作為主要開發工具鏈。建議使用 VS Code 配合以下設配置進行開發：
 
 ### 環境需求
-*   Node.js 20+
-*   npm 10+
+
+- Node.js 20+
+- npm 10+
 
 ### 操作指令
 
