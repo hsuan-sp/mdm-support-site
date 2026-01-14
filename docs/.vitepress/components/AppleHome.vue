@@ -494,7 +494,7 @@ const navCards = [
 }
 
 .card:hover .card-icon {
-  animation: silky-float 2.5s ease-in-out infinite;
+  animation: silky-float 8s ease-in-out infinite;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -502,11 +502,15 @@ const navCards = [
 
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1.1);
+    transform: translate3d(0, 0, 0) scale(1.1) rotate(0deg);
   }
 
-  50% {
-    transform: translate3d(0, -12px, 0) scale(1.1);
+  33% {
+    transform: translate3d(0, -6px, 0) scale(1.1) rotate(1deg);
+  }
+
+  66% {
+    transform: translate3d(0, -3px, 0) scale(1.1) rotate(-1deg);
   }
 }
 

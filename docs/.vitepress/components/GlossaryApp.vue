@@ -573,8 +573,8 @@ const clearSearch = () => {
 }
 
 .term-bob-layer {
-  animation: term-idle-bob 6s ease-in-out infinite;
-  animation-delay: calc(var(--delay, 0) * 0.2s);
+  animation: term-idle-bob 10s ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0) * 0.3s);
   height: 100%;
   will-change: transform;
 }
@@ -588,31 +588,35 @@ const clearSearch = () => {
   height: 100%;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  animation: glossary-intro 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--delay, 0) * 0.1s);
+  animation: glossary-intro 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--delay, 0) * 0.15s);
 }
 
 @keyframes term-idle-bob {
 
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
 
-  50% {
-    transform: translate3d(0, -12px, 0);
+  33% {
+    transform: translate3d(0, -8px, 0) rotate(0.4deg);
+  }
+
+  66% {
+    transform: translate3d(0, -4px, 0) rotate(-0.3deg);
   }
 }
 
 @keyframes glossary-intro {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px) scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 

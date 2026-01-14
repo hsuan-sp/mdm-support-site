@@ -192,7 +192,7 @@ body.is-home::before {
   filter: brightness(1.1) contrast(1.1);
 }
 
-/* 2. App Pages: Subtle Geometric Overlay on top of Mesh */
+/* 2. App Pages: Animated Geometric Grid on top of Mesh */
 body.is-app::after {
   content: "";
   position: fixed;
@@ -200,19 +200,26 @@ body.is-app::after {
   z-index: -1;
   pointer-events: none;
   background-image: 
-    linear-gradient(rgba(0, 122, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 122, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(0, 122, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 122, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
   background-position: center center;
-  mask-image: linear-gradient(to bottom, black, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
-  opacity: 1;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+  animation: grid-drift 60s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 60px 60px; }
 }
 
 .dark body.is-app::after {
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  opacity: 0.4;
 }
 
 .VPButton {
