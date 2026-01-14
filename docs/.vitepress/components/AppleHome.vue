@@ -407,6 +407,8 @@ const navCards = [
   line-height: 1.5;
 }
 
+
+
 /* Responsive Grid with Container Queries support */
 .cards-grid {
   display: grid;
@@ -415,9 +417,15 @@ const navCards = [
   container-type: inline-size;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1400px) {
+  .cards-grid {
+    gap: 32px;
   }
 }
 

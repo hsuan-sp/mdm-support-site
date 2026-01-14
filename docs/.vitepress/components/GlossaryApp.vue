@@ -543,8 +543,8 @@ const clearSearch = () => {
 /* Grid Layout with Transition */
 .terms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+  gap: 32px;
 }
 
 /* List Transitions */
