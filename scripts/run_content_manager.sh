@@ -22,6 +22,12 @@ if ! python3 -c "import tkinter" &> /dev/null; then
     exit 1
 fi
 
+# 檢查 Node.js (用於更新索引)
+if ! command -v node &> /dev/null; then
+    echo "⚠️ 警告: 找不到 node 指令，自動更新索引功能將無法運作。"
+    echo "請確保已安裝 Node.js"
+fi
+
 # 設置 PATH 以包含常見的 Node.js 路徑 (針對 macOS)
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 

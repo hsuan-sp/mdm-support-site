@@ -94,12 +94,12 @@ export default {
                     const { data, content } = parseFrontmatter(fileContent);
 
                     items.push({
-                        id: data.id,
-                        question: data.title,
+                        id: String(data.id || ''),
+                        question: String(data.title || ''),
                         answer: content.trim(),
                         important: Boolean(data.important),
-                        tags: Array.isArray(data.tags) ? data.tags : [],
-                        category: String(data.category || '')
+                        tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
+                        category: data.category
                     });
                 }
 
@@ -136,11 +136,11 @@ export default {
                 const analogy = parts[1] ? parts[1].trim() : '';
 
                 terms.push({
-                    term: data.term,
+                    term: String(data.term || ''),
                     definition,
                     analogy,
-                    category: String(data.category || ''),
-                    tags: Array.isArray(data.tags) ? data.tags : []
+                    category: data.category || [],
+                    tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : [])
                 });
             }
 

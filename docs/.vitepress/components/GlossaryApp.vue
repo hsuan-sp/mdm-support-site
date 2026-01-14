@@ -15,6 +15,23 @@ import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts'
 import AppSidebar from './AppSidebar.vue';
 import MobileDrawer from '../theme/components/MobileDrawer.vue';
 import EmptyState from '../theme/components/EmptyState.vue';
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+  breaks: true
+});
+
+const renderMarkdown = (text: string) => {
+  if (!text) return "";
+  // Fix list spacing for better rendering
+  const processed = text
+    .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
+    .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
+  return md.render(processed);
+};
 
 const { isMobileView } = useLayoutMode();
 const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-glossary');
@@ -198,14 +215,14 @@ const clearSearch = () => {
                 </div>
               </header>
 
-              <p class="term-definition">{{ item.definition }}</p>
+              <div class="term-definition markdown-body" v-html="renderMarkdown(item.definition)"></div>
             </div>
 
             <section v-if="item.analogy" class="analogy-wrapper">
               <div class="analogy-icon" aria-hidden="true">💡</div>
               <div class="analogy-content">
                 <span class="analogy-label">白話文 / 比喻</span>
-                <p class="analogy-text">{{ item.analogy }}</p>
+                <div class="analogy-text markdown-body" v-html="renderMarkdown(item.analogy)"></div>
               </div>
             </section>
           </article>
@@ -618,10 +635,74 @@ const clearSearch = () => {
 
 .analogy-text {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--vp-c-text-1);
   margin: 0;
   font-weight: 500;
+}
+
+/* Markdown Support Styles */
+:deep(.markdown-body) {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+:deep(.markdown-body p) {
+  margin-bottom: 12px;
+}
+
+:deep(.markdown-body p:last-child) {
+  margin-bottom: 0;
+}
+
+:deep(.markdown-body ul),
+:deep(.markdown-body ol) {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+:deep(.markdown-body li) {
+  margin-bottom: 4px;
+}
+
+:deep(.markdown-body strong) {
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+}
+
+:deep(.markdown-body table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9em;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+}
+
+:deep(.markdown-body th) {
+  background: var(--vp-c-bg-soft);
+  padding: 12px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--vp-c-divider);
+}
+
+:deep(.markdown-body td) {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+:deep(.markdown-body tr:last-child td) {
+  border-bottom: none;
+}
+
+:deep(.markdown-body tr:nth-child(even)) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark :deep(.markdown-body tr:nth-child(even)) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .term-badges {

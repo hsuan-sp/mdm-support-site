@@ -17,7 +17,11 @@
 *   **自動化索引 (必看)**：在新增內容前，請務必先查閱 **`docs/data/MAINTENANCE_INDEX.md`**。
     *   此索引會自動列出所有已存在的術語與問答題目。
     *   **維護規範**：請先看過索引，確認該術語「尚未編寫」再進行新增，避免資源重複或衝突。
-*   **索引更新**：執行 `npm run update-index` 或啟動開發伺服器時，系統會自動重新掃描並更新該索引。
+- **更新索引腳本**：當您增修術語後，請於專案根目錄執行以下指令以同步索引：
+  ```bash
+  npm run update-index
+  ```
+  *(註：此指令會調用 `scripts/generate_maintenance_index.mjs` 並更新 `MAINTENANCE_INDEX.md`，啟動 `npm run docs:dev` 時也會自動執行)*
 
 ---
 

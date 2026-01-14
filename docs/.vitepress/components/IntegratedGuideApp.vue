@@ -23,9 +23,9 @@ const md = new MarkdownIt({
 
 // Helper to count items per chapter
 const getChapterCount = (source: string) => {
-  const module = allQAData.find(m => m.source === source);
+  const module = (allQAData as any[]).find(m => m.source === source);
   if (!module) return 0;
-  return module.sections.reduce((total, section) => total + section.items.length, 0);
+  return module.sections.reduce((total: number, section: any) => total + section.items.length, 0);
 };
 
 // State
@@ -126,15 +126,22 @@ const toggleItem = (id: string) => {
 const renderMarkdown = (text: string) => {
   if (!text) return "";
   const lines = text.split('\n');
-  const minIndent = lines.filter(l => l.trim()).reduce((min, line) => {
-    const match = line.match(/^\s*/);
-    return Math.min(min, match ? match[0].length : min);
-  }, Infinity);
 
-  // 保持原始結構，僅處理縮排
+  // Find minimum indentation of non-empty lines
+  const nonEmptyLines = lines.filter(l => l.trim());
+  const minIndent = nonEmptyLines.length > 0
+    ? nonEmptyLines.reduce((min, line) => {
+      const match = line.match(/^\s*/);
+      return Math.min(min, match ? match[0].length : min);
+    }, Infinity)
+    : 0;
+
+  // Remove common indentation and trim
   let cleaned = lines.map(line => line.slice(minIndent)).join('\n').trim();
 
-  // 優化排版：僅針對 Markdown 解析必須的「列表前置空行」做補強
+  // Premium Typography Optimization:
+  // 1. Ensure lists have empty lines before them for correct MD parsing
+  // 2. Fix paragraph breaks
   let processed = cleaned
     .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
     .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
@@ -476,10 +483,76 @@ const switchModule = (source: string | "All") => {
 
 .markdown-body :deep(blockquote) {
   margin: 1.5em 0;
-  padding: 12px 24px;
+  padding: 16px 24px;
   border-left: 4px solid var(--vp-c-brand-1);
   background: var(--vp-c-bg-alt);
   border-radius: 8px;
+  font-style: italic;
+  color: var(--vp-c-text-2);
+}
+
+.markdown-body :deep(p) {
+  margin-bottom: 1.2em;
+}
+
+.markdown-body :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.markdown-body :deep(ul),
+.markdown-body :deep(ol) {
+  padding-left: 1.5em;
+  margin-bottom: 1.2em;
+}
+
+.markdown-body :deep(li) {
+  margin-bottom: 0.6em;
+}
+
+.markdown-body :deep(table) {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 24px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.markdown-body :deep(th) {
+  background: var(--vp-c-bg-soft);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+}
+
+.markdown-body :deep(td) {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+}
+
+.markdown-body :deep(tr:last-child td) {
+  border-bottom: none;
+}
+
+.markdown-body :deep(tr:nth-child(even)) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark .markdown-body :deep(tr:nth-child(even)) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.markdown-body :deep(code) {
+  background: var(--vp-c-bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.9em;
+  color: var(--vp-c-brand-1);
 }
 
 .section-label {

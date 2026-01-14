@@ -16,7 +16,11 @@
 *   **檔案目錄**：`docs/data/items/qa/[類別資料夾]/`
 *   **自動化索引 (必看)**：在新增問題前，請務必先查閱 **`docs/data/MAINTENANCE_INDEX.md`** 中的 Q&A 區塊。
     *   **維護規範**：先透過索引確認相同問題是否已存在。AI 助手或真人在接手任務時，應以此索引為唯一參考來源，確認「好喔，這個題目沒寫過」再進行新增。
-*   **更新方式**：當您增刪檔案後，執行 `npm run update-index` 即可確保索引與實際檔案同步。
+- **更新索引腳本**：當您增刪檔案後，請於專案根目錄執行以下指令以同步索引：
+  ```bash
+  npm run update-index
+  ```
+  *(註：此指令會調用 `scripts/generate_maintenance_index.mjs` 並更新 `MAINTENANCE_INDEX.md`)*
 
 ---
 
