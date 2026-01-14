@@ -227,7 +227,8 @@ const switchModule = (source: string | "All") => {
           <div v-if="searchResults && searchResults.length > 0">
             <div v-for="group in searchResults" :key="group.source" class="module-group">
               <h3 class="group-label">{{ group.source }}</h3>
-              <div v-for="item in group.items" :key="item.id" class="qa-item" :class="{ open: openItems.has(item.id) }">
+            <div v-for="(item, idx) in group.items" :key="item.id" class="qa-item" 
+                 :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
                 <div class="qa-trigger" @click="toggleItem(item.id)">
                   <div class="q-main">
                     <span v-if="item.important" class="imp-tag">重要</span>
@@ -251,8 +252,8 @@ const switchModule = (source: string | "All") => {
           <template v-if="activeSource !== 'All'">
             <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
               <h3 class="section-label">{{ section.title }}</h3>
-              <div v-for="item in section.items" :key="item.id" class="qa-item"
-                :class="{ open: openItems.has(item.id) }">
+              <div v-for="(item, idx) in section.items" :key="item.id" class="qa-item"
+              :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
                 <div class="qa-trigger" @click="toggleItem(item.id)">
                   <div class="q-main">
                     <span v-if="item.important" class="imp-tag">重要</span>
@@ -274,8 +275,8 @@ const switchModule = (source: string | "All") => {
               <h2 class="chapter-title">{{ module.source }}</h2>
               <div v-for="section in module.sections" :key="section.title" class="section-block">
                 <h3 class="section-label">{{ section.title }}</h3>
-                <div v-for="item in section.items" :key="item.id" class="qa-item"
-                  :class="{ open: openItems.has(item.id) }">
+                <div v-for="(item, idx) in section.items" :key="item.id" class="qa-item"
+                  :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
                   <div class="qa-trigger" @click="toggleItem(item.id)">
                     <div class="q-main">
                       <span v-if="item.important" class="imp-tag">重要</span>
@@ -402,29 +403,37 @@ const switchModule = (source: string | "All") => {
   margin-bottom: 32px;
   overflow: hidden;
   background: var(--vp-c-bg-elv, #ffffff);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   width: 100%;
-  animation: slide-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: idle-float 6s ease-in-out infinite, slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation-delay: calc(var(--item-index, 0) * 0.1s);
   animation-fill-mode: both;
 }
 
+@keyframes idle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 @keyframes slide-in {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .qa-item:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
   border-color: var(--vp-c-brand-soft);
   z-index: 10;
+  animation-play-state: paused;
 }
 
 .qa-item.open {
   border-color: var(--vp-c-brand-1);
   box-shadow: 0 20px 50px rgba(0, 122, 255, 0.15);
-  transform: translateY(-4px) scale(1.015);
+  transform: translateY(-6px) scale(1.01);
+  animation-play-state: paused;
 }
 
 .qa-trigger {

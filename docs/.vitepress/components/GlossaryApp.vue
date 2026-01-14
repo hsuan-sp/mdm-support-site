@@ -562,19 +562,27 @@ const clearSearch = () => {
   background: var(--vp-c-bg-elv, #ffffff);
   border-radius: 24px;
   border: 1px solid var(--vp-c-divider);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  animation: idle-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0) * 0.2s);
+}
+
+@keyframes idle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 .term-card:hover {
   border-color: var(--vp-c-brand-soft);
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
   z-index: 10;
+  animation-play-state: paused;
 }
 
 .card-main {
