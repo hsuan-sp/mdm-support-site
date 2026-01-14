@@ -568,21 +568,41 @@ const clearSearch = () => {
   height: 100%;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  animation: idle-float 6s ease-in-out infinite;
-  animation-delay: calc(var(--delay, 0) * 0.2s);
+  animation: glossary-intro 0.8s cubic-bezier(0.16, 1, 0.3, 1) both,
+    idle-float 6s ease-in-out infinite 0.8s;
+  animation-delay: calc(var(--delay, 0) * 0.1s), calc(var(--delay, 0) * 0.1s + 0.8s);
+}
+
+@keyframes glossary-intro {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes idle-float {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  33% { transform: translate3d(3px, -8px, 0) rotate(0.4deg); }
-  66% { transform: translate3d(-2px, -14px, 0) rotate(-0.4deg); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .term-card:hover {
   border-color: var(--vp-c-brand-soft);
-  transform: translate3d(0, -18px, 0) scale(1.03);
-  box-shadow: 0 45px 90px rgba(0, 0, 0, 0.12);
+  transform: translateY(-20px) scale(1.05);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
   z-index: 10;
+  animation-play-state: paused !important;
 }
 
 .card-main {
@@ -631,8 +651,15 @@ const clearSearch = () => {
 }
 
 @keyframes silky-float {
-  0%, 100% { transform: translateY(0) scale(1.1); }
-  50% { transform: translateY(-6px) scale(1.25); }
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1.1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.25);
+  }
 }
 
 .analogy-label {

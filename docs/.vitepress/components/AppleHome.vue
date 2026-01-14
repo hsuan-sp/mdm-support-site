@@ -32,82 +32,82 @@ onUnmounted(() => {
 })
 
 const navCards = [
-  { 
-    title: 'Identity', 
+  {
+    title: 'Identity',
     subtitle: '帳號與身分',
-    desc: '深入了解管理式 Apple ID、聯合驗證與權限委派。', 
+    desc: '深入了解管理式 Apple ID、聯合驗證與權限委派。',
     link: '/guide/#account',
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '👤'
   },
-  { 
-    title: 'Deployment', 
+  {
+    title: 'Deployment',
     subtitle: '零接觸部署',
-    desc: '透過 Apple Configurator 與 ADE 達成自動化開箱即用。', 
+    desc: '透過 Apple Configurator 與 ADE 達成自動化開箱即用。',
     link: '/guide/#enrollment',
     bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     textColor: '#fff',
     icon: '📦'
   },
-  { 
-    title: 'VPP Apps', 
+  {
+    title: 'VPP Apps',
     subtitle: '軟體採購',
-    desc: '掌握 App 與圖書的批量授權派發與生命週期管理。', 
+    desc: '掌握 App 與圖書的批量授權派發與生命週期管理。',
     link: '/guide/#apps',
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '📱'
   },
-  { 
-    title: 'Classroom', 
+  {
+    title: 'Classroom',
     subtitle: '課堂教學',
-    desc: '賦能教師掌握即時畫面控管、文件傳送與數位互動。', 
+    desc: '賦能教師掌握即時畫面控管、文件傳送與數位互動。',
     link: '/guide/#classroom',
     bg: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
     textColor: '#1d1d1f',
     icon: '🍎'
   },
-  { 
-    title: 'Education', 
+  {
+    title: 'Education',
     subtitle: '方案規範',
-    desc: '接軌教育部專案規範，優化校園數位學習環境。', 
+    desc: '接軌教育部專案規範，優化校園數位學習環境。',
     link: '/guide/#digital',
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🎓'
   },
-  { 
-    title: 'Service', 
+  {
+    title: 'Service',
     subtitle: '維護報修',
-    desc: '了解硬體保固查詢、維修流程與備機管理策略。', 
+    desc: '了解硬體保固查詢、維修流程與備機管理策略。',
     link: '/guide/#hardware',
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🔧'
   },
-  { 
-    title: 'macOS', 
+  {
+    title: 'macOS',
     subtitle: '電腦管理',
-    desc: '針對 Mac 的專屬組態描述檔與安全性原則管理。', 
+    desc: '針對 Mac 的專屬組態描述檔與安全性原則管理。',
     link: '/guide/#mac',
     bg: 'linear-gradient(135deg, #434343 0%, #000000 100%)',
     textColor: '#f5f5f7',
     icon: '💻'
   },
-  { 
-    title: 'Scenarios', 
+  {
+    title: 'Scenarios',
     subtitle: '情境實戰',
-    desc: '集結第一線網管與教師的高頻率常見問題答集。', 
+    desc: '集結第一線網管與教師的高頻率常見問題答集。',
     link: '/guide/#education',
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🏫'
   },
-  { 
-    title: 'Glossary', 
+  {
+    title: 'Glossary',
     subtitle: '零知識術語表',
-    desc: '從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。', 
+    desc: '從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。',
     link: '/glossary',
     bg: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
     textColor: '#1d1d1f',
@@ -118,25 +118,25 @@ const navCards = [
 
 <template>
   <div class="apple-container">
-    
+
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content fade-in-up">
         <span class="eyebrow">Superinfo Apple MDM Hub</span>
-        <h1>Empowering <br/>Education.</h1>
+        <h1>Empowering <br />Education.</h1>
         <p class="intro">
-          專為台灣教育現場打造。<br/>
+          專為台灣教育現場打造。<br />
           極致簡單的 Apple 裝置管理知識庫。
         </p>
         <div class="hero-links">
-           <a :href="withBase('/guide/')" class="primary-btn">
-             開始探索
-             <span class="btn-icon" aria-hidden="true">→</span>
-           </a>
-           <a :href="withBase('/glossary')" class="text-link">
-             查詢術語表 
-             <span aria-hidden="true">›</span>
-           </a>
+          <a :href="withBase('/guide/')" class="primary-btn">
+            開始探索
+            <span class="btn-icon" aria-hidden="true">→</span>
+          </a>
+          <a :href="withBase('/glossary')" class="text-link">
+            查詢術語表
+            <span aria-hidden="true">›</span>
+          </a>
         </div>
       </div>
     </header>
@@ -147,16 +147,10 @@ const navCards = [
         <h2>探索主題</h2>
         <p>從基礎設定到進階管理，一切盡在掌握。</p>
       </div>
-      
+
       <div class="cards-grid">
-        <a 
-          v-for="card in navCards" 
-          :key="card.link"
-          :href="withBase(card.link)"
-          class="card fade-in-on-scroll"
-          :style="{ background: card.bg, color: card.textColor }"
-          :aria-label="`前往 ${card.subtitle} 章節`"
-        >
+        <a v-for="card in navCards" :key="card.link" :href="withBase(card.link)" class="card fade-in-on-scroll"
+          :style="{ background: card.bg, color: card.textColor }" :aria-label="`前往 ${card.subtitle} 章節`">
           <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
           <div class="card-text">
             <span class="card-subtitle">{{ card.subtitle }}</span>
@@ -183,6 +177,7 @@ const navCards = [
 
 /* Enhanced Animations with reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -193,40 +188,48 @@ const navCards = [
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-.fade-in-up { 
-  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-  opacity: 0; 
+.fade-in-up {
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
 
-.fade-in { 
-  animation: fadeIn 1.2s ease-out forwards; 
-  opacity: 0; 
+.fade-in {
+  animation: fadeIn 1.2s ease-out forwards;
+  opacity: 0;
 }
 
-.delay-2 { animation-delay: 0.3s; }
+.delay-2 {
+  animation-delay: 0.3s;
+}
 
 /* Scroll-triggered fade-in with stagger */
 .fade-in-on-scroll {
   opacity: 0;
   transform: translateY(30px);
   /* Initial entry transition - only for opacity/transform */
-  transition: opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1), 
-              transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .fade-in-on-scroll.is-visible {
@@ -258,7 +261,7 @@ const navCards = [
 
 .hero h1 {
   font-size: clamp(40px, 7vw, 84px);
-  line-height: 1.2; 
+  line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.025em;
   margin-bottom: 24px;
@@ -310,7 +313,7 @@ const navCards = [
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -368,7 +371,7 @@ const navCards = [
   width: 100%;
 }
 
-.text-link:hover { 
+.text-link:hover {
   color: var(--vp-c-brand-2);
 }
 
@@ -395,7 +398,7 @@ const navCards = [
 .section-header h2 {
   font-size: clamp(32px, 5vw, 52px);
   font-weight: 800;
-  line-height: 1.1; 
+  line-height: 1.1;
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
@@ -441,12 +444,12 @@ const navCards = [
   justify-content: space-between;
   min-height: 280px;
   /* Ultra-smooth transition definition */
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.4s ease,
-              background-color 0.4s ease;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   container-type: inline-size;
   will-change: transform, box-shadow;
 }
@@ -455,7 +458,7 @@ const navCards = [
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
   opacity: 0;
   transition: opacity 0.6s ease;
   pointer-events: none;
@@ -467,8 +470,8 @@ const navCards = [
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .card:focus-visible {
@@ -483,26 +486,27 @@ const navCards = [
 .card-icon {
   font-size: 48px;
   margin-bottom: 20px;
-  display: inline-block;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2);
-  will-change: transform;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover .card-icon {
   animation: silky-float 3s ease-in-out infinite;
-  transform: scale(1.1);
   will-change: transform;
 }
 
 @keyframes silky-float {
-  0%, 100% { 
-    transform: scale(1.1) translate3d(0, 0, 0); 
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   }
-  50% { 
-    transform: scale(1.15) translate3d(0, -10px, 0); 
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
   }
 }
 
@@ -567,17 +571,17 @@ const navCards = [
 
 /* Dark Mode Enhancements */
 @media (prefers-color-scheme: dark) {
-  .apple-container { 
+  .apple-container {
     background: #000;
   }
-  
-  .card { 
-    border-color: rgba(255,255,255,0.08);
+
+  .card {
+    border-color: rgba(255, 255, 255, 0.08);
   }
-  
+
   .card:hover {
-    box-shadow: 0 24px 60px rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 24px 60px rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
   }
 }
 
@@ -586,26 +590,26 @@ const navCards = [
   .hero {
     padding-top: 60px;
   }
-  
+
   .hero-links {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .primary-btn,
   .text-link {
     width: 100%;
     justify-content: center;
   }
-  
+
   .section-header {
     text-align: center;
   }
-  
+
   .cards-grid {
     gap: 16px;
   }
-  
+
   .card {
     min-height: 240px;
     padding: 24px;

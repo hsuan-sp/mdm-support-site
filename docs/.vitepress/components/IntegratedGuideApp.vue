@@ -204,7 +204,8 @@ const switchModule = (source: string | "All") => {
           <button @click="switchModule('All')"
             :class="['nav-item', { active: activeSource === 'All' && !searchQuery }]">
             <span class="nav-text">全部題目</span>
-            <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source), 0)}}</span>
+            <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source),
+              0)}}</span>
           </button>
           <div class="sidebar-divider"></div>
           <button v-for="module in allQAData" :key="module.source" @click="switchModule(module.source)"
@@ -227,8 +228,8 @@ const switchModule = (source: string | "All") => {
           <div v-if="searchResults && searchResults.length > 0">
             <div v-for="group in searchResults" :key="group.source" class="module-group">
               <h3 class="group-label">{{ group.source }}</h3>
-            <div v-for="(item, idx) in group.items" :key="item.id" class="qa-item" 
-                 :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
+              <div v-for="(item, idx) in group.items" :key="item.id" class="qa-item"
+                :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
                 <div class="qa-trigger" @click="toggleItem(item.id)">
                   <div class="q-main">
                     <span v-if="item.important" class="imp-tag">重要</span>
@@ -253,7 +254,7 @@ const switchModule = (source: string | "All") => {
             <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
               <h3 class="section-label">{{ section.title }}</h3>
               <div v-for="(item, idx) in section.items" :key="item.id" class="qa-item"
-              :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
+                :class="{ open: openItems.has(item.id) }" :style="{ '--item-index': idx }">
                 <div class="qa-trigger" @click="toggleItem(item.id)">
                   <div class="q-main">
                     <span v-if="item.important" class="imp-tag">重要</span>
@@ -310,7 +311,8 @@ const switchModule = (source: string | "All") => {
         <div @click="switchModule('All')" class="m-nav-item"
           :class="{ active: activeSource === 'All' && !searchQuery }">
           <span class="nav-text">全部題目</span>
-          <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source), 0)}}</span>
+          <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source),
+            0)}}</span>
         </div>
 
         <div v-for="m in allQAData" :key="m.source" @click="switchModule(m.source)" class="m-nav-item"
@@ -406,33 +408,49 @@ const switchModule = (source: string | "All") => {
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   width: 100%;
-  animation: idle-float 6s ease-in-out infinite, slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  animation-delay: calc(var(--item-index, 0) * 0.1s);
-  animation-fill-mode: both;
+  /* Use different animation for intro to avoid conflict */
+  animation: qa-intro 0.8s cubic-bezier(0.16, 1, 0.3, 1) both,
+    idle-float 6s ease-in-out infinite 0.8s;
+  animation-delay: calc(var(--item-index, 0) * 0.1s), calc(var(--item-index, 0) * 0.1s + 0.8s);
+}
+
+@keyframes qa-intro {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes idle-float {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  33% { transform: translate3d(2px, -8px, 0) rotate(0.5deg); }
-  66% { transform: translate3d(-1px, -12px, 0) rotate(-0.5deg); }
-}
 
-@keyframes slide-in {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .qa-item:hover {
-  transform: translate3d(0, -15px, 0) scale(1.02);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+  transform: translateY(-20px) scale(1.03);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
   border-color: var(--vp-c-brand-soft);
   z-index: 10;
+  animation-play-state: paused !important;
 }
 
 .qa-item.open {
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 20px 50px rgba(0, 122, 255, 0.15);
-  transform: translate3d(0, -8px, 0) scale(1.01);
+  box-shadow: 0 20px 60px rgba(0, 122, 255, 0.18);
+  transform: translateY(-10px) scale(1.015);
+  animation-play-state: paused !important;
 }
 
 .qa-trigger {
