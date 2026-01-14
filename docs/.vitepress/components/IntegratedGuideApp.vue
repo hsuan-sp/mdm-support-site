@@ -4,7 +4,10 @@ import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
 import * as loaderData from "../../data/all-data.data";
 const data: any = loaderData;
-const allQAData = (data.default && data.default.allQAData) ? data.default.allQAData : (data.allQAData || []);
+// Fix: VitePress data loaders export 'data' as a named export in the virtual module
+const rawData = data.data || data.default || data;
+const allQAData = rawData.allQAData || [];
+console.log('IntegratedGuideApp Loaded Data Length:', allQAData.length);
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
 import AppSidebar from './AppSidebar.vue';
@@ -228,11 +231,7 @@ const switchModule = (source: string | "All") => {
               </div>
             </div>
           </div>
-          <EmptyState 
-            v-else 
-            @clear="searchQuery = ''" 
-            action-text="清除搜尋"
-          />
+          <EmptyState v-else @clear="searchQuery = ''" action-text="清除搜尋" />
         </div>
 
         <!-- 模組瀏覽模式 -->

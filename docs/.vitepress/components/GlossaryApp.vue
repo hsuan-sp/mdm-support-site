@@ -2,7 +2,12 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import * as loaderData from "../../data/all-data.data"; // Namespace import
 const data: any = loaderData;
-const glossaryData = (data.default && data.default.glossaryData) ? data.default.glossaryData : (data.glossaryData || []);
+// Handle both default export and named export possibilities
+// Fix: VitePress data loaders export 'data' as a named export in the virtual module
+// We check data.data (standard), data.default (fallback), and data (direct)
+const rawData = data.data || data.default || data;
+const glossaryData = rawData.glossaryData || [];
+console.log('GlossaryApp Loaded Data Length:', glossaryData.length);
 import type { Term } from "../../types";
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
@@ -207,13 +212,8 @@ const clearSearch = () => {
         </TransitionGroup>
 
         <!-- Empty State -->
-        <EmptyState 
-          v-if="filteredTerms.length === 0" 
-          icon="🧐"
-          :description="`沒有找到符合「${searchQuery}」的術語`"
-          action-text="清除搜尋條件"
-          @clear="clearSearch"
-        />
+        <EmptyState v-if="filteredTerms.length === 0" icon="🧐" :description="`沒有找到符合「${searchQuery}」的術語`"
+          action-text="清除搜尋條件" @clear="clearSearch" />
       </main>
     </div>
 
@@ -239,8 +239,7 @@ const clearSearch = () => {
           </button>
         </div>
         <div class="categories-chips">
-          <button v-for="cat in categories" :key="cat"
-            @click="selectedCategory = cat; isControlsExpanded = false"
+          <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat; isControlsExpanded = false"
             :class="['cat-chip', { active: selectedCategory === cat }]">
             {{ cat === 'All' ? '全部' : cat }}
           </button>

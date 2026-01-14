@@ -67,11 +67,18 @@ export default {
         const __dirname = path.dirname(__filename);
         const DATA_ROOT = path.resolve(__dirname, 'items');
 
+        console.log(`[Data Loader] Resolved DATA_ROOT: ${DATA_ROOT}`);
+
         const getFiles = (dir: string): string[] => {
-            if (!fs.existsSync(dir)) return [];
-            return fs.readdirSync(dir)
+            if (!fs.existsSync(dir)) {
+                console.warn(`[Data Loader] Dir not found: ${dir}`);
+                return [];
+            }
+            const files = fs.readdirSync(dir)
                 .filter(file => file.endsWith('.md'))
                 .map(file => path.join(dir, file));
+
+            return files;
         };
 
         const loadQAData = async () => {
