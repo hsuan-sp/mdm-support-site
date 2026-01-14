@@ -1,18 +1,13 @@
 <script setup lang="ts">
-/**
- * 空狀態呈現元件 (EmptyState)
- * 
- * 用於搜尋無結果或清單為空時的視覺提示。
- */
 defineProps<{
-  icon?: string;         // 顯示的圖示 (Emoji)
-  title?: string;        // 標題文字
-  description?: string;  // 詳細描述文字
-  actionText?: string;   // 動作按鈕文字
+  icon?: string;
+  title?: string;
+  description?: string;
+  actionText?: string;
 }>();
 
 defineEmits<{
-  (e: 'clear'): void;    // 清除/重設動作事件
+  (e: 'clear'): void;
 }>();
 </script>
 
@@ -26,10 +21,6 @@ defineEmits<{
 </template>
 
 <style scoped>
-/* 
- * 採用虛線外框與置中排版 
- * 強調該狀態為臨時性的搜尋結果缺位。
- */
 .empty-results {
   text-align: center;
   padding: 80px 24px;
