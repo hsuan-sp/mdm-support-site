@@ -490,17 +490,17 @@ const navCards = [
 
 .card:hover .card-icon {
   animation: silky-float 3s ease-in-out infinite;
-  transform: scale(1.1) translateY(-10px);
+  transform: scale(1.1);
   will-change: transform;
 }
 
 @keyframes silky-float {
   0%, 100% { 
-    transform: scale(1.1) translateY(-10px); 
+    transform: scale(1.1) translateY(0); 
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
   }
   50% { 
-    transform: scale(1.12) translateY(-14px); 
+    transform: scale(1.15) translateY(-8px); 
     filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
   }
 }
