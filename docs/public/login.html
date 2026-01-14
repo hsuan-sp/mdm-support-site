@@ -39,10 +39,12 @@
 
       body {
         font-family: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
-        background: radial-gradient(circle at top right, #f2f2f7, #e5e5ea);
-        background-image: linear-gradient(rgba(242, 242, 247, 0.5), rgba(242, 242, 247, 0.5)), url("/mdm_hero_premium.png");
-        background-size: cover;
-        background-position: center;
+        background-color: #f5f5f7;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(0, 122, 255, 0.1) 0, transparent 50%),
+          radial-gradient(at 100% 0%, rgba(90, 200, 250, 0.08) 0, transparent 50%),
+          radial-gradient(at 50% 100%, rgba(0, 122, 255, 0.05) 0, transparent 50%);
+        background-size: 100% 100%;
         background-attachment: fixed;
         display: flex;
         align-items: center;
@@ -269,7 +271,11 @@
           --text-main: #ffffff;
         }
         body {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/mdm_hero_premium.png");
+          background-color: #000000;
+          background-image: 
+            radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.1) 0, transparent 40%),
+            radial-gradient(at 100% 0%, rgba(100, 210, 255, 0.08) 0, transparent 40%),
+            radial-gradient(at 50% 100%, rgba(10, 132, 255, 0.05) 0, transparent 50%);
         }
         input {
           background: rgba(255, 255, 255, 0.06);
