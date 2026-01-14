@@ -197,27 +197,29 @@ const clearSearch = () => {
         <TransitionGroup name="list" tag="div" class="terms-grid">
           <article v-for="(item, index) in filteredTerms" :key="item.term" class="term-card"
             :style="{ '--delay': (index as any) % 10 }">
-            <div class="card-main">
-              <header class="card-header">
-                <h3 class="term-title">{{ item.term }}</h3>
-                <div class="term-badges">
-                  <span v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" :key="cat"
-                    :class="['badge', getCategoryColor(cat)]">
-                    {{ cat }}
-                  </span>
-                </div>
-              </header>
+            <div class="term-card-floating-wrapper">
+              <div class="card-main">
+                <header class="card-header">
+                  <h3 class="term-title">{{ item.term }}</h3>
+                  <div class="term-badges">
+                    <span v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" :key="cat"
+                      :class="['badge', getCategoryColor(cat)]">
+                      {{ cat }}
+                    </span>
+                  </div>
+                </header>
 
-              <div class="term-definition markdown-body" v-html="renderMarkdown(item.definition)"></div>
-            </div>
-
-            <section v-if="item.analogy" class="analogy-wrapper">
-              <div class="analogy-icon" aria-hidden="true">💡</div>
-              <div class="analogy-content">
-                <span class="analogy-label">白話文 / 比喻</span>
-                <div class="analogy-text markdown-body" v-html="renderMarkdown(item.analogy)"></div>
+                <div class="term-definition markdown-body" v-html="renderMarkdown(item.definition)"></div>
               </div>
-            </section>
+
+              <section v-if="item.analogy" class="analogy-wrapper">
+                <div class="analogy-icon" aria-hidden="true">💡</div>
+                <div class="analogy-content">
+                  <span class="analogy-label">白話文 / 比喻</span>
+                  <div class="analogy-text markdown-body" v-html="renderMarkdown(item.analogy)"></div>
+                </div>
+              </section>
+            </div>
           </article>
         </TransitionGroup>
 
@@ -559,6 +561,10 @@ const clearSearch = () => {
 
 /* Card Design */
 .term-card {
+  height: 100%;
+}
+
+.term-card-floating-wrapper {
   background: var(--vp-c-bg-elv, #ffffff);
   border-radius: 24px;
   border: 1px solid var(--vp-c-divider);
@@ -569,7 +575,7 @@ const clearSearch = () => {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   animation: glossary-intro 0.8s cubic-bezier(0.16, 1, 0.3, 1) both,
-    idle-float 6s ease-in-out infinite 0.8s;
+    idle-float 5s ease-in-out infinite 0.8s;
   animation-delay: calc(var(--delay, 0) * 0.1s), calc(var(--delay, 0) * 0.1s + 0.8s);
 }
 
@@ -597,7 +603,7 @@ const clearSearch = () => {
   }
 }
 
-.term-card:hover {
+.term-card:hover .term-card-floating-wrapper {
   border-color: var(--vp-c-brand-soft);
   transform: translateY(-20px) scale(1.05);
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
