@@ -1,0 +1,30 @@
+---
+id: cls-11
+title: "為什麼 iPadOS 17 以後，網管反應抓不到裝置的真實 MAC 位址？(專用 Wi-Fi 位址)"
+category: "第四部分：課堂管理與教學應用 (Classroom Management)"
+important: true
+tags: ["MAC 位址","專用 Wi-Fi 位址","隱私功能","網路管理"]
+---
+
+# Q: 為什麼 iPadOS 17 以後，網管反應抓不到裝置的真實 MAC 位址？(專用 Wi-Fi 位址)
+
+# Answer
+
+**這是因為 Apple 預設啟用了「專用 Wi-Fi 位址 (Private Wi-Fi Address)」功能，**
+**導致裝置向網路廣播的是隨機生成的虛擬 MAC。**
+
+**影響層面**：
+*   **DHCP 發放**：若學校 DHCP 伺服器依賴 MAC 綁定固定 IP，此功能會導致 IP 不斷變動。
+*   **行為審計**：防火牆無法透過硬體 MAC 追蹤特定學生的上網行為。
+
+**MDM 解決方案 (全校統一關閉)**：
+1.  在 Jamf Pro 編輯 **「Wi-Fi」** 設定描述檔。
+2.  進入 Wi-Fi Payload 設定頁面。
+3.  勾選 **「停用 MAC 位址隨機化 (Disable MAC Address Randomization)」** (或稱 Disable Private Address)。
+4.  將此描述檔派送至裝置。
+
+**效果**：
+當裝置連接該 *特定 SSID*（例如 School-Student）時，會強制使用 **硬體真實 MAC**。
+*   *注意：此設定僅對該描述檔指定的 Wi-Fi 有效。*
+    *學生回家連線自家 Wi-Fi 時，仍會自動開啟隨機化以保護隱私。*
+    

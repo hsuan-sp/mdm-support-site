@@ -2,7 +2,9 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
-import { allQAData } from "../../data/all-data";
+import * as loaderData from "../../data/all-data.data";
+const data: any = loaderData;
+const allQAData = (data.default && data.default.allQAData) ? data.default.allQAData : (data.allQAData || []);
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
 import AppSidebar from './AppSidebar.vue';

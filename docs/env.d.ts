@@ -6,12 +6,17 @@ declare module '*.vue' {
   export default component
 }
 
+declare module '*.data.ts' {
+  const data: any
+  export default data
+}
+
 // Volar JSX support
 import type { VNode } from 'vue'
 
 declare global {
   namespace JSX {
-    interface Element extends VNode {}
+    interface Element extends VNode { }
     interface IntrinsicElements {
       [elem: string]: any
     }

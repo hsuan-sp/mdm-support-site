@@ -10,3 +10,11 @@ export interface QASection {
   title: string;
   items: QAItem[];
 }
+
+export interface Term {
+  term: string;
+  definition: string;
+  analogy: string;
+  category: string;
+  tags: string[];
+}

@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from "vue";
-import { glossaryData } from "../../data/glossary";
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
+import * as loaderData from "../../data/all-data.data"; // Namespace import
+const data: any = loaderData;
+const glossaryData = (data.default && data.default.glossaryData) ? data.default.glossaryData : (data.glossaryData || []);
+import type { Term } from "../../types";
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
