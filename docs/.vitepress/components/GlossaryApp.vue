@@ -566,21 +566,22 @@ const clearSearch = () => {
 
 /* Card Design */
 .term-card {
-  background: var(--vp-c-bg);
+  background: var(--vp-c-bg-elv, #ffffff);
   border-radius: 24px;
   border: 1px solid var(--vp-c-divider);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  /* Fix: ensures bottom rounded corners are not covered */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .term-card:hover {
   border-color: var(--vp-c-brand-soft);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  z-index: 10;
 }
 
 .card-main {

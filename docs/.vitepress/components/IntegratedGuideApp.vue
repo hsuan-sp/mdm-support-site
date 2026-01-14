@@ -398,32 +398,33 @@ const switchModule = (source: string | "All") => {
 /* 問答卡片 */
 .qa-item {
   border: 1px solid var(--vp-c-divider);
-  border-radius: 20px;
-  margin-bottom: 24px;
+  border-radius: 24px;
+  margin-bottom: 32px;
   overflow: hidden;
-  background: var(--vp-c-bg);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background: var(--vp-c-bg-elv, #ffffff);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   width: 100%;
-  animation: slide-in 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: slide-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   animation-fill-mode: both;
 }
 
 @keyframes slide-in {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .qa-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   border-color: var(--vp-c-brand-soft);
+  z-index: 10;
 }
 
 .qa-item.open {
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 16px 48px rgba(0, 122, 255, 0.12);
-  transform: scale(1.005);
+  box-shadow: 0 20px 50px rgba(0, 122, 255, 0.15);
+  transform: translateY(-4px) scale(1.015);
 }
 
 .qa-trigger {
