@@ -84,15 +84,7 @@ const toggleDarkMode = () => {
         </div>
 
         <!-- 行動版選單觸發鈕 (漢寶選單圖示) -->
-        <button class="mobile-menu-trigger" @click="isMenuOpen = !isMenuOpen" :aria-expanded="isMenuOpen"
-            aria-label="開啟主選單">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
+        <!-- 行動版選單觸發鈕已移除，使用預設 VitePress 選單 -->
 
         <!-- 行動版下拉面板 (使用 Teleport 確保層級正確) -->
         <Teleport to="body">
@@ -205,20 +197,7 @@ const toggleDarkMode = () => {
     }
 }
 
-.mobile-menu-trigger {
-    display: none;
-    background: transparent;
-    border: none;
-    padding: 8px;
-    color: var(--vp-c-text-1);
-    cursor: pointer;
-}
 
-@media (max-width: 768px) {
-    .mobile-menu-trigger {
-        display: block;
-    }
-}
 
 .divider {
     width: 1px;
