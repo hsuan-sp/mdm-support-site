@@ -15,21 +15,21 @@ tags: ["PreStage", "設定輔助程式", "ADE", "部署加速", "最佳實務"]
 ## 建議跳過的步驟（教育環境）
 
 ### 隱私與定位相關
-- **✅ 定位服務** (Location Services)：建議透過 MDM 統一強制開啟，確保「尋找」功能正常運作
+- ✅ 隱私與定位服務 (Location Services)：建議由 IT 統一開啟
 - **✅ App 分析** (App Analytics)：學校代表組織決定即可
 - **✅ 螢幕使用時間** (Screen Time)：這是家長控制功能，學校應使用 MDM 限制
 
 ### Apple 服務相關
 - **✅ Apple Pay**：學生通常無信用卡，無需設定
-- **✅ Siri**：可後續透過 MDM 管理，避免設定過程拖長
-- **✅ Apple Intelligence**（iOS 26）：建議跳過，後續視需要開放
+- ✅ Siri / 新版導覽：跳過以加速學生開機
+- ✅ Apple Intelligence (iOS 26)：建議跳過，後續視需要開放
 - **✅ iMessage 與 FaceTime**：避免學生登入個人帳號
 
 ### 外觀與顯示
 - **✅ 原彩顯示** (True Tone)：非必要功能
 - **✅ 顯示大小** (Display Zoom)：建議使用預設值
 - **✅ 外觀** (Appearance)：統一使用預設主題
-- **✅ Liquid Glass**（iOS 26 新增）：外觀設定，建議跳過以統一介面
+- ✅ Liquid Glass 外觀設定（iOS 26 新增）：建議跳過以統一介面
 
 ### 其他
 - **✅ 服務條款** (Terms and Conditions)：IT 代表組織同意即可

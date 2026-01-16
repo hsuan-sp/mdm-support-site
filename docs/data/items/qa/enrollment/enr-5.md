@@ -26,6 +26,10 @@ tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
 *   **Content-Type**：回傳的標頭必須設為 `application/json`。
 *   **SSL 憑證**：伺服器必須具備有效的 HTTPS 憑證。
 
-若學校無法修改官網設定，Jamf Pro 或 ASM 通常不提供此 JSON 的直接託管服務，
-您可能需要請網管人員協助在 DNS 或網頁伺服器層級進行設定。
+若學校無法修改官網設定，Jamf Pro 或 ASM 通常不提供此 JSON 的直接託管服務。
+
+**替代方案**：
+1.  **直接瀏覽註冊網址**：管理員可產出 MDM 註冊 URL（通常是 `https://your-server.jamfcloud.com/enroll`），讓使用者直接透過 Safari 下載描述檔。
+2.  **QR Code 掃描**：將註冊網址製作成 QR Code 貼在教室或教員室，使用者掃描後即可快速跳轉至註冊入口。
+3.  **預載配置**：對於學校資產，優先使用 **自動裝置註冊 (ADE)**，完全不需手動輸入帳號或偵測服務。
     
