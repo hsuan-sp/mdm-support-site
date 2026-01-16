@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
+import { useRouter, useData } from 'vitepress';
+
+const { lang, page } = useData();
+const router = useRouter();
 
 const handleContextMenu = (e: MouseEvent) => {
   e.preventDefault();
@@ -34,6 +38,24 @@ const handleCopy = (e: ClipboardEvent) => {
 
 // 基礎防護：攔截右鍵、快捷鍵與複製
 onMounted(() => {
+  // Automatic Language Detection
+  if (typeof window !== 'undefined') {
+    const userLang = navigator.language || (navigator as any).userLanguage || '';
+    const isChinese = userLang.toLowerCase().startsWith('zh');
+    const currentPath = window.location.pathname;
+    const isEnPath = currentPath.includes('/en/');
+    const hasRedirected = sessionStorage.getItem('lang-redirect-checked');
+
+    // If browser is not Chinese, and we are NOT on an English page, and haven't checked yet
+    if (!isChinese && !isEnPath && !hasRedirected) {
+      sessionStorage.setItem('lang-redirect-checked', 'true');
+      const target = currentPath.startsWith('/mdm-support-site/') 
+        ? currentPath.replace('/mdm-support-site/', '/mdm-support-site/en/')
+        : '/en' + currentPath;
+      router.go(target);
+    }
+  }
+
   document.addEventListener('contextmenu', handleContextMenu);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('copy', handleCopy);

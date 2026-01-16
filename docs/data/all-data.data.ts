@@ -18,7 +18,7 @@ const QA_ORDER = [
 ];
 
 /**
- * 原始 slug 與顯示名稱的映射表
+ * 原始 slug 與顯示名稱的映射表 (中文)
  */
 const SOURCE_TITLE_MAP: Record<string, string> = {
     'account': '帳號與伺服器',
@@ -32,8 +32,21 @@ const SOURCE_TITLE_MAP: Record<string, string> = {
 };
 
 /**
+ * 原始 slug 與顯示名稱的映射表 (英文)
+ */
+const EN_SOURCE_TITLE_MAP: Record<string, string> = {
+    'account': 'Account & Server Management',
+    'enrollment': 'Enrollment & Device Setup',
+    'apps': 'App & Content Distribution',
+    'classroom': 'Apple Classroom & Teaching Tools',
+    'digital-learning': 'Campus Digital Initiatives',
+    'hardware': 'Hardware & Maintenance',
+    'mac': 'Advanced Mac Management',
+    'qa-education': 'Education Scenarios & FAQ'
+};
+
+/**
  * 輕量化 Frontmatter 解析程式
- * 從 Markdown 檔案中提取 YAML 屬性與正文。
  */
 function parseFrontmatter(content: string) {
     const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -49,7 +62,6 @@ function parseFrontmatter(content: string) {
         const parts = line.split(':');
         if (parts.length >= 2) {
             const key = parts[0].trim();
-            // 使用 any 以相容字串、布林與物件等不同類型的解析結果
             let value: any = parts.slice(1).join(':').trim();
 
             if (value.startsWith('"') && value.endsWith('"')) {
@@ -67,41 +79,28 @@ function parseFrontmatter(content: string) {
 }
 
 export default {
-    // 監看項目目錄下的 Markdown 變動，實現自動重新整理
-    watch: ['./items/**/*.md'],
+    watch: ['./items/**/*.md', './items-en/**/*.md'],
     async load() {
-        // 透過動態匯入確保 Node.js 專屬模組不會進入前端使用者端套件
         const { fileURLToPath } = await import('node:url');
         const path = await import('node:path');
         const fs = await import('node:fs');
 
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
-        const DATA_ROOT = path.resolve(__dirname, 'items');
+        const ZH_ROOT = path.resolve(__dirname, 'items');
+        const EN_ROOT = path.resolve(__dirname, 'items-en');
 
-        console.log(`[資料載入器] 已定位資料根路徑: ${DATA_ROOT}`);
-
-        /**
-         * 遞迴取得目錄下的 Markdown 檔案清單
-         */
         const getFiles = (dir: string): string[] => {
-            if (!fs.existsSync(dir)) {
-                console.warn(`[資料載入器] 目錄不存在: ${dir}`);
-                return [];
-            }
+            if (!fs.existsSync(dir)) return [];
             return fs.readdirSync(dir)
                 .filter(file => file.endsWith('.md'))
                 .map(file => path.join(dir, file));
         };
 
-        /**
-         * 載入並重組 Q&A 核心資料
-         */
-        const loadQAData = async () => {
+        const loadQAData = async (root: string, titleMap: Record<string, string>) => {
             const sections = [];
-
             for (const slug of QA_ORDER) {
-                const dir = path.join(DATA_ROOT, 'qa', slug);
+                const dir = path.join(root, 'qa', slug);
                 const files = getFiles(dir);
                 const items = [];
 
@@ -119,18 +118,13 @@ export default {
                     });
                 }
 
-                // 依據 ID 進行自然序排序
-                items.sort((a, b) => {
-                    const idA = a.id || '';
-                    const idB = b.id || '';
-                    return idA.localeCompare(idB, undefined, { numeric: true });
-                });
+                items.sort((a, b) => (a.id || '').localeCompare(b.id || '', undefined, { numeric: true }));
 
                 if (items.length > 0) {
                     sections.push({
-                        source: SOURCE_TITLE_MAP[slug] || slug,
+                        source: titleMap[slug] || slug,
                         sections: [{
-                            title: items[0].category || SOURCE_TITLE_MAP[slug],
+                            title: items[0].category || titleMap[slug],
                             items: items
                         }]
                     });
@@ -139,21 +133,20 @@ export default {
             return sections;
         };
 
-        /**
-         * 載入並解析術語庫資料
-         */
-        const loadGlossaryData = async () => {
-            const dir = path.join(DATA_ROOT, 'glossary');
+        const loadGlossaryData = async (root: string, lang: 'zh' | 'en') => {
+            const dir = path.join(root, 'glossary');
             const files = getFiles(dir);
             const terms = [];
+
+            const analogyMarker = lang === 'zh' ? '# 白話文比喻' : '# Analogy';
+            const definitionMarker = lang === 'zh' ? '# 術語定義' : '# Term Definition';
 
             for (const filePath of files) {
                 const fileContent = fs.readFileSync(filePath, 'utf-8');
                 const { data, content } = parseFrontmatter(fileContent);
 
-                // 拆解術語結構：定義與白話比喻
-                const parts = content.split('# 白話文比喻');
-                const definition = parts[0].replace('# 術語定義', '').trim();
+                const parts = content.split(analogyMarker);
+                const definition = parts[0].replace(definitionMarker, '').trim();
                 const analogy = parts[1] ? parts[1].trim() : '';
 
                 terms.push({
@@ -165,16 +158,21 @@ export default {
                 });
             }
 
-            // 依術語名稱進行排序
             terms.sort((a, b) => (a.term || '').localeCompare(b.term || ''));
             return terms;
         };
 
-        const [allQAData, glossaryData] = await Promise.all([
-            loadQAData(),
-            loadGlossaryData()
+        const [zhQA, zhGlossary, enQA, enGlossary] = await Promise.all([
+            loadQAData(ZH_ROOT, SOURCE_TITLE_MAP),
+            loadGlossaryData(ZH_ROOT, 'zh'),
+            loadQAData(EN_ROOT, EN_SOURCE_TITLE_MAP),
+            loadGlossaryData(EN_ROOT, 'en')
         ]);
 
-        return { allQAData, glossaryData };
+        return {
+            zh: { allQAData: zhQA, glossaryData: zhGlossary },
+            en: { allQAData: enQA, glossaryData: enGlossary }
+        };
     }
 }
+

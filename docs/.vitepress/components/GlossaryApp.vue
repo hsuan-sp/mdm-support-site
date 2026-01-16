@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from "vue";
+import { useData } from 'vitepress';
 import * as loaderData from "../../data/all-data.data";
+
+const { lang } = useData();
 const data: any = loaderData;
 const rawData = data.data || data.default || data;
-const glossaryData = rawData.glossaryData || [];
+
+// Selected data based on current language
+const langData = computed(() => lang.value === 'en-US' ? rawData.en : rawData.zh);
+const glossaryData = computed(() => langData.value?.glossaryData || []);
+
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
@@ -11,6 +18,85 @@ import AppSidebar from './AppSidebar.vue';
 import MobileDrawer from '../theme/components/MobileDrawer.vue';
 import EmptyState from '../theme/components/EmptyState.vue';
 import MarkdownIt from "markdown-it";
+
+// UI Translations
+const t = computed(() => {
+  const translations = {
+    'zh-TW': {
+      sidebarTitle: "術語庫分類",
+      searchPlaceholder: "搜尋術語... (按 / 聚焦)",
+      categoryLabel: "分類",
+      allLabel: "全部顯示",
+      allChips: "全部",
+      sortAZ: "A-Z",
+      sortZA: "Z-A",
+      sortBtnAZ: "排序 A-Z",
+      sortBtnZA: "排序 Z-A",
+      allCategories: "所有分類",
+      totalTerms: "共 {n} 個術語",
+      analogyLabel: "白話文 / 比喻",
+      emptyState: "沒有找到符合「{q}」的術語",
+      clearSearch: "清除搜尋條件",
+      mobileBtn: "篩選與搜尋",
+      drawerTitle: "篩選與搜尋",
+      drawerCategoryTitle: "分類選擇",
+      fontScaleTitle: "字體大小調整",
+      fontSmall: "小",
+      fontMedium: "中",
+      fontLarge: "大",
+      categories: {
+        Core: "核心概念",
+        Enrollment: "裝置註冊",
+        Apple: "Apple 服務",
+        Security: "資訊安全",
+        Network: "網路配置",
+        Hardware: "硬體管理",
+        Apps: "App 管理",
+        Other: "其他",
+        Education: "教育場域",
+        macOS: "macOS 管理",
+        Jamf: "Jamf 專區"
+      }
+    },
+    'en-US': {
+      sidebarTitle: "Glossary Categories",
+      searchPlaceholder: "Search terms... (Press / to focus)",
+      categoryLabel: "Category",
+      allLabel: "Show All",
+      allChips: "All",
+      sortAZ: "A-Z",
+      sortZA: "Z-A",
+      sortBtnAZ: "Sort A-Z",
+      sortBtnZA: "Sort Z-A",
+      allCategories: "All Categories",
+      totalTerms: "{n} terms found",
+      analogyLabel: "Plain English Analogy",
+      emptyState: "No terms found for \"{q}\"",
+      clearSearch: "Clear Search",
+      mobileBtn: "Filter & Search",
+      drawerTitle: "Filter & Search",
+      drawerCategoryTitle: "Category Selection",
+      fontScaleTitle: "Font Size Adjustment",
+      fontSmall: "S",
+      fontMedium: "M",
+      fontLarge: "L",
+      categories: {
+        Core: "Core Concepts",
+        Enrollment: "Enrollment",
+        Apple: "Apple Services",
+        Security: "Security",
+        Network: "Networking",
+        Hardware: "Hardware",
+        Apps: "App Management",
+        Other: "Other",
+        Education: "Education",
+        macOS: "macOS",
+        Jamf: "Jamf"
+      }
+    }
+  };
+  return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
+});
 
 const md = new MarkdownIt({
   html: true,
@@ -21,7 +107,6 @@ const md = new MarkdownIt({
 
 const renderMarkdown = (text: string) => {
   if (!text) return "";
-  // Fix list spacing for better rendering
   const processed = text
     .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
     .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
@@ -34,8 +119,8 @@ type CategoryType = "Core" | "Enrollment" | "Apple" | "Security" | "Network" | "
 
 const searchQuery = ref("");
 const selectedCategory = ref<CategoryType | "All">("All");
-const sortOrder = ref<'asc' | 'desc'>('asc'); // 新增排序狀態
-const isControlsExpanded = ref(false); // 控制搜尋工具的展開/收起，預設收起
+const sortOrder = ref<'asc' | 'desc'>('asc');
+const isControlsExpanded = ref(false);
 
 const categories = [
   "All",
@@ -48,12 +133,12 @@ const categories = [
   "Apps",
   "Other",
   "Education",
-  "macOS",    // 新增
-  "Jamf",     // 新增
+  "macOS",
+  "Jamf",
 ] as const;
 
 const filteredTerms = computed(() => {
-  let filtered = glossaryData.filter((item: any) => {
+  let filtered = glossaryData.value.filter((item: any) => {
     const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
 
     const matchesSearch = queries.every(q => {
@@ -88,12 +173,10 @@ const getCategoryColor = (cat: string) => {
   return `badge-${cat.toLowerCase()}`;
 };
 
-// 切換排序順序
 const toggleSort = () => {
   sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
 };
 
-// Keyboard shortcuts
 useKeyboardShortcuts({
   onSearchFocus: () => {
     const searchInput = document.querySelector('.search-input') as HTMLInputElement;
@@ -127,11 +210,9 @@ onMounted(async () => {
   });
 });
 
-
-// Helper to count items per category
 const getCategoryCount = (cat: string) => {
-  if (cat === 'All') return glossaryData.length;
-  return glossaryData.filter((item: any) =>
+  if (cat === 'All') return glossaryData.value.length;
+  return glossaryData.value.filter((item: any) =>
     Array.isArray(item.category)
       ? item.category.includes(cat as any)
       : item.category === cat
@@ -143,19 +224,35 @@ const clearSearch = () => {
   selectedCategory.value = 'All';
 };
 
+const getCategoryName = (cat: string) => {
+  if (cat === 'All') return t.value.allLabel;
+  return (t.value.categories as any)[cat] || cat;
+};
 
+const getCategoryChipName = (cat: string) => {
+  if (cat === 'All') return t.value.allChips;
+  return (t.value.categories as any)[cat] || cat;
+};
 </script>
 
 <template>
   <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }"
     :style="{ '--app-scale': fontScale }">
     <div class="app-layout">
-      <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
-      <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
-      <AppSidebar title="術語庫分類" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
+      <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
         @update:scale="val => fontScale = val">
-        <template #search>
-          <div class="search-box">
+        <!-- Banner Placeholder for Alerts -->
+        <div v-if="lang === 'en-US'" class="wip-banner">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Section 1-8 (First 5 Items) translated. Full content coming soon. (Taipei European School Context)</span>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
             <span class="search-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -163,22 +260,22 @@ const clearSearch = () => {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </span>
-            <input v-model="searchQuery" type="text" placeholder="搜尋術語... (按 / 聚焦)" class="search-input" />
+            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
           </div>
         </template>
 
         <template #nav-items>
           <div class="categories-header">
-            <span>分類</span>
-            <button @click="toggleSort" class="sort-btn" :title="sortOrder === 'asc' ? 'A-Z' : 'Z-A'">
-              {{ sortOrder === 'asc' ? 'A-Z' : 'Z-A' }}
+            <span>{{ t.categoryLabel }}</span>
+            <button @click="toggleSort" class="sort-btn" :title="sortOrder === 'asc' ? t.sortAZ : t.sortZA">
+              {{ sortOrder === 'asc' ? t.sortAZ : t.sortZA }}
             </button>
           </div>
 
           <div class="categories-list">
             <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat"
               :class="['cat-item', { active: selectedCategory === cat }]">
-              {{ cat === 'All' ? '全部顯示' : cat }}
+              {{ getCategoryName(cat) }}
               <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{ getCategoryCount(cat) }}</span>
             </button>
           </div>
@@ -186,12 +283,12 @@ const clearSearch = () => {
       </AppSidebar>
 
       <main class="app-content">
-        <!-- 內容頁首：頂部控制行 -->
         <header class="content-header">
-
           <div class="view-status-bar">
-            <span class="status-label">{{ selectedCategory === 'All' ? '所有分類' : selectedCategory }}</span>
-            <span class="status-count">共 {{ filteredTerms.length }} 個術語</span>
+            <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
+              getCategoryName(selectedCategory)
+              }}</span>
+            <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
           </div>
         </header>
         <TransitionGroup name="list" tag="div" class="terms-grid">
@@ -204,7 +301,7 @@ const clearSearch = () => {
                   <div class="term-badges">
                     <span v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" :key="cat"
                       :class="['badge', getCategoryColor(cat)]">
-                      {{ cat }}
+                      {{ getCategoryName(cat) }}
                     </span>
                   </div>
                 </header>
@@ -213,7 +310,7 @@ const clearSearch = () => {
               <section v-if="item.analogy" class="analogy-wrapper">
                 <div class="analogy-icon" aria-hidden="true">💡</div>
                 <div class="analogy-content">
-                  <span class="analogy-label">白話文 / 比喻</span>
+                  <span class="analogy-label">{{ t.analogyLabel }}</span>
                   <div class="analogy-text markdown-body" v-html="renderMarkdown(item.analogy)"></div>
                 </div>
               </section>
@@ -221,48 +318,45 @@ const clearSearch = () => {
           </article>
         </TransitionGroup>
 
-        <!-- Empty State -->
-        <EmptyState v-if="filteredTerms.length === 0" icon="🧐" :description="`沒有找到符合「${searchQuery}」的術語`"
-          action-text="清除搜尋條件" @clear="clearSearch" />
+        <EmptyState v-if="filteredTerms.length === 0" icon="🧐" :description="t.emptyState.replace('{q}', searchQuery)"
+          :action-text="t.clearSearch" @clear="clearSearch" />
       </main>
     </div>
 
-    <!-- Mobile Floating Filter Button -->
     <button class="mobile-floating-btn" @click="isControlsExpanded = true" v-if="!isControlsExpanded"
-      aria-label="開啟搜尋與篩選">
+      :aria-label="t.mobileBtn">
       <span class="icon" aria-hidden="true">🔍</span>
-      <span class="label">篩選與搜尋</span>
+      <span class="label">{{ t.mobileBtn }}</span>
     </button>
 
-    <!-- Mobile Drawer (Using Shared Component) -->
-    <MobileDrawer :is-open="isControlsExpanded" title="篩選與搜尋" @close="isControlsExpanded = false">
+    <MobileDrawer :is-open="isControlsExpanded" :title="t.drawerTitle" @close="isControlsExpanded = false">
       <div class="search-box">
         <span class="search-icon" aria-hidden="true">🔍</span>
-        <input v-model="searchQuery" type="text" placeholder="搜尋術語..." class="search-input" aria-label="搜尋術語" />
+        <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input"
+          :aria-label="t.searchPlaceholder" />
       </div>
 
       <div class="categories-wrapper">
         <div class="categories-header">
-          <span>分類選擇</span>
+          <span>{{ t.drawerCategoryTitle }}</span>
           <button @click="toggleSort" class="sort-btn">
-            {{ sortOrder === 'asc' ? '排序 A-Z' : '排序 Z-A' }}
+            {{ sortOrder === 'asc' ? t.sortBtnAZ : t.sortBtnZA }}
           </button>
         </div>
         <div class="categories-chips">
           <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat; isControlsExpanded = false"
             :class="['cat-chip', { active: selectedCategory === cat }]">
-            {{ cat === 'All' ? '全部' : cat }}
+            {{ getCategoryChipName(cat) }}
           </button>
         </div>
       </div>
 
-      <!-- Mobile Font Adjust -->
       <div class="font-controls-mobile">
-        <div class="categories-header"><span>字體大小調整</span></div>
+        <div class="categories-header"><span>{{ t.fontScaleTitle }}</span></div>
         <div class="btn-group-mobile">
-          <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">小</button>
-          <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">中</button>
-          <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">大</button>
+          <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+          <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
+          <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
         </div>
       </div>
     </MobileDrawer>
@@ -795,84 +889,5 @@ const clearSearch = () => {
 .badge-education {
   background: rgba(255, 204, 0, 0.1);
   color: #cca300;
-}
-
-.badge-macos {
-  background: rgba(175, 82, 222, 0.1);
-  color: #af52de;
-}
-
-.badge-jamf {
-  background: rgba(0, 0, 0, 0.1);
-  color: #1d1d1f;
-}
-
-.dark .badge-apple,
-.dark .badge-jamf {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .app-layout {
-    display: block;
-  }
-
-  .app-sidebar {
-    display: none !important;
-  }
-
-  .expand-sidebar-btn {
-    display: none !important;
-  }
-
-  .mobile-floating-btn {
-    display: flex;
-  }
-
-  .glossary-app {
-    padding: 0 24px 100px;
-  }
-
-  .terms-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .glossary-header {
-    padding-top: 40px;
-  }
-
-  .terms-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-
-  .list-move,
-  .list-enter-active,
-  .list-leave-active {
-    transition: none !important;
-  }
-}
-
-.cat-chip {
-  padding: 8px 16px;
-  border-radius: 20px;
-  background: var(--vp-c-bg-alt);
-  border: 1px solid var(--vp-c-divider);
-  font-size: 14px;
-  color: var(--vp-c-text-2);
-  transition: all 0.2s;
-}
-
-.cat-chip.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-  border-color: var(--vp-c-brand-1);
 }
 </style>

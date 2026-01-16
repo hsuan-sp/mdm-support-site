@@ -1,34 +1,68 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useData } from 'vitepress';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
 import * as loaderData from "../../data/all-data.data";
+
+const { lang } = useData();
 const data: any = loaderData;
-// Fix: VitePress data loaders export 'data' as a named export in the virtual module
 const rawData = data.data || data.default || data;
-const allQAData = rawData.allQAData || [];
-console.log('IntegratedGuideApp Loaded Data Length:', allQAData.length);
+
+// Selected data based on current language
+const langData = computed(() => lang.value === 'en-US' ? rawData.en : rawData.zh);
+const allQAData = computed(() => langData.value?.allQAData || []);
+
 import type { QAItem } from "../../types";
 import MarkdownIt from "markdown-it";
 import AppSidebar from './AppSidebar.vue';
 import MobileDrawer from '../theme/components/MobileDrawer.vue';
 import EmptyState from '../theme/components/EmptyState.vue';
 
+// UI Translations
+const t = computed(() => {
+  const translations = {
+    'zh-TW': {
+      sidebarTitle: "指南導覽",
+      allQuestions: "全部題目",
+      searchPlaceholder: "搜尋... (按 / 聚焦)",
+      important: "重要",
+      searchResult: "搜尋結果：{q}",
+      clearSearch: "清除搜尋",
+      menuBtn: "章節選單",
+      drawerTitle: "章節選單",
+      prevPage: "上一頁",
+      nextPage: "下一頁"
+    },
+    'en-US': {
+      sidebarTitle: "Guide Navigation",
+      allQuestions: "All Questions",
+      searchPlaceholder: "Search... (Press / to focus)",
+      important: "Important",
+      searchResult: "Search results: {q}",
+      clearSearch: "Clear Search",
+      menuBtn: "Chapter Menu",
+      drawerTitle: "Chapters",
+      prevPage: "Previous",
+      nextPage: "Next"
+    }
+  };
+  return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
+});
+
 const md = new MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
-  breaks: true // 確保單次換行也會生效
+  breaks: true
 });
 
-// Helper to count items per chapter
 const getChapterCount = (source: string) => {
-  const module = (allQAData as any[]).find(m => m.source === source);
+  const module = (allQAData.value as any[]).find(m => m.source === source);
   if (!module) return 0;
   return module.sections.reduce((total: number, section: any) => total + section.items.length, 0);
 };
 
-// State
 const searchQuery = ref("");
 const activeSource = ref<string | "All">("All");
 const isSidebarOpen = ref(false);
@@ -36,19 +70,20 @@ const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-qa'
 
 const handleHashChange = () => {
   const hash = window.location.hash.replace('#', '').toLowerCase();
-  // 建立映射表以支援英文 Hash
+
+  // Mapping for both languages
   const hashMap: Record<string, string> = {
-    'account': '帳號與伺服器',
-    'enrollment': '裝置註冊',
-    'apps': 'App 管理',
-    'classroom': '課堂管理',
-    'digital': '數位精進',
-    'hardware': '硬體排除',
-    'mac': 'Mac 管理',
-    'education': '教育實戰'
+    'account': lang.value === 'en-US' ? 'Account & Server' : '帳號與伺服器',
+    'enrollment': lang.value === 'en-US' ? 'Enrollment' : '裝置註冊',
+    'apps': lang.value === 'en-US' ? 'App Management' : 'App 管理',
+    'classroom': lang.value === 'en-US' ? 'Apple Classroom' : '課堂管理',
+    'digital': lang.value === 'en-US' ? 'Digital Learning' : '數位精進',
+    'hardware': lang.value === 'en-US' ? 'Hardware Tuning' : '硬體排除',
+    'mac': lang.value === 'en-US' ? 'Mac Management' : 'Mac 管理',
+    'education': lang.value === 'en-US' ? 'Education Q&A' : '教育實戰'
   };
 
-  const targetSource = hashMap[hash] || (allQAData as any[]).find((m: any) => m.source.toLowerCase().includes(hash))?.source;
+  const targetSource = hashMap[hash] || (allQAData.value as any[]).find((m: any) => m.source.toLowerCase().includes(hash))?.source;
 
   if (targetSource) {
     activeSource.value = targetSource;
@@ -64,11 +99,11 @@ const searchResults = computed(() => {
   const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
   const results: { source: string, items: (QAItem & { relevance: number })[] }[] = [];
 
-  allQAData.forEach((file: any) => {
+  allQAData.value.forEach((file: any) => {
     const matches: (QAItem & { relevance: number })[] = [];
     file.sections.forEach((s: any) => s.items.forEach((i: any) => {
       let relevance = 0;
-      const tags = i.tags.join(' ').toLowerCase();
+      const tags = (i.tags || []).join(' ').toLowerCase();
 
       const allMatch = queries.every(q => {
         let match = false;
@@ -90,14 +125,13 @@ const searchResults = computed(() => {
       if (allMatch) {
         matches.push({
           ...i,
-          tags: [...i.tags, file.source],
+          tags: [...(i.tags || []), file.source],
           relevance
         });
       }
     }));
 
     if (matches.length) {
-      // Sort matches by relevance
       matches.sort((a, b) => b.relevance - a.relevance);
       results.push({ source: file.source, items: matches });
     }
@@ -107,14 +141,14 @@ const searchResults = computed(() => {
 
 const currentModule = computed(() => {
   if (activeSource.value === 'All') return null;
-  return (allQAData as any[]).find((d: any) => d.source === activeSource.value);
+  return (allQAData.value as any[]).find((d: any) => d.source === activeSource.value);
 });
 
-// For "All" mode
 const allQuestions = computed(() => {
   if (activeSource.value !== 'All') return null;
-  return allQAData;
+  return allQAData.value;
 });
+
 const openItems = ref(new Set<string>());
 
 const toggleItem = (id: string) => {
@@ -130,8 +164,6 @@ const toggleItem = (id: string) => {
 const renderMarkdown = (text: string) => {
   if (!text) return "";
   const lines = text.split('\n');
-
-  // Find minimum indentation of non-empty lines
   const nonEmptyLines = lines.filter((l: string) => l.trim());
   const minIndent = nonEmptyLines.length > 0
     ? nonEmptyLines.reduce((min: number, line: string) => {
@@ -140,20 +172,13 @@ const renderMarkdown = (text: string) => {
     }, Infinity)
     : 0;
 
-  // Remove common indentation and trim
   let cleaned = lines.map((line: string) => line.slice(minIndent)).join('\n').trim();
-
-  // Premium Typography Optimization:
-  // 1. Ensure lists have empty lines before them for correct MD parsing
-  // 2. Fix paragraph breaks
   let processed = cleaned
     .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
     .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
-
   return md.render(processed);
 };
 
-// Keyboard shortcuts
 useKeyboardShortcuts({
   onSearchFocus: () => {
     const searchInput = document.querySelector('.search-input') as HTMLInputElement;
@@ -171,7 +196,6 @@ useKeyboardShortcuts({
 onMounted(() => {
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
-  // Body class added by useAppFeatures
 });
 
 onUnmounted(() => {
@@ -184,26 +208,23 @@ const switchModule = (source: string | "All") => {
   isSidebarOpen.value = false;
   openItems.value.clear();
 };
-
-
 </script>
 
 <template>
   <div class="guide-app" :style="{ '--app-scale': fontScale }" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
     <div class="app-layout">
-      <!-- Left Sidebar: Filters & Search (Desktop > 1200px) -->
-      <AppSidebar title="指南導覽" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
+      <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
         @update:scale="val => fontScale = val">
         <template #search>
           <div class="search-section">
-            <input v-model="searchQuery" type="text" placeholder="搜尋... (按 / 聚焦)" class="search-input" />
+            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
           </div>
         </template>
 
         <template #nav-items>
           <button @click="switchModule('All')"
             :class="['nav-item', { active: activeSource === 'All' && !searchQuery }]">
-            <span class="nav-text">全部題目</span>
+            <span class="nav-text">{{ t.allQuestions }}</span>
             <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source),
               0)}}</span>
           </button>
@@ -217,13 +238,10 @@ const switchModule = (source: string | "All") => {
       </AppSidebar>
 
       <main class="app-content">
-        <!-- 頂部標題與切換鈕行 -->
-        <!-- 頂部標題與切換鈕行 (僅搜尋時顯示) -->
         <header class="content-header" v-if="searchQuery">
-          <h2 class="title-text">搜尋結果：{{ searchQuery }}</h2>
+          <h2 class="title-text">{{ t.searchResult.replace('{q}', searchQuery) }}</h2>
         </header>
 
-        <!-- 搜尋模式 -->
         <div v-if="searchQuery" class="result-container">
           <div v-if="searchResults && searchResults.length > 0">
             <div v-for="group in searchResults" :key="group.source" class="module-group">
@@ -235,7 +253,7 @@ const switchModule = (source: string | "All") => {
                     <div class="qa-card-content">
                       <div class="qa-trigger" @click="toggleItem(item.id)">
                         <div class="q-main">
-                          <span v-if="item.important" class="imp-tag">重要</span>
+                          <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
                           <span class="q-text">{{ item.question }}</span>
                         </div>
                         <span class="arrow">▼</span>
@@ -250,12 +268,10 @@ const switchModule = (source: string | "All") => {
               </div>
             </div>
           </div>
-          <EmptyState v-else @clear="searchQuery = ''" action-text="清除搜尋" />
+          <EmptyState v-else @clear="searchQuery = ''" :action-text="t.clearSearch" />
         </div>
 
-        <!-- 模組瀏覽模式 -->
         <div v-else class="module-view">
-          <!-- 章節內容 -->
           <template v-if="activeSource !== 'All'">
             <div v-for="section in currentModule?.sections" :key="section.title" class="section-block">
               <h3 class="section-label">{{ section.title }}</h3>
@@ -266,7 +282,7 @@ const switchModule = (source: string | "All") => {
                     <div class="qa-card-content">
                       <div class="qa-trigger" @click="toggleItem(item.id)">
                         <div class="q-main">
-                          <span v-if="item.important" class="imp-tag">重要</span>
+                          <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
                           <span class="q-text">{{ item.question }}</span>
                         </div>
                         <span class="arrow">▼</span>
@@ -282,7 +298,6 @@ const switchModule = (source: string | "All") => {
             </div>
           </template>
 
-          <!-- 全部題目模式 -->
           <template v-else>
             <div v-for="module in allQuestions" :key="module.source" class="chapter-group">
               <h2 class="chapter-title">{{ module.source }}</h2>
@@ -295,7 +310,7 @@ const switchModule = (source: string | "All") => {
                       <div class="qa-card-content">
                         <div class="qa-trigger" @click="toggleItem(item.id)">
                           <div class="q-main">
-                            <span v-if="item.important" class="imp-tag">重要</span>
+                            <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
                             <span class="q-text">{{ item.question }}</span>
                           </div>
                           <span class="arrow">▼</span>
@@ -315,20 +330,19 @@ const switchModule = (source: string | "All") => {
       </main>
     </div>
 
-    <!-- 行動版選單 (Premium Bottom Sheet) -->
     <button class="mobile-menu-btn" @click="isSidebarOpen = true">
-      章節選單
+      {{ t.menuBtn }}
     </button>
 
-    <MobileDrawer :is-open="isSidebarOpen" title="章節選單" @close="isSidebarOpen = false">
+    <MobileDrawer :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
       <div class="mobile-search">
-        <input v-model="searchQuery" type="text" placeholder="搜尋..." class="search-input" />
+        <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
       </div>
 
       <div class="mobile-nav-scroll">
         <div @click="switchModule('All')" class="m-nav-item"
           :class="{ active: activeSource === 'All' && !searchQuery }">
-          <span class="nav-text">全部題目</span>
+          <span class="nav-text">{{ t.allQuestions }}</span>
           <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source),
             0)}}</span>
         </div>
