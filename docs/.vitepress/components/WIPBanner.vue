@@ -1,36 +1,7 @@
-<script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useData, withBase } from 'vitepress'
+import { useData } from 'vitepress'
 
 const { lang } = useData()
-const showBanner = ref(false)
 
-const checkWipStatus = async () => {
-    // Only check/show on English pages
-    if (lang.value !== 'en-US') {
-        showBanner.value = false
-        return
-    }
-
-    try {
-        // Check if WIP_NOTICE.html exists (build artifact of WIP_NOTICE.md)
-        // using withBase to handle base path correctly
-        const response = await fetch(withBase('/en/WIP_NOTICE.html'), { method: 'HEAD' })
-        showBanner.value = response.ok
-    } catch {
-        showBanner.value = false
-    }
-}
-
-onMounted(() => {
-    checkWipStatus()
-})
-
-// Watch for language changes to re-check
-watch(lang, () => {
-    checkWipStatus()
-})
-</script>
 
 <template>
     <Transition name="slide-down">
