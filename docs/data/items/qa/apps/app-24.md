@@ -17,11 +17,13 @@ tags: ["行動數據", "Wi-Fi", "App 下載", "流量管理", "iOS 26"]
 此功能透過 **Declarative Device Management (DDM)** 實現，具體設定路徑視 MDM 系統而異：
 
 **Jamf Pro：**
-1. 進入 **Blueprints** 或 **Configuration Profiles**
-2. 選擇 **Restrictions (限制)** payload
-3. 在 **App Store** 或 **Network (網路)** 相關分類中
-4. 啟用 **「Restrict app downloads over cellular (限制透過行動網路下載 App)」**
-5. 部署至目標裝置群組
+1. 進入 **Blueprints** 或 **App Declarations**
+2. 針對個別受管 App 進行定義
+3. 在部署宣告中設定 **「CellularDataPolicy」**：
+   - **Disallow (不允許)**：強制僅能透過 Wi-Fi 下載。
+   - **Allow (允許)**：不分網路類型執行安裝。
+4. 部署至目標裝置群組 (需 iOS/iPadOS 18+ 且為受管與監管裝置)
+
 
 **Microsoft Intune：**
 - 在裝置設定描述檔的 App Store 限制中，可找到相關設定選項
