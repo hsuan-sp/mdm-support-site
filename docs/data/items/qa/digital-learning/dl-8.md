@@ -10,18 +10,17 @@ tags: ["網路","有線連接","Ethernet","Lightning","iPad 9"]
 
 # Answer
 
-**可以。雖然精進方案採購的 iPad 是 Lightning 介面，**
-**但仍可透過專用轉接器連接有線網路。**
+**可以。無論是傳統 Lightning 還是新款 USB-C 介面的 iPad，皆支援透過轉接器連接有線網路。**
 
-由於 Lightning 接口的供電能力有限，連接有線網路時通常需要額外供電。
+**硬體需求與選擇**：
 
-**硬體需求 (針對 Lightning 機型)**：
+1.  **USB-C 機型 (iPad 10 代、iPad Air 4/5/M2、iPad Pro)**：
+    *   **通用型 USB-C 轉 RJ45**：絕大多數標準 USB-C 網卡皆可「隨插即用」，且通常不需要額外供電即可驅動。
+    *   **建議方案**：使用 **「帶有 PD 充電孔的 USB-C 集線器 (Hub)」**，可確保在上網的同時持續為 iPad 供電，避免長時間教學導致電量耗盡。
 
-1.  **專用轉接器 (推薦)**：
-    *   **Belkin Ethernet + Power Adapter with Lightning Connector或其他官方轉接頭**：
-        Apple 官方認證且最穩定的方案，支援同時上網與充電 (PoE 支援型號甚至可直接供電)。
-    *   **一般 Lightning 轉 RJ45**：市面上有副廠轉接頭，但穩定性參差不齊，
-        且必須選擇 **「帶有充電孔」** 的版本，否則 iPad 會顯示「配件耗電量過高」而無法使用。
+2.  **Lightning 機型 (iPad 9 代及更早)**：
+    *   **專用轉接器**：推薦使用 **Belkin Ethernet + Power Adapter with Lightning Connector**。
+    *   **限制**：Lightning 接口供電能力極弱，若使用不帶電源插孔的轉接頭，iPad 常會顯示「配件耗電量過高」而無法運作。務必連接 Lightning 充電線至轉接器。
 
 2.  **RJ-45 網路線**：連接至教室牆上的資訊插座。
 
