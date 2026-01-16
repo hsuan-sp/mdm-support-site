@@ -288,22 +288,28 @@
     </style>
   </head>
   <body>
+    <div class="lang-switch" style="position: absolute; top: 20px; right: 20px;">
+      <button id="btn-lang" class="lang-btn" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: var(--text-sec); padding: 8px 16px; font-size: 13px; width: auto; display: flex; align-items: center; gap: 6px; box-shadow: none; border: 1px solid rgba(0,0,0,0.05);">
+        <span style="font-size: 16px;">🌐</span> <span id="lang-text">English</span>
+      </button>
+    </div>
+
     <main role="main">
       <div class="card">
         <header>
           <div class="logo-wrapper">
-            <img src="/superinfo_logo.png" alt="極電資訊 Logo" class="logo" />
+            <img src="/superinfo_logo.png" alt="Logo" class="logo" />
           </div>
-          <h1>身分驗證</h1>
-          <p class="subtitle">
+          <h1 data-i18n="title">身分驗證</h1>
+          <p class="subtitle" data-i18n="subtitle">
             請使用教育網域信箱 (@*.edu.tw) 登入<br />以存取 MDM 專業知識庫
           </p>
         </header>
 
-        <!-- 第 1 步：輸入電子郵件 -->
+        <!-- Step 1: Email Input -->
         <section id="step-email">
           <div class="form-group">
-            <label for="email">及電子郵件地址</label>
+            <label for="email" data-i18n="emailLabel">教育電子郵件地址</label>
             <input
               type="email"
               id="email"
@@ -315,15 +321,15 @@
           </div>
           <button id="btn-send" type="button">
             <div id="send-spinner" class="spinner hidden"></div>
-            <span id="send-text">傳送驗證碼</span>
+            <span id="send-text" data-i18n="btnSend">傳送驗證碼</span>
           </button>
         </section>
 
-        <!-- 第 2 步：輸入驗證碼 (OTP) -->
+        <!-- Step 2: OTP Input -->
         <section id="step-otp" class="hidden">
           <p id="otp-hint" style="color: var(--text-sec); margin-bottom: 24px; font-size: 14px"></p>
           <div class="form-group">
-            <label for="otp">驗證碼</label>
+            <label for="otp" data-i18n="otpLabel">驗證碼</label>
             <input
               type="text"
               id="otp"
@@ -342,20 +348,20 @@
           </div>
           <button id="btn-verify" type="button">
             <div id="verify-spinner" class="spinner hidden"></div>
-            <span id="verify-text">登入系統</span>
+            <span id="verify-text" data-i18n="btnVerify">登入系統</span>
           </button>
-          <a href="#" id="link-retry" class="link-text">更換電子郵件</a>
+          <a href="#" id="link-retry" class="link-text" data-i18n="changeEmail">更換電子郵件</a>
         </section>
 
-        <!-- 訊息與狀態回饋 -->
+        <!-- Messages & Status -->
         <div id="message" class="message-box" aria-live="polite"></div>
         
         <div id="service-status" class="status-badge hidden">
           <span class="dot"></span>
-          <span id="status-text">正在確認連線品質...</span>
+          <span id="status-text" data-i18n="statusConnecting">正在確認連線品質...</span>
         </div>
 
-        <footer class="footer-note">
+        <footer class="footer-note" data-i18n="footer">
           本系統使用安全 Cookie 與雲端邊緣運算技術<br />
           維護您的存取安全 &copy; 2026 極電資訊
         </footer>
@@ -363,6 +369,95 @@
     </main>
 
     <script>
+      // i18n Configuration
+      const translations = {
+        'zh-TW': {
+          title: '身分驗證',
+          subtitle: '請使用教育網域信箱 (@*.edu.tw) 登入<br />以存取 MDM 專業知識庫',
+          emailLabel: '教育電子郵件地址',
+          btnSend: '傳送驗證碼',
+          sending: '請求中...',
+          otpLabel: '驗證碼',
+          btnVerify: '登入系統',
+          verifying: '校驗中...',
+          changeEmail: '更換電子郵件',
+          statusConnecting: '正在確認連線品質...',
+          statusOnline: '已連線至安全驗證節點',
+          statusOffline: '驗證服務連線中...',
+          otpSent: '驗證碼已傳送至',
+          checkInbox: '請檢查您的收件匣',
+          invalidEmail: '請輸入正確的電子郵件格式',
+          verifySuccess: '校驗成功，進入主頁面...',
+          verifyError: '驗證碼不正確或已失效',
+          networkError: '網路連線異常',
+          footer: '本系統使用安全 Cookie 與雲端邊緣運算技術<br />維護您的存取安全 &copy; 2026 極電資訊'
+        },
+        'en': {
+          title: 'Authentication',
+          subtitle: 'Please login with your education email (@*.edu.tw)<br />to access the MDM Knowledge Base',
+          emailLabel: 'Education Email Address',
+          btnSend: 'Send Verification Code',
+          sending: 'Sending...',
+          otpLabel: 'Verification Code',
+          btnVerify: 'Sign In',
+          verifying: 'Verifying...',
+          changeEmail: 'Change Email',
+          statusConnecting: 'Checking connection...',
+          statusOnline: 'Connected to Secure Auth Node',
+          statusOffline: 'Connecting to Auth Service...',
+          otpSent: 'Verification code sent to',
+          checkInbox: 'Please check your inbox',
+          invalidEmail: 'Please enter a valid email address',
+          verifySuccess: 'Success! Redirecting...',
+          verifyError: 'Invalid or expired verification code',
+          networkError: 'Network connection error',
+          footer: 'Secured by Secure Cookie & Edge Computing<br />&copy; 2026 Superinfo Computer Co., Ltd.'
+        }
+      };
+
+      let currentLang = 'zh-TW';
+
+      const updateLanguage = (lang) => {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.getElementById('lang-text').innerText = lang === 'zh-TW' ? 'English' : '繁體中文';
+        
+        // Update all data-i18n elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+
+        // Update Dynamic Placeholders/Messages if visible
+        const otpHint = document.getElementById('otp-hint');
+        if (otpHint && otpHint.innerText.includes('@')) {
+           // If OTP hint is showing, refresh it but keep the email
+           const email = document.getElementById('email').value;
+           otpHint.innerText = `${translations[lang].otpSent} ${email}`;
+        }
+      };
+
+      // Auto-detect Language
+      const detectLanguage = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('lang') === 'en') return 'en';
+        
+        const browserLang = navigator.language || navigator.userLanguage; 
+        return browserLang.toLowerCase().startsWith('zh') ? 'zh-TW' : 'en';
+      };
+
+      // Initialization
+      currentLang = detectLanguage();
+      updateLanguage(currentLang);
+
+      // Event Listener for Language Switcher
+      document.getElementById('btn-lang').onclick = () => {
+        const newLang = currentLang === 'zh-TW' ? 'en' : 'zh-TW';
+        updateLanguage(newLang);
+      };
+
       const elements = {
         stepEmail: document.getElementById("step-email"),
         stepOtp: document.getElementById("step-otp"),
@@ -396,7 +491,7 @@
         log("偵測到存取令牌，正在建立工作階段...");
         elements.stepEmail.classList.add("hidden");
         elements.msg.className = "message-box success";
-        elements.msg.innerHTML = '<div class="spinner" style="display:inline-block; border-top-color:var(--success); margin-right:10px;"></div> 驗證成功，正在建立安全工作階段...';
+        elements.msg.innerHTML = '<div class="spinner" style="display:inline-block; border-top-color:var(--success); margin-right:10px;"></div> Verification successful, creating session...';
         
         fetch("/auth/session", {
           method: "POST",
@@ -406,17 +501,17 @@
         .then(async (res) => {
           if (res.ok) {
             log("會話建立成功，準備導向...");
-            setTimeout(() => location.href = "/", 500);
+            setTimeout(() => location.href = currentLang === 'en' ? "/en/" : "/", 500);
           } else {
             const err = await res.json();
             elements.msg.className = "message-box error";
-            elements.msg.innerText = `驗證失敗：${err.error || "逾期或無效的連結"}`;
+            elements.msg.innerText = `Error: ${err.error || "Invalid Token"}`;
             elements.stepEmail.classList.remove("hidden");
           }
         })
         .catch(() => {
           elements.msg.className = "message-box error";
-          elements.msg.innerText = "無法連線至驗證伺服器";
+          elements.msg.innerText = translations[currentLang].networkError;
           elements.stepEmail.classList.remove("hidden");
         });
       }
@@ -429,12 +524,12 @@
           const data = await res.json();
           elements.serviceStatus.classList.remove("hidden");
           if (data.status === "online") {
-            elements.statusText.innerText = "已連線至安全驗證節點";
+            elements.statusText.innerText = translations[currentLang].statusOnline;
             elements.serviceStatus.className = "status-badge status-online";
           }
         } catch (e) {
           elements.serviceStatus.classList.remove("hidden");
-          elements.statusText.innerText = "驗證服務連線中...";
+          elements.statusText.innerText = translations[currentLang].statusOffline;
           elements.serviceStatus.className = "status-badge status-offline";
         }
       })();
@@ -444,11 +539,11 @@
         if (action === 'send') {
           elements.btnSend.disabled = loading;
           elements.sendSpinner.classList.toggle("hidden", !loading);
-          elements.sendText.innerText = loading ? "請求中..." : "傳送驗證碼";
+          elements.sendText.innerText = loading ? translations[currentLang].sending : translations[currentLang].btnSend;
         } else {
           elements.btnVerify.disabled = loading;
           elements.verifySpinner.classList.toggle("hidden", !loading);
-          elements.verifyText.innerText = loading ? "校驗中..." : "登入系統";
+          elements.verifyText.innerText = loading ? translations[currentLang].verifying : translations[currentLang].btnVerify;
         }
       };
 
@@ -457,7 +552,7 @@
         const email = elements.emailInput.value.trim();
         if (!email || !email.includes("@")) {
           elements.msg.className = "message-box error";
-          elements.msg.innerText = "請輸入正確的電子郵件格式";
+          elements.msg.innerText = translations[currentLang].invalidEmail;
           return;
         }
 
@@ -475,15 +570,15 @@
           if (res.ok) {
             elements.stepEmail.classList.add("hidden");
             elements.stepOtp.classList.remove("hidden");
-            document.getElementById("otp-hint").innerText = `驗證碼已傳送至 ${email}`;
+            document.getElementById("otp-hint").innerText = `${translations[currentLang].otpSent} ${email}`;
             elements.msg.className = "message-box success";
-            elements.msg.innerText = "請檢查您的收件匣";
+            elements.msg.innerText = translations[currentLang].checkInbox;
           } else {
             elements.msg.className = "message-box error";
-            elements.msg.innerText = data.error || "傳送失敗，請稍後再試";
+            elements.msg.innerText = data.error || "Failed. Please try again.";
           }
         } catch (e) {
-          elements.msg.innerText = "網路連線異常";
+          elements.msg.innerText = translations[currentLang].networkError;
         } finally {
           setState('send', false);
         }
@@ -505,15 +600,15 @@
           });
           if (res.ok) {
             elements.msg.className = "message-box success";
-            elements.msg.innerText = "校驗成功，進入主頁面...";
-            setTimeout(() => (location.href = "/"), 800);
+            elements.msg.innerText = translations[currentLang].verifySuccess;
+            setTimeout(() => (location.href = currentLang === 'en' ? "/en/" : "/"), 800);
           } else {
             elements.msg.className = "message-box error";
-            elements.msg.innerText = "驗證碼不正確或已失效";
+            elements.msg.innerText = translations[currentLang].verifyError;
             setState('verify', false);
           }
         } catch (e) {
-          elements.msg.innerText = "驗證過程發生錯誤";
+          elements.msg.innerText = translations[currentLang].networkError;
           setState('verify', false);
         }
       };
@@ -525,6 +620,5 @@
         elements.msg.innerText = "";
         elements.otpInput.value = "";
       };
-    </script>
-  </body>
+    </script>  </body>
 </html>
