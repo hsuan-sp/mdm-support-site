@@ -251,7 +251,8 @@ const getCategoryChipName = (cat: string) => {
             <span>Section 1-8 (First 5 Items) translated. Full content coming soon. (Taipei European School Context)</span>
         </div>
 
-        <div class="search-section">
+        <template #search>
+          <div class="search-section">
             <div class="search-box">
             <span class="search-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -261,6 +262,7 @@ const getCategoryChipName = (cat: string) => {
               </svg>
             </span>
             <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+          </div>
           </div>
         </template>
 

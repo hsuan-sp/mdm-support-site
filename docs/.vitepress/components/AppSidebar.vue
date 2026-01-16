@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
+import { useData, useRouter } from 'vitepress';
 
 export default defineComponent({
   name: 'AppSidebar',
@@ -15,11 +16,35 @@ export default defineComponent({
   },
   emits: ['toggle', 'close', 'update:scale'],
   setup(_, { emit }) {
+    const { lang } = useData();
+    const router = useRouter();
     const fontScale = ref(1.0);
+
+    const switchLanguage = () => {
+      const currentPath = window.location.pathname;
+      let targetPath = '';
+
+      if (lang.value === 'zh-TW') {
+        // Switch to English
+        targetPath = currentPath.startsWith('/mdm-support-site/')
+          ? currentPath.replace('/mdm-support-site/', '/mdm-support-site/en/')
+          : '/en' + currentPath;
+      } else {
+        // Switch to Chinese
+        targetPath = currentPath.replace('/en/', '/');
+      }
+      
+      router.go(targetPath);
+    };
+
+    const langLabel = computed(() => lang.value === 'zh-TW' ? 'English' : '中文');
 
     return {
       fontScale,
-      emit
+      emit,
+      lang,
+      switchLanguage,
+      langLabel
     };
   }
 });
@@ -60,6 +85,17 @@ export default defineComponent({
           <button @click="$emit('update:scale', 1.0)" title="重置">A</button>
           <button @click="$emit('update:scale', 1.15)" title="放大">A+</button>
         </div>
+      </div>
+      <div class="lang-controls">
+        <span class="ctrl-label">{{ lang === 'zh-TW' ? '語言 / Language' : 'Language / 語言' }}</span>
+        <button class="lang-switch-btn" @click="switchLanguage">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          {{ langLabel }}
+        </button>
       </div>
       <slot name="footer"></slot>
     </div>
@@ -212,10 +248,36 @@ export default defineComponent({
   border-top-color: rgba(255, 255, 255, 0.05);
 }
 
-.font-controls {
+.font-controls,
+.lang-controls {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.lang-controls {
+  margin-top: 16px;
+}
+
+.lang-switch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(var(--vp-c-brand-1-rgb), 0.1);
+  color: var(--vp-c-brand-1);
+  border: 1px solid rgba(var(--vp-c-brand-1-rgb), 0.2);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-switch-btn:hover {
+  background: var(--vp-c-brand-soft);
+  transform: translateY(-1px);
 }
 
 .ctrl-label {
