@@ -60,47 +60,12 @@ const switchLanguage = () => {
 
 <template>
     <div class="user-center">
-        <!-- Desktop Horizontal View -->
+        <!-- Desktop Horizontal View (Simplified to prevent overlap) -->
         <div class="desktop-actions">
-
-
-            <div class="divider"></div>
-
-            <!-- Language Switch -->
-            <button @click="switchLanguage" class="action-btn" :title="lang === 'zh-TW' ? 'Switch to English' : '切換至中文'">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-            </button>
-
-            <div class="divider"></div>
-
-            <!-- Dark Mode Toggle -->
-            <button @click="toggleDarkMode" class="action-btn" :title="isDark ? '切換至淡色模式' : '切換至深色模式'">
-                <svg v-if="isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-            </button>
-
-            <div class="divider"></div>
-
             <div class="user-info" v-if="user">
-                <span class="username">{{ username }}</span>
+                <div class="user-badge">
+                    <span class="username">{{ username }}</span>
+                </div>
                 <button v-if="!isGuest" @click="logout" class="logout-link">登出</button>
             </div>
         </div>
@@ -285,17 +250,35 @@ const switchLanguage = () => {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
+    gap: 12px;
+}
+
+.user-badge {
+    background: var(--vp-c-bg-soft);
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--vp-c-divider);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .username {
-    color: var(--vp-c-text-1);
+    font-size: 13px;
+    color: var(--vp-c-text-2);
     font-weight: 600;
-    max-width: 120px;
+    max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.user-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #10b981; /* Green dot for guest/online */
+    border-radius: 50%;
 }
 
 .logout-link,
