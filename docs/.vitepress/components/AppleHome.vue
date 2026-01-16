@@ -1,21 +1,127 @@
 <script setup>
-import { useRouter, withBase } from 'vitepress'
-import { onMounted, onUnmounted } from 'vue'
+import { useData, useRouter, withBase } from 'vitepress'
+import { onMounted, onUnmounted, computed } from 'vue'
 
+const { lang } = useData()
 const router = useRouter()
+
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    eyebrow: 'Superinfo Apple MDM Hub',
+    title: 'Empowering \nEducation.',
+    intro1: '專為台灣教育現場打造。',
+    intro2: '極致簡單的 Apple 裝置管理知識庫。',
+    explore: '開始探索',
+    searchGlossary: '查詢術語表',
+    exploreThemes: '探索主題',
+    mastery: '從基礎設定到進階管理，一切盡在掌握。'
+  } : {
+    eyebrow: 'Superinfo Apple MDM Hub',
+    title: 'Empowering \nEducation.',
+    intro1: 'Built for Taiwan\'s education landscape.',
+    intro2: 'The simplest Apple Device Management Knowledge Base.',
+    explore: 'Get Started',
+    searchGlossary: 'Search Glossary',
+    exploreThemes: 'Explore Topics',
+    mastery: 'From basic setup to advanced management, master it all here.'
+  }
+})
+
+const navCards = computed(() => [
+  {
+    title: 'Identity',
+    subtitle: lang.value === 'zh-TW' ? '帳號與身分' : 'Account & Identity',
+    desc: lang.value === 'zh-TW' ? '深入了解管理式 Apple ID、聯合驗證與權限委派。' : 'Learn about Managed Apple IDs, Federated Authentication, and roles.',
+    link: '/guide/#account',
+    bg: '#F5F5F7',
+    textColor: '#1d1d1f',
+    icon: '👤'
+  },
+  {
+    title: 'Deployment',
+    subtitle: lang.value === 'zh-TW' ? '零接觸部署' : 'Zero-Touch Deployment',
+    desc: lang.value === 'zh-TW' ? '透過 Apple Configurator 與 ADE 達成自動化開箱即用。' : 'Achieve out-of-the-box automation with Apple Configurator and ADE.',
+    link: '/guide/#enrollment',
+    bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    textColor: '#fff',
+    icon: '📦'
+  },
+  {
+    title: 'VPP Apps',
+    subtitle: lang.value === 'zh-TW' ? '軟體採購' : 'Software Procurement',
+    desc: lang.value === 'zh-TW' ? '掌握 App 與圖書的批量授權派發與生命週期管理。' : 'Master bulk licensing and lifecycle management for apps and books.',
+    link: '/guide/#apps',
+    bg: '#F5F5F7',
+    textColor: '#1d1d1f',
+    icon: '📱'
+  },
+  {
+    title: 'Classroom',
+    subtitle: lang.value === 'zh-TW' ? '課堂教學' : 'Classroom Instruction',
+    desc: lang.value === 'zh-TW' ? '賦能教師掌握即時畫面控管、文件傳送與數位互動。' : 'Empower teachers with screen monitoring, file sharing, and interaction.',
+    link: '/guide/#classroom',
+    bg: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
+    textColor: '#1d1d1f',
+    icon: '🍎'
+  },
+  {
+    title: 'Education',
+    subtitle: lang.value === 'zh-TW' ? '方案規範' : 'Project Compliance',
+    desc: lang.value === 'zh-TW' ? '接軌教育部專案規範，優化校園數位學習環境。' : 'Align with MOE technical requirements to optimize digital learning.',
+    link: '/guide/#digital',
+    bg: '#F5F5F7',
+    textColor: '#1d1d1f',
+    icon: '🎓'
+  },
+  {
+    title: 'Service',
+    subtitle: lang.value === 'zh-TW' ? '維護報修' : 'Maintenance & Repair',
+    desc: lang.value === 'zh-TW' ? '了解硬體保固查詢、維修流程與備機管理策略。' : 'Hardware warranty checks, repair flows, and loaner management.',
+    link: '/guide/#hardware',
+    bg: '#F5F5F7',
+    textColor: '#1d1d1f',
+    icon: '🔧'
+  },
+  {
+    title: 'macOS',
+    subtitle: lang.value === 'zh-TW' ? '電腦管理' : 'Mac Management',
+    desc: lang.value === 'zh-TW' ? '針對 Mac 的專屬組態描述檔與安全性原則管理。' : 'Configuration profiles and security policy management for Mac.',
+    link: '/guide/#mac',
+    bg: 'linear-gradient(135deg, #434343 0%, #000000 100%)',
+    textColor: '#f5f5f7',
+    icon: '💻'
+  },
+  {
+    title: 'Scenarios',
+    subtitle: lang.value === 'zh-TW' ? '情境實戰' : 'Battle-Tested Q&A',
+    desc: lang.value === 'zh-TW' ? '集結第一線網管與教師的高頻率常見問題答集。' : 'Frequently asked questions from on-site IT admins and teachers.',
+    link: '/guide/#education',
+    bg: '#F5F5F7',
+    textColor: '#1d1d1f',
+    icon: '🏫'
+  },
+  {
+    title: 'Glossary',
+    subtitle: lang.value === 'zh-TW' ? '零知識術語表' : 'Glossary',
+    desc: lang.value === 'zh-TW' ? '從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。' : 'From technical terms to plain English, master the MDM lingo.',
+    link: '/glossary',
+    bg: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    textColor: '#1d1d1f',
+    icon: '📖'
+  }
+])
 
 onMounted(() => {
   document.body.classList.add('is-home')
 
-  // Staggered animation for cards with improved performance
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
             entry.target.classList.add('is-visible')
-          }, index * 80) // Slightly faster stagger
-          observer.unobserve(entry.target) // Performance: stop observing after animation
+          }, index * 80)
+          observer.unobserve(entry.target)
         }
       })
     },
@@ -30,90 +136,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.body.classList.remove('is-home')
 })
-
-const navCards = [
-  {
-    title: 'Identity',
-    subtitle: '帳號與身分',
-    desc: '深入了解管理式 Apple ID、聯合驗證與權限委派。',
-    link: '/guide/#account',
-    bg: '#F5F5F7',
-    textColor: '#1d1d1f',
-    icon: '👤'
-  },
-  {
-    title: 'Deployment',
-    subtitle: '零接觸部署',
-    desc: '透過 Apple Configurator 與 ADE 達成自動化開箱即用。',
-    link: '/guide/#enrollment',
-    bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    textColor: '#fff',
-    icon: '📦'
-  },
-  {
-    title: 'VPP Apps',
-    subtitle: '軟體採購',
-    desc: '掌握 App 與圖書的批量授權派發與生命週期管理。',
-    link: '/guide/#apps',
-    bg: '#F5F5F7',
-    textColor: '#1d1d1f',
-    icon: '📱'
-  },
-  {
-    title: 'Classroom',
-    subtitle: '課堂教學',
-    desc: '賦能教師掌握即時畫面控管、文件傳送與數位互動。',
-    link: '/guide/#classroom',
-    bg: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
-    textColor: '#1d1d1f',
-    icon: '🍎'
-  },
-  {
-    title: 'Education',
-    subtitle: '方案規範',
-    desc: '接軌教育部專案規範，優化校園數位學習環境。',
-    link: '/guide/#digital',
-    bg: '#F5F5F7',
-    textColor: '#1d1d1f',
-    icon: '🎓'
-  },
-  {
-    title: 'Service',
-    subtitle: '維護報修',
-    desc: '了解硬體保固查詢、維修流程與備機管理策略。',
-    link: '/guide/#hardware',
-    bg: '#F5F5F7',
-    textColor: '#1d1d1f',
-    icon: '🔧'
-  },
-  {
-    title: 'macOS',
-    subtitle: '電腦管理',
-    desc: '針對 Mac 的專屬組態描述檔與安全性原則管理。',
-    link: '/guide/#mac',
-    bg: 'linear-gradient(135deg, #434343 0%, #000000 100%)',
-    textColor: '#f5f5f7',
-    icon: '💻'
-  },
-  {
-    title: 'Scenarios',
-    subtitle: '情境實戰',
-    desc: '集結第一線網管與教師的高頻率常見問題答集。',
-    link: '/guide/#education',
-    bg: '#F5F5F7',
-    textColor: '#1d1d1f',
-    icon: '🏫'
-  },
-  {
-    title: 'Glossary',
-    subtitle: '零知識術語表',
-    desc: '從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。',
-    link: '/glossary',
-    bg: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-    textColor: '#1d1d1f',
-    icon: '📖'
-  }
-]
 </script>
 
 <template>
@@ -122,19 +144,19 @@ const navCards = [
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content fade-in-up">
-        <span class="eyebrow">Superinfo Apple MDM Hub</span>
-        <h1>Empowering <br />Education.</h1>
+        <span class="eyebrow">{{ t.eyebrow }}</span>
+        <h1 style="white-space: pre-line;">{{ t.title }}</h1>
         <p class="intro">
-          專為台灣教育現場打造。<br />
-          極致簡單的 Apple 裝置管理知識庫。
+          {{ t.intro1 }}<br />
+          {{ t.intro2 }}
         </p>
         <div class="hero-links">
           <a :href="withBase('/guide/')" class="primary-btn">
-            開始探索
+            {{ t.explore }}
             <span class="btn-icon" aria-hidden="true">→</span>
           </a>
           <a :href="withBase('/glossary')" class="text-link">
-            查詢術語表
+            {{ t.searchGlossary }}
             <span aria-hidden="true">›</span>
           </a>
         </div>
@@ -144,13 +166,13 @@ const navCards = [
     <!-- Grid Section -->
     <section class="grid-section">
       <div class="section-header fade-in-on-scroll">
-        <h2>探索主題</h2>
-        <p>從基礎設定到進階管理，一切盡在掌握。</p>
+        <h2>{{ t.exploreThemes }}</h2>
+        <p>{{ t.mastery }}</p>
       </div>
 
       <div class="cards-grid">
         <a v-for="card in navCards" :key="card.link" :href="withBase(card.link)" class="card fade-in-on-scroll"
-          :style="{ background: card.bg, color: card.textColor }" :aria-label="`前往 ${card.subtitle} 章節`">
+          :style="{ background: card.bg, color: card.textColor }" :aria-label="`前往 ${card.subtitle}`">
           <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
           <div class="card-text">
             <span class="card-subtitle">{{ card.subtitle }}</span>

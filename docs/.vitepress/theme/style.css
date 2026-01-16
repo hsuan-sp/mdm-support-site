@@ -185,7 +185,10 @@ body,
   backdrop-filter: var(--vp-backdrop-filter);
   -webkit-backdrop-filter: var(--vp-backdrop-filter);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-  z-index: 100 !important; /* Ensure Nav stays on top */
+  z-index: 100 !important;
+  /* Ensure children are centered vertically */
+  display: flex !important;
+  align-items: center !important;
 }
 
 /* Fix dropdown disappearing issues */
@@ -262,14 +265,17 @@ h1 {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
-    padding-right: 20px;
-    max-width: 320px;
+    align-items: center; /* Center vertically */
+    padding-right: 16px;
+    max-width: 300px;
   }
 
   /* Reduce menu padding to fit more items */
-  .VPNavBarMenuLink,
+  .VPNavBarMenuLink, 
   .VPNavBarMenuGroup {
-    padding: 0 12px !important;
+    padding: 0 10px !important;
+    display: flex !important;
+    align-items: center !important;
   }
 }
 

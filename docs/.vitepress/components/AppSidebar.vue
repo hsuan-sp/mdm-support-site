@@ -20,31 +20,10 @@ export default defineComponent({
     const router = useRouter();
     const fontScale = ref(1.0);
 
-    const switchLanguage = () => {
-      const currentPath = window.location.pathname;
-      let targetPath = '';
-
-      if (lang.value === 'zh-TW') {
-        // Switch to English
-        targetPath = currentPath.startsWith('/mdm-support-site/')
-          ? currentPath.replace('/mdm-support-site/', '/mdm-support-site/en/')
-          : '/en' + currentPath;
-      } else {
-        // Switch to Chinese
-        targetPath = currentPath.replace('/en/', '/');
-      }
-      
-      router.go(targetPath);
-    };
-
-    const langLabel = computed(() => lang.value === 'zh-TW' ? 'English' : '中文');
-
     return {
       fontScale,
       emit,
-      lang,
-      switchLanguage,
-      langLabel
+      lang
     };
   }
 });
@@ -85,17 +64,6 @@ export default defineComponent({
           <button @click="$emit('update:scale', 1.0)" title="重置">A</button>
           <button @click="$emit('update:scale', 1.15)" title="放大">A+</button>
         </div>
-      </div>
-      <div class="lang-controls">
-        <span class="ctrl-label">{{ lang === 'zh-TW' ? '語言 / Language' : 'Language / 語言' }}</span>
-        <button class="lang-switch-btn" @click="switchLanguage">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-          {{ langLabel }}
-        </button>
       </div>
       <slot name="footer"></slot>
     </div>

@@ -76,15 +76,15 @@ export default defineConfig({
           { text: 'Guide', link: '/en/guide/' },
           { text: 'Glossary', link: '/en/glossary' },
           {
-            text: 'Resources',
+            text: 'Resources (Traditional Chinese Primarily)',
             items: [
               {
-                text: 'Useful Links',
+                text: 'External Links (ZH-TW)',
                 items: [
                   { text: 'Superinfo Website', link: 'https://www.superinfo.com.tw' },
-                  { text: 'Apple Education', link: 'https://www.apple.com/education/' },
-                  { text: 'Apple Platform Deployment', link: 'https://support.apple.com/guide/deployment/welcome/web' },
-                  { text: 'Apple School Manager Guide', link: 'https://support.apple.com/guide/apple-school-manager/welcome/web' },
+                  { text: 'Apple Education (TW)', link: 'https://www.apple.com/tw/education/' },
+                  { text: 'Apple Platform Deployment (ZH)', link: 'https://support.apple.com/zh-tw/guide/deployment/welcome/web' },
+                  { text: 'Apple School Manager Guide (ZH)', link: 'https://support.apple.com/zh-tw/guide/apple-school-manager/welcome/web' },
                   { text: 'Jamf Pro Documentation', link: 'https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/Jamf_Pro_Documentation.html' }
                 ]
               }
