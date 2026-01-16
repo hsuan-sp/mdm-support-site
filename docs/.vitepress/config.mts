@@ -127,6 +127,14 @@ export default defineConfig({
   cleanUrls: true,
 
   vite: {
+    build: {
+      chunkSizeWarningLimit: 2000,
+      rollupOptions: {
+        output: {
+          // 移除複雜的 manualChunks 以避免 Circular chunk 錯誤
+        }
+      }
+    },
     resolve: {
       alias: {
         'punycode': 'punycode'
