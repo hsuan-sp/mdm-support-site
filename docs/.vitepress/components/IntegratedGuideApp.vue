@@ -32,7 +32,11 @@ const t = computed(() => {
       menuBtn: "章節選單",
       drawerTitle: "章節選單",
       prevPage: "上一頁",
-      nextPage: "下一頁"
+      nextPage: "下一頁",
+      fontScaleTitle: "字體大小調整",
+      fontSmall: "小",
+      fontMedium: "中",
+      fontLarge: "大"
     },
     'en-US': {
       sidebarTitle: "Guide Navigation",
@@ -44,7 +48,11 @@ const t = computed(() => {
       menuBtn: "Chapter Menu",
       drawerTitle: "Chapters",
       prevPage: "Previous",
-      nextPage: "Next"
+      nextPage: "Next",
+      fontScaleTitle: "Font Size Adjustment",
+      fontSmall: "S",
+      fontMedium: "M",
+      fontLarge: "L"
     }
   };
   return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
@@ -217,7 +225,16 @@ const switchModule = (source: string | "All") => {
         @update:scale="val => fontScale = val">
         <template #search>
           <div class="search-section">
-            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+            <div class="search-box">
+              <span class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+            </div>
           </div>
         </template>
 
@@ -335,7 +352,14 @@ const switchModule = (source: string | "All") => {
     </button>
 
     <MobileDrawer :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
-      <div class="mobile-search">
+      <div class="search-box mobile-search">
+        <span class="search-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
         <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
       </div>
 
@@ -351,6 +375,15 @@ const switchModule = (source: string | "All") => {
           :class="{ active: activeSource === m.source && !searchQuery }">
           <span class="nav-text">{{ m.source }}</span>
           <span class="nav-count">{{ getChapterCount(m.source) }}</span>
+        </div>
+      </div>
+
+      <div class="font-controls-mobile">
+        <div class="categories-header-mini"><span>{{ t.fontScaleTitle }}</span></div>
+        <div class="btn-group-mobile">
+          <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+          <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
+          <button @click="fontScale = 1.15" :class="{ active: fontScale === 1.15 }">{{ t.fontLarge }}</button>
         </div>
       </div>
     </MobileDrawer>
@@ -660,14 +693,85 @@ const switchModule = (source: string | "All") => {
   }
 }
 
-.mobile-search input {
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
   width: 100%;
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  border-radius: 16px;
+  padding: 12px 16px 12px 40px;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.2s;
   border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-1);
+  line-height: normal; /* Fix misaligned text */
+}
+
+.search-input:focus {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.mobile-search {
+  margin-bottom: 20px;
+}
+
+.mobile-search .search-input {
+  padding: 14px 18px 14px 44px;
   font-size: 16px;
+  border-radius: 16px;
+}
+
+.font-controls-mobile {
+  margin-top: 32px;
+}
+
+.btn-group-mobile {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-group-mobile button {
+  flex: 1;
+  padding: 12px;
+  background: var(--vp-c-bg-mute);
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+}
+
+.btn-group-mobile button.active {
+  background: var(--vp-c-brand-1);
+  color: white;
+}
+
+.categories-header-mini {
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  letter-spacing: 0.05em;
 }
 
 .mobile-nav-scroll {

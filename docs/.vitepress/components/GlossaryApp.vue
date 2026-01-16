@@ -332,8 +332,14 @@ const getCategoryChipName = (cat: string) => {
     </button>
 
     <MobileDrawer :is-open="isControlsExpanded" :title="t.drawerTitle" @close="isControlsExpanded = false">
-      <div class="search-box">
-        <span class="search-icon" aria-hidden="true">🔍</span>
+      <div class="search-box mobile-search-box">
+        <span class="search-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
         <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input"
           :aria-label="t.searchPlaceholder" />
       </div>
@@ -611,8 +617,9 @@ const getCategoryChipName = (cat: string) => {
   font-size: 14px;
   transition: all 0.2s;
   border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
+  background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-1);
+  line-height: normal; /* Fix misaligned text */
 }
 
 .search-input:focus {
@@ -627,6 +634,10 @@ const getCategoryChipName = (cat: string) => {
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 /* Grid Layout with Transition */

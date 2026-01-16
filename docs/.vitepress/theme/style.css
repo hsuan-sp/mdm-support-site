@@ -184,11 +184,22 @@ body,
   max-width: 100vw !important;
   backdrop-filter: var(--vp-backdrop-filter);
   -webkit-backdrop-filter: var(--vp-backdrop-filter);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05) !important;
   z-index: 100 !important;
-  /* Ensure children are centered vertically */
+  height: var(--vp-nav-height);
+}
+
+.VPNavBar :deep(.container) {
   display: flex !important;
   align-items: center !important;
+  height: 100% !important;
+}
+
+.VPNavBar :deep(.content) {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  padding: 0 32px !important;
 }
 
 /* Fix dropdown disappearing issues */
@@ -198,9 +209,37 @@ body,
 
 .VPNavBarMenuLink,
 .VPNavBarMenuGroup {
-  /* Add padding to bridge hover gaps */
-  padding-bottom: 20px !important;
-  margin-bottom: -20px !important;
+  display: flex !important;
+  align-items: center !important;
+  height: var(--vp-nav-height) !important;
+  line-height: var(--vp-nav-height) !important;
+  padding: 0 12px !important;
+  transition: color 0.25s;
+}
+
+/* Remove all default vertical dividers and borders between navbar sections */
+:global(.VPNavBarDivider),
+:global(.VPNavBar .divider),
+:global(.VPNavBarMenu + .VPNavBarAppearance),
+:global(.VPNavBarAppearance + .VPNavBarExtra),
+:global(.VPNavBarExtra + .VPNavBarSocialLinks) {
+  display: none !important;
+  border: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+:global(.VPNavBarAppearance) {
+  display: flex !important;
+  align-items: center !important;
+  border-left: none !important;
+  margin-left: 12px !important;
+}
+
+:global(.VPNavBarMenu) {
+  display: flex !important;
+  align-items: center !important;
 }
 
 .VPMenu {
@@ -305,11 +344,13 @@ h1 {
 
 /* Adjust Site Title Text */
 .VPNavBarTitle .title {
-  font-weight: 600 !important;
-  font-size: 16px !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
   letter-spacing: -0.01em;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  color: var(--vp-c-text-1);
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .VPNavBarTitle:hover .title {
   opacity: 1;

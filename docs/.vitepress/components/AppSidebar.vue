@@ -17,13 +17,29 @@ export default defineComponent({
   emits: ['toggle', 'close', 'update:scale'],
   setup(_, { emit }) {
     const { lang } = useData();
-    const router = useRouter();
     const fontScale = ref(1.0);
+
+    const t = computed(() => {
+      return lang.value === 'zh-TW' ? {
+        fontSize: '字體大小',
+        smaller: '縮小',
+        reset: '重置',
+        larger: '放大',
+        toggleSidebar: '收合側邊欄'
+      } : {
+        fontSize: 'Font Size',
+        smaller: 'Smaller',
+        reset: 'Reset',
+        larger: 'Larger',
+        toggleSidebar: 'Toggle Sidebar'
+      }
+    });
 
     return {
       fontScale,
       emit,
-      lang
+      lang,
+      t
     };
   }
 });
@@ -33,7 +49,7 @@ export default defineComponent({
   <aside class="app-sidebar" :class="{ 'collapsed': !isOpen }">
     <div class="sidebar-top">
       <div class="sidebar-ctrls">
-        <button class="sidebar-toggle-btn" @click="emit('toggle')" title="收合側邊欄">
+        <button class="sidebar-toggle-btn" @click="emit('toggle')" :title="t.toggleSidebar">
           <svg v-if="isOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -58,11 +74,11 @@ export default defineComponent({
 
     <div class="sidebar-bottom" v-if="isOpen">
       <div class="font-controls">
-        <span class="ctrl-label">字體大小</span>
+        <span class="ctrl-label">{{ t.fontSize }}</span>
         <div class="btn-group">
-          <button @click="$emit('update:scale', 0.9)" title="縮小">A-</button>
-          <button @click="$emit('update:scale', 1.0)" title="重置">A</button>
-          <button @click="$emit('update:scale', 1.15)" title="放大">A+</button>
+          <button @click="$emit('update:scale', 0.9)" :title="t.smaller">A-</button>
+          <button @click="$emit('update:scale', 1.0)" :title="t.reset">A</button>
+          <button @click="$emit('update:scale', 1.15)" :title="t.larger">A+</button>
         </div>
       </div>
       <slot name="footer"></slot>

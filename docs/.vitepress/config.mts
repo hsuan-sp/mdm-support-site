@@ -143,29 +143,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/superinfo_logo.png',
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/hsuan-sp/mdm-support-site' }
-    ],
-    search: {
-      provider: 'local',
-      options: {
-        locales: {
-          en: {
-            translations: {
-              button: { buttonText: 'Search', buttonAriaLabel: 'Search' },
-              modal: { noResultsText: 'No results for', resetButtonTitle: 'Reset search', footer: { selectText: 'to select', navigateText: 'to navigate', closeText: 'to close' } }
-            }
-          },
-          root: {
-            translations: {
-              button: { buttonText: '搜尋', buttonAriaLabel: '搜尋' },
-              modal: { noResultsText: '找不到相關內容', resetButtonTitle: '清除搜尋', footer: { selectText: '選擇', navigateText: '切換', closeText: '關閉' } }
-            }
-          }
-        }
-      }
-    }
+    logo: '/superinfo_logo.png'
   }
 })
 
