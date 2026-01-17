@@ -1,7 +1,17 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const visible = ref(false)
+
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    backToTop: '返回頂部'
+  } : {
+    backToTop: 'Back to Top'
+  }
+})
 
 const handleScroll = () => {
   visible.value = window.scrollY > 300
@@ -25,7 +35,7 @@ onUnmounted(() => {
 
 <template>
   <transition name="slide-fade">
-    <button v-if="visible" class="back-to-top" aria-label="返回頂部" @click="scrollToTop">
+    <button v-if="visible" class="back-to-top" :aria-label="t.backToTop" @click="scrollToTop">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
         stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 15l-6-6-6 6" />
@@ -62,9 +72,17 @@ onUnmounted(() => {
 }
 
 @keyframes pulse-border {
-  0% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 113, 227, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 113, 227, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+  }
 }
 
 @media (max-width: 640px) {

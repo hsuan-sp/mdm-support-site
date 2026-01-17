@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useLayoutMode } from '../composables/useLayoutMode';
-import { useData, useRouter } from 'vitepress';
+import { useData, useRouter, withBase } from 'vitepress';
 
 import { useAuth } from '../composables/useAuth';
 
 useLayoutMode();
-const { isDark, theme } = useData();
+const { isDark, theme, lang, page } = useData();
 const { user, isGuest, username, checkAuth, logout } = useAuth();
 const router = useRouter();
 
@@ -39,7 +39,6 @@ const toggleDarkMode = () => {
     localStorage.setItem('vitepress-theme-appearance', newValue ? 'dark' : 'light');
 };
 
-const { lang } = useData();
 const t = computed(() => {
     return lang.value === 'zh-TW' ? {
         logout: '登出',
@@ -69,29 +68,29 @@ const t = computed(() => {
 });
 
 const switchLanguage = () => {
-    const currentPath = window.location.pathname;
-    let targetPath = '';
+    const relPath = page.value.relativePath;
+    let target = '';
 
     if (lang.value === 'zh-TW') {
-        // Switch to English: add /en prefix
-        if (currentPath === '/') {
-            targetPath = '/en/';
-        } else if (currentPath.startsWith('/')) {
-            targetPath = '/en' + currentPath;
-        }
+        // To English: prepend /en/
+        target = '/en/' + relPath;
     } else {
-        // Switch to Chinese: remove /en prefix
-        if (currentPath === '/en/' || currentPath === '/en') {
-            targetPath = '/';
-        } else if (currentPath.startsWith('/en/')) {
-            targetPath = currentPath.replace('/en/', '/');
-        } else {
-            targetPath = currentPath.replace('/en', '/');
-        }
+        // To Chinese: remove en/ prefix
+        target = '/' + relPath.replace(/^en\//, '');
     }
 
-    // Use window.location for full page reload to ensure proper language context
-    window.location.href = targetPath;
+    // Clean up path: remove .md and handle /index
+    target = target.replace(/\.md$/, '');
+    if (target.endsWith('/index')) {
+        target = target.replace(/\/index$/, '/');
+    } else if (target === 'index') {
+        target = '/';
+    }
+
+    // Ensure double slashes are avoided
+    target = target.replace(/\/+/g, '/');
+
+    window.location.href = withBase(target);
 };
 </script>
 
@@ -230,7 +229,7 @@ const switchLanguage = () => {
                             </div>
 
                             <button v-if="!isGuest" class="logout-btn-full" @click="logout">{{ t.logoutAccount
-                            }}</button>
+                                }}</button>
                             <button class="close-btn" @click="isMenuOpen = false">{{ t.closeMenu }}</button>
                         </div>
                     </div>

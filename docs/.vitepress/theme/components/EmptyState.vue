@@ -1,21 +1,28 @@
 <script setup lang="ts">
-defineProps<{
-  icon?: string;
-  title?: string;
-  description?: string;
-  actionText?: string;
-}>();
+import { computed } from 'vue';
+import { useData } from 'vitepress';
 
-defineEmits<{
-  (e: 'clear'): void;
-}>();
+defineProps<{ icon?: string; title?: string; description?: string; actionText?: string; }>();
+
+const { lang } = useData();
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    title: '找不到相關結果',
+    desc: '請嘗試使用不同的關鍵字，或者檢查拼字是否正確。'
+  } : {
+    title: 'No results found',
+    desc: 'Please try using different keywords or check your spelling.'
+  };
+});
+
+defineEmits<{ (e: 'clear'): void; }>();
 </script>
 
 <template>
   <div class="empty-results">
     <div class="empty-icon">{{ icon || '🔍' }}</div>
-    <h3>{{ title || '找不到相關結果' }}</h3>
-    <p>{{ description || '請嘗試使用不同的關鍵字，或者檢查拼字是否正確。' }}</p>
+    <h3>{{ title || t.title }}</h3>
+    <p>{{ description || t.desc }}</p>
     <button v-if="actionText" @click="$emit('clear')" class="clear-btn">{{ actionText }}</button>
   </div>
 </template>

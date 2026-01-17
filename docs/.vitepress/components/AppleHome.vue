@@ -1,12 +1,9 @@
 <script setup>
-import { useData, useRouter } from 'vitepress'
+import { useData, useRouter, withBase } from 'vitepress'
 import { onMounted, onUnmounted, computed } from 'vue'
 
-const { lang } = useData()
+const { lang, localePath } = useData()
 const router = useRouter()
-
-// Language-aware base path
-const langBase = computed(() => lang.value === 'en-US' ? '/en' : '')
 
 const t = computed(() => {
   return lang.value === 'zh-TW' ? {
@@ -35,7 +32,7 @@ const navCards = computed(() => [
     title: 'Identity',
     subtitle: lang.value === 'zh-TW' ? '帳號與身分' : 'Account & Identity',
     desc: lang.value === 'zh-TW' ? '深入了解管理式 Apple ID、聯合驗證與權限委派。' : 'Learn about Managed Apple IDs, Federated Authentication, and roles.',
-    link: `${langBase.value}/guide/#account`,
+    link: `${localePath.value}guide/#account`,
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '👤'
@@ -44,7 +41,7 @@ const navCards = computed(() => [
     title: 'Deployment',
     subtitle: lang.value === 'zh-TW' ? '零接觸部署' : 'Zero-Touch Deployment',
     desc: lang.value === 'zh-TW' ? '透過 Apple Configurator 與 ADE 達成自動化開箱即用。' : 'Achieve out-of-the-box automation with Apple Configurator and ADE.',
-    link: `${langBase.value}/guide/#enrollment`,
+    link: `${localePath.value}guide/#enrollment`,
     bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     textColor: '#fff',
     icon: '📦'
@@ -53,7 +50,7 @@ const navCards = computed(() => [
     title: 'VPP Apps',
     subtitle: lang.value === 'zh-TW' ? '軟體採購' : 'Software Procurement',
     desc: lang.value === 'zh-TW' ? '掌握 App 與圖書的批量授權派發與生命週期管理。' : 'Master bulk licensing and lifecycle management for apps and books.',
-    link: `${langBase.value}/guide/#apps`,
+    link: `${localePath.value}guide/#apps`,
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '📱'
@@ -62,7 +59,7 @@ const navCards = computed(() => [
     title: 'Classroom',
     subtitle: lang.value === 'zh-TW' ? '課堂教學' : 'Classroom Instruction',
     desc: lang.value === 'zh-TW' ? '賦能教師掌握即時畫面控管、文件傳送與數位互動。' : 'Empower teachers with screen monitoring, file sharing, and interaction.',
-    link: `${langBase.value}/guide/#classroom`,
+    link: `${localePath.value}guide/#classroom`,
     bg: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
     textColor: '#1d1d1f',
     icon: '🍎'
@@ -71,7 +68,7 @@ const navCards = computed(() => [
     title: 'Education',
     subtitle: lang.value === 'zh-TW' ? '方案規範' : 'Project Compliance',
     desc: lang.value === 'zh-TW' ? '接軌教育部專案規範，優化校園數位學習環境。' : 'Align with MOE technical requirements to optimize digital learning.',
-    link: `${langBase.value}/guide/#digital`,
+    link: `${localePath.value}guide/#digital`,
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🎓'
@@ -80,7 +77,7 @@ const navCards = computed(() => [
     title: 'Service',
     subtitle: lang.value === 'zh-TW' ? '維護報修' : 'Maintenance & Repair',
     desc: lang.value === 'zh-TW' ? '了解硬體保固查詢、維修流程與備機管理策略。' : 'Hardware warranty checks, repair flows, and loaner management.',
-    link: `${langBase.value}/guide/#hardware`,
+    link: `${localePath.value}guide/#hardware`,
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🔧'
@@ -89,7 +86,7 @@ const navCards = computed(() => [
     title: 'macOS',
     subtitle: lang.value === 'zh-TW' ? '電腦管理' : 'Mac Management',
     desc: lang.value === 'zh-TW' ? '針對 Mac 的專屬組態描述檔與安全性原則管理。' : 'Configuration profiles and security policy management for Mac.',
-    link: `${langBase.value}/guide/#mac`,
+    link: `${localePath.value}guide/#mac`,
     bg: 'linear-gradient(135deg, #434343 0%, #000000 100%)',
     textColor: '#f5f5f7',
     icon: '💻'
@@ -98,7 +95,7 @@ const navCards = computed(() => [
     title: 'Scenarios',
     subtitle: lang.value === 'zh-TW' ? '情境實戰' : 'Practical Q&A',
     desc: lang.value === 'zh-TW' ? '集結第一線網管與教師的高頻率常見問題答集。' : 'Frequently asked questions from on-site IT admins and teachers.',
-    link: `${langBase.value}/guide/#education`,
+    link: `${localePath.value}guide/#education`,
     bg: '#F5F5F7',
     textColor: '#1d1d1f',
     icon: '🏫'
@@ -107,17 +104,12 @@ const navCards = computed(() => [
     title: 'Glossary',
     subtitle: lang.value === 'zh-TW' ? '零知識術語表' : 'Glossary',
     desc: lang.value === 'zh-TW' ? '從專有名詞到白話文翻譯，讓您輕鬆讀懂裝置管理。' : 'From technical terms to plain English, master the MDM lingo.',
-    link: `${langBase.value}/glossary`,
+    link: `${localePath.value}glossary`,
     bg: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
     textColor: '#1d1d1f',
     icon: '📖'
   }
 ])
-
-const handleCardClick = (e, link) => {
-  e.preventDefault()
-  router.go(link)
-}
 
 onMounted(() => {
   document.body.classList.add('is-home')
@@ -159,12 +151,11 @@ onUnmounted(() => {
           {{ t.intro2 }}
         </p>
         <div class="hero-links">
-          <a :href="langBase + '/guide/'" class="primary-btn" @click="(e) => handleCardClick(e, langBase + '/guide/')">
+          <a :href="withBase(localePath + 'guide/')" class="primary-btn">
             {{ t.explore }}
             <span class="btn-icon" aria-hidden="true">→</span>
           </a>
-          <a :href="langBase + '/glossary'" class="text-link"
-            @click="(e) => handleCardClick(e, langBase + '/glossary')">
+          <a :href="withBase(localePath + 'glossary')" class="text-link">
             {{ t.searchGlossary }}
             <span aria-hidden="true">›</span>
           </a>
@@ -180,10 +171,9 @@ onUnmounted(() => {
       </div>
 
       <div class="cards-grid">
-        <a v-for="card in navCards" :key="card.link" :href="card.link" class="card fade-in-on-scroll"
+        <a v-for="card in navCards" :key="card.link" :href="withBase(card.link)" class="card fade-in-on-scroll"
           :style="{ background: card.bg, color: card.textColor }"
-          :aria-label="(lang === 'zh-TW' ? '前往 ' : 'Go to ') + card.subtitle"
-          @click="(e) => handleCardClick(e, card.link)">
+          :aria-label="(lang === 'zh-TW' ? '前往 ' : 'Go to ') + card.subtitle">
           <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
           <div class="card-text">
             <span class="card-subtitle">{{ card.subtitle }}</span>

@@ -1,12 +1,22 @@
 <script setup lang="ts">
-/**
- * 登入狀態顯示元件 (LoginStatus)
- * 
- * 簡易的導覽列擴充元件，用於展示當前使用者的登入資訊或引進登入頁面。
- */
+import { computed } from 'vue';
+import { useData, withBase } from 'vitepress';
 import { useAuth } from '../composables/useAuth';
 
+const { lang } = useData();
 const { user, logout } = useAuth();
+
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    logoutTitle: '登出系統',
+    logout: '退出',
+    login: '系統登入'
+  } : {
+    logoutTitle: 'Sign out',
+    logout: 'Exit',
+    login: 'Sign In'
+  };
+});
 </script>
 
 <template>
@@ -15,13 +25,13 @@ const { user, logout } = useAuth();
     <template v-if="user">
       <div class="user-pill">
         <span class="user-email text-truncate">{{ user }}</span>
-        <button class="logout-btn" @click="logout" title="登出系統">退出</button>
+        <button class="logout-btn" @click="logout" :title="t.logoutTitle">{{ t.logout }}</button>
       </div>
     </template>
 
     <!-- 未登入狀態 -->
     <template v-else>
-      <a href="/login.html" class="login-link">系統登入</a>
+      <a :href="withBase('/login.html')" class="login-link">{{ t.login }}</a>
     </template>
   </div>
 </template>

@@ -36,7 +36,17 @@ const t = computed(() => {
       fontScaleTitle: "字體大小調整",
       fontSmall: "小",
       fontMedium: "中",
-      fontLarge: "大"
+      fontLarge: "大",
+      hashMap: {
+        'account': '帳號與伺服器',
+        'enrollment': '裝置註冊',
+        'apps': 'App 管理',
+        'classroom': '課堂管理',
+        'digital': '數位精進',
+        'hardware': '硬體排除',
+        'mac': 'Mac 管理',
+        'education': '教育實戰'
+      }
     },
     'en-US': {
       sidebarTitle: "Guide Navigation",
@@ -52,7 +62,17 @@ const t = computed(() => {
       fontScaleTitle: "Font Size Adjustment",
       fontSmall: "S",
       fontMedium: "M",
-      fontLarge: "L"
+      fontLarge: "L",
+      hashMap: {
+        'account': 'Account & Server',
+        'enrollment': 'Enrollment',
+        'apps': 'App Management',
+        'classroom': 'Apple Classroom',
+        'digital': 'Digital Learning',
+        'hardware': 'Hardware Tuning',
+        'mac': 'Mac Management',
+        'education': 'Education Q&A'
+      }
     }
   };
   return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
@@ -80,16 +100,7 @@ const handleHashChange = () => {
   const hash = window.location.hash.replace('#', '').toLowerCase();
 
   // Mapping for both languages
-  const hashMap: Record<string, string> = {
-    'account': lang.value === 'en-US' ? 'Account & Server' : '帳號與伺服器',
-    'enrollment': lang.value === 'en-US' ? 'Enrollment' : '裝置註冊',
-    'apps': lang.value === 'en-US' ? 'App Management' : 'App 管理',
-    'classroom': lang.value === 'en-US' ? 'Apple Classroom' : '課堂管理',
-    'digital': lang.value === 'en-US' ? 'Digital Learning' : '數位精進',
-    'hardware': lang.value === 'en-US' ? 'Hardware Tuning' : '硬體排除',
-    'mac': lang.value === 'en-US' ? 'Mac Management' : 'Mac 管理',
-    'education': lang.value === 'en-US' ? 'Education Q&A' : '教育實戰'
-  };
+  const hashMap = t.value.hashMap as Record<string, string>;
 
   const targetSource = hashMap[hash] || (allQAData.value as any[]).find((m: any) => m.source.toLowerCase().includes(hash))?.source;
 
@@ -708,7 +719,8 @@ const switchModule = (source: string | "All") => {
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-1);
-  line-height: normal; /* Fix misaligned text */
+  line-height: normal;
+  /* Fix misaligned text */
 }
 
 .search-input:focus {

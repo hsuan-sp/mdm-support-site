@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted } from 'vue';
 import { useRouter, useData } from 'vitepress';
 
-const { lang, page } = useData();
+const { site } = useData();
 const router = useRouter();
 
 const handleContextMenu = (e: MouseEvent) => {
@@ -12,7 +12,7 @@ const handleContextMenu = (e: MouseEvent) => {
 
 const handleKeyDown = (e: KeyboardEvent) => {
   // 禁止 Ctrl+S, Ctrl+U, Ctrl+P, F12, Ctrl+Shift+I, Alt+Cmd+I
-  const isForbidden = 
+  const isForbidden =
     (e.keyCode === 123) || // F12
     ((e.ctrlKey || e.metaKey) && e.keyCode === 85) || // Ctrl+U
     ((e.ctrlKey || e.metaKey) && e.keyCode === 83) || // Ctrl+S
@@ -20,7 +20,7 @@ const handleKeyDown = (e: KeyboardEvent) => {
     ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
     ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
     (e.metaKey && e.altKey && e.keyCode === 73); // Mac Opt+Cmd+I
-  
+
   if (isForbidden) {
     e.preventDefault();
     console.error('🛡️ 系統已攔截受限操作 (Security Intercepted)');
@@ -49,9 +49,13 @@ onMounted(() => {
     // If browser is not Chinese, and we are NOT on an English page, and haven't checked yet
     if (!isChinese && !isEnPath && !hasRedirected) {
       sessionStorage.setItem('lang-redirect-checked', 'true');
-      const target = currentPath.startsWith('/mdm-support-site/') 
-        ? currentPath.replace('/mdm-support-site/', '/mdm-support-site/en/')
-        : '/en' + currentPath;
+
+      const base = site.value.base || '/';
+      const cleanPath = currentPath.startsWith(base)
+        ? currentPath.slice(base.length)
+        : currentPath;
+
+      const target = base + 'en/' + (cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath);
       router.go(target);
     }
   }
@@ -59,7 +63,7 @@ onMounted(() => {
   document.addEventListener('contextmenu', handleContextMenu);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('copy', handleCopy);
-  
+
   // 強制 CSS 禁止選擇 (如果需要更嚴格)
   document.body.style.userSelect = 'none';
   document.body.style.webkitUserSelect = 'none';

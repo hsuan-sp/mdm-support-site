@@ -1,12 +1,21 @@
 <script setup lang="ts">
-defineProps<{
-  isOpen: boolean;
-  title?: string;
-}>();
+import { computed } from 'vue';
+import { useData } from 'vitepress';
 
-defineEmits<{
-  (e: 'close'): void;
-}>();
+defineProps<{ isOpen: boolean; title?: string; }>();
+
+const { lang } = useData();
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    menu: '選單',
+    close: '關閉'
+  } : {
+    menu: 'Menu',
+    close: 'Close'
+  };
+});
+
+defineEmits<{ (e: 'close'): void; }>();
 </script>
 
 <template>
@@ -16,10 +25,10 @@ defineEmits<{
         <aside class="mobile-drawer" @click.stop role="dialog" aria-modal="true">
           <div class="drawer-handle"></div>
           <div class="drawer-header">
-            <h3>{{ title || '選單' }}</h3>
-            <button class="close-btn" @click="$emit('close')" aria-label="關閉">✕</button>
+            <h3>{{ title || t.menu }}</h3>
+            <button class="close-btn" @click="$emit('close')" :aria-label="t.close">✕</button>
           </div>
-          
+
           <div class="drawer-content">
             <slot></slot>
           </div>
@@ -44,7 +53,8 @@ defineEmits<{
 
 .mobile-drawer {
   width: 100%;
-  max-width: 600px; /* Consistent with previous designs */
+  max-width: 600px;
+  /* Consistent with previous designs */
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);

@@ -56,7 +56,8 @@ const t = computed(() => {
         Education: "教育場域",
         macOS: "macOS 管理",
         Jamf: "Jamf 專區"
-      }
+      },
+      alertMsg: ""
     },
     'en-US': {
       sidebarTitle: "Glossary Categories",
@@ -92,7 +93,8 @@ const t = computed(() => {
         Education: "Education",
         macOS: "macOS",
         Jamf: "Jamf"
-      }
+      },
+      alertMsg: "Section 1-8 translated. Full content coming soon."
     }
   };
   return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
@@ -243,26 +245,26 @@ const getCategoryChipName = (cat: string) => {
         @update:scale="val => fontScale = val">
         <!-- Banner Placeholder for Alerts -->
         <div v-if="lang === 'en-US'" class="wip-banner">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-            <span>Section 1-8 (First 5 Items) translated. Full content coming soon. (Taipei European School Context)</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>{{ t.alertMsg }}</span>
         </div>
 
         <template #search>
           <div class="search-section">
             <div class="search-box">
-            <span class="search-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </span>
-            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
-          </div>
+              <span class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+            </div>
           </div>
         </template>
 
@@ -289,7 +291,7 @@ const getCategoryChipName = (cat: string) => {
           <div class="view-status-bar">
             <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
               getCategoryName(selectedCategory)
-              }}</span>
+            }}</span>
             <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
           </div>
         </header>
@@ -619,7 +621,8 @@ const getCategoryChipName = (cat: string) => {
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-1);
-  line-height: normal; /* Fix misaligned text */
+  line-height: normal;
+  /* Fix misaligned text */
 }
 
 .search-input:focus {
