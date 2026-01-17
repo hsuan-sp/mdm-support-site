@@ -1,8 +1,14 @@
 import { defineConfig } from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
+// Determing base path dynamically: 
+// Use '/mdm-support-site/' for GitHub Pages (detected by GITHUB_ACTIONS env)
+// Use '/' for Cloudflare Workers or local development
+const base = process.env.GITHUB_ACTIONS === 'true'
+  ? '/mdm-support-site/'
+  : (process.env.BASE_PATH || '/')
+
 export default defineConfig({
-  base: '/mdm-support-site/',
+  base: base,
 
   locales: {
     root: {
