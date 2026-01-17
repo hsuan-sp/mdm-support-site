@@ -186,16 +186,17 @@
     }
 
     .status-badge {
-      font-size: 12px;
-      padding: 6px 14px;
+      font-size: 11px;
+      padding: 5px 12px;
       border-radius: 20px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(0, 0, 0, 0.04);
       color: var(--text-sec);
-      font-weight: 600;
-      margin-top: 32px;
+      font-weight: 500;
+      margin-top: 24px;
+      /* Reduced from 32px to balance with the new buttons below */
     }
 
     .dot {
@@ -272,92 +273,94 @@
       }
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --glass-bg: rgba(28, 28, 30, 0.8);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        --text-main: #ffffff;
-      }
-
-      body {
-        background-color: #000000;
-        background-image:
-          radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.1) 0, transparent 40%),
-          radial-gradient(at 100% 0%, rgba(100, 210, 255, 0.08) 0, transparent 40%),
-          radial-gradient(at 50% 100%, rgba(10, 132, 255, 0.05) 0, transparent 50%);
-      }
-
-      input {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.1);
-        color: white;
-      }
-
-      .status-badge {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .footer-note {
-        border-top-color: rgba(255, 255, 255, 0.1);
-      }
+    /* Control Row Styles (Theme & Lang) */
+    .controls-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0 8px;
     }
 
-    /* Language Switch Responsive Styles */
-    .lang-switch {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-    }
-
-    .lang-btn {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
       color: var(--text-sec);
-      padding: 10px 18px;
-      font-size: 14px;
+      padding: 10px 16px;
+      font-size: 13px;
       font-weight: 600;
       width: auto;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 1;
+      max-width: 160px;
     }
 
-    .lang-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    .control-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text-main);
+      transform: translateY(-1px);
     }
 
-    .lang-btn:active {
+    .control-btn:active {
       transform: translateY(0);
     }
 
-    /* Mobile-first responsive positioning */
-    @media (max-width: 640px) {
-      .lang-switch {
-        position: static;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-        padding: 0 24px;
-      }
-
-      .lang-btn {
-        min-height: 44px;
-        /* iOS minimum touch target */
-        min-width: 140px;
-        padding: 12px 24px;
-        font-size: 15px;
-        justify-content: center;
-      }
+    .control-icon {
+      font-size: 16px;
     }
+
+    /* Dark Mode Override Support */
+    .dark {
+      --glass-bg: rgba(28, 28, 30, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-sec: #8e8e93;
+    }
+
+    .dark body {
+      background-color: #000000;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.12) 0, transparent 40%),
+        radial-gradient(at 100% 0%, rgba(100, 210, 255, 0.1) 0, transparent 40%),
+        radial-gradient(at 50% 100%, rgba(10, 132, 255, 0.08) 0, transparent 50%);
+    }
+
+    .dark .card {
+      background: var(--glass-bg);
+      border-color: var(--glass-border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .dark input {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    .dark .control-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #98989d;
+    }
+
+    .dark .control-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .dark .status-badge {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .dark .footer-note {
+      border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
 
     @media (prefers-color-scheme: dark) {
       .lang-btn {
@@ -375,11 +378,6 @@
 
 <body>
   <!-- Language Switch Button - Responsive Positioning -->
-  <div class="lang-switch" id="lang-switch-container">
-    <button id="btn-lang" class="lang-btn">
-      <span style="font-size: 18px;">🌐</span> <span id="lang-text">English</span>
-    </button>
-  </div>
 
   <main role="main">
     <div class="card">
@@ -435,6 +433,18 @@
         <span id="status-text"></span>
       </div>
 
+      <!-- Settings Group: Integrated Theme & Language Switchers -->
+      <div class="controls-row">
+        <button id="btn-theme" class="control-btn" aria-label="Toggle Theme">
+          <span id="theme-icon" class="control-icon">🌓</span>
+          <span id="theme-text" data-i18n="themeAuto">標題</span>
+        </button>
+        <button id="btn-lang" class="control-btn" aria-label="Toggle Language">
+          <span class="control-icon">🌐</span>
+          <span id="lang-text">English</span>
+        </button>
+      </div>
+
       <footer class="footer-note" data-i18n="footer">
         本系統使用安全 Cookie 與雲端邊緣運算技術<br />
         維護您的存取安全 &copy; 2026 極電資訊
@@ -463,6 +473,8 @@
         verifySuccess: '校驗成功，進入主頁面...',
         verifyError: '驗證碼不正確或已失效',
         networkError: '網路連線異常',
+        themeDark: '深色模式',
+        themeLight: '淺色模式',
         footer: '本系統使用安全 Cookie 與雲端邊緣運算技術<br />維護您的存取安全 &copy; 2026 極電資訊'
       },
       'en': {
@@ -483,11 +495,15 @@
         verifySuccess: 'Success! Redirecting...',
         verifyError: 'Invalid or expired verification code',
         networkError: 'Network connection error',
+        themeDark: 'Dark Mode',
+        themeLight: 'Light Mode',
         footer: 'Secured by Secure Cookie & Edge Computing<br />&copy; 2026 Superinfo Computer Co., Ltd.'
       }
     };
 
     let currentLang = 'zh-TW';
+    let currentStatus = 'online';
+    let currentTheme = 'auto';
 
     const updateLanguage = (lang) => {
       currentLang = lang;
@@ -502,10 +518,20 @@
         }
       });
 
+      // Update Service Status Text
+      const statusText = document.getElementById('status-text');
+      if (statusText) {
+        statusText.innerText = currentStatus === 'online'
+          ? translations[lang].statusOnline
+          : translations[lang].statusOffline;
+      }
+
+      // Update Theme Button Text
+      updateThemeUI();
+
       // Update Dynamic Placeholders/Messages if visible
       const otpHint = document.getElementById('otp-hint');
       if (otpHint && otpHint.innerText.includes('@')) {
-        // If OTP hint is showing, refresh it but keep the email
         const email = document.getElementById('email').value;
         otpHint.innerText = `${translations[lang].otpSent} ${email}`;
       }
@@ -513,6 +539,9 @@
 
     // Auto-detect Language
     const detectLanguage = () => {
+      const savedLang = localStorage.getItem('user-language');
+      if (savedLang) return savedLang;
+
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('lang') === 'en') return 'en';
 
@@ -520,15 +549,58 @@
       return browserLang.toLowerCase().startsWith('zh') ? 'zh-TW' : 'en';
     };
 
+    // Theme Management
+    const updateThemeUI = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      document.getElementById('theme-icon').innerText = isDark ? '🌙' : '☀️';
+      document.getElementById('theme-text').innerText = isDark
+        ? translations[currentLang].themeDark
+        : translations[currentLang].themeLight;
+    };
+
+    const applyTheme = (theme) => {
+      currentTheme = theme;
+      localStorage.setItem('user-theme', theme);
+
+      if (theme === 'auto') {
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', systemDark);
+      } else {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      }
+      updateThemeUI();
+    };
+
+    const detectTheme = () => {
+      const savedTheme = localStorage.getItem('user-theme');
+      return savedTheme || 'auto';
+    };
+
     // Initialization
     currentLang = detectLanguage();
+    currentTheme = detectTheme();
+
+    applyTheme(currentTheme);
     updateLanguage(currentLang);
 
-    // Event Listener for Language Switcher
+    // Event Listeners
     document.getElementById('btn-lang').onclick = () => {
       const newLang = currentLang === 'zh-TW' ? 'en' : 'zh-TW';
+      localStorage.setItem('user-language', newLang);
       updateLanguage(newLang);
     };
+
+    document.getElementById('btn-theme').onclick = () => {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      applyTheme(isCurrentlyDark ? 'light' : 'dark');
+    };
+
+    // Listen for system theme changes if set to auto
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (currentTheme === 'auto') {
+        applyTheme('auto');
+      }
+    });
 
     const elements = {
       stepEmail: document.getElementById("step-email"),
@@ -596,10 +668,12 @@
         const data = await res.json();
         elements.serviceStatus.classList.remove("hidden");
         if (data.status === "online") {
+          currentStatus = 'online';
           elements.statusText.innerText = translations[currentLang].statusOnline;
           elements.serviceStatus.className = "status-badge status-online";
         }
       } catch (e) {
+        currentStatus = 'offline';
         elements.serviceStatus.classList.remove("hidden");
         elements.statusText.innerText = translations[currentLang].statusOffline;
         elements.serviceStatus.className = "status-badge status-offline";
