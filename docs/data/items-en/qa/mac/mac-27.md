@@ -32,7 +32,7 @@ Using macOS 26 **System Configurations**, you can set the following intelligent 
 
 ## 2. Operational Recommendations
 
-* **Avoid Hard Power Cuts**: Discourage the facility team from cutting the master circuit to the lab at night. This prevents M4/M5 Macs from performing essential background maintenance tasks like AI indexing, Spotlight optimization, and system cache cleaning.
+* **Avoid Hard Power Cuts**: Discourage the facility team from cutting the main circuit to the lab at night. This prevents M4/M5 Macs from performing essential background maintenance tasks like AI indexing, Spotlight optimization, and system cache cleaning.
 * **Nudge Integration**: If an update requires a restart, use a **Nudge** notification to ask the teacher to "Restart Now" the next morning, rather than forcing a midnight reboot that could cause loss of unsaved teaching materials.
 
 ## 3. Real-World Case Study

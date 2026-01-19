@@ -36,7 +36,7 @@ tags: ["單一 App 模式","ASAM","考試模式","風險警示"]
 
 * **設定方式**：在 Jamf Pro 的「限制」描述檔中，找到「自主單一 App 模式」選項，
 
- 將允許的 App Bundle ID 加入白名單。
+ 將允許的 App Bundle ID 加入允許名單。
 
 **模式三：引導使用模式 (Guided Access) —— 小規模適用**
 

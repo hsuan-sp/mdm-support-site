@@ -1,12 +1,12 @@
 ---
 id: hw-2
-title: "iPad 在充電車內無法充電，是機器壞了還是車子壞了？"
+title: "iPad 在充電車內無法充電，是機器故障還是車子故障？"
 category: "第六部分：硬體維修與故障排除 (Hardware & Maintenance)"
 important: false
 tags: ["充電問題","交叉測試","充電車","MFi","硬體檢測"]
 ---
 
-## Q: iPad 在充電車內無法充電，是機器壞了還是車子壞了？
+## Q: iPad 在充電車內無法充電，是機器故障還是車子故障？
 
 ## Answer
 

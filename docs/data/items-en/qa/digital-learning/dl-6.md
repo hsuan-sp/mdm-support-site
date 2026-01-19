@@ -10,7 +10,7 @@ tags: ["Content Filtering","Exclusions","YouTube","Jamf Trust","DNS Proxy"]
 
 ## Answer
 
-**Filtering rules for the Digital Learning Project are typically managed by higher-level authorities (Educational Bureaus). Modifying the blacklist is not recommended, but if an immediate exception is required for teaching, an "Exclusion" strategy is preferred.**
+**Filtering rules for the Digital Learning Project are typically managed by higher-level authorities (Educational Bureaus). Modifying the blocklist is not recommended, but if an immediate exception is required for teaching, an "Exclusion" strategy is preferred.**
 
 Depending on your specific needs, you can choose one of the following solutions:
 

@@ -26,7 +26,7 @@ Based on official technical specifications, here is an objective comparison:
 
 ## 3. Multi-Site Architecture and Scalability
 
-* **Jamf Pro**: Features a powerful **"Sites"** capability, allowing for completely independent management environments within a single server instance (e.g., a district managing the master instance while individual schools manage their specific sites).
+* **Jamf Pro**: Features a powerful **"Sites"** capability, allowing for completely independent management environments within a single server instance (e.g., a district managing the primary instance while individual schools manage their specific sites).
 * **Jamf School**: While it supports multi-school management, the depth of isolation and permissioning for global resource sharing is more streamlined.
 
 ## 4. API and Third-Party Integration

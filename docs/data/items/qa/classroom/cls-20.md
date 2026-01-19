@@ -23,7 +23,7 @@ Apple 的 MDM 協定並未開放「讀取或修改鬧鐘設定」的權限。
 
 * 在 Jamf Pro 的限制描述檔中，將 `com.apple.mobiletimer` (時鐘 App 的 Bundle ID)
 
- 加入 **「限制 App (Restricted Media)」** 或黑名單。
+ 加入 **「限制 App (Restricted Media)」** 或阻擋名單。
 
 * **效果**：時鐘 App 會從桌面上消失，學生無法再設定新鬧鐘。
 * *注意：若學生在隱藏前已設定了鬧鐘，時間到時仍可能會響，此時需重置設定。*

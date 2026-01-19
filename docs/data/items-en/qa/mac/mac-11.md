@@ -22,7 +22,7 @@ This is the standard way to bypass the block without lowering overall system sec
 
 1. Find the app in **Finder**.
 1. Hold the **Control** key (or right-click) and select **Open**.
-1. The resulting dialog will now include an **Open** button. Once selected, the system adds this app to a local whitelist.
+1. The resulting dialog will now include an **Open** button. Once selected, the system adds this app to a local allowlist.
 
 ## Option 2: System Settings Override
 

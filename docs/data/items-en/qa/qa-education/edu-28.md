@@ -35,7 +35,7 @@ This is the most critical step. It prevents the device from trying to enroll bac
 ## 4. Sustainability & ESG
 
 * **Second Life**: If the hardware is functional but cannot support newer OS versions, consider repurposing it as a "Library E-reader" or a dedicated "Sign-in Kiosk."
-* **Certified Recycling**: For broken units, choose a certified e-waste recycler and mark the device as **"Decommissioned"** in ASM for ESG reporting.
+* **Certified Recycling**: For damaged units, choose a certified e-waste recycler and mark the device as **"Decommissioned"** in ASM for ESG reporting.
 
 ## Summary Advice
 

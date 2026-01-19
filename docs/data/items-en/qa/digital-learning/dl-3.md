@@ -10,9 +10,9 @@ tags: ["Troubleshooting","Reset","Network","Connection Help"]
 
 ## Answer
 
-**Resetting network settings is a powerful way to solve stubborn Wi-Fi issues, but it carries the risk of making the device an "Orphan" if not handled carefully.**
+**Resetting network settings is a powerful way to solve stubborn Wi-Fi issues, but it carries the risk of making the device an "unmanaged device" if not handled carefully.**
 
-## The "Orphan" Risk:
+## The "unmanaged device" Risk:
 
 If you are in the middle of a Wi-Fi migration (transitioning from an old SSID to a new official school network), **do not delete the old profile first**.
 

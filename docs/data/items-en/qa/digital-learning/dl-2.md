@@ -24,7 +24,7 @@ For institutional compliance, the Jamf Trust app must remain active in the backg
 1. **Network Firewall Blocks**:
 
 * **The Issue**: The device is on Wi-Fi, but the campus firewall is blocking the specific AWS or Jamf Cloud ports required for reporting.
-* **Test**: Connect the device to a mobile hotspot. If the data uploads immediately, you need to ask the network administrator to whitelist Jamf’s reporting domains.
+* **Test**: Connect the device to a mobile hotspot. If the data uploads immediately, you need to ask the network administrator to allowlist Jamf’s reporting domains.
 
 1. **Profile Desynchronization**:
 

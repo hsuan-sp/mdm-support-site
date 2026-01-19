@@ -12,7 +12,7 @@ tags: ["Wi-Fi Migration","SSID","Disaster Prevention","Network Config"]
 
 **This is a common maintenance task that frequently leads to mass disconnections. You must follow the 'Parallel Deployment' principle: Never delete the old setting until the new network is verified as functional.**
 
-If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable to receive the MDM command for the new Wi-Fi, leaving them as "orphaned" devices that must be manually connected one by one.
+If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable to receive the MDM command for the new Wi-Fi, leaving them as "unmanaged" devices that must be manually connected one by one.
 
 ## Standard Safe Migration SOP:
 

@@ -24,7 +24,7 @@ Choosing the wrong mode is a leading cause of "bricked" devices during school de
 
 * **Logic**: Permission is delegated to the app. When a student starts an exam, the **App locks itself**. Once the exam is submitted, the **App unlocks itself**.
 * **Benefit**: No network dependency for unlocking. Even if the Wi-Fi drops, the student can finish the exam and the app can release the lock locally.
-* **Setup**: In Jamf Pro, add the app's Bundle ID to the "Autonomous Single App Mode" whitelist in a Restrictions profile.
+* **Setup**: In Jamf Pro, add the app's Bundle ID to the "Autonomous Single App Mode" allowlist in a Restrictions profile.
 
 ## Mode 3: Guided Access — Small Scale
 

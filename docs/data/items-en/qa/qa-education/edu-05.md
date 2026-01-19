@@ -1,12 +1,12 @@
 ---
 id: edu-05
-title: "The iPad feels slow or laggy. Is it broken? How do we fix it?"
+title: "The iPad feels slow or laggy. Is it faulty? How do we fix it?"
 category: "Section 8: Education Scenarios & FAQ"
 important: false
 tags: ["Performance","Troubleshooting","Maintenance"]
 ---
 
-## Q: The iPad feels slow or laggy. Is it broken? How do we fix it?
+## Q: The iPad feels slow or laggy. Is it faulty? How do we fix it?
 
 ## Answer
 

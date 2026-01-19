@@ -1,12 +1,12 @@
 ---
 id: hw-2
-title: "An iPad isn't charging inside the cart. Is the device broken or the cart?"
+title: "An iPad isn't charging inside the cart. Is the device faulty or the cart?"
 category: "Section 6: Hardware & Maintenance"
 important: false
 tags: ["Charging Issues","Diagnostics","Hardware Maintenance"]
 ---
 
-## Q: An iPad isn't charging inside the cart. Is the device broken or the cart?
+## Q: An iPad isn't charging inside the cart. Is the device faulty or the cart?
 
 ## Answer
 

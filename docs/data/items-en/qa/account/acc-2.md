@@ -16,7 +16,7 @@ The **Apple Push Notification service (APNs)** certificate is the "digital ID ca
 
 ## What Happens if it Expires?
 
-* **Total Loss of Control**: Devices will not "leave" management, but they will become "orphans." You will not be able to send any new profiles, apps, or commands.
+* **Total Loss of Control**: Devices will not "leave" management, but they will become "unmanaged devices." You will not be able to send any new profiles, apps, or commands.
 * **The Point of No Return**: If the certificate expires and you accidentally create a **new** one instead of **renewing** the old one, you will lose the link to all currently enrolled devices. You would then have to manually erase and re-enroll every single device in the school.
 
 ## How to Renew (Before Expiration):
