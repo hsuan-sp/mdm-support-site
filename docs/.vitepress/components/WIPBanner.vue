@@ -52,12 +52,27 @@ const toggleCollapse = () => {
 }
 
 .wip-banner.is-collapsed {
-    padding: 2px 24px;
+    position: fixed;
+    top: 64px;
+    /* Align with or below the nav bar */
+    left: 12px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ff9500 0%, #ffcc00 100%);
     cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wip-banner.is-collapsed:hover {
-    background: linear-gradient(90deg, #ffcc00 0%, #ff9500 100%);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
 }
 
 .wip-content {
@@ -92,23 +107,28 @@ const toggleCollapse = () => {
 }
 
 .expand-btn {
-    margin: 0 auto;
-    width: auto;
-    height: 20px;
+    width: 100%;
+    height: 100%;
     background: transparent;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.expand-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.expand-btn svg {
+    margin-top: -4px;
 }
 
 .collapse-btn:hover {
     background: rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
-}
-
-.expand-icon {
-    font-size: 14px;
 }
 
 .wip-icon {
@@ -166,6 +186,13 @@ const toggleCollapse = () => {
 @media (max-width: 768px) {
     .wip-banner {
         padding: 10px 20px;
+    }
+
+    .wip-banner.is-collapsed {
+        top: auto;
+        bottom: 80px;
+        /* Above potential mobile bottom nav */
+        left: 12px;
     }
 
     .collapse-btn {
