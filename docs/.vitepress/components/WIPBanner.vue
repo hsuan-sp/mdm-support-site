@@ -42,7 +42,7 @@ const toggleCollapse = () => {
 
         <!-- Minimized Badge: Teleported into the Topbar -->
         <Teleport to=".VPNavBarTitle" v-if="isMounted && isCollapsed">
-            <button class="wip-navbar-badge" @click.stop="toggleCollapse" aria-label="Expand notice">
+            <button class="wip-navbar-badge" @click.prevent.stop="toggleCollapse" aria-label="Expand notice">
                 <span class="badge-icon">🚧</span>
                 <span class="badge-label">WIP</span>
                 <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
@@ -55,16 +55,18 @@ const toggleCollapse = () => {
 </template>
 
 <style scoped>
-/* Main Banner Styles - Natural flow at top */
+/* Main Banner Styles - Fixed to super-top when expanded */
 .wip-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     background: linear-gradient(90deg, #ff9500 0%, #ffcc00 100%);
     color: #1d1d1f;
     padding: 8px 24px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    z-index: 2000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
+    z-index: 3000; /* Higher than Navbar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .wip-content {
@@ -98,7 +100,10 @@ const toggleCollapse = () => {
         inset 0 1px 0 rgba(255,255,255,0.25);
     white-space: nowrap;
     align-self: center;
-    border: 1px solid rgba(0,0,0,0.05); /* Added minor definition */
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    pointer-events: auto !important;
+    z-index: 2100; /* Ensure it stays above title link */
+    user-select: none;
 }
 
 .wip-navbar-badge:hover {
