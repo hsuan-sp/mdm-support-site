@@ -5,10 +5,9 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 tags: ["重新命名","名稱同步","資產預載","預備註冊","The MUT"]
 ---
+## Q: 在 Jamf Pro 修改了裝置名稱，為什麼 iPad 本機端仍顯示舊名字？
 
-# Q: 在 Jamf Pro 修改了裝置名稱，為什麼 iPad 本機端仍顯示舊名字？
-
-# Answer
+## Answer
 
 **這通常是因為您僅修改了 Jamf Pro 資料庫中的「文字紀錄」，而尚未發送「遠端更名指令」至實體裝置中。**
 
@@ -23,11 +22,11 @@ tags: ["重新命名","名稱同步","資產預載","預備註冊","The MUT"]
 * 在 **「預備註冊」>「行動裝置名稱」** 中設定。
 * **使用變數**：您可以使用 `$SERIALNUMBER` (序號) 或 `$ASSET_TAG` (資產標籤) 作為變數，
 
-    讓系統自動產生如 `EDU-$SERIALNUMBER` 的名稱。
+ 讓系統自動產生如 `EDU-$SERIALNUMBER` 的名稱。
 
 * **關鍵勾選**：必須勾選 **「在裝置上強制執行行動裝置名稱 (Enforce Mobile Device Name on devices)」**，
 
-    這樣裝置在連網啟用時就會自動更名。
+ 這樣裝置在連網啟用時就會自動更名。
 
 **2. 透過「遠端指令 (Remote Commands)」手動同步**
 
@@ -44,16 +43,16 @@ tags: ["重新命名","名稱同步","資產預載","預備註冊","The MUT"]
 * **大量動作**：在智慧型群組中選擇 **「動作 (Action)」>「Send Remote Commands」>「Set Device Name」**。
 * **The MUT**：透過 CSV 檔案上傳「序號」與「對應名稱」。
 
-    這套工具在更新紀錄的同時，也會觸發 Jamf Pro 向實體裝置發送更名指令。
+ 這套工具在更新紀錄的同時，也會觸發 Jamf Pro 向實體裝置發送更名指令。
 
 **為什麼指令會卡住？**
 * **未受監管 (Unsupervised)**：若 iPad 不是透過 ADE 註冊的「受監管」模式，
 
-    MDM 將無法強制修改其本機名稱。
+ MDM 將無法強制修改其本機名稱。
 
 * **指令待處理 (Pending)**：若裝置處於關機、斷網或長期休眠狀態，
 
-    更名指令會卡在 `Pending` 佇列中，直到裝置下次簽到 (Check-in) 為止。
+ 更名指令會卡在 `Pending` 佇列中，直到裝置下次簽到 (Check-in) 為止。
 
 **實務建議**
 

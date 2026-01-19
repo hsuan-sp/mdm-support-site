@@ -5,10 +5,9 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["FileVault", "SSH", "遠端解鎖", "macOS 26", "遠端管理"]
 ---
+## Q: macOS 26 的「透過 SSH 解鎖 FileVault」如何設定？有什麼安全考量？
 
-# Q: macOS 26 的「透過 SSH 解鎖 FileVault」如何設定？有什麼安全考量？
-
-# Answer
+## Answer
 
 **macOS 26 新增在 Pre-boot 階段透過 SSH 解鎖 FileVault 的功能，解決遠端管理無螢幕主機的痛點。**
 
@@ -26,8 +25,10 @@ tags: ["FileVault", "SSH", "遠端解鎖", "macOS 26", "遠端管理"]
 ## 設定需求
 
 1. **啟用遠端登入**：
-   * 「系統設定」>「一般」>「共享」>「遠端登入」
-   * 或透過 MDM 推送 `com.apple.RemoteManagement`
+
+ * 「系統設定」>「一般」>「共享」>「遠端登入」
+ * 或透過 MDM 推送 `com.apple.RemoteManagement`
+
 2. **網路連線**：乙太網路（最可靠）或 Pre-boot 可用的 Wi-Fi
 3. **授權使用者**：SSH 帳號必須是 FileVault 授權使用者
 4. **系統版本**：macOS 26 或更新
@@ -36,7 +37,7 @@ tags: ["FileVault", "SSH", "遠端解鎖", "macOS 26", "遠端管理"]
 
 遠端解鎖指令：
 
-    ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no username@mac-ip
+ SSH -o PreferredAuthentications=password -o PubkeyAuthentication=no username@mac-ip
 
 輸入密碼後，SSH 會暫時中斷（解鎖中），系統完成開機後可重新連線。
 

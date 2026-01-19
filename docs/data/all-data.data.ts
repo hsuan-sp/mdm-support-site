@@ -138,8 +138,8 @@ export default {
             const files = getFiles(dir);
             const terms = [];
 
-            const analogyMarker = lang === 'zh' ? '# 白話文比喻' : '# Analogy';
-            const definitionMarker = lang === 'zh' ? '# 術語定義' : '# Term Definition';
+            const analogyMarker = lang === 'zh' ? '## 白話文比喻' : '## Analogy';
+            const definitionMarker = lang === 'zh' ? '## 術語定義' : '## Term Definition';
 
             for (const filePath of files) {
                 const fileContent = fs.readFileSync(filePath, 'utf-8');

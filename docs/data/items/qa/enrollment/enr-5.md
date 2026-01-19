@@ -5,10 +5,9 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
 ---
+## Q: 如何在學校網域環境下，順利進行「帳號驅動註冊」的服務偵測？
 
-# Q: 如何在學校網域環境下，順利進行「帳號驅動註冊」的服務偵測？
-
-# Answer
+## Answer
 
 **帳號驅動註冊 (Account-driven Enrollment) 依賴 Apple 的「服務偵測 (Service Discovery)」機制，**
 **讓使用者只需輸入管理式 Apple 帳號即可引導註冊。**
@@ -21,7 +20,7 @@ tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
 1. 使用者輸入 `user@school.edu.tw`。
 2. 裝置發送 HTTP GET 請求至：
 
-    `https://school.edu.tw/.well-known/com.apple.remotemanagement`
+ `https://school.edu.tw/.well-known/com.apple.remotemanagement`
 
 3. 伺服器需回傳一個 JSON 檔案，其中包含 MDM 伺服器的 URL。
 
@@ -33,6 +32,7 @@ tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
 若學校無法修改官網設定，Jamf Pro 或 ASM 通常不提供此 JSON 的直接託管服務。
 
 **替代方案**：
+
 1. **直接瀏覽註冊網址**：管理員可產出 MDM 註冊 URL（通常是 `https://your-server.jamfcloud.com/enroll`），讓使用者直接透過 Safari 下載描述檔。
 2. **QR Code 掃描**：將註冊網址製作成 QR Code 貼在教室或教員室，使用者掃描後即可快速跳轉至註冊入口。
 3. **預載配置**：對於學校資產，優先使用 **自動裝置註冊 (ADE)**，完全不需手動輸入帳號或偵測服務。

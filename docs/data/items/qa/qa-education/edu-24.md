@@ -5,10 +5,9 @@ category: "第八部分：教育場景與教學應用 (Education Scenarios)"
 important: true
 tags: ["Writing Tools", "Apple Intelligence", "考試防弊", "iOS 26", "AI"]
 ---
+## Q: iOS 26 的「寫作工具」(Writing Tools) 在考試時該如何管理？哪些功能需要禁用？
 
-# Q: iOS 26 的「寫作工具」(Writing Tools) 在考試時該如何管理？哪些功能需要禁用？
-
-# Answer
+## Answer
 
 **Apple Intelligence 的「寫作工具」即使離線也能運作，能自動改寫、校對與摘要，對語文類考試構成作弊風險。支援 Apple Intelligence 的裝置必須透過 MDM 強制禁用。**
 
@@ -20,20 +19,22 @@ tags: ["Writing Tools", "Apple Intelligence", "考試防弊", "iOS 26", "AI"]
 
 ## 防弊管理方案
 
-### 方案 A：考試模式描述檔（MDM 限制）
+## 方案 A：考試模式描述檔（MDM 限制）
 
 建議在 Jamf Pro 或其他 MDM 中建立專用的考試描述檔：
 
 1. 建立 **Configuration Profile**，命名為「考試限制模式」
 2. 前往 **Restrictions (限制)** > **Intelligence** 或 **Siri** 相關分類
 3. 啟用以下限制（設為 Restrict 或取消 Allow）：
-   * **Allow Writing Tools (允許寫作工具)**
-   * **Allow Image Playground (允許影像樂園)**
-   * **Allow Genmoji**
-   * **Allow Math Notes (允許數學筆記)**（防止數學作弊）
+
+ * **Allow Writing Tools (允許寫作工具)**
+ * **Allow Image Playground (允許影像樂園)**
+ * **Allow Genmoji**
+ * **Allow Math Notes (允許數學筆記)**（防止數學作弊）
+
 4. **部署策略**：在考試前派送至目標裝置群組，考完試後移除
 
-### 方案 B：單一 App 模式（最嚴格）
+## 方案 B：單一 App 模式（最嚴格）
 
 若不確定描述檔是否生效，或混用個人裝置（BYOD），建議使用 **「課堂」(Classroom)** App 的 **「鎖定 App」(App Lock)** 功能：
 

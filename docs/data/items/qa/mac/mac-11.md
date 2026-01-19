@@ -5,10 +5,9 @@ category: "第七部分：Mac 電腦進階管理 (Mac Management)"
 important: false
 tags: ["Gatekeeper","安全性","公證","Notarization","軟體安裝"]
 ---
+## Q: Mac 安裝軟體時顯示「來自未識別的開發者」或「無法打開」，如何解決？
 
-# Q: Mac 安裝軟體時顯示「來自未識別的開發者」或「無法打開」，如何解決？
-
-# Answer
+## Answer
 
 **這是 macOS 的 Gatekeeper 安全機制。對於教學所需但未經公證的軟體，**
 **建議透過「右鍵開啟」繞過，或由 MDM 統一派送以避免隔離標記。**
@@ -28,6 +27,7 @@ Apple 強制要求所有 macOS 軟體必須經過 **「公證 (Notarization)」*
 4. 此時跳出的視窗會多出一個 **「打開」** 按鈕，點選後系統會將其加入信任白名單。
 
 **方法二：系統設定放行**
+
 1. 當出現阻擋訊息時，點選「好」。
 2. 前往 **「系統設定 (System Settings)」** > **「隱私權與安全性」**。
 3. 在「安全性」區塊下方會顯示「[App 名稱] 已被阻擋」，點選 **「仍要打開 (Open Anyway)」**。
@@ -38,7 +38,7 @@ Apple 強制要求所有 macOS 軟體必須經過 **「公證 (Notarization)」*
 **策略一：透過 Policy 派送 (推薦)**
 * **原理**：當軟體透過 Jamf Pro 的政策 (Policy) 安裝時，是由 Jamf Binary 以 Root 權限寫入，
 
-    通常**不會**被標記「網路隔離屬性 (com.apple.quarantine)」。
+ 通常**不會**被標記「網路隔離屬性 (com.apple.quarantine)」。
 
 * **優勢**：使用者開啟時完全不會看到 Gatekeeper 警告，體驗最流暢。
 
@@ -47,9 +47,10 @@ Apple 強制要求所有 macOS 軟體必須經過 **「公證 (Notarization)」*
 若軟體是透過腳本下載或複製進去的，可能會帶有隔離標籤。可透過 Jamf 腳本執行以下指令移除：
 ```bash
 
-# 移除指定 App 的隔離屬性 (慎用)
+## 移除指定 App 的隔離屬性 (慎用)
 
 xattr -r -d com.apple.quarantine /Applications/AppName.app
+
 ```
 
 **策略三：調整 Gatekeeper 政策 (不推薦)**

@@ -5,16 +5,16 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: true
 tags: ["App 鎖定","單一 App 模式","防弊","專注模式"]
 ---
+## Q: 可以限制學生在課堂上只能使用特定的 App 嗎？(App 鎖定)
 
-# Q: 可以限制學生在課堂上只能使用特定的 App 嗎？(App 鎖定)
-
-# Answer
+## Answer
 
 **可以。老師能透過「課堂」App 將學生裝置暫時「鎖定」在指定的應用程式中。**
 
 這在進行線上測驗（如 Kahoot）或專題製作時非常實用，能防止學生切換視窗分心。
 
 **操作步驟**：
+
 1. 在「課堂」App 中選取全班或特定學生。
 2. 點選 **「打開 (Open)」**。
 3. 選擇目標 App，並勾選下方的 **「鎖定為 App (Lock in app after opening)」**。

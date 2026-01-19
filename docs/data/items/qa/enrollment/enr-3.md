@@ -5,10 +5,9 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 tags: ["受監管","權限差異","Supervised","ADE"]
 ---
+## Q: 什麼是「受監管模式 (Supervised Mode)」？為什麼學校裝置一定要開啟？
 
-# Q: 什麼是「受監管模式 (Supervised Mode)」？為什麼學校裝置一定要開啟？
-
-# Answer
+## Answer
 
 **受監管模式 (Supervised Mode) 是 Apple 賦予組織擁有裝置「最高管理權限」的特殊狀態。**
 

@@ -5,10 +5,9 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
 tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 ---
+## Q: macOS 26 的「宣告式 .pkg 部署」如何使用？與傳統 Jamf Policy 有何不同？
 
-# Q: macOS 26 的「宣告式 .pkg 部署」如何使用？與傳統 Jamf Policy 有何不同？
-
-# Answer
+## Answer
 
 **macOS 26 (Tahoe) 將非 App Store 軟體 (.pkg) 納入宣告式裝置管理 (DDM) 範疇，允許透過 Declaration 部署軟體包，提供比傳統 Jamf Policy 更現代化、更透明的安裝體驗。**
 
@@ -16,7 +15,7 @@ tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 
 | 特性 | Jamf Policy (傳統) | DDM Package Declaration (新) |
 | :--- | :--- | :--- |
-| **運作核心** | 依賴 `jamf` binary 代理程式執行腳本與安裝 | 依賴 macOS 系統內建的 MDM 框架直接安裝 |
+| **運作核心** | 依賴 `Jamf` binary 代理程式執行腳本與安裝 | 依賴 macOS 系統內建的 MDM 框架直接安裝 |
 | **觸發時機** | 需設定觸發器 (Trigger)，如 Login、Startup、Recurring Check-in | **自主評估** (Autonomous)。只要符合宣告條件，系統即刻嘗試安裝 |
 | **狀態回報** | 回報至 Jamf Pro logs，有延遲 | **即時回報**安裝進度、錯誤代碼至 MDM |
 | **離線支援** | 需連線 MDM 才能觸發 Policy | 只要 Declaration 已下達，裝置可在背景自行處理 |

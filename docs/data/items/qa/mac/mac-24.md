@@ -5,10 +5,9 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 tags: ["Safari", "干擾控制", "考試防弊", "macOS 26", "教學端管理"]
 ---
+## Q: 【考試防弊】如何管理 Safari 的「干擾控制 (Distraction Control)」，避免學生在網頁檢定中隱藏關鍵 UI？
 
-# Q: 【考試防弊】如何管理 Safari 的「干擾控制 (Distraction Control)」，避免學生在網頁檢定中隱藏關鍵 UI？
-
-# Answer
+## Answer
 
 **macOS 26 Safari 推出的「干擾控制」允許使用者點擊並隱藏網頁上的部分元素（如廣告、側欄）。但在電腦化測驗 (CBT) 中，學生可能利用此功能隱藏測驗計時器、剩餘題數或導覽列，造成公平性疑慮。**
 
@@ -21,14 +20,14 @@ tags: ["Safari", "干擾控制", "考試防弊", "macOS 26", "教學端管理"]
 
 資訊組長應在大型測驗或檢定期間，透過 Jamf Pro 執行以下設定：
 
-### 1. 透過 Configuration Profile 鎖定 (推薦)
+## 1. 透過 Configuration Profile 鎖定 (推薦)
 
 * **路徑**：`com.apple.Safari` 網域下的進階設定。
 * **設定**：
-    * `AllowDistractionControl` = `false`
+ * `AllowDistractionControl` = `false`
 * **效果**：Safari 目錄下的「干擾控制」功能將變為灰色不可選取，學生無法針對特定測驗頁面發動隱藏指令。
 
-### 2. 測驗模式 (Assessment Mode / AAC)
+## 2. 測驗模式 (Assessment Mode / AAC)
 
 如果是高規格檢定，建議讓 App 呼叫 Apple 的 **「自動評量控制 (AAC)」**。
 

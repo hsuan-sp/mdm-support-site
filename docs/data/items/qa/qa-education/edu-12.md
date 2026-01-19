@@ -5,10 +5,9 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 tags: ["作業繳交","檔案分享","Google Drive"]
 ---
+## Q: 學生做完的作業（Keynote/Pages）要怎麼交給老師？
 
-# Q: 學生做完的作業（Keynote/Pages）要怎麼交給老師？
-
-# Answer
+## Answer
 
 **最佳方式是透過雲端硬碟（Google Drive、OneDrive、或 iCloud Drive）繳交。**
 **也可使用 AirDrop、Google Classroom 作業功能、或 Self Service 指定的繳交平台。**
@@ -20,12 +19,13 @@ tags: ["作業繳交","檔案分享","Google Drive"]
 適合已使用 Google Classroom/Workspace 的學校。
 
 **操作步驟**：
+
 1. 確認 iPad 已安裝 **「Google 雲端硬碟」** App 或 **「Google 文件/簡報」** 相關 App。
 2. 在 Keynote/Pages 中完成作業，點選「分享」（右上角分享按鈕）。
 3. 選擇「儲存到檔案 (Save to Files)」。
 4. 在「檔案」App 中，選擇 **「Google Drive」** 位置
 
-    （若未出現，需先在「檔案」App 中開啟 Google Drive）。
+ （若未出現，需先在「檔案」App 中開啟 Google Drive）。
 
 5. 選擇班級資料夾或老師指定的繳交資料夾。
 6. 點選「儲存」。

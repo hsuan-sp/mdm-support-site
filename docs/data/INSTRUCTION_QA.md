@@ -41,9 +41,9 @@ important: true/false
 tags: ["關鍵字1", "關鍵字2", "關鍵字3"]
 ---
 
-# Q: [重複問題標題]
+## Q: [重複問題標題]
 
-# Answer
+## Answer
 
 **核心答案（粗體開場，一句話總結問題解答）**
 
@@ -75,9 +75,9 @@ tags: ["標籤1", "標籤2", "標籤3"]  # 3-6個精確標籤
 
 **內容架構**（基於現有優秀範例分析）：
 ```markdown
-# Q: [重複問題標題]
+## Q: [重複問題標題]
 
-# Answer
+## Answer
 
 **核心答案（粗體開場，一句話總結）**
 
@@ -263,9 +263,9 @@ important: true
 tags: ["MDM 遷移", "零抹除", "iOS 26", "macOS Tahoe", "風險評估"]
 ---
 
-# Q: 什麼是「Zero-Wipe MDM Migration (零抹除 MDM 遷移)」？iOS 26 的新功能學校該用嗎？
+## Q: 什麼是「Zero-Wipe MDM Migration (零抹除 MDM 遷移)」？iOS 26 的新功能學校該用嗎？
 
-# Answer
+## Answer
 
 **iOS 26/macOS Tahoe 支援零抹除 MDM 遷移，但教育環境「強烈不建議」使用，應優先使用 Return to Service。**
 
@@ -389,7 +389,7 @@ id: enr-99
 title: "如何使用 iOS 18 的新功能設定 MDM？"
 ---
 
-# Answer
+## Answer
 iOS 18 新增了 DDM 功能，可以...
 ```
 **問題**：
@@ -407,7 +407,7 @@ title: "如何設定「Enforcement Deadline (強制執行截止日期)」確保�
 tags: ["Enforcement Deadline", "DDM", "iOS 26", "macOS Tahoe"]
 ---
 
-# Answer
+## Answer
 
 **透過 DDM (宣告式裝置管理) 設定截止日期，裝置會自主評估並在截止日移除「稍後」選項，強制執行。**
 

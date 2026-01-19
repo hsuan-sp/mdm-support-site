@@ -5,10 +5,9 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 tags: ["課堂管理","SOP","交接"]
 ---
+## Q: 班級輪替時（如走班、分組教學），如何快速整理平板給下一班使用？
 
-# Q: 班級輪替時（如走班、分組教學），如何快速整理平板給下一班使用？
-
-# Answer
+## Answer
 
 **善用「登出」與「訪客模式」快速清理，或透過 MDM 的「Return to Service」徹底重置。**
 **依時間緊迫程度選擇適合的方式。**
@@ -40,12 +39,14 @@ tags: ["課堂管理","SOP","交接"]
 若裝置不是共用 iPad 模式（個人載具臨時借用）：
 
 1. **登出雲端帳號**：
-    * 請學生登出 Google Classroom、Canva、iCloud（若有登入私人帳號）等。
-    * 這確保下一位使用者不會看到前一位的資料。
+
+ * 請學生登出 Google Classroom、Canva、iCloud（若有登入私人帳號）等。
+ * 這確保下一位使用者不會看到前一位的資料。
 
 2. **清理相簿與瀏覽紀錄**：
-    * 刪除相簿中的臨時照片。
-    * Safari > 清除歷史紀錄與網站資料。
+
+ * 刪除相簿中的臨時照片。
+ * Safari > 清除歷史紀錄與網站資料。
 
 3. **交接**：下一班學生使用前可能需重新登入各帳號。
 
@@ -56,14 +57,16 @@ tags: ["課堂管理","SOP","交接"]
 若需要完全還原至乾淨狀態，且希望下一班能「立即開機即用」：
 
 1. **使用 MDM 發送「清除裝置」指令**：
-    * 在 Jamf Pro 對目標裝置執行「Wipe Device/EACS」。
-    * **啟用 RTS 選項**：勾選 `Return to Service` 並指定 Wi-Fi 選項。
-    * **2026 新功能：保留受管 App**：勾選 `Preserve Managed Apps`。
+
+ * 在 Jamf Pro 對目標裝置執行「Wipe Device/EACS」。
+ * **啟用 RTS 選項**：勾選 `Return to Service` 並指定 Wi-Fi 選項。
+ * **2026 新功能：保留受管 App**：勾選 `Preserve Managed Apps`。
 
 2. **運作原理**：
-    * iPad 會清除所有使用者資料與快取。
-    * **快速重新註冊**：自動連上 Wi-Fi 並完成註冊畫面，跳過所有 Setup Assistant。
-    * **App 免下載**：由於啟用了保留 App，大型軟體（如 GarageBand, iMovie）不需重新下載，開機後立即出現在主畫面。
+
+ * iPad 會清除所有使用者資料與快取。
+ * **快速重新註冊**：自動連上 Wi-Fi 並完成註冊畫面，跳過所有 Setup Assistant。
+ * **App 免下載**：由於啟用了保留 App，大型軟體（如 GarageBand, iMovie）不需重新下載，開機後立即出現在主畫面。
 
 3. **耗時**：全程約 **3-5 分鐘**（顯著優於傳統重灌）。
 

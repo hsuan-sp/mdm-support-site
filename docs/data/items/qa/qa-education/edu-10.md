@@ -5,10 +5,9 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 tags: ["App Store","Self Service","限制"]
 ---
+## Q: 為什麼 App Store 不見了？我要怎麼下載 App？
 
-# Q: 為什麼 App Store 不見了？我要怎麼下載 App？
-
-# Answer
+## Answer
 
 **這是學校刻意的設定。App Store 被隱藏是為了防止學生自行下載未經審核的 App。**
 **請改用「Self Service (自助服務)」App 安裝學校核准的應用程式。**
@@ -32,6 +31,7 @@ tags: ["App Store","Self Service","限制"]
 學校管理員可設定哪些 App 提供給師生安裝。
 
 **操作步驟**：
+
 1. 在主畫面找到 **「Self Service」** App（圖示通常是學校 Logo 或 Jamf 標誌）。
 2. 開啟 App，瀏覽可用的 App 與資源。
 3. 找到需要的 App，點選 **「安裝 (Install)」**。
@@ -55,4 +55,4 @@ tags: ["App Store","Self Service","限制"]
 * **安裝按鈕是灰色的**：可能授權數量不足或 App 正在背景處理，稍後再試。
 * **找不到 Self Service App**：它可能被收進某個資料夾中，或在第二頁。
 
-    也可使用 Spotlight 搜尋。
+ 也可使用 Spotlight 搜尋。

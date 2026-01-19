@@ -5,10 +5,9 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 tags: ["EACS", "ADE 故障排除", "網路認證", "Terminal 指令", "復原模式"]
 ---
+## Q: 【現場救援】Mac 快速重置 (EACS) 後若自動註冊卡住，有哪些離線恢復與修復技巧？
 
-# Q: 【現場救援】Mac 快速重置 (EACS) 後若自動註冊卡住，有哪些離線恢復與修復技巧？
-
-# Answer
+## Answer
 
 **雖然「清除所有內容和設定 (EACS)」非常穩定，但在學校環境中，常因 Wi-Fi 需要網頁認證或防火牆擋掉 Apple 註冊伺服器，導致電腦卡在「遠端管理」註冊畫面。**
 
@@ -20,25 +19,29 @@ tags: ["EACS", "ADE 故障排除", "網路認證", "Terminal 指令", "復原模
 
 ## 二、 常見救援技巧 (SOP)
 
-### 技巧 1：強制同步系統時間 (終端機命令)
+## 技巧 1：強制同步系統時間 (終端機命令)
 
 在 Setup Assistant 畫面，按下 **Command + Option + T** 開啟終端機（或從選單進入）：
 ```bash
+
 sntp -sS time.apple.com
 
-# 或是手動設定 (格式: MMDDhhmmYY)
+## 或是手動設定 (格式: MMDDhhmmYY)
 
 date 0115100026
+
 ```
 
-### 技巧 2：手動觸發雲端設定檢查
+## 技巧 2：手動觸發雲端設定檢查
 
 ```bash
+
 sudo profiles renew -type enrollment
+
 ```
 這會強制 Mac 重新連網詢問 Apple 伺服器：「誰是我的管理程式？」
 
-### 技巧 3：利用 iPhone 熱點
+## 技巧 3：利用 iPhone 熱點
 
 如果學校 Wi-Fi 的防火牆有問題，請先讓 Mac 連接管理員的手機熱點，這通常能繞過校園網管限制，快速完成「註冊 (Enrollment)」階段，進入系統後再由政策切換回校園 Wi-Fi。
 

@@ -5,10 +5,9 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 tags: ["Mac 安全","啟用鎖定","Apple 晶片","Apple Configurator","維修風險"]
 ---
+## Q: 【Mac 啟用鎖定】Mac 電腦維修回來後被鎖住，該如何徹底解決？
 
-# Q: 【Mac 啟用鎖定】Mac 電腦維修回來後被鎖住，該如何徹底解決？
-
-# Answer
+## Answer
 
 **可以。配備 Apple 晶片（M1 至 M4 系列等）或 Apple T2 安全晶片的 Mac，**
 **其啟用鎖定管理完全整合於 Apple 校務管理 (ASM) 中。**
@@ -24,7 +23,7 @@ tags: ["Mac 安全","啟用鎖定","Apple 晶片","Apple Configurator","維修�
 2. 點選 **「管理啟用鎖定」>「關閉啟動鎖定」**。
 3. **生效流程**：確認指令送出約 10 分鐘後，將 Mac 重新開機並連上 Wi-Fi，
 
-    系統會向 Apple 伺服器驗證並解除鎖定。
+ 系統會向 Apple 伺服器驗證並解除鎖定。
 
 **方案二：序號不在 ASM 中，但屬於零售機（手動加回）**
 
@@ -32,11 +31,11 @@ tags: ["Mac 安全","啟用鎖定","Apple 晶片","Apple Configurator","維修�
 
 1. **準備工具**：使用另一台 Mac 安裝 **Apple Configurator**，
 
-    或使用 iPhone 下載 **Apple Configurator App**。
+ 或使用 iPhone 下載 **Apple Configurator App**。
 
 2. **操作步驟**：將待處理的 Mac 進入「設定輔助程式」畫面，利用 iPhone 掃描 Mac 螢幕上的圖案，
 
-    或透過 Mac 版 Configurator 指令將其 **「新增至 Apple 校務管理」**。
+ 或透過 Mac 版 Configurator 指令將其 **「新增至 Apple 校務管理」**。
 
 3. **後續**：一旦序號出現在您的 ASM 中，即可執行「方案一」的解鎖動作。
 
@@ -49,7 +48,7 @@ tags: ["Mac 安全","啟用鎖定","Apple 晶片","Apple Configurator","維修�
 * **風險**：**您無法自行解鎖。** 因為該硬體的所有權在法律與系統層級上仍屬於他人。
 * **對策**：必須立即要求維修商負責，聯繫原擁有者進行「釋出」操作，
 
-    或是更換一片乾淨的、未被納管的主機板。
+ 或是更換一片乾淨的、未被納管的主機板。
 
 **修復最後手段：DFU 模式還原**
 
@@ -59,7 +58,7 @@ tags: ["Mac 安全","啟用鎖定","Apple 晶片","Apple Configurator","維修�
 2. 連接至另一台 Mac（使用 Finder/Configurator）或 Windows 電腦（使用 **Apple 裝置 App**）。
 3. 執行 **「回復 (Restore)」**。這會重新刷寫韌體並抹除硬碟。
 
-    若 ASM 端已解鎖，還原完成後即可順利進入系統。
+ 若 ASM 端已解鎖，還原完成後即可順利進入系統。
 
 **實務建議**：
 

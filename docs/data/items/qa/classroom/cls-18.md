@@ -5,10 +5,9 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 tags: ["Jamf Teacher","Apple Classroom","工具比較","教學管理"]
 ---
+## Q: 「Jamf Teacher」與「Apple 課堂」有什麼不同？老師該用哪一個？
 
-# Q: 「Jamf Teacher」與「Apple 課堂」有什麼不同？老師該用哪一個？
-
-# Answer
+## Answer
 
 **這兩者是互補的工具。Apple 課堂擅長「近端監控」，Jamf Teacher 擅長「遠端限制」。**
 
@@ -25,4 +24,4 @@ tags: ["Jamf Teacher","Apple Classroom","工具比較","教學管理"]
 * **上課中看畫面**：使用 **Apple 課堂**。
 * **考試/專注模式**：使用 **Jamf Teacher**，因為它能更強力地隱藏無關的 App（如遊戲、瀏覽器），
 
-    且不需擔心藍牙斷線問題。
+ 且不需擔心藍牙斷線問題。
