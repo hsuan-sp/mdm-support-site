@@ -1,6 +1,6 @@
 ---
 term: "Universal Control"
-category: ["Apple", "macOS"]
+category: ["Apple","macOS"]
 ---
 
 ## Definition

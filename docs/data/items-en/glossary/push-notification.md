@@ -1,6 +1,6 @@
 ---
 term: "Push Notification"
-category: ["Core", "Apple"]
+category: ["Apple"]
 ---
 
 ## Definition

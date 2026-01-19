@@ -1,6 +1,6 @@
 ---
 term: "Location Services"
-category: ["Apple", "Core"]
+category: ["Apple","Core"]
 ---
 
 ## Definition

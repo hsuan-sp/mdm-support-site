@@ -1,6 +1,6 @@
 ---
 term: "Composer"
-category: ["macOS", "Jamf"]
+category: ["macOS","Jamf"]
 ---
 
 ## Definition

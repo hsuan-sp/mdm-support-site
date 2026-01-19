@@ -1,6 +1,6 @@
 ---
 term: "iCloud Private Relay"
-category: ["Security", "Apple"]
+category: ["Security","Apple"]
 ---
 
 ## Definition

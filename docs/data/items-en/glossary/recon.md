@@ -1,6 +1,6 @@
 ---
 term: "Recon"
-category: ["Jamf", "macOS"]
+category: ["Jamf","macOS"]
 ---
 
 ## Definition

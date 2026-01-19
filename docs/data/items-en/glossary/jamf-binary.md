@@ -1,6 +1,6 @@
 ---
 term: "Jamf Binary"
-category: ["Jamf", "macOS"]
+category: ["Jamf","macOS"]
 ---
 
 ## Definition

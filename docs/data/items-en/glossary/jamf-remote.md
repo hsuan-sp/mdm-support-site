@@ -1,6 +1,6 @@
 ---
 term: "Jamf Remote Assist"
-category: ["Jamf", "macOS"]
+category: ["Jamf","macOS"]
 ---
 
 ## Definition

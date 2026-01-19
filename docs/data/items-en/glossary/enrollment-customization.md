@@ -1,6 +1,6 @@
 ---
 term: "Enrollment Customization"
-category: ["Enrollment", "Apple"]
+category: ["Enrollment","Apple"]
 ---
 
 ## Definition

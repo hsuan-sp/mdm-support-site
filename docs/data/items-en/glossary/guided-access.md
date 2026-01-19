@@ -1,6 +1,6 @@
 ---
 term: "Guided Access"
-category: ["Education", "Apple"]
+category: ["Education","Apple"]
 ---
 
 ## Definition

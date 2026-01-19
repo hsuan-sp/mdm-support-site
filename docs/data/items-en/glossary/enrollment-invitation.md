@@ -1,6 +1,6 @@
 ---
 term: "Enrollment Invitation"
-category: ["Jamf", "Enrollment"]
+category: ["Jamf","Enrollment"]
 ---
 
 ## Definition

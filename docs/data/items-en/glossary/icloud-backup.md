@@ -1,6 +1,6 @@
 ---
 term: "iCloud Backup"
-category: ["Core", "Apple"]
+category: ["Core","Apple"]
 ---
 
 ## Definition

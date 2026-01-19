@@ -1,6 +1,6 @@
 ---
 term: "Bonjour"
-category: ["Network", "Apple"]
+category: ["Network","Apple"]
 ---
 
 ## Definition

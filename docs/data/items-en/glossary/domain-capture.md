@@ -1,6 +1,6 @@
 ---
 term: "Domain Capture"
-category: ["Apple", "Security"]
+category: ["Apple","Security"]
 ---
 
 ## Definition

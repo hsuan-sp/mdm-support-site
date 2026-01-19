@@ -1,6 +1,6 @@
 ---
 term: "Software Update"
-category: ["macOS", "Jamf"]
+category: ["macOS","Jamf"]
 ---
 
 ## Definition

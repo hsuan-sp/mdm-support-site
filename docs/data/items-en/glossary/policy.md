@@ -1,6 +1,6 @@
 ---
 term: "Policy"
-category: ["Core", "Jamf"]
+category: ["Core"]
 ---
 
 ## Definition

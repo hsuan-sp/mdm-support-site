@@ -1,6 +1,6 @@
 ---
 term: "Blueprints"
-category: ["Jamf", "Core"]
+category: ["Jamf","Core"]
 ---
 
 ## Definition

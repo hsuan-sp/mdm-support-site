@@ -1,6 +1,6 @@
 ---
 term: "Smart Group"
-category: ["Core", "Jamf"]
+category: ["Core","Jamf"]
 ---
 
 ## Definition

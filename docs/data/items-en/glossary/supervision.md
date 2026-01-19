@@ -1,6 +1,6 @@
 ---
 term: "Supervision"
-category: ["Enrollment", "Security"]
+category: ["Core"]
 ---
 
 ## Definition

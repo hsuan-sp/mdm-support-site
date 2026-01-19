@@ -1,6 +1,6 @@
 ---
 term: "Jamf Pro"
-category: ["Core", "Jamf"]
+category: ["Core","Jamf"]
 ---
 
 ## Definition

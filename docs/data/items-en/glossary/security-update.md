@@ -1,6 +1,6 @@
 ---
 term: "Security Update"
-category: ["Core", "Jamf"]
+category: ["Core","Jamf"]
 ---
 
 ## Definition

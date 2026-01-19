@@ -1,6 +1,6 @@
 ---
 term: "Managed Classes"
-category: ["Education", "Jamf"]
+category: ["Education","Jamf"]
 ---
 
 ## Definition

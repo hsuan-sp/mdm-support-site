@@ -1,6 +1,6 @@
 ---
 term: "Remote Management"
-category: ["Core", "Enrollment"]
+category: ["Core","Jamf"]
 ---
 
 ## Definition

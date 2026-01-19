@@ -1,6 +1,6 @@
 ---
 term: "Find My"
-category: ["Apple", "Security"]
+category: ["Apple","Security"]
 ---
 
 ## Definition

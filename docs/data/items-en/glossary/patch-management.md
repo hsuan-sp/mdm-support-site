@@ -1,6 +1,6 @@
 ---
 term: "Patch Management"
-category: ["macOS", "Jamf"]
+category: ["macOS","Jamf"]
 ---
 
 ## Definition

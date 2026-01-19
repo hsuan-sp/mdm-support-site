@@ -1,6 +1,6 @@
 ---
 term: "Shared iPad"
-category: ["Education", "Enrollment"]
+category: ["Education","Enrollment"]
 ---
 
 ## Definition

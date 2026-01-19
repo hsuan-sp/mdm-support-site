@@ -1,6 +1,6 @@
 ---
 term: "Platform SSO"
-category: ["Security", "macOS"]
+category: ["Security","macOS"]
 ---
 
 ## Definition

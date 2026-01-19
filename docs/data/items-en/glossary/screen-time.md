@@ -1,6 +1,6 @@
 ---
 term: "Screen Time"
-category: ["Core", "Security"]
+category: ["Apple","Core"]
 ---
 
 ## Definition

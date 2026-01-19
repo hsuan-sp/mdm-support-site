@@ -1,6 +1,6 @@
 ---
 term: "Recovery Mode"
-category: ["Security"]
+category: ["Apple","macOS"]
 ---
 
 ## Definition

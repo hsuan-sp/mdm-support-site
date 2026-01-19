@@ -1,6 +1,6 @@
 ---
 term: "Scope"
-category: ["Core", "Jamf"]
+category: ["Core","Jamf"]
 ---
 
 ## Definition
