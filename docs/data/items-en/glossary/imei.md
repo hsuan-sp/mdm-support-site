@@ -5,7 +5,7 @@ category: ["Hardware"]
 
 ## Definition
 
-The International Mobile Equipment Identity (IMEI) is a unique 15-digit serial number used to identify an individual mobile device on a cellular network. Every iPad or iPhone with a SIM card slot has a unique IMEI that is hardcoded into the hardware. If a cellular-enabled device is stolen, this number can be used by the school and local authorities to blacklist the device, preventing it from ever connecting to a mobile network again.
+The International Mobile Equipment Identity (IMEI) is a unique 15-digit serial number used to identify an individual mobile device on a cellular network. Every iPad or iPhone with a SIM card slot has a unique IMEI that is hardcoded into the hardware. If a cellular-enabled device is stolen, this number can be used by the school and local authorities to blocklist the device, preventing it from ever connecting to a mobile network again.
 
 ## Plain English
 

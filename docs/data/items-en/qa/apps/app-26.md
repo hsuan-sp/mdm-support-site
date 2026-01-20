@@ -1,7 +1,7 @@
 ---
 id: app-26
 title: "How do I manage the AI-assisted teaching apps released in 2024–2025 (e.g., Writing Tools, Image Playground)?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: true
 tags: ["AI","Apple Intelligence","App Management","Privacy","Exam Security"]
 ---

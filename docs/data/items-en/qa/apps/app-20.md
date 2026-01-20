@@ -1,7 +1,7 @@
 ---
 id: app-20
 title: "What is 'Declarative App Management' (DDM)?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["DDM","App Deployment","Status Monitoring","New Tech"]
 ---

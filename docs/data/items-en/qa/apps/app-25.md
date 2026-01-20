@@ -1,7 +1,7 @@
 ---
 id: app-25
 title: "How do I use 'Declarative .pkg Deployment' in macOS 26? How does it differ from Jamf Policies?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 ---

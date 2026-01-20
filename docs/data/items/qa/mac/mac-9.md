@@ -1,7 +1,7 @@
 ---
 id: mac-9
 title: "Jamf 的 Script (腳本) 功能可以做什麼？如何建立與執行？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["自動化","Shell Script","Zsh","政策","腳本","jamfHelper"]
 ---

@@ -1,7 +1,7 @@
 ---
 id: app-13
 title: "What is 'Managed App Configuration'? How is it used for mass deployment?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["AppConfig","XML","Variables","Jamf Pro"]
 ---

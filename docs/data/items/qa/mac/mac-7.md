@@ -1,7 +1,7 @@
 ---
 id: mac-7
 title: "M 系列晶片 (Apple Silicon) 的 Mac 在管理上有什麼特殊限制？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["Apple Silicon","Bootstrap Token","安全啟動","核心延伸功能"]
 ---

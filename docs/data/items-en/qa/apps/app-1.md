@@ -1,7 +1,7 @@
 ---
 id: app-1
 title: "Apps on the iPad are stuck on 'Waiting' or failing to install. How do I troubleshoot this?"
-category: "Section 3: App Management & Distribution"
+category: "Section 3: App Distribution category: "Section 3: App Management & Distribution" Management"
 important: true
 tags: ["Troubleshooting","App Installation","VPP","DDM"]
 ---

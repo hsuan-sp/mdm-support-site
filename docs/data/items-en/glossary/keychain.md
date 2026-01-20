@@ -9,4 +9,4 @@ The Keychain is Apple’s built-in password management system. It securely store
 
 ## Plain English
 
-Think of this as the system's "Master Key Ring." You don't have to carry around dozens of individual keys (your passwords) in your head; you just keep them in this secure, encrypted "Lockbox" (the Keychain). Once you unlock the box with your fingerprint or startup password, the system automatically grabs whichever key you need to unlock a website or the school Wi-Fi.
+Think of this as the system's "Universal Key Ring." You don't have to carry around dozens of individual keys (your passwords) in your head; you just keep them in this secure, encrypted "Lockbox" (the Keychain). Once you unlock the box with your fingerprint or startup password, the system automatically grabs whichever key you need to unlock a website or the school Wi-Fi.

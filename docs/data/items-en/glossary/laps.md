@@ -9,4 +9,4 @@ Local Administrator Password Solution (LAPS) is a security mechanism that ensure
 
 ## Plain English
 
-Think of this as an "Automatic Lock-Changing System." In the past, every classroom door in a school might have used the same master key. If a thief stole that key, they could enter every room. With LAPS, every single door has a different, unique code that changes every few days. Even if someone steals a code today, it won't work on the next door, and it won't even work on the same door tomorrow.
+Think of this as an "Automatic Lock-Changing System." In the past, every classroom door in a school might have used the same shared key. If a thief stole that key, they could enter every room. With LAPS, every single door has a different, unique code that changes every few days. Even if someone steals a code today, it won't work on the next door, and it won't even work on the same door tomorrow.

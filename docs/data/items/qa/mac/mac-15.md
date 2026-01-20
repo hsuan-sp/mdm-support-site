@@ -1,7 +1,7 @@
 ---
 id: mac-15
 title: "如何大量部署 Microsoft Office 並啟用授權？電腦教室與行政機有何不同？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["Office","Microsoft 365","Serializer","大量授權","Jamf App Installers"]
 ---

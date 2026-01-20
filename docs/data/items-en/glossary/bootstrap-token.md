@@ -9,4 +9,4 @@ A Bootstrap Token is an automated authorization credential used in macOS. When t
 
 ## Plain English
 
-This is the "Spare Master Key" stored in the MDM vault. When a computer is locked down with encryption (FileVault), usually only the primary user can unlock it. The Bootstrap Token allows IT to have a secure copy of the "key" so they can enter the system for maintenance or give access to a new employee if the original user is unavailable.
+This is the "Backup Recovery Key" stored in the MDM vault. When a computer is locked down with encryption (FileVault), usually only the primary user can unlock it. The Bootstrap Token allows IT to have a secure copy of the "key" so they can enter the system for maintenance or give access to a new employee if the original user is unavailable.

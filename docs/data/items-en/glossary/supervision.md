@@ -9,4 +9,4 @@ Supervision is a special mode for school-owned Apple devices that provides advan
 
 ## Plain English
 
-Supervision is the difference between a **"Library Book"** and a **"School Notebook."** A library book (personal device) is borrowed but fairly private. A school supervised device, however, is like a specialized laboratory tool assigned for a specific purpose—it’s built to be managed, and the student "owns" the experience but the school "governs" the rules of the tool to keep it safe and focused on learning.
+Supervision is the device's "School Asset Mode." A personal iPhone you buy from a store is in "Personal Mode"—most settings cannot be locked down. Once a device is supervised, it is recognized as "school property." This unlocks full management capabilities for IT: they can lock down any feature, silently push apps, enforce kiosk modes, and prevent the removal of the management profile. It's the essential requirement for any school-owned iPad.

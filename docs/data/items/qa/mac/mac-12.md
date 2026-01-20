@@ -1,7 +1,7 @@
 ---
 id: mac-12
 title: "如何防止學生進入 Recovery Mode (復原模式) 格式化電腦？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["防篡改","Recovery Lock","韌體密碼","資安","遠端指令"]
 ---

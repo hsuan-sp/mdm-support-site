@@ -5,7 +5,7 @@ category: ["Security"]
 
 ## Definition
 
-Restricted Software is a "Blacklist" mechanism within Jamf Pro. Administrators can define a list of prohibited applications (such as unauthorized games or older macOS installers). If a user attempts to open a restricted app, the system immediately forces the application to quit and can be configured to delete the app and display a warning message to the user.
+Restricted Software is a "Blocklist" mechanism within Jamf Pro. Administrators can define a list of prohibited applications (such as unauthorized games or older macOS installers). If a user attempts to open a restricted app, the system immediately forces the application to quit and can be configured to delete the app and display a warning message to the user.
 
 ## Plain English
 

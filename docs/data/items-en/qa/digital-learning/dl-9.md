@@ -1,7 +1,7 @@
 ---
 id: dl-9
 title: "Does MDM monitor the student's location (GPS) at all times?"
-category: "Section 5: MOE Digital Learning Project"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Privacy","Location","GPS","Lost Mode"]
 ---

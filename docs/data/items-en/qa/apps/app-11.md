@@ -1,7 +1,7 @@
 ---
 id: app-11
 title: "How do I distribute E-books (PDF/ePub) to student iPads?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["E-books","Material Distribution","PDF","Restrictions"]
 ---

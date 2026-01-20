@@ -1,7 +1,7 @@
 ---
 id: dl-2
 title: "The MOE dashboard shows some devices as 'Unused' or failing to upload data. How do we fix this?"
-category: "Section 5: Campus Digital Initiatives & Compliance"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: true
 tags: ["Data Reporting","Troubleshooting","Jamf Trust","Usage Metrics"]
 ---

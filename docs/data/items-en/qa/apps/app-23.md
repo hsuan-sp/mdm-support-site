@@ -1,7 +1,7 @@
 ---
 id: app-23
 title: "What is 'Declarative App Management' (DDM), and how does it differ from traditional VPP?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: true
 tags: ["DDM", "App Management", "Declarative", "Auto-Update", "iOS 26"]
 ---

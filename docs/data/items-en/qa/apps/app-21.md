@@ -1,7 +1,7 @@
 ---
 id: app-21
 title: "How do I prevent students from 'hiding' or 'locking' Managed Apps in iOS 18?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: true
 tags: ["iOS 18","Hide App","Lock App","Restrictions"]
 ---

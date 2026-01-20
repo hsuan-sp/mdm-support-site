@@ -1,7 +1,7 @@
 ---
 id: app-5
 title: "How do we balance automated app installs with limited school bandwidth?"
-category: "Section 3: App Management & Distribution"
+category: "Section 3: App Distribution category: "Section 3: App Management & Distribution" Management"
 important: false
 tags: ["Deployment Strategy","Content Caching","Bandwidth Management"]
 ---

@@ -1,7 +1,7 @@
 ---
 id: app-14
 title: "Can teachers use Managed Apple Accounts to test school-developed Beta apps in TestFlight?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["TestFlight","App Store Connect","Managed Apple Account","Service Access"]
 ---

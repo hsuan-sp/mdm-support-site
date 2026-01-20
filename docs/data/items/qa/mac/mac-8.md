@@ -1,7 +1,7 @@
 ---
 id: mac-8
 title: "為什麼 MDM 要求開啟 FileVault？使用者忘記登入密碼時該如何救援？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 tags: ["FileVault","全磁碟加密","資料安全","復原密鑰","Jamf Pro","資產"]
 ---

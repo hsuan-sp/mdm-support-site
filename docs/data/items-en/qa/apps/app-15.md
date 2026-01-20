@@ -1,7 +1,7 @@
 ---
 id: app-15
 title: "How do I prevent apps from updating during class time to avoid network congestion?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["App Updates","Classroom Management","Update Strategy","Bandwidth Control"]
 ---

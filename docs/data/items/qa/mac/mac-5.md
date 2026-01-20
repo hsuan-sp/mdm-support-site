@@ -1,7 +1,7 @@
 ---
 id: mac-5
 title: "如何強制 Mac 進行 macOS 系統更新？學生一直按「稍後提醒」怎麼辦？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["系統更新","DDM","Nudge","宣告式管理","SOP"]
 ---

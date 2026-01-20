@@ -1,7 +1,7 @@
 ---
 id: app-9
 title: "Do I need the student's Apple ID password to update apps? How can I achieve silent updates?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["App Updates","Device-based Assignment","Automated Updates","DDM"]
 ---

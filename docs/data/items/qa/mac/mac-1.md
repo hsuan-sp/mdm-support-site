@@ -1,7 +1,7 @@
 ---
 id: mac-1
 title: "Mac 需要綁定 AD (Active Directory) 嗎？現代化的建議是什麼？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 tags: ["AD","身分認證","Jamf Connect","Platform SSO","No-Bind"]
 ---
@@ -55,4 +55,4 @@ tags: ["AD","身分認證","Jamf Connect","Platform SSO","No-Bind"]
 **實務建議：遷移策略**
 
 若貴校仍有大量 Mac 綁定 AD，請優先計畫「解除綁定 (Unbind)」專案，
-並導入 Platform SSO，這能大幅減少ICT 資訊支援團隊長處理「密碼不同步」工單的數量。
+並導入 Platform SSO，這能大幅減少 ICT 資訊支援團隊長處理「密碼不同步」工單的數量。

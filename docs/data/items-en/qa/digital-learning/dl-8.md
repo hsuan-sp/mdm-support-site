@@ -1,7 +1,7 @@
 ---
 id: dl-8
 title: "If school Wi-Fi is poor, can I connect the iPad to a wired network (Ethernet)?"
-category: "Section 5: MOE Digital Learning Project"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Network","Wired Connection","Ethernet","Lightning","iPad 9"]
 ---

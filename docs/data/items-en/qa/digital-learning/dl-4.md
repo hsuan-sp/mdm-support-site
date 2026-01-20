@@ -1,7 +1,7 @@
 ---
 id: dl-4
 title: "How do I create Smart Groups specifically for tracking different phases of our hardware rollout?"
-category: "Section 5: Campus Digital Initiatives & Compliance"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Group Management","Automation","Smart Groups","Asset Tracking"]
 ---

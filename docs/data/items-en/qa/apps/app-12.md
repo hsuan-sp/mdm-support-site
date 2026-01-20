@@ -1,7 +1,7 @@
 ---
 id: app-12
 title: "Can paid app licenses be shared between different schools? (Cross-school VPP)"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["VPP Locations","Resource Sharing","ASM"]
 ---

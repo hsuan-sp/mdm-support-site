@@ -1,7 +1,7 @@
 ---
 id: mac-14
 title: "學校有多台網路印表機，如何透過 Jamf Pro 派送設定給老師的 Mac？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["印表機","AirPrint","lpadmin","政策","自助服務","驅動程式"]
 ---

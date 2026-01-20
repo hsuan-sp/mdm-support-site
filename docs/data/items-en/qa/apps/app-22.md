@@ -1,7 +1,7 @@
 ---
 id: app-22
 title: "Purchasing Procreate vs. Procreate Pocket: What's the difference, and what if we bought the wrong version?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["Procreate","App Purchasing","VPP","Universal Purchase","Refund"]
 ---

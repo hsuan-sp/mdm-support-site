@@ -1,7 +1,7 @@
 ---
 id: app-10
 title: "Why does the iPad prompt for an Apple ID password when opening an app?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["Troubleshooting","License Conflicts","Managed Apps","Device-based Assignment"]
 ---

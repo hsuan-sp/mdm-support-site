@@ -1,7 +1,7 @@
 ---
 id: app-3
 title: "If the App Store is hidden, how can students get the apps they need for class?"
-category: "Section 3: App Management & Distribution"
+category: "Section 3: App Distribution category: "Section 3: App Management & Distribution" Management"
 important: false
 tags: ["Self Service","App Store","Restrictions","Student Autonomy"]
 ---

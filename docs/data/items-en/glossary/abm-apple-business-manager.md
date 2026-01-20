@@ -9,4 +9,4 @@ Apple Business Manager (ABM) is a web-based portal for IT administrators to depl
 
 ## Plain English
 
-ABM is the "Central Assets Headquarters" for an organization's Apple devices. Every piece of hardware the company buys and every software license is registered here first. Think of the MDM as a third-party management company that must get a "Master Key" from the Headquarters (ABM) before it is allowed to enter and manage the company's property.
+ABM is the "Central Assets Headquarters" for an organization's Apple devices. Every piece of hardware the company buys and every software license is registered here first. Think of the MDM as a third-party management company that must get a "Central Key" from the Headquarters (ABM) before it is allowed to enter and manage the company's property.

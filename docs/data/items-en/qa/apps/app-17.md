@@ -1,7 +1,7 @@
 ---
 id: app-17
 title: "I 'purchased' an app in ASM, but it's not appearing in my Jamf Pro list. Why?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["VPP Sync","ASM","Troubleshooting","Volume Purchase"]
 ---

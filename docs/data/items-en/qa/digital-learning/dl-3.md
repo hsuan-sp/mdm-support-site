@@ -1,7 +1,7 @@
 ---
 id: dl-3
 title: "How do I perform a 'Reset Network Settings'? What are the risks to my MDM connection?"
-category: "Section 5: Campus Digital Initiatives & Compliance"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Troubleshooting","Reset","Network","Connection Help"]
 ---

@@ -1,7 +1,7 @@
 ---
 id: mac-13
 title: "Google Meet 或 Zoom 想要分享螢幕，卻一直跳出權限請求？MDM 能自動全開嗎？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["PPPC","隱私權限","TCC","螢幕錄製","標準使用者","Apple Intelligence"]
 ---

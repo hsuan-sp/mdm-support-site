@@ -1,7 +1,7 @@
 ---
 id: mac-11
 title: "Mac 安裝軟體時顯示「來自未識別的開發者」或「無法打開」，如何解決？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["Gatekeeper","安全性","公證","Notarization","軟體安裝"]
 ---

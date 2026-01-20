@@ -4,7 +4,7 @@
 
 ## 🛠️ 核心工具 (Core Tools)
 
-### 1. [`content_manager.py`](./content_manager.py) (內容管理 GUI)
+### 1. `content_manager.py` (內容管理 GUI)
 
 這是專案的主要內容編輯工具，提供圖形化介面 (Tkinter) 讓維護者能輕鬆新增、編輯與管理 Markdown 文件。
 
@@ -25,7 +25,7 @@ python3 scripts/content_manager.py
 ./scripts/run_content_manager.sh
 ```
 
-### 2. [`fix-markdown.js`](./fix-markdown.js) (全能修正腳本)
+### 2. `fix-markdown.js` (全能修正腳本)
 
 這是專案的**自動化排版與 Lint 修正核心**，一次執行即可修復絕大多數的格式問題。
 
@@ -51,7 +51,7 @@ python3 scripts/content_manager.py
 npm run fix-markdown
 ```
 
-### 3. [`generate_maintenance_index.mjs`](./generate_maintenance_index.mjs) (索引生成)
+### 3. `generate_maintenance_index.mjs` (索引生成)
 
 此腳本用於掃描 `docs/data` 下的所有 Markdown 檔案，並產生總覽索引，方便維護者快速檢索現有內容。
 

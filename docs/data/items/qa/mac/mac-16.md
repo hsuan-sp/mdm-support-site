@@ -1,7 +1,7 @@
 ---
 id: mac-16
 title: "【Sequoia 新功能】如何管理或禁用「iPhone 鏡像輸出 (iPhone Mirroring)」？"
-category: "第七部分：Mac 電腦進階管理 (Mac Management)"
+category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 tags: ["macOS 15","iPhone Mirroring","隱私","限制","DLP"]
 ---

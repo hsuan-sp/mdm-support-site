@@ -1,7 +1,7 @@
 ---
 id: app-4
 title: "What details should we keep in mind when 'purchasing' free apps in bulk?"
-category: "Section 3: App Management & Distribution"
+category: "Section 3: App Distribution category: "Section 3: App Management & Distribution" Management"
 important: false
 tags: ["VPP","ASM","Location Tokens","Inventory Management"]
 ---

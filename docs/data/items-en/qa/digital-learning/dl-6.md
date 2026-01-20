@@ -1,7 +1,7 @@
 ---
 id: dl-6
 title: "How can I temporarily unblock certain websites needed for teaching?"
-category: "Section 5: MOE Digital Learning Project"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Content Filtering","Exclusions","YouTube","Jamf Trust","DNS Proxy"]
 ---

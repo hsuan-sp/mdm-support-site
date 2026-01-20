@@ -1,7 +1,7 @@
 ---
 id: dl-7
 title: "Why is 'iCloud Private Relay' forced off on school iPads? Does this affect privacy?"
-category: "Section 5: MOE Digital Learning Project"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["iCloud","Private Relay","Digital Learning Project","Policy Info"]
 ---

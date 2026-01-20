@@ -9,4 +9,4 @@ An Activation Lock Bypass Code is a unique alphanumeric string that MDM automati
 
 ## Plain English
 
-This is the "Emergency Master Key" for company-owned hardware. If someone leaves the school and forgets to unlock their iPad, IT doesn't have to guess their password. They can pull this code from the MDM system, enter it into the device, and the "theft lock" is instantly removed so the iPad can be wiped and given to a new student.
+This is the "Emergency Override Key" for institution-owned hardware. If someone leaves the school and forgets to unlock their iPad, IT doesn't have to guess their password. They can pull this code from the MDM system, enter it into the device, and the "theft lock" is instantly removed so the iPad can be wiped and given to a new student.

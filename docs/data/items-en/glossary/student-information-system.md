@@ -9,4 +9,4 @@ A Student Information System (SIS) is a comprehensive database school management
 
 ## Plain English
 
-This is the "Digital Brain of the School Office." It’s the master computer that knows every student's name, which class they are in, and who their parents are. By connecting this "Brain" to the school’s iPad system, everything stays synchronized. If a new student joins the school, the system automatically gives them an iPad account and puts them in the correct classes without any extra paperwork.
+This is the "Digital Brain of the School Office." It's the central hub that knows every student's name, which class they are in, and who their parents are. By connecting this "Brain" to the school's iPad system, everything stays synchronized. If a new student joins the school, the system automatically gives them an iPad account and puts them in the correct classes without any extra paperwork.

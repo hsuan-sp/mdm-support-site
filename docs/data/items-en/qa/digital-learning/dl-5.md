@@ -1,7 +1,7 @@
 ---
 id: dl-5
 title: "Students are deleting the Jamf Trust app. How does this affect compliance, and how do we prevent it?"
-category: "Section 5: Campus Digital Initiatives & Compliance"
+category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 tags: ["Compliance","Security","Restrictions","Jamf Trust"]
 ---

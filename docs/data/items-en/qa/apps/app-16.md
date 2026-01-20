@@ -1,7 +1,7 @@
 ---
 id: app-16
 title: "Can I standardize the iPad Home Screen layout for students?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["Home Screen Layout","Restrictions","Folders"]
 ---

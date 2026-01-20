@@ -1,7 +1,7 @@
 ---
 id: app-24
 title: "How do I restrict student iPads to download apps only over Wi-Fi to save cellular data?"
-category: "Section 3: App Distribution & Management (Apps & Books)"
+category: "Section 3: App Distribution category: "Section 3: App Distribution & Management (Apps & Books)" Management"
 important: false
 tags: ["Cellular Data", "Wi-Fi", "App Download", "Traffic Management", "iOS 26"]
 ---
