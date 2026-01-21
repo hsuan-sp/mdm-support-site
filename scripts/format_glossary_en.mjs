@@ -49,10 +49,24 @@ function formatContent(content) {
         .replace(/([^\n])\n(##\s)/g, '$1\n\n$2') // Blank line before Header
         .replace(/(##\s.*)\n([^\n])/g, '$1\n\n$2'); // Blank line after Header
 
-    // Ensure blank line before list
+    // 4. Tighten Lists (Remove empty lines between list items)
+    // Matches: (newline) * text (newline)(newline) * text
+    // Replace with: (newline) * text (newline) * text
+    // We run this loop until no more changes to catch multi-item lists
+    let previousBody;
+    do {
+        previousBody = newBody;
+        newBody = newBody.replace(/(\n\* [^\n]+)\n\n(\* )/g, '$1\n$2');
+    } while (newBody !== previousBody);
+
+    // Ensure blank line BEFORE the FIRST list item if it follows text
     newBody = newBody.replace(/([^\n])\n(\* )/g, '$1\n\n$2');
 
-    // Collapse multiple blank lines to one
+    // Ensure blank line AFTER the LAST list item if it precedes text (not header)
+    // Matches: (newline) * text (newline) text
+    newBody = newBody.replace(/(\n\* [^\n]+)\n([^\n\*#])/g, '$1\n\n$2');
+
+    // Collapse multiple blank lines to one (max 2 newlines = 1 blank line)
     newBody = newBody.replace(/\n{3,}/g, '\n\n');
 
     // Trim outer

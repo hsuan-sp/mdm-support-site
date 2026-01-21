@@ -12,7 +12,7 @@ const md = new MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
-    breaks: true
+    breaks: false // Stop converting newlines to <br> to fix excessive spacing
 });
 
 /**
@@ -46,14 +46,8 @@ function enhanceTypography(text: string) {
 function renderMarkdown(text: string) {
     if (!text) return "";
 
-    // 預處理：修正格式問題
-    const processed = text
-        // 防止列表縮進導致的渲染錯誤
-        .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
-        .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
-
     // 應用排版優化
-    const enhanced = enhanceTypography(processed);
+    const enhanced = enhanceTypography(text);
 
     return md.render(enhanced);
 }

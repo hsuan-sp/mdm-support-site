@@ -184,11 +184,11 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
           <div class="view-status-bar">
             <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
               getCategoryName(selectedCategory)
-              }}</span>
+            }}</span>
             <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
             <button v-if="!isMobileView" @click="toggleSort" class="desk-sort-btn">{{ sortOrder === 'asc' ? 'A-Z' :
               'Z-A'
-              }}</button>
+            }}</button>
           </div>
         </header>
 
@@ -287,7 +287,8 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 /* Readability Improvements */
 .markdown-body {
   font-size: 1.05em;
-  line-height: 1.85 !important;
+  line-height: 1.6 !important;
+  /* Tighter line height (was 1.85) */
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -295,11 +296,33 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 }
 
 .markdown-body :deep(p) {
-  margin-bottom: 1.4em !important;
+  margin-bottom: 1.2em !important;
+  /* Reduced from 1.4em */
+}
+
+.markdown-body :deep(ul),
+.markdown-body :deep(ol) {
+  margin-bottom: 1.2em !important;
+  padding-left: 1.5em !important;
+}
+
+.markdown-body :deep(li) {
+  margin-bottom: 0.3em !important;
+  /* Tighter list items */
+  line-height: 1.5 !important;
+}
+
+/* Optimizations for CJK vs Latin */
+.markdown-body[lang="zh-TW"] {
+  line-height: 1.75 !important;
+  /* CJK needs slightly more breathing room */
+  text-align: justify;
 }
 
 .markdown-body[lang="en-US"] {
-  text-align: justify;
+  text-align: left;
+  /* Justify can look weird in short web text */
+  line-height: 1.6 !important;
 }
 
 .glossary-app {
