@@ -251,7 +251,8 @@ function processFile(filePath) {
         }
 
         if (isOrdered) {
-          listPart = listPart.replace(/^\s*\d+\./, (m) => m.match(/^\s*/)[0] + '1.');
+          // 不再強制統一為 1. 以支援連貫編號 (1. 2. 3.)
+          // listPart = listPart.replace(/^\s*\d+\./, (m) => m.match(/^\s*/)[0] + '1.');
         } else {
           listPart = listPart.replace(/^\s*[*+-]/, (m) => m.match(/^\s*/)[0] + '*');
         }

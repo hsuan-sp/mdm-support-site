@@ -278,7 +278,7 @@ tags: ["Zero-Wipe MDM Migration", "iOS 26", "教育環境", "Return to Service",
 * [ ] Frontmatter 格式正確
 * [ ] 標籤精確且有 3-6 個
 * [ ] 已執行 `npm run update-index` 更新索引
-* [ ] 已至 `docs/UPDATE_LOG.md` 記錄本次更新
+* [ ] 已於 `docs/data/logs/items/` 建立對應版本的更新日誌 (參閱 `docs/data/logs/` 維護指南)
 
 ---
 
