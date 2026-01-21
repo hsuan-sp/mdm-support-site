@@ -9,7 +9,7 @@ Last Updated：1/19/2026, 11:59:17 AM
 Total **137** terms：
 
 * **802.1X** (`802-1x.md`)
-* **AAS (Automatic Assessment Configuration)** (`aas-automatic-assessment-configuration.md`)
+* **AAC (Automatic Assessment Configuration)** (`aac-automatic-assessment-configuration.md`)
 * **ABM (Apple Business Manager)** (`abm-apple-business-manager.md`)
 * **Accessibility Features** (`accessibility-features.md`)
 * **Account-Driven Device Enrollment** (`account-driven-device-enrollment.md`)

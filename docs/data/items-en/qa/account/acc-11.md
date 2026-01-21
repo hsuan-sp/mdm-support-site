@@ -1,12 +1,12 @@
 ---
 id: acc-11
-title: "The [Certificate Trap]: Apple Classroom fails school-wide, showing 'Invalid Profile'?"
+title: "Troubleshooting: Apple Classroom fails school-wide with 'Invalid Profile' (The Certificate Trap)"
 category: "Section 1: Account & Server Management"
 important: true
 tags: ["Certificate Expiration","Apple Classroom","Education Profile"]
 ---
 
-## Q: The [Certificate Trap]: Apple Classroom fails school-wide, showing 'Invalid Profile'?
+## Q: Troubleshooting: Apple Classroom fails school-wide with 'Invalid Profile' (The Certificate Trap)
 
 ## Answer
 
