@@ -27,8 +27,8 @@ const toggleCollapse = () => {
                 <div class="wip-content">
                     <div class="wip-icon">🚧</div>
                     <div class="wip-text">
-                        <strong>English Beta (Ver. 2026 Verified)</strong>
-                        <span>Technically accurate. Language refinement in progress.</span>
+                        <strong>English Version Beta</strong>
+                        <span>Translation Complete. Click the bug icon to report errors.</span>
                     </div>
                     <button class="collapse-btn" @click.stop="toggleCollapse" aria-label="Minimize notice">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
