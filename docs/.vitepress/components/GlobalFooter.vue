@@ -1,79 +1,25 @@
 <script setup>
 import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
+import ReportIssue from './ReportIssue.vue' // Assuming ReportIssue.vue is in the same directory
 
-const { page, lang } = useData()
+const { lang } = useData()
 
 const t = computed(() => {
   const isZh = lang.value === 'zh-TW' || lang.value === 'root'
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown URL'
-  const pageTitle = page.value.title || 'Unknown Page'
-
-  // Detect Context
-  let context = 'General'
-  if (currentUrl.includes('/glossary/')) context = 'Glossary'
-  if (currentUrl.includes('/qa/')) context = 'Q&A'
-
-  // Construct Body
-  const bodyZh = `
-頁面詳細資訊 (Page Details):
-- 標題: ${pageTitle}
-- 網址: ${currentUrl}
-- 類別: ${context}
-
-問題類型 (請保留其中一項項目並填寫描述):
-[ ] 內容準確性 - 資訊不正確或具誤導性
-[ ] 資訊過時 - 內容已不符合最新版本 (iOS 26/macOS Tahoe)
-[ ] 翻譯建議 - 術語或語句翻譯欠佳
-[ ] 技術故障 - 佈局或功能顯示異常
-[ ] 連結失效 - 圖片或外部連結失效
-[ ] 其他建議
-
-詳細描述 (Description):
-(請在此處描述您遇到的具體問題...)
-  `.trim()
-
-  const bodyEn = `
-Page Details:
-- Title: ${pageTitle}
-- URL: ${currentUrl}
-- Category: ${context}
-
-Issue Type (Please keep one):
-[ ] Content Accuracy - Information is incorrect or misleading
-[ ] Outdated Info - Content does not match iOS 26/macOS Tahoe
-[ ] Translation - Terminology or phrasing issues
-[ ] Technical Bug - Layout or functional errors
-[ ] Broken Link/Image
-[ ] Suggestion
-
-Description:
-(Please describe the issue...)
-  `.trim()
-
-  const subjectPrefix = isZh ? '[問題回報]' : '[Issue Report]'
-  const subject = encodeURIComponent(`${subjectPrefix} ${pageTitle}`)
-  const body = encodeURIComponent(isZh ? bodyZh : bodyEn)
-  const mailto = `mailto:hsuan@superinfo.com.tw?subject=${subject}&body=${body}`
 
   return isZh ? {
     company: '極電資訊有限公司',
     badges: 'Apple 授權教育經銷商｜Apple 校園體驗中心｜軟硬體專業諮詢',
     slogan: '致力於給您最好的服務',
     copyright: 'Copyright ©2026 極電資訊｜Apple 授權教育經銷商',
-    info: '極電資訊有限公司 | 統一編號 23756990',
-    reportLabel: '回報頁面問題',
-    reportTitle: '透過電子郵件回報此頁面的錯誤或建議',
-    mailtoLink: mailto
+    info: '極電資訊有限公司 | 統一編號 23756990'
   } : {
     company: 'Superinfo Computer Co., Ltd.',
     badges: 'Apple Authorized Education Specialist｜Apple Campus Experience Center｜Hardware & Software Advisory',
     slogan: 'Committed to excellence in service',
     copyright: 'Copyright © 2026 Superinfo｜Apple Authorized Education Specialist',
-    info: 'Superinfo Computer Co., Ltd. | Tax ID 23756990',
-    reportLabel: 'Report Page Issue',
-    reportTitle: 'Report error or suggestion via Email',
-    mailtoLink: mailto
+    info: 'Superinfo Computer Co., Ltd. | Tax ID 23756990'
   }
 })
 </script>
@@ -97,11 +43,7 @@ Description:
       <p>{{ t.copyright }}</p>
       <p>{{ t.info }}</p>
 
-      <div class="report-issue-container">
-        <a :href="t.mailtoLink" class="report-link" :title="t.reportTitle">
-          {{ t.reportLabel }}
-        </a>
-      </div>
+      <ReportIssue />
     </div>
   </footer>
 </template>
