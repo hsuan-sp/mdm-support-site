@@ -15,8 +15,8 @@ tags: ["EACS", "ADE Troubleshooting", "Network Auth", "Terminal Commands", "Reco
 ## 1. Initial Diagnosis: Why is it hanging?
 
 1. **Time Sync (Most Common)**: If the Mac's system time differs significantly from the Apple servers, SSL certificate validation will fail.
-1. **Network Restrictions**: The school Wi-Fi requires a certificate that hasn't been deployed yet, or the firewall is blocking port 443 to `*apple.com`.
-1. **ASM Assignment**: The serial number in Apple School Manager has not been properly assigned to the target MDM server.
+2. **Network Restrictions**: The school Wi-Fi requires a certificate that hasn't been deployed yet, or the firewall is blocking port 443 to `*apple.com`.
+3. **ASM Assignment**: The serial number in Apple School Manager has not been properly assigned to the target MDM server.
 
 ## 2. Recovery Techniques (SOP)
 
@@ -25,10 +25,13 @@ tags: ["EACS", "ADE Troubleshooting", "Network Auth", "Terminal Commands", "Reco
 At the Setup Assistant screen, press **Command + Option + T** to open the Terminal (or access it from the Utilities menu):
 
 ```bash
+
 # Sync with Apple's time server
+
 sntp -sS time.apple.com
 
 # OR set manually (Format: MMDDhhmmYY)
+
 date 0115100026
 ```
 

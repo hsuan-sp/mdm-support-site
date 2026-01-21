@@ -7,7 +7,9 @@ tags: ["系統更新","Jamf Pro","DDM","軟體更新藍圖","iOS 更新","macOS 
 ---
 
 ## Q: 如何透過 Jamf Pro 統一推送系統更新？可以設定截止時間強制執行嗎？
+
 |
+
 ## Answer
 
 **在 2026 年的 Jamf Pro 中，推送系統更新（iOS/iPadOS/macOS）已全面轉向「宣告式管理 (DDM)」模式。**

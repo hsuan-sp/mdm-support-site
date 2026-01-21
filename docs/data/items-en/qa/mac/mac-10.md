@@ -25,8 +25,8 @@ In addition to traditional inventory updates, macOS 26 recommends using the DDM 
 ## Setup Steps (SOP):
 
 1. **Navigate**: Go to **Settings > Computer Management > Extension Attributes**.
-1. **Add**: Click **+ New**.
-1. **Configure**:
+2. **Add**: Click **+ New**.
+3. **Configure**:
 
 * **Display Name**: e.g., "Last Reboot Time".
   * **Input Type**: Select **Script**.
@@ -40,10 +40,13 @@ In addition to traditional inventory updates, macOS 26 recommends using the DDM 
 ## Practical Example: Collecting "System Uptime Days"
 
 ```bash
+
 #!/bin/bash
 
 # Get system uptime days and report to Jamf Pro
+
 # Uses awk to grab the 'days' part of the uptime command output
+
 days=$(uptime | awk '{ print $3 }')
 echo "<result>$days</result>"
 ```
