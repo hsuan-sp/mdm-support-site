@@ -16,6 +16,7 @@ import BackToTop from '../components/BackToTop.vue'
 import GlobalFooter from '../components/GlobalFooter.vue'
 import WIPBanner from '../components/WIPBanner.vue'
 import ReportIssue from '../components/ReportIssue.vue'
+import ChangelogApp from '../components/ChangelogApp.vue'
 
 // 匯入全域佈局增強元件
 import UserCenter from './components/UserCenter.vue'
@@ -51,5 +52,6 @@ export default {
     app.component('MobileDrawer', MobileDrawer)
     app.component('EmptyState', EmptyState)
     app.component('WIPBanner', WIPBanner)
+    app.component('ChangelogApp', ChangelogApp)
   }
 }
