@@ -15,68 +15,58 @@ const t = computed(() => {
     if (currentUrl.includes('/glossary/')) category = isZh ? '術語表' : 'Glossary'
     if (currentUrl.includes('/qa/')) category = isZh ? '問答庫' : 'Q&A'
 
-    // Template Construction
-    const bodyZh = `--- ISSUE REPORT ---
-Page Info:
-- Title: ${pageTitle}
-- URL: ${currentUrl}
-- Category: ${category}
+    // Unified Professional Bilingual Template with Examples
+    const unifiedBody = `=== PROFESSIONAL ISSUE REPORT / 頁面問題回報 ===
 
-Issue Type:
-[ ] Content Error (Incorrect info)
-[ ] Outdated Information (iOS 26/macOS Tahoe mismatch)
-[ ] Translation Suggestion
-[ ] Technical Bug
-[ ] Broken Link/Image
+[PAGE CONTEXT / 頁面資訊]
+- Title / 標題: ${pageTitle}
+- URL / 網址: ${currentUrl}
+- Category / 類別: ${category}
 
-Description:
-(Please describe the issue here...)
-`.trim()
+[ISSUE TYPE / 問題類型]
+(Please mark with [x] / 請在括號中填入 x)
+[ ] Content Accuracy / 內容準確性 (e.g. Incorrect technical info / 技術資訊錯誤)
+[ ] Outdated Info / 資訊過時 (e.g. Does not match iOS 26 specifications / 已不符 2026 規格)
+[ ] Translation / 翻譯建議 (e.g. Phrasing or Terminology / 術語或語句優化)
+[ ] Technical Bug / 技術故障 (e.g. Layout or Function error / 頁面功能異常)
+[ ] Broken Link / 連結失效 (e.g. Image or External link / 圖片或連結失效)
 
-    const bodyEn = `--- ISSUE REPORT ---
-Page Info:
-- Title: ${pageTitle}
-- URL: ${currentUrl}
-- Category: ${category}
-
-Issue Type:
-[ ] Content Error (Incorrect info)
-[ ] Outdated Information (iOS 26/macOS Tahoe mismatch)
-[ ] Translation Suggestion
-[ ] Technical Bug
-[ ] Broken Link/Image
+[DESCRIPTION & EXAMPLES / 詳細描述與範例]
+(Please describe the issue below. Example: "The DDM section in acc-11 mentions iOS 25, but it should be iOS 26.")
+(請在下方詳述問題。範例：「acc-11 中的 DDM 描述提到 iOS 25，應更正為 iOS 26。」)
 
 Description:
-(Please describe the issue here...)
-`.trim()
 
-    const subjectZh = `[問題回報] ${pageTitle}`
-    const subjectEn = `[Issue Report] ${pageTitle}`
 
-    const mailto = `mailto:hsuan@superinfo.com.tw?subject=${encodeURIComponent(isZh ? subjectZh : subjectEn)}&body=${encodeURIComponent(isZh ? bodyZh : bodyEn)}`
+=== END OF REPORT ===`.trim()
+
+    const subjectPrefix = isZh ? '[問題回報]' : '[Issue Report]'
+    const subject = encodeURIComponent(`${subjectPrefix} ${pageTitle}`)
+    const body = encodeURIComponent(unifiedBody)
+    const mailto = `mailto:hsuan@superinfo.com.tw?subject=${subject}&body=${body}`
 
     return isZh ? {
         label: '回報頁面問題',
         title: '回報此頁面的錯誤或建議',
         email: 'hsuan@superinfo.com.tw',
         mailtoLink: mailto,
-        dialogTitle: '回報問題',
+        dialogTitle: '專業問題回報',
         dialogDesc: '如無法自動開啟郵件程式，請複製以下資訊並寄送至技術團隊：',
         copyEmail: '複製 Email',
         copyTemplate: '複製模板',
         close: '關閉',
-        template: bodyZh
+        template: unifiedBody
     } : {
         label: 'Report Page Issue',
         title: 'Report errors or suggestions for this page',
         email: 'hsuan@superinfo.com.tw',
         mailtoLink: mailto,
-        dialogTitle: 'Report Issue',
+        dialogTitle: 'Issue Report',
         dialogDesc: 'If mail client fails to open, please copy the info below and send to our team:',
         copyEmail: 'Copy Email',
         copyTemplate: 'Copy Template',
         close: 'Close',
-        template: bodyEn
+        template: unifiedBody
     }
 })
 
