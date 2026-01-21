@@ -2,42 +2,42 @@
 import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
 
-const { page } = useData()
+const { page, lang } = useData()
 
 const t = computed(() => {
-  const isZh = lang.value === 'zh-TW'
+  const isZh = lang.value === 'zh-TW' || lang.value === 'root'
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown URL'
   const pageTitle = page.value.title || 'Unknown Page'
 
   // Detect Context
   let context = 'General'
-  if (currentUrl.includes('/glossary/')) context = 'Glossary (術語表)'
-  if (currentUrl.includes('/qa/')) context = 'Q&A (問答庫)'
+  if (currentUrl.includes('/glossary/')) context = 'Glossary'
+  if (currentUrl.includes('/qa/')) context = 'Q&A'
 
   // Construct Body
   const bodyZh = `
-頁面資訊 (Page Info):
+頁面詳細資訊 (Page Details):
 - 標題: ${pageTitle}
 - 網址: ${currentUrl}
-- 範圍: ${context}
+- 類別: ${context}
 
-問題類型 (請保留一項並刪除其他):
-[ ] 內容錯誤 (Content Error) - 資訊不正確或有誤導性
-[ ] 資訊過時 (Outdated Info) - 內容已不符合最新版本 (iOS 26/macOS Tahoe)
-[ ] 翻譯建議 (Translation) - 術語或語句翻譯不順暢
-[ ] 技術故障 (Bug) - 頁面功能異狀或顯示錯誤
-[ ] 連結失效 (Broken Link) - 圖片或連結無法開啟
-[ ] 其他建議 (Suggestion)
+問題類型 (請保留其中一項項目並填寫描述):
+[ ] 內容準確性 - 資訊不正確或具誤導性
+[ ] 資訊過時 - 內容已不符合最新版本 (iOS 26/macOS Tahoe)
+[ ] 翻譯建議 - 術語或語句翻譯欠佳
+[ ] 技術故障 - 佈局或功能顯示異常
+[ ] 連結失效 - 圖片或外部連結失效
+[ ] 其他建議
 
-問題描述 (Description):
-(請在此描述您遇到的問題...)
+詳細描述 (Description):
+(請在此處描述您遇到的具體問題...)
   `.trim()
 
   const bodyEn = `
-Page Info:
+Page Details:
 - Title: ${pageTitle}
 - URL: ${currentUrl}
-- Context: ${context}
+- Category: ${context}
 
 Issue Type (Please keep one):
 [ ] Content Accuracy - Information is incorrect or misleading
@@ -63,7 +63,7 @@ Description:
     copyright: 'Copyright ©2026 極電資訊｜Apple 授權教育經銷商',
     info: '極電資訊有限公司 | 統一編號 23756990',
     reportLabel: '回報頁面問題',
-    reportTitle: '透過 Email 回報此頁面的錯誤或建議',
+    reportTitle: '透過電子郵件回報此頁面的錯誤或建議',
     mailtoLink: mailto
   } : {
     company: 'Superinfo Computer Co., Ltd.',
@@ -99,7 +99,7 @@ Description:
 
       <div class="report-issue-container">
         <a :href="t.mailtoLink" class="report-link" :title="t.reportTitle">
-          <span class="icon">🐞</span> {{ t.reportLabel }}
+          {{ t.reportLabel }}
         </a>
       </div>
     </div>

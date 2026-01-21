@@ -8,27 +8,29 @@
 
 ---
 
-## 🚀 系統架構與特性
+## 系統架構與特性
 
 本平台採用現代化前端技術棧構建，旨在提供極致的性能、安全性與雙語閱讀體驗。
 
 ### 1. 核心技術棧 (Technical Stack)
-*   **文檔框架**: [VitePress](https://vitepress.dev/) (SSG 靜態站點生成)
-*   **互動組件**: Vue 3 (Composition API)
-*   **資料載入**: TypeScript Data Loaders (Build-time 預處理)
-*   **樣式系統**: 原生 CSS 變數 + 現代化毛玻璃視覺 (Glassmorphism)
+
+* **文檔框架**: [VitePress](https://vitepress.dev/) (SSG 靜態站點生成)
+* **互動組件**: Vue 3 (Composition API)
+* **資料載入**: TypeScript Data Loaders (Build-time 預處理)
+* **樣式系統**: 原生 CSS 變數 + 現代化毛玻璃視覺 (Glassmorphism)
 
 ### 2. 核心功能模組
-*   **雙語動態切換**: 支援繁體中文與英文即時切換，內容 100% 同步。
-*   **智慧型回報系統**: 整合於頁尾的 Issue Report 功能，自動擷取頁面上下文 (Context)，加速技術問題排查。
-*   **自動化內容管理**: 
-    *   `fix-markdown.js`: 自動校正標題、清單、中英文空格及排版錯誤。
-    *   `generate_maintenance_index.mjs`: 自動生成維護索引，確保 220+ 篇文章的維護效率。
-*   **多層級安全性**: 內建程式碼混淆 (Terser) 與內容保護機制，防止未經授權的內容抓取。
+
+* **雙語動態切換**: 支援繁體中文與英文即時切換，內容 100% 同步。
+* **智慧型回報系統**: 整合於頁尾的 Issue Report 功能，自動擷取頁面上下文 (Context)，加速技術問題排查。
+* **自動化內容管理**:
+  * `fix-markdown.js`: 自動校正標題、清單、中英文空格及排版錯誤。
+  * `generate_maintenance_index.mjs`: 自動生成維護索引，確保 220+ 篇文章的維護效率。
+* **多層級安全性**: 內建程式碼混淆 (Terser) 與內容保護機制，防止未經授權的內容抓取。
 
 ---
 
-## 📂 專案目錄結構
+## 專案目錄結構
 
 ```text
 ├── docs/
@@ -48,13 +50,15 @@
 
 ---
 
-## 🛠️ 維護者指南 (Maintainer Guide)
+## 維護者指南 (Maintainer Guide)
 
 ### 環境需求
-*   Node.js 20+
-*   npm / npx
+
+* Node.js 20+
+* npm / npx
 
 ### 開發與維護指令
+
 ```bash
 # 啟動本地開發模式 (http://localhost:5173)
 npm run dev
