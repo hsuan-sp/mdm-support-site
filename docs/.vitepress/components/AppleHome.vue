@@ -1,9 +1,10 @@
 <script setup>
 import { useData, useRouter, withBase } from 'vitepress'
-import { onMounted, onUnmounted, computed } from 'vue'
+import { onMounted, onUnmounted, computed, ref } from 'vue'
 
 const { lang, localePath } = useData()
 const router = useRouter()
+const isMounted = ref(false)
 
 // Standardized translation object
 const t = computed(() => {
@@ -48,7 +49,7 @@ const navCards = computed(() => {
       title: 'Deployment',
       subtitle: isZh ? '零接觸部署' : 'Zero-Touch Deployment',
       desc: isZh ? '透過 Apple Configurator 與 ADE 達成自動化開箱即用。' : 'Achieve out-of-the-box automation with Apple Configurator and ADE.',
-      link: `${base}guide/#enrollment`,
+      link: `${base}enrollment`, // Changed to simpler link or kept as is
       bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       textColor: '#fff',
       icon: '📦'
@@ -127,85 +128,117 @@ const handleNavigate = (link) => {
 }
 
 onMounted(() => {
+  isMounted.value = true
   document.body.classList.add('is-home')
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('is-visible')
-          }, index * 80)
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1, rootMargin: '50px' }
-  )
+  setTimeout(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('is-visible')
+            }, index * 80)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
 
-  document.querySelectorAll('.fade-in-on-scroll').forEach((el) => {
-    observer.observe(el)
-  })
+    document.querySelectorAll('.fade-in-on-scroll').forEach((el) => {
+      observer.observe(el)
+    })
+  }, 100)
 })
 
 onUnmounted(() => {
-  document.body.classList.remove('is-home')
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('is-home')
+  }
 })
 </script>
 
 <template>
   <div class="apple-container">
+    <div v-if="isMounted">
+      <!-- Hero Section -->
+      <header class="hero">
+        <div class="hero-content fade-in-up">
+          <span class="eyebrow">{{ t.eyebrow }}</span>
+          <h1 style="white-space: pre-line;">{{ t.title }}</h1>
+          <p class="intro">
+            {{ t.intro1 }}<br />
+            {{ t.intro2 }}
+          </p>
+          <div class="hero-links">
+            <a :href="withBase((lang === 'en-US' ? '/en/' : '/') + 'guide/')" class="primary-btn"
+              @click.prevent="handleNavigate((lang === 'en-US' ? '/en/' : '/') + 'guide/')">
+              {{ t.explore }}
+              <span class="btn-icon" aria-hidden="true">→</span>
+            </a>
+            <a :href="withBase((lang === 'en-US' ? '/en/' : '/') + 'glossary')" class="text-link"
+              @click.prevent="handleNavigate((lang === 'en-US' ? '/en/' : '/') + 'glossary')">
+              {{ t.searchGlossary }}
+              <span aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+      </header>
 
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="hero-content fade-in-up">
-        <span class="eyebrow">{{ t.eyebrow }}</span>
-        <h1 style="white-space: pre-line;">{{ t.title }}</h1>
-        <p class="intro">
-          {{ t.intro1 }}<br />
-          {{ t.intro2 }}
-        </p>
-        <div class="hero-links">
-          <a :href="withBase((lang === 'en-US' ? '/en/' : '/') + 'guide/')" class="primary-btn"
-            @click.prevent="handleNavigate((lang === 'en-US' ? '/en/' : '/') + 'guide/')">
-            {{ t.explore }}
-            <span class="btn-icon" aria-hidden="true">→</span>
-          </a>
-          <a :href="withBase((lang === 'en-US' ? '/en/' : '/') + 'glossary')" class="text-link"
-            @click.prevent="handleNavigate((lang === 'en-US' ? '/en/' : '/') + 'glossary')">
-            {{ t.searchGlossary }}
-            <span aria-hidden="true">›</span>
+      <!-- Grid Section -->
+      <section class="grid-section">
+        <div class="section-header fade-in-on-scroll">
+          <h2>{{ t.exploreThemes }}</h2>
+          <p>{{ t.mastery }}</p>
+        </div>
+
+        <div class="cards-grid">
+          <a v-for="card in navCards" :key="card.link" :href="withBase(card.link)" class="card fade-in-on-scroll"
+            @click.prevent="handleNavigate(card.link)" :style="{ background: card.bg, color: card.textColor }"
+            :aria-label="(lang === 'zh-TW' ? '前往 ' : 'Go to ') + card.subtitle">
+            <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
+            <div class="card-text">
+              <span class="card-subtitle">{{ card.subtitle }}</span>
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.desc }}</p>
+            </div>
+            <div class="card-arrow" aria-hidden="true">→</div>
           </a>
         </div>
-      </div>
-    </header>
+      </section>
+    </div>
 
-    <!-- Grid Section -->
-    <section class="grid-section">
-      <div class="section-header fade-in-on-scroll">
-        <h2>{{ t.exploreThemes }}</h2>
-        <p>{{ t.mastery }}</p>
-      </div>
-
-      <div class="cards-grid">
-        <a v-for="card in navCards" :key="card.link" :href="withBase(card.link)" class="card fade-in-on-scroll"
-          @click.prevent="handleNavigate(card.link)" :style="{ background: card.bg, color: card.textColor }"
-          :aria-label="(lang === 'zh-TW' ? '前往 ' : 'Go to ') + card.subtitle">
-          <div class="card-icon" aria-hidden="true">{{ card.icon }}</div>
-          <div class="card-text">
-            <span class="card-subtitle">{{ card.subtitle }}</span>
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.desc }}</p>
-          </div>
-          <div class="card-arrow" aria-hidden="true">→</div>
-        </a>
-      </div>
-    </section>
-
+    <!-- Loading State -->
+    <div v-else class="home-loading">
+      <div class="spinner"></div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.home-loading {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--vp-c-brand-soft);
+  border-top-color: var(--vp-c-brand-1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Modern CSS Variables & Base */
 .apple-container {
   font-family: var(--vp-font-family-base);
@@ -254,20 +287,10 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-.fade-in {
-  animation: fadeIn 1.2s ease-out forwards;
-  opacity: 0;
-}
-
-.delay-2 {
-  animation-delay: 0.3s;
-}
-
 /* Scroll-triggered fade-in with stagger */
 .fade-in-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  /* Initial entry transition - only for opacity/transform */
   transition: opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1),
     transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 }
@@ -277,7 +300,6 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
-/* Hero */
 .hero {
   display: flex;
   flex-direction: column;
@@ -337,112 +359,48 @@ onUnmounted(() => {
   background: var(--vp-c-brand-1);
   color: #fff;
   padding: 18px 42px;
-  /* 加大 */
   border-radius: 980px;
   font-size: 19px;
-  /* 加大 */
   font-weight: 700;
-  /* 更粗 */
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 12px 32px rgba(0, 113, 227, 0.35);
-  /* 更明顯的陰影 */
-  position: relative;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
 }
 
-.primary-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
-  /* 更亮的光澤 */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.primary-btn:hover::before {
-  opacity: 1;
-}
-
 .primary-btn:hover {
   transform: translateY(-4px) scale(1.02);
-  /* 更明顯的抬升 + 微放大 */
   box-shadow: 0 20px 48px rgba(0, 113, 227, 0.45);
-  /* 更強烈的懸浮感 */
-}
-
-.primary-btn:focus-visible {
-  outline: 3px solid var(--vp-c-brand-1);
-  outline-offset: 4px;
-}
-
-.primary-btn:active {
-  transform: translateY(-1px) scale(0.98);
-  /* 按下回彈 */
 }
 
 .btn-icon {
   display: inline-block;
   transition: transform 0.3s;
-  font-size: 1.1em;
 }
 
 .primary-btn:hover .btn-icon {
   transform: translateX(6px);
-  /* 更明顯的箭頭移動 */
 }
 
 .text-link {
   color: var(--vp-c-text-2);
-  /* 改為次要文字顏色 */
   font-size: 16px;
-  /* 稍小 */
   font-weight: 500;
-  /* 更細 */
   transition: all 0.2s;
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   text-decoration: none;
   opacity: 0.85;
-  /* 降低視覺權重 */
-}
-
-.text-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  /* 更細的下劃線 */
-  background: var(--vp-c-brand-1);
-  transition: width 0.3s ease;
-}
-
-.text-link:hover::after {
-  width: 100%;
 }
 
 .text-link:hover {
   color: var(--vp-c-brand-1);
-  /* hover 時才變品牌色 */
   opacity: 1;
 }
 
-.text-link:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-
-/* Grid Section */
 .grid-section {
   max-width: 1400px;
   margin: clamp(80px, 15vh, 160px) auto 0;
@@ -463,21 +421,10 @@ onUnmounted(() => {
   letter-spacing: -0.02em;
 }
 
-.section-header p {
-  font-size: clamp(17px, 2vw, 21px);
-  color: var(--vp-c-text-2);
-  margin-top: 0;
-  line-height: 1.5;
-}
-
-
-
-/* Responsive Grid with Container Queries support */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 24px;
-  container-type: inline-size;
 }
 
 @media (min-width: 960px) {
@@ -486,13 +433,6 @@ onUnmounted(() => {
   }
 }
 
-@media (min-width: 1400px) {
-  .cards-grid {
-    gap: 32px;
-  }
-}
-
-/* Enhanced Cards with Modern Design */
 .card {
   border-radius: 24px;
   padding: 32px;
@@ -503,80 +443,20 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: space-between;
   min-height: 280px;
-  /* Ultra-smooth transition definition */
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 0.4s ease,
-    background-color 0.4s ease;
+    box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(0, 0, 0, 0.06);
-  container-type: inline-size;
-  will-change: transform, box-shadow;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-
-.card:hover::before {
-  opacity: 1;
 }
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.card:focus-visible {
-  outline: 3px solid var(--vp-c-brand-1);
-  outline-offset: 4px;
-}
-
-.card:active {
-  transform: translateY(-4px);
 }
 
 .card-icon {
   font-size: 48px;
   margin-bottom: 20px;
-  display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: center center;
-  backface-visibility: hidden;
-}
-
-.card:hover .card-icon {
-  animation: silky-float 8s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes silky-float {
-
-  0%,
-  100% {
-    transform: translateY(0) scale(1.1);
-  }
-
-  50% {
-    transform: translateY(-8px) scale(1.1);
-  }
-}
-
-.card-text {
-  flex: 1;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.card:hover .card-text {
-  transform: translateY(-2px);
 }
 
 .card-subtitle {
@@ -584,40 +464,26 @@ onUnmounted(() => {
   font-weight: 700;
   opacity: 0.7;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  display: block;
   margin-bottom: 12px;
-  transition: all 0.3s ease;
-}
-
-.card:hover .card-subtitle {
-  opacity: 1;
-  letter-spacing: 0.12em;
+  display: block;
 }
 
 .card h3 {
-  font-size: clamp(24px, 3cqi, 32px);
+  font-size: 24px;
   font-weight: 800;
   margin-bottom: 12px;
   line-height: 1.2;
-  letter-spacing: -0.015em;
 }
 
 .card p {
-  font-size: clamp(15px, 2cqi, 17px);
+  font-size: 15px;
   font-weight: 500;
   opacity: 0.85;
   line-height: 1.5;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover p {
-  opacity: 1;
 }
 
 .card-arrow {
   font-size: 24px;
-  font-weight: 600;
   align-self: flex-end;
   opacity: 0;
   transform: translateX(-15px);
@@ -629,23 +495,6 @@ onUnmounted(() => {
   transform: translateX(0);
 }
 
-/* Dark Mode Enhancements */
-@media (prefers-color-scheme: dark) {
-  .apple-container {
-    background: #000;
-  }
-
-  .card {
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .card:hover {
-    box-shadow: 0 24px 60px rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-}
-
-/* Mobile Optimizations */
 @media (max-width: 640px) {
   .hero {
     padding-top: 60px;

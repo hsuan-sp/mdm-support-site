@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from "vue";
+import { ref, computed, onMounted, nextTick, shallowRef } from "vue";
 import { useData } from 'vitepress';
-import * as loaderData from "../../data/all-data.data";
+// @ts-ignore
+import { data as rawLoaderData } from "../../data/all-data.data";
 
 const { lang } = useData();
-const data: any = loaderData;
-const rawData = data.data || data.default || data;
+const isMounted = ref(false);
+
+// Use shallowRef to avoid deep reactivity overhead on huge static data
+const rawData = shallowRef(rawLoaderData);
 
 // Selected data based on current language
-const langData = computed(() => lang.value === 'en-US' ? rawData.en : rawData.zh);
+const langData = computed(() => {
+  const d = rawData.value;
+  return lang.value === 'en-US' ? d?.en : d?.zh;
+});
 const glossaryData = computed(() => langData.value?.glossaryData || []);
 
 import { useLayoutMode } from '../theme/composables/useLayoutMode';
@@ -178,6 +184,7 @@ useKeyboardShortcuts({
 });
 
 onMounted(async () => {
+  isMounted.value = true;
   await nextTick();
 
   const observer = new IntersectionObserver(
@@ -224,10 +231,9 @@ const getCategoryChipName = (cat: string) => {
 <template>
   <div class="glossary-app" :class="{ 'is-mobile-device': isMobileView, 'sidebar-collapsed': isSidebarCollapsed }"
     :style="{ '--app-scale': fontScale }">
-    <div class="app-layout">
+    <div v-if="isMounted" class="app-layout">
       <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
         @update:scale="val => fontScale = val">
-        <!-- Banner Placeholder for Alerts -->
         <div v-if="lang === 'en-US'" class="wip-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
@@ -275,7 +281,7 @@ const getCategoryChipName = (cat: string) => {
           <div class="view-status-bar">
             <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
               getCategoryName(selectedCategory)
-            }}</span>
+              }}</span>
             <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
           </div>
         </header>
@@ -311,13 +317,8 @@ const getCategoryChipName = (cat: string) => {
       </main>
     </div>
 
-    <button class="mobile-floating-btn" @click="isControlsExpanded = true" v-if="!isControlsExpanded"
-      :aria-label="t.mobileBtn">
-      <span class="icon" aria-hidden="true">🔍</span>
-      <span class="label">{{ t.mobileBtn }}</span>
-    </button>
-
-    <MobileDrawer :is-open="isControlsExpanded" :title="t.drawerTitle" @close="isControlsExpanded = false">
+    <MobileDrawer v-if="isMounted" :is-open="isControlsExpanded" :title="t.drawerTitle"
+      @close="isControlsExpanded = false">
       <div class="search-box mobile-search-box">
         <span class="search-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -354,13 +355,45 @@ const getCategoryChipName = (cat: string) => {
         </div>
       </div>
     </MobileDrawer>
+
+    <button v-if="isMounted" class="mobile-floating-btn" @click="isControlsExpanded = true" v-show="!isControlsExpanded"
+      :aria-label="t.mobileBtn">
+      <span class="icon" aria-hidden="true">🔍</span>
+      <span class="label">{{ t.mobileBtn }}</span>
+    </button>
+
+    <div v-if="!isMounted" class="app-loading-placeholder">
+    </div>
   </div>
 </template>
 
 <style scoped>
-/* Mobile Floating Button */
+.app-loading-placeholder {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vp-c-bg-soft);
+  margin: 40px;
+  border-radius: 24px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
 .mobile-floating-btn {
-  display: none;
   position: fixed;
   bottom: 32px;
   left: 24px;
@@ -373,16 +406,16 @@ const getCategoryChipName = (cat: string) => {
   font-size: 15px;
   box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
   z-index: 100;
-  display: none;
+  display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.mobile-floating-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 113, 227, 0.4);
+@media (min-width: 901px) {
+  .mobile-floating-btn {
+    display: none;
+  }
 }
 
 .categories-chips {
@@ -391,107 +424,29 @@ const getCategoryChipName = (cat: string) => {
   gap: 10px;
 }
 
-/* 術語表獨立比例控制 */
 .glossary-app {
   --base-size: calc(16px * var(--app-scale, 1));
   font-size: var(--base-size);
   width: 100%;
 }
 
-/* Local Font Controls Styles */
-.font-controls {
-  margin-top: 32px;
-}
-
-.btn-group {
-  display: flex;
-  gap: 4px;
-  background: var(--vp-c-bg-mute);
-  padding: 4px;
-  border-radius: 12px;
-}
-
-.btn-group button {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
-  color: var(--vp-c-text-2);
-  font-weight: 600;
-}
-
-.btn-group button.active {
-  background: var(--vp-c-bg-alt);
-  color: var(--vp-c-brand-1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.font-controls-mobile {
-  margin-top: 32px;
-}
-
-.btn-group-mobile {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-group-mobile button {
-  flex: 1;
-  padding: 12px;
-  background: var(--vp-c-bg-mute);
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-}
-
-.btn-group-mobile button.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-}
-
-/* Header section refined */
-.glossary-header {
-  display: none;
-}
-
-.hero-title {
-  display: none;
-}
-
-.subtitle {
-  display: none;
-}
-
-/* 2-Column Layout */
-/* 2-Column Layout Refined */
 .app-layout {
   display: flex;
   gap: 40px;
   justify-content: center;
   align-items: flex-start;
-  /* Critical for sticky to work */
   padding: 40px 24px 100px;
   position: relative;
   max-width: 1600px;
   margin: 0 auto;
   min-height: 100vh;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 內容區頂部控制列 */
 .content-header {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 32px;
-  height: 44px;
 }
 
 .view-status-bar {
@@ -510,28 +465,6 @@ const getCategoryChipName = (cat: string) => {
   border-radius: 6px;
 }
 
-
-.app-content {
-  flex: 1;
-  min-width: 0;
-}
-
-/* Sidebar Elements */
-.sidebar-header h2 {
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
-  color: var(--vp-c-text-2);
-}
-
-.categories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
 .cat-item {
   display: flex;
   justify-content: space-between;
@@ -541,23 +474,15 @@ const getCategoryChipName = (cat: string) => {
   font-size: 14px;
   color: var(--vp-c-text-2);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   border: none;
   background: transparent;
-}
-
-.cat-item:hover {
-  background: var(--vp-c-bg-mute);
-  color: var(--vp-c-text-1);
-  transform: translateX(4px) scale(1.02);
 }
 
 .cat-item.active {
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
   font-weight: 600;
-  transform: scale(1.02);
 }
 
 .cat-count {
@@ -565,95 +490,13 @@ const getCategoryChipName = (cat: string) => {
   background: var(--vp-c-bg-alt);
   padding: 2px 8px;
   border-radius: 10px;
-  min-width: 28px;
-  text-align: center;
   border: 1px solid var(--vp-c-divider);
 }
 
-.categories-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 32px;
-  margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
-  letter-spacing: 0.05em;
-}
-
-.sort-btn {
-  font-size: 12px;
-  color: var(--vp-c-brand-1);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.search-box {
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 16px 12px 40px;
-  border-radius: 12px;
-  font-size: 14px;
-  transition: all 0.2s;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-mute);
-  color: var(--vp-c-text-1);
-  line-height: normal;
-  /* Fix misaligned text */
-}
-
-.search-input:focus {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
-  outline: none;
-}
-
-.search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-/* Grid Layout with Transition */
 .terms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
   gap: 32px;
-}
-
-/* List Transitions */
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-
-/* Card Design */
-.term-card {
-  height: 100%;
 }
 
 .term-card-content {
@@ -663,31 +506,6 @@ const getCategoryChipName = (cat: string) => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s ease;
-  animation: glossary-intro 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--delay, 0) * 0.05s);
-}
-
-@keyframes glossary-intro {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.term-card:hover .term-card-content {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-color: var(--vp-c-brand-soft);
 }
 
 .card-main {
@@ -707,14 +525,6 @@ const getCategoryChipName = (cat: string) => {
   font-size: 22px;
   font-weight: 800;
   margin: 0;
-  color: var(--vp-c-text-1);
-  line-height: 1.3;
-}
-
-.term-definition {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--vp-c-text-2);
 }
 
 .analogy-wrapper {
@@ -725,28 +535,6 @@ const getCategoryChipName = (cat: string) => {
   gap: 16px;
 }
 
-.analogy-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.term-card:hover .analogy-icon {
-  animation: silky-float 3s ease-in-out infinite;
-}
-
-@keyframes silky-float {
-
-  0%,
-  100% {
-    transform: translateY(0) scale(1.1);
-  }
-
-  50% {
-    transform: translateY(-6px) scale(1.25);
-  }
-}
-
 .analogy-label {
   display: block;
   font-weight: 800;
@@ -754,86 +542,6 @@ const getCategoryChipName = (cat: string) => {
   color: var(--vp-c-brand-1);
   text-transform: uppercase;
   margin-bottom: 6px;
-  letter-spacing: 0.1em;
-}
-
-.analogy-text {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--vp-c-text-1);
-  margin: 0;
-  font-weight: 500;
-}
-
-/* Markdown Support Styles */
-:deep(.markdown-body) {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-:deep(.markdown-body p) {
-  margin-bottom: 12px;
-}
-
-:deep(.markdown-body p:last-child) {
-  margin-bottom: 0;
-}
-
-:deep(.markdown-body ul),
-:deep(.markdown-body ol) {
-  padding-left: 20px;
-  margin-bottom: 16px;
-}
-
-:deep(.markdown-body li) {
-  margin-bottom: 4px;
-}
-
-:deep(.markdown-body strong) {
-  color: var(--vp-c-brand-1);
-  font-weight: 700;
-}
-
-:deep(.markdown-body table) {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0;
-  font-size: 0.9em;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--vp-c-divider);
-}
-
-:deep(.markdown-body th) {
-  background: var(--vp-c-bg-soft);
-  padding: 12px;
-  text-align: left;
-  font-weight: 700;
-  border-bottom: 2px solid var(--vp-c-divider);
-}
-
-:deep(.markdown-body td) {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-:deep(.markdown-body tr:last-child td) {
-  border-bottom: none;
-}
-
-:deep(.markdown-body tr:nth-child(even)) {
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.dark :deep(.markdown-body tr:nth-child(even)) {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.term-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  justify-content: flex-end;
 }
 
 .badge {
@@ -842,10 +550,8 @@ const getCategoryChipName = (cat: string) => {
   border-radius: 8px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
-/* Badge Color System */
 .badge-core {
   background: rgba(0, 113, 227, 0.1);
   color: #0071e3;
@@ -881,13 +587,19 @@ const getCategoryChipName = (cat: string) => {
   color: #ff2d55;
 }
 
-.badge-other {
-  background: rgba(142, 142, 147, 0.1);
-  color: #8e8e93;
-}
-
 .badge-education {
   background: rgba(255, 204, 0, 0.1);
   color: #cca300;
+}
+
+@media (max-width: 900px) {
+  .app-layout {
+    display: block;
+    padding-top: 10px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
 }
 </style>

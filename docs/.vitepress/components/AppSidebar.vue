@@ -1,46 +1,34 @@
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
-import { useData, useRouter } from 'vitepress';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useData } from 'vitepress';
 
-export default defineComponent({
-  name: 'AppSidebar',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    isOpen: {
-      type: Boolean,
-      required: true
-    }
-  },
-  emits: ['toggle', 'close', 'update:scale'],
-  setup(_, { emit }) {
-    const { lang } = useData();
-    const fontScale = ref(1.0);
+const props = defineProps<{
+  title: string;
+  isOpen: boolean;
+}>();
 
-    const t = computed(() => {
-      return lang.value === 'zh-TW' ? {
-        fontSize: '字體大小',
-        smaller: '縮小',
-        reset: '重置',
-        larger: '放大',
-        toggleSidebar: '收合側邊欄'
-      } : {
-        fontSize: 'Font Size',
-        smaller: 'Smaller',
-        reset: 'Reset',
-        larger: 'Larger',
-        toggleSidebar: 'Toggle Sidebar'
-      }
-    });
+const emit = defineEmits<{
+  (e: 'toggle'): void;
+  (e: 'close'): void;
+  (e: 'update:scale', value: number): void;
+}>();
 
-    return {
-      fontScale,
-      emit,
-      lang,
-      t
-    };
+const { lang } = useData();
+const fontScale = ref(1.0);
+
+const t = computed(() => {
+  return lang.value === 'zh-TW' ? {
+    fontSize: '字體大小',
+    smaller: '縮小',
+    reset: '重置',
+    larger: '放大',
+    toggleSidebar: '收合側邊欄'
+  } : {
+    fontSize: 'Font Size',
+    smaller: 'Smaller',
+    reset: 'Reset',
+    larger: 'Larger',
+    toggleSidebar: 'Toggle Sidebar'
   }
 });
 </script>
@@ -76,9 +64,9 @@ export default defineComponent({
       <div class="font-controls">
         <span class="ctrl-label">{{ t.fontSize }}</span>
         <div class="btn-group">
-          <button @click="$emit('update:scale', 0.9)" :title="t.smaller">A-</button>
-          <button @click="$emit('update:scale', 1.0)" :title="t.reset">A</button>
-          <button @click="$emit('update:scale', 1.15)" :title="t.larger">A+</button>
+          <button @click="emit('update:scale', 0.9)" :title="t.smaller">A-</button>
+          <button @click="emit('update:scale', 1.0)" :title="t.reset">A</button>
+          <button @click="emit('update:scale', 1.15)" :title="t.larger">A+</button>
         </div>
       </div>
       <slot name="footer"></slot>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useData } from 'vitepress';
 
 defineProps<{ isOpen: boolean; title?: string; }>();
 
 const { lang } = useData();
+const isMounted = ref(false);
+
 const t = computed(() => {
   return lang.value === 'zh-TW' ? {
     menu: '選單',
@@ -15,11 +17,15 @@ const t = computed(() => {
   };
 });
 
+onMounted(() => {
+  isMounted.value = true;
+});
+
 defineEmits<{ (e: 'close'): void; }>();
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport to="body" v-if="isMounted">
     <Transition name="slide-up">
       <div v-if="isOpen" class="mobile-drawer-overlay" @click="$emit('close')">
         <aside class="mobile-drawer" @click.stop role="dialog" aria-modal="true">

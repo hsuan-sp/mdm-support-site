@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, shallowRef } from "vue";
 import { useData } from 'vitepress';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
-import * as loaderData from "../../data/all-data.data";
+// @ts-ignore
+import { data as rawLoaderData } from "../../data/all-data.data";
 
 const { lang } = useData();
-const data: any = loaderData;
-const rawData = data.data || data.default || data;
+const isMounted = ref(false);
+
+// Use shallowRef to avoid deep reactivity overhead on huge static data
+const rawData = shallowRef(rawLoaderData);
 
 // Selected data based on current language
-const langData = computed(() => lang.value === 'en-US' ? rawData.en : rawData.zh);
+const langData = computed(() => {
+  const d = rawData.value;
+  return lang.value === 'en-US' ? d?.en : d?.zh;
+});
 const allQAData = computed(() => langData.value?.allQAData || []);
 
 import type { QAItem } from "../../types";
@@ -187,6 +193,7 @@ useKeyboardShortcuts({
 });
 
 onMounted(() => {
+  isMounted.value = true;
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
 });
@@ -205,7 +212,7 @@ const switchModule = (source: string | "All") => {
 
 <template>
   <div class="guide-app" :style="{ '--app-scale': fontScale }" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
-    <div class="app-layout">
+    <div v-if="isMounted" class="app-layout">
       <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
         @update:scale="val => fontScale = val">
         <template #search>
@@ -332,11 +339,7 @@ const switchModule = (source: string | "All") => {
       </main>
     </div>
 
-    <button class="mobile-menu-btn" @click="isSidebarOpen = true">
-      {{ t.menuBtn }}
-    </button>
-
-    <MobileDrawer :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
+    <MobileDrawer v-if="isMounted" :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
       <div class="search-box mobile-search">
         <span class="search-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -372,10 +375,42 @@ const switchModule = (source: string | "All") => {
         </div>
       </div>
     </MobileDrawer>
+
+    <button v-if="isMounted" class="mobile-menu-btn" @click="isSidebarOpen = true">
+      {{ t.menuBtn }}
+    </button>
+
+    <div v-if="!isMounted" class="app-loading-placeholder">
+    </div>
   </div>
 </template>
 
 <style scoped>
+.app-loading-placeholder {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vp-c-bg-soft);
+  margin: 40px;
+  border-radius: 24px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
 /* 全域比例控制 */
 .guide-app {
   --base-size: calc(16px * var(--app-scale));
@@ -399,13 +434,11 @@ const switchModule = (source: string | "All") => {
   gap: 48px;
   justify-content: center;
   align-items: flex-start;
-  /* Critical for sticky to work */
   padding: 40px 24px;
   position: relative;
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100vh;
-  /* Ensure container is tall */
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -426,15 +459,13 @@ const switchModule = (source: string | "All") => {
   color: var(--vp-c-text-1);
 }
 
-
-
 @media (max-width: 900px) {
   .app-layout {
     display: block;
     padding-top: 10px;
   }
 
-  .app-sidebar {
+  .desktop-only {
     display: none !important;
   }
 
@@ -443,10 +474,6 @@ const switchModule = (source: string | "All") => {
     margin-bottom: 20px;
   }
 }
-
-
-/* 側邊欄視覺與固定邏輯 */
-
 
 /* 問答卡片 */
 .qa-item {
@@ -496,11 +523,6 @@ const switchModule = (source: string | "All") => {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.qa-trigger:hover {
-  background-color: var(--vp-c-bg-soft);
 }
 
 .q-main {
@@ -514,7 +536,6 @@ const switchModule = (source: string | "All") => {
   font-size: 1.15em;
   font-weight: 700;
   line-height: 1.45;
-  color: var(--vp-c-text-1);
 }
 
 .imp-tag {
@@ -523,15 +544,12 @@ const switchModule = (source: string | "All") => {
   color: white;
   padding: 2px 8px;
   border-radius: 6px;
-  flex-shrink: 0;
   font-weight: 800;
-  margin-top: 2px;
 }
 
 .arrow {
   color: var(--vp-c-text-3);
   transition: transform 0.3s;
-  margin-top: 4px;
 }
 
 .qa-item.open .arrow {
@@ -539,7 +557,6 @@ const switchModule = (source: string | "All") => {
   color: var(--vp-c-brand-1);
 }
 
-/* 內容樣式 */
 .qa-content {
   padding: 0 32px 32px;
   border-top: 1px solid var(--vp-c-divider);
@@ -549,87 +566,7 @@ const switchModule = (source: string | "All") => {
 .markdown-body {
   font-size: 1.05em;
   line-height: 1.8;
-  color: var(--vp-c-text-1);
   padding-top: 24px;
-}
-
-.markdown-body :deep(strong) {
-  color: var(--vp-c-brand-1);
-  font-weight: 800;
-}
-
-.markdown-body :deep(blockquote) {
-  margin: 1.5em 0;
-  padding: 16px 24px;
-  border-left: 4px solid var(--vp-c-brand-1);
-  background: var(--vp-c-bg-alt);
-  border-radius: 8px;
-  font-style: italic;
-  color: var(--vp-c-text-2);
-}
-
-.markdown-body :deep(p) {
-  margin-bottom: 1.2em;
-}
-
-.markdown-body :deep(p:last-child) {
-  margin-bottom: 0;
-}
-
-.markdown-body :deep(ul),
-.markdown-body :deep(ol) {
-  padding-left: 1.5em;
-  margin-bottom: 1.2em;
-}
-
-.markdown-body :deep(li) {
-  margin-bottom: 0.6em;
-}
-
-.markdown-body :deep(table) {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 24px 0;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.markdown-body :deep(th) {
-  background: var(--vp-c-bg-soft);
-  padding: 14px 16px;
-  text-align: left;
-  font-weight: 700;
-  border-bottom: 2px solid var(--vp-c-divider);
-  color: var(--vp-c-text-1);
-}
-
-.markdown-body :deep(td) {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
-}
-
-.markdown-body :deep(tr:last-child td) {
-  border-bottom: none;
-}
-
-.markdown-body :deep(tr:nth-child(even)) {
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.dark .markdown-body :deep(tr:nth-child(even)) {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.markdown-body :deep(code) {
-  background: var(--vp-c-bg-soft);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: var(--vp-font-family-mono);
-  font-size: 0.9em;
-  color: var(--vp-c-brand-1);
 }
 
 .section-label {
@@ -638,7 +575,6 @@ const switchModule = (source: string | "All") => {
   padding-bottom: 12px;
   border-bottom: 2px solid var(--vp-c-divider);
   font-weight: 800;
-  color: var(--vp-c-text-1);
 }
 
 .chapter-title {
@@ -652,11 +588,6 @@ const switchModule = (source: string | "All") => {
   border: 1px solid var(--vp-c-divider);
 }
 
-.chapter-group:first-child .chapter-title {
-  margin-top: 0;
-}
-
-/* 行動版 */
 .mobile-menu-btn {
   position: fixed;
   bottom: 24px;
@@ -688,19 +619,9 @@ const switchModule = (source: string | "All") => {
   width: 100%;
   padding: 12px 16px 12px 40px;
   border-radius: 12px;
-  font-size: 14px;
-  transition: all 0.2s;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-1);
-  line-height: normal;
-  /* Fix misaligned text */
-}
-
-.search-input:focus {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
-  outline: none;
 }
 
 .search-icon {
@@ -710,59 +631,6 @@ const switchModule = (source: string | "All") => {
   transform: translateY(-50%);
   opacity: 0.5;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.mobile-search {
-  margin-bottom: 20px;
-}
-
-.mobile-search .search-input {
-  padding: 14px 18px 14px 44px;
-  font-size: 16px;
-  border-radius: 16px;
-}
-
-.font-controls-mobile {
-  margin-top: 32px;
-}
-
-.btn-group-mobile {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-group-mobile button {
-  flex: 1;
-  padding: 12px;
-  background: var(--vp-c-bg-mute);
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-}
-
-.btn-group-mobile button.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-}
-
-.categories-header-mini {
-  margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
-  letter-spacing: 0.05em;
-}
-
-.mobile-nav-scroll {
-  overflow-y: auto;
-  flex: 1;
 }
 
 .m-nav-item {
@@ -773,7 +641,6 @@ const switchModule = (source: string | "All") => {
   border-radius: 16px;
   margin-bottom: 8px;
   background: rgba(0, 0, 0, 0.03);
-  transition: all 0.2s;
 }
 
 .dark .m-nav-item {
@@ -784,11 +651,6 @@ const switchModule = (source: string | "All") => {
   background: var(--vp-c-brand-1);
   color: white;
   font-weight: 700;
-}
-
-.m-nav-item.active .nav-count {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
 }
 
 .nav-count {
