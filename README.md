@@ -109,6 +109,7 @@ python3 scripts/content_manager.py
 1. 在 `docs/data/items` 或 `docs/data/items-en` 下新增/修改 Markdown 檔案。
 1. 務必執行 `npm run fix-markdown` 確保格式正確。
 1. 執行 `node scripts/generate_maintenance_index.mjs` 更新索引。
+1. **更新紀錄**：若有內容增修，請至 `docs/UPDATE_LOG.md` 記錄變更。
 
 ## 📄 版權資訊 (License)
 
