@@ -1,5 +1,5 @@
 ---
-title: 版本更新日誌 (Changelog)
+title: Changelog
 editLink: false
 search: false
 ---
@@ -11,7 +11,9 @@ const activeLang = ref('zh') // 'zh' | 'en'
 </script>
 
 <div class="changelog-header">
-  <h1>版本更新日誌 (Changelog)</h1>
+  <h1 v-if="activeLang === 'zh'">版本更新日誌 (Changelog)</h1>
+  <h1 v-else>Changelog</h1>
+  
   <div class="lang-switch">
     <button :class="{ active: activeLang === 'zh' }" @click="activeLang = 'zh'">繁體中文</button>
     <button :class="{ active: activeLang === 'en' }" @click="activeLang = 'en'">English</button>
@@ -23,48 +25,84 @@ const activeLang = ref('zh') // 'zh' | 'en'
 <!-- v1.0.0 -->
 <div class="version-block">
   <div class="version-meta">
-    <div class="version-tag">v1.0.0</div>
+    <div class="version-number">1.0.0</div>
     <div class="version-date">2026-01-21</div>
   </div>
   
   <div v-if="activeLang === 'zh'" class="version-content">
-    <h3>🚀 初始正式發布 (Initial Release)</h3>
-    <p>本專案首個正式版本，完整建構了針對台灣教育場域的 Apple MDM 雙語知識庫系統。</p>
+    <h3>初始發布 (Initial Release)</h3>
+    <p>針對台灣教育場域建置的企業級 Apple MDM 雙語知識庫系統正式上線。</p>
     
-    <h4>🔥 核心功能與內容</h4>
+    <h4>系統現狀報告 (System Status Report)</h4>
+    <p>截至本版本，系統已包含以下經技術驗證的內容與功能：</p>
+    
+    <div class="status-grid">
+      <div class="status-item">
+        <span class="label">術語總數 (Glossary Terms)</span>
+        <span class="value">220</span>
+      </div>
+      <div class="status-item">
+        <span class="label">問答文章 (Q&A Articles)</span>
+        <span class="value">217</span>
+      </div>
+      <div class="status-item">
+        <span class="label">技術基準 (Technical Baseline)</span>
+        <span class="value">iOS 26 / macOS Tahoe</span>
+      </div>
+      <div class="status-item">
+        <span class="label">雙語支援 (Language Support)</span>
+        <span class="value">繁中 / 英文 (100% 同步)</span>
+      </div>
+    </div>
+
+    <h4>已通過驗證的功能模組</h4>
     <ul>
-      <li><strong>全站內容建置</strong>：完成 137 個術語 (Glossary) 與 8 大類別 Q&A 的中英文內容撰寫，總計超過 200 篇文章。</li>
-      <li><strong>2026 技術驗證</strong>：所有內容皆通過 iOS 26 與 macOS Tahoe 技術規格驗證，確保資訊時效性。</li>
-      <li><strong>雙語即時切換</strong>：實作 <code>GlossaryApp</code> 與 <code>IntegratedGuideApp</code> 核心組件，支援無縫中英切換。</li>
-      <li><strong>錯誤回報機制</strong>：全站右下角新增懸浮回報按鈕 (ReportIssue)，支援全平台原生郵件軟體呼叫。</li>
+      <li><strong>核心知識庫引擎</strong>：整合 <code>GlossaryApp</code> 與 <code>IntegratedGuideApp</code> 組件，支援中英動態切換與關鍵字檢索。</li>
+      <li><strong>全站問題回報機制</strong>：實作懸浮式回報元件 (ReportIssue.vue)，支援跨平台 (iOS, Android, Windows, macOS) 的原生郵件調用協議，可自動擷取頁面 Context。</li>
+      <li><strong>自動化維護系統</strong>：部署 Python 內容管理工具與索引生成腳本 (<code>generate_maintenance_index.mjs</code>)，確保維護效率。</li>
+      <li><strong>資訊安全架構</strong>：已啟用原始碼混淆 (Terser integration) 與前端防複製保護 (CSS user-select protection)。</li>
     </ul>
 
-    <h4>🛠️ 架構與系統</h4>
-    <ul>
-      <li><strong>自動化維護</strong>：建立 Python 內容管理工具 (<code>content_manager.py</code>) 與自動索引生成腳本。</li>
-      <li><strong>文件規範</strong>：制定完整的 <code>INSTRUCTION</code> 撰寫指南，規範術語使用與版本標註。</li>
-      <li><strong>資訊安全</strong>：實作原始碼混淆 (Obfuscation) 與防複製 (User-select protection) 機制。</li>
-    </ul>
+    <h4>內容覆蓋範圍</h4>
+    <p>內容涵蓋 8 大核心管理領域：帳號與伺服器管理、裝置註冊 (ADE)、應用程式部署 (VPP)、課堂管理 (Apple Classroom)、以及針對台灣教育部的「數位學習精進方案」專區。</p>
   </div>
 
   <div v-if="activeLang === 'en'" class="version-content">
-    <h3>🚀 Initial Release</h3>
-    <p>The first official release of the project, establishing a complete bilingual Apple MDM knowledge base tailored for Taiwan's education sector.</p>
+    <h3>Initial Release</h3>
+    <p>Official launch of the Enterprise Apple MDM Bilingual Knowledge Base tailored for Taiwan's education sector.</p>
 
-    <h4>🔥 Core Features & Content</h4>
+    <h4>System Status Report</h4>
+    <p>As of this release, the system includes the following verified content and features:</p>
+    
+    <div class="status-grid">
+      <div class="status-item">
+        <span class="label">Glossary Terms</span>
+        <span class="value">220</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Q&A Articles</span>
+        <span class="value">217</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Technical Baseline</span>
+        <span class="value">iOS 26 / macOS Tahoe</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Language Support</span>
+        <span class="value">TC / EN (100% Synced)</span>
+      </div>
+    </div>
+
+    <h4>Verified Feature Modules</h4>
     <ul>
-      <li><strong>Full Content Deployment</strong>: Completed all 137 Glossary terms and 8 categories of Q&A in both Traditional Chinese and English, totaling over 200 articles.</li>
-      <li><strong>2026 Technical Verification</strong>: All content verified against iOS 26 and macOS Tahoe specifications to ensure currency.</li>
-      <li><strong>Bilingual Switching</strong>: Implemented core components <code>GlossaryApp</code> and <code>IntegratedGuideApp</code> for seamless language toggling.</li>
-      <li><strong>Issue Reporting</strong>: Added a floating Report Issue button on all pages, supporting native mail clients across all platforms.</li>
+      <li><strong>Core Knowledge Engine</strong>: Integration of <code>GlossaryApp</code> and <code>IntegratedGuideApp</code> components, supporting dynamic language toggling and keyword search.</li>
+      <li><strong>Global Issue Reporting</strong>: Implementation of a floating reporting component (ReportIssue.vue), supporting native mail client invocation across all platforms (iOS, Android, Windows, macOS) with automatic context capture.</li>
+      <li><strong>Automated Maintenance System</strong>: Deployment of Python content management tools and index generation scripts (<code>generate_maintenance_index.mjs</code>) to ensure operational efficiency.</li>
+      <li><strong>Security Architecture</strong>: Activation of source code obfuscation (Terser integration) and frontend content protection (CSS user-select protection).</li>
     </ul>
 
-    <h4>🛠️ Architecture & System</h4>
-    <ul>
-      <li><strong>Automated Maintenance</strong>: Established Python content management tools (<code>content_manager.py</code>) and automated index generation scripts.</li>
-      <li><strong>Documentation Standards</strong>: Define comprehensive <code>INSTRUCTION</code> guidelines for terminology usage and version tagging.</li>
-      <li><strong>Security</strong>: Implemented source code obfuscation and user-select protection mechanisms.</li>
-    </ul>
+    <h4>Content Coverage</h4>
+    <p>Content covers 8 core management domains: Account & Server Management, Device Enrollment (ADE), App Deployment (VPP), Classroom Management (Apple Classroom), and a dedicated section for the MOE "Digital Learning Project".</p>
   </div>
 </div>
 
@@ -73,52 +111,52 @@ const activeLang = ref('zh') // 'zh' | 'en'
 <hr class="divider" />
 
 <div v-if="activeLang === 'zh'" class="guidelines">
-  <h2>📝 更新日誌撰寫規範</h2>
-  <p>為維護日誌的專業性與易讀性，所有維護者必須遵守以下規範：</p>
+  <h2>維護者日誌撰寫規範 (Maintainer Guidelines)</h2>
   
   <h3>1. 記錄原則</h3>
   <ul>
-    <li><strong>⭕ 必須記錄</strong>：新增題目/術語、刪除內容、功能重大更新、架構調整。</li>
-    <li><strong>❌ 無需記錄</strong>：錯字修正、格式微調、Bug 修復 (除非影響重大)、翻譯潤飾。</li>
+    <li><strong>重大變更 (Major Changes)</strong>: 當進行網站架構重構、核心版本升級或政策性變更時，必須記錄。</li>
+    <li><strong>內容增減 (Content Modifications)</strong>: 新增文章系列、刪除過時內容或整併章節時，必須記錄。</li>
+    <li><strong>豁免項目 (Exclusions)</strong>: 單一文章的錯字修正、翻譯優化、或不影響功能的樣式微調，無須在此記錄。</li>
   </ul>
 
-  <h3>2. 版本號規則 (Semantic Versioning)</h3>
+  <h3>2. 版本控制標準 (Semantic Versioning)</h3>
   <ul>
-    <li><strong>Major (x.0.0)</strong>：網站架構重構或重大政策變更。</li>
-    <li><strong>Minor (1.x.0)</strong>：新增一批新的 Q&A 題目或新功能模組。</li>
-    <li><strong>Patch (1.0.x)</strong>：單一題目修正或緊急錯誤修復。</li>
+    <li><strong>Major (x.0.0)</strong>: 架構重寫或不相容的變更。</li>
+    <li><strong>Minor (1.x.0)</strong>: 新增功能模組或大量內容更新。</li>
+    <li><strong>Patch (1.0.x)</strong>: 緊急修復 (Hotfix) 或重要錯誤修正。</li>
   </ul>
 
-  <h3>3. 格式要求</h3>
+  <h3>3. 撰寫風格</h3>
   <ul>
-    <li>使用 HTML 結構而非 Markdown，以確保樣式統一。</li>
-    <li><strong>標題</strong>：使用 Emoji + 簡短描述 (如 <code>🚀 新功能</code>, <code>📝 內容更新</code>)。</li>
-    <li><strong>雙語對照</strong>：必須同時提供繁體中文與英文說明。</li>
+    <li><strong>嚴肅專業</strong>: 禁止使用表情符號 (Emojis) 或非正式用語。</li>
+    <li><strong>數據導向</strong>: 應包含具體的統計數字或受影響的範圍。</li>
+    <li><strong>雙語對照</strong>: 所有日誌必須同步提供中英文版本。</li>
   </ul>
 </div>
 
 <div v-if="activeLang === 'en'" class="guidelines">
-  <h2>📝 Changelog Guidelines</h2>
-  <p>To maintain professionalism and readability, all maintainers must adhere to the following guidelines:</p>
-
+  <h2>Maintainer Guidelines</h2>
+  
   <h3>1. Logging Principles</h3>
   <ul>
-    <li><strong>⭕ Must Log</strong>: Adding new topics/terms, deleting content, major feature updates, architectural changes.</li>
-    <li><strong>❌ No Log Needed</strong>: Typo fixes, minor formatting, bug fixes (unless critical), translation polish.</li>
+    <li><strong>Major Changes</strong>: Must log when re-architecting the site, upgrading core versions, or implementing policy changes.</li>
+    <li><strong>Content Modifications</strong>: Must log when adding article series, deleting obsolete content, or merging sections.</li>
+    <li><strong>Exclusions</strong>: Do not log single-article typo fixes, translation polishing, or minor style tweaks that do not affect functionality.</li>
   </ul>
 
-  <h3>2. Versioning Rules (Semantic Versioning)</h3>
+  <h3>2. Versioning Standards (Semantic Versioning)</h3>
   <ul>
-    <li><strong>Major (x.0.0)</strong>: Site re-architecture or major policy changes.</li>
-    <li><strong>Minor (1.x.0)</strong>: Batch addition of new Q&A topics or new feature modules.</li>
-    <li><strong>Patch (1.0.x)</strong>: Single topic correction or critical hotfix.</li>
+    <li><strong>Major (x.0.0)</strong>: Architecture rewrite or incompatible changes.</li>
+    <li><strong>Minor (1.x.0)</strong>: New feature modules or bulk content updates.</li>
+    <li><strong>Patch (1.0.x)</strong>: Critical hotfixes or significant bug corrections.</li>
   </ul>
 
-  <h3>3. Formatting Requirements</h3>
+  <h3>3. Writing Style</h3>
   <ul>
-    <li>Use HTML structure instead of Markdown to ensure consistent styling.</li>
-    <li><strong>Headers</strong>: Use Emoji + Short Description (e.g., <code>🚀 New Features</code>, <code>📝 Content Update</code>).</li>
-    <li><strong>Bilingual</strong>: Must provide both Traditional Chinese and English descriptions simultaneously.</li>
+    <li><strong>Professional Tone</strong>: No emojis or informal language.</li>
+    <li><strong>Data-Driven</strong>: Include specific statistics or scope of impact where applicable.</li>
+    <li><strong>Bilingual</strong>: All log entries must be provided in both Traditional Chinese and English.</li>
   </ul>
 </div>
 
@@ -143,7 +181,7 @@ const activeLang = ref('zh') // 'zh' | 'en'
   padding: 6px 16px;
   font-size: 14px;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--vp-c-text-2);
   transition: all 0.2s;
 }
@@ -151,80 +189,56 @@ const activeLang = ref('zh') // 'zh' | 'en'
 .lang-switch button.active {
   background: var(--vp-c-bg);
   color: var(--vp-c-brand);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .version-block {
-  display: flex;
-  gap: 32px;
   margin-bottom: 60px;
-  position: relative;
-}
-
-.version-block::before {
-  content: '';
-  position: absolute;
-  left: 38px;
-  top: 40px;
-  bottom: -70px;
-  width: 2px;
-  background: var(--vp-c-divider);
-  opacity: 0.5;
-}
-
-.version-block:last-child::before {
-  display: none;
+  border-left: 3px solid var(--vp-c-brand);
+  padding-left: 24px;
 }
 
 .version-meta {
-  flex-shrink: 0;
-  width: 120px;
-  text-align: right;
-  padding-top: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.version-tag {
+.version-number {
   font-family: var(--vp-font-family-mono);
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--vp-c-brand);
-  background: var(--vp-c-bg-soft);
-  padding: 4px 10px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-bottom: 6px;
-}
-
-.version-date {
-  font-size: 13px;
-  color: var(--vp-c-text-3);
-  font-family: var(--vp-font-family-mono);
-}
-
-.version-content {
-  flex-grow: 1;
-  padding-bottom: 20px;
-}
-
-.version-content h3 {
-  margin: 0 0 16px 0;
   font-size: 20px;
   font-weight: 700;
   color: var(--vp-c-text-1);
 }
 
-.version-content h4 {
-  margin: 24px 0 12px 0;
-  font-size: 16px;
+.version-date {
+  font-size: 14px;
+  color: var(--vp-c-text-3);
+  font-family: var(--vp-font-family-mono);
+}
+
+.version-content h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+}
+
+.version-content h4 {
+  margin: 24px 0 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 6px;
+  display: inline-block;
 }
 
 .version-content ul {
-  padding-left: 20px;
+  padding-left: 18px;
   margin: 0;
 }
 
@@ -232,38 +246,79 @@ const activeLang = ref('zh') // 'zh' | 'en'
   margin-bottom: 8px;
   line-height: 1.6;
   color: var(--vp-c-text-2);
+  font-size: 15px;
+}
+
+.version-content p {
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.status-item {
+  background: var(--vp-c-bg-soft);
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-item .label {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.status-item .value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--vp-c-brand);
+  font-family: var(--vp-font-family-mono);
 }
 
 .divider {
   margin: 60px 0;
   border: none;
-  border-top: 1px dashed var(--vp-c-divider);
+  border-top: 1px solid var(--vp-c-divider);
 }
 
 .guidelines {
   background: var(--vp-c-bg-soft);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 8px;
+}
+
+.guidelines h2 {
+  margin-top: 0;
+  font-size: 20px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.guidelines h3 {
+  font-size: 16px;
+  margin-top: 24px;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 768px) {
-  .version-block {
+  .changelog-header {
     flex-direction: column;
+    align-items: flex-start;
     gap: 16px;
   }
   
-  .version-block::before {
-    left: 14px;
-    top: 36px;
-    bottom: -30px;
-  }
-  
-  .version-meta {
-    width: 100%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .status-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 </style>
