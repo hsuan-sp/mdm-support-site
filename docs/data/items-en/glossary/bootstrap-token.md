@@ -3,10 +3,22 @@ term: "Bootstrap Token"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-A Bootstrap Token is an automated authorization credential used in macOS. When the first user enables FileVault disk encryption, the system generates this token and securely escrows it to the MDM server. MDM can then use this token to authorize other administrator accounts to log in to the encrypted Mac or to automatically authorize software updates that require a cryptographic "owner" to proceed.
+A **Bootstrap Token** is a secure authorization credential used within the macOS management framework to facilitate administration.
 
-## Plain English
+Operational flow:
 
-This is the "Backup Recovery Key" stored in the MDM vault. When a computer is locked down with encryption (FileVault), usually only the primary user can unlock it. The Bootstrap Token allows IT to have a secure copy of the "key" so they can enter the system for maintenance or give access to a new employee if the original user is unavailable.
+* **Generation**: When the first user enables **FileVault** encryption on a Mac, the system generates this token.
+
+* **Escrow**: The token is securely uploaded and stored in the MDM server.
+
+* **Utility**: MDM uses this token to authorize other administrator accounts or to allow **software updates** that require a cryptographic "owner" to proceed.
+
+This ensures that IT can maintain a device even when the primary user is not present or when the device is in a locked, encrypted state.
+
+## Analogy
+
+This is the **"Backup Recovery Key"** stored in the school's digital vault.
+
+When a computer is locked down with encryption (FileVault), usually only the primary user can unlock the door. The **Bootstrap Token** allows IT to have a secure copy of the "Master Key" so they can enter the system for maintenance or give access to a new employee if the original user has left.

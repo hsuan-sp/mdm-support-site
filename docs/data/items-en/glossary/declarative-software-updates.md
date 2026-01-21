@@ -4,20 +4,24 @@ category: ["DDM"]
 tags: ["DDM", "Software Updates", "Enforcement", "Beta Enrollment"]
 ---
 
-## Definition
+## Term Definition
 
-Declarative Software Updates is the mandatory method for managing OS updates starting in late 2024 (and enforced into 2026). Traditional MDM remote update commands are being phased out in favor of the DDM "Declaration" mechanism. This system supports advanced features such as remote enrollment in Beta programs, staggered rollouts, and the setting of strict Enforcement Deadlines.
+**Declarative Software Updates** is the mandatory, modern method for managing OS updates in Apple's ecosystem.
 
-## Plain English
+Fundamental changes:
 
-Previously, updating was like "A teacher personally chasing every student to turn in their homework" (the MDM server sending individual commands). Now, it's like "Posting the due date on the bulletin board and letting the students manage their own time" (a DDM declaration where the device autonomously handles the update).
+* **Phase-out**: Legacy MDM update commands (like `ScheduleOSUpdate`) are being replaced by the DDM "Configuration" mechanism.
 
-## MDM Context
+* **Deadlines**: Supports strict **Enforcement Deadlines** where the device will force an update at a specific date and time.
 
-**Mandatory Transition!** Organizations must convert all software update policies to DDM by late 2024/2025. Failure to do so will result in an inability to manage updates on modern versions of iOS and macOS.
+* **Betas**: Allows administrators to remotely enroll or restrict devices in Apple’s **Beta Software Programs**.
 
-## Technical Advantages
+* **Reporting**: Provides real-time progress updates through the **Status Channel** (e.g., "Downloading," "Verifying," "Installing").
 
-* The device autonomously determines the best time to update (based on battery, network, and usage).
-* Provides real-time installation reporting via the Status Channel.
-* Supports consistent management across iPad, Mac, Apple TV, and Apple Vision Pro.
+**Note**: Organizations had to transition to this method starting in late 2024 to maintain update control over modern versions of iOS and macOS.
+
+## Analogy
+
+Previously, updating was like **"A teacher personally chasing every student"** to turn in their homework (the MDM server sending individual, repeated commands).
+
+Now, it's like **"Posting the due date on the bulletin board"** and letting the students manage their own time. The device knows the deadline and handles the update autonomously when the time is right, just reporting back to the teacher when it's done.

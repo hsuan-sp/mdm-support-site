@@ -1,12 +1,26 @@
 ---
 term: "Jamf Binary"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
-## Definition
+## Term Definition
 
-The Jamf Binary (often referred to as the `Jamf` command) is the core management agent installed on macOS devices. It acts as the local "Engine" for Jamf Pro, communicating with the server to trigger management policies, install software, and report inventory data. While iOS devices use Apple’s native MDM framework directly, macOS devices rely on this additional binary to perform advanced management tasks like running custom scripts.
+The **Jamf Binary** (frequently referred to as the `jamf` command-line tool) is the management agent that powers advanced control on macOS.
 
-## Plain English
+Operational roles:
 
-Think of this as the "On-Site Manager" living inside your Mac. While the main school office (the MDM server) gives the orders, the On-Site Manager is the one who actually does the work—like installing your apps, fixing your settings, and making sure the computer is following the school rules. Without this silent helper working in the background, the school wouldn't be able to support your Mac remotely.
+* **Local Engine**: It is the "brain" on the Mac that executes instructions sent from the Jamf Pro server.
+
+* **Policies**: Unlike standard MDM profiles, the binary allows for complex "Policies" that can run scripts, install specialized software packages, and perform system maintenance.
+
+* **Check-ins**: The binary periodically "checks in" with the server to see if there are any new tasks to perform.
+
+**Note**: While iPads use Apple’s built-in MDM framework alone, Macs use a combination of standard MDM and the Jamf Binary to provide deeper management capabilities.
+
+## Analogy
+
+Think of this as the **"On-Site Manager"** living inside your Mac.
+
+While the main school office (the MDM server) gives the big-picture orders, the **On-Site Manager** is the person who actually does the heavy physical work—like unpacking and installing your apps, fixing your system settings, and making sure the computer is following all the school’s safety rules.
+
+Without this silent helper working in the background, the school wouldn't be able to fix your Mac's problems from their office.

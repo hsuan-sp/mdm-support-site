@@ -4,10 +4,22 @@ category: ["DDM"]
 tags: ["App Configuration", "Certificates", "Security", "Future Feature"]
 ---
 
-## Definition
+## Term Definition
 
-Announced at WWDC 2025, the Managed App Framework is a modern architecture for delivering and managing app settings. It replaces the older "Managed App Configuration" method. This framework allows MDM to securely transmit configurations, security certificates, and passwords to apps through a dedicated encrypted channel. Unlike the old method, apps can now dynamically request settings updates while they are running, providing greater flexibility and security.
+The **Managed App Framework** (announced at WWDC 2025) is the modern successor to the legacy "Managed App Configuration" standard.
 
-## Plain English
+Capabilities:
 
-In the past, giving a new app its settings was like "leaving a note in a mailbox"—the app could only read it when it first opened. The new Managed App Framework is more like "Instant Messaging." The app can talk to the school system while you are using it to get the latest security updates and settings instantly. It’s faster, safer, and means your apps are always set up perfectly.
+* **Dynamic Updates**: Allows apps to receive configuration changes (settings, server URLs) in real-time without needing a restart.
+
+* **Secure Channel**: Establishes a direct, encrypted pipeline between the MDM and the app for delivering sensitive items like identity certificates.
+
+* **Pull Model**: Apps can proactively request updated settings from the system, rather than waiting passively for a push.
+
+## Analogy
+
+In the past, giving an app its settings was like **"Leaving a note in a mailbox"**—the app could only read the note when it first opened.
+
+The new **Managed App Framework** is more like **"Instant Messaging."**
+
+The app can talk to the school system *while* you are using it to get the latest security updates or server changes instantly. It’s faster, safer, and means your apps are always set up perfectly without you having to restart them.

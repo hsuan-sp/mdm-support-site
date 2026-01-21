@@ -3,10 +3,22 @@ term: "Restricted Software"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-Restricted Software is a "Blocklist" mechanism within Jamf Pro. Administrators can define a list of prohibited applications (such as unauthorized games or older macOS installers). If a user attempts to open a restricted app, the system immediately forces the application to quit and can be configured to delete the app and display a warning message to the user.
+**Restricted Software** is a blocking mechanism in Jamf Pro used to prohibit specific applications from running.
 
-## Plain English
+Capabilities:
 
-Think of this as the school's "Digital Hall Monitor." The hall monitor is always watching; if they catch you trying to use a "prohibited item" (like a game during class), they will immediately take it away and give you a warning. It helps keep everyone focused on learning instead of playing unapproved games.
+* **Detection**: Monitors the system for the launch of a specific process name (e.g., `Steam.app` or `Install macOS Beta.app`).
+
+* **Kill Process**: The moment the user tries to open the app, the system immediately forces it to quit.
+
+* **Remediation**: Can be configured to delete the application entirely and display a warning message explaining why it is not allowed.
+
+## Analogy
+
+Think of this as the school's **"Digital Hall Monitor."**
+
+The hall monitor is always watching. If they see you trying to pull a "prohibited item" (like a video game console) out of your backpack, they immediately **take it away** and give you a warning note.
+
+It helps keep the classroom focused on learning by ensuring distractions (unapproved games) don't even have a chance to start.

@@ -1,12 +1,24 @@
 ---
 term: "Provisioning Profile"
-category: ["Apps","Security"]
+category: ["Apps", "Security"]
 ---
 
-## Definition
+## Term Definition
 
-A Provisioning Profile is a digital authorization file that allows an app to run on a specific Apple device. For custom, "In-House" apps developed by a school or organization, these profiles must be signed by an official Apple Developer account. These profiles have an expiration date (typically one year). If the profile is not renewed by IT, the app will immediately stop working and crash when opened.
+A **Provisioning Profile** is a digital signing asset that links a developer's certificate, an App ID, and a device (or list of devices) to authorize an app to run.
 
-## Plain English
+Usage contexts:
 
-Think of this as a "Temporary Entry Visa" for apps. Most apps get a "Permanent Visa" from the public App Store. However, if the school makes its own private app just for its students, that app only gets a "Temporary Visa" (the Provisioning Profile) that lasts for one year. If the school forgot to renew the visa, the app "gets kicked out" and won't open anymore until it gets its new paperwork.
+* **App Store Apps**: Signed by Apple, valid indefinitely for the user.
+
+* **In-House Enterprise Apps**: Signed by the organization. These profiles typically expire after **1 year**.
+
+* **Expiration**: If the profile expires, the app will crash immediately upon launch. It must be renewed and pushed via MDM to restore functionality.
+
+## Analogy
+
+Think of this as a **"Temporary Work Visa"** for apps.
+
+Most apps get a "Permanent Citizenship" from the public App Store. However, if the school creates its own private app just for students, that app only gets a **"1-Year Visa"** (the Provisioning Profile).
+
+If the school forgets to renew the visa, the app gets **"deported"** (stops working) and won't open anymore until it gets its new paperwork stamped.

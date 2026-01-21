@@ -2,11 +2,11 @@
 
 > 此文件由腳本自動生成。用於讓維護人員（或 AI）快速確認目前已存在的內容，避免重複新增。
 
-最後更新時間：2026/1/21上午11:58:20
+最後更新時間：2026/1/21下午2:46:20
 
 ## 術語表 (Glossary)
 
-目前共有 **220** 個術語：
+目前共有 **223** 個術語：
 
 * **802.1X** (`802-1x.md`)
 * **AAS (Automatic Assessment Configuration)** (`aas-automatic-assessment-configuration.md`)
@@ -220,7 +220,10 @@
 * **VPP (Volume Purchase Program)** (`vpp-volume-purchase-program.md`)
 * **Web Clip (網頁捷徑)** (`web-clip-網頁捷徑.md`)
 * **Wi-Fi Payload** (`wi-fi-payload.md`)
-* **Wi-Fi 6E 160MHz Channel Bandwidth (Wi-Fi 6E 160MHz 通道頻寬)** (`wifi-6e-160mhz-channel-bandwidth.md`)
+* **Wi-Fi 5** (`wifi-5.md`)
+* **Wi-Fi 6** (`wifi-6.md`)
+* **Wi-Fi 6E** (`wifi-6e.md`)
+* **Wi-Fi 7** (`wifi-7.md`)
 * **Window App (視窗化 App)** (`window-app.md`)
 * **Wipe (清除裝置)** (`wipe-清除裝置.md`)
 * **WPA / WPA2 / WPA3** (`wpa-wpa2-wpa3.md`)

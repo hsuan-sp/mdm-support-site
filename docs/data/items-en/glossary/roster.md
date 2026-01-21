@@ -3,10 +3,21 @@ term: "Roster"
 category: ["Education"]
 ---
 
-## Definition
+## Term Definition
 
-In a digital education environment, a Roster is the official list of students and teachers assigned to specific classes. Within Apple School Manager (ASM), roster data can be imported automatically via SFTP or manual CSV uploads. This data is then used to populate the Apple **Classroom** and **Schoolwork** apps, ensuring that teachers see the correct list of students as soon as they start a lesson.
+In educational technology, a **Roster** is the digital dataset defining the relationship between students, teachers, and classes.
 
-## Plain English
+Data flow:
+1. **Source**: Originates from the school's **Student Information System (SIS)** (e.g., PowerSchool, iSAMS).
+2. **Sync**: Uploaded to **Apple School Manager** via SFTP or API.
+3. **Usage**: Populates apps like **Apple Classroom** and **Schoolwork**.
 
-This is the "Digital Roll Call List." Instead of a teacher having to type in every student's name one by one, the school's central computer system automatically "tells" the teacher's iPad exactly who is supposed to be in their class. When the teacher opens their teaching app, the names are already there, ready for the lesson to begin.
+Accurate rostering ensures that when a teacher opens their iPad, they automatically see the correct list of 25 students sitting in front of them for "Period 1 Math," without manual data entry.
+
+## Analogy
+
+This is the **"Digital Roll Call List."**
+
+Instead of a teacher having to create a spreadsheet and type in every student's name one by one, the school's central computer system automatically **"pushes"** the list to the teacher's iPad.
+
+It means that when Mr. Smith walks into Biology class, his iPad already knows exactly who is supposed to be there.

@@ -19,7 +19,9 @@ This automated process—known as **Automated Device Enrollment (ADE)**—relies
 1. **Verify Status in Apple School Manager (ASM)**:
 
 * Log in to [school.apple.com](https://school.apple.com).
+
 * Search for the serial number under **"Devices."**
+
 * Check the **"MDM Server"** field. If it’s blank, you need to manually assign it to your Jamf Pro server.
 
 1. **Check with your Reseller**:
@@ -39,4 +41,5 @@ This automated process—known as **Automated Device Enrollment (ADE)**—relies
 If the device has already reached the Home Screen (skipping management):
 
 * **The device must be erased**: Go to **Settings > General > Transfer or Reset iPad > Erase All Content and Settings**.
+
 * Once wiped and restarted, ensure the Wi-Fi connection is stable. The device will check again and should now present the "Remote Management" screen.

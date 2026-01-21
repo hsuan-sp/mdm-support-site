@@ -3,10 +3,24 @@ term: "Temporary Session"
 category: ["Education"]
 ---
 
-## Definition
+## Term Definition
 
-A Temporary Session (also known as Guest Mode) is a feature of **Shared iPad**. It allows a user to tap "Guest" on the login screen and use the iPad without an Apple account. As soon as the user logs out, all data from that session—including browsing history, downloaded files, and app data—is permanently erased, ensuring the next user starts with a completely clean and private device.
+A **Temporary Session** (often called Guest functionality) is a feature of the **Shared iPad** environment.
 
-## Plain English
+Workflow:
 
-Think of this as a "Public Library Computer." You don't need a name or password to sit down and start using it. However, the moment you stand up and "log out," the computer instantly "cleans its own desk" and throws away any notes you left behind. This ensures the next person can't see what you were doing and the iPad stays fresh and fast.
+* **Login**: User taps "Guest" on the login screen (no username/password needed).
+
+* **Usage**: User has full access to apps and Safari for the duration of the session.
+
+* **Logout**: When the user logs out, the cryptographic keys for that session are destroyed.
+
+* **Wipe**: All data—browsing history, documents, photos, caches—is instantly and permanently erased.
+
+## Analogy
+
+Think of this as a **"Public Library Computer."**
+
+You don't need a library card to sit down and start using it. However, the moment you stand up and **"log out,"** the keyboard auto-cleans itself and the computer **shreds any papers** you left on the desk.
+
+This ensures the next person can't see what you were doing, and the iPad stays fresh and fast for everyone.

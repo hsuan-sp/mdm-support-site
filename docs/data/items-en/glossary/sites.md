@@ -3,10 +3,24 @@ term: "Sites"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-Sites (or Jamf Pro Sites) is a multi-tenancy feature that allows a single Jamf Pro server to be divided into multiple virtual instances. Each "Site" can have its own independent administrators, device lists, and policies that are isolated from other sites. This is commonly used by large school districts or international school groups to manage multiple campuses from one central server while allowing each campus to handle its own daily operations.
+**Sites** is a multi-tenancy architecture feature within Jamf Pro.
 
-## Plain English
+Functionality:
 
-Think of this as "Separate Offices in a Single Headquarters." The school district might have one big central computer (the server), but inside that computer, there are "private rooms" (Sites) for each individual school. The primary school staff can't see the secondary school’s iPads, and each school can set their own rules without interfering with the other.
+* **Segmentation**: Allows a single MDM server to be virtually divided into distinct administrative zones.
+
+* **Granular Access**: "Site Administrators" can only see and manage devices, users, and policies that belong to their specific site.
+
+* **Independence**: Actions taken in "High School Site" do not affect devices in "Primary School Site."
+
+This is essential for large districts or university systems where different departments need autonomy but share a central infrastructure.
+
+## Analogy
+
+Think of this as **"Separate Private Offices in a Shared Building."**
+
+The school district might own the whole building (the server), but inside, there are locked private offices (Sites) for each individual school.
+
+The Primary School staff can't see the High School’s iPads, and each school can set their own rules without interfering with the other.

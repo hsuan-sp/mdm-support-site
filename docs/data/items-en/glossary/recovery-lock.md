@@ -3,10 +3,22 @@ term: "Recovery Lock"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-Recovery Lock is a critical security feature for Apple Silicon (M-series) Macs. It prevents unauthorized users from accessing **Recovery Mode** (by long-pressing the power button) to wipe the computer or lower its security settings. To enter Recovery Mode, a user must enter a specific password defined by the IT department via MDM.
+**Recovery Lock** is a hardware-level security feature for Mac computers with Apple Silicon.
 
-## Plain English
+Functionality:
 
-Think of this as a "Digital Lock on the ER Door." In the past, anyone could take a computer that wasn't working to the "Emergency Room" (Recovery Mode) and reset everything. Now, the ER door has a secret code. Without that code, a thief can't even "reinstall" the computer to erase their tracks, making the stolen Mac useless.
+* **Block**: Prevents users from entering macOS Recovery Mode unless they have authorization.
+
+* **Requirement**: Users must enter a predefined password (managed by MDM) to access tools like Disk Utility or Terminal in the recovery environment.
+
+* **Goal**: Stops students or thieves from wiping the Mac, disabling security settings (like SIP), or downgrading the OS to bypass management.
+
+## Analogy
+
+Think of this as a **"Digital Lock on the ER Door."**
+
+In the past, anyone could take a computer that wasn't working to the "Emergency Room" (Recovery Mode) and reset everything to factory settings.
+
+Now, the ER door has a keypad. Without the secret code from IT, a thief can't even "reinstall" the computer to erase their tracks, making a stolen school Mac useless to them.

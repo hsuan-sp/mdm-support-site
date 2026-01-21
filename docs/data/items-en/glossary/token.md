@@ -3,10 +3,22 @@ term: "Token"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-A Token is a digital credential used in authentication. Once a user has successfully signed in with their username and password, the server issues a "Token." For all subsequent requests during that session, the user's device simply presents the Token to gain access, eliminating the need to re-enter sensitive login credentials. Tokens typically have an expiration time for security purposes and must be renewed periodically.
+A **Token** is a temporary digital key used for authentication in modern security systems (like OAuth or OIDC).
 
-## Plain English
+How it differs from a password:
 
-Think of a Token as an "All-Day Pass" at an amusement park. You go to the front gate and show your official ID and pay for a ticket (this is entering your username and password). Instead of having to show your ID at every single ride, the park gives you a wristband (the Token). As long as you are wearing the wristband, you can walk onto any ride instantly without needing to prove who you are again.
+* **Temporary**: A password lasts forever until changed; a token expires automatically (e.g., in 1 hour).
+
+* **Specific**: A password unlocks everything; a token grants access only to specific resources (e.g., "Read Email" but not "Delete Email").
+
+* **Invisible**: The user types their password once; the system exchanges tokens in the background for all subsequent actions, keeping the password safe.
+
+## Analogy
+
+Think of a Token as an **"All-Day Wristband"** at an amusement park.
+
+You go to the front gate, show your ID, and pay (this is entering your password).
+
+Instead of having to show your ID at every single ride, the park gives you a **wristband** (the Token). As long as you are wearing it, you can walk onto any ride instantly. If it falls off (expires), you just go back to the gate to get a new one.

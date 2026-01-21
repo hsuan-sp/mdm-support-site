@@ -3,10 +3,22 @@ term: "TestFlight"
 category: ["Apps"]
 ---
 
-## Definition
+## Term Definition
 
-TestFlight is Apple’s official platform for beta testing applications. Developers can use it to distribute pre-release versions of their apps to internal testers or up to 10,000 external users before officially launching on the App Store. Testers install the TestFlight app to receive updates and provide feedback directly to the developers. Each beta version is typically available for 90 days.
+**TestFlight** is Apple's platform for beta testing pre-release applications.
 
-## Plain English
+Workflow:
+1. **Invite**: Developers send an email invitation or public link to testers.
+2. **Install**: Testers download the TestFlight app to install the beta version of the software.
+3. **Feedback**: Testers can take screenshots or send crash reports directly to the developer from within the app.
+4. **Expiry**: Beta builds typically expire after 90 days.
 
-Think of this as a "Sneak Peek Movie Screening." Before a movie (an app) comes out in theaters (the App Store), the filmmakers might show a "work-in-progress" version to a small group of fans to get their advice on how to make it better. TestFlight is the "private theater" where students and teachers can try out new educational tools and help find bugs before they are released to the whole world.
+This is useful for schools piloting new ed-tech apps before deploying them to the entire student body.
+
+## Analogy
+
+Think of this as a **"Sneak Peek Movie Screening."**
+
+Before a movie (an app) comes out in theaters (the App Store), the filmmakers might show a **"work-in-progress"** version to a small group of fans to get their advice.
+
+TestFlight is the **"private theater"** where students and teachers can try out new educational tools and help fix the bugs before the app is released to the whole world.

@@ -16,15 +16,46 @@ const md = new MarkdownIt({
 });
 
 /**
+ * 專業排版引擎：處理中英文間隔 (Pangu Spacing) 與標點規範
+ */
+function enhanceTypography(text: string) {
+    if (!text) return "";
+    return text
+        // 1. Pangu Spacing: 在中文與英文/數字之間加上半形空格
+        // 中文 -> 英文/數字
+        .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, '$1 $2')
+        // 英文/數字 -> 中文
+        .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, '$1 $2')
+        // 2. 標點規範：修正中文語境下的英文標點
+        .replace(/([\u4e00-\u9fa5]),/g, '$1，')
+        .replace(/([\u4e00-\u9fa5]):/g, '$1：')
+        .replace(/([\u4e00-\u9fa5]);/g, '$1；')
+        .replace(/([\u4e00-\u9fa5])!/g, '$1！')
+        .replace(/([\u4e00-\u9fa5])\?/g, '$1？')
+        // 3. 標點美化：全形括號、橢圓、智慧引號
+        .replace(/\.\.\./g, '…')
+        .replace(/--/g, '—')
+        // 僅在中文字符附近優化引號
+        .replace(/([\u4e00-\u9fa5])"/g, '$1”')
+        .replace(/"([\u4e00-\u9fa5])/g, '“$1');
+}
+
+/**
  * 預渲染 Markdown 到 HTML
  */
 function renderMarkdown(text: string) {
     if (!text) return "";
-    // 修正 VitePress 資料傳遞中常見的清單換行遺失問題
+
+    // 預處理：修正格式問題
     const processed = text
+        // 防止列表縮進導致的渲染錯誤
         .replace(/([^\n])\n(\s*[-*+])/g, '$1\n\n$2')
         .replace(/([^\n])\n(\s*\d+\.)/g, '$1\n\n$2');
-    return md.render(processed);
+
+    // 應用排版優化
+    const enhanced = enhanceTypography(processed);
+
+    return md.render(enhanced);
 }
 
 const QA_ORDER = [

@@ -3,10 +3,24 @@ term: "Zero Trust"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-Zero Trust is a security paradigm centered on the principle of "Never Trust, Always Verify." In a Zero Trust environment, no user or device is trusted by default, even if they are physically inside the school building. Every attempt to access school data requires continuous verification of the user’s identity, the device’s health (security compliance), and its physical location before access is granted.
+**Zero Trust** is a modern security architecture based on the principle: **"Never Trusted, Always Verified."**
 
-## Plain English
+Key concepts:
 
-Think of this as the "Strict Security Guard" mode. In the past, if you were inside the school building, everybody assumed you belonged there. Under Zero Trust, the building is full of "locked doors." No matter who you are—a student, a teacher, or even the Principal—the school's system asks to see your "Digital ID card" and check your fingerprints every single time you want to open a door or look at a file. It’s very strict, but it keeps everyone’s data much safer.
+* **No Perimeter**: Being "inside the school building" does not automatically grant access.
+
+* **Continuous Auth**: Every request (opening a file, accessing email) is checked.
+
+* **Context**: Access depends on *Who* you are (User ID), *What* device you have (Managed?), and *Where* you are.
+
+* **Risk Assessment**: If a device is outdated or infected, access is blocked immediately, even if the password is correct.
+
+## Analogy
+
+Think of this as the **"Strict Security Guard"** mode.
+
+In the past, if you were inside the school building, everybody assumed you belonged there.
+
+Under **Zero Trust**, the building is full of **"locked doors."** No matter who you are, the school's system asks to see your **"ID card"** and check your **fingerprints** every single time you want to open a door. It’s strict, but it keeps everyone’s data much safer.

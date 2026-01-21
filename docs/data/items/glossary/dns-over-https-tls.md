@@ -19,4 +19,5 @@ Jamf Safe Internet 使用 Jamf DNS over HTTPS gateway 實現內容過濾，兼�
 **應對策略**：
 
 * 使用 Network Extension URL Filtering API（iOS 26 新功能）
+
 * 限制 VPN/DNS App 的安裝

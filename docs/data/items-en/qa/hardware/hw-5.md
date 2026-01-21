@@ -19,6 +19,7 @@ Storing a device improperly for 2-3 months can lead to "Deep Discharge," where t
 1. **Charge to ~50%**:
 
 * **Do not store at 0%**: This can lead to the battery falling into a deep discharge state, making the device impossible to turn on come September.
+
 * **Do not store at 100%**: Keeping a battery at maximum capacity for months can cause it to lose some of its total lifespan permanently.
 
 1. **Power Off Completely**:

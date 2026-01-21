@@ -19,6 +19,7 @@ iPadOS 26 引入的視窗化多工系統，允許 iPad 像 Mac 一樣以視窗�
 **Jamf Pro 設定路徑**：
 
 * Restrictions > Functionality > 取消勾選 "Allow Multitasking" (若需完全禁用)。
+
 * 或透過 DDM 設定更精細的 App 視窗規則。
 
 ## 風險提示

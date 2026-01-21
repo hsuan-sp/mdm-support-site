@@ -4,14 +4,24 @@ category: ["Mac"]
 tags: ["Platform SSO", "ADE", "FileVault"]
 ---
 
-## Definition
+## Term Definition
 
-Introduced in macOS Tahoe, this feature allows Platform SSO (Single Sign-On) to be integrated directly into the Setup Assistant during Automated Device Enrollment (ADE). It enables users to log in with their corporate cloud credentials (e.g., Entra ID or Google) at the very first screen. This process can automatically unlock FileVault and create a local user account synchronized with the organization’s identity provider.
+**Platform SSO in Setup Assistant** is a streamlined deployment feature introduced in **macOS Tahoe**.
 
-## Plain English
+Workflow improvements:
 
-Previously, setting up a new Mac meant "Creating a local account first, then binding your company account later." Now, it's like "Swiping your employee badge to enter the building." You use your work login from the very first second you turn on the computer, and everything is set up for you automatically.
+* **Early Login**: Allows the user to authenticate with their cloud identity (Google/Microsoft/Okta) during the very first "Hello" setup screens.
 
-## MDM Context
+* **Auto-Account Creation**: Automatically creates the local computer account using the cloud identity's full name and password.
 
-This significantly simplifies Mac deployment by unifying the cloud identity with the physical device from the start, ensuring that FileVault encryption and user permissions are aligned with organizational policies immediately.
+* **FileVault Sync**: Ensures the disk encryption password matches the cloud password from day one.
+
+* **Token Exchange**: Retrieves the necessary SSO tokens immediately so apps are logged in as soon as the Desktop appears.
+
+## Analogy
+
+Previously, setting up a new school Mac meant **"Creating a local account first, then connecting your school ID later."**
+
+Now, it's like **"Swiping your employee badge to enter the building."**
+
+You use your official work login from the very first second you turn on the computer, and the system sets up your desk, your keys, and your ID card automatically before you even sit down.

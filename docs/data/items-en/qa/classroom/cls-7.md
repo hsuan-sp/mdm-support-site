@@ -15,6 +15,7 @@ tags: ["Command Latency","Network Environment","Bluetooth","Client Isolation"]
 Apple Classroom relies on two layers of communication to function:
 
 1. **Bluetooth (Discovery)**: Used to find nearby students.
+
 1. **Wi-Fi (Transport)**: Used to transmit commands and screen data.
 
 ## Troubleshooting Checklist:
@@ -24,6 +25,7 @@ Apple Classroom relies on two layers of communication to function:
 This is the most common culprit. If your school's AP has this feature enabled, devices connected to the same AP **cannot communicate with each other.**
 
 * **Symptoms**: The teacher can "see" students online (discovered via Bluetooth), but when attempting to view a screen or send a command, it spins indefinitely (the Wi-Fi packet cannot be delivered).
+
 * **Solution**: Ask your network administrator to disable "Client Isolation" on the SSIDs used for instruction.
 
 ## 2. Bluetooth Signal Interference

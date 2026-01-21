@@ -1,12 +1,30 @@
 ---
 term: "Recon"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
-## Definition
+## Term Definition
 
-Recon (short for `Jamf recon`) is one of the most frequently used commands within the Jamf binary on macOS. When executed, it triggers the device to immediately collect and report its latest inventory data—including hardware health, installed software, user details, and customized **Extension Attributes**—back to the Jamf Pro server. It is typically the first step in troubleshooting a managed Mac.
+**Recon** (short for the `jamf recon` command) is the inventory collection process on managed Macs.
 
-## Plain English
+What it collects:
 
-Think of this as an "Instant Health Checkup." Normally, a computer might only send its status report once a day. If you run the "Recon" command, you're telling the Mac to immediately re-count its apps, check its storage, and send its latest "Health Report" back to the tech office right now, without waiting for its scheduled check-in.
+* **Hardware**: Model, serial number, battery health, and storage capacity.
+
+* **Software**: List of all installed applications and their versions.
+
+* **Identity**: Current logged-in user and local account lists.
+
+* **Custom Data**: Results from any scripts defined as "Extension Attributes" (e.g., checking if SSH is enabled).
+
+Running `sudo jamf recon` in Terminal forces the Mac to submit this report immediately.
+
+## Analogy
+
+Think of this as an **"Instant Health Checkup."**
+
+Normally, a computer might only send its status report once a day.
+
+If you run the "Recon" command, you're telling the Mac to **"Stop everything, count your apps, check your storage, and tell the main office how you are feeling right now!"**
+
+It ensures IT has the absolute latest information to help fix a problem.

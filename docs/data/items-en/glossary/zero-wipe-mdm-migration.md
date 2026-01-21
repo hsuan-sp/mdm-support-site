@@ -4,24 +4,22 @@ category: ["MDM"]
 tags: ["Migration", "Zero-Wipe", "ABM", "ASM", "Transfer"]
 ---
 
-## Definition
+## Term Definition
 
-Introduced in iOS 26 and macOS Tahoe, Zero-Wipe MDM Migration is a feature that allows a device to be moved from one MDM server to another without erasing the user's data. This process synchronizes through Apple School Manager (ASM) and allows the device to keep its existing applications and files while simply switching its "Manager." This eliminates the need for time-consuming backups and restores during a system upgrade or vendor switch.
+**Zero-Wipe MDM Migration** is a transition feature in iOS/iPadOS and macOS that allows devices to switch MDM servers without erasing user data.
 
-## Plain English
+Mechanism (Declarative Device Management):
+1. **Unenroll**: The device gracefully leaves the old MDM server.
+2. **Transfer**: It retains user data (photos, files) and apps.
+3. **Re-enroll**: It immediately enrolls into the *new* MDM server designated in Apple School Manager.
+4. **Takeover**: The new server takes ownership of the existing managed apps.
 
-In the past, switching to a new management system was like "tearing down a house and rebuilding it" just to change who was the landlord. Now, Zero-Wipe Migration is like "Keeping your house and all your furniture exactly as it is, but just hiring a new security company." All your photos, apps, and homework stay on the iPad, but the school gets to manage it using a newer, better system.
+**Warning for Schools**: While promising, this process can be risky for **Shared iPads** or devices with complex profiles, often leading to "zombie" apps that cannot be updated.
 
-## MDM Related
+## Analogy
 
-Administrators can set an "Enforcement Deadline" to ensure all devices complete the migration by a specific date. Devices that have not migrated will receive escalating notifications as the deadline approaches.
+In the past, switching to a new management system was like **"tearing down a house and rebuilding it"** just to change the landlord.
 
-## Risk Advisory (Education)
+Now, **Zero-Wipe Migration** is like **"keeping your house and furniture exactly as is, but just hiring a new security guard."**
 
-**Zero-Wipe Migration is NOT recommended for educational environments.** While the feature works well in enterprise settings, schools should be aware of the following risks:
-
-* **Legacy Profile Conflicts**: Old configuration profiles may remain cached on the device, causing Apple Classroom to malfunction or fail to connect.
-* **VPP License Conflicts**: App licenses from the old MDM may not transfer cleanly, resulting in students losing access to critical learning apps.
-* **Shared iPad Complications**: On Shared iPads, user data from multiple students can become mixed or corrupted during migration.
-
-**Recommendation**: For school-owned devices, continue using **Return to Service** (a full wipe with automatic re-enrollment) to ensure a clean and stable management state.
+All your photos and homework stay on the iPad, but the school gets to manage it using a newer, better system.

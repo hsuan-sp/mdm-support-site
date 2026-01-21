@@ -1,12 +1,26 @@
 ---
 term: "Enrollment Customization"
-category: ["Enrollment","Apple"]
+category: ["Enrollment", "Apple"]
 ---
 
-## Definition
+## Term Definition
 
-Enrollment Customization allows organizations to display a custom interface during the Automated Device Enrollment (ADE) process. This interface can include welcome screens, acceptable use policies (AUP), or integration with modern identity providers for authentication. It ensures that students and staff see important school branding and legal agreements before they even reach the home screen.
+**Enrollment Customization** allows organizations to deliver a tailored onboarding experience during the **Automated Device Enrollment (ADE)** process.
 
-## Plain English
+Customization options:
 
-This is the device's "Welcome Lobby." Just like a new student's first day involves a welcome packet and signing school rules at the front desk, this feature puts that experience right on the iPad screen. Before the student can use the device, they see the school's logo and must "sign" the rules, ensuring everyone is on the same page from day one.
+* **Branding**: Display school logos, custom welcome text, and contact information.
+
+* **Policies**: Require users to read and accept Apple’s and the school’s **Acceptable Use Policy (AUP)** before proceeding.
+
+* **Authentication**: Use modern identity providers (Azure AD, Okta, Google) to verify the user's identity before enrollment is completed.
+
+* **Workflow**: Create a multi-step sequence of setup screens that are unique to the organization.
+
+## Analogy
+
+This is the device's **"Welcome Lobby"** or **"Registration Desk."**
+
+Just like a new student's first day involves visiting a welcome center to get their ID badge and sign the school rules, this feature puts that exact experience right on the iPad or Mac screen.
+
+Before the student can even reach the Home Screen, they see the school's logo and must **"sign"** the rules, ensuring everyone is on the same page and properly identified from day one.

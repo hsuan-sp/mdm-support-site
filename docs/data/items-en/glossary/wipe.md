@@ -3,10 +3,24 @@ term: "Wipe"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-A Wipe is a remote MDM command that restores an Apple device to its original factory settings. This process permanently erases all user data, applications, photos, and system configurations. Once the wipe is complete, the device restarts to the "Hello" welcome screen. This is a critical security tool used when a device is lost, stolen, or assigned to a new student or staff member.
+A **Wipe** (or Remote Wipe) is the MDM command to factory reset a device.
 
-## Plain English
+Consequences:
 
-This is the "Digital Reset Button." When IT sends this command, it tells the iPad to completely "forget" everything it knows—every photo, every app, and every setting is erased. The iPad then wakes up looking exactly as it did the day it was first taken out of its box, clean and ready for a fresh start.
+* **Deletion**: Permanently erases all user data, apps, accounts, and settings.
+
+* **Reset**: Returns the operating system to its "out-of-box" state ("Hello" screen).
+
+* **Security**: Used as a last resort for lost/stolen devices to prevent data theft.
+
+* **lifecycle**: Used at the end of a school year to prepare an iPad for a new student.
+
+## Analogy
+
+This is the **"Digital Reset Button."**
+
+When IT sends this command, it tells the iPad to completely **"forget"** everything it knows—every photo, every app, and every setting is erased.
+
+The iPad then wakes up looking exactly as it did the day it was first taken out of its box, clean and ready for a fresh start.

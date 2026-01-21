@@ -3,10 +3,24 @@ term: "VPP (Volume Purchase Program)"
 category: ["Apple"]
 ---
 
-## Definition
+## Term Definition
 
-The Volume Purchase Program (VPP) is an Apple service that allows schools and businesses to purchase app and book licenses in bulk. These licenses are managed through **Apple School Manager (ASM)** and can be distributed wirelessly to student devices via MDM. Crucially, the school retains ownership of the license; if a student leaves, the license can be "revoked" and reassigned to a new student, saving the school from having to repurchase apps every year.
+**VPP (Volume Purchase Program)** is the Apple licensing framework for bulk app and book distribution.
 
-## Plain English
+Mechanics:
 
-Think of this as the school's "Digital Bulk-Buying Account." Instead of every student having to use their own money to buy an app, the school buys 500 copies all at once. The school "lends" a copy to each student. When the school year is over, the school "takes the book back" electronically and puts it back in the digital library, ready for the next class to use.
+* **Ownership**: The organization buys the licenses (e.g., 500 copies of Procreate), not the user.
+
+* **Distribution**: Licenses are assigned to devices or Apple IDs via MDM ("Managed Distribution").
+
+* **Revocation**: If a student leaves or graduates, the school can **revoke** the license and reclaim it to the central pool, ready to be assigned to a new incoming student.
+
+* **Cost**: Eliminates the need to repurchase software every year.
+
+## Analogy
+
+Think of this as the school's **"Digital Library."**
+
+Instead of every student having to use their own money to buy a textbook, the school buys 500 copies. The school **"lends"** a copy to each student.
+
+When the school year is over, the school **"takes the book back"** electronically and puts it back on the shelf, ready for the next class to use.

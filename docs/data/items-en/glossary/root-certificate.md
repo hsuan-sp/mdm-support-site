@@ -3,10 +3,22 @@ term: "Root Certificate"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-A Root Certificate is the foundation of the "Chain of Trust" in digital security. Every trusted certificate eventually traces back to a system-trusted **Root Certificate Authority (CA)**. For a school to use secure internal websites or Wi-Fi authentication, the MDM must first deploy the school's Root Certificate to student and staff devices. Once installed, the device will trust all other certificates signed by that Root CA.
+A **Root Certificate** is the fundamental anchor of trust in a Public Key Infrastructure (PKI).
 
-## Plain English
+Role in a school:
 
-Think of this as the "Trusted Founder" of a family. Trust in digital security works like a family tree. If your device trusts the "Founder" (the Root Certificate), it will automatically trust all the Founder's "children and grandchildren" (the other certificates). If your device doesn't know the Founder, it will block the whole family from entering, which means you won't be able to connect to the school Wi-Fi.
+* **Trust Anchor**: It is the "Parent" certificate. If a device trusts the Parent, it automatically trusts all "Children" certificates signed by that Parent.
+
+* **Internal Security**: Schools generate their own internal "School Root CA."
+
+* **Deployment**: This Root Certificate must be installed on every student iPad. Once installed, the iPad will trust the school's private secure Wi-Fi and internal websites, which otherwise would be rejected as "unsafe."
+
+## Analogy
+
+Think of this as the **"Trusted Founder"** of a family.
+
+Trust in digital security works like a family tree. If your device trusts the **"Grandfather"** (the Root Certificate), it will automatically trust all of his **"Children and Grandchildren"** (the other certificates).
+
+However, if your device doesn't know the Grandfather, it will block the entire family from entering—which means you won't be allowed to connect to the secure school Wi-Fi.

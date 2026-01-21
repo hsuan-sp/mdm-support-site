@@ -1,12 +1,24 @@
 ---
 term: "Software Update"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
-## Definition
+## Term Definition
 
-Software Update refers to the process of installing both major upgrades (new versions like macOS 16) and minor updates (security fixes) to an Apple operating system. Using **Declarative Device Management (DDM)**, school administrators can schedule these updates for specific times, force them to install after a certain deadline, or defer them to ensure that all educational software remains compatible before the entire school moves to a new version.
+**Software Update** is the system mechanism for downloading and installing new versions of the operating system (macOS/iOS) and its built-in apps (Safari).
 
-## Plain English
+Management controls (via DDM):
 
-Think of this as "Device Schooling." Every once in a while, your device needs to "go back to class" to learn new skills (new features) or get "stronger" (security fixes). IT is the teacher who decides when it’s the best time for all school iPads to learn these new things, making sure they are ready for the next lesson without any surprises.
+* **Deferral**: IT can hide an update for up to 90 days to allow for testing.
+
+* **Enforcement**: IT can force an update to install by a specific date and time.
+
+* **Verification**: The device must reach out to Apple's servers to cryptographically verify the update package before installing.
+
+## Analogy
+
+Think of this as **"Device Schooling."**
+
+Every once in a while, your device needs to **"go back to class"** to learn new skills (new features) or get stronger (security fixes).
+
+IT is the **Teacher** who decides when it’s the best time for all school iPads to learn these new things, making sure they are ready for the next lesson without surprising you in the middle of an exam.

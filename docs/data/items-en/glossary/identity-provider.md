@@ -3,10 +3,24 @@ term: "Identity Provider (IdP)"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-An Identity Provider (IdP) is a cloud service (such as Google Workspace or Microsoft Entra ID) that manages and authenticates user identities for an organization. Instead of the MDM system managing passwords itself, it "asks" the IdP to verify if a user is who they say they are. This enables Single Sign-On (SSO), allowing students and staff to use the same school email and password to log in to all their various school systems.
+An **Identity Provider (IdP)** is a specialized service that creates, maintains, and manages digital identities and authentication.
 
-## Plain English
+Common IdPs in Education:
 
-Think of this as the "Global School ID Office." Instead of every individual website or app needing to keep its own list of students and passwords, they all just call the ID Office and ask, "Is this actually John Smith?" Once the ID Office confirms it's him, he is granted access. This means students only have one password to remember for everything.
+* **Google Workspace**
+
+* **Microsoft Entra ID (formerly Azure AD)**
+
+* **Okta**
+
+**MDM Role**: In a modern setup, MDM does not manage passwords itself. Instead, it "outsources" authentication to the IdP. When a student tries to enroll an iPad, the MDM sends a request to the IdP (e.g., Google) to verify the password. This enables **Single Sign-On (SSO)**, allowing students to use one single password for their iPad, their email, and their learning portal.
+
+## Analogy
+
+Think of this as the **"Global School ID Office."**
+
+Instead of every individual website, app, or iPad needing to keep its own private list of 500 students and their passwords, they all just call the **ID Office** and ask, "Is this person actually who they say they are?".
+
+Once the ID Office confirms it's them, the person is granted access to the building. This means students only have **one single "Master Password"** to remember for everything related to school.

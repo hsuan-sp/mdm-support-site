@@ -3,10 +3,22 @@ term: "Firmware"
 category: ["Hardware"]
 ---
 
-## Definition
+## Term Definition
 
-Firmware is the low-level software programmed into a hardware chip that controls the device's basic operations and initialization (such as iBoot on a Mac). It sits between the physical hardware and the operating system (macOS). Apple typically bundles firmware updates with standard OS updates to patch low-level security vulnerabilities and ensure hardware stability.
+**Firmware** is persistent, low-level software programmed directly into a hardware chip (like the BIOS or iBoot) to control its basic operations.
 
-## Plain English
+Key roles:
 
-Think of this as the "Built-in Brain" of the hardware parts. While the operating system is the software people use, firmware is the software the computer itself uses to function. It tells the screen how to light up and the fans how to spin. If this deep-level software is broken, the computer won't even be able to show a startup logo.
+* **Initialization**: It is the first code that runs when a device is turned on, telling the hardware how to start up.
+
+* **Hardware Control**: Manages the interaction between the physical components (screen, battery, fans) and the higher-level operating system (macOS/iOS).
+
+* **Security Updates**: Apple frequently bundles firmware updates with standard OS updates to patch vulnerabilities that exist at the chip level.
+
+## Analogy
+
+Think of this as the **"Built-in Reflexes"** or the **"Operating Instructions"** inside the computer's brain.
+
+While the "Operating System" is like the language you speak and the apps you use, **Firmware** is like the instinct to blink or breathe. It tells the screen how to light up, the battery how to charge, and the fans how fast to spin.
+
+If this deep-level "instinctive" software is broken, the computer won't even know how to wake up or show its name.

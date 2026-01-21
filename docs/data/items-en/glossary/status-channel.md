@@ -3,10 +3,22 @@ term: "Status Channel"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-The Status Channel is a fundamental mechanism of **Declarative Device Management (DDM)**. It allows a device to "proactively" report status changes back to the MDM server—such as a successful app installation, a drop in battery level, or a change in security posture—without the server having to "ask" (poll) the device. This enables real-time monitoring and a much higher level of management efficiency.
+The **Status Channel** is a real-time communication pipeline used in **Declarative Device Management (DDM)**.
 
-## Plain English
+Key shift from legacy MDM:
 
-Think of this as "The Emergency Radio." In the old days, a boss had to call every employee every hour to ask, "Is the project done yet?" (this is called polling). With the Status Channel, the employee just radios the boss the moment they finish a task: "I'm done!" It’s faster, uses less energy, and keeps the boss informed in real-time without constant interruptions.
+* **Legacy (Polling)**: The server has to proactively ask the device, "Do you have this app installed?" repeatedly.
+
+* **Modern (Status)**: The device automatically subscribes to "status items" (like Battery Health or Passcode Compliance). When a value changes, the device **immediately** notifies the server.
+
+* **Efficiency**: Reduces network traffic and server load while increasing data accuracy.
+
+## Analogy
+
+Think of this as **"The Emergency Radio."**
+
+In the old days, a boss had to call every employee every hour to ask, "Is the project done yet?" (this is called polling). It was annoying.
+
+With the **Status Channel**, the employee just radios the boss the moment they finish a task: **"I'm done!"** It’s faster, uses less energy, and keeps the boss informed instantly without constant phone calls.

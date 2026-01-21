@@ -3,10 +3,22 @@ term: "Command History"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-Command History is a record within the MDM console of every command sent to a specific device, along with its execution status (e.g., Succeeded, Failed, or Pending). Administrators use this log to track the device's operational history, such as verifying when a "Lock Device" command was issued or investigating the specific error code associated with a failed app installation.
+**Command History** is a comprehensive audit log within the MDM console that tracks every action sent to an individual device.
 
-## Plain English
+Administrators use this history to:
 
-This is the device's "Transaction Log." Just as a bank statement lists every withdrawal and deposit, Command History lists every instruction the school IT team has sent to that specific iPad. If something goes wrong, IT can check the history to see exactly which command got stuck and why.
+* **Audit**: Verify when a specific command (like "Lock Device" or "Clear Passcode") was issued.
+
+* **Troubleshoot**: Investigate error codes associated with failed app installations or profile deployments.
+
+* **Track Status**: Monitor whether a command is currently **Pending** (device offline), **Succeeded**, or **Failed**.
+
+## Analogy
+
+This is the device's **"Instruction Log"** or **"Receipt Book."**
+
+Just as a bank statement lists every withdrawal and deposit, Command History lists every single instruction the school IT team has sent to that specific iPad.
+
+If something goes wrong, IT doesn't have to guess what happened; they can check the history to see exactly which command got "stuck in the mail" and why.

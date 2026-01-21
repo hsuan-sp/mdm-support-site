@@ -1,12 +1,24 @@
 ---
 term: "iCloud Private Relay"
-category: ["Security","Apple"]
+category: ["Security", "Apple"]
 ---
 
-## Definition
+## Term Definition
 
-iCloud Private Relay is a privacy service from Apple for iCloud+ subscribers. It encrypts DNS requests and hides your IP address by routing your Safari traffic through two separate internet relays. While this protects your privacy from trackers, it can interfere with school network filters that need to identify devices. For this reason, many school networks and MDMs are configured to block Private Relay to ensure a safe and monitored online environment for students.
+**iCloud Private Relay** is an Apple privacy service available to iCloud+ subscribers that obscures a user's web browsing behavior.
 
-## Plain English
+Technical mechanism:
 
-Think of this as an "Invisibility Cloak" for whenever you use the internet. It hides who you are (your IP address) and where you are going. However, at school, teachers and the IT team need to make sure you are staying on safe websites. Because the "Invisibility Cloak" stops them from being able to protect you, the school usually asks you to take the cloak off (turns the feature off) while you are using school Wi-Fi.
+* **Encryption**: DNS requests are encrypted so the ISP/School cannot see where the user is going.
+
+* **Anonymization**: Traffic is routed through two separate internet relays. The first knows *who* you are (IP) but not *where* you are going. The second knows *where* you are going but not *who* you are.
+
+* **Conflict**: This prevents the destination website from seeing the user's IP. However, it also prevents school web filters from identifying the user, which is why it is often blocked on managed networks.
+
+## Analogy
+
+Think of this as an **"Invisibility Cloak"** for the internet.
+
+It hides who you are and where you are going. However, at school, teachers and the IT team need to make sure you are staying on safe websites.
+
+Because the "Invisibility Cloak" stops them from being able to protect you, the school usually **"asks you to take the cloak off"** (blocks the feature) while you are using school Wi-Fi.

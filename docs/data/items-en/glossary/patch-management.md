@@ -1,12 +1,26 @@
 ---
 term: "Patch Management"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
-## Definition
+## Term Definition
 
-Patch Management is the process of automated distribution and installation of updates (patches) for three-party software, such as Chrome, Zoom, or Adobe Creative Cloud. Jamf Pro’s Patch Management feature allows administrators to subscribe to official software update feeds, ensuring that as soon as a security flaw is fixed by the developer, the updated version is automatically pushed to all school Macs to keep them secure.
+**Patch Management** is the automated workflow for identifying, distributing, and installing software updates for third-party applications.
 
-## Plain English
+Jamf Pro capabilities:
 
-Think of this as "Automatic Security Repairs." When a software company finds a "hole" (a bug) in their program, they release a "patch" to fix it. IT uses Patch Management to make sure that as soon as a fix is available, it is automatically applied to every computer in the school. It’s like having a maintenance team that automatically fixes every leaky pipe in school the moment it's found.
+* **Monitoring**: Checks the fleet for vulnerable versions of common software (e.g., Google Chrome, Zoom, Microsoft Office).
+
+* **Automation**: Subscribes to manufacturer feeds to detect when a new version is released.
+
+* **Enforcement**: Automatically pushes the update package to computers that need it, minimizing the "window of vulnerability."
+
+* **Reporting**: Provides real-time dashboards showing exactly which computers are patched and which are still risky.
+
+## Analogy
+
+Think of this as **"Automatic Security Repairs."**
+
+When a software company finds a "hole" (a bug) in their program, they release a **"patch"** to fix it.
+
+IT uses Patch Management to make sure that as soon as a fix is available, it is automatically applied to every computer in the school. It’s like having a maintenance team that automatically fixes every leaky pipe in school the moment it's found, without you having to call them.

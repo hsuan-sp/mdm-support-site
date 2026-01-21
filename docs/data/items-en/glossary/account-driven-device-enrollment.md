@@ -3,10 +3,22 @@ term: "Account-Driven Device Enrollment"
 category: ["Enrollment"]
 ---
 
-## Definition
+## Term Definition
 
-Account-Driven Device Enrollment is a modernized method for enrolling personal devices in a Bring Your Own Device (BYOD) environment. Users simply sign in with their "Managed Apple Account" in the Settings app, and the system automatically guides them through the MDM enrollment process. This mode enforces a strict separation between work data and personal data (User Enrollment), ensuring that the organization can only manage business apps and data while keeping personal photos and messages private.
+**Account-Driven Device Enrollment** is a modernized method for enrolling personal devices in a **Bring Your Own Device (BYOD)** environment.
 
-## Plain English
+The process is streamlined:
 
-This is a "Log-in to Manage" mechanism. It's as simple as signing into your work email. Once you log in, your phone creates a separate "Work Workspace" for company apps and files. If you ever leave the company and log out, that entire workspace disappears instantly, leaving your personal data completely untouched.
+1. Users sign in with their **Managed Apple Account** directly in the Settings app.
+
+2. The system automatically detects the organization's MDM and guides the user through enrollment.
+
+This method enforces a strict **separation between work and personal data**. The organization can only manage business apps and specific professional settings, while personal photos, messages, and accounts remain completely private and inaccessible to the IT department.
+
+## Analogy
+
+This is a **"Log-in to Manage"** mechanism.
+
+It is as simple as signing into your work email. Once you log in, your phone creates a separate **"Work Partition"** for company apps and files.
+
+If you ever leave the company and log out, that entire partition disappears instantly, leaving your personal data completely untouched.

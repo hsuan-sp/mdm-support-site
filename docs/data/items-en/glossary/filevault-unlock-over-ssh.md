@@ -4,10 +4,20 @@ category: ["Mac"]
 tags: ["FileVault", "SSH", "Remote Unlock", "macOS Tahoe"]
 ---
 
-## Definition
+## Term Definition
 
-A new capability introduced in macOS Tahoe. If a Mac has "Remote Login" enabled and is connected to the network, an administrator can remotely unlock a FileVault-encrypted disk via an SSH connection. This allows for remote maintenance and troubleshooting without requiring physical presence at the Mac’s keyboard.
+A remote management capability introduced in **macOS Tahoe** that improves troubleshooting workflows for encrypted Macs.
 
-## Plain English
+Functional details:
 
-In the past, unlocking an encrypted Mac was like "Having to be there in person to turn the combination lock on a safe." Now, with SSH unlocking, it's like a "Verified Remote Unlock." As long as the computer is online, IT can securely unlock the "vault" from their office to fix a problem, saving them from having to walk across campus to your desk.
+* **Capability**: Allows an administrator to remotely unlock a **FileVault-encrypted** startup disk using a secure shell (SSH) connection.
+
+* **Prerequisite**: The Mac must have "Remote Login" enabled via MDM and be connected to the network.
+
+* **Utility**: Highly useful for remote maintenance on devices that have been rebooted but are stuck at the pre-boot login screen.
+
+## Analogy
+
+In the past, unlocking an encrypted Mac was like **"Having to be there in person to turn the combination lock on a heavy safe."**
+
+Now, with SSH unlocking, it's like having a **"Verified Remote Remote Control."** As long as the computer is online, IT can securely unlock the "digital vault" from their office to fix a software error, saving them from having to walk across the entire campus to your specific desk just to type a password.

@@ -3,10 +3,24 @@ term: "OIDC (OpenID Connect)"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-OpenID Connect (OIDC) is an identity layer on top of the OAuth 2.0 protocol. It is the modern standard used by services like **Jamf Connect** and Single Sign-On (SSO) platforms for authentication. Unlike older protocols, OIDC is designed for the cloud, supports Multi-Factor Authentication (MFA), and uses secure "Tokens" instead of transmitting actual passwords, making it much more resilient against phishing attacks.
+**OpenID Connect (OIDC)** is a modern identity authentication protocol built on top of the OAuth 2.0 framework.
 
-## Plain English
+Key features:
 
-Think of this as the "Global Digital Passport" for websites. Instead of having to create a new name and password for every single school website, OIDC allows you to use your one "Official ID" (like your Google or Microsoft school account). Once you show your ID once, you get a "Temporary Pass" (a Token) that lets you walk into all the school's other "Digital Rooms" without having to show your ID again and again.
+* **Standard**: Used by major providers like Google, Microsoft, and Okta.
+
+* **Workflow**: It allows a client (like an iPad or Jamf Connect) to verify the identity of a user based on authentication performed by an authorization server.
+
+* **Tokens**: Instead of sending actual passwords back and forth, it uses secure "ID Tokens," reducing the risk of password theft.
+
+* **MFA**: Natively supports Multi-Factor Authentication workflows.
+
+## Analogy
+
+Think of this as the **"Global Digital Passport"** for the internet.
+
+Instead of having to create a new name and password for every single school website or app, OIDC is the technology that lets you use your one **"Official ID"** (your Google or Microsoft account).
+
+Once you show your ID once, you get a **"Visitor's Badge"** (a Token) that lets you walk into all the school's other "Digital Rooms" without having to stop and show your ID card again at every single door.

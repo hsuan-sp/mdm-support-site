@@ -4,10 +4,22 @@ category: ["Core"]
 tags: ["Android", "Data Transfer", "iOS 26.3", "Cross-Platform"]
 ---
 
-## Definition
+## Term Definition
 
-An official tool introduced in iOS 26.3 that facilitates the seamless migration of user data from an iPhone to an Android device. It supports the transfer of core content, including contacts, photos, calendars, and messages. While primarily a consumer feature, MDM administrators should be aware of this tool as it provides a path for data to leave the managed iOS ecosystem if not restricted by institutional policy.
+The **Transfer to Android Tool** is a migration utility introduced in iOS 26.3 to facilitate data portability.
 
-## Plain English
+Functionality:
 
-This is the "Migration Helper" for when someone switches their phone style. Just as Apple has a tool to help people move from Android to iPhone, this new tool helps people move their photos and contacts in the opposite direction. For schools, it's something to keep an eye on, to make sure school-owned files aren't being moved to a personal Android phone where the school can no longer protect them.
+* **Direction**: Moves data *from* an iPhone *to* an Android device.
+
+* **Content**: Transfers contacts, message history, photos, videos, and DRM-free music.
+
+* **MDM Restriction**: Administrators can block this feature on supervised devices to prevent corporate or school data (like contacts) from being exported to unmanaged personal devices.
+
+## Analogy
+
+This is the **"Exit Migration Helper."**
+
+Just as Apple has a tool to help people move *in* (Move to iOS), this tool helps people pack up their boxes and move *out* to a different house (Android).
+
+For schools, it's something to watch out for. You don't want a student packing up the school's "furniture" (school data) and taking it to their personal house where the school keys no longer work.

@@ -4,10 +4,20 @@ category: ["Core"]
 tags: ["Multitasking", "iPadOS 26.2", "Dock", "Spotlight"]
 ---
 
-## Definition
+## Term Definition
 
-Enhanced multitasking gestures introduced in iPadOS 26.2. Users can now directly drag app icons from the Dock or Spotlight search to quickly create Split View, Slide Over, or complex window layouts. This significantly streamlines the iPad workflow, reducing the number of steps required to manage multiple active windows.
+Introduced in **iPadOS 26.2**, this feature enhances the speed and fluidity of multitasking on the iPad.
 
-## Plain English
+Workflow improvements:
 
-Think of this as "Organizing your desk" with one hand. Instead of opening apps one by one, you can just grab an icon from the shelf (the Dock) and drop it right onto the screen to start working side-by-side. It makes using two or three apps at once feel as natural as moving papers around on a real desk.
+* **Direct Interaction**: Users can ahora drag app icons directly from the **Dock** or **Spotlight** search results onto the active screen.
+
+* **Dynamic Layouts**: Dragging an icon results in the instant creation of **Split View**, **Slide Over**, or complex multi-window layers.
+
+* **Productivity**: Reduces the number of taps and swipes needed to arrange a workspace for research, writing, or collaboration.
+
+## Analogy
+
+Think of this as **"Organizing your physical desk"** with one hand.
+
+Instead of opening apps one by one, you can just grab a tool from your shelf (the Dock) and drop it right onto the table to start working side-by-side with what's already there. It makes using two or three apps at once feel as natural as moving papers around on a real desk.

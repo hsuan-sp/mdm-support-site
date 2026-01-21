@@ -3,10 +3,26 @@ term: "USB-C"
 category: ["Hardware"]
 ---
 
-## Definition
+## Term Definition
 
-USB-C (formally USB Type-C) is the industry-standard connector for all modern Apple hardware, including the latest iPhone, iPad, and Mac models. It is a high-performance, reversible port that supports power delivery (charging), data transfer at high speeds, and video output (DisplayPort). For school IT departments, USB-C simplifies charging setups but also requires MDM monitoring of "USB Restrictions" to prevent unauthorized data removal via portable drives.
+**USB-C** is the universal connector standard used by modern Apple devices (iPad 10+, MacBook, iPhone 15+).
 
-## Plain English
+Capabilities:
 
-Think of this as the "Universal Connection Hole." In the old days, you had different cables for charging, connecting to a screen, and moving files. Now, one single "USB-C" port does it all. It’s faster, the cable works even if you flip it upside down, and it makes it much easier to keep your iPad charged and ready for the school day.
+* **Power**: High-wattage charging (Power Delivery).
+
+* **Data**: High-speed file transfer (up to 40Gbps with Thunderbolt).
+
+* **Video**: Connects directly to projectors and monitors.
+
+* **Accessories**: Supports ethernet dongles, microphones, and hard drives.
+
+**MDM Context**: Because USB-C makes it so easy to plug in flash drives, schools often use **"USB Restricted Mode"** profiles to stop students from copying school data onto personal drives.
+
+## Analogy
+
+Think of this as the **"Universal Connection Hole."**
+
+In the old days, you had different cables for charging (Lightning), connecting to a screen (HDMI), and moving files (USB-A). Now, one single **USB-C** port does it all.
+
+It’s faster, the cable works even if you flip it upside down, and it makes it much easier to keep your iPad charged and ready for the school day.

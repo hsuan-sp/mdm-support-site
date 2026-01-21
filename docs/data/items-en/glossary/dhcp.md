@@ -3,10 +3,24 @@ term: "DHCP (Dynamic Host Configuration Protocol)"
 category: ["Network"]
 ---
 
-## Definition
+## Term Definition
 
-DHCP is a network protocol used to automatically assign IP addresses to devices on a network. When a device connects to Wi-Fi, the DHCP server "leases" an IP address to it temporarily. This eliminates the need for manual IP configuration and prevents address conflicts. Once the lease expires, the IP is returned to a pool and can be recycled for another device.
+**DHCP** is a foundational network protocol that automates the assignment of IP addresses and other network parameters to devices.
 
-## Plain English
+How it works:
 
-Think of this as a "Parking Attendant" for the internet. When you drive your car into a parking garage (connect to the network), the attendant automatically points you to an empty spot (an IP address). You don't have to find a spot yourself, and you'll never try to park in a space that someone else is already using.
+* **Discovery**: When a device connects to a network (Wi-Fi or Ethernet), it broadcasts a request for an address.
+
+* **Lease**: The DHCP server "leases" a temporary IP address to the device from a pool.
+
+* **Renewal**: The device periodically renews its lease to keep using that address.
+
+* **Efficiency**: Prevents "IP conflicts" where two devices accidentally try to use the same address at the same time.
+
+## Analogy
+
+Think of this as a **"Valet Parking Attendant"** for the internet.
+
+When you drive your car (your iPad) into the school's parking garage (the Wi-Fi network), the attendant automatically points you to an **available parking spot** (an IP address).
+
+You don't have to wander around looking for an empty spot yourself, and you'll never accidentally try to park in a space that another car is already using. The attendant makes sure everyone has a place to park so they can join the party.

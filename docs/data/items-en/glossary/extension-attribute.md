@@ -3,10 +3,22 @@ term: "Extension Attribute"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-An Extension Attribute is an advanced feature in Jamf Pro that allows administrators to collect custom information that is not part of the standard MDM inventory protocol. By using scripts (such as Bash or Python), an administrator can report on specific data points, such as whether a Mac has a specific internal file, the number of battery cycles, or if a non-approved application is currently installed.
+An **Extension Attribute** is a powerful customization feature in Jamf Pro that allows administrators to collect data points not covered by the standard MDM inventory protocol.
 
-## Plain English
+Capabilities:
 
-Think of this as a "Custom Survey" for your computers. A standard inventory check only asks basic questions like "What's your serial number?" An Extension Attribute lets IT ask more specific questions, like "Did you restart your computer this week?" or "Is your hard drive almost full?". It helps IT find small problems before they become big ones.
+* **Custom Scripts**: Run Bash, Zsh, or Python scripts to query deep system settings.
+
+* **Specific Monitoring**: Report on unique items like the number of **battery cycles**, the presence of internal company files, or specific hardware daughterboard IDs.
+
+* **Reporting**: The data collected is populated into the device record and can be used to trigger **Smart Groups**.
+
+## Analogy
+
+Think of this as a **"Custom Survey"** or a **"Specific Health Quiz"** for your computers.
+
+A standard inventory check only asks basic questions like "What is your serial number?". An **Extension Attribute** lets IT ask much more specific and inquisitive questions, like "Did you restart your computer this month?" or "Is your hard drive feeling too full?".
+
+It helps IT find small, hidden problems before they turn into major system failures.

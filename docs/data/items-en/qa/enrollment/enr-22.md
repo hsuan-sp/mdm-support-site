@@ -19,6 +19,7 @@ If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable
 1. **Step 1: Push the New Profile**:
 
 * Create a new Wi-Fi configuration profile in Jamf Pro (with the new SSID and password).
+
   * Deploy this to all devices. At this point, the iPads will have *both* the old and new Wi-Fi settings.
 
 1. **Step 2: Field Testing**:
@@ -28,6 +29,7 @@ If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable
 1. **Step 3: Grace Period**:
 
 * Keep both SSIDs active for at least **2 to 3 days**.
+
   * This ensures that devices that were asleep, powered off, or off-site have a chance to wake up and receive the new Wi-Fi profile before the old network disappears.
 
 1. **Step 4: Decommission Old Config**:

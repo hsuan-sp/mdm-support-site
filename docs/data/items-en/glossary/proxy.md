@@ -3,10 +3,24 @@ term: "Proxy"
 category: ["Network"]
 ---
 
-## Definition
+## Term Definition
 
-A Proxy server acts as an intermediary between a local device and the internet. Instead of connecting directly to a website, the device sends its request to the Proxy, which then retrieves the data on the user’s behalf. Schools use Proxies to accelerate web loading (through caching) and to filter out harmful or inappropriate content, ensuring that all browsing remains within the school's "Digital Citizenship" guidelines.
+A **Proxy Server** acts as an intermediary gateway between a user's device and the internet.
 
-## Plain English
+Functions:
 
-Think of a Proxy as a "Personal Shopper" for the internet. Instead of you going directly to a store (a website) yourself, you give a list of what you want to your personal shopper (the Proxy). They go and get the data for you. This allows the shopper to check that the website is safe and doesn't contain any "forbidden items" before they bring the information back to your screen.
+* **Filtering**: Inspects URL requests and blocks dangerous or inappropriate content before it reaches the device.
+
+* **Caching**: Stores copies of frequently accessed websites (e.g., the school homepage) to speed up loading times for everyone.
+
+* **Anonymity**: Hides the internal IP structure of the school network from the public internet.
+
+* **Logging**: Keeps a record of which websites are accessed by which user for accountability.
+
+## Analogy
+
+Think of a Proxy as a **"Personal Shopper"** for the internet.
+
+Instead of you going directly to a store (a website) yourself, you hand a shopping list to your device, which gives it to the **Personal Shopper** (the Proxy).
+
+They go out, verify the store is safe, buy the item, and bring it back to you. This ensures that no "forbidden items" are brought onto campus because the shopper checks everything first.

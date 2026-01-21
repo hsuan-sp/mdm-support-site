@@ -1,12 +1,26 @@
 ---
 term: "Bonjour"
-category: ["Network","Apple"]
+category: ["Network", "Apple"]
 ---
 
-## Definition
+## Term Definition
 
-Bonjour is Apple’s implementation of Zero Configuration Networking (zeroconf). It allows Apple devices to automatically discover printers (AirPrint), displays (AirPlay), and other management devices (Apple Classroom) on the same local network without requiring manual configuration of IP addresses or DNS.
+**Bonjour** is Apple’s implementation of **Zero Configuration Networking (zeroconf)**. It enables devices to discover services on a local network without manual setup.
 
-## Plain English
+Common use cases in schools:
 
-Think of this as the "Automatic Handshake" system for your devices. It's like a new student walking into a classroom and announcing "I'm here, and I can draw!" Everyone else (the other devices) immediately knows they are there and what service they provide. Without Bonjour, you would have to know every device's exact "Street Address" (IP Address) just to talk to them.
+* **Printing**: Discovering **AirPrint** enabled printers.
+
+* **Display**: Finding **AirPlay** destinations like Apple TVs.
+
+* **Collaboration**: Allowing **Apple Classroom** to discover student iPads.
+
+Bonjour eliminates the need for users to know technical details like IP addresses or DNS records to connect nearby devices.
+
+## Analogy
+
+Think of this as the **"Automatic Handshake"** system for your devices.
+
+It's like a new student walking into a classroom and announcing "I'm here, and I'm ready to learn!" Everyone else in the room (the other devices) immediately knows they are there and what they can do.
+
+Without Bonjour, you would have to know every device's exact **"GPS Coordinates"** (IP Address) just to say hello to them.

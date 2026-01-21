@@ -4,16 +4,22 @@ category: ["DDM"]
 tags: ["DDM", "App Management", "Required Apps", "Auto-Updates"]
 ---
 
-## Definition
+## Term Definition
 
-Introduced in OS version 26, this is the core mechanism for managing apps via Declarative Device Management (DDM). It supports the deployment of App Store apps, Custom apps, and `.pkg` packages. Administrators can define specific behaviors for each app, such as forcing an update, pinning a specific version, or disabling auto-updates, all while receiving real-time status reporting.
+Introduced in **OS version 26**, this core DDM mechanism allows for more sophisticated software governance. It supports the deployment of App Store apps, Custom apps, and **.pkg** packages for macOS.
 
-## Plain English
+Key management capabilities:
 
-In the past, sending an app was like "Delivering a package—once it's there, it's done." Now, it's more like a "Subscription Service." You can set rules for each app (like "always keep this one updated" or "never update this specific version"), giving the school much finer control over the software students are using.
+* **Required Apps**: Automatically installed and self-healed (cannot be permanently removed by users).
 
-## MDM Context
+* **Optional Apps**: Available for users to download through a curated organizational portal.
 
-* **Required Apps**: Automatically installed and cannot be removed by the user.
-* **Optional Apps**: Available for the user to download at their own choice.
-* **Per-App Update Control**: High-stakes testing apps can be "frozen" at a specific version to ensure stability.
+* **Update Pinning**: Administrators can freeze high-stakes testing apps at a specific version to ensure stability.
+
+* **Granular Control**: Detailed settings for forcing updates or disabling auto-updates per-application.
+
+## Analogy
+
+In the past, sending an app was like **"Delivering a package"**—once it arrived on the doorstep, the delivery driver's job was done.
+
+Now, with DDM, it's more like a **"Managed Subscription Service."** You can set rules for each app (like "always keep this one updated" or "never update this version until I say so"), giving the school total control over the software students are using in the classroom.

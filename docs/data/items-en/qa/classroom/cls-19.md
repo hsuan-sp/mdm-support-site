@@ -17,12 +17,15 @@ tags: ["Apple Pencil","Bluetooth","Hardware Compatibility","Troubleshooting"]
 1. **Verify Compatibility (Most Common Error)**:
 
 * **1st Gen (Lightning)**: Does not work with common USB-C iPads (unless using an adapter).
+
   * **2nd Gen (Magnetic)**: Only for iPad Air/Pro models with the magnetic charging strip.
+
   * **USB-C Model**: Does not support magnetic pairing; must be connected via **cable** for initial setup.
 
 1. **Reset Bluetooth**:
 
 * Go to **Settings > Bluetooth**, find the old Apple Pencil entry, and select **Forget This Device**.
+
   * Re-attach or re-plug the Apple Pencil to re-pair.
 
 1. **Check the Tip**:

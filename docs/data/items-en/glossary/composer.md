@@ -1,12 +1,26 @@
 ---
 term: "Composer"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
-## Definition
+## Term Definition
 
-Composer is a professional software packaging tool provided by Jamf for macOS. IT administrators use it to create system snapshots that monitor file changes during a software installation. These changes are then bundled into a standard `.pkg` or `.dmg` installer, allowing complex software suites to be easily deployed to hundreds of Macs simultaneously via MDM.
+**Composer** is a professional software packaging application for macOS provided as part of the Jamf management suite.
 
-## Plain English
+Key functionalities:
 
-Think of this as a "Professional Gift Wrapper" for software. If you have a complicated app with many different parts, you use Composer to neatly organize and pack them into a single "Box" (a .pkg file). Once IT sends that box to other computers, the recipients just have to open it, and all the parts automatically go exactly where they belong.
+* **Snapshots**: Monitors a Mac's filesystem during a software installation to identify exactly what files were added or modified.
+
+* **Packaging**: Bundles these changes into a standardized **.pkg** or **.dmg** installer.
+
+* **Customization**: Allows administrators to include specific configuration files or licenses within an app installer.
+
+This tool is essential for deploying complex software that doesn't follow standard App Store installation methods.
+
+## Analogy
+
+Think of this as a **"Professional Gift Wrapper"** for software.
+
+If you have a complicated app with many different parts scattered everywhere, you use Composer to neatly organize and pack them into a single, tidy **"Box"** (a .pkg file).
+
+Once IT sends that box to other computers, the recipients just have to open it, and all the parts automatically jump out and go exactly where they belong on the new computer.

@@ -3,10 +3,24 @@ term: "DMG (Disk Image)"
 category: ["macOS"]
 ---
 
-## Definition
+## Term Definition
 
-DMG is an Apple Disk Image file format exclusive to macOS. When double-clicked, it "mounts" to the desktop as a virtual disk drive, typically containing an application. To install the app, the user usually just drags the app icon from the DMG window to the "Applications" folder. This is the most common method for distributing third-party software on macOS.
+**DMG** is a proprietary Apple Disk Image file format used primarily for software distribution on macOS.
 
-## Plain English
+Key characteristics:
 
-Think of this as a "Virtual Software CD." Downloading a DMG is like downloading a digital CD. When you open it, a "CD drive" appears on your computer containing the software. Once you've copied the software onto your Mac, you just "eject" the digital CD and delete the file.
+* **Mounting**: When opened, it behaves like a virtual external drive or CD-ROM appearing on the Desktop.
+
+* **Compression**: Often compressed to save space during download.
+
+* **Usage**: Typically used to deliver `.app` bundles. Users install software by dragging the application icon from the DMG into the `/Applications` folder.
+
+In enterprise management, DMG files are often converted into **.pkg** files for automated deployment, as standard DMGs usually require manual user interaction to "drag and drop" the app.
+
+## Analogy
+
+Think of this as a **"Virtual Software CD."**
+
+Downloading a DMG is like being handed a digital disc. When you open it, your Mac "inserts" the disc, and a window pops up showing you what's inside.
+
+Once you've copied the software onto your Mac's hard drive, you just "eject" the digital disc and throw the DMG file in the trash. It’s a clean and organized way to deliver a new tool to your computer.

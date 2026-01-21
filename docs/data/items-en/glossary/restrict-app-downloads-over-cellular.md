@@ -4,10 +4,22 @@ category: ["Network"]
 tags: ["Mobile Data", "Wi-Fi", "App Downloads", "Traffic Management"]
 ---
 
-## Definition
+## Term Definition
 
-A specialized management capability introduced in iOS 26 and iPadOS 26 using **Declarative Device Management (DDM)**. This allows organizations to restrict app downloads and updates to Wi-Fi networks only, completely disabling the use of cellular data for these tasks. This is a vital tool for managing data costs and ensuring that students do not exhaust their mobile data plans on large app downloads.
+**Restrict App Downloads over Cellular** is a modern policy configuration available via Declarative Device Management (DDM).
 
-## Plain English
+Functionality:
 
-Think of this as "Wi-Fi Only Mode" for apps. It’s like a parent setting a rule that says, "You can only download new games or big updates when you are connected to the home Wi-Fi, not while you're out using your phone data." This prevents students from accidentally using up all their monthly data on a single large download while on the bus.
+* **Constraint**: It explicitly forbids the App Store and MDM from downloading or updating apps while using a cellular (4G/5G) connection.
+
+* **Enforcement**: Downloads will pause and wait until the device connects to a Wi-Fi network.
+
+* **Purpose**: Prevents students with cellular-enabled iPads from accidentally exhausting the school's data plan quota with large game or OS updates.
+
+## Analogy
+
+Think of this as **"Wi-Fi Only Mode"** for heavy lifting.
+
+It’s like a parent setting a rule that says: **"You can only download new video games when you are at home on Wi-Fi, not while you're on the bus using expensive phone data."**
+
+This creates a safety net so that one student downloading a huge game doesn't use up the entire class's data budget for the month.

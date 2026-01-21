@@ -3,10 +3,24 @@ term: "Gatekeeper"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-Gatekeeper is a macOS security feature designed to ensure that only trusted software runs on a Mac. It checks downloaded applications for a valid Developer ID and verifies that they have been notarized by Apple to be free of known malware. Administrators can use MDM to manage Gatekeeper settings, ensuring students only run approved applications while allowing specialized school software to be exempted from these checks.
+**Gatekeeper** is a macOS internal security technology designed to protect users from malicious or untrusted software.
 
-## Plain English
+Protective measures:
 
-This is the system's "Software Customs Officer." Whenever you try to run a program you downloaded from the internet, the officer (Gatekeeper) stops it to check if it has a valid visa (notarization) from Apple. If the program looks suspicious or is from an unknown source, the officer will block it and refuse to let it run, keeping your Mac safe from viruses.
+* **Verification**: Checks downloaded applications for a valid Apple Developer ID signature.
+
+* **Notarization**: Verifies that the app has been scanned and "notarized" by Apple’s automated security systems to be free of known malware.
+
+* **In-Place Enforcement**: If an app is from an unknown source or has been tampered with, Gatekeeper prevents it from opening.
+
+Administrators use MDM to standardize Gatekeeper settings across the school, ensuring only approved and safe software can be launched by students.
+
+## Analogy
+
+This is the Mac's **"Software Customs Officer."**
+
+Whenever you try to run a program you downloaded from the internet, the officer (Gatekeeper) stops it to check if it has a valid entry visa (notarization) from Apple.
+
+If the program looks suspicious, comes from an untrusted source, or hasn't been properly cleared, the officer will block the door and refuse to let it run, keeping your Mac safe from viruses and digital "intruders."

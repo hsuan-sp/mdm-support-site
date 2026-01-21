@@ -3,10 +3,20 @@ term: "DNS (Domain Name System)"
 category: ["Network"]
 ---
 
-## Definition
+## Term Definition
 
-DNS is the "phonebook" of the internet. It translates human-readable web addresses (e.g., `apple.com`) into the numeric IP addresses (e.g., `17.172.224.47`) that computers use to talk to each other. MDM can be used to force devices to use specific DNS servers to enable content filtering or speed up access to school resources.
+**DNS** is the foundational "Address Book" of the internet that translates human-readable domain names into numeric IP addresses.
 
-## Plain English
+Functional roles:
 
-This is the internet's "Directory Assistance." You know the name of the store you want to visit (the URL), but you don't know the phone number (the IP Address). You "call" the DNS server, it gives you the number, and then your computer can make the call and load the website.
+* **Translation**: It turns `www.apple.com` into `17.172.224.47`.
+
+* **Filtering**: Many school networks use "Filtering DNS" (like Jamf Safe Internet) to block access to malicious or inappropriate content at the name-resolution level.
+
+* **MDM Control**: Administrators can force devices to use specific DNS servers via a Wi-Fi or Global HTTP Proxy payload.
+
+## Analogy
+
+This is the internet's **"Directory Assistance"** or **"GPS."**
+
+You know the name of the store you want to visit (e.g., "Apple Support"), but you don't know exactly where it's located (the IP Address). You "call" the DNS server, it gives you the specific coordinates, and then your device can navigate directly to the correct destination and load the website.

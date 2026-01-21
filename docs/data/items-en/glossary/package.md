@@ -3,10 +3,24 @@ term: "Package (.pkg)"
 category: ["macOS"]
 ---
 
-## Definition
+## Term Definition
 
-A Package (.pkg) is a standard installer file format for macOS. It can contain application files, installation scripts, and metadata that defines where files should be placed and what permissions they should have. MDM systems can push these packages to Macs and install them silently in the background, allowing complex software to be deployed to hundreds of computers without requiring user interaction.
+A **Package (.pkg)** is the standard flat-file installation format for macOS software deployment.
 
-## Plain English
+Components:
 
-Think of this as a "Digital Home Delivery Box." It doesn't just contain the item (the software); it also includes an "instruction manual" for the computer on where to put every part and how to set it up. When the school’s maintenance system sends this box to a Mac, the Mac reads the manual and puts everything in the right place automatically while the student is working.
+* **Payload**: The actual files (apps, fonts, scripts) to be installed.
+
+* **Scripts**: "Pre-install" and "Post-install" scripts that run commands to set up the environment (e.g., activate a license key).
+
+* **Receipts**: A record left on the Mac so the system knows what was installed.
+
+**MDM Usage**: Admins wrap complex software (like Microsoft Office or Adobe Creative Cloud) into PKG files to deploy them silently to thousands of Macs at once.
+
+## Analogy
+
+Think of this as a **"Digital IKEA Box."**
+
+It doesn't just contain the furniture (the software); it also includes the tools and an **"Instruction Manual"** (scripts) for the computer.
+
+When the school sends this box to a Mac, the Mac opens it, reads the manual, and puts every piece in exactly the right place automatically—building the furniture while the student is busy doing something else.

@@ -3,10 +3,24 @@ term: "Handoff"
 category: ["Apple"]
 ---
 
-## Definition
+## Term Definition
 
-Handoff is a core Continuity feature that allows a user to start a task on one Apple device and seamlessly continue it on another device nearby. For instance, if a teacher begins drafting an email on their iPhone while walking to class, they can instantly see an icon on their Mac’s Dock and click it to finish the email on the larger screen. This requires both devices to be signed into the same Apple ID with Bluetooth and Wi-Fi enabled.
+**Handoff** is a primary component of Apple’s **Continuity** framework that enables users to transfer an active task between nearby devices seamlessly.
 
-## Plain English
+How it works:
 
-This is a "Relay Race" for your work. Your iPhone runs the first lap (starts an email), and as soon as it reaches the "handoff zone" near your Mac, the Mac can take the baton and finish the race. You don't need to save a file or email it to yourself; the work just "jumps" from one screen to the other instantly.
+* **Synchronization**: As you work in a compatible app (like Mail, Safari, or Pages), the device broadcasts the state of that app.
+
+* **Continuity**: A nearby device (Mac, iPad, or iPhone) detects the broadcast and displays a Handoff icon.
+
+* **Resumption**: Clicking the icon instantly opens the same app on the second device, at the exact same point in the task.
+
+**Requirements**: Both devices must be signed in to the same **Apple Account**, have Bluetooth and Wi-Fi enabled, and be within close proximity.
+
+## Analogy
+
+This is a **"Relay Race"** for your digital work.
+
+Your iPhone runs the first lap (you start drafting an email while walking to school), and as soon as it reaches the "Handoff Zone" near your Mac in the classroom, the Mac can take the baton and finish the race.
+
+You don't need to manually save a file or email it to yourself; the work just **"jumps"** from one screen to the other instantly, so you never lose your momentum.

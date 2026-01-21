@@ -1,12 +1,26 @@
 ---
 term: "Enrollment Invitation"
-category: ["Jamf","Enrollment"]
+category: ["Jamf", "Enrollment"]
 ---
 
-## Definition
+## Term Definition
 
-An Enrollment Invitation is a manual method for adding devices to the Jamf management system. An administrator generates a unique URL or QR code and sends it to a user. When the user clicks the link or scans the code on their device, they are guided through the process of installing the management profile. This is commonly used in BYOD scenarios for personal iPhones or Macs.
+An **Enrollment Invitation** is a semi-automated method for adding existing or personal devices to the Jamf management system.
 
-## Plain English
+The typical process:
 
-Think of this as a "Digital Golden Ticket." The school sends you a special link; once you click it, your personal device is "invited" into the school's management system. This allows you to get school Wi-Fi and apps automatically, but because it's an invitation you accepted, the school still can't see your personal photos or messages.
+1. **Creation**: An administrator generates a unique invitation in the MDM console.
+
+2. **Delivery**: The invitation is sent to the user via email, SMS, or displayed as a QR code.
+
+3. **Execution**: The user clicks the link or scans the code, which directs them to a secure portal to install the management profile manually.
+
+This method is primarily used for **User Enrollment (BYOD)** or for enrolling devices that were not purchased through official Apple corporate channels.
+
+## Analogy
+
+Think of this as a **"Digital Golden Ticket."**
+
+The school sends you a special, unique link. Once you click it, your personal device is "invited" to join the school's private network.
+
+This allows you to get school services (like Wi-Fi and apps) automatically. However, because it's an invitation **you accepted**, the school still can't see your personal data, like photos or text messages.

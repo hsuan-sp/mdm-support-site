@@ -3,10 +3,22 @@ term: "Local Account"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-A Local Account is a user profile that exists solely on an individual computer's hard drive. Its username, password, and permissions are stored locally and are not synchronized with any cloud or network directory. While most school users use "Network Accounts" that follow them from device to device, Local Accounts are typically reserved for IT maintenance or for devices that do not require internet connectivity.
+A **Local Account** is a user profile that resides strictly on the individual computer's hard drive.
 
-## Plain English
+Key differences from Network Accounts:
 
-Think of this as a "Room-Specific Key." This key (the account) only opens one specific door (one computer). If you try to use it on any other computer in the building, it won't work. It’s different from a school "ID Card" (Network Account) which can be used to scan into any classroom or library computer.
+* **Authentication**: Usage is verified against a local database on the machine, not a central server.
+
+* **Scope**: Credentials work **only** on that specific Mac; they cannot be used to log in to other computers.
+
+* **Use Case**: Typically reserved for the primary "Administrator" account used by IT for maintenance, or for specialized stations (like a theater lighting controller) that do not require network connectivity.
+
+## Analogy
+
+Think of this as a **"Room-Specific Key."**
+
+This key (the account) only opens one specific door (one computer). If you try to use it on any other computer in the building, it won't work.
+
+It’s different from a school **"ID Badge"** (Network Account) which scans you into any classroom, library, or lab computer across the entire campus.

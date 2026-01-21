@@ -3,10 +3,24 @@ term: "Lost Mode"
 category: ["Security"]
 ---
 
-## Definition
+## Term Definition
 
-Lost Mode is a remote security capability within MDM for supervised iOS and iPadOS devices. When a device is reported missing, IT can enable Lost Mode to immediately lock the device, display a custom "Return to..." message, and track its GPS location. While in Lost Mode, the device cannot be used, and its data remains encrypted and inaccessible. Once the device is recovered, IT can remotely disable the lock.
+**Lost Mode** is a powerful recovery protocol available for supervised iOS and iPadOS devices.
 
-## Plain English
+When activated by IT:
 
-Think of this as a "Remote Digital Handcuff." If a student leaves their iPad on a bus, IT can press a button to instantly lock it. The screen will say something like "This iPad belongs to TES—Please call 02-1234-5678." At the same time, the iPad will start reporting its location on a map so it can be found. It protects the student's data and makes the iPad useless to anyone who finds it.
+* **Lock Down**: The device is immediately locked and cannot be unlocked by the user.
+
+* **Messaging**: A custom message (e.g., "Property of School - Call 555-0199") is displayed on the Lock Screen.
+
+* **Tracking**: The device begins reporting its GPS coordinates to the MDM server, even if Location Services were previously disabled.
+
+* **Privacy**: Personal data remains encrypted and inaccessible during the lock state.
+
+## Analogy
+
+Think of this as a **"Remote Digital Handcuff."**
+
+If a student leaves their iPad on a bus, IT can press a button to instantly freeze it. The screen will display a "Return to..." message, and the iPad will start shouting its location to the school's map.
+
+It renders the device completely useless to a thief while helping the school get it back safely.

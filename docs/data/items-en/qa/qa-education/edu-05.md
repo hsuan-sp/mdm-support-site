@@ -17,6 +17,7 @@ tags: ["Performance","Troubleshooting","Maintenance"]
 1. **Reboot (The Most Important Step)**:
 
 * iPads are often left on for weeks at a time. A simple **Hard Restart** clears out memory leaks and hung background processes.
+
 * *Tip: We recommend every student reboots their iPad once a week.*
 
 1. **Storage Overload**:

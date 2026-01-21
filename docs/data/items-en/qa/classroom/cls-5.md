@@ -17,6 +17,7 @@ tags: ["Troubleshooting","Bluetooth","Local Network Permissions"]
 1. **Check 'Local Network' Privacy (Most Common)**:
 
 * On both teacher and student iPads, go to **Settings > Privacy & Security > Local Network**.
+
 * Ensure the toggle for **Classroom** is turned **ON**. If this is off, the app is blocked from "seeing" other devices on the same Wi-Fi.
 
 1. **Reset the Bluetooth Stack**:

@@ -3,10 +3,22 @@ term: "Face ID"
 category: ["Hardware"]
 ---
 
-## Definition
+## Term Definition
 
-Face ID is Apple’s facial recognition technology, which uses a TrueDepth camera system to project infrared dots and create a 3D mathematical model of a user's face. It provides a higher level of security than traditional fingerprint or 2D photo recognition. MDM can require users to enable Face ID or Touch ID to access school-managed apps, serving as a vital second layer of defense for student data.
+**Face ID** is Apple’s advanced facial recognition biometric authentication system.
 
-## Plain English
+Technical security:
 
-This is "3D Facial Scanning." It doesn't just take a photo; it scans the actual shape of your face using invisible light. Even if someone has a high-quality photo or a mask of you, they can’t trick the system. It’s a fast and very secure way to make sure only the correct student is using the device.
+* **TrueDepth Camera**: Projects and analyzes over 30,000 invisible infrared dots to create a 3D mathematical model of the user's face.
+
+* **Security Enclave**: The mathematical model is stored and processed locally on the device and is never sent to Apple or the cloud.
+
+* **MDM Control**: Administrators can enforce the use of Face ID (or Touch ID) to unlock devices or access specific managed educational apps, ensuring that sensitive data remains protected even if a device is physically accessed by an unauthorized person.
+
+## Analogy
+
+This is **"3D Facial Scanning."**
+
+It doesn't just take a flat photo; it scans the actual depth and shape of your face using invisible light beams. Even if someone has a high-quality 2D photo or a professional mask of you, they can’t trick the system.
+
+It’s a fast, convenient, and incredibly secure way to make sure that the **correct student**—and only that student—is using the device.

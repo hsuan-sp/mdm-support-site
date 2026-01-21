@@ -1,12 +1,24 @@
 ---
 term: "Remote Management"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
-## Definition
+## Term Definition
 
-Remote Management is the screen or status that appears on an Apple device during setup, indicating that the device is being configured by the school's MDM server. It confirms the organization's ownership and sets initial boundaries.
+**Remote Management** is the specific screen presented by the Setup Assistant on a new Apple device during the **Automated Device Enrollment** process.
 
-## Plain English
+Signifies:
 
-Remote Management is the **"School’s Digital Stamp."** When you first open your iPad, this screen is like the device holding up a badge saying: "I’m a representative of Taipei European School." It’s the hand-off where the iPad officially accepts the school’s rules and begins its journey as a learning tool.
+* **Detection**: The device has "called home" to Apple and recognized that it belongs to an organization (e.g., specific school).
+
+* **Consent**: The user must click "Next" or "Enroll" to download the MDM profile.
+
+* **Mandate**: If the device is in ADE, this screen is usually mandatory and cannot be skipped, ensuring no device enters the fleet unmanaged.
+
+## Analogy
+
+Remote Management is the **"School’s Digital Stamp."**
+
+When you first open a brand new iPad box, this screen is like the device holding up a badge saying: **"I belong to Taipei European School."**
+
+It’s the official hand-off where the iPad accepts the school’s rules and begins its life as a managed learning tool.

@@ -3,10 +3,22 @@ term: "AirPrint"
 category: ["Core"]
 ---
 
-## Definition
+## Term Definition
 
-AirPrint is Apple’s driverless printing technology. It allows devices to print directly to supported printers on the same local network without the need for manual driver installation. MDM can use an AirPrint payload to push an "Allowlist" of school printers directly to users' devices, ensuring that student and staff iPads are ready to print to the nearest school printer automatically.
+**AirPrint** is Apple’s driverless printing technology. It allows Apple devices to print directly to supported printers on the same local network.
 
-## Plain English
+Key advantages for IT:
 
-Think of this as "Driver-Free Printing." In the old days, you had to download and install complicated software for every new printer. With AirPrint, your iPad "sees" the printer instantly. IT can set it up so that as soon as you connect to the school Wi-Fi, all the school’s printers just show up in your print menu, ready to go.
+* **No Drivers**: Eliminates the need for manual driver installation on individual devices.
+
+* **Payloads**: MDM can use an AirPrint payload to push an **"Allowlist"** of specific school printers to student and staff devices.
+
+* **Automation**: Printers appear automatically in the print menu when the device connects to the school network.
+
+## Analogy
+
+Think of this as **"Driver-Free Printing."**
+
+In the old days, you had to download and install complicated software for every new printer. With AirPrint, your iPad **"sees"** the printer instantly.
+
+IT sets it up so that as soon as you connect to the school Wi-Fi, all the authorized school printers just show up in your menu, ready to go.

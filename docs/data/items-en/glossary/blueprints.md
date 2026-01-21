@@ -1,12 +1,26 @@
 ---
 term: "Blueprints"
-category: ["Jamf","Core"]
+category: ["Jamf", "Core"]
 ---
 
-## Definition
+## Term Definition
 
-Blueprints are an advanced automation framework within Jamf management tools. They allow administrators to define a "Desired State" for a device and continuously monitor for compliance. If a device drifts from this standard (e.g., an app is deleted or a setting is changed), the Blueprint automatically triggers a corrective action. This proactive self-healing mechanism is more intelligent than traditional policies and ensures devices remain compliant with the organization's security baseline.
+**Blueprints** are an advanced automation framework within Jamf management tools used to maintain device consistency.
 
-## Plain English
+Key features:
 
-Think of this as "Autopilot Mode" for computer management. You set the destination (e.g., "Must have antivirus and disk encryption"), and the system automatically keeps the device on track. If the device "veers off course," the Blueprint pulls it back into alignment without IT needing to manually intervene.
+* **Desired State**: Administrators define exactly how a device should be configured (apps, settings, security).
+
+* **Continuous Monitoring**: The system periodically checks if the device matches the defined state.
+
+* **Self-Healing**: If a device drifts from this standard (e.g., an app is removed), the Blueprint automatically triggers a corrective action.
+
+This proactive mechanism ensures that devices remain compliant with the organization's security baseline without manual intervention.
+
+## Analogy
+
+Think of this as **"Autopilot Mode"** for computer management.
+
+You set the destination (e.g., "This device must always have the security app and disk encryption turned on"), and the system automatically keeps the device on track.
+
+If the device **"veers off course"** because someone changed a setting, the Blueprint pulls it back into alignment instantly, without IT needing to step in.

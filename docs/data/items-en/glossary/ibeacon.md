@@ -3,10 +3,20 @@ term: "iBeacon"
 category: ["Hardware"]
 ---
 
-## Definition
+## Term Definition
 
-iBeacon is Apple’s implementation of Bluetooth Low Energy (BLE) proximity sensing. Schools can place small iBeacon transmitters in specific locations, such as classrooms or the library. When a student’s iPad detects the beacon's signal, the MDM can automatically trigger specific actions, such as automatically muting the device in the library or opening a specific textbook app as soon as the student enters the classroom.
+**iBeacon** is Apple's location-aware technology that uses **Bluetooth Low Energy (BLE)** to detect proximity and trigger location-specific actions on mobile devices.
 
-## Plain English
+Educational applications:
 
-Think of these as "Invisible Sense-Posts" around the school. When an iPad walks past a post in the library, it doesn't need to be scanned; the system just "senses" the location and can automatically tell the iPad, "You're in the library now—please turn your volume down to zero." It helps make the technology respond intelligently to where the student is.
+* **Automation**: Automatically opening a specific textbook app when a student enters the library.
+
+* **Restrictions**: Automatically muting iPad volume or disabling the camera as soon as a device "senses" it is inside the auditorium.
+
+* **Inventory**: Helping IT locate sets of iPads within large buildings by identifying which beacon they are currently near.
+
+## Analogy
+
+Think of these as **"Invisible Sense-Posts"** or **"Digital Lighthouses"** placed around the school.
+
+When an iPad walks past a post in the music room, it doesn't need to be scanned; the system just "senses" the location and can automatically tell the iPad, "You're in the music room now—please turn your volume down and open the sheet music app." It helps make the technology respond intelligently to exactly where the student is standing.

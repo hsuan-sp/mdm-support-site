@@ -3,10 +3,22 @@ term: "Universal Binary"
 category: ["macOS"]
 ---
 
-## Definition
+## Term Definition
 
-A Universal Binary is a single application file that contains executable code optimized for both Intel-based Macs and Apple Silicon (M-series) Macs. This allows developers to distribute one single app that runs natively and with peak performance on any modern Mac hardware without requiring the **Rosetta 2** translation layer.
+A **Universal Binary** is a macOS application package that contains executable code for multiple processor architectures.
 
-## Plain English
+Structure:
 
-Think of this as a "Bilingual App." Instead of having to download one version for English-speaking Macs (Intel) and another for French-speaking Macs (Apple Silicon), the app contains both languages in one package. The computer automatically reads the version it understands best, making the app faster and more reliable on any computer you use.
+* **Fat Binary**: It includes code for both **Intel** (x86_64) and **Apple Silicon** (ARM64) chips inside a single app file.
+
+* **Workflow**: When the user double-clicks the app, macOS automatically chooses the correct code for the computer's chip.
+
+* **Benefit**: Ensures the app runs at maximum native speed on an M3 MacBook Air *and* an old Intel iMac, without needing **Rosetta 2**.
+
+## Analogy
+
+Think of this as a **"Bilingual Book."**
+
+Instead of buying one book in English and another in French, you buy one book that has every page written in both languages side-by-side.
+
+If you are an English reader (Apple Silicon), you just read the English parts. If you are a French reader (Intel), you read the French parts. It works perfectly for everyone without needing a translator.

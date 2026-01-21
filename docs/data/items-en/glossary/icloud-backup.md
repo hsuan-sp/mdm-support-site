@@ -1,12 +1,26 @@
 ---
 term: "iCloud Backup"
-category: ["Core","Apple"]
+category: ["Core", "Apple"]
 ---
 
-## Definition
+## Term Definition
 
-iCloud Backup automatically saves a device’s app data, settings, and photos to Apple’s cloud storage when the device is connected to Wi-Fi, locked, and charging (usually overnight). This ensures that if a student’s iPad is damaged or lost, their work can be quickly restored onto a new device. MDM can be used to mandate or restrict this feature based on the school's data privacy policies.
+**iCloud Backup** is an automated cloud service that replicates a device's data and settings to Apple’s secure servers.
 
-## Plain English
+Execution criteria:
 
-This is the "Automatic Digital Safety Net." Every night when the student's iPad is charging and connected to Wi-Fi, it quietly packs up all their work, photos, and settings and stores a copy safely in the cloud. If the iPad is broken the next morning, IT can just give the student a new one, and their entire "digital life" will come back exactly as it was.
+* **Connectivity**: The device must be connected to Wi-Fi.
+
+* **Power**: The device must be plugged into a power source (charging).
+
+* **State**: The device screen must be locked (usually occurring overnight).
+
+**MDM Governance**: Depending on the school's data privacy policy, IT can either mandate iCloud Backup to ensure student work is never lost, or restrict it if data must remain strictly on-premises for legal reasons.
+
+## Analogy
+
+This is the **"Automatic Digital Safety Net."**
+
+Every night while the student's iPad is sleeping and charging, it quietly packs up all their school work, photos, and settings and stores a safety copy in the "Cloud" (a secure digital warehouse).
+
+If the iPad is dropped and shattered the next morning, IT can just give the student a brand new iPad. Once they log in, their entire **"digital life"** will come back exactly as it was, like nothing ever happened.
