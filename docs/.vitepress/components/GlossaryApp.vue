@@ -39,9 +39,9 @@ const t = computed(() => {
       analogyLabel: "白話文解說",
       emptyState: "未找到「{q}」",
       clearSearch: "清除搜尋",
-      mobileBtn: "設定",
-      drawerTitle: "介面設定",
-      drawerCategoryTitle: "分類選擇",
+      menuBtn: "搜尋與設定",
+      drawerTitle: "術語搜尋與設定",
+      drawerCategoryTitle: "術語分類",
       fontScaleTitle: "字體大小調整",
       fontSmall: "小",
       fontMedium: "中",
@@ -50,8 +50,7 @@ const t = computed(() => {
         Core: "核心", Enrollment: "註冊", Apple: "Apple", Security: "安管",
         Network: "網路", Hardware: "硬體", Apps: "軟體", Other: "其他",
         Education: "教育", macOS: "macOS", Jamf: "Jamf"
-      },
-      alertMsg: ""
+      }
     },
     'en-US': {
       sidebarTitle: "Glossary Categories",
@@ -68,8 +67,8 @@ const t = computed(() => {
       analogyLabel: "In Plain English",
       emptyState: "No results for \"{q}\"",
       clearSearch: "Clear",
-      mobileBtn: "Settings",
-      drawerTitle: "Settings",
+      menuBtn: "Search & Filter",
+      drawerTitle: "Glossary Settings",
       drawerCategoryTitle: "Categories",
       fontScaleTitle: "Font Size",
       fontSmall: "S",
@@ -79,8 +78,7 @@ const t = computed(() => {
         Core: "Core", Enrollment: "Enroll", Apple: "Apple", Security: "Security",
         Network: "Network", Hardware: "Hardware", Apps: "Apps", Other: "Other",
         Education: "Edu", macOS: "macOS", Jamf: "Jamf"
-      },
-      alertMsg: ""
+      }
     }
   };
   return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
@@ -149,6 +147,7 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 <template>
   <div class="glossary-app" :class="{ 'sidebar-collapsed': isSidebarCollapsed }" :style="{ '--app-scale': fontScale }">
     <div v-if="isMounted" class="app-layout">
+      <!-- Desktop Sidebar -->
       <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
         @update:scale="val => fontScale = val">
         <template #search>
@@ -181,40 +180,15 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
       </AppSidebar>
 
       <main class="app-content">
-        <!-- New Mobile Smart Header -->
-        <div class="mobile-smart-header">
-          <div class="mobile-search-bar">
-            <div class="search-box">
-              <span class="search-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </span>
-              <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
-              <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
-            </div>
-          </div>
-
-          <div class="mobile-filter-chips">
-            <div class="chip-scroll-container">
-              <button v-for="cat in categoriesList" :key="cat" @click="selectedCategory = cat"
-                :class="['filter-chip', { active: selectedCategory === cat }]">
-                {{ getCategoryChipName(cat) }}
-              </button>
-            </div>
-          </div>
-        </div>
-
         <header class="content-header">
           <div class="view-status-bar">
             <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
               getCategoryName(selectedCategory)
-            }}</span>
+              }}</span>
             <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
             <button v-if="!isMobileView" @click="toggleSort" class="desk-sort-btn">{{ sortOrder === 'asc' ? 'A-Z' :
               'Z-A'
-            }}</button>
+              }}</button>
           </div>
         </header>
 
@@ -229,13 +203,13 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
                       :class="['badge', getCategoryColor(cat)]">{{ getCategoryName(cat) }}</span>
                   </div>
                 </header>
-                <div class="term-definition markdown-body" v-html="item.definition"></div>
+                <div class="term-definition markdown-body" :lang="lang" v-html="item.definition"></div>
               </div>
               <section v-if="item.analogy" class="analogy-wrapper">
                 <div class="analogy-icon">💡</div>
                 <div class="analogy-content">
                   <span class="analogy-label">{{ t.analogyLabel }}</span>
-                  <div class="analogy-text markdown-body" v-html="item.analogy"></div>
+                  <div class="analogy-text markdown-body" :lang="lang" v-html="item.analogy"></div>
                 </div>
               </section>
             </div>
@@ -247,38 +221,87 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
       </main>
     </div>
 
-    <div v-if="!isMounted" class="app-loading-placeholder"></div>
-
+    <!-- Mobile Unified Settings Drawer -->
     <MobileDrawer v-if="isMounted" :is-open="isSettingsOpen" :title="t.drawerTitle" @close="isSettingsOpen = false">
-      <div class="settings-group">
-        <div class="group-label">{{ t.fontScaleTitle }}</div>
-        <div class="btn-group-mobile">
-          <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
-          <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
-          <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
+      <div class="mobile-drawer-inner">
+        <!-- Search Section -->
+        <div class="drawer-section">
+          <div class="search-box mobile-search-bar">
+            <span class="search-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
+          </div>
         </div>
-      </div>
-      <div class="settings-group" style="margin-top: 24px;">
-        <div class="group-label">排序方式</div>
-        <div class="btn-group-mobile">
-          <button @click="sortOrder = 'asc'" :class="{ active: sortOrder === 'asc' }">A → Z</button>
-          <button @click="sortOrder = 'desc'" :class="{ active: sortOrder === 'desc' }">Z → A</button>
+
+        <!-- Category Chips -->
+        <div class="drawer-section">
+          <div class="section-label-mini">
+            <span>{{ t.drawerCategoryTitle }}</span>
+            <button @click="toggleSort" class="sort-text-btn">
+              {{ sortOrder === 'asc' ? t.sortBtnAZ : t.sortBtnZA }}
+            </button>
+          </div>
+          <div class="mobile-filter-chips">
+            <div class="chip-scroll-container">
+              <button v-for="cat in categoriesList" :key="cat" @click="selectedCategory = cat"
+                :class="['filter-chip', { active: selectedCategory === cat }]">
+                {{ getCategoryChipName(cat) }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Font Controls -->
+        <div class="drawer-section">
+          <div class="section-label-mini"><span>{{ t.fontScaleTitle }}</span></div>
+          <div class="btn-group-mobile">
+            <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
+            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
+          </div>
         </div>
       </div>
     </MobileDrawer>
 
-    <button v-if="isMounted" class="mobile-settings-btn" @click="isSettingsOpen = true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path
-          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-        </path>
-      </svg>
+    <!-- Super FAB Button -->
+    <button v-if="isMounted" class="super-fab-btn" @click="isSettingsOpen = true" :aria-label="t.menuBtn">
+      <div class="fab-icons">
+        <svg v-if="!searchQuery" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <div v-else class="search-active-dot"></div>
+      </div>
+      <span class="fab-label">{{ t.menuBtn }}</span>
     </button>
   </div>
 </template>
 
 <style scoped>
+/* Readability Improvements */
+.markdown-body {
+  font-size: 1.05em;
+  line-height: 1.85 !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  letter-spacing: 0.01em;
+}
+
+.markdown-body :deep(p) {
+  margin-bottom: 1.4em !important;
+}
+
+.markdown-body[lang="en-US"] {
+  text-align: justify;
+}
+
 .glossary-app {
   --base-size: calc(16px * var(--app-scale, 1));
   font-size: var(--base-size);
@@ -301,49 +324,119 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   min-width: 0;
 }
 
-/* Mobile Smart Header */
-.mobile-smart-header {
+/* Super FAB Button */
+.super-fab-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  padding: 0 24px;
+  height: 56px;
+  background: var(--vp-c-brand-1);
+  color: white;
+  border-radius: 28px;
   display: none;
-  flex-direction: column;
+  align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
-  position: sticky;
-  top: var(--vp-nav-height);
-  z-index: 100;
-  background: var(--vp-c-bg);
-  padding: 12px 0;
+  box-shadow: 0 12px 32px rgba(var(--vp-c-brand-1-rgb), 0.4);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 700;
 }
 
-.mobile-search-bar .search-box {
-  background: var(--vp-c-bg-mute);
-  border-radius: 16px;
-  border: 1px solid var(--vp-c-divider);
-  padding: 4px;
+.fab-label {
+  font-size: 15px;
+}
+
+.search-active-dot {
+  width: 12px;
+  height: 12px;
+  background: #34c759;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+@media (max-width: 900px) {
+  .super-fab-btn {
+    display: flex;
+  }
+
+  .app-layout {
+    display: block;
+    padding: 12px 20px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* Mobile Drawer Styling */
+.mobile-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-label-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--vp-c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sort-text-btn {
+  color: var(--vp-c-brand-1);
+  text-transform: none;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .mobile-search-bar .search-input {
-  background: transparent;
-  border: none;
-  font-size: 16px;
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border-radius: 16px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-mute);
+  font-size: 17px;
+}
+
+.mobile-search-bar .search-icon {
+  position: absolute;
+  left: 16px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .clear-search-btn {
-  padding: 8px 12px;
+  position: absolute;
+  right: 12px;
+  width: 32px;
+  height: 32px;
   color: var(--vp-c-text-3);
   font-size: 18px;
 }
 
 .mobile-filter-chips {
   overflow: hidden;
-  margin: 0 -24px;
-  padding: 0 24px;
+  margin: 0 -12px;
 }
 
 .chip-scroll-container {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 4px 12px 12px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -353,44 +446,42 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 
 .filter-chip {
   white-space: nowrap;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background: var(--vp-c-bg-soft);
   border-radius: 100px;
   font-size: 14px;
   font-weight: 600;
   color: var(--vp-c-text-2);
   border: 1px solid var(--vp-c-divider);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.filter-chip:active {
-  transform: scale(0.95);
 }
 
 .filter-chip.active {
   background: var(--vp-c-brand-1);
   color: white;
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1-rgb), 0.3);
 }
 
-@media (max-width: 900px) {
-  .app-layout {
-    display: block;
-    padding: 12px 20px;
-  }
-
-  .mobile-smart-header {
-    display: flex;
-  }
-
-  .desktop-only {
-    display: none !important;
-  }
+.btn-group-mobile {
+  display: flex;
+  gap: 10px;
 }
 
+.btn-group-mobile button {
+  flex: 1;
+  padding: 16px;
+  background: var(--vp-c-bg-mute);
+  border-radius: 14px;
+  border: 1px solid var(--vp-c-divider);
+  font-weight: 700;
+  color: var(--vp-c-text-2);
+}
+
+.btn-group-mobile button.active {
+  background: var(--vp-c-brand-1);
+  color: white;
+}
+
+/* Content Styling */
 .content-header {
   display: flex;
   align-items: center;
@@ -410,8 +501,8 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 .status-label {
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
-  padding: 2px 10px;
-  border-radius: 6px;
+  padding: 4px 12px;
+  border-radius: 8px;
 }
 
 .desk-sort-btn {
@@ -419,7 +510,6 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   color: var(--vp-c-brand-1);
 }
 
-/* Grid Layout */
 .terms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
@@ -456,38 +546,42 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .term-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .analogy-wrapper {
   background: var(--vp-c-bg-soft);
-  padding: 20px 28px;
+  padding: 24px 28px;
   border-top: 1px solid var(--vp-c-divider);
   display: flex;
-  gap: 16px;
+  gap: 20px;
+}
+
+.analogy-icon {
+  font-size: 24px;
 }
 
 .analogy-label {
   display: block;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 11px;
   color: var(--vp-c-brand-1);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .badge {
   font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-weight: 800;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -561,7 +655,7 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 12px;
   font-size: 14px;
   color: var(--vp-c-text-2);
@@ -569,82 +663,25 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   width: 100%;
   border: none;
   background: transparent;
+  transition: all 0.2s;
+}
+
+.cat-item:hover {
+  background: var(--vp-c-bg-soft);
 }
 
 .cat-item.active {
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .cat-count {
   font-size: 11px;
   background: var(--vp-c-bg-alt);
-  padding: 2px 8px;
+  padding: 2px 10px;
   border-radius: 10px;
-}
-
-.mobile-settings-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 48px;
-  height: 48px;
-  background: var(--vp-c-bg-alt);
-  color: var(--vp-c-text-1);
-  border-radius: 50%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  border: 1px solid var(--vp-c-divider);
-}
-
-@media (max-width: 900px) {
-  .mobile-settings-btn {
-    display: flex;
-  }
-}
-
-.settings-group {
-  padding: 12px 0;
-}
-
-.group-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--vp-c-text-3);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-
-.btn-group-mobile {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-group-mobile button {
-  flex: 1;
-  padding: 14px;
-  background: var(--vp-c-bg-soft);
-  border-radius: 12px;
-  border: 1px solid var(--vp-c-divider);
-  font-weight: 700;
-  color: var(--vp-c-text-2);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-group-mobile button:active {
-  transform: scale(0.97);
-}
-
-.btn-group-mobile button.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1-rgb), 0.3);
+  font-weight: 600;
 }
 
 .app-loading-placeholder {

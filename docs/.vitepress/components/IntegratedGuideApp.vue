@@ -34,8 +34,8 @@ const t = computed(() => {
       important: "重要",
       searchResult: "搜尋結果：{q}",
       clearSearch: "清除搜尋",
-      menuBtn: "設定",
-      drawerTitle: "介面設定",
+      menuBtn: "設定與搜尋",
+      drawerTitle: "搜尋與指南設定",
       prevPage: "上一頁",
       nextPage: "下一頁",
       fontScaleTitle: "字體大小調整",
@@ -43,6 +43,7 @@ const t = computed(() => {
       fontMedium: "中",
       fontLarge: "大",
       allLabel: "全部",
+      categoryTitle: "章節篩選",
       hashMap: {
         'account': '帳號與伺服器',
         'enrollment': '裝置註冊',
@@ -61,8 +62,8 @@ const t = computed(() => {
       important: "Important",
       searchResult: "Search results: {q}",
       clearSearch: "Clear Search",
-      menuBtn: "Settings",
-      drawerTitle: "Interface Settings",
+      menuBtn: "Filter & Search",
+      drawerTitle: "Search & Guide Settings",
       prevPage: "Previous",
       nextPage: "Next",
       fontScaleTitle: "Font Size Adjustment",
@@ -70,6 +71,7 @@ const t = computed(() => {
       fontMedium: "M",
       fontLarge: "L",
       allLabel: "All",
+      categoryTitle: "Chapters",
       hashMap: {
         'account': 'Account & Server Management',
         'enrollment': 'Enrollment & Device Setup',
@@ -179,6 +181,14 @@ const toggleItem = (id: string) => {
   openItems.value = next;
 };
 
+// Auto-open logic for search results
+import { watch } from 'vue';
+watch(searchQuery, (newVal) => {
+  if (newVal.length > 2) {
+    // If search is active, we don't necessarily open all, but we keep track
+  }
+});
+
 useKeyboardShortcuts({
   onSearchFocus: () => {
     const searchInput = document.querySelector('.search-input') as HTMLInputElement;
@@ -250,34 +260,6 @@ const switchModule = (source: string | "All") => {
       </AppSidebar>
 
       <main class="app-content">
-        <!-- New Mobile Smart Header -->
-        <div class="mobile-smart-header">
-          <div class="mobile-search-bar">
-            <div class="search-box">
-              <span class="search-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </span>
-              <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
-              <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
-            </div>
-          </div>
-
-          <div class="mobile-filter-chips">
-            <div class="chip-scroll-container">
-              <button @click="switchModule('All')" :class="['filter-chip', { active: activeSource === 'All' }]">
-                {{ t.allLabel }}
-              </button>
-              <button v-for="m in allQAData" :key="m.source" @click="switchModule(m.source)"
-                :class="['filter-chip', { active: activeSource === m.source }]">
-                {{ m.source }}
-              </button>
-            </div>
-          </div>
-        </div>
-
         <header class="content-header" v-if="searchQuery">
           <h2 class="title-text">{{ t.searchResult.replace('{q}', searchQuery) }}</h2>
         </header>
@@ -297,7 +279,7 @@ const switchModule = (source: string | "All") => {
                     <span class="arrow">▼</span>
                   </div>
                   <div v-if="openItems.has(item.id)" class="qa-content">
-                    <div class="markdown-body" v-html="item.answer"></div>
+                    <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
                     <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
                   </div>
                 </div>
@@ -322,7 +304,7 @@ const switchModule = (source: string | "All") => {
                     <span class="arrow">▼</span>
                   </div>
                   <div v-if="openItems.has(item.id)" class="qa-content">
-                    <div class="markdown-body" v-html="item.answer"></div>
+                    <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
                     <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
                   </div>
                 </div>
@@ -346,7 +328,7 @@ const switchModule = (source: string | "All") => {
                       <span class="arrow">▼</span>
                     </div>
                     <div v-if="openItems.has(item.id)" class="qa-content">
-                      <div class="markdown-body" v-html="item.answer"></div>
+                      <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
                       <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
                     </div>
                   </div>
@@ -361,30 +343,94 @@ const switchModule = (source: string | "All") => {
     <div v-if="!isMounted" class="app-loading-placeholder">
     </div>
 
-    <!-- Mobile Settings Drawer (Simplified) -->
+    <!-- Mobile Super Drawer: Contains Everything -->
     <MobileDrawer v-if="isMounted" :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
-      <div class="font-controls-mobile">
-        <div class="categories-header-mini"><span>{{ t.fontScaleTitle }}</span></div>
-        <div class="btn-group-mobile">
-          <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
-          <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
-          <button @click="fontScale = 1.15" :class="{ active: fontScale === 1.15 }">{{ t.fontLarge }}</button>
+      <div class="mobile-drawer-inner">
+        <!-- Search Section -->
+        <div class="drawer-section">
+          <div class="search-box mobile-search-bar">
+            <span class="search-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
+            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
+          </div>
+        </div>
+
+        <!-- Filter Chips Section -->
+        <div class="drawer-section">
+          <div class="section-header-mini"><span>{{ t.categoryTitle }}</span></div>
+          <div class="mobile-filter-chips">
+            <div class="chip-scroll-container">
+              <button @click="switchModule('All')" :class="['filter-chip', { active: activeSource === 'All' }]">
+                {{ t.allLabel }}
+              </button>
+              <button v-for="m in allQAData" :key="m.source" @click="switchModule(m.source)"
+                :class="['filter-chip', { active: activeSource === m.source }]">
+                {{ m.source }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Font Controls Section -->
+        <div class="drawer-section">
+          <div class="section-header-mini"><span>{{ t.fontScaleTitle }}</span></div>
+          <div class="btn-group-mobile">
+            <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
+            <button @click="fontScale = 1.15" :class="{ active: fontScale === 1.15 }">{{ t.fontLarge }}</button>
+          </div>
         </div>
       </div>
     </MobileDrawer>
 
-    <button v-if="isMounted" class="mobile-settings-btn" @click="isSidebarOpen = true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path
-          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-        </path>
-      </svg>
+    <!-- Super Button: Floating Action Button -->
+    <button v-if="isMounted" class="super-fab-btn" @click="isSidebarOpen = true" :aria-label="t.menuBtn">
+      <div class="fab-icons">
+        <svg v-if="!searchQuery" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <div v-else class="search-active-dot"></div>
+      </div>
+      <span class="fab-label">{{ t.menuBtn }}</span>
     </button>
   </div>
 </template>
 
 <style scoped>
+/* Readability Improvements */
+.markdown-body {
+  font-size: 1.05em;
+  line-height: 1.85 !important;
+  /* Increased line height for better eye tracking */
+  padding-top: 16px;
+  letter-spacing: 0.01em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  /* Essential for mobile word wrapping */
+  hyphens: auto;
+  /* English hyphenation */
+  text-align: left;
+  /* Keep left aligned for standard readability */
+}
+
+.markdown-body :deep(p) {
+  margin-bottom: 1.4em !important;
+  /* Half-line equivalent block spacing */
+}
+
+/* Specific logic for English wrapping to avoid cutting words */
+.markdown-body[lang="en-US"] {
+  text-align: justify;
+  hyphens: auto;
+}
+
 .app-loading-placeholder {
   min-height: 60vh;
   display: flex;
@@ -433,50 +479,127 @@ const switchModule = (source: string | "All") => {
   max-width: 920px;
 }
 
-/* Mobile Smart Header */
-.mobile-smart-header {
+/* FAB Styling - Super Button */
+.super-fab-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  /* Placed left to avoid conflict with BackToTop on right */
+  padding: 0 24px;
+  height: 56px;
+  background: var(--vp-c-brand-1);
+  color: white;
+  border-radius: 28px;
   display: none;
-  flex-direction: column;
+  /* Desktop hidden */
+  align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
-  position: sticky;
-  top: var(--vp-nav-height);
-  z-index: 100;
-  background: var(--vp-c-bg);
-  padding: 12px 0;
+  box-shadow: 0 12px 32px rgba(var(--vp-c-brand-1-rgb), 0.4);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 700;
 }
 
-.mobile-search-bar .search-box {
-  background: var(--vp-c-bg-mute);
-  border-radius: 16px;
-  border: 1px solid var(--vp-c-divider);
-  padding: 4px;
+.super-fab-btn:active {
+  transform: scale(0.92);
+}
+
+.fab-label {
+  font-size: 15px;
+}
+
+.search-active-dot {
+  width: 12px;
+  height: 12px;
+  background: #34c759;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+@media (max-width: 900px) {
+  .super-fab-btn {
+    display: flex;
+  }
+
+  .app-layout {
+    display: block;
+    padding: 12px 20px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* Drawer Internal Styling */
+.mobile-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-header-mini {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--vp-c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: 4px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .mobile-search-bar .search-input {
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  /* Prevent zoom on iOS */
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border-radius: 16px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-mute);
+  font-size: 17px;
+  /* Best for iOS input */
+}
+
+.mobile-search-bar .search-icon {
+  position: absolute;
+  left: 16px;
+  opacity: 0.6;
 }
 
 .clear-search-btn {
-  padding: 8px 12px;
+  position: absolute;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--vp-c-text-3);
   font-size: 18px;
 }
 
 .mobile-filter-chips {
   overflow: hidden;
-  margin: 0 -24px;
-  padding: 0 24px;
+  margin: 0 -12px;
+  padding: 0 12px;
 }
 
 .chip-scroll-container {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 4px 0 12px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -486,84 +609,86 @@ const switchModule = (source: string | "All") => {
 
 .filter-chip {
   white-space: nowrap;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background: var(--vp-c-bg-soft);
   border-radius: 100px;
   font-size: 14px;
   font-weight: 600;
   color: var(--vp-c-text-2);
   border: 1px solid var(--vp-c-divider);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.filter-chip:active {
-  transform: scale(0.95);
+  transition: all 0.2s;
 }
 
 .filter-chip.active {
   background: var(--vp-c-brand-1);
   color: white;
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1-rgb), 0.3);
 }
 
-@media (max-width: 900px) {
-  .app-layout {
-    display: block;
-    padding: 12px 20px;
-  }
+.btn-group-mobile {
+  display: flex;
+  gap: 10px;
+}
 
-  .mobile-smart-header {
-    display: flex;
-  }
+.btn-group-mobile button {
+  flex: 1;
+  padding: 16px;
+  background: var(--vp-c-bg-mute);
+  border-radius: 14px;
+  border: 1px solid var(--vp-c-divider);
+  font-weight: 700;
+  color: var(--vp-c-text-2);
+}
 
-  .desktop-only {
-    display: none !important;
-  }
+.btn-group-mobile button.active {
+  background: var(--vp-c-brand-1);
+  color: white;
+  border-color: var(--vp-c-brand-1);
 }
 
 /* QA Cards Styling */
 .qa-item {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .qa-card-content {
   border: 1px solid var(--vp-c-divider);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   background: var(--vp-c-bg-elv);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .qa-trigger {
-  padding: 20px 24px;
+  padding: 24px 28px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .q-text {
-  font-size: 1.1em;
-  font-weight: 700;
-  line-height: 1.4;
+  font-size: 1.15em;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
 .imp-tag {
   background: #ff3b30;
   color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .arrow {
   color: var(--vp-c-text-3);
-  transition: transform 0.3s;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .qa-item.open .arrow {
@@ -572,63 +697,28 @@ const switchModule = (source: string | "All") => {
 }
 
 .qa-content {
-  padding: 0 24px 24px;
+  padding: 0 28px 28px;
   background: var(--vp-c-bg-soft);
   border-top: 1px solid var(--vp-c-divider);
 }
 
-.markdown-body {
-  font-size: 1.05em;
-  line-height: 1.7;
-  padding-top: 16px;
-}
-
 .section-label {
-  font-size: 1.5em;
-  margin: 40px 0 20px;
-  font-weight: 800;
-  border-bottom: 2px solid var(--vp-c-divider);
-  padding-bottom: 8px;
+  font-size: 1.6em;
+  margin: 48px 0 24px;
+  font-weight: 900;
+  border-bottom: 3px solid var(--vp-c-brand-soft);
+  padding-bottom: 10px;
+  color: var(--vp-c-text-1);
 }
 
 .chapter-title {
-  font-size: 1.8em;
-  margin: 60px 0 24px;
-  padding: 12px 20px;
-  background: var(--vp-c-bg-soft);
+  font-size: 2em;
+  margin: 80px 0 32px;
+  padding: 16px 24px;
+  background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
-  border-radius: 16px;
-  font-weight: 800;
-}
-
-.mobile-settings-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 48px;
-  height: 48px;
-  background: var(--vp-c-bg-alt);
-  color: var(--vp-c-text-1);
-  border-radius: 50%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  border: 1px solid var(--vp-c-divider);
-}
-
-@media (max-width: 900px) {
-  .mobile-settings-btn {
-    display: flex;
-  }
-}
-
-.search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
+  border-radius: 20px;
+  font-weight: 900;
 }
 
 .search-input {
@@ -641,51 +731,21 @@ const switchModule = (source: string | "All") => {
 }
 
 .search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.5;
   display: flex;
+  align-items: center;
 }
 
-.font-controls-mobile {
-  padding: 20px 0;
-}
+@media (max-width: 640px) {
+  .qa-trigger {
+    padding: 20px 24px;
+  }
 
-.categories-header-mini {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--vp-c-text-3);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
+  .qa-content {
+    padding: 0 24px 24px;
+  }
 
-.btn-group-mobile {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-group-mobile button {
-  flex: 1;
-  padding: 14px;
-  background: var(--vp-c-bg-soft);
-  border-radius: 12px;
-  border: 1px solid var(--vp-c-divider);
-  font-weight: 700;
-  color: var(--vp-c-text-2);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-group-mobile button:active {
-  transform: scale(0.97);
-}
-
-.btn-group-mobile button.active {
-  background: var(--vp-c-brand-1);
-  color: white;
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 12px rgba(var(--vp-c-brand-1-rgb), 0.3);
+  .q-text {
+    font-size: 1.1em;
+  }
 }
 </style>
