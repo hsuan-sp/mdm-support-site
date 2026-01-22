@@ -8,17 +8,19 @@ tags: ["Network Optimization","Content Caching","Bandwidth Management","iCloud"]
 
 ## Q: Will simultaneous downloads by the whole class crash the network? What is 'Content Caching'?
 
-## Answer**Yes. Without a caching mechanism, 30 iPads requesting data individually from the internet will likely saturate your school's outbound bandwidth.**## The Role of Content Caching:
+## Answer
 
-Content Caching is a feature on a local Mac (e.g., a Mac mini) that stores content from**Apple's official servers**locally.
+** Yes. Without a caching mechanism, 30 iPads requesting data individually from the internet will likely saturate your school's outbound bandwidth. ** ## The Role of Content Caching:
 
-***Supported Content**:
+Content Caching is a feature on a local Mac (e.g., a Mac mini) that stores content from ** Apple's official servers ** locally.
+
+* ** Supported Content ** :
 * iOS / iPadOS system updates (the single largest bandwidth consumer).
 * Apps downloaded from the App Store.
 * Course files stored in iCloud Drive (e.g., Keynote, Pages, PDFs).
 * Photos and backups uploaded to iCloud.
-***Unsupported Content**:
-***YouTube videos, Netflix, and general web browsing.**This traffic does**not**go through Content Caching and will still consume outbound bandwidth.
+* ** Unsupported Content ** :
+* ** YouTube videos, Netflix, and general web browsing. ** This traffic does ** not ** go through Content Caching and will still consume outbound bandwidth.
 
 ## Practical Benefits:
 
