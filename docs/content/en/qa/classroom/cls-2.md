@@ -17,8 +17,8 @@ tags: ["App Lock","Single App Mode","Focus","Compliance"]
 
 ## How to Unlock:
 
-* Tap the **"Unlock"** button in the teacher’s toolbar.
-* The devices will also automatically unlock when the teacher ends the class session.
+- Tap the **"Unlock"** button in the teacher’s toolbar.
+- The devices will also automatically unlock when the teacher ends the class session.
 
 ## Practical Tip:
 

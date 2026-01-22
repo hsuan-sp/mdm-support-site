@@ -17,11 +17,11 @@ tags: ["Battery Health","Storage","Summer Break","Prevention"]
 
 1. **Power Off Completely** :
 
-* After reaching 50%, go to **Settings > General > Shut Down** . This ensures the device isn't slowly draining power while sitting in the cart.
+- After reaching 50%, go to **Settings > General > Shut Down** . This ensures the device isn't slowly draining power while sitting in the cart.
 
 1. **Cool, Dry Environment** :
 
-* Store the iPads (and the charging cart) in a temperature-controlled room. Excessive heat (like a non-air-conditioned classroom in the height of summer) accelerated chemical degradation.
+- Store the iPads (and the charging cart) in a temperature-controlled room. Excessive heat (like a non-air-conditioned classroom in the height of summer) accelerated chemical degradation.
 
 ## Operational Advice for IT:
 

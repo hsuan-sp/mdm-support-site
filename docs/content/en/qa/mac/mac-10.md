@@ -30,7 +30,7 @@ In addition to traditional inventory updates, macOS 26 recommends using the DDM 
 
 1. **Write Script** :
 
-* Paste your Shell Script in the editor.
+- Paste your Shell Script in the editor.
 - **Crucial Syntax** : Jamf Pro only reads values enclosed in `<result>` and `</result>` tags. Any other `echo` output will only appear in debug logs and won't be written to the database.
 
 ## Practical Example: Collecting "System Uptime Days"

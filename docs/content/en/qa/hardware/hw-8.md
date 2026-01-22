@@ -14,11 +14,11 @@ tags: ["Cleaning","Maintenance","Disinfection","Alcohol","Oleophobic Coating"]
 
 ## 2. Prohibited Substances & Tools:
 
-* ❌ **Bleach** or products containing **Hydrogen Peroxide** .
-* ❌ **Window cleaners or household detergents** .
-* ❌ **Aerosols, solvents, or abrasives** .
-* ❌ **Compressed air** sprayed directly into openings (can damage microphone or speaker membranes).
-* ❌ **Rough fabrics, paper towels, or napkins** (may cause micro-scratches).
+- ❌ **Bleach** or products containing **Hydrogen Peroxide** .
+- ❌ **Window cleaners or household detergents** .
+- ❌ **Aerosols, solvents, or abrasives** .
+- ❌ **Compressed air** sprayed directly into openings (can damage microphone or speaker membranes).
+- ❌ **Rough fabrics, paper towels, or napkins** (may cause micro-scratches).
 
 ## 3. Standard Cleaning Steps:
 

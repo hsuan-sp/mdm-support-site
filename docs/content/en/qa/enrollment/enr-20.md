@@ -18,18 +18,18 @@ tags: ["Repair","Replacement","ADE","Automated Device Enrollment"]
 
 ## 2. Sync Jamf Pro
 
-* Go to **Settings > Global Management > Device Enrollment > [Your Server]** .
-* Click **Sync Now** to ensure the new serial number is pulled into your PreStage Enrollments scope.
+- Go to **Settings > Global Management > Device Enrollment > [Your Server]** .
+- Click **Sync Now** to ensure the new serial number is pulled into your PreStage Enrollments scope.
 
 ## 3. Initial Enrollment (ADE Flow)
 
-* Power on the device to the **Setup Assistant** .
-* Manually connect to Wi-Fi (the device isn't managed yet).
-* The device will fetch the **Remote Management** screen. Click "Download Profile" to begin the automated app and setting installation.
+- Power on the device to the **Setup Assistant** .
+- Manually connect to Wi-Fi (the device isn't managed yet).
+- The device will fetch the **Remote Management** screen. Click "Download Profile" to begin the automated app and setting installation.
 
 ## 4. Future Resets (Using RTS)
 
-* Once the device has completed the above steps, it is now "Managed."
+- Once the device has completed the above steps, it is now "Managed."
 - **Next time** you need to wipe it for a new student, you can use the **Return to Service (RTS)** command for a zero-touch wipe and Wi-Fi reconnect.
 
 ## Troubleshooting:

@@ -15,15 +15,15 @@ tags: ["Account Lifecycle","Graduation","Data Retention"]
 
 1. **Effects** :
 
-* The student will be immediately signed out of all devices and can no longer access any Apple services.
-* Data in iCloud ( **200 GB free tier** ) is retained on the server until the account is permanently deleted.
-* Administrators can reactivate access at any time by switching the status back to "Active". **Phase 2: Retention Period** It is advisable to retain accounts for 30 to 90 days after graduation. Since students cannot use the "Data and Privacy" page to download backups like personal accounts can, this period allows for temporary reactivation requests to transfer important coursework. **Phase 3: Delete Account** 1. Select the deactivated user.
+- The student will be immediately signed out of all devices and can no longer access any Apple services.
+- Data in iCloud ( **200 GB free tier** ) is retained on the server until the account is permanently deleted.
+- Administrators can reactivate access at any time by switching the status back to "Active". **Phase 2: Retention Period** It is advisable to retain accounts for 30 to 90 days after graduation. Since students cannot use the "Data and Privacy" page to download backups like personal accounts can, this period allows for temporary reactivation requests to transfer important coursework. **Phase 3: Delete Account** 1. Select the deactivated user.
 1. Click **Delete User** in the right-hand panel.
 
 1. **Consequences** :
 
-* All cloud data (Drive files, Notes, Photos) associated with the account will be permanently erased.
-* Any App licenses (VPP) assigned to the user will be automatically released back to the school's license pool.
+- All cloud data (Drive files, Notes, Photos) associated with the account will be permanently erased.
+- Any App licenses (VPP) assigned to the user will be automatically released back to the school's license pool.
 
 **Batch Processing for Graduates** :
 

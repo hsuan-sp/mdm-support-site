@@ -12,17 +12,17 @@ tags: ["Platform SSO", "無密碼", "資安規範", "教育部要求", "身分�
 
 1. **整合雲端帳號** ：
 
-* 在 Jamf Pro 中設定 PSSO 配置。
-* 選取驗證模式為 **「分層式加密 (Shared Secret)」** 或 **「硬體金鑰 (Hardware Bound Key)」** 。
+- 在 Jamf Pro 中設定 PSSO 配置。
+- 選取驗證模式為 **「分層式加密 (Shared Secret)」** 或 **「硬體金鑰 (Hardware Bound Key)」** 。
 
 1. **開機即登入 (Boot to Desktop)** ：
 
-* 啟用 **「FileVault 登入與 PSSO 同步」** 功能。
+- 啟用 **「FileVault 登入與 PSSO 同步」** 功能。
 - **效果** ：使用者在開機第一個畫面（FileVault）輸入密碼後，系統會自動在後台完成組織驗證，直接載入桌面，不再跳出第二次登入視窗。
 
 1. **強制強密碼原則** ：
 
-* 由雲端 IdP (如 Microsoft Entra) 統一控管密碼強度（需包含長度、複雜度、定期更換）。
+- 由雲端 IdP (如 Microsoft Entra) 統一控管密碼強度（需包含長度、複雜度、定期更換）。
 - **優勢** ：資訊組長無須逐機檢查老师的本機密碼，只要 IdP 通過，即代表符合教育部資安稽核標準。
 
 ## 二、 常見資安問答

@@ -17,17 +17,17 @@ tags: ["Troubleshooting","App Installation","VPP","DDM"]
 
 1. **Campus Network Restrictions** :
 
-* App downloads require access to Apple’s **Content Delivery Network (CDN)** . If your school’s firewall blocks these domains, the download will sit at 0%.
+- App downloads require access to Apple’s **Content Delivery Network (CDN)** . If your school’s firewall blocks these domains, the download will sit at 0%.
 - **Test** : Connect the iPad to a mobile hotspot. If the progress bar starts moving immediately, the issue lies with your campus network configuration.
 
 1. **Assignment Mode Conflict** :
 
-* Ensure the app is set to **"Device-based Assignment"** in Jamf Pro. If it’s incorrectly set to "User-based," the device will wait indefinitely for a student to log into a personal Apple ID.
+- Ensure the app is set to **"Device-based Assignment"** in Jamf Pro. If it’s incorrectly set to "User-based," the device will wait indefinitely for a student to log into a personal Apple ID.
 
 1. **Declarative Management (DDM) Desync** :
 
-* In the latest iPadOS versions, app status is reported via DDM. If the status seems "stuck" in the dashboard, try sending a **"Cancel All Pending Commands"** followed by an **"Update Inventory"** command to the device.
+- In the latest iPadOS versions, app status is reported via DDM. If the status seems "stuck" in the dashboard, try sending a **"Cancel All Pending Commands"** followed by an **"Update Inventory"** command to the device.
 
 1. **Storage Constraints** :
 
-* If the iPad’s storage is nearly full, the OS will automatically pause background downloads. Check **Settings > General > iPad Storage** to ensure enough overhead remains for the new apps.
+- If the iPad’s storage is nearly full, the OS will automatically pause background downloads. Check **Settings > General > iPad Storage** to ensure enough overhead remains for the new apps.

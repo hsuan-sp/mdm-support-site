@@ -26,8 +26,8 @@ tags: ["手動註冊","帳號驅動註冊","受監管","Apple Configurator"]
 
 1. **註冊方式的演進** ：
 
-* 傳統上，手動註冊是透過 Safari 前往網頁下載 .mobileconfig 檔案。
-* 現代化方式稱為 **「帳號驅動註冊 (Account-driven Enrollment)」** 。
+- 傳統上，手動註冊是透過 Safari 前往網頁下載 .mobileconfig 檔案。
+- 現代化方式稱為 **「帳號驅動註冊 (Account-driven Enrollment)」** 。
 
  使用者只需在「設定」中登入「管理式 Apple 帳號」，系統即會識別其身分並引導註冊，流程更直覺且安全。 **如何將非 ADE 裝置提升至「受監管」？** 若您的 iPad 是非正規管道取得，但您仍希望讓它具備最高管理權限：
 

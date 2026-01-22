@@ -23,7 +23,7 @@ tags: ["System Updates","DDM","Nudge","IT Operations"]
 
 ## Path 2: Nudge (Visual Urgency)
 
-* If the subtle system notifications aren't enough, **Nudge** is the industry standard for gettings users to take action.
+- If the subtle system notifications aren't enough, **Nudge** is the industry standard for gettings users to take action.
 - **The Experience** : It pops up a non-dismissible window (which can be branded with the school logo) that clearly states: "Your Mac is out of date and insecure. Please update now."
 - **Escalation** : As the deadline nears, Nudge can dim the screen or blur the background, making it impossible for the student to ignore the update while they try to use other apps.
 

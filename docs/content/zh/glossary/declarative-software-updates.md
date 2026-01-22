@@ -25,8 +25,8 @@ category: ["DDM"]
 
 **Jamf Pro 對應** ：
 
-* 使用 **Blueprints (Configuration Profiles 3.0)** 執行 DDM 軟體更新。
-* 舊版 Policy-based 更新將失效。
+- 使用 **Blueprints (Configuration Profiles 3.0)** 執行 DDM 軟體更新。
+- 舊版 Policy-based 更新將失效。
 
 ## 技術優勢
 

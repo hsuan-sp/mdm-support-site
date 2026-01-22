@@ -12,7 +12,7 @@ tags: ["Deployment","ADE","Offline Install","Content Caching","macOS 26"]
 
 1. **Content Caching Server** :
 
-* This is the lifeblood of mass deployment. Dedicate one Mac mini (M5) to this role for each computer lab.
+- This is the lifeblood of mass deployment. Dedicate one Mac mini (M5) to this role for each computer lab.
 - **Benefit** : When the first Mac downloads Office or a macOS update, the other 49 units will pull it locally from the cache at near-instant speeds, protecting your school's external internet pipe.
 
 1. **Declarative Enrollment (DDM)** :
@@ -22,7 +22,7 @@ tags: ["Deployment","ADE","Offline Install","Content Caching","macOS 26"]
 
 1. **Hybrid 'Pre-load' Strategy** :
 
-* For schools with poor internet, use an external SSD to pre-load large **.pkg** files (like Adobe CC). Use a post-enrollment script to call `/usr/sbin/installer` locally from the internal drive to finish the setup quickly.
+- For schools with poor internet, use an external SSD to pre-load large **.pkg** files (like Adobe CC). Use a post-enrollment script to call `/usr/sbin/installer` locally from the internal drive to finish the setup quickly.
 
 ## 2026 NPU Considerations:
 

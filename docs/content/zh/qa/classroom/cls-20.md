@@ -13,7 +13,7 @@ tags: ["時鐘 App","鬧鐘限制","課堂秩序","限制描述檔"]
 
 1. **隱藏時鐘 App (最有效)** ：
 
-* 在 Jamf Pro 的限制描述檔中，將 `com.apple.mobiletimer` (時鐘 App 的 Bundle ID)
+- 在 Jamf Pro 的限制描述檔中，將 `com.apple.mobiletimer` (時鐘 App 的 Bundle ID)
 
  加入 **「限制 App (Restricted Media)」** 或阻擋名單。
 
@@ -21,12 +21,12 @@ tags: ["時鐘 App","鬧鐘限制","課堂秩序","限制描述檔"]
 
 1. **還原設定 (Reset All Settings)** ：
 
-* 若鬧鐘已經設好且隱藏 App 後仍在響，
+- 若鬧鐘已經設好且隱藏 App 後仍在響，
 
  請執行裝置端的 **「重置所有設定」** （不會刪除資料，但會移除鬧鐘）。
 
 1. **使用 Jamf Teacher 的「App 限制」** ：
 
-* 老師可以在上課期間，利用 Jamf Teacher 設定「僅允許教學 App」，
+- 老師可以在上課期間，利用 Jamf Teacher 設定「僅允許教學 App」，
 
  這樣時鐘 App 就會暫時被隱藏，達到防干擾效果。

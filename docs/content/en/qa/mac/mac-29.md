@@ -17,8 +17,8 @@ This is the recommended and most professional method:
 
 1. **Key Setting: Enforcement Deadline** :
 
-* Set a specific date and time (e.g., Three days from now at 5:00 PM).
-* Before the deadline, users will receive gentle system notifications.
+- Set a specific date and time (e.g., Three days from now at 5:00 PM).
+- Before the deadline, users will receive gentle system notifications.
 - **Once the deadline is reached, the device will ignore the user's state, force a restart, and install the update.** 1. Assign this blueprint to the target device group.
 
 ## 2. Using Mass Actions for Remote Commands (Legacy Way)

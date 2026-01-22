@@ -18,8 +18,8 @@ tags: ["Shared iPad","Guest Session","Library"]
 
 ## Use Cases:
 
-* Public kiosks in the library.
-* Temporary sessions for younger students who haven't yet received Managed Apple Accounts.
+- Public kiosks in the library.
+- Temporary sessions for younger students who haven't yet received Managed Apple Accounts.
 
 ## Configuration:
 

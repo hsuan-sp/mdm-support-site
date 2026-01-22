@@ -20,7 +20,7 @@ tags: ["Content Filtering","Exclusions","YouTube","Jamf Trust","DNS Proxy"]
 
 ## Method 2: AirPlay via Teacher Device
 
-* If students only need to "view" content rather than "interact" with it, it is recommended that the teacher play the video on their own device (which typically has less restrictive filtering) and project it to the classroom Apple TV via AirPlay.
+- If students only need to "view" content rather than "interact" with it, it is recommended that the teacher play the video on their own device (which typically has less restrictive filtering) and project it to the classroom Apple TV via AirPlay.
 
 ## Practical Advice: Risk Management
 

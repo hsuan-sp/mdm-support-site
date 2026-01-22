@@ -9,12 +9,12 @@ tags: ["硬體管理","Lightning","USB-C","Apple Pencil","轉接器","充電車"
 **隨著精進方案進入後期，學校開始採購新 iPad，校內常出現不同介面的 iPad 併存。****管理員需特別注意介面轉換、Apple Pencil 的配對機制以及充電車的佈線設定。** iPad 9（Lightning 介面）以前的裝置，與 iPad 10（USB-C 介面）以後的裝置，
 在硬體連接埠物理特性上有顯著差異，這直接影響了周邊配件的採購與共用性： **Apple Pencil 相容性與轉接方案：** 1. **iPad 9 (Lightning) 世代** ：僅支援 **Apple Pencil (第 1 代)** 。
 
-* 配對與充電方式是直接將筆頭插入 iPad 底部的 Lightning 埠。
+- 配對與充電方式是直接將筆頭插入 iPad 底部的 Lightning 埠。
 
 1. **iPad 10 (USB-C 基礎款)** ：
 
-* 若沿用 **Apple Pencil (第 1 代)** ：必須額外購買 **「USB-C 對 Apple Pencil 轉接器」** 。配對時需透過 USB-C 線接上轉接器與筆，過程較為繁瑣，建議由老師統一保管轉接器，避免學生遺失。
-* 若新購 **Apple Pencil (USB-C)** ：可直接透過 USB-C 線進行配對與充電，但要注意此款筆 **不具備壓力感應功能** 。
+- 若沿用 **Apple Pencil (第 1 代)** ：必須額外購買 **「USB-C 對 Apple Pencil 轉接器」** 。配對時需透過 USB-C 線接上轉接器與筆，過程較為繁瑣，建議由老師統一保管轉接器，避免學生遺失。
+- 若新購 **Apple Pencil (USB-C)** ：可直接透過 USB-C 線進行配對與充電，但要注意此款筆 **不具備壓力感應功能** 。
 
 1. **iPad Pro (M4)、iPad Air (M2/M3)、iPad mini 7 (A17 Pro) 高階機型** ：
 

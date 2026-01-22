@@ -22,7 +22,7 @@ tags: ["Writing Tools", "Apple Intelligence", "Exam Security", "iOS 26", "AI"]
 - **Optional** : Also disable **'Allow Math Notes'** to prevent cheating in mathematics exams.
 - **Deployment** : Push this profile 15 minutes before the exam and remove it immediately after. **Strategy B: App Lock (Single App Mode)** Using the **Classroom** app's **'App Lock'** feature is the most secure method:
 
-* When locked into a single app, the system-wide text selection menu is suppressed, and the student cannot access the Writing Tools interface. This is effective for both school-owned and BYOD devices.
+- When locked into a single app, the system-wide text selection menu is suppressed, and the student cannot access the Writing Tools interface. This is effective for both school-owned and BYOD devices.
 
 ## Device Capability Audit:
 

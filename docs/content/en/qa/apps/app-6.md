@@ -14,7 +14,7 @@ tags: ["Managed Apps","License Ownership","VPP","Data Protection"]
 - **Ownership** : The license belongs to the **school** .
 - **Graduation/Departure Process** :
 - **License Recovery** : When a student leaves and the device is unenrolled, the MDM revokes the license. The app will either disappear from the device or become inaccessible.
-* The license is then returned to the school's VPP (Volume Purchase Program) pool for the next student to use.
+- The license is then returned to the school's VPP (Volume Purchase Program) pool for the next student to use.
 - **Data Risk** : If the "Remove app when management profile is removed" setting is enabled, all data stored within the app (e.g., unsaved projects, local notes) will be **permanently erased** .
 
 ## 2. Apps purchased with a student's personal Apple Account

@@ -26,7 +26,7 @@ tags: ["E-books","Material Distribution","PDF","Restrictions"]
 
 ## Option 3: Learning Management Systems (LMS)
 
-* Upload materials to your LMS (e.g., Google Classroom, Canvas). Students access the content via the LMS app or web browser.
+- Upload materials to your LMS (e.g., Google Classroom, Canvas). Students access the content via the LMS app or web browser.
 
 ## Key Considerations:
 

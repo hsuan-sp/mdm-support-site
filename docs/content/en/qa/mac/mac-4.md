@@ -27,11 +27,11 @@ tags: ["Software Updates", "DDM", "macOS 26", "Compliance", "IT Strategy"]
 
 1. **Utilize Background Caching** :
 
-* Ensure each administrative or classroom building has at least one Mac mini acting as a **"Content Caching"** server. This ensures the update files are downloaded from the school's local network rather than hitting your external internet line 500 times simultaneously.
+- Ensure each administrative or classroom building has at least one Mac mini acting as a **"Content Caching"** server. This ensures the update files are downloaded from the school's local network rather than hitting your external internet line 500 times simultaneously.
 
 1. **Blackout Dates** :
 
-* Use the "Update Delay" feature in Jamf Pro during **Assessment Weeks** or Final Exams. You don't want a student's Mac to trigger a forced restart in the middle of a high-stakes digital exam because a deadline was reached.
+- Use the "Update Delay" feature in Jamf Pro during **Assessment Weeks** or Final Exams. You don't want a student's Mac to trigger a forced restart in the middle of a high-stakes digital exam because a deadline was reached.
 
 ## Institutional Advice:
 

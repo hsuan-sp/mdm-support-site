@@ -12,16 +12,16 @@ tags: ["Platform SSO", "Passwordless", "Security Standards", "MOE Requirements",
 
 ## 1. Configure PSSO in MDM
 
-* Set up the Platform SSO configuration in Jamf Pro.
-* Select the authentication mode: **'Shared Secret'** (standard) or **'Hardware Bound Key'** (highest security using the Secure Enclave).
+- Set up the Platform SSO configuration in Jamf Pro.
+- Select the authentication mode: **'Shared Secret'** (standard) or **'Hardware Bound Key'** (highest security using the Secure Enclave).
 
 ## 2. Enable Boot-to-Desktop
 
-* Enable **'FileVault Login & PSSO Synchronization.'***** Result** : When the teacher enters their password at the initial FileVault disk-unlock screen, the system automatically uses those credentials to complete the cloud authentication in the background. The Mac loads straight to the desktop without asking for a second password.
+- Enable **'FileVault Login & PSSO Synchronization.'***** Result** : When the teacher enters their password at the initial FileVault disk-unlock screen, the system automatically uses those credentials to complete the cloud authentication in the background. The Mac loads straight to the desktop without asking for a second password.
 
 ## 3. Enforce Strong Policies via IdP
 
-* Password strength (length, complexity, rotation) is managed centrally by your Cloud Identity Provider (IdP).
+- Password strength (length, complexity, rotation) is managed centrally by your Cloud Identity Provider (IdP).
 - **Benefit** : The school IT lead no longer needs to manually audit every Mac’s local password. As long as the IdP authentication is successful, the device is automatically compliant with national cybersecurity audit standards.
 
 ## Frequently Asked Questions

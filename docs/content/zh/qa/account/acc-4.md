@@ -11,8 +11,8 @@ tags: ["VPP","Token","大量採購"]
 
 **過期前 Jamf Pro 會提供以下警告** ：
 
-* 儀錶板顯示紅色或橘色警告標籤。
-* 管理員 Email 會收到到期通知（通常為到期前 30 天）。
+- 儀錶板顯示紅色或橘色警告標籤。
+- 管理員 Email 會收到到期通知（通常為到期前 30 天）。
 
 **更新流程** ： **步驟一：從 Apple 校務管理下載新的 Token** 1. 登入 [school.apple.com](https://school.apple.com)，使用具備「管理員」或「App 與書籍管理者」權限的帳號。
 1. 點選左下角的 **帳號名稱** ，進入 **「偏好設定 (Preferences)」** 。
@@ -36,5 +36,5 @@ tags: ["VPP","Token","大量採購"]
 
 **實務建議** ：
 
-* 將 VPP Token 更新日期設定在行事曆提醒，建議每年固定日期處理（例如暑假開學前）。
-* 更新 Token 後，建議執行一次 **「同步大量採購內容 (Sync Volume Purchasing Content)」** 以確保授權數量正確。
+- 將 VPP Token 更新日期設定在行事曆提醒，建議每年固定日期處理（例如暑假開學前）。
+- 更新 Token 後，建議執行一次 **「同步大量採購內容 (Sync Volume Purchasing Content)」** 以確保授權數量正確。

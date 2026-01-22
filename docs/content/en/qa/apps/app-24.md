@@ -29,12 +29,12 @@ This feature is implemented via **DDM** configurations. In **Jamf Pro** :
 ## Impact and Limitations
 
 - **Applies to** :
-* Manual App Store downloads.
-* MDM-initiated (DDM) automated installs.
-* App auto-updates.
+- Manual App Store downloads.
+- MDM-initiated (DDM) automated installs.
+- App auto-updates.
 - **Does NOT apply to** :
-* General web browsing or video streaming (YouTube still consumes data unless managed by a Content Filter).
-* In-app content updates (e.g., additional data packs inside a game).
+- General web browsing or video streaming (YouTube still consumes data unless managed by a Content Filter).
+- In-app content updates (e.g., additional data packs inside a game).
 - **User Experience** : When a student tries to download an app on 4G/5G, the button will be grayed out or a prompt will appear: "Please connect to Wi-Fi to download."
 
 ## Expert Strategy

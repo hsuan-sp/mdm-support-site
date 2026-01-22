@@ -16,7 +16,7 @@ tags: ["Prevent Unenrollment","Supervised","PreStage Enrollment","ADE","Return t
 
 1. **Lock the Profile (Crucial Step)** :
 
-* Check **Prevent Unenrollment** .
+- Check **Prevent Unenrollment** .
 - **Result** : The "Remove Management" button will disappear from the iPad settings. Unless the device was added via Apple Configurator (which has a 30-day grace period), the student cannot manually remove the MDM profile.
 
 ## Supporting Security Measures:

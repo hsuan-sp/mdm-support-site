@@ -17,25 +17,25 @@
 
 存放所有的原子化 Markdown 內容檔案（QA、術語表）。
 
-*   `zh/`: 繁體中文術語表與常見問答。
-*   `en/`: 英文版同步內容（用於 i18n 切換）。
+- `zh/`: 繁體中文術語表與常見問答。
+- `en/`: 英文版同步內容（用於 i18n 切換）。
 
 ### 2. 資料與邏輯 (`docs/data/`)
 
 存放系統層級的資料載入器與變更日誌。
 
-*   `all.data.ts`: 全域資料載入器（基於 `gray-matter` 確保解析安全）。
-*   `changelog.data.ts`: 更新日誌載入器。
-*   `logs/`: 存放按版本分層的 Changelog 原始 Markdown。
+- `all.data.ts`: 全域資料載入器（基於 `gray-matter` 確保解析安全）。
+- `changelog.data.ts`: 更新日誌載入器。
+- `logs/`: 存放按版本分層的 Changelog 原始 Markdown。
 
 ### 3. 維護與指南 (`docs/maintenance/`)
 
 存放維護者的「指南針」，避免與核心內容混雜。
 
-*   `INDEX_ZH.md` / `INDEX_EN.md`: 自動產生的維護索引（不可手動編輯）。
-*   `MAINTENANCE_QA_GUIDE.md`: 問答集撰寫指南。
-*   `MAINTENANCE_GLOSSARY_GUIDE.md`: 術語表撰寫指南。
-*   `MAINTENANCE_CHANGELOG_GUIDE.md`: 更新日誌撰寫規範。
+- `INDEX_ZH.md` / `INDEX_EN.md`: 自動產生的維護索引（不可手動編輯）。
+- `MAINTENANCE_QA_GUIDE.md`: 問答集撰寫指南。
+- `MAINTENANCE_GLOSSARY_GUIDE.md`: 術語表撰寫指南。
+- `MAINTENANCE_CHANGELOG_GUIDE.md`: 更新日誌撰寫規範。
 
 ### 4. 英文版頁面 (`docs/en/`)
 

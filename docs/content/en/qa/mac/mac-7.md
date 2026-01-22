@@ -18,11 +18,11 @@ tags: ["Apple Silicon","Bootstrap Token","Secure Boot","Kernel Extensions"]
 
 ## 2. Volume Ownership
 
-* Only users designated as "Owners" can perform system resets or updates.
-* The first account created through ADE enrollment automatically gains ownership. MDM escorts this privilege via the Bootstrap Token.
+- Only users designated as "Owners" can perform system resets or updates.
+- The first account created through ADE enrollment automatically gains ownership. MDM escorts this privilege via the Bootstrap Token.
 
 ## 3. Kernel Extensions (KEXTs)
 
-* Apple Silicon **blocks** all third-party KEXTs by default.
-* If they must be installed (e.g., for older antivirus software), the device must be rebooted into Recovery Mode to lower the security setting to "Reduced Security."
+- Apple Silicon **blocks** all third-party KEXTs by default.
+- If they must be installed (e.g., for older antivirus software), the device must be rebooted into Recovery Mode to lower the security setting to "Reduced Security."
 - **Modern Recommendation** : Use **System Extensions** instead. This is Apple's recommended architecture, which can be authorized directly via MDM configuration profiles without lowering system security.

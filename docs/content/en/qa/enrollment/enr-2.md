@@ -22,7 +22,7 @@ tags: ["Manual Enrollment","Account-Driven","Supervised","Apple Configurator"]
 
 1. **Modern Methods** :
 
-* While old-fashioned manual enrollment required visiting a web URL in Safari, the modern approach is **"Account-Driven Enrollment."** Users simply sign in with their Managed Apple Account in Settings, and the system automatically guides them through the enrollment.
+- While old-fashioned manual enrollment required visiting a web URL in Safari, the modern approach is **"Account-Driven Enrollment."** Users simply sign in with their Managed Apple Account in Settings, and the system automatically guides them through the enrollment.
 
 ## How to Upgrade Manual Devices to "Supervised" Status:
 

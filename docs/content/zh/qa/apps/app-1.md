@@ -22,7 +22,7 @@ tags: ["故障排除","App 安裝","VPP","DDM"]
 
 1. **網路環境阻擋** ：
 
-* App 下載需連向 Apple 的 **Content Delivery Network (CDN)** 。
+- App 下載需連向 Apple 的 **Content Delivery Network (CDN)** 。
 
  若學校防火牆阻擋了相關網域，下載會卡在 0%。
 
@@ -30,18 +30,18 @@ tags: ["故障排除","App 安裝","VPP","DDM"]
 
 1. **Apple 帳號衝突** ：
 
-* 確認該 App 的分派模式是否設定為 **「指派給裝置 (Assign to Device)」** 。
+- 確認該 App 的分派模式是否設定為 **「指派給裝置 (Assign to Device)」** 。
 
  若錯誤設為「指派給使用者」，系統會等待使用者登入 Apple 帳號，導致卡住。
 
 1. **宣告式管理 (DDM) 狀態異常** ：
 
-* 在最新的 iPadOS 中，App 安裝狀態由 DDM 回報。
+- 在最新的 iPadOS 中，App 安裝狀態由 DDM 回報。
 
  若狀態不同步，請在 Jamf Pro 發送 **「取消所有擱置指令」** 並執行 **「更新資產」** 。
 
 1. **儲存空間不足** ：
 
-* 若 iPad 剩餘空間小於 App 大小，系統會主動在後台暫停下載。
+- 若 iPad 剩餘空間小於 App 大小，系統會主動在後台暫停下載。
 
  請檢查「設定」>「一般」>「iPad 儲存空間」。

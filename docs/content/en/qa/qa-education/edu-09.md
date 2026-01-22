@@ -25,11 +25,11 @@ tags: ["Projection","Adapters","AirPlay","HDMI"]
 
 **Pros** :
 
-* Near-zero latency, great for live demos.
-* No network required.
-* Compatible with any TV/Projector with an HDMI port.
+- Near-zero latency, great for live demos.
+- No network required.
+- Compatible with any TV/Projector with an HDMI port.
 
 **Cons** :
 
-* Requires carrying an adapter and cable.
-* The iPad is tethered to the cable length.
+- Requires carrying an adapter and cable.
+- The iPad is tethered to the cable length.

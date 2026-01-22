@@ -19,8 +19,8 @@ If a student's 200GB is full (often due to backing up large personal photo/video
 
 1. **Utilize the 'Schoolwork' App** :
 
-* Files submitted via the **Schoolwork** app (Pages, Keynote, video assignments) are managed separately from the student’s personal iCloud quota, reducing pressure on their individual space.
-* Teach students to manage files effectively instead of storing all miscellaneous data in iCloud.
+- Files submitted via the **Schoolwork** app (Pages, Keynote, video assignments) are managed separately from the student’s personal iCloud quota, reducing pressure on their individual space.
+- Teach students to manage files effectively instead of storing all miscellaneous data in iCloud.
 
 1. **Cleanup and Backup (SOP)** :
 
@@ -30,7 +30,7 @@ If a student's 200GB is full (often due to backing up large personal photo/video
 
 1. **Alternative Cloud Services** :
 
-* If your school provides **Google Workspace for Education** or **Microsoft 365** , direct students to store large static files (like long-form video projects) on Google Drive or OneDrive. Keep iCloud reserved for app syncing and current documents.
+- If your school provides **Google Workspace for Education** or **Microsoft 365** , direct students to store large static files (like long-form video projects) on Google Drive or OneDrive. Keep iCloud reserved for app syncing and current documents.
 
 ## Expert Insight
 

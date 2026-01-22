@@ -32,24 +32,24 @@ While scripts were previously used to check system states periodically, macOS 26
 
 1. **Write the Script** :
 
-* Use **Zsh** (`#!/bin/zsh`), the default shell for modern macOS. ** Note: Python 2.7 has been removed since macOS 12.3; you must deploy your own interpreter to run Python scripts.*
+- Use **Zsh** (`#!/bin/zsh`), the default shell for modern macOS. ** Note: Python 2.7 has been removed since macOS 12.3; you must deploy your own interpreter to run Python scripts.*
 
 1. **Upload to Jamf Pro** :
 
-* Go to **Settings > Computer Management > Scripts** .
-* Click **+ New** , enter a name, and paste your script content.
+- Go to **Settings > Computer Management > Scripts** .
+- Click **+ New** , enter a name, and paste your script content.
 - **Parameters** : You can set labels for variables `$4` through `$11`, allowing the same script to take different inputs (e.g., a printer IP) via different policies.
 
 1. **Execute via Policy** :
 
-* Go to **Computers > Policies > + New** .
-* Set a **Trigger** (e.g., Recurring Check-in, Login).
-* Add the **Scripts** payload and select your uploaded script.
-* Set the **Scope** for the target computers.
+- Go to **Computers > Policies > + New** .
+- Set a **Trigger** (e.g., Recurring Check-in, Login).
+- Add the **Scripts** payload and select your uploaded script.
+- Set the **Scope** for the target computers.
 
 1. **Execution Frequency** :
 
-* Define the frequency (e.g., **Once per computer** or **Ongoing** for every trigger).
+- Define the frequency (e.g., **Once per computer** or **Ongoing** for every trigger).
 
 ## Practical Example: Displaying a Notice with `jamfHelper`
 

@@ -18,13 +18,13 @@ tags: ["Apple Pencil","Bluetooth","Hardware Compatibility","Troubleshooting"]
 
 1. **Reset Bluetooth** :
 
-* Go to **Settings > Bluetooth** , find the old Apple Pencil entry, and select **Forget This Device** .
-* Re-attach or re-plug the Apple Pencil to re-pair.
+- Go to **Settings > Bluetooth** , find the old Apple Pencil entry, and select **Forget This Device** .
+- Re-attach or re-plug the Apple Pencil to re-pair.
 
 1. **Check the Tip** :
 
-* If it pairs but won't write, the **tip is often loose** . Try tightening it by turning it clockwise.
+- If it pairs but won't write, the **tip is often loose** . Try tightening it by turning it clockwise.
 
 1. **MDM Restrictions** :
 
-* Ensure the MDM "Restrictions" profile does not have **Disallow modifying Bluetooth settings** checked, as this may block new pairing attempts.
+- Ensure the MDM "Restrictions" profile does not have **Disallow modifying Bluetooth settings** checked, as this may block new pairing attempts.

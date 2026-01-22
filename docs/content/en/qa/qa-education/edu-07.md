@@ -15,9 +15,9 @@ tags: ["Battery","Myths","MDM","Power Consumption"]
 
 The Jamf Trust app, which handles content filtering and data reporting, also uses very little power:
 
-* It uses DNS Proxy technology at the system level.
-* Background processes are highly optimized.
-* Under **Settings > Battery** , Jamf Trust typically accounts for less than 1% of usage.
+- It uses DNS Proxy technology at the system level.
+- Background processes are highly optimized.
+- Under **Settings > Battery** , Jamf Trust typically accounts for less than 1% of usage.
 
 ## The Real Battery Killers:
 

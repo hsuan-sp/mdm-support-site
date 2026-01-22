@@ -16,7 +16,7 @@ tags: ["Device Settings","Power Saving","Auto-Lock","Restrictions Profile"]
 ## 2. Screen Brightness
 
 - **NOT Manageable** : Currently, there is no MDM command to lock brightness at a specific percentage (e.g., 50%).
-* This is by design to ensure accessibility and visibility across varying lighting environments.
+- This is by design to ensure accessibility and visibility across varying lighting environments.
 - **Advice** : Teachers should instruct students to enable "Auto-Brightness" or manually adjust it via Control Center.
 
 ## 3. Wallpaper

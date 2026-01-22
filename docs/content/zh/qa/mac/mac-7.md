@@ -21,13 +21,13 @@ tags: ["Apple Silicon","Bootstrap Token","安全啟動","核心延伸功能"]
 
 1. **Volume Ownership (磁碟擁有權)** ：
 
-* 只有被視為「擁有者」的使用者才能執行系統重置或更新。
-* 透過 ADE 註冊並建立的第一個帳號會自動獲得擁有權。MDM 透過 Bootstrap Token 託管此權限。
+- 只有被視為「擁有者」的使用者才能執行系統重置或更新。
+- 透過 ADE 註冊並建立的第一個帳號會自動獲得擁有權。MDM 透過 Bootstrap Token 託管此權限。
 
 1. **核心延伸功能 (Kernel Extensions / KEXTs)** ：
 
-* Apple Silicon 預設 **封鎖** 所有第三方 KEXTs。
-* 若必須安裝（如舊款防毒軟體），必須重開機進入 Recovery Mode 降低安全性設定（Reduced Security）。
+- Apple Silicon 預設 **封鎖** 所有第三方 KEXTs。
+- 若必須安裝（如舊款防毒軟體），必須重開機進入 Recovery Mode 降低安全性設定（Reduced Security）。
 - **現代建議** ：請改用 **系統延伸功能 (System Extensions)** ，這是 Apple 推薦的新架構，
 
  可直接透過 MDM 設定檔授權，無需降低系統安全性。

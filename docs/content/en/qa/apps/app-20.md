@@ -17,8 +17,8 @@ tags: ["DDM","App Deployment","Status Monitoring","New Tech"]
 
 1. **Status Channel** :
 
-* The device **proactively** reports detailed app installation progress (e.g., waiting, installing, verification failed) to Jamf Pro via a lightweight status channel. This is much faster and uses less bandwidth than traditional "Server Polling."
+- The device **proactively** reports detailed app installation progress (e.g., waiting, installing, verification failed) to Jamf Pro via a lightweight status channel. This is much faster and uses less bandwidth than traditional "Server Polling."
 
 1. **Predicates (Local Logic)** :
 
-* Administrators can set installation conditions (e.g., "Only install if OS version > 17"). The device performs this logic evaluation locally, removing the need for the server to perform heavy calculations for every device.
+- Administrators can set installation conditions (e.g., "Only install if OS version > 17"). The device performs this logic evaluation locally, removing the need for the server to perform heavy calculations for every device.

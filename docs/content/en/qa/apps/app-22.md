@@ -17,14 +17,14 @@ tags: ["Procreate","App Purchasing","VPP","Universal Purchase","Refund"]
 
 1. **Request a VPP Refund** :
 
-* The administrator should log in to **Apple School Manager** , go to **Settings > Payments and Billing > View Purchase History** .
-* Alternatively, log in to **reportaproblem.apple.com** using the Managed Apple Account used for the purchase.
-* Select the order and "Request a refund," citing "Purchased wrong version." ** Note: Apple typically decides on refunds within 24–48 hours.*
+- The administrator should log in to **Apple School Manager** , go to **Settings > Payments and Billing > View Purchase History** .
+- Alternatively, log in to **reportaproblem.apple.com** using the Managed Apple Account used for the purchase.
+- Select the order and "Request a refund," citing "Purchased wrong version." ** Note: Apple typically decides on refunds within 24–48 hours.*
 
 1. **Re-purchase** :
 
-* Because the licenses are not interchangeable, you must purchase the correct iPad version to deploy it to student iPads.
+- Because the licenses are not interchangeable, you must purchase the correct iPad version to deploy it to student iPads.
 
 1. **Clean Up** :
 
-* In Jamf Pro, ensure you remove the "Pocket" version from any scopes to prevent students from installing the low-resolution version, which would degrade the classroom experience.
+- In Jamf Pro, ensure you remove the "Pocket" version from any scopes to prevent students from installing the low-resolution version, which would degrade the classroom experience.

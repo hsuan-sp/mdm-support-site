@@ -12,7 +12,7 @@ tags: ["iPadOS 26","Multitasking","Windowed Apps","Slide Over","Teaching Efficie
 
 1. **Enabling the Mode** :
 
-* Go to **Settings > Multitasking & Gestures** and select **Windowed Apps** . (Note: This is most effective on iPads with M1/M2/M4 chips and secondary displays).
+- Go to **Settings > Multitasking & Gestures** and select **Windowed Apps** . (Note: This is most effective on iPads with M1/M2/M4 chips and secondary displays).
 
 1. **Advanced Window Management** :
 
@@ -22,7 +22,7 @@ tags: ["iPadOS 26","Multitasking","Windowed Apps","Slide Over","Teaching Efficie
 
 1. **The Menu Bar** :
 
-* Swipe down from the very top to reveal the **Menu Bar** , giving students quick access to app commands without digging through menus, much like a Mac.
+- Swipe down from the very top to reveal the **Menu Bar** , giving students quick access to app commands without digging through menus, much like a Mac.
 
 ## Best Practices for Students:
 

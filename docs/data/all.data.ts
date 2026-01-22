@@ -4,7 +4,7 @@
 // 我們必須避免在最外層 (Top-level) 使用 'node:*' 的匯入語法。
 
 /**
- * Q&A 章節顯示順序定義
+ - Q&A 章節顯示順序定義
  */
 import MarkdownIt from "markdown-it";
 
@@ -16,7 +16,7 @@ const md = new MarkdownIt({
 });
 
 /**
- * 專業排版引擎：處理中英文間隔 (Pangu Spacing) 與標點規範
+ - 專業排版引擎：處理中英文間隔 (Pangu Spacing) 與標點規範
  */
 function enhanceTypography(text: string) {
     if (!text) return "";
@@ -41,7 +41,7 @@ function enhanceTypography(text: string) {
 }
 
 /**
- * 預渲染 Markdown 到 HTML
+ - 預渲染 Markdown 到 HTML
  */
 function renderMarkdown(text: string) {
     if (!text) return "";
@@ -64,7 +64,7 @@ const QA_ORDER = [
 ];
 
 /**
- * 原始 slug 與顯示名稱的映射表 (中文)
+ - 原始 slug 與顯示名稱的映射表 (中文)
  */
 const SOURCE_TITLE_MAP: Record<string, string> = {
     'account': '帳號與伺服器',
@@ -78,7 +78,7 @@ const SOURCE_TITLE_MAP: Record<string, string> = {
 };
 
 /**
- * 原始 slug 與顯示名稱的映射表 (英文)
+ - 原始 slug 與顯示名稱的映射表 (英文)
  */
 const EN_SOURCE_TITLE_MAP: Record<string, string> = {
     'account': 'Account & Server Management',

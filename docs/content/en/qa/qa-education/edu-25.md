@@ -12,8 +12,8 @@ tags: ["MOE Project", "2026", "System Upgrade", "iPadOS 26", "Sustainability"]
 
 ## 1. Hardware Longevity
 
-* The primary project device is the **iPad (9th Gen, A13 chip)** .
-* Follow-on purchases may include the **iPad (10th Gen, A14 chip)** or the **iPad (11th Gen, A16 chip)** .
+- The primary project device is the **iPad (9th Gen, A13 chip)** .
+- Follow-on purchases may include the **iPad (10th Gen, A14 chip)** or the **iPad (11th Gen, A16 chip)** .
 - **All three models fully support iPadOS 26** .
 - **Note** : While these models cannot run "Apple Intelligence" features due to hardware limitations, they still benefit from critical security updates and performance optimizations (like the improved Return to Service).
 

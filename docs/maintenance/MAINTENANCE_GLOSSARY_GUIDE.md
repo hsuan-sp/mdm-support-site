@@ -16,7 +16,7 @@
 
 - **檔案目錄**：`docs/content/zh/glossary/`
 - **自動化索引 (必看)**：在新增內容前，請務必先查閱 **`docs/maintenance/INDEX_ZH.md`**。
-* 此索引會自動列出所有已存在的術語與問答題目。
+- 此索引會自動列出所有已存在的術語與問答題目。
 - **維護規範**：請先看過索引，確認該術語「尚未編寫」再進行新增，避免資源重複或衝突。
 - **自動排版腳本 (重要)**：
 
@@ -79,22 +79,22 @@ tags: ["標籤1", "標籤2", "標籤3"]
 
 **正確的版本標註方式**：
 
-* ✅ **iOS 26**、**iPadOS 26**、**macOS Tahoe (26)**
-* ✅ **系統版本 26**（Apple 官方用語）
-* ✅ **iOS 26.2 新增**、**macOS Tahoe 26 開始支援**
-* ❌ 避免使用過時版本號（如 iOS 18、macOS Sequoia 等，除非專門討論舊版）
+- ✅ **iOS 26**、**iPadOS 26**、**macOS Tahoe (26)**
+- ✅ **系統版本 26**（Apple 官方用語）
+- ✅ **iOS 26.2 新增**、**macOS Tahoe 26 開始支援**
+- ❌ 避免使用過時版本號（如 iOS 18、macOS Sequoia 等，除非專門討論舊版）
 
 **版本命名說明**：
 
-* 2024 年：iOS 18、iPadOS 18、macOS 15 Sequoia
-* 2025 年：iOS 26、iPadOS 26、macOS 26 Tahoe
-* Apple 自 2025 年起改用年份命名
+- 2024 年：iOS 18、iPadOS 18、macOS 15 Sequoia
+- 2025 年：iOS 26、iPadOS 26、macOS 26 Tahoe
+- Apple 自 2025 年起改用年份命名
 
 **功能生命週期標註**：
 
-* 新功能：`(2025 年 9 月 WWDC 宣布)`、`(iOS 26 新增)`
-* Beta 功能：`(iOS 26.3 beta，正式版待確認)`
-* 棄用功能：`(2026 年底將停止支援)`、`(已被 XX 取代)`
+- 新功能：`(2025 年 9 月 WWDC 宣布)`、`(iOS 26 新增)`
+- Beta 功能：`(iOS 26.3 beta，正式版待確認)`
+- 棄用功能：`(2026 年底將停止支援)`、`(已被 XX 取代)`
 
 ## 4.2 白話文比喻指引
 
@@ -144,36 +144,36 @@ MDM 可透過「Restrictions」描述檔管理多工權限。
 
 **必須使用的台灣繁體中文術語**：
 
-* ✅ 「管理式 Apple 帳號」（不是「託管式」）
-* ✅ 「裝置」（不是「設備」）
-* ✅ 「描述檔」（不是「配置文件」或「設定檔」）
-* ✅ 「資料」（不是「數據」，台灣用語）
-* ✅ 「螢幕使用時間」（不是「屏幕時間」）
-* ✅ 「應用程式」或「App」（不是「應用程式商店」）
+- ✅ 「管理式 Apple 帳號」（不是「託管式」）
+- ✅ 「裝置」（不是「設備」）
+- ✅ 「描述檔」（不是「配置文件」或「設定檔」）
+- ✅ 「資料」（不是「數據」，台灣用語）
+- ✅ 「螢幕使用時間」（不是「屏幕時間」）
+- ✅ 「應用程式」或「App」（不是「應用程式商店」）
 
 **避免的大陸用語**：
 
-* ❌ 文件 → ✅ 檔案/描述檔
-* ❌ 數據 → ✅ 資料
-* ❌ 屏幕 → ✅ 螢幕
-* ❌ 服務器 → ✅ 伺服器
-* ❌ 默認 → ✅ 預設
+- ❌ 文件 → ✅ 檔案/描述檔
+- ❌ 數據 → ✅ 資料
+- ❌ 屏幕 → ✅ 螢幕
+- ❌ 服務器 → ✅ 伺服器
+- ❌ 默認 → ✅ 預設
 
 ## 4.5 類別與標籤策略
 
 **類別 (Category) 選擇**：
 
-* 核心功能：`Core`
-* 裝置註冊：`Enrollment`
-* Apple 生態：`Apple`
-* 安全性：`Security`
-* 網路相關：`Network`
-* 硬體相關：`Hardware`
-* 應用程式：`Apps`
-* 教育專屬：`Education`
-* macOS 專屬：`macOS`
-* Jamf 專屬：`Jamf`
-* 宣告式管理：`DDM`
+- 核心功能：`Core`
+- 裝置註冊：`Enrollment`
+- Apple 生態：`Apple`
+- 安全性：`Security`
+- 網路相關：`Network`
+- 硬體相關：`Hardware`
+- 應用程式：`Apps`
+- 教育專屬：`Education`
+- macOS 專屬：`macOS`
+- Jamf 專屬：`Jamf`
+- 宣告式管理：`DDM`
 
 **標籤 (Tags) 策略**（建議 3-6 個）：
 
@@ -189,11 +189,11 @@ MDM 可透過「Restrictions」描述檔管理多工權限。
 
 在開始撰寫術語前，請確認：
 
-* [ ] 已查閱 `INDEX_ZH.md` 確認術語未重複
-* [ ] 已搜尋 Apple 官方文件確認技術正確性
-* [ ] 已確認使用正確的系統版本號（iOS 26、macOS Tahoe 等）
-* [ ] 已準備生活化的白話文比喻
-* [ ] 若涉及 MDM，已準備設定路徑與管理建議
+- [ ] 已查閱 `INDEX_ZH.md` 確認術語未重複
+- [ ] 已搜尋 Apple 官方文件確認技術正確性
+- [ ] 已確認使用正確的系統版本號（iOS 26、macOS Tahoe 等）
+- [ ] 已準備生活化的白話文比喻
+- [ ] 若涉及 MDM，已準備設定路徑與管理建議
 
 ---
 
@@ -201,17 +201,17 @@ MDM 可透過「Restrictions」描述檔管理多工權限。
 
 完成撰寫後，請自我檢查：
 
-* [ ] 術語定義專業且精確
-* [ ] 白話文比喻生活化且易懂
-* [ ] 若涉及 MDM，已說明設定方式
-* [ ] 若有風險，已明確提示
-* [ ] 已標註正確的系統版本
-* [ ] 無大陸用語（資料非數據、檔案非文件）
-* [ ] Frontmatter 格式正確
-* [ ] 標籤精確且有 3-6 個
-* [ ] 列表之間無空行，結構緊湊
-* [ ] 已執行排版腳本與更新索引腳本
-* [ ] 已於 `docs/data/logs/items/` 建立對應版本的更新日誌 (參閱 `docs/data/logs/` 維護指南)
+- [ ] 術語定義專業且精確
+- [ ] 白話文比喻生活化且易懂
+- [ ] 若涉及 MDM，已說明設定方式
+- [ ] 若有風險，已明確提示
+- [ ] 已標註正確的系統版本
+- [ ] 無大陸用語（資料非數據、檔案非文件）
+- [ ] Frontmatter 格式正確
+- [ ] 標籤精確且有 3-6 個
+- [ ] 列表之間無空行，結構緊湊
+- [ ] 已執行排版腳本與更新索引腳本
+- [ ] 已於 `docs/data/logs/items/` 建立對應版本的更新日誌 (參閱 `docs/data/logs/` 維護指南)
 
 ---
 
@@ -247,28 +247,28 @@ Liquid Glass 是 Apple 於 2025 年（系統版本 26）推出的全新視覺設
 
 **錯誤 1**：使用過時版本號
 
-* ❌ 「iOS 18 新增的功能」
-* ✅ 「iOS 26 新增的功能」
+- ❌ 「iOS 18 新增的功能」
+- ✅ 「iOS 26 新增的功能」
 
 **錯誤 2**：比喻過於抽象
 
-* ❌ 「就像雲端運算的分散式架構」
-* ✅ 「就像便利商店的中央配送系統」
+- ❌ 「就像雲端運算的分散式架構」
+- ✅ 「就像便利商店的中央配送系統」
 
 **錯誤 3**：缺少 MDM 說明
 
-* ❌ 只有技術定義，沒說明如何管理
-* ✅ 包含 Jamf Pro 設定路徑與管理建議
+- ❌ 只有技術定義，沒說明如何管理
+- ✅ 包含 Jamf Pro 設定路徑與管理建議
 
 **錯誤 4**：使用大陸用語
 
-* ❌ 「配置文件」、「設備」、「數據」
-* ✅ 「描述檔」、「裝置」、「資料」
+- ❌ 「配置文件」、「設備」、「數據」
+- ✅ 「描述檔」、「裝置」、「資料」
 
 **錯誤 5**：列表鬆散
 
-* ❌ 列表項之間留有空行
-* ✅ 列表項之間無空行，使用緊湊格式
+- ❌ 列表項之間留有空行
+- ✅ 列表項之間無空行，使用緊湊格式
 
 ---
 
@@ -278,10 +278,10 @@ Liquid Glass 是 Apple 於 2025 年（系統版本 26）推出的全新視覺設
 
 **警告**：AI 模型與真人維護者的知識可能過時！
 
-* 多數 AI 的知識截止日期在 2023-2024 年
-* 可能誤用舊版本號（如 iOS 18、macOS Sequoia）
-* Apple 自 2025 年起改用年份命名（iOS 26、macOS Tahoe）
-* 功能與 API 可能已有重大變更
+- 多數 AI 的知識截止日期在 2023-2024 年
+- 可能誤用舊版本號（如 iOS 18、macOS Sequoia）
+- Apple 自 2025 年起改用年份命名（iOS 26、macOS Tahoe）
+- 功能與 API 可能已有重大變更
 
 ## 9.2 必查的官方資料來源
 
@@ -289,27 +289,27 @@ Liquid Glass 是 Apple 於 2025 年（系統版本 26）推出的全新視覺設
 
 1. **Apple Platform Deployment Guide**（最權威）
 
-* 網址：https://support.apple.com/guide/deployment/welcome/web
-* 更新頻率：每次 macOS/iOS 重大更新後
-* 查看：「What's New」章節
-* 確認最新系統版本號
+- 網址：https://support.apple.com/guide/deployment/welcome/web
+- 更新頻率：每次 macOS/iOS 重大更新後
+- 查看：「What's New」章節
+- 確認最新系統版本號
 
 1. **Apple Developer Release Notes**
 
-* iOS：https://developer.apple.com/documentation/iOS-iPadOS-release-notes
-* macOS：https://developer.apple.com/documentation/macOS-release-notes
-* 查看：Beta 版本功能預告
+- iOS：https://developer.apple.com/documentation/iOS-iPadOS-release-notes
+- macOS：https://developer.apple.com/documentation/macOS-release-notes
+- 查看：Beta 版本功能預告
 
 1. **Jamf Pro 官方繁中文件**
 
-* 網址：https://learn.Jamf.com/zh-TW/
-* 搜尋：版本號 + 功能名稱
-* 確認：Jamf Pro 是否已支援該功能
+- 網址：https://learn.Jamf.com/zh-TW/
+- 搜尋：版本號 + 功能名稱
+- 確認：Jamf Pro 是否已支援該功能
 
 1. **Apple School Manager / Business Manager 更新日誌**
 
-* 網址：https://support.apple.com/guide/apple-school-manager/whats-new/web
-* 查看：ASM 新功能與 API 變更
+- 網址：https://support.apple.com/guide/apple-school-manager/whats-new/web
+- 查看：ASM 新功能與 API 變更
 
 ## 9.3 版本號查證流程
 
@@ -317,17 +317,17 @@ Liquid Glass 是 Apple 於 2025 年（系統版本 26）推出的全新視覺設
 
 打開 Apple Developer 網站或 Wikipedia（macOS version history），確認：
 
-* 最新 iOS/iPadOS 版本號（如：26.2）
-* 最新 macOS 版本號與代號（如：Tahoe 26.2）
-* 發布日期（避免引用 Beta 版為正式版）
+- 最新 iOS/iPadOS 版本號（如：26.2）
+- 最新 macOS 版本號與代號（如：Tahoe 26.2）
+- 發布日期（避免引用 Beta 版為正式版）
 
 **步驟二：驗證功能存在性**
 
 在 Apple Platform Deployment Guide 搜尋功能名稱：
 
-* 找到功能說明 → 可以撰寫
-* 找不到或標註「即將推出」→ 需標註 Beta 或待確認
-* 找到但已棄用 → 需說明替代方案
+- 找到功能說明 → 可以撰寫
+- 找不到或標註「即將推出」→ 需標註 Beta 或待確認
+- 找到但已棄用 → 需說明替代方案
 
 **步驟三：交叉驗證**
 
@@ -337,11 +337,11 @@ Liquid Glass 是 Apple 於 2025 年（系統版本 26）推出的全新視覺設
 
 在撰寫術語時，務必檢查：
 
-* [ ] 我使用的版本號是否為 2026 年 1 月最新？
-* [ ] 我有查證 Apple 官方文件而非依賴記憶？
-* [ ] 我有確認功能未被棄用或替代？
-* [ ] 若引用 Beta 功能，我有明確標註「Beta」？
-* [ ] 我有查證 Jamf Pro 是否已支援該功能？
+- [ ] 我使用的版本號是否為 2026 年 1 月最新？
+- [ ] 我有查證 Apple 官方文件而非依賴記憶？
+- [ ] 我有確認功能未被棄用或替代？
+- [ ] 若引用 Beta 功能，我有明確標註「Beta」？
+- [ ] 我有查證 Jamf Pro 是否已支援該功能？
 
 ## 9.5 快速查證範例
 
@@ -383,10 +383,10 @@ FileVault 是 macOS 的全磁碟加密功能。macOS Tahoe 26 新增透過 SSH �
 
 提及內容過濾或網路管理時，可補充：
 
-* 台北市酷課雲（Cooc Cloud）
-* 新北市親師生平台
-* 高雄市達學堂
-* 各縣市教育局平台需與 Jamf Trust 協調白名單
+- 台北市酷課雲（Cooc Cloud）
+- 新北市親師生平台
+- 高雄市達學堂
+- 各縣市教育局平台需與 Jamf Trust 協調白名單
 
 ---
 
@@ -394,18 +394,18 @@ FileVault 是 macOS 的全磁碟加密功能。macOS Tahoe 26 新增透過 SSH �
 
 **定期審查**：
 
-* 每季檢視 Apple 官方文件更新
-* WWDC 後立即更新相關術語
-* 追蹤台灣教育部數位學習政策變化
+- 每季檢視 Apple 官方文件更新
+- WWDC 後立即更新相關術語
+- 追蹤台灣教育部數位學習政策變化
 
 **版本管理**：
 
-* 在術語內容中標註最後更新日期
-* 保留舊版說明（如需向下相容）
-* 新版本功能需明確標註「XX 版本新增」
+- 在術語內容中標註最後更新日期
+- 保留舊版說明（如需向下相容）
+- 新版本功能需明確標註「XX 版本新增」
 
 **使用者回饋**：
 
-* 收集師生對術語解釋的理解度
-* 調整不易理解的比喻
-* 補充常見疑問
+- 收集師生對術語解釋的理解度
+- 調整不易理解的比喻
+- 補充常見疑問

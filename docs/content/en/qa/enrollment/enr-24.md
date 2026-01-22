@@ -10,9 +10,9 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 
 ## Key Principles
 
-* The device receives a **Declaration** containing the deadline.
-* The device manages its own notification frequency locally.
-* At the deadline, the action is forced without needing the MDM server to push a real-time command.
+- The device receives a **Declaration** containing the deadline.
+- The device manages its own notification frequency locally.
+- At the deadline, the action is forced without needing the MDM server to push a real-time command.
 
 ## Scope
 
@@ -28,8 +28,8 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 1. Set the **Target Version** (e.g., Latest version).
 1. Enable **Enforcement Deadline** .
 
-* Set the specific date and time (e.g., 2026-02-28 17:00).
-* Choose the time zone (Local device time is recommended).
+- Set the specific date and time (e.g., 2026-02-28 17:00).
+- Choose the time zone (Local device time is recommended).
 
 1. Deploy to the target group.
 

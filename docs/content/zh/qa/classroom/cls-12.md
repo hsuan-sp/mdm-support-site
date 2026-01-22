@@ -24,4 +24,4 @@ tags: ["Apple Intelligence","寫作工具","數學備忘錄","防弊","iOS 18"]
 
 **的「服務存取」中，針對租戶層級關閉管理式 Apple 帳號的 Apple Intelligence 權限。** 硬體門檻校對 ** ：
 
-* Apple Intelligence 僅支援配備 **M 系列晶片** 或 **A17 Pro 以上** 的裝置。 ** 備註：目前的入門款 iPad (如第 10 代、第 11 代，搭載 A14/A16 晶片) 硬體本身即不支援上述 AI 功能，管理員可將重點放在配備 M 系列晶片的 iPad Air 與 iPad Pro。*
+- Apple Intelligence 僅支援配備 **M 系列晶片** 或 **A17 Pro 以上** 的裝置。 ** 備註：目前的入門款 iPad (如第 10 代、第 11 代，搭載 A14/A16 晶片) 硬體本身即不支援上述 AI 功能，管理員可將重點放在配備 M 系列晶片的 iPad Air 與 iPad Pro。*

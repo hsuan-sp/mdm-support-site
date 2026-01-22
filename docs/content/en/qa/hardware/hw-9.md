@@ -36,8 +36,8 @@ tags: ["Keyboard","Smart Connector","Magic Keyboard","Hardware Compatibility","T
 ## Phase 4: Administrator Cross-Testing
 
 - **Cross-Validation** : Try a known-working keyboard of the same model with the iPad.
-* If it still doesn't work, the **iPad's internal Smart Connector IC** is likely at fault.
-* If it works with a different keyboard, the **internal ribbon cable** of the original keyboard is likely broken (common at the hinge).
+- If it still doesn't work, the **iPad's internal Smart Connector IC** is likely at fault.
+- If it works with a different keyboard, the **internal ribbon cable** of the original keyboard is likely broken (common at the hinge).
 - **Repair Reminder** : Apple keyboards are covered under the project's hardware warranty. If there are no signs of accidental damage (like spills or tears) before the 2026 warranty expires, contact your vendor for a replacement.
 
 ## Practical Advice:

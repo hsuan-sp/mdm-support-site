@@ -33,7 +33,7 @@ If your school uses a Student Information System (SIS), you can upload data via 
 
 1. **Processing** : ASM will process the files automatically. You can download logs to check for errors.
 
-* Note: After the initial connection, every subsequent update must include "all" CSV files, even those that haven't changed.*
+- Note: After the initial connection, every subsequent update must include "all" CSV files, even those that haven't changed.*
 
 ## 2. Manual CSV Upload
 

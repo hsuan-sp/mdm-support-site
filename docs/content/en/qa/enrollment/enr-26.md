@@ -52,6 +52,6 @@ When sending a **Return to Service** command:
 
 ## Key Limitations
 
-* Requires **iOS/iPadOS 26** or later.
-* Only works for apps deployed as **Managed Apps** via MDM.
-* If the app itself requires an update, it will still trigger a download after the reset.
+- Requires **iOS/iPadOS 26** or later.
+- Only works for apps deployed as **Managed Apps** via MDM.
+- If the app itself requires an update, it will still trigger a download after the reset.

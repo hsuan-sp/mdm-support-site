@@ -24,7 +24,7 @@ Using macOS 26 **System Configurations** , you can set the following intelligent
 
 ## Energy Auditing (Status Channel)
 
-* You can monitor "Battery Cycle Counts" or "Up-time in High Performance Mode" via the DDM Status Channel to use as quantitative data for future hardware replacement cycles.
+- You can monitor "Battery Cycle Counts" or "Up-time in High Performance Mode" via the DDM Status Channel to use as quantitative data for future hardware replacement cycles.
 
 ## 2. Operational Recommendations
 

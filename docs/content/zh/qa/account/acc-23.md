@@ -14,7 +14,7 @@ tags: ["管理式 Apple 帳號", "資料外洩", "iOS 26", "組織裝置", "WWDC
 
 1. 登入 **Apple School Manager (ASM)** 或 **Apple Business Manager (ABM)** 1. 前往 **「權限管理」(Access Management)** 1. 選取 **「Apple 服務」(Apple Services)** 1. 找到 **「Apple Account on Organization Devices」** 選項
 
-* （中文暫譯：「組織裝置上的 Apple 帳號」，實際名稱請以介面顯示為準）*
+- （中文暫譯：「組織裝置上的 Apple 帳號」，實際名稱請以介面顯示為準）*
 
 1. 啟用 **「僅限管理式 Apple 帳號登入」** 相關選項
 1. 儲存設定
@@ -24,15 +24,15 @@ tags: ["管理式 Apple 帳號", "資料外洩", "iOS 26", "組織裝置", "WWDC
 ## 技術特性與限制
 
 - **系統層級強制執行** ：
-* 此限制在作業系統層級運作，無需透過 MDM 設定描述檔即可生效
-* 適用於「設定輔助程式 (Setup Assistant)」啟用階段及後續的「系統偏好設定」登入
-* 裝置會驗證登入帳號的網域是否符合組織在 ASM/ABM 中已驗證的網域
+- 此限制在作業系統層級運作，無需透過 MDM 設定描述檔即可生效
+- 適用於「設定輔助程式 (Setup Assistant)」啟用階段及後續的「系統偏好設定」登入
+- 裝置會驗證登入帳號的網域是否符合組織在 ASM/ABM 中已驗證的網域
 - **系統版本需求** ：
-* iOS 26、iPadOS 26、macOS 26 (Tahoe) 或更新版本
-* macOS 26 (Tahoe) 於 2025 年 9 月 15 日正式發布
+- iOS 26、iPadOS 26、macOS 26 (Tahoe) 或更新版本
+- macOS 26 (Tahoe) 於 2025 年 9 月 15 日正式發布
 - **裝置條件** ：
-* 裝置需為組織所有並透過 ASM/ABM 管理
-* 建議搭配「自動裝置註冊 (ADE)」與「監管模式 (Supervised)」以獲得完整保護
+- 裝置需為組織所有並透過 ASM/ABM 管理
+- 建議搭配「自動裝置註冊 (ADE)」與「監管模式 (Supervised)」以獲得完整保護
 
 ## 部署建議
 

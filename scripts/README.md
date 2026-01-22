@@ -34,12 +34,12 @@ scripts/
 
 **產出檔案：**
 
-*   `docs/maintenance/INDEX_ZH.md` (中文索引)
-*   `docs/maintenance/INDEX_EN.md` (英文索引)
+- `docs/maintenance/INDEX_ZH.md` (中文索引)
+- `docs/maintenance/INDEX_EN.md` (英文索引)
 
 **使用方式：**
 
-*   手動執行：`node scripts/maintenance/generate-index.js`
+- 手動執行：`node scripts/maintenance/generate-index.js`
 
 ---
 
@@ -49,8 +49,8 @@ scripts/
 
 ### 1. 標題層級 (Headers)
 
-*   正文一律使用 **二級標題** (`##`) 作為主要區塊。
-*   避免使用一級標題 (`#`) 或三級以上標題 (`###`)，以保持文件結構扁平化。
+- 正文一律使用 **二級標題** (`##`) 作為主要區塊。
+- 避免使用一級標題 (`#`) 或三級以上標題 (`###`)，以保持文件結構扁平化。
 
 ### 2. 列表格式 (Lists)
 
@@ -61,24 +61,24 @@ scripts/
 
 ### 3. 空格與符號 (Spacing & Symbols)
 
-*   中文與英文/數字之間必須有一個半形空格。
-*   表格 (`Table`) 的 pipe 符號 `|` 兩側需保留空格。
+- 中文與英文/數字之間必須有一個半形空格。
+- 表格 (`Table`) 的 pipe 符號 `|` 兩側需保留空格。
 
 ### 4. 專有名詞 (Proper Nouns)
 
-*   `Apple` (不使用 apple)
-*   `iPad`, `iPhone`, `macOS`, `iOS`
-*   `Wi-Fi` (不使用 Wifi 或 wifi)
-*   `Jamf Pro`, `Jamf School`
+- `Apple` (不使用 apple)
+- `iPad`, `iPhone`, `macOS`, `iOS`
+- `Wi-Fi` (不使用 Wifi 或 wifi)
+- `Jamf Pro`, `Jamf School`
 
 ## 📦 目標目錄 (Target Directories)
 
 這些腳本主要針對以下目錄進行處理：
 
-*   `docs/content/zh/qa` (中文問答)
-*   `docs/content/zh/glossary` (中文術語)
-*   `docs/content/en/qa` (英文問答)
-*   `docs/content/en/glossary` (英文術語)
+- `docs/content/zh/qa` (中文問答)
+- `docs/content/zh/glossary` (中文術語)
+- `docs/content/en/qa` (英文問答)
+- `docs/content/en/glossary` (英文術語)
 
 ---
 

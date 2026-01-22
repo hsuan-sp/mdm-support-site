@@ -14,9 +14,9 @@ tags: ["iOS 26", "MDM Migration", "Zero-Wipe", "Asset Transfer", "Jamf Pro"]
 
 The MDM server change must originate at the root of the ownership chain:
 
-* In **Apple School Manager** , go to **Devices** .
-* Select the target devices and choose **Edit MDM Server** .
-* Point them to your new "In-House" MDM server.
+- In **Apple School Manager** , go to **Devices** .
+- Select the target devices and choose **Edit MDM Server** .
+- Point them to your new "In-House" MDM server.
 
 ## 2. Configure the Migration Payload
 
@@ -27,9 +27,9 @@ In your *existing* (MOE) MDM server, you must configure the migration instructio
 
 ## 3. The Device Experience
 
-* The student receives a notification that their device will be moved to a new management system.
-* Up until the deadline, they can choose "Later."
-* At the **Enforcement Deadline** , the device silently unenrolls from the MOE server and immediately enrolls in the school's server.
+- The student receives a notification that their device will be moved to a new management system.
+- Up until the deadline, they can choose "Later."
+- At the **Enforcement Deadline** , the device silently unenrolls from the MOE server and immediately enrolls in the school's server.
 - **Crucial** : All local student files, photos, and project data are **not touched** .
 
 ## Risks and Mitigation for Schools

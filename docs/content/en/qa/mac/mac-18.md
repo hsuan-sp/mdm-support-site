@@ -16,15 +16,15 @@ tags: ["Activation Lock","ASM","Unlocking","Asset Recovery"]
 
 1. **Execute Unlock** :
 
-* Locate the **Activation Lock** status in the details pane.
-* Click **Turn Off** or **Clear Unlock Code** .
+- Locate the **Activation Lock** status in the details pane.
+- Click **Turn Off** or **Clear Unlock Code** .
 
 1. **Reset Device** :
 
-* Wait a few minutes for the command to propagate.
-* Put the Mac into **Recovery Mode** and reinstall macOS. The lock screen will no longer appear.
+- Wait a few minutes for the command to propagate.
+- Put the Mac into **Recovery Mode** and reinstall macOS. The lock screen will no longer appear.
 
 ## Prerequisites:
 
-* The device must be part of your **Automated Device Enrollment (ADE)** pool and assigned to your MDM.
-* For older machines purchased outside the project, they must have been added to ASM via Apple Configurator for this feature to work.
+- The device must be part of your **Automated Device Enrollment (ADE)** pool and assigned to your MDM.
+- For older machines purchased outside the project, they must have been added to ASM via Apple Configurator for this feature to work.

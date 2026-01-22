@@ -24,15 +24,15 @@ Once configured, this policy automatically applies to all eligible devices owned
 ## Technical Characteristics and Limitations
 
 - **System-Level Enforcement** :
-* The restriction operates at the OS level and does not require a specific MDM configuration profile once the organization-level policy is set.
-* It applies during the "Setup Assistant" phase and within "System Settings."
-* The device validates that the signing-in account domain matches the verified domains in your ASM/ABM.
+- The restriction operates at the OS level and does not require a specific MDM configuration profile once the organization-level policy is set.
+- It applies during the "Setup Assistant" phase and within "System Settings."
+- The device validates that the signing-in account domain matches the verified domains in your ASM/ABM.
 - **System Version Requirements** :
-* Requires **iOS 26** , **iPadOS 26** , **macOS 26 (Tahoe)** , or later.
-* macOS 26 (Tahoe) was officially released on September 15, 2025.
+- Requires **iOS 26** , **iPadOS 26** , **macOS 26 (Tahoe)** , or later.
+- macOS 26 (Tahoe) was officially released on September 15, 2025.
 - **Device Conditions** :
-* Devices must be owned by the organization and managed via ASM/ABM.
-* We recommend combining this with **Automated Device Enrollment (ADE)** and **Supervised Mode** for complete protection.
+- Devices must be owned by the organization and managed via ASM/ABM.
+- We recommend combining this with **Automated Device Enrollment (ADE)** and **Supervised Mode** for complete protection.
 
 ## Deployment Advice
 

@@ -31,7 +31,7 @@ tags: ["延伸屬性","Extension Attributes","腳本","資產","客製化欄位"
 
 1. **撰寫腳本** ：
 
-* 在編輯器中貼上 Shell Script。
+- 在編輯器中貼上 Shell Script。
 - **關鍵語法** ：Jamf Pro 僅會讀取被 `<result>` 與 `</result>` 標籤包住的輸出值。
 
 **任何未被標籤包住的 echo 輸出僅會出現在除錯日誌中，不會寫入資料庫。*** 實戰範例：收集「系統運作天數 (Uptime)」 ** ```bash

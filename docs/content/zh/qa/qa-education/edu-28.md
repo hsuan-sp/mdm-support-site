@@ -19,14 +19,14 @@ tags: ["裝置退休", "ESG", "資料清理", "資產管理"]
 
 這是最重要的一步，防止裝置在二手市場或報廢後仍試圖連回學校 MDM：
 
-* 前往 **Apple School Manager (ASM)** 。
-* 找到該裝置序號，點選「解編裝置 (Release Device)」。
+- 前往 **Apple School Manager (ASM)** 。
+- 找到該裝置序號，點選「解編裝置 (Release Device)」。
 - **注意** ：一旦解編，除非手動使用 Apple Configurator 重新加入，否則該裝置將不再具備「自動裝置註冊 (ADE)」功能。
 
 ## 3. MDM 紀錄庫存化 (Inventory Archiving)
 
-* 不要直接刪除 Jamf Pro 中的紀錄。建議將其移動至 **「退休群組 (Retired Group)」** 。
-* 匯出完整資產清冊（序號、購買日期、最後報到時間），作為資產報廢的審計憑證。
+- 不要直接刪除 Jamf Pro 中的紀錄。建議將其移動至 **「退休群組 (Retired Group)」** 。
+- 匯出完整資產清冊（序號、購買日期、最後報到時間），作為資產報廢的審計憑證。
 
 ## 4. 永續發展 (ESG) 與生命週期
 

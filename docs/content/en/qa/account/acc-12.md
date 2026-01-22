@@ -16,8 +16,8 @@ tags: ["Migration","MDM Transfer","OS 26"]
 
 ## 2. Technical Context:
 
-* Devices must be updated to **Version 26 (iOS/iPadOS 26, macOS 26 Tahoe)** for the most stable "wipe-free" migration experience.
-* While this feature has been significantly bolstered since WWDC 2025, a clean reset remains the recommended option for complex educational deployments.
+- Devices must be updated to **Version 26 (iOS/iPadOS 26, macOS 26 Tahoe)** for the most stable "wipe-free" migration experience.
+- While this feature has been significantly bolstered since WWDC 2025, a clean reset remains the recommended option for complex educational deployments.
 
 ## Practical Advice:
 
