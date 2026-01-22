@@ -10,19 +10,19 @@ tags: ["Printers","AirPrint","lpadmin","Policy","Self Service"]
 
 ## Answer
 
-** Modern Mac printing should prioritize the 'AirPrint (driverless)' protocol. For advanced configurations, use 'Policies' or Shell scripts executing the `lpadmin` command. ** Since macOS 12 Monterey, Apple has shifted towards IPP/AirPrint, significantly reducing the need for vendor-specific PPD drivers.
+**Modern Mac printing should prioritize the 'AirPrint (driverless)' protocol. For advanced configurations, use 'Policies' or Shell scripts executing the `lpadmin` command.** Since macOS 12 Monterey, Apple has shifted towards IPP/AirPrint, significantly reducing the need for vendor-specific PPD drivers.
 
 ## Deployment Strategies:
 
 ## Method 1: Native Jamf Pro UI (Best for Beginners)
 
-1. ** Add Printer ** : Go to ** Settings > Computer Management > Printers ** .
+1. **Add Printer** : Go to **Settings > Computer Management > Printers** .
 
 1. Enter the IP and Display Name.
 
-1. ** Key ** : If the printer supports AirPrint, select ** Generic PCL Laser Printer ** or ** Generic PostScript Printer ** . No vendor driver is needed.
+1. **Key** : If the printer supports AirPrint, select **Generic PCL Laser Printer** or **Generic PostScript Printer** . No vendor driver is needed.
 
-1. ** Policy ** : Create a policy to install this printer. Set the trigger to ** Self Service ** so teachers can install only the printers they need for their specific office.
+1. **Policy** : Create a policy to install this printer. Set the trigger to **Self Service** so teachers can install only the printers they need for their specific office.
 
 ## Method 2: Shell Script (Advanced / Driverless)
 
@@ -53,4 +53,4 @@ echo "Printer $DISPLAY_NAME installed successfully."
 
 ## Practical Advice:
 
-** Use Self Service ** . Deploying dozens of printers automatically creates a cluttered menu for teachers. By placing printers in Self Service with clear names (e.g., "Install - 2F Staff Room Printer"), you minimize confusion and support calls.
+**Use Self Service** . Deploying dozens of printers automatically creates a cluttered menu for teachers. By placing printers in Self Service with clear names (e.g., "Install - 2F Staff Room Printer"), you minimize confusion and support calls.

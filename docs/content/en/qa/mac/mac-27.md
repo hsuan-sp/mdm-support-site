@@ -10,19 +10,19 @@ tags: ["Energy Policy", "DDM", "Auto-Update", "Power Management", "macOS 26"]
 
 ## Answer
 
-** In the past, school IT wanted computers ON for updates, while the facility manager wanted them OFF to save electricity. macOS 26 and DDM provide a perfect automated balance. ** ## 1. DDM Power Configuration Strategy (SOP)
+**In the past, school IT wanted computers ON for updates, while the facility manager wanted them OFF to save electricity. macOS 26 and DDM provide a perfect automated balance.** ## 1. DDM Power Configuration Strategy (SOP)
 
-Using macOS 26 ** System Configurations ** , you can set the following intelligent logic:
+Using macOS 26 **System Configurations** , you can set the following intelligent logic:
 
 ## Dynamic Sleep Schedule
 
-* ** School Hours ** : Set a 20-minute idle-to-sleep timer for immediate student access.
-* ** Night Mode ** : After 6:00 PM, transition to a deep sleep state (Power Nap).
+* **School Hours** : Set a 20-minute idle-to-sleep timer for immediate student access.
+* **Night Mode** : After 6:00 PM, transition to a deep sleep state (Power Nap).
 
 ## Update-Initiated Wake
 
-* ** Configuration ** : Enable `Allow Wake for Managed Activity` in the DDM payload.
-* ** Effect ** : Even if the Mac is asleep, when Jamf Pro pushes a ** Security Response (RSR) ** or a ** DDM Software Declaration ** , the Mac will briefly "wake," complete the background installation, and return to deep sleep once the task is reported as successful.
+* **Configuration** : Enable `Allow Wake for Managed Activity` in the DDM payload.
+* **Effect** : Even if the Mac is asleep, when Jamf Pro pushes a **Security Response (RSR)** or a **DDM Software Declaration** , the Mac will briefly "wake," complete the background installation, and return to deep sleep once the task is reported as successful.
 
 ## Energy Auditing (Status Channel)
 
@@ -30,8 +30,8 @@ Using macOS 26 ** System Configurations ** , you can set the following intellige
 
 ## 2. Operational Recommendations
 
-* ** Avoid Hard Power Cuts ** : Discourage the facility team from cutting the main circuit to the lab at night. This prevents M4/M5 Macs from performing essential background maintenance tasks like AI indexing, Spotlight optimization, and system cache cleaning.
-* ** Nudge Integration ** : If an update requires a restart, use a ** Nudge ** notification to ask the teacher to "Restart Now" the next morning, rather than forcing a midnight reboot that could cause loss of unsaved teaching materials.
+* **Avoid Hard Power Cuts** : Discourage the facility team from cutting the main circuit to the lab at night. This prevents M4/M5 Macs from performing essential background maintenance tasks like AI indexing, Spotlight optimization, and system cache cleaning.
+* **Nudge Integration** : If an update requires a restart, use a **Nudge** notification to ask the teacher to "Restart Now" the next morning, rather than forcing a midnight reboot that could cause loss of unsaved teaching materials.
 
 ## 3. Real-World Case Study
 

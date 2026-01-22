@@ -10,11 +10,11 @@ tags: ["Security","Sideloading","App Store"]
 
 ## Answer
 
-** To ensure device security and stability, Apple restricts app installation to the App Store or trusted organizational MDM channels (preventing 'Sideloading'). ** ## Rationale:
+**To ensure device security and stability, Apple restricts app installation to the App Store or trusted organizational MDM channels (preventing 'Sideloading').** ## Rationale:
 
-* ** Malware Prevention ** : Third-party installation files (IPA) can contain trojans or keyloggers.
-* ** System Stability ** : Unvetted apps can cause battery drain, system crashes, or data leaks.
-* ** Auditing ** : School-issued devices must maintain authorized license counts and updates; manual sideloading makes asset management impossible.
+* **Malware Prevention** : Third-party installation files (IPA) can contain trojans or keyloggers.
+* **System Stability** : Unvetted apps can cause battery drain, system crashes, or data leaks.
+* **Auditing** : School-issued devices must maintain authorized license counts and updates; manual sideloading makes asset management impossible.
 
 ## Practical Advice:
 

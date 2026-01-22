@@ -10,22 +10,22 @@ tags: ["Projection","Adapters","AirPlay","HDMI"]
 
 ## Answer
 
-** You can use a wired HDMI adapter (most stable) or third-party wireless projection software. For the best experience, we recommend the school acquire an Apple TV. ** ## Option 1: HDMI Adapters (Highly Recommended)
+**You can use a wired HDMI adapter (most stable) or third-party wireless projection software. For the best experience, we recommend the school acquire an Apple TV.** ## Option 1: HDMI Adapters (Highly Recommended)
 
-** Required Equipment ** :
+**Required Equipment** :
 
-* ** Lightning Models ** : Lightning Digital AV Adapter (Original Apple or MFi certified).
-* ** USB-C Models ** : USB-C Digital AV Multiport Adapter.
-* ** HDMI Cable ** . ** Steps ** :
+* **Lightning Models** : Lightning Digital AV Adapter (Original Apple or MFi certified).
+* **USB-C Models** : USB-C Digital AV Multiport Adapter.
+* **HDMI Cable** . **Steps** :
 
 1. Plug the adapter into the iPad.
 1. Connect one end of the HDMI cable to the adapter and the other to the TV/Projector.
 1. Switch the TV input to the correct HDMI source.
-1. The iPad screen will automatically mirror. ** Pros ** :
+1. The iPad screen will automatically mirror. **Pros** :
 
 * Near-zero latency, great for live demos.
 * No network required.
-* Compatible with any TV/Projector with an HDMI port. ** Cons ** :
+* Compatible with any TV/Projector with an HDMI port. **Cons** :
 
 * Requires carrying an adapter and cable.
 * The iPad is tethered to the cable length.
