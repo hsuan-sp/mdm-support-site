@@ -59,7 +59,11 @@ DESC="您的電腦將在 10 分鐘後進行安全性更新，請儲存手邊的�
 
 "$HELPER" -windowType utility -title "$TITLE" -heading "$HEADING" -description "$DESC" -button1 "我已了解" -defaultButton 1
 
-``` **實務建議：專家提示***** 權限** ：Jamf Pro 執行的腳本預設皆為 **Root (系統最高權限)** ，請務必先在測試機上驗證，
+```
+
+**實務建議：專家提示**
+
+* **權限** ：Jamf Pro 執行的腳本預設皆為 **Root (系統最高權限)** ，請務必先在測試機上驗證，
 
  以免誤刪重要系統檔。
 

@@ -10,7 +10,9 @@ tags: ["System Updates","DDM","Nudge","IT Operations"]
 
 ## Path 1: DDM Enforced Updates (Recommended for macOS 14+)
 
-* **The Logic** : You set an **"Enforcement Deadline."***** The Experience** :
+* **The Logic** : You set an **"Enforcement Deadline."**
+
+*** The Experience** :
 
 1. In the days leading up to the deadline, the system gently notifies the student.
 1. As the deadline approaches, the notifications become more persistent.

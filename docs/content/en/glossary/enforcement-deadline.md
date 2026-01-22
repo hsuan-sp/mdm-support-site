@@ -19,7 +19,9 @@ Enforcement Deadlines are used for critical security remediations, such as manda
 
 ## Analogy
 
-Think of it as a **"Library Book Due Date."*** One week before it's due, you get a gentle reminder.
+Think of it as a **"Library Book Due Date."**
+
+* One week before it's due, you get a gentle reminder.
 * One day before, you get a more urgent alert.
 * Once the **deadline** hits, the library "locks your account" or applies a fine until the book is returned.
 

@@ -15,4 +15,6 @@ Key improvements for schools:
 
 ## Analogy
 
-Think of this as a **"Smart Bus System."****Wi-Fi 5** was like a fleet of cars carrying one person each. If 30 students needed data, 30 cars had to line up, causing a traffic jam. **Wi-Fi 6** uses **OFDMA** , which is like a **bus** . One bus can pick up data for 30 students at once and deliver it in a single trip. The road is less crowded, and everyone gets to their destination (website) smoother and faster, even during a busy lesson.
+Think of this as a **"Smart Bus System."**
+
+**Wi-Fi 5** was like a fleet of cars carrying one person each. If 30 students needed data, 30 cars had to line up, causing a traffic jam. **Wi-Fi 6** uses **OFDMA** , which is like a **bus** . One bus can pick up data for 30 students at once and deliver it in a single trip. The road is less crowded, and everyone gets to their destination (website) smoother and faster, even during a busy lesson.

@@ -21,7 +21,9 @@ Under the latest OS architecture, **DDM** is the best path for silent updates:
 
 1. **Supervised Mode** : The iPad must be in a "Supervised" state.
 
-1. **Jamf Configuration** : In the app's distribution settings, enable **"Automatically Update App."**** Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration.*
+1. **Jamf Configuration** : In the app's distribution settings, enable **"Automatically Update App."**
+
+** Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration.*
 
 ## Common Troubleshooting for Failed Updates:
 

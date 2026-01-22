@@ -27,4 +27,6 @@ tags: ["Cybersecurity Audit","NIST","Compliance"]
 
 Since the "MOE Centralized Jamf Pro" must manage millions of devices, some cutting-edge DDM features may have a rollout delay.
 
-* **Advice** : If your school has an independent **Jamf School/Pro** instance, use it as a **"Beta Test Lab."*** Test your iOS 26 profiles and DDM status channels there first. When the central MOE instance is updated, you will already be an expert on the configuration, ensuring your school passes cybersecurity audits with flying colors.
+* **Advice** : If your school has an independent **Jamf School/Pro** instance, use it as a **"Beta Test Lab."**
+
+* Test your iOS 26 profiles and DDM status channels there first. When the central MOE instance is updated, you will already be an expert on the configuration, ensuring your school passes cybersecurity audits with flying colors.

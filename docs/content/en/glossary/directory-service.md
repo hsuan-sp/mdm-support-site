@@ -5,16 +5,37 @@ category: ["Network"]
 
 ## Term Definition
 
-A **Directory Service** is a centralized software system that stores, organizes, and provides access to information about a network's users and resources.
+A **Directory Service** is a centralized system used to store, organize, and manage identity information such as users, devices, groups, and access permissions within an organization.
 
-Common implementations:
+It serves as the authoritative source for answering:
 
-* ** Microsoft Active Directory (AD)
+- Who a user is
+- Which organization or department they belong to
+- What resources they are allowed to access
 
-***** LDAP (Lightweight Directory Access Protocol) ***** Cloud Identity **: Azure AD (Entra ID), Google Workspace, or Okta.** MDM Integration ** : By linking MDM to a Directory Service, organizations enable users to enroll devices and access institutional apps using their existing, familiar credentials. This ensures that when a user leaves the organization, their access is revoked across all managed devices simultaneously.
+### Common Implementations
+
+- **Microsoft Active Directory (AD)**
+- **LDAP (Lightweight Directory Access Protocol)**
+- **Cloud-based Identity Services**
+  - Azure AD (Entra ID)
+  - Google Workspace
+  - Okta
+
+### Integration with MDM
+
+When integrated with a **Mobile Device Management (MDM)** system, a Directory Service allows users to enroll devices and access organizational resources using their existing credentials.
+
+This enables:
+
+- Centralized authentication
+- Automatic assignment of apps and configurations based on group or role
+- Immediate revocation of access across all managed devices when a user leaves the organization
 
 ## Analogy
 
-This is the school's **"Master Registry"** or **"Digital Office Book."** It contains a centralized record of every student and staff member—who they are, what department they belong to, and what they are allowed to do.
+A Directory Service is like an organization's **"Master Registry"**.
 
-Other systems, like the MDM or the campus Wi-Fi, "ask" this book whenever someone tries to log in. This ensures that everyone's information is consistent and that nobody can "sneak into" the school's digital building without an official entry in the registry.
+It maintains an official record of every member—who they are, which department they belong to, and what permissions they have.
+
+Whenever a user tries to log in to systems such as Wi-Fi, email, or MDM enrollment, those systems consult this central registry to verify identity and permissions, ensuring consistent access control and preventing unauthorized entry.

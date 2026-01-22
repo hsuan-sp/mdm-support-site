@@ -25,4 +25,6 @@ tags: ["Classroom","ASM","Restrictions Profile","Prevent Leaving"]
 
 If the school allows teachers to create their own classes but wants to prevent students from leaving them, the administrator must modify the **Restrictions** profile in Jamf Pro. **Uncheck** (disable) the following option:
 
-* **"Allow leaving classes created by the teacher"**** (Note: This restriction only applies to Supervised devices.)*
+* **"Allow leaving classes created by the teacher"**
+
+** (Note: This restriction only applies to Supervised devices.)*
