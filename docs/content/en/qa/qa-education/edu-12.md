@@ -33,7 +33,11 @@ Best for small groups or immediate collection.
 
 1. Open the project and tap **Share** .
 1. Select **AirDrop** .
-1. Tap the teacher's iPad name. **Pros** : Fast, works without internet. **Cons** : Noisy in large groups; files must be accepted one by one.
+1. Tap the teacher's iPad name.
+
+**Pros** : Fast, works without internet.
+
+**Cons** : Noisy in large groups; files must be accepted one by one.
 
 ## Recommended Export Formats:
 

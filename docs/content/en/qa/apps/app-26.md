@@ -25,6 +25,8 @@ For apps integrating third-party LLMs (e.g., OpenAI, Google Gemini):
 ## 3. Flexible Management in the Classroom
 
 * **Using Jamf Teacher/Classroom** : Teachers can use "App Lock" to keep students within a specific app, which automatically suppresses system-wide AI Writing Tools.
-* **Network-Level Filtering** : Install a "Content Filtering" profile via MDM to precisely control access to AI model servers if there are concerns about over-reliance on browser-based AI tools. **💡 Strategy Tip** :
+* **Network-Level Filtering** : Install a "Content Filtering" profile via MDM to precisely control access to AI model servers if there are concerns about over-reliance on browser-based AI tools.
+
+**💡 Strategy Tip** :
 
 Instead of a total ban, consider allowing AI tools for "Creative projects" while using Jamf Pro to push "Assessment Mode (ASAM)" to automatically disable all AI assistants during exams.

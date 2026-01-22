@@ -29,4 +29,6 @@ tags: ["PPPC","Privacy","TCC","Screen Recording","Standard Users"]
 
 ## Practical Advice:
 
-If your PPPC profile isn't working, check your **Bundle ID** and **Code Requirement** . Use the "PPPC Utility" (free open-source tool) to generate exact signature codes for Jamf Pro. **Note** : macOS 26 has increased the frequency of "Screen Recording" persistence notifications. Even when authorized, the system will occasionally remind users that an app is observing the screen. Inform staff that this is a normal security feature.
+If your PPPC profile isn't working, check your **Bundle ID** and **Code Requirement** . Use the "PPPC Utility" (free open-source tool) to generate exact signature codes for Jamf Pro.
+
+**Note** : macOS 26 has increased the frequency of "Screen Recording" persistence notifications. Even when authorized, the system will occasionally remind users that an app is observing the screen. Inform staff that this is a normal security feature.

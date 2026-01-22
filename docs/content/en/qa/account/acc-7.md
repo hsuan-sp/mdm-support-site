@@ -6,7 +6,9 @@ important: false
 tags: ["Personal Apple Account","Managed Apple Account","Access Control"]
 ---
 
-**Standard Policy: Not Recommended. School devices should prioritize the use of a 'Managed Apple Account' or remain signed out.** School administrators can now configure specific restrictions via Apple School Manager (ASM) to ensure organization-owned devices can only sign in with managed accounts. Even if your device does not enforce this yet, you should be aware of the following risks. **Why Signing in with Personal Accounts is Discouraged** :
+**Standard Policy: Not Recommended. School devices should prioritize the use of a 'Managed Apple Account' or remain signed out.** School administrators can now configure specific restrictions via Apple School Manager (ASM) to ensure organization-owned devices can only sign in with managed accounts. Even if your device does not enforce this yet, you should be aware of the following risks.
+
+**Why Signing in with Personal Accounts is Discouraged** :
 
 | Risk Factor | Details |
 | :--- | :--- |

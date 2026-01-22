@@ -13,7 +13,9 @@ Because an MDM server cannot communicate directly with a device (due to firewall
 
 2. **Wake up** : APNs "wakes up" the device via a persistent low-power connection.
 
-3. **Check-in** : The device is instructed to check in with the MDM server to receive its tasks. **Crucial Note** : If the connection to APNs is blocked (e.g., by a school firewall or misconfigured network), management of the devices will fail entirely.
+3. **Check-in** : The device is instructed to check in with the MDM server to receive its tasks.
+
+**Crucial Note** : If the connection to APNs is blocked (e.g., by a school firewall or misconfigured network), management of the devices will fail entirely.
 
 ## Analogy
 

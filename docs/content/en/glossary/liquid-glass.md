@@ -11,7 +11,9 @@ Visual characteristics:
 
 * **Materiality** : Features increased transparency, dynamic light reflections, and real-time blurring logic.
 * **Depth** : Creates a fluid sense of depth where interface elements (like windows or dock icons) feel like they are floating on different layers of glass.
-* **Adaptability** : The interface reacts subtly to environmental lighting conditions captured by the device's sensors. **MDM Context** : Administrators should note that users can adjust the "opacity" of this effect in settings. Onboarding materials should clarify that this transparency is a stylistic choice, not a display hardware defect.
+* **Adaptability** : The interface reacts subtly to environmental lighting conditions captured by the device's sensors.
+
+**MDM Context** : Administrators should note that users can adjust the "opacity" of this effect in settings. Onboarding materials should clarify that this transparency is a stylistic choice, not a display hardware defect.
 
 ## Analogy
 

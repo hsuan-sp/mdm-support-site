@@ -51,7 +51,7 @@ tags: ["自動化","Shell Script","Zsh","政策","腳本","jamfHelper"]
 ## 設定變數
 
 HELPER="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-TITLE="學校 ICT 資訊支援團隊公告"
+TITLE="學校 資訊組公告"
 HEADING="軟體更新通知"
 DESC="您的電腦將在 10 分鐘後進行安全性更新，請儲存手邊的工作並連接電源。"
 

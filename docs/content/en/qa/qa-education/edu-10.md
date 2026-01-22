@@ -19,7 +19,9 @@ tags: ["App Store","Self Service","Restrictions"]
 
 ## How to Install Apps: Using Self Service
 
-**Self Service** is Jamf's "School App Store." Administrators choose which apps are available for students and staff. **Steps** :
+**Self Service** is Jamf's "School App Store." Administrators choose which apps are available for students and staff.
+
+**Steps** :
 
 1. Find the **Self Service** app on the Home Screen (usually the school logo or Jamf icon).
 1. Open the app and browse available resources.

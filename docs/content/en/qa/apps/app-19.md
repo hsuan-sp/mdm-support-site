@@ -27,5 +27,7 @@ tags: ["Single App Mode","ASAM","Assessment Mode","Risk Warning"]
 
 ## Practical Advice for 2026:
 
-* **Formal Assessments** : Require your software vendor to support **ASAM** (e.g., LockDown Browser). This is the enterprise standard. **OS 26 integrates ASAM into the DDM framework, ensuring stability even during transient network drops.***** Informal Quizzes** : Use **Guided Access** for manual control.
+* **Formal Assessments** : Require your software vendor to support **ASAM** (e.g., LockDown Browser). This is the enterprise standard.
+
+**OS 26 integrates ASAM into the DDM framework, ensuring stability even during transient network drops.***** Informal Quizzes** : Use **Guided Access** for manual control.
 * **Avoid** : MDM-Enforced Single App Mode for large groups of student devices unless you have 100% Wi-Fi confidence and Ethernet adapters on standby.

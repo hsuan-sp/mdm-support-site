@@ -19,5 +19,7 @@ To ensure the local name matches, successful admins use three correct methods: *
 
 * **Mass Actions** : Select specific devices in a Smart Group, then choose **Action > Send Remote Commands > Set Device Name** .
 * **The MUT** : Upload a CSV file containing "Serial Number" and "Desired Name".
-* This tool updates the record and simultaneously triggers Jamf Pro to send rename commands to the physical devices. **Why do commands get stuck?***** Unsupervised** : If the iPad is not in "Supervised" mode (via ADE), MDM cannot forcibly change its local name.
+* This tool updates the record and simultaneously triggers Jamf Pro to send rename commands to the physical devices.
+
+**Why do commands get stuck?***** Unsupervised** : If the iPad is not in "Supervised" mode (via ADE), MDM cannot forcibly change its local name.
 * **Command Pending** : If the device is off, offline, or sleeping, the rename command will sit in the `Pending` queue until the next Check-in. **Practical Advice** Admins should always check "Enforce Mobile Device Name" within Jamf Pro. This prevents students from arbitrarily changing names on the iPad, ensuring the backend inventory always matches the physical device.

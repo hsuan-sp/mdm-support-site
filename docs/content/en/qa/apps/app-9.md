@@ -27,4 +27,6 @@ Under the latest OS architecture, **DDM** is the best path for silent updates:
 
 * **App in Use** : If a student is currently using the app, the system will typically wait until the app is in the background or the device is idle before updating.
 * **Insufficient Storage** : Updates require temporary space to download the installer. If the device is full, the update will fail.
-* **Stuck Commands** : If you see many pending update commands, try sending a **"Blank Push"** to force the device to check in with Apple servers. **Note** : DDM makes the device more proactive in scheduling updates, reducing its real-time dependency on the MDM server for simple maintenance tasks.
+* **Stuck Commands** : If you see many pending update commands, try sending a **"Blank Push"** to force the device to check in with Apple servers.
+
+**Note** : DDM makes the device more proactive in scheduling updates, reducing its real-time dependency on the MDM server for simple maintenance tasks.

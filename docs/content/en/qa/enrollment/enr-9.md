@@ -25,7 +25,9 @@ tags: ["Stuck Commands","Push Notification Service","APNs","Declarative Manageme
 
 1. **Date & Time Accuracy** :
 
-* If the device time drifts by more than a few minutes, the SSL secure connection fails. Ensure "Set Automatically" is enabled in Settings. **Practical Advice** :
+* If the device time drifts by more than a few minutes, the SSL secure connection fails. Ensure "Set Automatically" is enabled in Settings.
+
+**Practical Advice** :
 
 If a single device is frequently Pending, it's usually a local network or hardware sleep issue.
 If devices across the entire school are Pending simultaneously, prioritize checking if the **APNs Certificate** in Jamf Pro is still valid.
