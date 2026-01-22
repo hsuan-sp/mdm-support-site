@@ -14,7 +14,7 @@ title: >-
 
 ## Answer
 
-***Yes, the teacher can 'Mute' the whole class with one click, but they cannot 'Unmute' them remotely.**## Operation:
+*  **Yes, the teacher can 'Mute' the whole class with one click, but they cannot 'Unmute' them remotely.**## Operation:
 
 Within the**Classroom**app's main screen, tap the**Mute**icon. The media volume on all student iPads will immediately drop to zero.
 

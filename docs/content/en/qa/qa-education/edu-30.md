@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***One of the iPad’s greatest strengths is its 'Offline Productivity.' Even without Wi-Fi, most pre-installed apps and downloaded content remain fully functional. The role of MDM is to pre-configure 'Offline Grace Periods' and 'Local Caching' to ensure teaching never stops.**## Strategies for Offline Teaching
+*  **One of the iPad’s greatest strengths is its 'Offline Productivity.' Even without Wi-Fi, most pre-installed apps and downloaded content remain fully functional. The role of MDM is to pre-configure 'Offline Grace Periods' and 'Local Caching' to ensure teaching never stops.**## Strategies for Offline Teaching
 
 ## 1. Pre-Class Preparation: Caching and Syncing***Content Caching**: Ensure your school has a macOS**Content Caching**server. If the main internet line fails but the internal local network (LAN) is active, iPads can still download apps or updates from the local cache.***Asset Pre-loading**: Use Jamf Pro to push "Essential Courseware" directly into the student's**Files**app or**Books**beforehand, rather than relying on cloud links.
 

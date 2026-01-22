@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***Yes, everything is working perfectly. In modern iPadOS versions (17 through 26), Jamf Trust uses "DNS Proxy" and "Content Filter" technology which does not require a VPN tunnel.**This architectural shift is intentional and was implemented to improve device battery life and network stability across school campuses.
+*  **Yes, everything is working perfectly. In modern iPadOS versions (17 through 26), Jamf Trust uses "DNS Proxy" and "Content Filter" technology which does not require a VPN tunnel.**This architectural shift is intentional and was implemented to improve device battery life and network stability across school campuses.
 
 ## Why the Icon is Gone:***Legacy (iOS 16 & older)**: Used "Always-On VPN" which displayed a permanent VPN icon.***Modern (iOS 17 - 26)**: Uses native**Content Filtering APIs**. These operate at the system level without needing a separate VPN connection, so the icon is no longer displayed in the status bar.
 

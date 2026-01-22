@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***Apple provides APIs for ASM/ABM that allow developers to interact directly with organizational data, enabling advanced automations like "automated account creation," "device inventory queries," and "bulk MDM reassignment."**## Key API Use Cases
+*  **Apple provides APIs for ASM/ABM that allow developers to interact directly with organizational data, enabling advanced automations like "automated account creation," "device inventory queries," and "bulk MDM reassignment."**## Key API Use Cases
 
 1. **Roster Automation**:***Integrate directly with the school’s**SIS (Student Information System)**. When a registrar adds a transfer student to the SIS, the Roster API can automatically create the corresponding Managed Apple Account in ASM and assign it to the correct Class and Location.***This replaces traditional daily SFTP imports, achieving "real-time" synchronization.**1.**Device Inventory & Management**:***Third-party asset management systems can use the Device API to query the list of devices in ASM/ABM, including their model, warranty status, and MDM assignment.*****Automate "MDM Server Assignment"**: For example, detecting newly purchased iPads and automatically assigning them to the "Student MDM" based on the order number, while assigning Macs to the "Staff MDM."
 

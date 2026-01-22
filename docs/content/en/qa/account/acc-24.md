@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***Managed Apple Accounts for education default to a 200GB iCloud storage quota. Administrators cannot adjust individual quotas or purchase additional space for specific users.**## Storage Quotas by Organization Type***Education (ASM)**: Apple provides**200GB**of iCloud storage for every user (staff and students) at no additional cost.***Business (ABM)**: Defaults to 5GB. Organizations with**Apple Business Essentials (ABE)**may have 50GB or 200GB quotas.**Note: As of early 2026, ABE is not yet widely available in all regions (including Taiwan).**## Handling a Full 200GB Quota
+*  **Managed Apple Accounts for education default to a 200GB iCloud storage quota. Administrators cannot adjust individual quotas or purchase additional space for specific users.**## Storage Quotas by Organization Type***Education (ASM)**: Apple provides**200GB**of iCloud storage for every user (staff and students) at no additional cost.***Business (ABM)**: Defaults to 5GB. Organizations with**Apple Business Essentials (ABE)**may have 50GB or 200GB quotas.**Note: As of early 2026, ABE is not yet widely available in all regions (including Taiwan).**## Handling a Full 200GB Quota
 
 If a student's 200GB is full (often due to backing up large personal photo/video libraries), consider the following strategies:
 

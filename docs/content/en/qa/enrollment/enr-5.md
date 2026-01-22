@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***Account-Driven Enrollment relies on "Service Discovery," allowing users to enroll simply by entering their school email address.**## How it Works:
+*  **Account-Driven Enrollment relies on "Service Discovery," allowing users to enroll simply by entering their school email address.**## How it Works:
 
 When a user enters their email (e.g., `student@tes.tp.edu.tw`) during the Enrollment process, the device attempts to find a secret instruction file on the school’s web domain.
 

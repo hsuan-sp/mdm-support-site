@@ -13,7 +13,7 @@ title: 'Troubleshooting: Apple Pencil won''t pair or write. How do I fix it?'
 
 ## Answer
 
-***Apple Pencil issues are usually caused by 'Model Incompatibility' or 'Bluetooth Pairing Cache' errors.**## Troubleshooting Flow:
+*  **Apple Pencil issues are usually caused by 'Model Incompatibility' or 'Bluetooth Pairing Cache' errors.**## Troubleshooting Flow:
 
 1. **Verify Compatibility (Most Common Error)**:***1st Gen (Lightning)**: Does not work with common USB-C iPads (unless using an adapter).***2nd Gen (Magnetic)**: Only for iPad Air/Pro models with the magnetic charging strip.***USB-C Model**: Does not support magnetic pairing; must be connected via**cable**for initial setup.
 

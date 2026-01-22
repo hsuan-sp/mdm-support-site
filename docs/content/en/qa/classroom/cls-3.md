@@ -13,7 +13,7 @@ title: Why is the web navigation failing when I try to push a URL to student iPa
 
 ## Answer
 
-***Navigation failures are typically caused by browser restrictions, content filters, or excessive open tabs.**## Troubleshooting Checklist:
+*  **Navigation failures are typically caused by browser restrictions, content filters, or excessive open tabs.**## Troubleshooting Checklist:
 
 1. **Safari is Disabled**: Verify if Safari has been hidden or disabled via a management profile. If the browser is unavailable, the push command has nowhere to go.
 2. **Web Content Filtering**: If your school uses a strict "allowlist," and the URL you are pushing (e.g., a specific YouTube video or external blog) is not on that list, Safari will block the page from loading.

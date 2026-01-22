@@ -13,7 +13,7 @@ title: Can students leave or remove 'Classroom' classes created by the teacher?
 
 ## Answer
 
-***This depends on the source of the class.*****Classes synced from your school system cannot be removed, but teacher-created ad-hoc classes can—unless restricted via MDM.**## Difference Between the Two Class Types:
+*  **This depends on the source of the class.*****Classes synced from your school system cannot be removed, but teacher-created ad-hoc classes can—unless restricted via MDM.**## Difference Between the Two Class Types:
 
 ## 1. ASM-synced Classes (Apple School Manager)***Source**: Created by administrators in ASM or a Student Information System (SIS) and deployed via MDM.***Student Rights**:**Cannot be removed.**These are considered permanent educational configurations.***On the iPad under**Settings > Classroom**, students can view class info but will find no "Remove Class" option.
 

@@ -13,12 +13,12 @@ title: 什麼是「受監管模式 (Supervised Mode)」？為什麼學校裝置�
 
 ## Answer
 
-***受監管模式 (Supervised Mode) 是 Apple 賦予組織擁有裝置「最高管理權限」的特殊狀態。
+*  **受監管模式 (Supervised Mode) 是 Apple 賦予組織擁有裝置「最高管理權限」的特殊狀態。
 
 **一般個人購買的 iPad 預設為「非受監管」，使用者擁有最高控制權。
 但學校資產必須透過**自動裝置註冊 (ADE)**或**Apple Configurator**才能進入受監管狀態。
 
-***開啟受監管模式後的關鍵差異**：
+*  **開啟受監管模式後的關鍵差異**：
 
 | 功能 | 一般模式 (Unsupervised) | 受監管模式 (Supervised) |
 | :--- | :--- | :--- |

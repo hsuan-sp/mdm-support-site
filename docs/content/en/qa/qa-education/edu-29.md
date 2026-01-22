@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***MDM should not just be a 'restrictor,' but a 'guardrail' for Digital Citizenship education. With the features in iOS 26, administrators can guide students toward responsible AI and technology habits.**## The New Role of MDM in Behavior Management
+*  **MDM should not just be a 'restrictor,' but a 'guardrail' for Digital Citizenship education. With the features in iOS 26, administrators can guide students toward responsible AI and technology habits.**## The New Role of MDM in Behavior Management
 
 ## 1. Phased Access to Apple Intelligence***Not just ON/OFF**: Use**Managed App Config**to enable AI "Summarization" in science or history (to practice identifying key points) while disabling "Rewrite" in language arts (to practice original composition).***Contextual Boundaries**: Use MDM to restrict features like**iPhone Mirroring**on student devices to teach the difference between "Personal" and "Educational" tool usage boundaries.
 

@@ -14,7 +14,7 @@ title: What is 'Declarative App Management' (DDM)?
 
 ## Answer
 
-***Declarative Device Management (DDM) is a major evolution of the Apple MDM protocol, allowing devices to autonomously maintain their state based on 'Declarations' from the server.**## Core Differences from Traditional MDM:
+*  **Declarative Device Management (DDM) is a major evolution of the Apple MDM protocol, allowing devices to autonomously maintain their state based on 'Declarations' from the server.**## Core Differences from Traditional MDM:
 
 1. **Desired State Management**:***Old Way**: Server sends an "Install App" command. If a user deletes the app later, the server must wait to scan the device again and re-send the command.***New Way (DDM)**: Server declares "This app MUST exist." The device**continuously monitors itself**. If it detects the app is missing, it triggers a redownload automatically without waiting for a server command.
 

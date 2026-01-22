@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***macOS 26 provides granular MDM controls for 'iPhone Mirroring.' IT coordinators can set different permission levels for 'Shared Lab Macs' versus 'Teacher Presentation Macs.'**## Management Modes (SOP)
+*  **macOS 26 provides granular MDM controls for 'iPhone Mirroring.' IT coordinators can set different permission levels for 'Shared Lab Macs' versus 'Teacher Presentation Macs.'**## Management Modes (SOP)
 
 Using Jamf Pro's**Restrictions**payload, you should apply one of these three strategies based on the machine's location:
 

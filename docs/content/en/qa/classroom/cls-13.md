@@ -14,7 +14,7 @@ title: >-
 
 ## Answer
 
-***Yes. Shared iPad supports 'Guest Sessions', allowing users to log in without an account.**## Features and Limitations:
+*  **Yes. Shared iPad supports 'Guest Sessions', allowing users to log in without an account.**## Features and Limitations:
 
 1. **Login**: Tap the**Guest**button below the user icons on the sign-in screen.
 2. **Temporary Storage**: Any Safari history, photos, or documents created during the session are only stored locally.

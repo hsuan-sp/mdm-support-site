@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***In a 'Shared iPad' environment, pairing Bluetooth headsets has historically been a major pain point. Previously, AirPods would try to sync to a student's iCloud account, leading to disconnections or cross-room interference when the next student used the same iPad.**## The 'Audio Accessory Configuration' Solution
+*  **In a 'Shared iPad' environment, pairing Bluetooth headsets has historically been a major pain point. Previously, AirPods would try to sync to a student's iCloud account, leading to disconnections or cross-room interference when the next student used the same iPad.**## The 'Audio Accessory Configuration' Solution
 
 Introduced in**iOS 26 (Tahoe)**, this MDM payload completely changes how accessories behave in a shared setting.
 

@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***'Pending' means the command has been sent to Apple's servers, but the device has not yet contacted the server to report its status.**In the current architecture where**Declarative Device Management (DDM)**runs alongside traditional MDM protocols, command status updates rely heavily on device response. If commands stall, check these core factors:
+*  **'Pending' means the command has been sent to Apple's servers, but the device has not yet contacted the server to report its status.**In the current architecture where**Declarative Device Management (DDM)**runs alongside traditional MDM protocols, command status updates rely heavily on device response. If commands stall, check these core factors:
 
 1. **APNs Communication Blocked**:***This is the most common cause. Even if the device can browse the web, if the firewall blocks**TCP Port 5223**(used for communicating with Apple servers), push commands will never reach the device.***Test**: Switch the device to a mobile hotspot. If the status immediately changes from "Pending" to "Completed", it proves a campus network restriction.
 

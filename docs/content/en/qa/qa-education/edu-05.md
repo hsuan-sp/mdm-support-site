@@ -12,7 +12,7 @@ title: The iPad feels slow or laggy. Is it faulty? How do we fix it?
 
 ## Answer
 
-***Most 'slowness' is caused by software fatigue rather than hardware failure. Regular maintenance steps can restore the device to its original speed.**## Troubleshooting Checklist:
+*  **Most 'slowness' is caused by software fatigue rather than hardware failure. Regular maintenance steps can restore the device to its original speed.**## Troubleshooting Checklist:
 
 1. **Reboot (The Most Important Step)**:***iPads are often left on for weeks at a time. A simple**Hard Restart**clears out memory leaks and hung background processes.***Tip: We recommend every student reboots their iPad once a week.**1.**Storage Overload**:***Check**Settings > General > iPad Storage**. If the device has less than**2GB**of free space, iPadOS will slow down significantly as it struggles to manage temporary files. Ask the student to delete large personal videos or unused games.
 

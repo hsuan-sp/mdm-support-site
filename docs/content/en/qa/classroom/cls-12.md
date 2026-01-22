@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***For devices running iOS 26+, administrators should use 'Declarative Device Management (DDM)' for real-time control.**## Risk Features and Controls:***Writing Tools**: Disable via the DDM**Restrictions**declaration using `allowWritingTools`.***Math Notes**: Disable using `allowMathNotes`.***Genmoji and Image Playground**: Disable using `allowGenmoji`and`allowImagePlayground`.
+*  **For devices running iOS 26+, administrators should use 'Declarative Device Management (DDM)' for real-time control.**## Risk Features and Controls:***Writing Tools**: Disable via the DDM**Restrictions**declaration using `allowWritingTools`.***Math Notes**: Disable using `allowMathNotes`.***Genmoji and Image Playground**: Disable using `allowGenmoji`and`allowImagePlayground`.
 
 ## Setup Path (Jamf Pro):
 

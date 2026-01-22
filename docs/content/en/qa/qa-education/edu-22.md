@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***In iOS 26.2, iPadOS 26.2, and macOS 26.2, the 'AirDrop Code' mechanism means that first-time transfers between people not in each other's contacts require a 6-digit code. This changes the 'Everyone open AirDrop' workflow but can be managed effectively.**## The New Workflow:
+*  **In iOS 26.2, iPadOS 26.2, and macOS 26.2, the 'AirDrop Code' mechanism means that first-time transfers between people not in each other's contacts require a 6-digit code. This changes the 'Everyone open AirDrop' workflow but can be managed effectively.**## The New Workflow:
 
 1. **Sender**: Selects the file and clicks the student's name in AirDrop.
 2. **Recipient**: Taps "Get AirDrop Code" (since they aren't in the teacher's contacts).
@@ -29,7 +29,7 @@ title: >-
 
 1. **'Pairing Day' Routine**:***If your curriculum requires formats that Classroom doesn't support (like large Keynote project files), dedicate 5 minutes at the start of the semester for "Pairing Day."*****Have students pair with their neighbors using the AirDrop code once. This trust will last for 30 days.**2.**Cloud Relay**:
 
-* Upload the material to Google Drive or a school NAS and push the*link* via Classroom. Students can then download at their own pace without worrying about peer-to-peer pairing.
+*  Upload the material to Google Drive or a school NAS and push the*link* via Classroom. Students can then download at their own pace without worrying about peer-to-peer pairing.
 
 ## Advice for Teachers:
 

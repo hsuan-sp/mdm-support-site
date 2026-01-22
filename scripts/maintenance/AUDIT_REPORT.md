@@ -1,6 +1,6 @@
 # Markdown 格式檢測報告 (V3.1 同步版)
 
-共在 637 個檔案中發現在位準確問題。
+共在 627 個檔案中發現在位準確問題。
 
 ### 802-1x.md (`content/en/glossary/802-1x.md`)
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
@@ -1420,9 +1420,6 @@
 ### airdrop-for-business.md (`content/zh/glossary/airdrop-for-business.md`)
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
-### airprint.md (`content/zh/glossary/airprint.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### apns.md (`content/zh/glossary/apns.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
@@ -1456,9 +1453,6 @@
 ### bootstrap-token.md (`content/zh/glossary/bootstrap-token.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
-### bundle-id.md (`content/zh/glossary/bundle-id.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### captive-portal.md (`content/zh/glossary/captive-portal.md`)
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
@@ -1478,11 +1472,7 @@
 ### dhcp-dynamic-host-configuration-protocol.md (`content/zh/glossary/dhcp-dynamic-host-configuration-protocol.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
-### directory-service.md (`content/zh/glossary/directory-service.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### dns-over-https-tls.md (`content/zh/glossary/dns-over-https-tls.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### domain-capture.md (`content/zh/glossary/domain-capture.md`)
@@ -1571,26 +1561,25 @@
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
 ### acc-10.md (`content/zh/qa/account/acc-10.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-11.md (`content/zh/qa/account/acc-11.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-12.md (`content/zh/qa/account/acc-12.md`)
+- ⚠️ 粗體語法開頭有多餘空格 (例如 '** text**')
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-13.md (`content/zh/qa/account/acc-13.md`)
+- ⚠️ 粗體語法開頭有多餘空格 (例如 '** text**')
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-14.md (`content/zh/qa/account/acc-14.md`)
+- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
+- ⚠️ 粗體語法開頭有多餘空格 (例如 '** text**')
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
-### acc-15.md (`content/zh/qa/account/acc-15.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### acc-16.md (`content/zh/qa/account/acc-16.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-17.md (`content/zh/qa/account/acc-17.md`)
@@ -1611,7 +1600,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-22.md (`content/zh/qa/account/acc-22.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-23.md (`content/zh/qa/account/acc-23.md`)
@@ -1627,7 +1615,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-5.md (`content/zh/qa/account/acc-5.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### acc-6.md (`content/zh/qa/account/acc-6.md`)
@@ -1667,9 +1654,6 @@
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
 ### app-25.md (`content/zh/qa/apps/app-25.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
-### app-26.md (`content/zh/qa/apps/app-26.md`)
 - ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
 ### app-3.md (`content/zh/qa/apps/app-3.md`)
@@ -1757,7 +1741,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### dl-15.md (`content/zh/qa/digital-learning/dl-15.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### dl-16.md (`content/zh/qa/digital-learning/dl-16.md`)
@@ -1842,7 +1825,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### enr-22.md (`content/zh/qa/enrollment/enr-22.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### enr-23.md (`content/zh/qa/enrollment/enr-23.md`)
@@ -1859,7 +1841,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### enr-5.md (`content/zh/qa/enrollment/enr-5.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### enr-7.md (`content/zh/qa/enrollment/enr-7.md`)
@@ -1869,7 +1850,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### hw-1.md (`content/zh/qa/hardware/hw-1.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### hw-10.md (`content/zh/qa/hardware/hw-10.md`)
@@ -1878,11 +1858,7 @@
 ### hw-12.md (`content/zh/qa/hardware/hw-12.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
-### hw-13.md (`content/zh/qa/hardware/hw-13.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### hw-14.md (`content/zh/qa/hardware/hw-14.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### hw-15.md (`content/zh/qa/hardware/hw-15.md`)
@@ -1947,7 +1923,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### mac-19.md (`content/zh/qa/mac/mac-19.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### mac-20.md (`content/zh/qa/mac/mac-20.md`)
@@ -1974,7 +1949,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### mac-27.md (`content/zh/qa/mac/mac-27.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### mac-28.md (`content/zh/qa/mac/mac-28.md`)
@@ -2019,26 +1993,13 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### edu-05.md (`content/zh/qa/qa-education/edu-05.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
-
-### edu-07.md (`content/zh/qa/qa-education/edu-07.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
 ### edu-08.md (`content/zh/qa/qa-education/edu-08.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
-### edu-09.md (`content/zh/qa/qa-education/edu-09.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
 ### edu-10.md (`content/zh/qa/qa-education/edu-10.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
-
-### edu-12.md (`content/zh/qa/qa-education/edu-12.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
-
-### edu-13.md (`content/zh/qa/qa-education/edu-13.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 
 ### edu-14.md (`content/zh/qa/qa-education/edu-14.md`)
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
@@ -2053,7 +2014,6 @@
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### edu-19.md (`content/zh/qa/qa-education/edu-19.md`)
-- ⚠️ 粗體範圍過長 (>100 字元)，可能涵蓋了不該粗體的內容
 - ⚠️ 粗體語法結尾有多餘空格 (例如 '**text **')
 
 ### edu-20.md (`content/zh/qa/qa-education/edu-20.md`)

@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***The modern solution is to use "Declarative Device Management (DDM)." If you need more visual urgency, you can supplement this with the open-source tool "Nudge."**Unlike iPads, Mac updates often require a lengthy restart, which leads students to postpone them indefinitely, creating a fragmented and insecure fleet.
+*  **The modern solution is to use "Declarative Device Management (DDM)." If you need more visual urgency, you can supplement this with the open-source tool "Nudge."**Unlike iPads, Mac updates often require a lengthy restart, which leads students to postpone them indefinitely, creating a fragmented and insecure fleet.
 
 ## Path 1: DDM Enforced Updates (Recommended for macOS 14+)***The Logic**: You set an**"Enforcement Deadline."*****The Experience**:
 

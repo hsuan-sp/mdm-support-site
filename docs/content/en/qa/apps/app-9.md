@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**## The Preferred 2026 Method: Declarative Device Management (DDM)
+*  **No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**## The Preferred 2026 Method: Declarative Device Management (DDM)
 
 Under the latest OS architecture,**DDM**is the best path for silent updates:***Autonomy**: The device itself monitors app versions based on the MDM declaration and triggers downloads in the background. It no longer relies on a one-way "push" command from the server.***Status Transparency**: Admins get real-time progress reports (e.g., "Downloading" or "Insufficient Space") instead of the vague "Pending" status seen in older MDM versions.
 

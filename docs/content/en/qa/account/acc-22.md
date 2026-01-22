@@ -14,7 +14,7 @@ title: How do I batch create Managed Apple Accounts? Should I use SFTP or CSV im
 
 ## Answer
 
-***According to official Apple documentation, there are three primary ways to create Managed Apple Accounts: SFTP Upload (SIS integration), Manual CSV Import, and Federated Authentication.**## Comparison of Methods
+*  **According to official Apple documentation, there are three primary ways to create Managed Apple Accounts: SFTP Upload (SIS integration), Manual CSV Import, and Federated Authentication.**## Comparison of Methods
 
 | Method | Best For | Key Features |
 | :--- | :--- | :--- |

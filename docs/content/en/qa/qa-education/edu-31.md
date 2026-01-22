@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***The primary differences lie in administrative permissions, feature rollout speed, and 'Global Toggle' control. While assets can be moved between them, the daily management experience varies significantly.**## Three Levels of Administrative Access
+*  **The primary differences lie in administrative permissions, feature rollout speed, and 'Global Toggle' control. While assets can be moved between them, the daily management experience varies significantly.**## Three Levels of Administrative Access
 
 In the**MOE Managed Jamf Pro**architecture, permissions are layered to balance security with local flexibility:
 

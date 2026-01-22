@@ -18,9 +18,9 @@ In a school environment, iPads are often shared between multiple students. Regul
 
 ### 1. Recommended Cleaning Methods
 
-* Use a**70% Isopropyl Alcohol**wipe,**75% Ethyl Alcohol**wipe, or**Clorox Disinfecting Wipes**.
-* Gently wipe the hard, nonporous surfaces of the iPad, such as the display, buttons, and enclosure.
-* Turn off the device and unplug all power sources before cleaning.
+*  Use a**70% Isopropyl Alcohol**wipe,**75% Ethyl Alcohol**wipe, or**Clorox Disinfecting Wipes**.
+*  Gently wipe the hard, nonporous surfaces of the iPad, such as the display, buttons, and enclosure.
+*  Turn off the device and unplug all power sources before cleaning.
 
 ### 2. Prohibited Substances & Tools***❌ Bleach**or products containing**Hydrogen Peroxide**.***❌ Window cleaners or household detergents**.***❌ Aerosols, solvents, or abrasives**.***❌ Compressed air**sprayed directly into openings (can damage microphone or speaker membranes).***❌ Rough fabrics, paper towels, or napkins**(may cause micro-scratches).
 

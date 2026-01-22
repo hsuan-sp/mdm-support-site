@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***Standard 'Single App Mode' cannot be exited by the user. If you need exit flexibility, you should use 'Autonomous Single App Mode (ASAM)'.**Choosing the wrong mode is a leading cause of "bricked" devices during school deployments:
+*  **Standard 'Single App Mode' cannot be exited by the user. If you need exit flexibility, you should use 'Autonomous Single App Mode (ASAM)'.**Choosing the wrong mode is a leading cause of "bricked" devices during school deployments:
 
 ## Mode 1: MDM-Enforced Single App Mode***Logic**: The administrator sends a lock command. The device remains locked until a second "unlock" command is received.***Risk**:**Network Dependency**. If Wi-Fi fails while locked, the device cannot receive the unlock command. Since the user cannot access Settings to reconnect Wi-Fi, the device is "stuck" and may require an Ethernet adapter (RJ45) or a full restore to rescue.***Use Case**: Kiosks, digital signage, library lookup stations.
 

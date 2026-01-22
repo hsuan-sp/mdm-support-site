@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***You can use a wired HDMI adapter (most stable) or third-party wireless projection software. For the best experience, we recommend the school acquire an Apple TV.**## Option 1: HDMI Adapters (Highly Recommended)***Required Equipment**:***Lightning Models**: Lightning Digital AV Adapter (Original Apple or MFi certified).***USB-C Models**: USB-C Digital AV Multiport Adapter.***HDMI Cable**.***Steps**:
+*  **You can use a wired HDMI adapter (most stable) or third-party wireless projection software. For the best experience, we recommend the school acquire an Apple TV.**## Option 1: HDMI Adapters (Highly Recommended)***Required Equipment**:***Lightning Models**: Lightning Digital AV Adapter (Original Apple or MFi certified).***USB-C Models**: USB-C Digital AV Multiport Adapter.***HDMI Cable**.***Steps**:
 
 1. Plug the adapter into the iPad.
 2. Connect one end of the HDMI cable to the adapter and the other to the TV/Projector.

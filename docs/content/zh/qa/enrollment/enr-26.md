@@ -14,7 +14,7 @@ title: iOS 26 的「Return to Service 保留 App」功能如何運作？實際�
 
 ## Answer
 
-***iOS 26、iPadOS 26 與 visionOS 26 的 Return to Service 可選擇保留 Managed App 的程式本體（Preserve Managed Apps），在清除使用者資料的同時，省去重新下載 GB 級教學 App 的巨大時間成本與網路頻寬壓力。
+*  **iOS 26、iPadOS 26 與 visionOS 26 的 Return to Service 可選擇保留 Managed App 的程式本體（Preserve Managed Apps），在清除使用者資料的同時，省去重新下載 GB 級教學 App 的巨大時間成本與網路頻寬壓力。
 
 **## 技術運作原理
 
@@ -37,10 +37,10 @@ title: iOS 26 的「Return to Service 保留 App」功能如何運作？實際�
 
 ## 關鍵技術
 
-* 使用檔案系統快照 (Filesystem Snapshot)
-* 僅保留 App 的二進位檔案 (Binary)
-* 清除 App 內的使用者資料
-* 重新驗證 VPP 授權
+*  使用檔案系統快照 (Filesystem Snapshot)
+*  僅保留 App 的二進位檔案 (Binary)
+*  清除 App 內的使用者資料
+*  重新驗證 VPP 授權
 
 ## 實際效益比較
 
@@ -70,9 +70,9 @@ title: iOS 26 的「Return to Service 保留 App」功能如何運作？實際�
 
 ## 注意事項
 
-* 僅適用於 iOS 26、iPadOS 26、visionOS 26 或更新版本
-* 舊版 iOS 裝置不會顯示「保留 App」選項
-* 需要在 MDM 發送 `DeviceConfigured` 指令後才會建立快照
+*  僅適用於 iOS 26、iPadOS 26、visionOS 26 或更新版本
+*  舊版 iOS 裝置不會顯示「保留 App」選項
+*  需要在 MDM 發送 `DeviceConfigured` 指令後才會建立快照
 
 ## 適用情境
 
@@ -80,25 +80,25 @@ title: iOS 26 的「Return to Service 保留 App」功能如何運作？實際�
 
 ## 不適用的情況
 
-* 需要變更 App 清單（新增或移除 App）
-* App 版本需要更新
-* 裝置狀態異常，需要完全清除
+*  需要變更 App 清單（新增或移除 App）
+*  App 版本需要更新
+*  裝置狀態異常，需要完全清除
 
 ## 保留與清除的內容
 
 ## 會保留的項目
 
-* ✅ Managed App 的程式檔案（二進位）
-* ✅ Wi-Fi 設定（需勾選選項）
-* ✅ MDM 註冊資訊
+*  ✅ Managed App 的程式檔案（二進位）
+*  ✅ Wi-Fi 設定（需勾選選項）
+*  ✅ MDM 註冊資訊
 
 ## 會清除的項目
 
-* ❌ 使用者的個人資料（照片、影片、文件）
-* ❌ App 內的使用者資料（如 Word 編輯過的文件）
-* ❌ 瀏覽記錄、cookies
-* ❌ 使用者自行安裝的 App（非 Managed App）
-* ❌ 個人 Apple 帳號登入狀態
+*  ❌ 使用者的個人資料（照片、影片、文件）
+*  ❌ App 內的使用者資料（如 Word 編輯過的文件）
+*  ❌ 瀏覽記錄、cookies
+*  ❌ 使用者自行安裝的 App（非 Managed App）
+*  ❌ 個人 Apple 帳號登入狀態
 
 ## 學校部署建議
 
@@ -114,8 +114,8 @@ title: iOS 26 的「Return to Service 保留 App」功能如何運作？實際�
 | 預估完成時間 | 1-2 小時 * | 15-30 分鐘 |
 | 網路流量消耗 | 約 300GB（假設每台 10GB App） | 接近 0 |
 
-* 假設學校有部署快取伺服器（Content Caching），時間可能可縮短至 30-60 分鐘***核心優勢**：
+*  假設學校有部署快取伺服器（Content Caching），時間可能可縮短至 30-60 分鐘***核心優勢**：
 
-* 大幅減少網路頻寬壓力
-* 可在課間休息時間快速完成
-* 不影響其他教學活動的網路使用
+*  大幅減少網路頻寬壓力
+*  可在課間休息時間快速完成
+*  不影響其他教學活動的網路使用

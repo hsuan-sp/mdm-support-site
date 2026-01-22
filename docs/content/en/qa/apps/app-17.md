@@ -14,7 +14,7 @@ title: 'I ''purchased'' an app in ASM, but it''s not appearing in my Jamf Pro li
 
 ## Answer
 
-***This is usually due to a synchronization delay between Apple’s servers and your MDM server.**## The Sync Mechanism:
+*  **This is usually due to a synchronization delay between Apple’s servers and your MDM server.**## The Sync Mechanism:
 
 By default, Jamf Pro usually syncs with Apple School Manager (ASM) once a day (or as configured). When you click "Get" in ASM, the data does not appear "instantly" in Jamf Pro.
 

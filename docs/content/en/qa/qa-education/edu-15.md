@@ -12,7 +12,7 @@ title: Does enabling 'Lost Mode' infringe on my privacy?
 
 ## Answer
 
-***No. Lost Mode is designed specifically for asset recovery. Location services are only activated while the device is officially marked as 'Lost' by an administrator.**## How it Works:
+*  **No. Lost Mode is designed specifically for asset recovery. Location services are only activated while the device is officially marked as 'Lost' by an administrator.**## How it Works:
 
 1. **Enforcement**: Even if a user has disabled Location Services, the MDM forcibly enables them upon receiving the "Lost Mode" command.
 2. **Notification**: The device screen locks and displays a custom message (e.g., "This iPad is lost. Please contact the ICT Support Team at...") and a phone number.

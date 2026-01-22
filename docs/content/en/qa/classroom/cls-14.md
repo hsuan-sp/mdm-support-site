@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***AirDrop is a primary source of classroom distraction. We recommend either constant restrictions via MDM or dynamic control by the teacher.**## Three Levels of Control:
+*  **AirDrop is a primary source of classroom distraction. We recommend either constant restrictions via MDM or dynamic control by the teacher.**## Three Levels of Control:
 
 1. **Fully Disable (Strict - Ideal for Exams)**:***In a Restrictions profile,**uncheck 'Allow AirDrop'**.***Result**: The AirDrop icon disappears from the Control Center, and no one can send or receive files.
 

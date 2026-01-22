@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***A 'Waiting' status usually indicates that the installation process is stalled at either the 'License Verification' or the 'Download Queue' stage.**When an MDM sends an installation command, a complex handshake occurs between the device and Apple’s servers. Please check these common failure points:
+*  **A 'Waiting' status usually indicates that the installation process is stalled at either the 'License Verification' or the 'Download Queue' stage.**When an MDM sends an installation command, a complex handshake occurs between the device and Apple’s servers. Please check these common failure points:
 
 ## Common Causes & Solutions:
 

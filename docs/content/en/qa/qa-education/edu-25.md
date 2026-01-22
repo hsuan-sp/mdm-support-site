@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***iPads provided by the Digital Learning Project are school assets. Even after the initial project period concludes, they can continue to be used as long as the school maintains them. Upgrading to iPadOS 26 is technically viable and highly recommended, provided you consider MDM server compatibility.**## Evaluation for the iPadOS 26 Upgrade
+*  **iPads provided by the Digital Learning Project are school assets. Even after the initial project period concludes, they can continue to be used as long as the school maintains them. Upgrading to iPadOS 26 is technically viable and highly recommended, provided you consider MDM server compatibility.**## Evaluation for the iPadOS 26 Upgrade
 
 ## 1. Hardware Longevity***The primary project device is the**iPad (9th Gen, A13 chip)**.***Follow-on purchases may include the**iPad (10th Gen, A14 chip)**or the**iPad (11th Gen, A16 chip)**.***All three models fully support iPadOS 26**.***Note**: While these models cannot run "Apple Intelligence" features due to hardware limitations, they still benefit from critical security updates and performance optimizations (like the improved Return to Service).
 

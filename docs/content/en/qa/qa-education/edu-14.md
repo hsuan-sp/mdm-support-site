@@ -12,7 +12,7 @@ title: Why is my iPad suddenly requiring a 6-digit (or longer) passcode?
 
 ## Answer
 
-***This is because an administrator has deployed a 'Passcode Configuration' profile to meet school security standards.**## Common Requirements:
+*  **This is because an administrator has deployed a 'Passcode Configuration' profile to meet school security standards.**## Common Requirements:
 
 1. **Minimum Length**: Increased from the default 4 digits to 6 or more.
 2. **Complexity**: May require letters or forbid simple sequences (like "123456").

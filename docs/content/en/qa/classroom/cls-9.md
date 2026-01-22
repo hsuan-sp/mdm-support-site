@@ -13,7 +13,7 @@ title: How do I manage 'Screen Brightness' and 'Auto-Lock' on student iPads?
 
 ## Answer
 
-***MDM can enforce an 'Auto-Lock' timeout, but it 'cannot' directly control screen brightness.**According to Apple's MDM protocol specifications:
+*  **MDM can enforce an 'Auto-Lock' timeout, but it 'cannot' directly control screen brightness.**According to Apple's MDM protocol specifications:
 
 ## 1. Auto-Lock***Manageable**: Administrators can use a configuration profile (Passcode Payload) to enforce a specific "Timeout before Auto-Lock" (e.g., force locking after 5 minutes of inactivity).***Advice**: Set this to between 2 and 5 minutes. Too short interferes with reading; too long wastes battery.
 

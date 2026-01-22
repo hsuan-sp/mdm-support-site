@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***In Jamf Pro, app updates are primarily managed through "Automated Enforcement" and the "Force Update" button.**To ensure classroom iPads remain up-to-date, it is recommended to combine automated checking with manual enforcement when necessary.
+*  **In Jamf Pro, app updates are primarily managed through "Automated Enforcement" and the "Force Update" button.**To ensure classroom iPads remain up-to-date, it is recommended to combine automated checking with manual enforcement when necessary.
 
 ## 1. Configuring Automated Updates and Sync Schedules
 

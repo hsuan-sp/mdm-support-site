@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***This is governed by macOS TCC (Transparency, Consent, and Control) privacy mechanisms. For 'Screen Recording,' 'Microphone,' and 'Camera,' Apple mandates that the user must 'personally click to allow.'**MDM cannot forcibly "turn on" these permissions. However, you can use a**PPPC (Privacy Preferences Policy Control)**profile in Jamf Pro to authorize "Standard Users" (teachers) to approve these requests without needing an administrator password.
+*  **This is governed by macOS TCC (Transparency, Consent, and Control) privacy mechanisms. For 'Screen Recording,' 'Microphone,' and 'Camera,' Apple mandates that the user must 'personally click to allow.'**MDM cannot forcibly "turn on" these permissions. However, you can use a**PPPC (Privacy Preferences Policy Control)**profile in Jamf Pro to authorize "Standard Users" (teachers) to approve these requests without needing an administrator password.
 
 ## MDM Control Capability Matrix (2026 Edition)
 

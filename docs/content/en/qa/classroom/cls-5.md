@@ -14,7 +14,7 @@ title: >-
 
 ## Answer
 
-***This is usually caused by missing 'Local Network' permissions or an expired teacher certificate.**## Troubleshooting Checklist:
+*  **This is usually caused by missing 'Local Network' permissions or an expired teacher certificate.**## Troubleshooting Checklist:
 
 1. **Check 'Local Network' Privacy (Most Common)**:***On both teacher and student iPads, go to**Settings > Privacy & Security > Local Network**.***Ensure the toggle for**Classroom**is turned**ON**. If this is off, the app is blocked from "seeing" other devices on the same Wi-Fi.
 

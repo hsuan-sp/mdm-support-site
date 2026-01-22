@@ -14,7 +14,7 @@ title: >-
 
 ## Answer
 
-***MDM cannot detect or block the 'setting' of specific alarms, but you can solve the problem by 'Hiding the App'.**## Why can't we manage alarms directly?
+*  **MDM cannot detect or block the 'setting' of specific alarms, but you can solve the problem by 'Hiding the App'.**## Why can't we manage alarms directly?
 
 The Apple MDM protocol does not grant permissions to read or modify local alarm settings. Therefore, an administrator cannot remotely delete a student's set alarms or prevent them from ringing.
 

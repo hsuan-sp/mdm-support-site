@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***We strongly recommend a "No-Bind" strategy. Instead of traditional AD binding, schools should adopt Platform SSO or Jamf Connect.**The traditional method of "Binding" a Mac to a Domain Controller (DC) is increasingly unreliable in a modern campus environment characterized by mobile laptops and Zero Trust security.
+*  **We strongly recommend a "No-Bind" strategy. Instead of traditional AD binding, schools should adopt Platform SSO or Jamf Connect.**The traditional method of "Binding" a Mac to a Domain Controller (DC) is increasingly unreliable in a modern campus environment characterized by mobile laptops and Zero Trust security.
 
 ## Why Move Away from AD Binding?***Mobility Barriers**: If a teacher takes their MacBook home, they are disconnected from the DC. This often causes slow logins or failures when trying to sync password changes made on campus.***Keychain Synchronization Issues**: When an AD password is changed, the local Mac "Keychain" often falls out of sync, leading to constant and frustrating password prompts for the user.***Legacy Technology**: Apple is no longer actively developing the AD Plugin. Modern macOS management is built around Cloud Identity Providers (IdP).
 

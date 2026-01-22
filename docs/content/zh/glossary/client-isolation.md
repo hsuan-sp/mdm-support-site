@@ -7,11 +7,11 @@ term: Client Isolation （使用者隔離）
 
 雖然這能防止病毒在內網橫向傳播，但也會直接導致以下 Apple 關鍵教育功能**失效**：
 
-***AirPlay**：無法投影。
+*  **AirPlay**：無法投影。
 
-***AirDrop**：找不到鄰近裝置。
+*  **AirDrop**：找不到鄰近裝置。
 
-***Apple Classroom**：教師端無法連接學生端 iPad。
+*  **Apple Classroom**：教師端無法連接學生端 iPad。
 
 因此，教育單位在規劃網路時，通常需要特別為這些功能開啟白名單或調整隔離策略。
 

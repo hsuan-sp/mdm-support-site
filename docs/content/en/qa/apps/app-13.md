@@ -14,7 +14,7 @@ title: What is 'Managed App Configuration'? How is it used for mass deployment?
 
 ## Answer
 
-***'Managed App Configuration' uses the MDM protocol to inject XML-based settings into apps that support the AppConfig standard, enabling 'Zero-touch Configuration'.**This goes beyond just pre-filling data; it can lock specific app behaviors to prevent user modification.
+*  **'Managed App Configuration' uses the MDM protocol to inject XML-based settings into apps that support the AppConfig standard, enabling 'Zero-touch Configuration'.**This goes beyond just pre-filling data; it can lock specific app behaviors to prevent user modification.
 
 ## Technical Implementation with Jamf Pro Variables:
 

@@ -12,7 +12,7 @@ title: Why is the 'Screen Recording' button missing or grayed out on student iPa
 
 ## Answer
 
-***This is typically because 'Screen Recording' is restricted in the school's MDM Profile, or the button simply hasn't been added to the Control Center.**## Troubleshooting Steps:
+*  **This is typically because 'Screen Recording' is restricted in the school's MDM Profile, or the button simply hasn't been added to the Control Center.**## Troubleshooting Steps:
 
 1. **Check MDM Restrictions (Most Common)**:***Many schools disable**Allow screen recording**in the**Restrictions**profile to prevent students from recording lessons or non-educational content.***Fix**: If a teacher requires this for a project, the IT Coordinator must enable it in Jamf Pro for that specific classroom group.
 

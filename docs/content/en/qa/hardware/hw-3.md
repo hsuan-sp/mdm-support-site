@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***AirDrop and AirPlay operate differently: AirDrop uses Peer-to-Peer communication, while AirPlay relies heavily on your campus network configuration.**## AirDrop Troubleshooting (Point-to-Point):
+*  **AirDrop and AirPlay operate differently: AirDrop uses Peer-to-Peer communication, while AirPlay relies heavily on your campus network configuration.**## AirDrop Troubleshooting (Point-to-Point):
 
 1. **Interface State**: AirDrop requires both Bluetooth (for discovery) and Wi-Fi (for transfer). Even if there is no internet, Wi-Fi must be toggled ON.
 2. **Privacy Settings**: Since iOS 16.2, "Everyone" mode automatically reverts to "Contacts Only" after 10 minutes. Ensure the recipient has manually re-enabled "Everyone" for the transfer.

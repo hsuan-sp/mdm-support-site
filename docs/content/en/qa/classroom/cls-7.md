@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***This is usually caused by a "Bluetooth Discovery Failure" or "Wi-Fi LAN communication being blocked."**Apple Classroom relies on two layers of communication to function:
+*  **This is usually caused by a "Bluetooth Discovery Failure" or "Wi-Fi LAN communication being blocked."**Apple Classroom relies on two layers of communication to function:
 
 1. **Bluetooth (Discovery)**: Used to find nearby students.
 2. **Wi-Fi (Transport)**: Used to transmit commands and screen data.

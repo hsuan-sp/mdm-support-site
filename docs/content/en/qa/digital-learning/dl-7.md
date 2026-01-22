@@ -15,7 +15,7 @@ title: >-
 
 ## Answer
 
-***This policy ensures that 'Jamf Trust' functions correctly. Enabling this feature would disable the school's content filtering and stop usage data reporting.**## Current Situation:
+*  **This policy ensures that 'Jamf Trust' functions correctly. Enabling this feature would disable the school's content filtering and stop usage data reporting.**## Current Situation:
 
 On Supervised devices within the Digital Learning Project, you will typically find the "Private Relay" switch under**Settings > iCloud**is**greyed out and set to 'Off'.**This is a mandatory restriction enforced via MDM configuration profiles.
 

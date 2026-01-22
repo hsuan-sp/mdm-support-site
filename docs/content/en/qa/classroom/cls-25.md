@@ -16,7 +16,7 @@ title: >-
 
 ## Answer
 
-***The 'Classroom' app is for active classroom management (the 'Now'), while the 'Schoolwork' app is for assignment distribution and progress tracking (the 'Long-form'). Most successful teachers use both in tandem.**## Core Comparison Table
+*  **The 'Classroom' app is for active classroom management (the 'Now'), while the 'Schoolwork' app is for assignment distribution and progress tracking (the 'Long-form'). Most successful teachers use both in tandem.**## Core Comparison Table
 
 | Feature | Classroom (v6.0+) | Schoolwork |
 | :--- | :--- | :--- |

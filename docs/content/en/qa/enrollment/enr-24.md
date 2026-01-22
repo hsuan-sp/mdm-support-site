@@ -14,7 +14,7 @@ title: How do I set an 'Enforcement Deadline' for MDM enrollment or system updat
 
 ## Answer
 
-***Using Declarative Device Management (DDM), you can set 'Enforcement Deadlines.' The device will autonomously manage notifications and, once the deadline is reached, remove the 'Later' option to force the update or Enrollment.**## Key Principles***The device receives a**Declaration**containing the deadline.***The device manages its own notification frequency locally.*****At the deadline, the action is forced without needing the MDM server to push a real-time command.**## Scope***OS Versions**: iOS 26, iPadOS 26, macOS 26, visionOS 26, tvOS 26.***Applications**: Software Update enforcement, MDM Migration deadlines, and Configuration Profile installations.
+*  **Using Declarative Device Management (DDM), you can set 'Enforcement Deadlines.' The device will autonomously manage notifications and, once the deadline is reached, remove the 'Later' option to force the update or Enrollment.**## Key Principles***The device receives a**Declaration**containing the deadline.***The device manages its own notification frequency locally.*****At the deadline, the action is forced without needing the MDM server to push a real-time command.**## Scope***OS Versions**: iOS 26, iPadOS 26, macOS 26, visionOS 26, tvOS 26.***Applications**: Software Update enforcement, MDM Migration deadlines, and Configuration Profile installations.
 
 ## Implementation (Jamf Pro Example)
 

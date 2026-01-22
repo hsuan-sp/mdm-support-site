@@ -14,7 +14,7 @@ title: >-
 
 ## Answer
 
-***This is a common 'Serial Lock' risk. If a student tries the wrong password too many times, both the device and the account may be locked out simultaneously.**## Recovery SOP:
+*  **This is a common 'Serial Lock' risk. If a student tries the wrong password too many times, both the device and the account may be locked out simultaneously.**## Recovery SOP:
 
 1. **Unlock the Device**: First, send the**Clear Passcode**command via Jamf Pro.
 2. **Reset the Apple Account**: Administrator logs into**ASM**, selects the student account, and clicks**Reset Password**.
