@@ -46,5 +46,5 @@ Admins often want students to see essential apps immediately upon boot, but if t
 * **Best Practices**:
 
 * **Minimize Initial Payload**: PreStage should only enforce critical configuration profiles or extremely small "Guide Apps".
-* **Background Install**: Set main educational apps to deploy**after* Enrollment is complete, rather than intercepting the user during the Setup Assistant.
+* **Background Install**: Set main educational apps to deploy **after** Enrollment is complete, rather than intercepting the user during the Setup Assistant.
 * **Pilot Test**: Before unboxing remotely, take one device through the full process to verify VPP sync and download speeds.

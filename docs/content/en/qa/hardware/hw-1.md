@@ -24,7 +24,7 @@ title: >-
 2. **iPad 10 (USB-C Base Model)**:
 
 * **Using 1st Gen Pencil**: Requires the**"USB-C to Apple Pencil Adapter."**Because this adapter is small and easily lost, we recommend teachers manage these centrally.
-* **Using USB-C Pencil**: Pairs via a USB-C cable. Note that this model does**not* support pressure sensitivity.
+* **Using USB-C Pencil**: Pairs via a USB-C cable. Note that this model does **not** support pressure sensitivity.
 
 1. **iPad Pro/Air (M-series Chips)**:
 

@@ -27,7 +27,7 @@ Granting permanent Admin rights to students or teachers is a major security risk
 
 * **As of**macOS 26**, Apple includes a native LAPS protocol.
 * **How it works**: Jamf Pro creates a hidden admin account on every Mac. The password for this account is a long, random string that**rotates automatically**every few days.
-* **Operational use**: If a technician needs to fix a Mac, they look up the**current* random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
+* **Operational use**: If a technician needs to fix a Mac, they look up the **current** random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
 
 1. **Self-Service Elevation (Privileges App)**:
 

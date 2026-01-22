@@ -10,7 +10,7 @@ In device management,**Scope**refers to the defined set of targets (users or dev
 
 A scope is built using three logic gates:
 
-* **Targets**: Who**should* get it? (e.g., "All Grades 9-12").
+* **Targets**: Who **should** get it? (e.g., "All Grades 9-12").
 * **Limitations**: Specific subsets required (e.g., "Only users in the Art Department").
 * **Exclusions**: Who should**definitely not* get it? (e.g., "Exclude the 'Lost/Stolen' device group").
 

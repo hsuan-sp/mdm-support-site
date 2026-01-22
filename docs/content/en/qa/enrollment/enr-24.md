@@ -66,5 +66,5 @@ title: How do I set an 'Enforcement Deadline' for MDM enrollment or system updat
 
 ## Communication:
 
-* **Teachers**: Explain**why* the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
+* **Teachers**: Explain **why** the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
 * **Students**: Remind them to leave their iPads connected to power at home to allow for automatic background updates.
