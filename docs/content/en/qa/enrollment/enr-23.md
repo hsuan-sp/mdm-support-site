@@ -56,7 +56,7 @@ title: >-
 
 *    Long-term technical debt and system caches are preserved. This can impact the efficiency of new MDM commands.
 
-## Recommended Alternative: Return to Service (RTS)
+## Recommended Alternative: Return to Service (Return to Service)
 
 For student devices that require periodic resets,**Return to Service**remains the gold standard.
 

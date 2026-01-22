@@ -23,7 +23,7 @@ title: 新買的 iPad 開機後沒有出現「遠端管理」畫面，該如何�
 
 1. **檢查 ASM 中的指派狀態**：
 
-* 登入 [Apple 校務管理 (ASM)](HTTPS://school.Apple.com)。
+* 登入 [Apple 校務管理 (ASM)](https://school.Apple.com)。
 * 點選「裝置」，搜尋該序號。
 * 確認其「MDM 伺服器」欄位是否已指派給您的 Jamf 伺服器。
 

@@ -21,7 +21,7 @@ title: ASM 現在可以直接解除啟用鎖定嗎？還需要聯絡 Apple 客�
 
 **自助解鎖操作步驟**：
 
-1. 登入 **[Apple 校務管理 (ASM)](HTTPS://school.Apple.com)**。
+1. 登入 **[Apple 校務管理 (ASM)](https://school.Apple.com)**。
 2. 點選左側選單的 **「裝置」**，並透過序號搜尋目標裝置。
 3. 點開詳細資訊頁面的工具列按鈕（或「更多」選單）。
 4. 點選 **「停用『啟動鎖定』 (Turn Off Activation Lock)」** 並確認。

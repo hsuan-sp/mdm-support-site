@@ -28,7 +28,7 @@ title: 裝置一直顯示「連線失敗」或無法更新資產 (Inventory)？
 * 主機名：**Apple.com** 及其所有子網域。
 * 埠號：**TCP 443、2197、5223**。
 * **Jamf Pro 伺服器**：裝置必須能透過 HTTPS (443) 正常載入您的 Jamf Cloud 網址。
-* **測試建議**：使用裝置的 Safari 瀏覽器分別開啟 [appleid.Apple.com](HTTPS://appleid.Apple.com) 與您的 Jamf 登入頁面，
+* **測試建議**：使用裝置的 Safari 瀏覽器分別開啟 [appleid.Apple.com](https://appleid.Apple.com) 與您的 Jamf 登入頁面，
 
  確認皆可連線。
 

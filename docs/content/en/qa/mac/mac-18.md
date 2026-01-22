@@ -21,7 +21,7 @@ This is a critical failsafe for when staff leave or students graduate without si
 
 ## Standard Recovery SOP:
 
-1. **Log in to ASM**: Use your administrator account at [school.Apple.com](HTTPS://school.Apple.com).
+1. **Log in to ASM**: Use your administrator account at [school.Apple.com](https://school.Apple.com).
 2. **Search Device**: Click**Devices**in the sidebar and enter the Mac's serial number.
 3. **Execute Unlock**:
 

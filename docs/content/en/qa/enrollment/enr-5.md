@@ -23,7 +23,7 @@ When a user enters their email (e.g., `student@tes.tp.edu.tw`) during the Enroll
 
 1. The device sends an HTTP GET request to:
 
- `HTTPS://school.domain.com/.well-known/com.Apple.remotemanagement`
+ `https://school.domain.com/.well-known/com.Apple.remotemanagement`
 
 2. The school’s web server must respond with a JSON file that points the device to the correct MDM server URL.
 
@@ -37,5 +37,5 @@ When a user enters their email (e.g., `student@tes.tp.edu.tw`) during the Enroll
 
 If your school’s website is managed by a third party and you cannot modify the server files, you can still enroll devices using these methods:
 
-1. **Direct URL/QR Code**: Provide students with a direct Enrollment URL from Jamf Pro (e.g., `HTTPS://school.jamfcloud.com/enroll`). Converting this into a QR Code and posting it in the ICT department is a highly effective way to handle BYOD walk-ins.
+1. **Direct URL/QR Code**: Provide students with a direct Enrollment URL from Jamf Pro (e.g., `https://school.jamfcloud.com/enroll`). Converting this into a QR Code and posting it in the ICT department is a highly effective way to handle BYOD walk-ins.
 2. **Automated Enrollment (ADE)**: For school-purchased hardware, always use ADE. It bypasses the need for service discovery entirely, as the hardware is already "pre-linked" to the school in Apple’s database.

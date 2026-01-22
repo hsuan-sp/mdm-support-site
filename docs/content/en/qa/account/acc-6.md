@@ -22,7 +22,7 @@ The lifecycle of a Managed Apple Account should align with your school's adminis
 **Recommended Workflow**:
 **Phase 1: Deactivate Account**
 
-1. Log in to Apple School Manager ([school.Apple.com](HTTPS://school.Apple.com)).
+1. Log in to Apple School Manager ([school.Apple.com](https://school.Apple.com)).
 2. Click**Users**in the sidebar, then search for and select the student.
 3. In the details panel on the right, click**Change Account Status**(or click "Edit"/"Change" next to the status).
 4. Change the status to**Deactivated**.

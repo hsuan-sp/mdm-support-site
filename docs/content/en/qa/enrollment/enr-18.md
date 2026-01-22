@@ -21,7 +21,7 @@ This eliminates the need to call support or provide invoices for managed hardwar
 
 ## Self-Service Unlocking Steps:
 
-1. Log in to**[Apple School Manager (ASM)](HTTPS://school.Apple.com)**.
+1. Log in to**[Apple School Manager (ASM)](https://school.Apple.com)**.
 2. Select**Devices**from the sidebar and search for the target serial number.
 3. Open the device details and look for the toolbar button (or "More" menu).
 4. Click**Turn Off Activation Lock**and confirm.

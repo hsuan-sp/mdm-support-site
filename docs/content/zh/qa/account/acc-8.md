@@ -29,7 +29,7 @@ title: 忘記 Jamf Pro 的管理員登入密碼怎麼辦？
 
 3. **聯絡 Jamf 客戶成功團隊 (Support)**：
 
-* 若您是唯一的管理員且無法收信，請前往 **[Jamf Account](HTTPS://account.Jamf.com)** 提交支援案例。
+* 若您是唯一的管理員且無法收信，請前往 **[Jamf Account](https://account.Jamf.com)** 提交支援案例。
 
  Jamf 團隊在驗證您的機構身分後，可協助恢復主管理員帳號的存取權。
 

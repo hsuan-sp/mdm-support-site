@@ -31,9 +31,9 @@ This architectural shift is intentional and was implemented to improve device ba
 2. **Test the Filter**: Try navigating to a known blocked category (e.g., a gaming site) in Safari. If the page is blocked, the filter is active.
 3. **Check Jamf Pro**: Reconfirm that the "DNS Proxy" and "Content Filter" profiles are marked as "Installed" in the device inventory.
 
-## New for 2026: Return to Service (RTS) Protection
+## New for 2026: Return to Service (Return to Service) Protection
 
-In macOS and**iOS 26**, these network filters are now protected by**RTS (Return to Service)**. Even if a device is erased, the management configuration is baked into the reactivation process, ensuring the device is "Born Protected" the moment it joins a network.
+In macOS and**iOS 26**, these network filters are now protected by**Return to Service (Return to Service)**. Even if a device is erased, the management configuration is baked into the reactivation process, ensuring the device is "Born Protected" the moment it joins a network.
 
 ## Institutional Advice:
 

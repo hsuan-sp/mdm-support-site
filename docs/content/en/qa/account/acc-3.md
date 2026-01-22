@@ -18,7 +18,7 @@ Because these are school-managed assets, students cannot use the standard "I for
 
 ## Individual Reset Steps:
 
-1. Log in to [school.Apple.com](HTTPS://school.Apple.com).
+1. Log in to [school.Apple.com](https://school.Apple.com).
 2. Select**"Users"**from the sidebar and search for the student's name or ID.
 3. Select the user from the list.
 4. Click**"Reset Password"**in the right-hand panel.
@@ -33,4 +33,4 @@ Because these are school-managed assets, students cannot use the standard "I for
 
 ## Important Note: Federated Authentication
 
-If your school has enabled**Federated Authentication**with Google or Microsoft (Microsoft Entra ID), you**cannot**reset passwords in ASM. Instead, you must reset the student's password in the Google Admin Console or Microsoft 365 Admin Center. The change will automatically sync to their Apple account.
+If your school has enabled**Federated Authentication**with Google or Microsoft (Microsoft Entra ID), you**cannot**reset passwords in ASM. Instead, you must reset the student's password in the Google Admin Console or Microsoft 365 Admin Center. The change will automatically sync to their Apple Account.

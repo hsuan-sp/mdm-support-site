@@ -30,7 +30,7 @@ The device needs to reach both the Jamf server and Apple's servers. Ensure the c
 *    Hostname:**Apple.com**and all subdomains.
 *    Ports:**TCP 443, 2197, 5223**.
 * **Jamf Pro Server**: Devices must be able to load your Jamf Cloud URL via HTTPS (443).
-* **Test**: Use Safari on the device to visit [appleid.Apple.com](HTTPS://appleid.Apple.com) and your Jamf login page to confirm connectivity.
+* **Test**: Use Safari on the device to visit [appleid.Apple.com](https://appleid.Apple.com) and your Jamf login page to confirm connectivity.
 
 **Check 3: Date & Time Sync**
 

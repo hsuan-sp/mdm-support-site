@@ -26,7 +26,7 @@ If the device was Supervised and managed by Jamf Pro before being locked:
 
 ## Option 2: Remove via Apple School Manager (The New Standard)
 
-1. Log in to [Apple School Manager (ASM)](HTTPS://school.Apple.com).
+1. Log in to [Apple School Manager (ASM)](https://school.Apple.com).
 2. Click**Devices**and search for the serial number.
 3. If the device belongs to your organization, click**Turn off Activation Lock**.
 4. Wait a few moments, then restart the iPad to enter the setup screen normally.

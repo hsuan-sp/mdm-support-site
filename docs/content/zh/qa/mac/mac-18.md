@@ -21,7 +21,7 @@ title: 【資產救援】Mac 送修回來或離職交接時被舊 Apple 帳號�
 
 **標準解鎖 SOP：**
 
-1. **登入 ASM**：使用管理員帳號登入 [school.Apple.com](HTTPS://school.Apple.com)。
+1. **登入 ASM**：使用管理員帳號登入 [school.Apple.com](https://school.Apple.com)。
 2. **搜尋裝置**：在側邊欄點選 **「裝置 (Devices)」**，輸入該 Mac 的序號。
 3. **執行解鎖**：
 

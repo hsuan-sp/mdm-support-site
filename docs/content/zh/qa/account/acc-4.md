@@ -25,7 +25,7 @@ title: Jamf Pro 顯示「VPP Token」即將過期，如何更新？
 **更新流程**：
 **步驟一：從 Apple 校務管理下載新的 Token**
 
-1. 登入 [school.Apple.com](HTTPS://school.Apple.com)，使用具備「管理員」或「App 與書籍管理者」權限的帳號。
+1. 登入 [school.Apple.com](https://school.Apple.com)，使用具備「管理員」或「App 與書籍管理者」權限的帳號。
 2. 點選左下角的 **帳號名稱**，進入 **「偏好設定 (Preferences)」**。
 3. 選擇 **「付款與帳單 (Payments and Billing)」** 分頁。
 4. 找到 **「App (Apps)」** 區塊。

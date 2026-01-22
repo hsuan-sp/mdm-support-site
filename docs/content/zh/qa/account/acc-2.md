@@ -46,7 +46,7 @@ Apple 推播通知服務憑證 (Apple Push Notification service Certificate, APN
 3. **點選「續約 (Renew)」**，系統會產生一個 **憑證簽署請求 (CSR)** 檔案供您下載。
 4. **登入 Apple 推播憑證入口網站**：
 
- 前往 [identity.Apple.com/pushcert](HTTPS://identity.Apple.com/pushcert)，
+ 前往 [identity.apple.com/pushcert](https://identity.apple.com/pushcert)，
  使用 **最初建立該憑證的同一個 Apple 帳號** 登入。
 
 *⚠️**嚴重警告**：若使用不同的 Apple 帳號登入並建立新憑證，
@@ -68,6 +68,6 @@ Apple 推播通知服務憑證 (Apple Push Notification service Certificate, APN
 
  而非個人 Apple 帳號去交換憑證，以確保管理不中斷。
 
-* **密碼重置**：管理員可以透過 [iforgot.Apple.com](HTTPS://iforgot.Apple.com) 更輕鬆地重設管理式 Apple 帳號密碼，
+* **密碼重置**：管理員可以透過 [iforgot.apple.com](https://iforgot.apple.com) 更輕鬆地重設管理式 Apple 帳號密碼，
 
  但仍強烈建議保持電話號碼的有效性，避免難以找回帳號。

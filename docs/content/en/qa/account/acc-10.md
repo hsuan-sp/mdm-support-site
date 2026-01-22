@@ -24,7 +24,7 @@ title: >-
 **Procedure**:
 **Step 1: Add and Verify the New Domain**
 
-1. Log in to Apple School Manager ([school.Apple.com](HTTPS://school.Apple.com)).
+1. Log in to Apple School Manager ([school.Apple.com](https://school.Apple.com)).
 2. Go to**Preferences > Accounts**(or "User Sign-in & Directory Sync").
 3. In the Domains section, click**Add**and enter the new domain (e.g., `@school.xh.edu.tw`).
 4. Follow the instructions to add a TXT record to your DNS settings. Once verified, the domain can be assigned to users.

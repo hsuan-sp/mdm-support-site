@@ -27,7 +27,7 @@ title: What should I do if I forget the Jamf Pro administrator password?
 
 3. **Contact Jamf Customer Success (Support)**:
 
-*    If you are the sole administrator and cannot access your email, log a support case via**[Jamf Account](HTTPS://account.Jamf.com)**.
+*    If you are the sole administrator and cannot access your email, log a support case via**[Jamf Account](https://account.Jamf.com)**.
 *    The Jamf team can assist in restoring access to the primary admin account after verifying your identity.
 
 **Scenario 2: Jamf Pro On-Premise**

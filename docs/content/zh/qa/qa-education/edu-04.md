@@ -62,7 +62,7 @@ title: 班級輪替時（如走班、分組教學），如何快速整理平板�
 1. **使用 MDM 發送「清除裝置」指令**：
 
 * 在 Jamf Pro 對目標裝置執行「Wipe Device/EACS」。
-* **啟用 RTS 選項**：勾選 `Return to Service` 並指定 Wi-Fi 選項。
+* **啟用 Return to Service 選項**：勾選 `Return to Service` 並指定 Wi-Fi 選項。
 
 * **2026 新功能：保留受管 App**：勾選 `Preserve Managed Apps`。
 
@@ -78,5 +78,5 @@ title: 班級輪替時（如走班、分組教學），如何快速整理平板�
 **實務建議：**
 
 * 對於頻繁輪替的情境，強烈建議使用「共用 iPad」模式。
-* 善用 **DDM (宣告式管理)** 狀態回報，確保所有 iPad 在第一節課開始前都已完成 RTS 流程。
+* 善用 **DDM (宣告式管理)** 狀態回報，確保所有 iPad 在第一節課開始前都已完成 Return to Service 流程。
 * 下課前預留 2-3 分鐘進行交接流程。

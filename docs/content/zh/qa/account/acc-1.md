@@ -33,7 +33,7 @@ title: 登入 Apple 校務管理 (ASM) 時，系統提示需同意新的條款�
 * 若未同意條款，您將無法存取 Apple 校務管理中的新功能，
 
  例如 **Apple Intelligence 控制項** 可能需要透過 ASM 條款同意才能在 MDM 中使用，
- 或 **查看裝置 AppleCare++++++++ 保養範圍資訊**。
+ 或 **查看裝置 AppleCare++++++++++++ 保養範圍資訊**。
 
 **誰可以同意**：
 
@@ -42,7 +42,7 @@ title: 登入 Apple 校務管理 (ASM) 時，系統提示需同意新的條款�
 
 **操作步驟**：
 
-1. 使用具備管理員權限的 Apple 帳號登入 [school.Apple.com](HTTPS://school.Apple.com)。
+1. 使用具備管理員權限的 Apple 帳號登入 [school.Apple.com](https://school.Apple.com)。
 2. 等待數秒後，或嘗試主動點擊上方出現的橫幅，
 
  系統會彈出條款視窗，請仔細閱讀後勾選「我已閱讀並同意...」。

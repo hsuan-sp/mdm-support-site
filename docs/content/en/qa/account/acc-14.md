@@ -26,7 +26,7 @@ The Server Token acts as the secure bridge between ASM and Jamf Pro for hardware
 
 ## How to Renew the Server Token:
 
-1. Log in to [school.Apple.com](HTTPS://school.Apple.com).
+1. Log in to [school.Apple.com](https://school.Apple.com).
 2. Click your name at the bottom left >**Preferences > Your MDM Servers**.
 3. Select your server and click**Download Token**.
 4. Log in to Jamf Pro, go to**Settings > Global Management > Device Enrollment**.

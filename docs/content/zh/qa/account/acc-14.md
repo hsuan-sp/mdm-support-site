@@ -33,7 +33,7 @@ title: ASM 中新採購的裝置無法同步到 Jamf Pro？（ADE 伺服器代�
 
 **操作步驟：伺服器代號 (Server Token) 續約**：
 
-1. 登入 [school.Apple.com](HTTPS://school.Apple.com)。
+1. 登入 [school.Apple.com](https://school.Apple.com)。
 2. 點選左下角帳號名稱 >**「偏好設定」**>**「您的 MDM 伺服器」**。
 3. 選擇對應的伺服器名稱，點選 **「下載代號 (Download Token)」**。
 4. 登入 Jamf Pro，前往 **「設定」>「全域管理」>「裝置註冊 (Device Enrollment)」**。

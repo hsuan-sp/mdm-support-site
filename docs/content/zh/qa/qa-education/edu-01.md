@@ -27,9 +27,9 @@ title: iPadOS 17 以上沒有顯示 VPN 圖示，這樣網路過濾或是使用�
 | iPadOS 16 及以前 | Per-App VPN / Always-On VPN | 顯示 VPN 圖示 |
 | iPadOS 17 ~ 26 | DNS Proxy + Content Filter | **不顯示**VPN 圖示 |
 
-**2026 年新技術：Return to Service (RTS) 網路保留**
+**2026 年新技術：Return to Service (Return to Service) 網路保留**
 
-在 iOS 26 中，即便進行遠端重置，透過 Jamf Pro 部署的網路過濾配置會受到 **RTS 系統保護**，確保裝置重啟後第一時間即處於受管網路環境。
+在 iOS 26 中，即便進行遠端重置，透過 Jamf Pro 部署的網路過濾配置會受到 **Return to Service 系統保護**，確保裝置重啟後第一時間即處於受管網路環境。
 
 **新架構的優點**：
 

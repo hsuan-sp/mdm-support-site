@@ -31,7 +31,7 @@ title: 裝置被「啟用鎖定 (Activation Lock)」鎖住了，該如何解除�
 
 **方案二：透過管理入口直接解除 —— 最新標準流程**
 
-1. 登入 [Apple 校務管理 (ASM)](HTTPS://school.Apple.com)。
+1. 登入 [Apple 校務管理 (ASM)](https://school.Apple.com)。
 2. 點選「裝置」，搜尋該序號。
 3. 若該裝置由組織擁有，可直接點選 **「關閉啟動鎖定 (Turn off Activation Lock)」**。
 

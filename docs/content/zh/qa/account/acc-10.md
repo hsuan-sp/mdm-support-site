@@ -25,7 +25,7 @@ title: 學校的 Email 網域更換了（例如從 .edu.tw 改為 .xh.edu.tw）�
 **操作流程**：
 **步驟一：新增並驗證新網域**
 
-1. 登入 Apple 校務管理 ([school.Apple.com](HTTPS://school.Apple.com))。
+1. 登入 Apple 校務管理 ([school.Apple.com](https://school.Apple.com))。
 2. 前往 **「設定」>「使用者登入與目錄同步」**。
 3. 在「網域」區塊點選 **「新增」** 並輸入新網域（如 @school.xh.edu.tw）。
 4. 依照指示在 DNS 設定中加入新的 TXT 驗證記錄。驗證完成後，該網域才可被指派給使用者。

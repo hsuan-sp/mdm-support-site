@@ -20,7 +20,7 @@ If the token expires, Jamf Pro will lose the ability to fetch new licenses or up
 
 ## Step 1: Download the Token from ASM
 
-1. Log in to [school.Apple.com](HTTPS://school.Apple.com) with "Administrator" or "Content Manager" privileges.
+1. Log in to [school.Apple.com](https://school.Apple.com) with "Administrator" or "Content Manager" privileges.
 2. Click your**Account Name**in the bottom-left corner and go to**Preferences**.
 3. Select**Payments and Billing**.
 4. Find the**Apps and Books**section and locate your specific location (e.g., "Main Campus").

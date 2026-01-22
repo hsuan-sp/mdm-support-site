@@ -21,7 +21,7 @@ title: 學生畢業或離校了，我該如何處理他們的管理式 Apple 帳
 **建議處理流程**：
 **階段一：停用帳號 (Deactivate)**
 
-1. 登入 Apple 校務管理 ([school.Apple.com](HTTPS://school.Apple.com))。
+1. 登入 Apple 校務管理 ([school.Apple.com](https://school.Apple.com))。
 2. 點選左側選單的 **「使用者」**，搜尋並選取該學生。
 3. 在右側面板中點選 **「變更帳號狀態」**(或是點選狀態旁邊的「編輯」/「變更」)。
 4. 將狀態改為 **「停用」**。

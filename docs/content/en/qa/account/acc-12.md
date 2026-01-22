@@ -29,4 +29,4 @@ According to the latest updates from WWDC 25, Apple has enhanced the `MigrateDev
 
 ## Practical Advice:
 
-To ensure device stability for a new semester, we prioritize the**Return to Service (RTS)**feature. Introduced in iOS 17 and optimized in**Version 26**, RTS allows administrators to send a single command that wipes the device and automatically re-enrolls it using cached Wi-Fi credentials. Crucially,**OS 26 supports retaining installed managed apps during the RTS process**, providing a "clean, stable, and fully automated" transition.
+To ensure device stability for a new semester, we prioritize the**Return to Service (Return to Service)**feature. Introduced in iOS 17 and optimized in**Version 26**, Return to Service allows administrators to send a single command that wipes the device and automatically re-enrolls it using cached Wi-Fi credentials. Crucially,**OS 26 supports retaining installed managed apps during the Return to Service process**, providing a "clean, stable, and fully automated" transition.

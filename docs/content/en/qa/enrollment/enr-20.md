@@ -17,7 +17,7 @@ title: >-
 
 **A 'Service Replacement' unit has a brand-new serial number. To automate the setup, you must handle the serial transfer and use Automated Device Enrollment (ADE).**
 
-Note:**Return to Service (RTS)**only applies to devices already in management and is not for unboxing new replacement units.
+Note:**Return to Service (Return to Service)**only applies to devices already in management and is not for unboxing new replacement units.
 
 ## Standard SOP:
 
@@ -38,10 +38,10 @@ Note:**Return to Service (RTS)**only applies to devices already in management an
 *    Manually connect to Wi-Fi (the device isn't managed yet).
 *    The device will fetch the**Remote Management**screen. Click "Download Profile" to begin the automated app and setting installation.
 
-## 4. Future Resets (Using RTS)
+## 4. Future Resets (Using Return to Service)
 
 *    Once the device has completed the above steps, it is now "Managed."
-* **Next time**you need to wipe it for a new student, you can use the**Return to Service (RTS)**command for a zero-touch wipe and Wi-Fi reconnect.
+* **Next time**you need to wipe it for a new student, you can use the**Return to Service (Return to Service)**command for a zero-touch wipe and Wi-Fi reconnect.
 
 ## Troubleshooting:
 
