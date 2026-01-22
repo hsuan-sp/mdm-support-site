@@ -1,7 +1,6 @@
 ---
 term: "Automatic Reboot"
 category: ["Security"]
-tags: ["Auto-Reboot", "Security", "Lockdown", "Data Protection"]
 ---
 
 ## Term Definition

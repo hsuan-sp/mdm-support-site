@@ -1,7 +1,6 @@
 ---
 term: "Platform SSO in Setup Assistant"
 category: ["Mac"]
-tags: ["Platform SSO", "ADE", "FileVault"]
 ---
 
 ## Term Definition

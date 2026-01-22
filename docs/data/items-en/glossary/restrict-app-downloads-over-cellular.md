@@ -1,7 +1,6 @@
 ---
 term: "Restrict App Downloads over Cellular"
 category: ["Network"]
-tags: ["Mobile Data", "Wi-Fi", "App Downloads", "Traffic Management"]
 ---
 
 ## Term Definition

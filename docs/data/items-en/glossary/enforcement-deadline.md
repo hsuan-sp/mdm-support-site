@@ -1,7 +1,6 @@
 ---
 term: "Enforcement Deadline"
 category: ["DDM"]
-tags: ["DDM", "Software Update", "Compliance"]
 ---
 
 ## Term Definition

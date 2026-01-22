@@ -1,7 +1,6 @@
 ---
 term: "Intel Mac End-of-Support Milestone (Intel Mac 支援終止里程碑)"
 category: ["Mac"]
-tags: ["Intel Mac", "支援終止", "Apple Silicon", "汰換計畫"]
 ---
 
 ## 術語定義

@@ -1,7 +1,6 @@
 ---
 term: "Zero-Wipe MDM Migration"
 category: ["MDM"]
-tags: ["Migration", "Zero-Wipe", "ABM", "ASM", "Transfer"]
 ---
 
 ## Term Definition

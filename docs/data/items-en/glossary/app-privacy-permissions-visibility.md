@@ -1,7 +1,6 @@
 ---
 term: "App Privacy Permissions Visibility"
 category: ["Mac"]
-tags: ["Privacy", "Transparency", "PPPC", "System Settings"]
 ---
 
 ## Term Definition

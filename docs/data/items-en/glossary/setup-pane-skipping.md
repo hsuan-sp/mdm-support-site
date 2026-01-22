@@ -1,7 +1,6 @@
 ---
 term: "Setup Pane Skipping"
 category: ["Mac"]
-tags: ["Setup Assistant", "Skipping", "Deployment", "macOS Tahoe"]
 ---
 
 ## Term Definition

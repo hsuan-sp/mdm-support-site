@@ -1,7 +1,6 @@
 ---
 term: "Captive Portal"
 category: ["Network"]
-tags: ["Wi-Fi", "Public Wi-Fi", "Login Page"]
 ---
 
 ## Term Definition

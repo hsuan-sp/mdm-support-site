@@ -1,7 +1,6 @@
 ---
 term: "Transfer to Android Tool"
 category: ["Core"]
-tags: ["Android", "Data Transfer", "iOS 26.3", "Cross-Platform"]
 ---
 
 ## Term Definition

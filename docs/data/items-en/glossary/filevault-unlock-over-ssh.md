@@ -1,7 +1,6 @@
 ---
 term: "FileVault Unlock over SSH"
 category: ["Mac"]
-tags: ["FileVault", "SSH", "Remote Unlock", "macOS Tahoe"]
 ---
 
 ## Term Definition

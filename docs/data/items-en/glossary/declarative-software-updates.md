@@ -1,7 +1,6 @@
 ---
 term: "Declarative Software Updates"
 category: ["DDM"]
-tags: ["DDM", "Software Updates", "Enforcement", "Beta Enrollment"]
 ---
 
 ## Term Definition

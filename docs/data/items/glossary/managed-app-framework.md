@@ -1,7 +1,6 @@
 ---
 term: "Managed App Framework (管理式 App 框架)"
 category: ["DDM"]
-tags: ["App Configuration", "憑證傳遞", "資安", "未來功能"]
 ---
 
 ## 術語定義

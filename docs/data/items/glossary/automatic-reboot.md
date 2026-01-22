@@ -1,7 +1,6 @@
 ---
 term: "Automatic Reboot (自動重開機)"
 category: ["Security"]
-tags: ["自動重開機", "安全機制", "長時間鎖定", "資料保護"]
 ---
 
 ## 術語定義

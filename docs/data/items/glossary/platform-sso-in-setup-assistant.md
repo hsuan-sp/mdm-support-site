@@ -1,7 +1,6 @@
 ---
 term: "Platform SSO in Setup Assistant (設定輔助程式中的 Platform SSO)"
 category: ["Mac"]
-tags: ["Platform SSO", "Setup Assistant", "ADE", "Secure Enclave", "FileVault"]
 ---
 
 ## 術語定義

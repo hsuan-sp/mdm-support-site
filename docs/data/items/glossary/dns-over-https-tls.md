@@ -1,7 +1,6 @@
 ---
 term: "DNS over HTTPS/TLS (DNS 加密協定)"
 category: ["Network"]
-tags: ["DoH", "DoT", "DNS 加密", "隱私", "Jamf Safe Internet"]
 ---
 
 ## 術語定義

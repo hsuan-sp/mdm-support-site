@@ -203,8 +203,20 @@ function processFile(filePath) {
       const parts = rawContent.split('---');
       if (parts.length >= 3) {
         frontmatter = parts[1];
-        // 確保 frontmatter 結尾有換行符號
-        if (!frontmatter.endsWith('\n')) frontmatter += '\n';
+        
+        // REMOVE tags field from frontmatter ONLY for glossary files
+        if (filePath.includes('/glossary/')) {
+            frontmatter = frontmatter.replace(/^tags:.*$/m, '');
+            // Remove empty lines that might have been left behind
+            frontmatter = frontmatter.replace(/^\s*[\r\n]/gm, '');
+        }
+        
+        // Ensure frontmatter is clean and has proper spacing
+        frontmatter = frontmatter.trim();
+        if (frontmatter) {
+            frontmatter = '\n' + frontmatter + '\n';
+        }
+        
         content = parts.slice(2).join('---');
       }
     }

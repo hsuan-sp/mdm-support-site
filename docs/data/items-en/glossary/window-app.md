@@ -1,7 +1,6 @@
 ---
 term: "Window App"
 category: ["Core"]
-tags: ["Multitasking", "iPadOS 26", "Productivity", "Split View"]
 ---
 
 ## Term Definition

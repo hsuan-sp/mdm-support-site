@@ -1,7 +1,6 @@
 ---
 term: "Network Extension URL Filtering API (網路擴充功能 URL 過濾 API)"
 category: ["Network"]
-tags: ["URL 過濾", "內容過濾", "Network Extension", "隱私保護", "Jamf Safe Internet"]
 ---
 
 ## 術語定義

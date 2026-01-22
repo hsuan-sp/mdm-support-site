@@ -1,7 +1,6 @@
 ---
 term: "AirDrop Codes (AirDrop 代碼)"
 category: ["Network"]
-tags: ["AirDrop", "隱私", "iOS 26.2", "檔案分享"]
 ---
 
 ## 術語定義

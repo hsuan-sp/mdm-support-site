@@ -1,7 +1,6 @@
 ---
 term: "Window App (視窗化 App)"
 category: ["Core"]
-tags: ["Window App", "多工", "iPadOS 26", "視窗化", "拖放式多工"]
 ---
 
 ## 術語定義

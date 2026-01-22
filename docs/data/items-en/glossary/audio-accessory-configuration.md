@@ -1,7 +1,6 @@
 ---
 term: "Audio Accessory Configuration"
 category: ["Hardware"]
-tags: ["AirPods", "Beats", "Shared iPad"]
 ---
 
 ## Term Definition

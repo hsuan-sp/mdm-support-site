@@ -1,7 +1,6 @@
 ---
 term: "Apple Intelligence (Apple 智慧)"
 category: ["Core"]
-tags: ["Apple Intelligence", "AI", "寫作工具", "Image Playground", "Genmoji", "考試防弊"]
 ---
 
 ## 術語定義

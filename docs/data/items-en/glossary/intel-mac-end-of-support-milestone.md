@@ -1,7 +1,6 @@
 ---
 term: "Intel Mac End-of-Support Milestone"
 category: ["Mac"]
-tags: ["Intel Mac", "End of Support", "Apple Silicon", "Phase-out"]
 ---
 
 ## Term Definition

@@ -1,7 +1,6 @@
 ---
 term: "Drag and Drop Multitasking"
 category: ["Core"]
-tags: ["Multitasking", "iPadOS 26.2", "Dock", "Spotlight"]
 ---
 
 ## Term Definition

@@ -1,7 +1,6 @@
 ---
 term: "Transfer to Android Tool (移轉至 Android 工具)"
 category: ["Core"]
-tags: ["Android", "資料轉移", "iOS 26.3", "跨平台"]
 ---
 
 ## 術語定義

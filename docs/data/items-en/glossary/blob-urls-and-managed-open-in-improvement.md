@@ -1,7 +1,6 @@
 ---
 term: "Blob URLs and Managed Open-In Improvement"
 category: ["Security"]
-tags: ["Blob URL", "Managed Open In", "DLP"]
 ---
 
 ## Term Definition

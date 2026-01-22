@@ -1,7 +1,6 @@
 ---
 term: "Liquid Glass"
 category: ["Core"]
-tags: ["Design", "iOS 26", "macOS Tahoe"]
 ---
 
 ## Term Definition

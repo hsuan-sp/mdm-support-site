@@ -1,7 +1,6 @@
 ---
 term: "Audio Accessory Configuration (音訊配件設定)"
 category: ["Hardware"]
-tags: ["AirPods", "Beats", "配對", "共用 iPad", "音訊配件"]
 ---
 
 ## 術語定義

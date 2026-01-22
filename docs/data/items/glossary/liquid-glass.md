@@ -1,7 +1,6 @@
 ---
 term: "Liquid Glass (液態玻璃設計)"
 category: ["Core"]
-tags: ["Liquid Glass", "介面設計", "iOS 26", "macOS Tahoe", "visionOS"]
 ---
 
 ## 術語定義

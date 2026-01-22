@@ -1,7 +1,6 @@
 ---
 term: "Apple Intelligence"
 category: ["Core"]
-tags: ["AI", "Writing Tools", "Image Playground", "Genmoji", "Exam Security"]
 ---
 
 ## Term Definition

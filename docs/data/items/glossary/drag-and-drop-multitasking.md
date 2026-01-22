@@ -1,7 +1,6 @@
 ---
 term: "Drag and Drop Multitasking (拖放式多工)"
 category: ["Core"]
-tags: ["拖放", "多工", "iPadOS 26.2", "Dock", "Spotlight"]
 ---
 
 ## 術語定義

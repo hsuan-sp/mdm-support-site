@@ -1,7 +1,6 @@
 ---
 term: "Managed App Framework"
 category: ["DDM"]
-tags: ["App Configuration", "Certificates", "Security", "Future Feature"]
 ---
 
 ## Term Definition

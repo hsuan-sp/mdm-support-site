@@ -1,7 +1,6 @@
 ---
 term: "Background Security Improvements"
 category: ["Security"]
-tags: ["Updates", "iOS 26.3", "Safari", "WebKit"]
 ---
 
 ## Term Definition

@@ -1,7 +1,6 @@
 ---
 term: "Network Extension URL Filtering API"
 category: ["Network"]
-tags: ["Filtering", "Security", "Privacy", "macOS Tahoe"]
 ---
 
 ## Term Definition

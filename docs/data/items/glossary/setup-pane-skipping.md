@@ -1,7 +1,6 @@
 ---
 term: "Setup Pane Skipping (跳過設定輔助程式面板)"
 category: ["Mac"]
-tags: ["Setup Assistant", "設定輔助程式", "跳過", "部署加速"]
 ---
 
 ## 術語定義

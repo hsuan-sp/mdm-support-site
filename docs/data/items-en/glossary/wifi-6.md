@@ -1,7 +1,6 @@
 ---
 term: "Wi-Fi 6"
 category: ["Network"]
-tags: ["Wi-Fi 6", "802.11ax", "OFDMA", "Efficiency"]
 ---
 
 ## Term Definition

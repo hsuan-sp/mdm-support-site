@@ -1,7 +1,6 @@
 ---
 term: "Wi-Fi 5"
 category: ["Network"]
-tags: ["Wi-Fi 5", "802.11ac", "5GHz", "Legacy"]
 ---
 
 ## Term Definition

@@ -1,7 +1,6 @@
 ---
 term: "Captive Portal (強制入口網頁)"
 category: ["Network"]
-tags: ["Captive Portal", "強制入口網頁", "公共 Wi-Fi", "登入頁面"]
 ---
 
 ## 術語定義

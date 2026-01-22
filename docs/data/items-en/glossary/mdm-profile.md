@@ -1,7 +1,6 @@
 ---
 term: "MDM Profile"
 category: ["Core"]
-tags: ["Enrollment", "Security", "The Contract"]
 ---
 
 ## Term Definition

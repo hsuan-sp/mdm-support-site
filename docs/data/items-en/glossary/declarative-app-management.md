@@ -1,7 +1,6 @@
 ---
 term: "Declarative App Management"
 category: ["DDM"]
-tags: ["DDM", "App Management", "Required Apps", "Auto-Updates"]
 ---
 
 ## Term Definition

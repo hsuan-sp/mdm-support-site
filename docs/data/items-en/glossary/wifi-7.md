@@ -1,7 +1,6 @@
 ---
 term: "Wi-Fi 7"
 category: ["Network"]
-tags: ["Wi-Fi 7", "802.11be", "MLO", "320MHz", "Low Latency"]
 ---
 
 ## Term Definition

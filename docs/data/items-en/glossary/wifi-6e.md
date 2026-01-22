@@ -1,7 +1,6 @@
 ---
 term: "Wi-Fi 6E"
 category: ["Network"]
-tags: ["Wi-Fi 6E", "160MHz", "Performance", "iPadOS 26.2", "macOS Tahoe 26.2"]
 ---
 
 ## Term Definition

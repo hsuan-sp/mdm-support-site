@@ -1,7 +1,6 @@
 ---
 term: "App Privacy Permissions Visibility (App 隱私權限可見度)"
 category: ["Mac"]
-tags: ["隱私權限", "透明度", "PPPC", "系統設定"]
 ---
 
 ## 術語定義

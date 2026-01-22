@@ -1,7 +1,6 @@
 ---
 term: "Enforcement Deadline (強制執行截止日)"
 category: ["DDM"]
-tags: ["強制執行", "截止日期", "DDM", "軟體更新", "MDM 註冊"]
 ---
 
 ## 術語定義

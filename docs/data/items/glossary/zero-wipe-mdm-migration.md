@@ -1,7 +1,6 @@
 ---
 term: "Zero-Wipe MDM Migration (零抹除 MDM 遷移)"
 category: ["MDM"]
-tags: ["MDM 遷移", "零抹除", "ABM", "ASM", "裝置轉移"]
 ---
 
 ## 術語定義

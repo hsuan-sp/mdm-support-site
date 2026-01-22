@@ -1,7 +1,6 @@
 ---
 term: "Background Security Improvements (背景安全改良)"
 category: ["Security"]
-tags: ["安全更新", "快速修補", "iOS 26.3", "Safari", "WebKit"]
 ---
 
 ## 術語定義

@@ -1,7 +1,6 @@
 ---
 term: "Camera Access Control per App"
 category: ["Privacy"]
-tags: ["Camera Permissions", "Privacy", "allowedCameraRestrictionBundleIDs"]
 ---
 
 ## Term Definition

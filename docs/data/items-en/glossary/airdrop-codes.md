@@ -1,7 +1,6 @@
 ---
 term: "AirDrop Codes"
 category: ["Network"]
-tags: ["AirDrop", "Privacy", "iOS 26.2", "File Sharing"]
 ---
 
 ## Term Definition

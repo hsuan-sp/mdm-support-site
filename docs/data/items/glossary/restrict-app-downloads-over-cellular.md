@@ -1,7 +1,6 @@
 ---
 term: "Restrict App Downloads over Cellular (限制透過行動網路下載 App)"
 category: ["Network"]
-tags: ["行動數據", "Wi-Fi", "App 下載", "流量管理"]
 ---
 
 ## 術語定義

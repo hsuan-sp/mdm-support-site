@@ -1,7 +1,6 @@
 ---
 term: "Camera Access Control per App (個別 App 相機存取控制)"
 category: ["Privacy"]
-tags: ["相機權限", "隱私", "allowedCameraRestrictionBundleIDs", "個別 App"]
 ---
 
 ## 術語定義

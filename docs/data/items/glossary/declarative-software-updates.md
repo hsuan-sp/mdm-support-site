@@ -1,7 +1,6 @@
 ---
 term: "Declarative Software Updates (宣告式軟體更新)"
 category: ["DDM"]
-tags: ["DDM", "軟體更新", "2026年強制", "Beta 註冊", "分階段推出"]
 ---
 
 ## 術語定義
