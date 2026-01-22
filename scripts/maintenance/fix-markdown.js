@@ -122,16 +122,27 @@ class TypographyEngine {
     }
 
     /**
-     * MD037/038/039: 語法內部空格清理
+     * MD037/038/039: 語法內部空格清理 (極致壓縮)
      */
     static cleanSyntaxSpaces(text) {
         let result = text;
-        // 強調符號內部空格: ** text ** -> **text**
-        result = result.replace(/(\*{1,2}|_{1,2}) +(.+?) +\1/g, '$1$2$1');
-        // 代碼內部空格: ` code ` -> `code`
-        result = result.replace(/(`) +(.+?) +\1/g, '$1$2$1');
-        // 連結文字內部空格: [ text ] -> [text]
-        result = result.replace(/\[ +(.+?) +\]/g, '[$1]');
+        
+        // 1. 強力修復清單符號與粗體粘連: *** Text ** -> * **Text**
+        result = result.replace(/^(\s*)\*{3}\s*(.+?)\s*\*{2}/g, '$1* **$2**');
+        
+        // 2. 移除所有粗體內部的空格: ** text ** -> **text**
+        // 支援多種空格字元並確保不誤傷空行
+        result = result.replace(/(\*{2})\s*([^\n]+?)\s*(\1)/g, '$1$2$3');
+        
+        // 3. 移除斜體內部的空格: * text * -> *text*
+        result = result.replace(/(?<!\*)\*\s*([^\n\*]+?)\s*\*(?!\*)/g, '*$1*');
+        
+        // 4. 代碼內部空格: ` code ` -> `code`
+        result = result.replace(/(`)\s*([^\n]+?)\s*\1/g, '$1$2$1');
+        
+        // 5. 連結文字內部空格: [ text ] -> [text]
+        result = result.replace(/\[\s*([^\n]+?)\s*\]/g, '[$1]');
+        
         return result;
     }
 }
@@ -229,11 +240,12 @@ class MarkdownFormatter {
         // 3. 文字優化規則
         let processed = line;
         processed = TypographyEngine.normalizeProperNouns(processed);
-        processed = TypographyEngine.cleanSyntaxSpaces(processed);
-        processed = TypographyEngine.fixLinks(processed);
         if (TypographyEngine.hasCJK(processed)) {
             processed = TypographyEngine.applyPangu(processed);
         }
+        processed = TypographyEngine.fixLinks(processed);
+        // cleanSyntaxSpaces 必須放在最後，作為「燙平」空格的最終工序
+        processed = TypographyEngine.cleanSyntaxSpaces(processed);
 
         // 4. 結構判定：標題 (MD001 / MD025)
         const headingMatch = processed.match(/^(#{1,6}) (.*)/);

@@ -35,4 +35,4 @@ title: >-
 
 ## Institutional Advice:
 
-We recommend that schools maintain an "Internal Insurance Fund" or accidental damage protection (like AppleCare+++++++ for Schools) to cover the high cost of screen replacements, which can often be up to 60-80% of the cost of a new device.
+We recommend that schools maintain an "Internal Insurance Fund" or accidental damage protection (like AppleCare+++++++++ for Schools) to cover the high cost of screen replacements, which can often be up to 60-80% of the cost of a new device.

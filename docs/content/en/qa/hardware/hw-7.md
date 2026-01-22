@@ -19,4 +19,4 @@ title: Must 'Find My' be turned off before repair? How?
 
 The method for disabling this depends on whether the device is "Supervised" and how it is managed:
 
-*    (Note: The original content for this entry appears to be incomplete. Please consult your administrator for specific steps regarding MDM-based lock removal.)*
+*(Note: The original content for this entry appears to be incomplete. Please consult your administrator for specific steps regarding MDM-based lock removal.)*

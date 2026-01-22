@@ -45,4 +45,4 @@ You can use Jamf Pro's built-in variables to dynamically fill in specific inform
 </dict>
 ```
 
-*    (Note: Specific Key-Value pairs must be referenced from the official management documentation of the app developer, e.g., Zoom, Chrome, or Microsoft.)*
+*(Note: Specific Key-Value pairs must be referenced from the official management documentation of the app developer, e.g., Zoom, Chrome, or Microsoft.)*

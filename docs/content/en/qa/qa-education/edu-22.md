@@ -44,7 +44,7 @@ title: >-
 
 3. **Cloud Relay**:
 
-*    Upload the material to Google Drive or a school NAS and push the*link* via Classroom. Students can then download at their own pace without worrying about peer-to-peer pairing.
+*Upload the material to Google Drive or a school NAS and push the*link* via Classroom. Students can then download at their own pace without worrying about peer-to-peer pairing.
 
 ## Advice for Teachers:
 
