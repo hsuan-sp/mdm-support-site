@@ -1,33 +1,29 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useData } from 'vitepress';
 
-const props = defineProps<{
-  title: string;
-  isOpen: boolean;
-}>();
+const props = defineProps<{ title: string; isOpen: boolean; }>();
 
-const emit = defineEmits<{
-  (e: 'toggle'): void;
-  (e: 'close'): void;
-  (e: 'update:scale', value: number): void;
-}>();
+const emit = defineEmits<{ (e: 'toggle'): void; (e: 'close'): void; (e: 'update:scale', value: number): void; }>();
 
 const { lang } = useData();
-const fontScale = ref(1.0);
 
 const t = computed(() => {
   return lang.value === 'zh-TW' ? {
     fontSize: '字體大小',
+    extraSmaller: '極小',
     smaller: '縮小',
     reset: '重置',
     larger: '放大',
+    extraLarger: '極大',
     toggleSidebar: '收合側邊欄'
   } : {
     fontSize: 'Font Size',
+    extraSmaller: 'XS',
     smaller: 'Smaller',
     reset: 'Reset',
     larger: 'Larger',
+    extraLarger: 'XL',
     toggleSidebar: 'Toggle Sidebar'
   }
 });
@@ -64,9 +60,11 @@ const t = computed(() => {
       <div class="font-controls">
         <span class="ctrl-label">{{ t.fontSize }}</span>
         <div class="btn-group">
-          <button @click="emit('update:scale', 0.9)" :title="t.smaller">A-</button>
+          <button @click="emit('update:scale', 0.85)" :title="t.extraSmaller">A--</button>
+          <button @click="emit('update:scale', 0.92)" :title="t.smaller">A-</button>
           <button @click="emit('update:scale', 1.0)" :title="t.reset">A</button>
-          <button @click="emit('update:scale', 1.15)" :title="t.larger">A+</button>
+          <button @click="emit('update:scale', 1.2)" :title="t.larger">A+</button>
+          <button @click="emit('update:scale', 1.4)" :title="t.extraLarger">A++</button>
         </div>
       </div>
       <slot name="footer"></slot>
@@ -277,13 +275,13 @@ const t = computed(() => {
 
 .btn-group button {
   flex: 1;
-  padding: 8px;
+  padding: 6px 2px;
   border: none;
   background: transparent;
   border-radius: 8px;
   color: var(--vp-c-text-2);
   font-weight: 600;
-  font-size: 0.85em;
+  font-size: 0.8em;
   cursor: pointer;
   transition: all 0.2s;
   font-family: inherit;

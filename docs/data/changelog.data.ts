@@ -18,7 +18,7 @@ function renderMarkdown(text: string) {
 
 
 export default {
-    watch: ['../logs/items/*.md', '../logs/items-en/*.md'], // Relative to loaders, assuming logs stayed in data/logs
+    watch: ['./logs/items/*.md', './logs/items-en/*.md'], // Relative to docs/data/changelog.data.ts
     async load() {
         const { fileURLToPath } = await import('node:url');
         const path = await import('node:path');
@@ -27,9 +27,9 @@ export default {
 
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
-        // Path from loaders/ -> ../logs/items = docs/data/logs/items
-        const ZH_ROOT = path.resolve(__dirname, '../logs/items');
-        const EN_ROOT = path.resolve(__dirname, '../logs/items-en');
+        // Path from data/ -> data/logs/items
+        const ZH_ROOT = path.resolve(__dirname, 'logs/items');
+        const EN_ROOT = path.resolve(__dirname, 'logs/items-en');
 
         const getFiles = (dir: string): string[] => {
             if (!fs.existsSync(dir)) return [];
@@ -43,16 +43,20 @@ export default {
             const items = [];
 
             for (const filePath of files) {
-                const fileContent = fs.readFileSync(filePath, 'utf-8');
-                // Use gray-matter for robust parsing
-                const { data, content } = matter.default(fileContent);
+                try {
+                    const fileContent = fs.readFileSync(filePath, 'utf-8');
+                    // Use gray-matter for robust parsing
+                    const { data, content } = matter.default(fileContent);
 
-                items.push({
-                    version: String(data.version || ''),
-                    date: String(data.date || ''),
-                    type: String(data.type || 'patch'),
-                    content: renderMarkdown(content.trim())
-                });
+                    items.push({
+                        version: String(data.version || path.basename(filePath, '.md')),
+                        date: String(data.date || new Date().toISOString().split('T')[0]),
+                        type: String(data.type || 'patch'),
+                        content: renderMarkdown(content.trim())
+                    });
+                } catch (err) {
+                    console.error(`[Changelog Loader] Error parsing log file ${filePath}:`, err);
+                }
             }
 
             // Sort by version (SemVer mostly works with localeCompare for simple cases, or date)

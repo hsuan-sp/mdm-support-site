@@ -231,6 +231,25 @@ body.is-app::after {
   .VPDoc .container {
     padding: 0 var(--vp-screen-padding) !important;
   }
+
+  /* Optimize Navbar for tight spaces */
+  .VPNavBar .container {
+    padding: 0 12px !important;
+  }
+
+  .VPNavBarTitle {
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+  }
+
+  /* Hide the text part of the title on mobile, keep the logo */
+  .VPNavBarTitle .title :not(.logo) {
+    display: none !important;
+  }
+
+  .VPNavBarTitle .logo {
+    margin-right: 0 !important;
+  }
 }
 
 /* --- Shared UI Components --- */

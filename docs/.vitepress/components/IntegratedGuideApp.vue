@@ -4,7 +4,7 @@ import { useData } from 'vitepress';
 import { useAppFeatures } from '../theme/composables/useAppFeatures';
 import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
 // @ts-ignore
-import { data as rawLoaderData } from '../../data/loaders/all.data';
+import { data as rawLoaderData } from '../../data/all.data';
 
 const { lang } = useData();
 const isMounted = ref(false);
@@ -39,9 +39,11 @@ const t = computed(() => {
       prevPage: "上一頁",
       nextPage: "下一頁",
       fontScaleTitle: "字體大小調整",
+      fontExtraSmall: "極小",
       fontSmall: "小",
       fontMedium: "中",
       fontLarge: "大",
+      fontExtraLarge: "極大",
       allLabel: "全部",
       categoryTitle: "章節篩選",
       hashMap: {
@@ -67,9 +69,11 @@ const t = computed(() => {
       prevPage: "Previous",
       nextPage: "Next",
       fontScaleTitle: "Font Size Adjustment",
+      fontExtraSmall: "XS",
       fontSmall: "S",
       fontMedium: "M",
       fontLarge: "L",
+      fontExtraLarge: "XL",
       allLabel: "All",
       categoryTitle: "Chapters",
       hashMap: {
@@ -380,9 +384,11 @@ const switchModule = (source: string | "All") => {
         <div class="drawer-section">
           <div class="section-header-mini"><span>{{ t.fontScaleTitle }}</span></div>
           <div class="btn-group-mobile">
-            <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">{{ t.fontExtraSmall }}</button>
+            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">{{ t.fontSmall }}</button>
             <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
-            <button @click="fontScale = 1.15" :class="{ active: fontScale === 1.15 }">{{ t.fontLarge }}</button>
+            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
+            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">{{ t.fontExtraLarge }}</button>
           </div>
         </div>
       </div>
@@ -458,7 +464,6 @@ const switchModule = (source: string | "All") => {
 
 .guide-app {
   --base-size: calc(16px * var(--app-scale));
-  font-size: var(--base-size);
   width: 100%;
   color: var(--vp-c-text-1);
 }
@@ -477,6 +482,7 @@ const switchModule = (source: string | "All") => {
   flex: 1;
   min-width: 0;
   max-width: 920px;
+  font-size: var(--base-size);
 }
 
 /* FAB Styling - Super Button */

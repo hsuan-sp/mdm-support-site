@@ -15,32 +15,16 @@ const MAINTENANCE_DIR = path.join(__dirname, '../../docs/maintenance');
 const INDEX_ZH_FILE = path.join(MAINTENANCE_DIR, 'INDEX_ZH.md');
 const INDEX_EN_FILE = path.join(MAINTENANCE_DIR, 'INDEX_EN.md');
 
-// Helper to get frontmatter
+import matter from 'gray-matter';
+
+// Helper to get frontmatter safely
 function getFrontmatter(filePath) {
   try {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const match = content.match(/^---\n([\s\S]*?)\n---/);
-    if (!match) return {};
-    
-    const fm = {};
-    const lines = match[1].split('\n');
-    for (const line of lines) {
-      const parts = line.split(':');
-      if (parts.length >= 2) {
-        const key = parts[0].trim();
-        let value = parts.slice(1).join(':').trim();
-        // remove quotes if present
-        if (value.startsWith('"') && value.endsWith('"')) {
-          value = value.slice(1, -1);
-        }
-        if (value.startsWith("'") && value.endsWith("'")) {
-            value = value.slice(1, -1);
-        }
-        fm[key] = value;
-      }
-    }
-    return fm;
+    const rawContent = fs.readFileSync(filePath, 'utf-8');
+    const { data } = matter(rawContent);
+    return data;
   } catch (e) {
+    console.error(`Error reading frontmatter from ${filePath}:`, e);
     return {};
   }
 }

@@ -94,7 +94,7 @@ const EN_SOURCE_TITLE_MAP: Record<string, string> = {
 
 
 export default {
-    watch: ['../../content/zh/**/*.md', '../../content/en/**/*.md'], // Relative to loaders/all.data.ts
+    watch: ['../content/zh/**/*.md', '../content/en/**/*.md'], // Relative to docs/data/all.data.ts
     async load() {
         const { fileURLToPath } = await import('node:url');
         const path = await import('node:path');
@@ -103,9 +103,9 @@ export default {
 
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
-        // Correct path from loaders/ to content/
-        const ZH_ROOT = path.resolve(__dirname, '../../content/zh');
-        const EN_ROOT = path.resolve(__dirname, '../../content/en');
+        // Correct path from data/ to content/
+        const ZH_ROOT = path.resolve(__dirname, '../content/zh');
+        const EN_ROOT = path.resolve(__dirname, '../content/en');
 
         const getFiles = (dir: string): string[] => {
             if (!fs.existsSync(dir)) return [];
@@ -123,18 +123,22 @@ export default {
                 const items = [];
 
                 for (const filePath of files) {
-                    const fileContent = fs.readFileSync(filePath, 'utf-8');
-                    // Use gray-matter instead of custom parser
-                    const { data, content } = matter.default(fileContent);
+                    try {
+                        const fileContent = fs.readFileSync(filePath, 'utf-8');
+                        const { data, content } = matter.default(fileContent);
 
-                    items.push({
-                        id: String(data.id || ''),
-                        question: String(data.title || ''),
-                        answer: renderMarkdown(content.trim()),
-                        important: Boolean(data.important),
-                        tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
-                        category: data.category
-                    });
+                        items.push({
+                            id: String(data.id || path.basename(filePath, '.md')),
+                            question: String(data.title || path.basename(filePath, '.md')),
+                            answer: renderMarkdown(content.trim()),
+                            important: Boolean(data.important),
+                            tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
+                            category: data.category || titleMap[slug]
+                        });
+                    } catch (err) {
+                        console.error(`[Data Loader] Error parsing QA file ${filePath}:`, err);
+                        // Don't throw, just skip this file to let the build continue
+                    }
                 }
 
                 items.sort((a, b) => (a.id || '').localeCompare(b.id || '', undefined, { numeric: true }));
@@ -161,21 +165,24 @@ export default {
             const definitionMarker = lang === 'zh' ? '## 術語定義' : '## Term Definition';
 
             for (const filePath of files) {
-                const fileContent = fs.readFileSync(filePath, 'utf-8');
-                // Use gray-matter instead of custom parser
-                const { data, content } = matter.default(fileContent);
+                try {
+                    const fileContent = fs.readFileSync(filePath, 'utf-8');
+                    const { data, content } = matter.default(fileContent);
 
-                const parts = content.split(analogyMarker);
-                const definition = parts[0].replace(definitionMarker, '').trim();
-                const analogy = parts[1] ? parts[1].trim() : '';
+                    const parts = content.split(analogyMarker);
+                    const definition = parts[0].replace(definitionMarker, '').trim();
+                    const analogy = parts[1] ? parts[1].trim() : '';
 
-                terms.push({
-                    term: String(data.term || ''),
-                    definition: renderMarkdown(definition),
-                    analogy: renderMarkdown(analogy),
-                    category: data.category || [],
-                    tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : [])
-                });
+                    terms.push({
+                        term: String(data.term || path.basename(filePath, '.md')),
+                        definition: renderMarkdown(definition),
+                        analogy: renderMarkdown(analogy),
+                        category: data.category || [],
+                        tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : [])
+                    });
+                } catch (err) {
+                    console.error(`[Data Loader] Error parsing Glossary file ${filePath}:`, err);
+                }
             }
 
             terms.sort((a, b) => (a.term || '').localeCompare(b.term || ''));

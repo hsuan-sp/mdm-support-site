@@ -73,31 +73,48 @@
 }
 
 /* Lists - fixing the "ugly" list rendering */
-.vp-doc ul, .vp-doc ol {
-  padding-left: 1.25rem;
+.vp-doc ul, .vp-doc ol,
+.markdown-body ul, .markdown-body ol {
+  padding-left: 1.5rem;
   margin-bottom: 1.5rem;
+  list-style-position: outside;
 }
 
-.vp-doc li {
+.vp-doc li,
+.markdown-body li {
   margin-bottom: 0.75rem;
   line-height: 1.7;
   color: var(--vp-c-text-2);
 }
 
-/* List markers styling */
-.vp-doc ul > li {
+/* List markers styling - Unified for Doc and Apps */
+.vp-doc ul > li,
+.markdown-body ul > li {
   list-style-type: none;
   position: relative;
 }
 
-.vp-doc ul > li::before {
+.vp-doc ul > li::before,
+.markdown-body ul > li::before {
   content: "•";
   color: var(--vp-c-brand-1);
   font-weight: bold;
   position: absolute;
   left: -1.25rem;
-  font-size: 1.2em;
-  line-height: 1.5;
+  font-size: 1.25em;
+  line-height: 1.4;
+  display: inline-block;
+}
+
+.vp-doc ol,
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.vp-doc ol > li::marker,
+.markdown-body ol > li::marker {
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
 }
 
 /* --- 3. Feature: Cards & Callouts (Q&A / Glossary Highlights) --- */

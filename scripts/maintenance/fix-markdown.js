@@ -117,7 +117,7 @@ function getAllMarkdownFiles(dir) {
 }
 
 function getLanguage(filePath) {
-  return filePath.includes('items-en') ? 'en' : 'zh';
+  return filePath.includes('/content/en') ? 'en' : 'zh';
 }
 
 function optimizeSpacing(text, lang) {

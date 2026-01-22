@@ -3,7 +3,7 @@
 import { ref, computed, onMounted, nextTick, shallowRef } from "vue";
 import { useData } from 'vitepress';
 // @ts-ignore
-import { data as _rawDataImported } from '../../data/loaders/all.data';
+import { data as _rawDataImported } from '../../data/all.data';
 
 const { lang } = useData();
 const isMounted = ref(false);
@@ -44,9 +44,11 @@ const t = computed(() => {
       drawerTitle: "術語搜尋與設定",
       drawerCategoryTitle: "術語分類",
       fontScaleTitle: "字體大小調整",
+      fontExtraSmall: "極小",
       fontSmall: "小",
       fontMedium: "中",
       fontLarge: "大",
+      fontExtraLarge: "極大",
       categories: {
         Core: "核心", Enrollment: "註冊", Apple: "Apple", Security: "安管",
         Network: "網路", Hardware: "硬體", Apps: "軟體", Other: "其他",
@@ -72,9 +74,11 @@ const t = computed(() => {
       drawerTitle: "Glossary Settings",
       drawerCategoryTitle: "Categories",
       fontScaleTitle: "Font Size",
+      fontExtraSmall: "XS",
       fontSmall: "S",
       fontMedium: "M",
       fontLarge: "L",
+      fontExtraLarge: "XL",
       categories: {
         Core: "Core", Enrollment: "Enroll", Apple: "Apple", Security: "Security",
         Network: "Network", Hardware: "Hardware", Apps: "Apps", Other: "Other",
@@ -185,11 +189,11 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
           <div class="view-status-bar">
             <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
               getCategoryName(selectedCategory)
-            }}</span>
+              }}</span>
             <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
             <button v-if="!isMobileView" @click="toggleSort" class="desk-sort-btn">{{ sortOrder === 'asc' ? 'A-Z' :
               'Z-A'
-            }}</button>
+              }}</button>
           </div>
         </header>
 
@@ -261,9 +265,11 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
         <div class="drawer-section">
           <div class="section-label-mini"><span>{{ t.fontScaleTitle }}</span></div>
           <div class="btn-group-mobile">
-            <button @click="fontScale = 0.9" :class="{ active: fontScale === 0.9 }">{{ t.fontSmall }}</button>
+            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">{{ t.fontExtraSmall }}</button>
+            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">{{ t.fontSmall }}</button>
             <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
             <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
+            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">{{ t.fontExtraLarge }}</button>
           </div>
         </div>
       </div>
@@ -301,21 +307,9 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
   /* Reduced from 1.4em */
 }
 
-.markdown-body :deep(ul),
-.markdown-body :deep(ol) {
-  margin-bottom: 1.2em !important;
-  padding-left: 1.5em !important;
-}
-
-.markdown-body :deep(li) {
-  margin-bottom: 0.3em !important;
-  /* Tighter list items */
-  line-height: 1.5 !important;
-}
-
 /* Optimizations for CJK vs Latin */
 .markdown-body[lang="zh-TW"] {
-  line-height: 1.75 !important;
+  line-height: 1.85 !important;
   /* CJK needs slightly more breathing room */
   text-align: left;
 }
@@ -328,7 +322,6 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 
 .glossary-app {
   --base-size: calc(16px * var(--app-scale, 1));
-  font-size: var(--base-size);
   width: 100%;
   color: var(--vp-c-text-1);
 }
@@ -346,6 +339,7 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 .app-content {
   flex: 1;
   min-width: 0;
+  font-size: var(--base-size);
 }
 
 /* Super FAB Button */

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GLOSSARY_ZH_DIR = path.join(__dirname, '../docs/data/items/glossary');
+const GLOSSARY_ZH_DIR = path.join(__dirname, '../../docs/content/zh/glossary');
 // const GLOSSARY_EN_DIR = path.join(__dirname, '../docs/data/items-en/glossary'); // English names seem fine already
 
 function renameFiles(dir) {

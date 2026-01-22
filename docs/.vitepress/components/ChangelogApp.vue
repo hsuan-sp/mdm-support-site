@@ -2,7 +2,7 @@
 import { computed, ref, onMounted, shallowRef, watch } from 'vue'
 import { useData } from 'vitepress'
 // @ts-ignore
-import { data as rawLogsData } from '../../data/loaders/changelog.data'
+import { data as rawLogsData } from '../../data/changelog.data'
 
 const { lang } = useData()
 const isMounted = ref(false)
@@ -232,27 +232,8 @@ const getTypeLabel = (type) => {
     border-radius: 2px;
 }
 
-:deep(.version-body ul) {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-}
+/* Removed specific list overrides to use global .markdown-body styles from markdown-styles.css */
 
-:deep(.version-body li) {
-    margin-bottom: 0.6rem;
-    line-height: 1.7;
-    color: var(--vp-c-text-2);
-    position: relative;
-    padding-left: 1.25rem;
-}
-
-:deep(.version-body li::before) {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--vp-c-brand);
-    font-weight: bold;
-}
 
 /* Loading Placeholder */
 .loading-placeholder {

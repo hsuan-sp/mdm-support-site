@@ -15,11 +15,11 @@
 ## 2. 檔案位置與維護索引
 
 * **檔案目錄**：`docs/content/zh/qa/[類別資料夾]/`
-* **自動化索引 (必看)**：在新增問題前，請務必先查閱 **`docs/data/MAINTENANCE_INDEX.md`** 中的 Q&A 區塊。
+* **自動化索引 (必看)**：在新增問題前，請務必先查閱 **`docs/maintenance/INDEX_ZH.md`** 中的 Q&A 區塊。
 * **維護規範**：先透過索引確認相同問題是否已存在。AI 助手或真人在接手任務時，應以此索引為唯一參考來源，確認「好喔，這個題目沒有寫過」再進行新增。
 * **排版與索引腳本**：
   * **目前暫無專用的 Q&A 自動排版腳本**，請人工確保格式「嚴格緊湊」（Tight List）。
-  * **更新索引**：`npm run update-index` (調用 `scripts/generate_maintenance_index.mjs`)
+  * **更新索引**：`npm run update-index` (調用 `scripts/maintenance/generate-index.js`)
 
 ---
 
@@ -27,7 +27,7 @@
 
 ## 第一步：選擇類別與檔名
 
-在 `docs/data/items/qa/` 下選擇對應目錄，建立 `[前綴]-[編號].md` 檔案（如：`dl-21.md`、`mac-22.md`）。
+在 `docs/content/zh/qa/` 下選擇對應目錄，建立 `[前綴]-[編號].md` 檔案（如：`dl-21.md`、`mac-22.md`）。
 
 ## 第二步：標準內容模板
 
@@ -216,7 +216,7 @@ tags: ["Zero-Wipe MDM Migration", "iOS 26", "教育環境", "Return to Service",
 
 **檢查機制**：
 
-1. 先查閱 `MAINTENANCE_INDEX.md` 確認題目未重複
+1. 先查閱 `INDEX_ZH.md` 確認題目未重複
 1. 若新題目與現有題目相似，需調整角度：
 
 * 現有：「如何設定 Apple Classroom？」
@@ -257,7 +257,7 @@ tags: ["Zero-Wipe MDM Migration", "iOS 26", "教育環境", "Return to Service",
 
 在開始撰寫 Q&A 前，請確認：
 
-* [ ] 已查閱 `MAINTENANCE_INDEX.md` 確認題目未重複
+* [ ] 已查閱 `INDEX_ZH.md` 確認題目未重複
 * [ ] 已參考 3 個以上現有 Q&A 範例掌握風格
 * [ ] 已搜尋 Apple 官方文件確認技術正確性
 * [ ] 已確認不與數位精進方案現有內容衝突
@@ -525,7 +525,7 @@ tags: ["Enforcement Deadline", "DDM", "iOS 26", "macOS Tahoe"]
 
 **錯誤 5**：與現有內容重複
 
-* ❌ 未查閱 MAINTENANCE_INDEX.md 直接撰寫
+* ❌ 未查閱 INDEX_ZH.md 直接撰寫
 * ✅ 先確認題目未重複，或從不同角度切入
 
 **錯誤 6**：列表鬆散

@@ -15,16 +15,16 @@
 ## 2. 檔案位置與維護索引
 
 * **檔案目錄**：`docs/content/zh/glossary/`
-* **自動化索引 (必看)**：在新增內容前，請務必先查閱 **`docs/data/MAINTENANCE_INDEX.md`**。
+* **自動化索引 (必看)**：在新增內容前，請務必先查閱 **`docs/maintenance/INDEX_ZH.md`**。
 * 此索引會自動列出所有已存在的術語與問答題目。
 * **維護規範**：請先看過索引，確認該術語「尚未編寫」再進行新增，避免資源重複或衝突。
 * **自動排版腳本 (重要)**：
 
   在此專案中，我們使用嚴格的 `Tight List` 格式（列表項之間無空行），並透過腳本強制執行。
 
-* **英文術語排版**：`node scripts/format_glossary_en.mjs`
-  * **中文術語排版**：`node scripts/format_glossary_tc.mjs`
-  * **更新索引**：`npm run update-index`
+  * **英文術語排版**：`node scripts/maintenance/align-glossary.js` (或 `rename-glossary.js`)
+  * **中文術語排版**：`node scripts/maintenance/fix-markdown.js`
+  * **更新索引**：`npm run update-index` (或 `node scripts/maintenance/generate-index.js`)
 
   **建議流程**：修改完檔案後，先執行上述排版腳本，確認格式無誤後再執行 `update-index`。
 
@@ -189,7 +189,7 @@ MDM 可透過「Restrictions」描述檔管理多工權限。
 
 在開始撰寫術語前，請確認：
 
-* [ ] 已查閱 `MAINTENANCE_INDEX.md` 確認術語未重複
+* [ ] 已查閱 `INDEX_ZH.md` 確認術語未重複
 * [ ] 已搜尋 Apple 官方文件確認技術正確性
 * [ ] 已確認使用正確的系統版本號（iOS 26、macOS Tahoe 等）
 * [ ] 已準備生活化的白話文比喻

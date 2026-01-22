@@ -239,6 +239,25 @@ const handleReport = () => {
     border-color: #ff3b30;
 }
 
+@media (max-width: 768px) {
+
+    .badge-label,
+    .chevron {
+        display: none !important;
+    }
+
+    .wip-navbar-badge {
+        padding: 4px;
+        width: 30px;
+        justify-content: center;
+    }
+
+    .badge-group {
+        margin-left: 2px;
+        gap: 2px;
+    }
+}
+
 .collapse-btn {
     background: transparent;
     border: none;
