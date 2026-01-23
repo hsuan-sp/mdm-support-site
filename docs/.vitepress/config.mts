@@ -175,12 +175,12 @@ export default defineConfig({
   },
 
   head: [
-    // 預設 favicon.ico - 加入 v=2 強制重新整理快取
-    ["link", { rel: "icon", href: "/favicon.ico?v=2" }],
+    // 預設 favicon.ico - 改名徹底破壞快取
+    ["link", { rel: "icon", href: "/favicon-custom.ico" }],
     // 針對不同設備的 Favicons
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png?v=2" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png?v=2" }],
-    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=2" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }],
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
       "link",
@@ -203,7 +203,7 @@ export default defineConfig({
     // OG Image 同樣加入版本號確保社群平台抓取正確
     [
       "meta",
-      { property: "og:image", content: "/logo.png?v=2" },
+      { property: "og:image", content: "/logo-square.png" },
     ],
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
   ],
@@ -227,6 +227,6 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: "/logo.png",
+    logo: "/logo-square.png",
   },
 });

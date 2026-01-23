@@ -3,9 +3,9 @@ export default async function middleware(req) {
   const { pathname } = url;
 
   // 1. 定義公開路徑 (不需驗證)
-  // 包含靜態內容, login 頁面, 與 auth API
+  // 包含所有常見的靜態資源副檔名，且不分大小寫
   const isPublicAsset = pathname.match(
-    /\.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?|json|jpeg)$/
+    /\.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?|json|webp|xml|webmanifest|txt|map)$/i
   );
   const isLoginPage = pathname === "/login" || pathname === "/login.html";
   const isAuthApi =
