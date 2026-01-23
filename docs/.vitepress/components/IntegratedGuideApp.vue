@@ -385,7 +385,7 @@ const closeMobileDrawer = () => {
                     <div class="q-main">
                       <span v-if="item.important" class="imp-tag">{{
                         t.important
-                        }}</span>
+                      }}</span>
                       <span class="q-text">{{ item.question }}</span>
                     </div>
                     <span class="arrow">▼</span>
@@ -414,7 +414,7 @@ const closeMobileDrawer = () => {
                     <div class="q-main">
                       <span v-if="item.important" class="imp-tag">{{
                         t.important
-                        }}</span>
+                      }}</span>
                       <span class="q-text">{{ item.question }}</span>
                     </div>
                     <span class="arrow">▼</span>
@@ -442,7 +442,7 @@ const closeMobileDrawer = () => {
                       <div class="q-main">
                         <span v-if="item.important" class="imp-tag">{{
                           t.important
-                          }}</span>
+                        }}</span>
                         <span class="q-text">{{ item.question }}</span>
                       </div>
                       <span class="arrow">▼</span>
@@ -936,7 +936,8 @@ const closeMobileDrawer = () => {
 }
 
 .qa-content {
-  padding: 0 28px 28px;
+  padding: 0 40px 40px;
+  /* Increased to 40px (2.5em) to ensure list markers don't clip */
   background: var(--vp-c-bg-soft);
   border-top: 1px solid var(--vp-c-divider);
 }
@@ -987,7 +988,7 @@ const closeMobileDrawer = () => {
   }
 
   .qa-content {
-    padding: 0 24px 24px;
+    padding: 0 32px 32px;
   }
 
   .q-text {

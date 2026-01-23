@@ -98,9 +98,9 @@
   font-size: var(--base-font-size);
   font-weight: 700;
   line-height: 1.5;
-  margin-top: 3.5rem;
-  margin-bottom: 2.25rem; /* Max separation for clarity */
-  padding-bottom: 0.75rem;
+  margin-top: 4rem; /* More breath for sections */
+  margin-bottom: 2.5rem; /* Significant separation */
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-1);
   display: flex;
@@ -125,8 +125,8 @@
   font-size: var(--base-font-size);
   font-weight: 700;
   line-height: 1.5;
-  margin-top: 2.25rem;
-  margin-bottom: 1.75rem; /* Max separation for clarity */
+  margin-top: 2.5rem;
+  margin-bottom: 1.85rem; /* Significant separation */
   color: var(--vp-c-text-1);
   letter-spacing: -0.01em;
 }
@@ -169,19 +169,19 @@
 }
 
 /* Lists - Enhanced readability */
-/* Lists - Robust 2-em Grid (1-em Marker + 1-em Gap) */
+/* Lists - Robust 2.5-em Layout (0.5em Safe + 1em Marker + 1em Gap) */
 .vp-doc ul,
 .vp-doc ol,
 .markdown-body ul,
 .markdown-body ol {
-  padding-left: 2em !important; /* Perfect 2-ch width */
-  margin-bottom: 2rem;
+  padding-left: 2.5em !important; /* Total indent includes safety gutter */
+  margin-bottom: 2.5rem;
   list-style: none !important;
 }
 
 .vp-doc li,
 .markdown-body li {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.85rem; /* More breath between items */
   position: relative;
   padding-left: 0 !important;
   color: var(--vp-c-text-2);
@@ -212,8 +212,13 @@
 .vp-doc li::before,
 .markdown-body li::before {
   position: absolute;
-  left: -2em; /* Start of the grid */
-  width: 1em; /* Fixed character-width box */
+  /* 
+     Logic: padding-left (2.5) - left (2.0) = 0.5em safety on the left.
+     Marker takes 1em space. 2.5 - 0.5 - 1.0 = 1em gap on the right.
+     Ensures perfect 1+1 grid while avoiding clipping.
+  */
+  left: -2em; 
+  width: 1em; /* Exactly 1 character width */
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -221,18 +226,18 @@
   pointer-events: none;
 }
 
-/* Chinese-specific alignment: Optical compensation for CJK center */
+/* Chinese-specific alignment: Optical compensation for CJK center line */
 .markdown-body[lang^="zh"] li::before,
 .vp-doc li:lang(zh)::before {
   height: 1.85em; /* Match zh line-height */
-  transform: translateY(-0.08em); /* Optical shift up for CJK */
+  transform: translateY(-0.1em); /* Compensate for CJK being high-centered */
 }
 
-/* English-specific alignment: Standard x-center */
+/* English-specific alignment: Latin baseline-friendly center */
 .markdown-body[lang^="en"] li::before,
 .vp-doc li:lang(en)::before {
   height: 1.6em; /* Match en line-height */
-  transform: translateY(0); /* Standard centering works for Latin */
+  transform: translateY(-0.02em); /* Minimal adjustment for Latin */
 }
 
 /* Unordered Styles */
