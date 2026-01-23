@@ -7,7 +7,8 @@ import { useAuth } from "../../theme/composables/useAuth";
 
 useLayoutMode();
 const { isDark, theme, lang, page } = useData();
-const { user, isGuest, username, checkAuth, logout } = useAuth();
+const { user, isGuest, username, checkAuth, logout, isStaticPlatform } =
+  useAuth();
 const router = useRouter();
 
 const isMenuOpen = ref(false);
@@ -137,7 +138,7 @@ const switchLanguage = () => {
   <div class="user-center">
     <!-- Desktop Horizontal View (Simplified to prevent overlap) -->
     <div class="desktop-actions">
-      <div class="user-info" v-if="user">
+      <div class="user-info" v-if="user && !isStaticPlatform">
         <div class="user-badge">
           <span class="username">{{ username }}</span>
         </div>
@@ -362,7 +363,7 @@ const switchLanguage = () => {
               </div>
             </div>
 
-            <div class="dropdown-footer">
+            <div class="dropdown-footer" v-if="!isStaticPlatform">
               <!-- User Info moved to Footer -->
               <div class="user-detail-footer">
                 <div class="current-user-label">{{ t.currentlyLoggedIn }}</div>
@@ -372,6 +373,11 @@ const switchLanguage = () => {
               <button v-if="!isGuest" class="logout-btn-full" @click="logout">
                 {{ t.logoutAccount }}
               </button>
+              <button class="close-btn" @click="isMenuOpen = false">
+                {{ t.closeMenu }}
+              </button>
+            </div>
+            <div class="dropdown-footer" v-else>
               <button class="close-btn" @click="isMenuOpen = false">
                 {{ t.closeMenu }}
               </button>

@@ -3,10 +3,6 @@ import { defineConfig } from "vitepress";
 // Determing base path dynamically:
 // Use '/mdm-support-site/' for GitHub Pages (detected by GITHUB_ACTIONS env)
 // Use '/' for Vercel or local development
-const base =
-  process.env.GITHUB_ACTIONS === "true"
-    ? "/mdm-support-site/"
-    : process.env.BASE_PATH || "/";
 
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site/" : "/",

@@ -50,6 +50,20 @@
 - **`features/`**: 具備特定業務邏輯的模組 (例：`UserCenter.vue`, `SecurityGuard.vue`)。
 - **`ui/`**: 可重複使用的視覺組件 (例：`EmptyState.vue`)。
 
+## 🌐 部署平台支援 (Deployment Platforms)
+
+專案目前支援雙平台佈署，並自動根據環境調整行為：
+
+1. **Vercel (推薦)**:
+   - **網址**: `https://mdm-support-site.vercel.app/`
+   - **功能**: 具備完整的身分驗證 (OTP)、登入日誌紀錄與全站安全性攔截。
+   - **運作機制**: 使用 Vercel Edge Middleware 與 Serverless Functions 進行後端驗證。
+
+2. **GitHub Pages (靜態預覽)**:
+   - **網址**: 指向您的 `*.github.io` 專案頁面。
+   - **功能**: **純靜態顯示**，不處理登入邏輯。
+   - **運作機制**: 系統會偵測網域，若為 `.github.io` 則自動隱藏登入/登出 UI，直接開放內容閱讀。
+
 ---
 
 ## 🛠️ 維護者指令速查

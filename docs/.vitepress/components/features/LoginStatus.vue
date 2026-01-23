@@ -4,7 +4,7 @@ import { useData, withBase } from "vitepress";
 import { useAuth } from "../../theme/composables/useAuth";
 
 const { lang } = useData();
-const { user, logout } = useAuth();
+const { user, logout, isStaticPlatform } = useAuth();
 
 const t = computed(() => {
   return lang.value === "zh-TW"
@@ -22,7 +22,7 @@ const t = computed(() => {
 </script>
 
 <template>
-  <div class="login-status-nav">
+  <div class="login-status-nav" v-if="!isStaticPlatform">
     <!-- 已登入狀態 -->
     <template v-if="user">
       <div class="user-pill">
