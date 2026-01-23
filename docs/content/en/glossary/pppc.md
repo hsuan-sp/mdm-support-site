@@ -2,7 +2,6 @@
 term: "PPPC"
 
 category: ["Security", "macOS"]
-
 ---
 
 ## Term Definition

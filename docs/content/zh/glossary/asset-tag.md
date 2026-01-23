@@ -2,7 +2,6 @@
 term: "Asset Tag (資產標籤)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

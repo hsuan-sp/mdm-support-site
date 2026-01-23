@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["MOE Project", "2026", "System Upgrade", "iPadOS 26", "Sustainability"]
-
 ---
 
 **iPads provided by the Digital Learning Project are school assets. Even after the initial project period concludes, they can continue to be used as long as the school maintains them. Upgrading to iPadOS 26 is technically viable and highly recommended, provided you consider MDM server compatibility.**

@@ -2,7 +2,6 @@
 term: "Schoolwork App"
 
 category: ["Education"]
-
 ---
 
 ## 術語定義

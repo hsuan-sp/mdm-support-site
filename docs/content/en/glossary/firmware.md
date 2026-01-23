@@ -2,7 +2,6 @@
 term: "Firmware"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

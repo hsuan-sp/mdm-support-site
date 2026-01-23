@@ -2,7 +2,6 @@
 term: "Declarative App Management"
 
 category: ["DDM"]
-
 ---
 
 ## Term Definition

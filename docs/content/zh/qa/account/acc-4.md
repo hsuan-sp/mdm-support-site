@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["VPP", "Token", "大量採購"]
-
 ---
 
 **VPP (大量採購方案) Token 是 Jamf Pro 與 Apple 校務管理之間同步 App 授權的橋梁，每年需更新一次。**

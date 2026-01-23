@@ -2,7 +2,6 @@
 term: "Composer"
 
 category: ["macOS", "Jamf"]
-
 ---
 
 ## Term Definition

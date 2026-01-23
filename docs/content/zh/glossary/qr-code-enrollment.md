@@ -2,7 +2,6 @@
 term: "QR Code Enrollment"
 
 category: ["Enrollment"]
-
 ---
 
 ## 術語定義

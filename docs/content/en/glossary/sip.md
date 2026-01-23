@@ -2,7 +2,6 @@
 term: "SIP (System Integrity Protection)"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

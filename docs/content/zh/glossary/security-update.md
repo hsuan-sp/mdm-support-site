@@ -2,7 +2,6 @@
 term: "Security Update"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## 術語定義

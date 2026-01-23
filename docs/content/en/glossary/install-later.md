@@ -2,7 +2,6 @@
 term: "Install Later"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

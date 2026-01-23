@@ -2,7 +2,6 @@
 term: "Jamf Pro"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## 術語定義

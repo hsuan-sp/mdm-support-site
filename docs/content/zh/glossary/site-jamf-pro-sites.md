@@ -2,7 +2,6 @@
 term: "Site (Jamf Pro Sites)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Local Account"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

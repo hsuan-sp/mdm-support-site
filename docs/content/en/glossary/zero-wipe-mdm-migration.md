@@ -2,7 +2,6 @@
 term: "Zero-Wipe MDM Migration"
 
 category: ["MDM"]
-
 ---
 
 ## Term Definition

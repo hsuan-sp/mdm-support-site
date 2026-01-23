@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Digital Citizenship", "AI Ethics", "Behavior Management", "iOS 26"]
-
 ---
 
 **MDM should not just be a 'restrictor,' but a 'guardrail' for Digital Citizenship education. With the features in iOS 26, administrators can guide students toward responsible AI and technology habits.**

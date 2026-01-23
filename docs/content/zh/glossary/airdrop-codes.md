@@ -2,7 +2,6 @@
 term: "AirDrop Codes (AirDrop 代碼)"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

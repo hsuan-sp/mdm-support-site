@@ -2,7 +2,6 @@
 term: "Rapid Security Response (RSR)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

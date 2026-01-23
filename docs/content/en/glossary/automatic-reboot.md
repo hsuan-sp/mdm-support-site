@@ -2,7 +2,6 @@
 term: "Automatic Reboot"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

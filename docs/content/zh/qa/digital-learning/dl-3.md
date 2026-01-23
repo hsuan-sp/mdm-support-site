@@ -8,7 +8,6 @@ category: "第五部分：數位學習精進方案專區 (MOE Digital Learning P
 important: false
 
 tags: ["故障排除", "重置", "網路", "Wi-Fi 遷移"]
-
 ---
 
 **「重置網路設定」是解決頑固連線問題的最後手段，** 但必須注意 Wi-Fi 設定檔的銜接，以免變成脫管設備。

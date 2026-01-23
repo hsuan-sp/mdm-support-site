@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["Apple Configurator", "手動加入 ASM", "過渡期"]
-
 ---
 
 **可以。對於非透過教育授權經銷商管道購買的裝置，可以使用 Apple Configurator 將其手動納入 Apple 校務管理 (ASM) 組織。**
@@ -18,7 +17,6 @@ tags: ["Apple Configurator", "手動加入 ASM", "過渡期"]
 ## 操作前提與準備 ：
 
 1.  **硬體需求** ：
-
     - 需要一台 Mac，並安裝最新版的 **Apple Configurator** 。
     - 或者是使用 iPhone 下載 **Apple Configurator App** （此方法適用於將 Mac 加入 ASM）。
 

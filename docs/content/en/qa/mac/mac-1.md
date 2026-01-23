@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: true
 
 tags: ["AD", "Identity", "Jamf Connect", "Platform SSO", "No-Bind"]
-
 ---
 
 **We strongly recommend a "No-Bind" strategy. Instead of traditional AD binding, schools should adopt Platform SSO or Jamf Connect.**

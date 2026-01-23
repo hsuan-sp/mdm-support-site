@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Submission", "File Sharing", "Google Drive"]
-
 ---
 
 **The best method is via cloud storage (Google Drive, OneDrive, or iCloud Drive). Other options include AirDrop, Google Classroom assignments, or a school-designated submission portal.** In a digital learning environment, a smooth submission flow is key to efficiency.

@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags: ["iOS 18", "Apple Intelligence", "Notification Management"]
-
 ---
 
 **iOS 18 introduces AI-powered notification summaries. While useful for filtering noise, it may cause students to miss critical full-context messages during class.**

@@ -2,7 +2,6 @@
 term: "Bundle ID"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

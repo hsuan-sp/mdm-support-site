@@ -2,7 +2,6 @@
 term: "Extension Attribute"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

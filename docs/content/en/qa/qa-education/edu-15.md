@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Lost Mode", "Privacy", "Location Tracking"]
-
 ---
 
 **No. Lost Mode is designed specifically for asset recovery. Location services are only activated while the device is officially marked as 'Lost' by an administrator.**

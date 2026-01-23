@@ -2,7 +2,6 @@
 term: "Remote Management"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## Term Definition

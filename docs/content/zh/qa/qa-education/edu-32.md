@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 
 tags: ["解鎖密碼", "忘記密碼", "Jamf Pro", "遠端指令", "故障排除"]
-
 ---
 
 **可以的。只要 iPad 是由學校 MDM (Jamf Pro) 管理且處於連網狀態，老師或資訊組長可以透過指令直接「清除密碼」，而不需要重灌裝置。**

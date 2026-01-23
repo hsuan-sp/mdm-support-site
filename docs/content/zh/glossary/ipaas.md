@@ -2,7 +2,6 @@
 term: "iPaaS"
 
 category: ["Other"]
-
 ---
 
 ## 術語定義

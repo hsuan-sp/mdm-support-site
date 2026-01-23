@@ -2,7 +2,6 @@
 term: "Device Group"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

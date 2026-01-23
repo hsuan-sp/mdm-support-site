@@ -2,7 +2,6 @@
 term: "Scope"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## Term Definition

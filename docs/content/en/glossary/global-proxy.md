@@ -2,7 +2,6 @@
 term: "Global Proxy"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

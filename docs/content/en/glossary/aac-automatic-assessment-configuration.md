@@ -2,7 +2,6 @@
 term: "AAC (Automatic Assessment Configuration)"
 
 category: ["Education"]
-
 ---
 
 ## Term Definition

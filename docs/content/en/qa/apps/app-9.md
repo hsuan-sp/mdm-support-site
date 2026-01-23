@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["App Updates", "Device-based Assignment", "Automated Updates", "DDM"]
-
 ---
 
 **No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**

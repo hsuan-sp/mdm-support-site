@@ -2,7 +2,6 @@
 term: "Sites"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

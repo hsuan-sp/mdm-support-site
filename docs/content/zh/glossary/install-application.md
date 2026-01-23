@@ -2,7 +2,6 @@
 term: "Install Application"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

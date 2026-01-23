@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["System Updates", "DDM", "Nudge", "IT Operations"]
-
 ---
 
 **The modern solution is to use "Declarative Device Management (DDM)."** If you need more visual urgency, you can supplement this with the open-source tool "Nudge."
@@ -19,7 +18,6 @@ Unlike iPads, Mac updates often require a lengthy restart, which leads students 
 
 - **The Logic**: This is Apple's newest management protocol. IT administrators set an **"Enforcement Deadline."**
 - **The Workflow**:
-
   1. In the days leading up to the deadline, the system gently notifies the student.
   2. As the deadline approaches, the notifications become more persistent.
   3. **Once the deadline is reached**, the Mac will automatically download the update and force a restart. The student cannot postpone it further.

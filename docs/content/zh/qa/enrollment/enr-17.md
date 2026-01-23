@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["啟用鎖定", "Activation Lock", "解鎖代碼", "Apple 裝置 App"]
-
 ---
 
 **啟動鎖定是 Apple 的資安防護機制，若您擁有該裝置的所有權，可透過多種技術途徑解除鎖定。**

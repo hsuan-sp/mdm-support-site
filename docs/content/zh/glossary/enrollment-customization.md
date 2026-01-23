@@ -2,7 +2,6 @@
 term: "Enrollment Customization (註冊自訂內容)"
 
 category: ["Enrollment", "Apple"]
-
 ---
 
 ## 術語定義

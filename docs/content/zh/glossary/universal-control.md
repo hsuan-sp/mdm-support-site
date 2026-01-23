@@ -2,7 +2,6 @@
 term: "Universal Control（通用控制）"
 
 category: ["Apple", "macOS"]
-
 ---
 
 ## 術語定義

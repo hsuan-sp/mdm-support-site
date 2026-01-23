@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["Apple Configurator", "Manual ASM Addition", "Provisional Period"]
-
 ---
 
 **Yes. For devices not purchased through an authorized education reseller, you can use Apple Configurator to manually enroll them into your Apple School Manager (ASM) organization.**

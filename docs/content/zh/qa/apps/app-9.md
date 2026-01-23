@@ -8,7 +8,6 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
 
 tags: ["App 更新", "裝置型分派", "自動更新", "DDM"]
-
 ---
 
 **不需要。只要使用「裝置型分派 (Device-based Assignment)」，更新過程完全無需人工介入。**

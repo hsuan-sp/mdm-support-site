@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["密碼重置", "ASM", "管理員操作"]
-
 ---
 
 **目前的 Apple 校務管理 (ASM) 後台中，並沒有提供「讓使用者自行重設密碼」的開關。**

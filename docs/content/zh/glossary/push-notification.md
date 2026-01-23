@@ -2,7 +2,6 @@
 term: "Push Notification (推播通知)"
 
 category: ["Core", "Apple"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "OTA (Over-The-Air)"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

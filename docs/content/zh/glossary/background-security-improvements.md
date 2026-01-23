@@ -2,7 +2,6 @@
 term: "Background Security Improvements (背景安全改良)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

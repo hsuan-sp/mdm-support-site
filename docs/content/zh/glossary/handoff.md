@@ -2,7 +2,6 @@
 term: "Handoff（接力）"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

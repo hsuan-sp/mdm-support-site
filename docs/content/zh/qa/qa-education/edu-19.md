@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["資安稽核", "NIST", "規範"]
-
 ---
 
 ## Q: 新要求：教育部資安稽核要求符合 NIST 標準，MDM 該如何配合？
@@ -18,16 +17,13 @@ tags: ["資安稽核", "NIST", "規範"]
 ## 一、 NIST 標準在 MDM 的實踐 (SOP)
 
 1.  **密碼複雜度 (Authenticator Assurance)** ：
-
     - **2026 規範** ：不再強制單純的定期更換，而是強調「防猜測」與「MFA 多因素驗證」。
     - **MDM 設定** ：強制 6 位數以上密碼，並搭配 **Managed Apple Accounts** 的雙重認證。
 
 1.  **裝置與 App 認證 (Managed App Attestation)** ：
-
     - **技術** ：利用 iOS 26 的硬體金鑰保護，確保 App 是從受管管道安裝，未被中間人攔截。
 
 1.  **弱點管理 (Vulnerability Management)** ：
-
     - **宣告式更新 (DDM)** ：設定強制更新期限，確保全校裝置在安全性更新釋出後 48 小時內完成 Patch。
 
 ## 二、 關於中央版與自購版 Jamf Pro 的銜接建議
@@ -37,7 +33,6 @@ tags: ["資安稽核", "NIST", "規範"]
 - **目前的困境** ：若您在後台找不到最新的 DDM 操作選項，通常是因為權限層級限制。
 
 - **建議做法** ：若校內有 **自購版 Jamf Pro (School 或 Pro)** ，強烈建議 資訊組長利用自購版作為 **「新技術測試環境」** 。
-
   - 優先在自購版測試 iOS 26 的新功能描述檔。
   - 實際驗證 DDM 狀態頻道的回報結果。
 

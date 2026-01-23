@@ -8,7 +8,6 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: true
 
 tags: ["App 更新", "Jamf Pro", "手動更新", "自動更新", "DDM"]
-
 ---
 
 **在 Jamf Pro 中，App 的更新主要透過「自動強制執行」與「手動點選強制更新」兩種方式達成。**

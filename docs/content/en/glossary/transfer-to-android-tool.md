@@ -2,7 +2,6 @@
 term: "Transfer to Android Tool"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

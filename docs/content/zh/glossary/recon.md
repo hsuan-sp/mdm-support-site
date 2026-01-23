@@ -2,7 +2,6 @@
 term: "Recon"
 
 category: ["Jamf", "macOS"]
-
 ---
 
 ## 術語定義

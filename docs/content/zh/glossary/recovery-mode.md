@@ -2,7 +2,6 @@
 term: "Recovery Mode（復原模式）"
 
 category: ["Apple", "macOS"]
-
 ---
 
 ## 術語定義

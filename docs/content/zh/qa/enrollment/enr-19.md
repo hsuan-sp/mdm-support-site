@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["Mac 安全", "啟動鎖定", "Apple 晶片", "Apple Configurator", "維修風險"]
-
 ---
 
 **可以。配備 Apple 晶片（M1 至 M4 系列等）或 Apple T2 安全晶片的 Mac，其啟動鎖定管理完全整合於 Apple 校務管理 (ASM) 中。**

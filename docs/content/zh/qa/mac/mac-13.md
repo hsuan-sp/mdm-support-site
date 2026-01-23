@@ -8,9 +8,7 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags:
-
   ["PPPC", "隱私權限", "TCC", "螢幕錄製", "標準使用者", "Apple Intelligence"]
-
 ---
 
 **這是 macOS 的 TCC (透明度、同意與控制) 隱私機制。針對「螢幕錄製」、「麥克風」與「相機」，Apple 強制要求必須由使用者「親自點選同意」，MDM 無法越俎代庖強制開啟。**

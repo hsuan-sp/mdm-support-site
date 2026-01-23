@@ -2,7 +2,6 @@
 term: "Recovery Lock"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

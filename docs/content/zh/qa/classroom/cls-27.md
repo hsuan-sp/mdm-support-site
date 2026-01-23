@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與互動教學 (Classroom Management)"
 important: false
 
 tags: ["AirPods", "音訊配件", "共用 iPad", "iOS 26", "耳機管理"]
-
 ---
 
 **在「共用 iPad (Shared iPad)」環境中，最困擾師生的一個問題是藍牙耳機的配對。**

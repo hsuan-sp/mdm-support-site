@@ -2,7 +2,6 @@
 term: "DDM (Declarative Device Management)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

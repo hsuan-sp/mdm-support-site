@@ -2,7 +2,6 @@
 term: "TLS / SSL"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

@@ -8,9 +8,7 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags:
-
   ["Reset", "EACS", "Erase All Content and Settings", "Computer Lab", "Imaging"]
-
 ---
 
 **In the era of Apple Silicon (M-series), using "recovery cards" or "Ghost" imaging is no longer recommended and often not even possible. Instead, use the "Erase All Content and Settings (EACS)" command.**

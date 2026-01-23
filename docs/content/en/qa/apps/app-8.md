@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["Web Clip", "Safari", "Configuration Profile", "Teaching Tools"]
-
 ---
 
 **Yes. A Web Clip is not a true app; rather, it is a bookmark icon on the home screen that points to a specific URL.**

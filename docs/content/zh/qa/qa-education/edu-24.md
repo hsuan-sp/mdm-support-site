@@ -8,7 +8,6 @@ category: "第八部分：教育場景與教學應用 (Education Scenarios)"
 important: true
 
 tags: ["Writing Tools", "Apple Intelligence", "考試防弊", "iOS 26", "AI"]
-
 ---
 
 **Apple Intelligence 的「寫作工具」即使離線也能運作，對語文類考試構成作弊風險。**支援 Apple Intelligence 的裝置必須在正式評量時透過 MDM 強制禁用相關功能，以維護考試公平性。
@@ -28,7 +27,6 @@ tags: ["Writing Tools", "Apple Intelligence", "考試防弊", "iOS 26", "AI"]
 1.  前往 **Restrictions (限制)** > **Intelligence** 分類。
 
 1.  啟用以下限制（設為不允許）：
-
     - **Allow Writing Tools (不允許寫作工具)**
     - **Allow Image Playground (不允許影像樂園)**
     - **Allow Math Notes (不允許數學筆記)**（防止數學自動求解作弊）

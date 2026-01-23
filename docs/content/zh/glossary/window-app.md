@@ -2,7 +2,6 @@
 term: "Window App (視窗化 App)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

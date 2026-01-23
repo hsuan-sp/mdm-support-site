@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: true
 
 tags: ["iOS 26", "MDM Migration", "Zero-Wipe", "Asset Transfer", "Jamf Pro"]
-
 ---
 
 **As educational projects evolve, many schools look to migrate devices from a centrally managed instance (like Taiwan's MOE Jamf Pro) to their own in-house MDM server. Prior to iOS 26, this required a full erase, which was a barrier for students with extensive learning data. iOS 26 solves this with 'Zero-Wipe MDM Migration.'**

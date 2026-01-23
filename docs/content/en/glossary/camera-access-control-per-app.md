@@ -2,7 +2,6 @@
 term: "Camera Access Control per App"
 
 category: ["Privacy"]
-
 ---
 
 ## Term Definition

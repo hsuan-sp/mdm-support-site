@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["VPP Sync", "ASM", "Troubleshooting", "Volume Purchase"]
-
 ---
 
 **This is usually due to a synchronization delay between Apple’s servers and your MDM server.**

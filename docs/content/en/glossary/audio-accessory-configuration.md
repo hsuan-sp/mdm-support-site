@@ -2,7 +2,6 @@
 term: "Audio Accessory Configuration"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

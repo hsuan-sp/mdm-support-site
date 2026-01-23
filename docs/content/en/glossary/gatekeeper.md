@@ -2,7 +2,6 @@
 term: "Gatekeeper"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 
 tags: ["PreStage", "設定輔助程式", "ADE", "部署加速", "最佳實務"]
-
 ---
 
 **PreStage Enrollment 可跳過多項設定輔助程式步驟。教育環境建議跳過大部分非必要步驟，以加速部署並減少學生誤操作。**

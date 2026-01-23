@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["Jamf Pro", "Jamf School", "產品比較"]
-
 ---
 
 **這兩款產品均為 Apple 官方認可的 MDM 解決方案，但在設計邏輯、語言支援與管理深度上有所不同。**

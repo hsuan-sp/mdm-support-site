@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["macOS 15", "iPhone Mirroring", "Privacy", "Restrictions", "DLP"]
-
 ---
 
 **While convenient, 'iPhone Mirroring' in macOS 15+ poses Data Loss Prevention (DLP) risks on shared school computers. It should be managed via MDM.**

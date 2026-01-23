@@ -2,7 +2,6 @@
 term: "Temporary Session (Guest Mode)"
 
 category: ["Education"]
-
 ---
 
 ## 術語定義

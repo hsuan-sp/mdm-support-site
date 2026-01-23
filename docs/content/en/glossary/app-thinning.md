@@ -2,7 +2,6 @@
 term: "App Thinning"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

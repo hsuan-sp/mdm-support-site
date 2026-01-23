@@ -2,7 +2,6 @@
 term: "Federated Authentication"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

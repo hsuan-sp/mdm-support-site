@@ -2,7 +2,6 @@
 term: "Provisioning Profile"
 
 category: ["Apps", "Security"]
-
 ---
 
 ## 術語定義

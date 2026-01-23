@@ -2,7 +2,6 @@
 term: "DNS over HTTPS/TLS (DNS 加密協定)"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

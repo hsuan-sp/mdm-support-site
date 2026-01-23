@@ -2,7 +2,6 @@
 term: "ARD (Apple Remote Desktop)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

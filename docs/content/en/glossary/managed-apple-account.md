@@ -2,7 +2,6 @@
 term: "Managed Apple Account"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

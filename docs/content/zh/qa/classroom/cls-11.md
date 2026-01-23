@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: true
 
 tags: ["MAC 位址", "專用 Wi-Fi 位址", "隱私功能", "網路管理"]
-
 ---
 
 **這是因為 Apple 預設啟用了「專用 Wi-Fi 位址 (Private Wi-Fi Address)」功能。**

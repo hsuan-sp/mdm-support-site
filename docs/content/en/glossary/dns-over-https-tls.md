@@ -2,7 +2,6 @@
 term: "DNS over HTTPS/TLS (DoH/DoT)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

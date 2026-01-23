@@ -2,7 +2,6 @@
 term: "UIE (User-Initiated Enrollment)"
 
 category: ["Enrollment"]
-
 ---
 
 ## 術語定義

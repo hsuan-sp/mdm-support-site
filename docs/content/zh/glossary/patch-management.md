@@ -2,7 +2,6 @@
 term: "Patch Management"
 
 category: ["macOS", "Jamf"]
-
 ---
 
 ## 術語定義

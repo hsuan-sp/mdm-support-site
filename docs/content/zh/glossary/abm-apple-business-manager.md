@@ -2,7 +2,6 @@
 term: "ABM (Apple Business Manager)"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

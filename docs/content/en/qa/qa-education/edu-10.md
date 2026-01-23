@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags: ["App Store", "Self Service", "Restrictions"]
-
 ---
 
 **This is an intentional setting by the school. The App Store is hidden to prevent students from downloading unauthorized apps. Use the 'Self Service' app to install school-approved applications instead.** Finding the App Store missing is a result of MDM restrictions, not a malfunction.

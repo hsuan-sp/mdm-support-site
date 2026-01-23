@@ -2,7 +2,6 @@
 term: "Policy"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

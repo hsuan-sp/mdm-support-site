@@ -2,7 +2,6 @@
 term: "AirPlay"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

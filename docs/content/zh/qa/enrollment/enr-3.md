@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 
 tags: ["受監管", "權限差異", "Supervised", "ADE"]
-
 ---
 
 **受監管模式 (Supervised Mode) 是 Apple 賦予組織擁有裝置「最高管理權限」的特殊狀態。** 一般個人購買的 iPad 預設為「非受監管」，使用者擁有最高控制權。

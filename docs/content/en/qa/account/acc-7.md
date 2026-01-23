@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Personal Apple Account", "Managed Apple Account", "Access Control"]
-
 ---
 
 **Standard Policy: Not Recommended. School devices should prioritize the use of a 'Managed Apple Account' or remain signed out.**

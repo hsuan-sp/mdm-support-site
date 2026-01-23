@@ -2,7 +2,6 @@
 term: "Command History"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

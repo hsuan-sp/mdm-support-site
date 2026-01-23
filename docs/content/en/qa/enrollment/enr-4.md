@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["BYOD", "Privacy", "Partitioning", "Account-Driven"]
-
 ---
 
 **User Enrollment is a privacy-first management mode specifically designed for "Bring Your Own Device" (BYOD) scenarios.**

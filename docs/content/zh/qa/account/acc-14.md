@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: true
 
 tags: ["ADE", "Server Token", "自動裝置註冊"]
-
 ---
 
 **新採購的裝置若未出現在清單中，最常見的原因是「伺服器代號 (Server Token)」過期或裝置未指派。**

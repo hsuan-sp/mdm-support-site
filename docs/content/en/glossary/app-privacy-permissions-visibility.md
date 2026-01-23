@@ -2,7 +2,6 @@
 term: "App Privacy Permissions Visibility"
 
 category: ["Mac"]
-
 ---
 
 ## Term Definition

@@ -8,9 +8,7 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: true
 
 tags:
-
   [
-
     "Windowed Apps",
 
     "Multitasking",
@@ -20,9 +18,7 @@ tags:
     "iPadOS 26",
 
     "Classroom Management",
-
   ]
-
 ---
 
 **iPadOS 26 introduces a new 'Windowed Apps' multitasking system, allowing apps to appear in resizable, overlapping windows. While great for productivity, it can lead to distraction. Schools can manage this via segmented MDM restrictions or use the 'Classroom' app for temporary focus locking.**
@@ -52,7 +48,6 @@ Allow multitasking normally, but lock it down when focus is required.
 - **Tool**: **Apple Classroom** or **Jamf Teacher**.
 
 - **Action**:
-
   1. Select the class or specific students.
   2. Select **Open App** and check **Lock in App after opening**.
   3. Select the required app (e.g., Keynote).

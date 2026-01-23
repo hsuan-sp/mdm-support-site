@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["Repair", "Replacement", "ADE", "Automated Device Enrollment"]
-
 ---
 
 **A 'Service Replacement' unit has a brand-new serial number. To automate the setup, you must handle the serial transfer and use Automated Device Enrollment (ADE).**

@@ -8,7 +8,6 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
 
 tags: ["Self Service", "App Store", "限制描述檔", "自主學習"]
-
 ---
 
 **即使透過限制描述檔隱藏了官方 App Store，學生仍能透過「Self Service (自助服務)」App 安全地獲取 App。**

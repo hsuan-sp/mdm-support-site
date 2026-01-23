@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Jamf Pro", "Jamf School", "Product Comparison"]
-
 ---
 
 **Both products are Apple-validated MDM solutions, but they differ significantly in design philosophy, language support, and depth of management capabilities.**

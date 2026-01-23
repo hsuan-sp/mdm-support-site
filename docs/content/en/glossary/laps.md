@@ -2,7 +2,6 @@
 term: "LAPS (Local Administrator Password Solution)"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

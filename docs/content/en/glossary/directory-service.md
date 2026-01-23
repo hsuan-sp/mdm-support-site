@@ -2,7 +2,6 @@
 term: "Directory Service"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition
@@ -21,7 +20,6 @@ It serves as the authoritative source for answering:
 - **Microsoft Active Directory (AD)**
 - **LDAP (Lightweight Directory Access Protocol)**
 - **Cloud-based Identity Services**
-
   - Azure AD (Entra ID)
   - Google Workspace
   - Okta

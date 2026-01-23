@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["Shared iPad", "Guest Session", "Library"]
-
 ---
 
 **Yes. Shared iPad supports 'Guest Sessions', allowing users to log in without an account.**

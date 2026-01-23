@@ -2,7 +2,6 @@
 term: "NIST Benchmarks"
 
 category: ["Security", "Education"]
-
 ---
 
 ## Term Definition

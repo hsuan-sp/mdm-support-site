@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["數位公民", "AI 倫理", "行為管理", "iOS 26"]
-
 ---
 
 **MDM 不應只是「限制器」，而是數位公民教育的「守護欄」。**透過 iOS 26 的新功能，管理員可以引導學生建立負責任的 AI 使用與網路瀏覽習慣。

@@ -2,7 +2,6 @@
 term: "FileVault Unlock over SSH (透過 SSH 解鎖 FileVault)"
 
 category: ["Mac"]
-
 ---
 
 ## 術語定義

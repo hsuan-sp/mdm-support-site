@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Apple Intelligence", "Service Access", "ASM"]
-
 ---
 
 **Administrators can determine whether to allow AI features through the 'Service Access' settings in Apple School Manager (ASM).**

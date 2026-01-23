@@ -2,7 +2,6 @@
 term: "Battery Health"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

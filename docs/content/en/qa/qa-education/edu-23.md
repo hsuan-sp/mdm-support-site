@@ -8,9 +8,7 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags:
-
   [
-
     "iPadOS 26",
 
     "Multitasking",
@@ -20,9 +18,7 @@ tags:
     "Slide Over",
 
     "Teaching Efficiency",
-
   ]
-
 ---
 
 **iPadOS 26.2 matures the 'Windowed Apps' system, allowing the iPad to behave more like a traditional computer. For students and teachers who need to cross-reference materials, this is a significant productivity boost.**

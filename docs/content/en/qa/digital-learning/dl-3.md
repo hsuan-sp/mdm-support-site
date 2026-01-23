@@ -8,7 +8,6 @@ category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 
 tags: ["Troubleshooting", "Reset", "Network", "Connection Help"]
-
 ---
 
 **Resetting network settings is a powerful way to solve stubborn Wi-Fi issues, but it carries the risk of making the device an "unmanaged device" if not handled carefully.**

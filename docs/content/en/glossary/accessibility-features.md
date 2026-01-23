@@ -2,7 +2,6 @@
 term: "Accessibility Features"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

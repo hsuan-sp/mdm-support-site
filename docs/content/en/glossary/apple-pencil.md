@@ -2,7 +2,6 @@
 term: "Apple Pencil"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

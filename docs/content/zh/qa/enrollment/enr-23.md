@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 
 tags: ["MDM 遷移", "零抹除", "iOS 26", "macOS 26", "風險評估"]
-
 ---
 
 **iOS 26、iPadOS 26 與 macOS 26 支援零抹除 MDM 遷移，可在不重置裝置的情況下更換 MDM 系統。但教育環境建議優先評估使用 Return to Service，以確保裝置處於乾淨狀態。**
@@ -21,7 +20,6 @@ tags: ["MDM 遷移", "零抹除", "iOS 26", "macOS 26", "風險評估"]
 2.  設定遷移截止日期 (Enrollment Deadline)。
 3.  裝置在截止日前通知使用者。
 4.  到達截止日時，裝置自動：
-
     - 移除舊 MDM 的管理描述檔。
     - 保留使用者資料、App 和設定。
     - 自動註冊至新 MDM。

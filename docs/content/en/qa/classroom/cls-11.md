@@ -8,9 +8,7 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: true
 
 tags:
-
   [
-
     "MAC Address",
 
     "Private Wi-Fi Address",
@@ -18,9 +16,7 @@ tags:
     "Privacy Features",
 
     "Network Management",
-
   ]
-
 ---
 
 **This is because Apple enables the 'Private Wi-Fi Address' feature by default.**

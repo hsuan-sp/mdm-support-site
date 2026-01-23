@@ -2,7 +2,6 @@
 term: "Recovery Mode"
 
 category: ["Apple", "macOS"]
-
 ---
 
 ## Term Definition

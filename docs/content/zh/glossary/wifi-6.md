@@ -2,7 +2,6 @@
 term: "Wi-Fi 6"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "DNS (Domain Name System)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

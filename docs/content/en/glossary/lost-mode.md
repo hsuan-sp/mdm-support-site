@@ -2,7 +2,6 @@
 term: "Lost Mode"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

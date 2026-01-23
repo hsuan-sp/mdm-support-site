@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 
 tags: ["App Store", "Self Service", "限制"]
-
 ---
 
 **這是學校刻意的設定。App Store 被隱藏是為了防止學生自行下載未經審核的 App。請改用「Self Service (自助服務)」App 安裝學校核准的應用程式。**

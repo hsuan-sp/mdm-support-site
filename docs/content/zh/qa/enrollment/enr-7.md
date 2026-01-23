@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["PreStage 註冊", "App 派送", "自動裝置註冊", "DDM", "故障排除"]
-
 ---
 
 **當您在 PreStage 註冊中設定了「強制安裝 App」，裝置會等待該 App 下載完成才允許進入主畫面。**若網路或 VPP 授權出問題，就會導致卡死。\*\* 這在執行「自動裝置註冊 (ADE)」時極為常見。

@@ -2,7 +2,6 @@
 term: "Single App Mode (Kiosk Mode)"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

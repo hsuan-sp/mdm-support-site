@@ -2,7 +2,6 @@
 term: "Script"
 
 category: ["macOS"]
-
 ---
 
 ## 術語定義

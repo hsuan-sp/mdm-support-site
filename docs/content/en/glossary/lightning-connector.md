@@ -2,7 +2,6 @@
 term: "Lightning Connector"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

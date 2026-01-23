@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["重新命名", "名稱同步", "資產預載", "預備註冊", "The MUT"]
-
 ---
 
 **這通常是因為您僅修改了 Jamf Pro 資料庫中的「文字紀錄」，而尚未發送「遠端更名指令」至實體裝置中。**

@@ -8,9 +8,7 @@ category: "Section 8: Common Education Scenarios"
 important: true
 
 tags:
-
   [
-
     "Passcode",
 
     "Forgot Password",
@@ -20,9 +18,7 @@ tags:
     "Remote Commands",
 
     "Troubleshooting",
-
   ]
-
 ---
 
 **Yes. As long as the iPad is managed by the school's MDM (Jamf Pro) and remains connected to the internet, a teacher or IT administrator can "Clear Passcode" remotely without needing to wipe the device.** This is a very common scenario in the classroom.

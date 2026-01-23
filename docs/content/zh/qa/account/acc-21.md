@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: true
 
 tags: ["moemdm", "教育部", "Jamf Pro", "架構说明"]
-
 ---
 
 **兩者完全不同。Jamf Pro 是真正的「遙控器（管理系統）」，而 moemdm 是教育部的「儀表板（回報平台）」。**

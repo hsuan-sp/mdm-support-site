@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags: ["Screen Recording", "Restrictions", "Control Center"]
-
 ---
 
 **This is typically because 'Screen Recording' is restricted in the school's MDM profile, or the button simply hasn't been added to the Control Center.**

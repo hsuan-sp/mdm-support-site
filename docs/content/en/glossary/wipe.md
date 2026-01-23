@@ -2,7 +2,6 @@
 term: "Wipe"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

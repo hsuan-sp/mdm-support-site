@@ -2,7 +2,6 @@
 term: "App Store"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

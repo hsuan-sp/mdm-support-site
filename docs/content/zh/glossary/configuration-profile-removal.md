@@ -2,7 +2,6 @@
 term: "Configuration Profile Removal（描述檔移除）"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

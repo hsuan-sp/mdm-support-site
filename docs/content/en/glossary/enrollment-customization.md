@@ -2,7 +2,6 @@
 term: "Enrollment Customization"
 
 category: ["Enrollment", "Apple"]
-
 ---
 
 ## Term Definition

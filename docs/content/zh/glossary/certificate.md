@@ -2,7 +2,6 @@
 term: "Certificate (憑證)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

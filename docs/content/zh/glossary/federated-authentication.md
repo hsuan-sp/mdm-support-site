@@ -2,7 +2,6 @@
 term: "Federated Authentication (聯合驗證)"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

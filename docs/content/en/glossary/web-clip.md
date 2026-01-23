@@ -2,7 +2,6 @@
 term: "Web Clip"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

@@ -2,7 +2,6 @@
 term: "Jamf binary"
 
 category: ["Jamf", "macOS"]
-
 ---
 
 ## 術語定義

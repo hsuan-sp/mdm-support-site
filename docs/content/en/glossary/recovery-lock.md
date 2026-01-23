@@ -2,7 +2,6 @@
 term: "Recovery Lock"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

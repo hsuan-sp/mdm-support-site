@@ -2,7 +2,6 @@
 term: "AirPrint"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["遺失模式", "隱私", "定位"]
-
 ---
 
 **不會。遺失模式 (Lost Mode) 是專為尋回裝置設計的，只有在裝置被標記為「遺失」時才會啟用定位。**

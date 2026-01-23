@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["Troubleshooting", "Network", "Declarative Management", "Profile"]
-
 ---
 
 **This error typically stems from the device's inability to establish a stable, trusted secure connection with the MDM server or Apple servers.**

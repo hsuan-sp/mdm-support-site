@@ -2,7 +2,6 @@
 term: "Content Caching"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

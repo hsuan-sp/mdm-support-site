@@ -2,7 +2,6 @@
 term: "App Config (App Configuration)"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

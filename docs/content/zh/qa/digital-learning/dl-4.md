@@ -8,7 +8,6 @@ category: "第五部分：數位學習精進方案專區 (MOE Digital Learning P
 important: false
 
 tags: ["群組管理", "自動化", "智慧型群組", "Smart Group"]
-
 ---
 
 **智慧型群組 (Smart Group) 是管理大量精進方案載具的核心工具，** 能根據「資產標籤」或「採購年度」自動歸類裝置。

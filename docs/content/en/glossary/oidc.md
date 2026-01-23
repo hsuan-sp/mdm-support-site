@@ -2,7 +2,6 @@
 term: "OIDC (OpenID Connect)"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

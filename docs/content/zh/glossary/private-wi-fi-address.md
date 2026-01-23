@@ -2,7 +2,6 @@
 term: "Private Wi-Fi Address (私有 Wi-Fi 位址)"
 
 category: ["Network", "Security"]
-
 ---
 
 ## 術語定義

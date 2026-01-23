@@ -2,7 +2,6 @@
 term: "Certificate Authority (CA)"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

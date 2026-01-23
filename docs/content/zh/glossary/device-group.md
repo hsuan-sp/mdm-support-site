@@ -2,7 +2,6 @@
 term: "Device Group (裝置群組)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

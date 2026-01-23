@@ -2,7 +2,6 @@
 term: "Setup Pane Skipping (跳過設定輔助程式面板)"
 
 category: ["Mac"]
-
 ---
 
 ## 術語定義

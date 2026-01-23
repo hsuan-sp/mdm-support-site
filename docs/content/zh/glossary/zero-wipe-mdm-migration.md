@@ -2,7 +2,6 @@
 term: "Zero-Wipe MDM Migration (零抹除 MDM 遷移)"
 
 category: ["MDM"]
-
 ---
 
 ## 術語定義

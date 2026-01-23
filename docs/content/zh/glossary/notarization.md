@@ -2,7 +2,6 @@
 term: "Notarization (公證)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

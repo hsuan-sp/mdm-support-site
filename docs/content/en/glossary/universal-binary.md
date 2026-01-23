@@ -2,7 +2,6 @@
 term: "Universal Binary"
 
 category: ["macOS"]
-
 ---
 
 ## Term Definition

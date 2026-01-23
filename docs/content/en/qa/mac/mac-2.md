@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["Privilege Management", "LAPS", "Security", "Standard User"]
-
 ---
 
 **The Gold Standard is to provide "Standard User" accounts for daily tasks, supplemented by a "just-in-time" Admin elevation tool or a Managed LAPS solution.**

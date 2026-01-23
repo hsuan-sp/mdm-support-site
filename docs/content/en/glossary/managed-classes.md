@@ -2,7 +2,6 @@
 term: "Managed Classes"
 
 category: ["Education", "Jamf"]
-
 ---
 
 ## Term Definition

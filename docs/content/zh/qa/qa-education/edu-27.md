@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 
 tags: ["MDM 遷移", "Zero-Wipe", "系統維護", "2026 新技術"]
-
 ---
 
 **在 2026 年以前是肯定的，但在 iOS 26 後，Apple 引入了「Zero-Wipe MDM Migration」技術。**只要符合特定條件，學校可以在不清除裝置資料、不重灌 App 的情況下，將裝置靜默地從 A 廠商遷移至 B 廠商。

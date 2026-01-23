@@ -2,7 +2,6 @@
 term: "Extension Attribute (擴充屬性)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

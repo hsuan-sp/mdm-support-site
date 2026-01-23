@@ -8,7 +8,6 @@ category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 
 tags: ["Privacy", "Location", "GPS", "Lost Mode"]
-
 ---
 
 **No. Apple's privacy architecture strictly limits MDM's location permissions. Under normal conditions, schools cannot obtain a device's GPS coordinates.**

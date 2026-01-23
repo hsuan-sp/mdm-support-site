@@ -2,7 +2,6 @@
 term: "Platform SSO in Setup Assistant"
 
 category: ["Mac"]
-
 ---
 
 ## Term Definition

@@ -2,7 +2,6 @@
 term: "WPA / WPA2 / WPA3"
 
 category: ["Network", "Security"]
-
 ---
 
 ## Term Definition

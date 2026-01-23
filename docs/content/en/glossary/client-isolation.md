@@ -2,7 +2,6 @@
 term: "Client Isolation"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["指令延遲", "網路環境", "藍牙", "使用者隔離"]
-
 ---
 
 **這通常是「藍牙發現失敗」或「Wi-Fi 區網互通被阻擋」造成的。** Apple Classroom 的運作依賴兩層通訊，缺一不可：

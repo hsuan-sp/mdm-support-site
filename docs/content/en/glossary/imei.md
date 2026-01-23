@@ -2,7 +2,6 @@
 term: "IMEI"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

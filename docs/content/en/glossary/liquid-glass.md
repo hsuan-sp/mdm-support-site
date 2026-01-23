@@ -2,7 +2,6 @@
 term: "Liquid Glass"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

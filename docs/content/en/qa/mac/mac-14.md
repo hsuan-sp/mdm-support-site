@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["Printers", "AirPrint", "lpadmin", "Policy", "Self Service"]
-
 ---
 
 **Modern Mac printing should prioritize the 'AirPrint (driverless)' protocol. For advanced configurations, use 'Policies' or Shell scripts executing the `lpadmin` command.**

@@ -2,7 +2,6 @@
 term: "Unified Logging"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "User Approved MDM（使用者核准的 MDM）"
 
 category: ["Enrollment", "macOS"]
-
 ---
 
 ## 術語定義

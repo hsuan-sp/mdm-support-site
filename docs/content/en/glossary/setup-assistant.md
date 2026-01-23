@@ -2,7 +2,6 @@
 term: "Setup Assistant"
 
 category: ["Enrollment"]
-
 ---
 
 ## Term Definition

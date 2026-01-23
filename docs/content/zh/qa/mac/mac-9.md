@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["自動化", "Shell Script", "Zsh", "政策", "腳本", "jamfHelper"]
-
 ---
 
 **腳本 (Scripts) 讓管理員能以 Root 權限在 Mac 上執行 Shell 指令，實現標準 MDM 描述檔 (Payload) 無法達成的進階客製化功能。**
@@ -36,24 +35,20 @@ Jamf Pro 的強大之處在於其專屬的二進位檔案 (Binary)，配合 **�
 ## 建立與部署流程 (SOP)：
 
 1.  **撰寫腳本** ：
-
     - 建議使用 **Zsh** (`#!/bin/zsh`)，這是現代 macOS 的預設 Shell。 **注意：macOS 12.3 起已移除內建 Python 2.7，若需執行 Python 腳本需自行部署直譯器。**
 
 1.  **上傳至 Jamf Pro** ：
-
     - 前往 **「設定」** > **「電腦管理」** > **「腳本 (Scripts)」** 。
     - 點選 **「+ 新增」** ，輸入顯示名稱並貼上腳本內容。
     - **參數設定** ：可設定 `$4` 到 `$11` 的參數標籤，讓同一支腳本透過不同政策帶入不同變數（例如：設定印表機 IP）。
 
 1.  **透過政策執行** ：
-
     - 前往 **「電腦」** > **「政策 (Policies)」** > **「+ 新增」** 。
     - 設定 **「觸發程序 (Trigger)」** （如：報到 Recurring Check-in、登入時）。
     - 設定 **「腳本 (Scripts)」** 承載資料，選取剛才上傳的腳本。
     - 設定 **「範圍 (Scope)」** 指派給目標電腦。
 
 1.  **執行頻率 (Frequency)** ：
-
     - 務必設定頻率（例如： **Once per computer** 僅執行一次，或 **Ongoing** 每次觸發都執行）。
 
 ## 實用範例：使用 jamfHelper 顯示公告

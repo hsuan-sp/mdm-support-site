@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["混合環境", "Intel Mac", "Apple Silicon", "Smart Group", "部署策略"]
-
 ---
 
 **2026 年是 Intel Mac 邁向生命週期終點的關鍵年。校內同時存在「x86_64 (Intel)」與「arm 64 (M1-M5)」兩種架構，若派錯軟體包，輕則軟體無法執行，重則導致系統不穩。**
@@ -37,7 +36,6 @@ tags: ["混合環境", "Intel Mac", "Apple Silicon", "Smart Group", "部署策�
 
 1.  **優先使用 Universal 二進位檔** ：如果廠商提供 Universal 版（如 Chrome、Office），請直接上傳該版本，Jamf 會自動適配。
 1.  **區分 PKG 派送** ：
-
     - 針對專業軟體（如 Adobe 系列、特定實驗軟體），請分別製作 `Soft_v1.0_AppleSilicon.pkg` 與 `Soft_v1.0_Intel.pkg`。
     - 在政策中，將前者派送給 Apple Silicon 群組，後者派送給 Intel 群組。
 

@@ -2,7 +2,6 @@
 term: "APNs (Apple Push Notification service)"
 
 category: ["Core", "Apple"]
-
 ---
 
 ## Term Definition

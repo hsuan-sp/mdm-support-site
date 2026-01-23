@@ -2,7 +2,6 @@
 term: "Window App"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

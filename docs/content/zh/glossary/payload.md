@@ -2,7 +2,6 @@
 term: "Payload"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

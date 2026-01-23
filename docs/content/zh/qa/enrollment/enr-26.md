@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 
 tags: ["Return to Service", "iOS 26", "共享 iPad", "App 保留", "快速部署"]
-
 ---
 
 **iOS 26、iPadOS 26 與 visionOS 26 的 Return to Service 可選擇保留 Managed App 的程式本體（Preserve Managed Apps），在清除使用者資料的同時，省去重新下載 GB 級教學 App 的巨大時間成本與網路頻寬壓力。**

@@ -2,7 +2,6 @@
 term: "Wipe (清除裝置)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

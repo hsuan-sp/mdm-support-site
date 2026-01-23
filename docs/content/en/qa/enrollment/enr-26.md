@@ -8,9 +8,7 @@ category: "Section 2: Device Enrollment & Deployment"
 important: true
 
 tags:
-
   [
-
     "Return to Service",
 
     "iOS 26",
@@ -20,9 +18,7 @@ tags:
     "App Preservation",
 
     "Rapid Deployment",
-
   ]
-
 ---
 
 **In iOS 26, iPadOS 26, and visionOS 26, 'Return to Service' introduces the ability to 'Preserve Managed Apps.' This allows you to wipe user data while keeping the actual app binaries on the device, eliminating the massive time and bandwidth cost of redownloading gigabytes of educational software.**

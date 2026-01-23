@@ -2,7 +2,6 @@
 term: "Intelligent Hub"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

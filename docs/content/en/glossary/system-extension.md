@@ -2,7 +2,6 @@
 term: "System Extension"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

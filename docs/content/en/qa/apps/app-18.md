@@ -8,9 +8,7 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags:
-
   [
-
     "App Store",
 
     "Missing Icon",
@@ -20,9 +18,7 @@ tags:
     "Screen Time",
 
     "Restrictions",
-
   ]
-
 ---
 
 **A missing App Store icon usually results from 'Screen Time' restrictions on the device or a 'Restrictions' profile from the MDM. Follow these steps to troubleshoot:**

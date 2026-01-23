@@ -2,7 +2,6 @@
 term: "Local Account (本機帳號)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

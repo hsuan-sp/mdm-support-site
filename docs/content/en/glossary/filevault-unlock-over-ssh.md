@@ -2,7 +2,6 @@
 term: "FileVault Unlock over SSH"
 
 category: ["Mac"]
-
 ---
 
 ## Term Definition

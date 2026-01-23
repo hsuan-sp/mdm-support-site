@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["Activation Lock", "Bypass Code", "Apple Devices App"]
-
 ---
 
 **Activation Lock is an Apple security feature. If you have ownership of the device, there are several technical pathways to unlock it.**
@@ -38,7 +37,6 @@ If the device is in an abnormal state and cannot receive commands:
 1. Use **Finder / Apple Configurator** (macOS) or the **Apple Devices app** (Windows).
 
 2. Enter Recovery Mode and perform a Restore.
-
    - **Note**: This clears the data, but the Activation Lock screen may still appear (requiring Option 1 or 2 to unlock).
 
 ## Option 4: Contact Apple Support

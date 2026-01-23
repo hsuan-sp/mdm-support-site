@@ -2,7 +2,6 @@
 term: "Self Service"
 
 category: ["Apps", "Jamf"]
-
 ---
 
 ## Term Definition

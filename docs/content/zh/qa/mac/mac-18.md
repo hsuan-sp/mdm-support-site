@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["啟用鎖定", "Activation Lock", "ASM", "解除鎖定", "資產回收"]
-
 ---
 
 **只要該 Mac 屬於學校資產（已加入 ASM），管理員可直接在 Apple School Manager 後台強制解除鎖定，無需聯絡原使用者。**
@@ -21,13 +20,11 @@ tags: ["啟用鎖定", "Activation Lock", "ASM", "解除鎖定", "資產回收"]
 
 1. **搜尋裝置**：在側邊欄點選 **「裝置 (Devices)」**，輸入該 Mac 的序號。
 1. **執行解鎖**：
-
    - 在裝置詳情頁面，找到 **「啟用鎖定 (Activation Lock)」** 狀態。
    - 點選 **「關閉 (Turn Off)」** 或 **「解除鎖定」**。
    - 系統會跳出確認視窗，點擊確認。
 
 1. **重置裝置**：
-
    - 解鎖指令送出後，通常幾分鐘內生效。
    - 將 Mac 進入 **復原模式 (Recovery Mode)** 重新安裝 macOS，原本的帳號鎖定畫面將不再出現。
 

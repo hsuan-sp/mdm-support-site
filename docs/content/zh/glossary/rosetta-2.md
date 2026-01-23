@@ -2,7 +2,6 @@
 term: "Rosetta 2"
 
 category: ["macOS"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Guided Access"
 
 category: ["Education", "Apple"]
-
 ---
 
 ## Term Definition

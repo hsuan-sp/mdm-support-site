@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["投影", "轉接", "AirPlay", "HDMI"]
-
 ---
 
 **可透過 HDMI 轉接器有線連接（最穩定），或使用第三方無線投影軟體（延遲較高）。最佳方案仍是建議學校購置 Apple TV。**

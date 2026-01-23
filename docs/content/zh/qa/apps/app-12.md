@@ -8,7 +8,6 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
 
 tags: ["VPP 位置", "資源共享", "跨校管理", "ASM"]
-
 ---
 
 **可以，這透過 ASM 的「位置 (Location)」管理達成。**

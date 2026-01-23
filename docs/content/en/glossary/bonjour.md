@@ -2,7 +2,6 @@
 term: "Bonjour"
 
 category: ["Network", "Apple"]
-
 ---
 
 ## Term Definition

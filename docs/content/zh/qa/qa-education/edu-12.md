@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["作業繳交", "檔案分享", "Google Drive"]
-
 ---
 
 **最佳方式是透過雲端硬碟（Google Drive、OneDrive、或 iCloud Drive）繳交。也可使用 AirDrop、Google Classroom 作業功能、或 Self Service 指定的繳交平台。**

@@ -2,7 +2,6 @@
 term: "Drag and Drop Multitasking"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

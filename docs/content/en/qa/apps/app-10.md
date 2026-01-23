@@ -8,9 +8,7 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags:
-
   [
-
     "Troubleshooting",
 
     "License Conflicts",
@@ -18,9 +16,7 @@ tags:
     "Managed Apps",
 
     "Device-based Assignment",
-
   ]
-
 ---
 
 **This usually happens because the "License Source" does not match the "Installation Identity," causing the system to attempt to verify the original purchaser's ID.**

@@ -2,7 +2,6 @@
 term: "DDM App Management"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

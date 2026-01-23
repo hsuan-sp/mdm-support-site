@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["System Updates", "Stability", "iOS Updates"]
-
 ---
 
 **It is recommended to wait for a school announcement before updating. New iOS versions can sometimes cause compatibility issues with teaching apps or MDM functions. The school will coordinate a mass update after verification.** While Apple releases updates every few weeks for security and features, "newest" isn't always "best" for an educational environment.

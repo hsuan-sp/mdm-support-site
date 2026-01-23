@@ -2,7 +2,6 @@
 term: "AirDrop for Business"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["DNS", "DHCP", "Network Failure", "Troubleshooting"]
-
 ---
 
 **This is often a 'False IP' or 'DNS failure' rather than a hardware defect in the iPad.**

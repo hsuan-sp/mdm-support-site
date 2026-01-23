@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Passcode Policy", "Security", "Compliance"]
-
 ---
 
 **This is because an administrator has deployed a 'Passcode Configuration' profile to meet school security standards.**

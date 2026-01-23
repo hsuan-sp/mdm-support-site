@@ -2,7 +2,6 @@
 term: "Wi-Fi 5"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

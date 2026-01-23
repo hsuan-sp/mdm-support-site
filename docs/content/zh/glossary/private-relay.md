@@ -2,7 +2,6 @@
 term: "Private Relay (私密轉送)"
 
 category: ["Security", "Apple"]
-
 ---
 
 ## 術語定義

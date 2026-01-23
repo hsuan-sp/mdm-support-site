@@ -2,7 +2,6 @@
 term: "Screen Time（螢幕使用時間）"
 
 category: ["Apple", "Core"]
-
 ---
 
 ## 術語定義

@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["Extension Attributes", "Scripts", "Inventory", "Custom Fields"]
-
 ---
 
 **Use the "Computer Extension Attributes" feature. This is the core tool in Jamf Pro for expanding database fields and collecting non-standard hardware/software information.**

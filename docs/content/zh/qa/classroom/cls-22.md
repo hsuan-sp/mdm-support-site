@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: true
 
 tags: ["網路架構", "VLAN", "Bonjour", "mDNS"]
-
 ---
 
 **預設情況下會不通。因為 Apple Classroom 依賴的 Bonjour 廣播封包無法跨越不同的網段 (Subnet/VLAN)。**

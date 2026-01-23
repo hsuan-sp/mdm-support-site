@@ -2,7 +2,6 @@
 term: "Student Information System (SIS)"
 
 category: ["Education", "Other"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 
 tags: ["軟體更新", "DDM", "macOS 26", "宣告式更新", "資訊組長實務"]
-
 ---
 
 **在 macOS 26 (Tahoe) 環境下，Apple 已正式棄用舊款指令式更新，全面轉向更強大的 DDM (宣告式管理) 模式。** 這讓 資訊組長從「催促裝置更新」變為「定義目標狀態」，解決了以往更新指令容易塞車的問題。

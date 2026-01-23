@@ -2,7 +2,6 @@
 term: "Policy (原則/政策)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

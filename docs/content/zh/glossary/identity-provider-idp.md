@@ -2,7 +2,6 @@
 term: "Identity Provider (IdP)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

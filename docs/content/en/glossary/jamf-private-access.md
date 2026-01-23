@@ -2,7 +2,6 @@
 term: "Jamf Private Access"
 
 category: ["Jamf", "Security", "Network"]
-
 ---
 
 ## Definition

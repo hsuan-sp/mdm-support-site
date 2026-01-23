@@ -2,7 +2,6 @@
 term: "IP Address"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

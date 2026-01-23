@@ -2,7 +2,6 @@
 term: "AirDrop"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

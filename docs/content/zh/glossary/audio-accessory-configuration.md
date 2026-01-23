@@ -2,7 +2,6 @@
 term: "Audio Accessory Configuration (音訊配件設定)"
 
 category: ["Hardware"]
-
 ---
 
 ## 術語定義

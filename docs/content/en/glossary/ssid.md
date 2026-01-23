@@ -2,7 +2,6 @@
 term: "SSID (Service Set Identifier)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

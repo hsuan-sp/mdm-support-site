@@ -2,7 +2,6 @@
 term: "Enrollment Invitation"
 
 category: ["Jamf", "Enrollment"]
-
 ---
 
 ## 術語定義

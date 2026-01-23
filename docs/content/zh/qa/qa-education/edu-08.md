@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["系統更新", "穩定性", "iOS 更新"]
-
 ---
 
 **建議等待學校通知後再更新。新版 iOS 剛推出時可能存在與教學 App 或 MDM 功能的相容性問題，學校會在驗證後統一安排更新。**

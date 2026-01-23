@@ -2,7 +2,6 @@
 term: "Jamf Safe Internet"
 
 category: ["Jamf", "Security", "Network"]
-
 ---
 
 ## Term Definition

@@ -2,7 +2,6 @@
 term: "Token"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

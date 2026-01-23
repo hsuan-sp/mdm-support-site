@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["描述檔無效", "故障排除", "抹除裝置", "宣告式管理"]
-
 ---
 
 **「描述檔無效」通常代表裝置與 MDM 伺服器間的身分信任鏈（Trust Anchor）已中斷，這會導致指令與設定無法正確下達。**

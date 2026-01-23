@@ -2,7 +2,6 @@
 term: "Zero Trust"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Connection Issues", "APNs", "Network", "Troubleshooting"]
-
 ---
 
 **This usually indicates a breakdown in communication between the device and the MDM server or Apple's services. Please check the following four core areas in order:**
@@ -24,7 +23,6 @@ tags: ["Connection Issues", "APNs", "Network", "Troubleshooting"]
 The device needs to reach both the Jamf server and Apple's servers. Ensure the campus firewall is not blocking:
 
 - **Apple Push Notification service (APNs)**:
-
   - Hostname: **apple.com** and all subdomains.
   - Ports: **TCP 443, 2197, 5223**.
 
@@ -43,7 +41,6 @@ The device needs to reach both the Jamf server and Apple's servers. Ensure the c
 
 - **Check Profile**: On the iPad, go to **Settings > General > VPN & Device Management** and confirm the "Management Profile" is still "Verified".
 - **Clear Pending Commands**:
-
   1. Open the device record in Jamf Pro.
   2. Go to **History > Management Commands**.
   3. If there are many **Pending** or **Failed** commands, click **Cancel All Pending and Failed Commands**.

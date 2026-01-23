@@ -2,7 +2,6 @@
 term: "Shared iPad (共用 iPad)"
 
 category: ["Education", "Enrollment"]
-
 ---
 
 ## 術語定義

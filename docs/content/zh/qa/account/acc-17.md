@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["PSSO", "FileVault", "macOS 15+", "身分驗證"]
-
 ---
 
 **在 macOS 15 (Sequoia) 以上版本，Platform SSO 支援了與 FileVault 的深度整合，真正解決了「二次密碼」的痛點。**

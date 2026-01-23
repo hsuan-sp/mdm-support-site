@@ -2,7 +2,6 @@
 term: "Jamf Student"
 
 category: ["Jamf", "Education"]
-
 ---
 
 ## Term Definition

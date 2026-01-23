@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["Device Settings", "Power Saving", "Auto-Lock", "Restrictions Profile"]
-
 ---
 
 **MDM can enforce an 'Auto-Lock' timeout, but it 'cannot' directly control screen brightness.**

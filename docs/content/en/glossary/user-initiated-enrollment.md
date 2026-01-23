@@ -2,7 +2,6 @@
 term: "User-Initiated Enrollment (UIE)"
 
 category: ["Enrollment"]
-
 ---
 
 ## Term Definition

@@ -2,7 +2,6 @@
 term: "MDM Profile (MDM 描述檔)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

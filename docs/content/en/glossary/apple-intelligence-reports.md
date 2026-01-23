@@ -2,7 +2,6 @@
 term: "Apple Intelligence Reports"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

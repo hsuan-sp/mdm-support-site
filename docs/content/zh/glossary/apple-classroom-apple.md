@@ -2,7 +2,6 @@
 term: "Apple Classroom (Apple 課堂)"
 
 category: ["Education"]
-
 ---
 
 ## 術語定義

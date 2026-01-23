@@ -2,7 +2,6 @@
 term: "Drag and Drop Multitasking (拖放式多工)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

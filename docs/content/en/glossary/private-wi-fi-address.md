@@ -2,7 +2,6 @@
 term: "Private Wi-Fi Address"
 
 category: ["Network", "Security"]
-
 ---
 
 ## Term Definition

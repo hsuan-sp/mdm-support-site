@@ -2,7 +2,6 @@
 term: "Find My"
 
 category: ["Apple", "Security"]
-
 ---
 
 ## Term Definition

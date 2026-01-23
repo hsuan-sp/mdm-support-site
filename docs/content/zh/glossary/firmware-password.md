@@ -2,7 +2,6 @@
 term: "Firmware Password"
 
 category: ["macOS"]
-
 ---
 
 ## 術語定義

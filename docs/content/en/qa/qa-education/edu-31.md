@@ -8,9 +8,7 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags:
-
   [
-
     "MOE Instance",
 
     "Private Instance",
@@ -20,9 +18,7 @@ tags:
     "Integration",
 
     "IT Coordinator",
-
   ]
-
 ---
 
 **The primary differences lie in administrative permissions, feature rollout speed, and 'Global Toggle' control. While assets can be moved between them, the daily management experience varies significantly.**

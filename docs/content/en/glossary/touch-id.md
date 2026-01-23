@@ -2,7 +2,6 @@
 term: "Touch ID"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

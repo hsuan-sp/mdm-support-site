@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["Mute", "Volume Control", "Classroom Order"]
-
 ---
 
 **Yes, the teacher can 'Mute' the whole class with one click, but they cannot 'Unmute' them remotely.**

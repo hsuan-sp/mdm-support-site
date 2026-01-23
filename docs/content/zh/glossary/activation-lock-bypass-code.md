@@ -2,7 +2,6 @@
 term: "Activation Lock Bypass Code (啟用鎖定繞過代碼)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

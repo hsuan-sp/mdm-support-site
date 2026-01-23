@@ -2,7 +2,6 @@
 term: "Apple Intelligence (Apple 智慧)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

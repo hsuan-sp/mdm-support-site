@@ -2,7 +2,6 @@
 term: "Background App Refresh（背景 App 重新整理）"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

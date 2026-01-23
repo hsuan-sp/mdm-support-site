@@ -8,9 +8,7 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags:
-
   [
-
     "App Updates",
 
     "Classroom Management",
@@ -18,9 +16,7 @@ tags:
     "Update Strategy",
 
     "Bandwidth Control",
-
   ]
-
 ---
 
 **The key is to disable 'Automatic Updates' and adopt a 'Manual Push during Maintenance Window' strategy.**

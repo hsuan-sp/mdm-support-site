@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["網頁導航", "Safari", "網站過濾", "故障排除"]
-
 ---
 
 **導航失敗通常與 Safari 的「限制設定」或「網站過濾」有關。**

@@ -8,9 +8,7 @@ category: "Section 7: Advanced Mac Management"
 important: true
 
 tags:
-
   ["Safari", "Distraction Control", "Exam Security", "macOS 26", "Proctoring"]
-
 ---
 
 **Safari in macOS 26 introduces 'Distraction Control,' which allows users to hide specific web elements (like ads or sidebars). However, in a Computer-Based Testing (CBT) environment, students could abuse this to hide timers, navigation menus, or proctoring warnings.**

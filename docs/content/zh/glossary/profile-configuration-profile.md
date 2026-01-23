@@ -2,7 +2,6 @@
 term: "Profile (Configuration Profile)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

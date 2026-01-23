@@ -8,9 +8,7 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags:
-
   [
-
     "Invalid Profile",
 
     "Troubleshooting",
@@ -18,9 +16,7 @@ tags:
     "Wipe Device",
 
     "Declarative Management",
-
   ]
-
 ---
 
 **'Invalid Profile' typically indicates that the 'Trust Anchor' (the identity chain between the device and the MDM server) has been broken.**

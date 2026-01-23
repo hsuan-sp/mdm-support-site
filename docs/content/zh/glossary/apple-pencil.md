@@ -2,7 +2,6 @@
 term: "Apple Pencil"
 
 category: ["Hardware"]
-
 ---
 
 ## 術語定義

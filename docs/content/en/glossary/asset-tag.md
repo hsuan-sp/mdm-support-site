@@ -2,7 +2,6 @@
 term: "Asset Tag"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

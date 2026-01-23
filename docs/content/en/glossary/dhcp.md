@@ -2,7 +2,6 @@
 term: "DHCP (Dynamic Host Configuration Protocol)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

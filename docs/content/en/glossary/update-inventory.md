@@ -2,7 +2,6 @@
 term: "Update Inventory"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

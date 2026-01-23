@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Password Management", "Account Security", "Troubleshooting"]
-
 ---
 
 **This is a common 'Serial Lock' risk. If a student tries the wrong password too many times, both the device and the account may be locked out simultaneously.**

@@ -2,7 +2,6 @@
 term: "Supervision"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

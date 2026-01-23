@@ -2,7 +2,6 @@
 term: "Compliance"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

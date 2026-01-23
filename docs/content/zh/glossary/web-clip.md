@@ -2,7 +2,6 @@
 term: "Web Clip (網頁捷徑)"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Apple Classroom"
 
 category: ["Education"]
-
 ---
 
 ## Term Definition

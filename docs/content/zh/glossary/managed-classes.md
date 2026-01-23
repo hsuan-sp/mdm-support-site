@@ -2,7 +2,6 @@
 term: "Managed Classes（管理化班級）"
 
 category: ["Education", "Jamf"]
-
 ---
 
 ## 術語定義

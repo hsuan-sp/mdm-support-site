@@ -2,7 +2,6 @@
 term: "Admin Account"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

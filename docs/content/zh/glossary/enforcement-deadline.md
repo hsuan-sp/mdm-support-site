@@ -2,7 +2,6 @@
 term: "Enforcement Deadline (強制執行截止日)"
 
 category: ["DDM"]
-
 ---
 
 ## 術語定義

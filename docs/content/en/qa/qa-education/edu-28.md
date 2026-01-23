@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Device Retirement", "ESG", "Data Sanitization", "Asset Management"]
-
 ---
 
 **Device retirement is more than just turning off the power. It involves data sanitization and the secure return of ownership rights in Apple School Manager (ASM). A proper retirement process ensures student privacy and meets ESG (Environmental, Social, and Governance) sustainability standards.**

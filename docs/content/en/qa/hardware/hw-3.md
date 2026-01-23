@@ -8,7 +8,6 @@ category: "Section 6: Hardware & Maintenance"
 important: true
 
 tags: ["AirDrop", "AirPlay", "Network Management", "mDNS", "Troubleshooting"]
-
 ---
 
 **AirDrop and AirPlay operate differently: AirDrop uses Peer-to-Peer communication, while AirPlay relies heavily on your campus network configuration.**

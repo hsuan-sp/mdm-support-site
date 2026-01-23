@@ -2,7 +2,6 @@
 term: "User Enrollment"
 
 category: ["Enrollment"]
-
 ---
 
 ## 術語定義

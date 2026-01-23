@@ -2,7 +2,6 @@
 term: "Smart Group"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## 術語定義

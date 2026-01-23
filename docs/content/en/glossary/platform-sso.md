@@ -2,7 +2,6 @@
 term: "Platform SSO"
 
 category: ["Security", "macOS"]
-
 ---
 
 ## Term Definition

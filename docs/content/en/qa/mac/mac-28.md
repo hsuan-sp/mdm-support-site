@@ -8,9 +8,7 @@ category: "Section 7: Advanced Mac Management"
 important: true
 
 tags:
-
   [
-
     "EACS",
 
     "ADE Troubleshooting",
@@ -20,9 +18,7 @@ tags:
     "Terminal Commands",
 
     "Recovery Mode",
-
   ]
-
 ---
 
 **While 'Erase All Content and Settings (EACS)' is highly stable, school environments with captive-portal Wi-Fi or strict firewalls can cause the Mac to hang at the 'Remote Management' enrollment screen.**

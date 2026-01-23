@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["Gatekeeper", "Security", "Notarization", "Software Installation"]
-
 ---
 
 **This is macOS's Gatekeeper security mechanism. For software required for teaching that has not been notarized by Apple, we recommend using 'Right-click to Open' or deploying via MDM to bypass quarantine flags.**

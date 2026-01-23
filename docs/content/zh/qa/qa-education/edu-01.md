@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 
 tags: ["精進方案", "VPN", "Jamf Trust", "網路過濾", "使用率資料回傳"]
-
 ---
 
 **完全正常運作中。iPadOS 17 之後，Jamf Trust 改用「DNS Proxy」與「內容過濾器」技術，不再需要建立 VPN 通道，因此狀態列不會顯示 VPN 圖示。**
@@ -35,17 +34,14 @@ tags: ["精進方案", "VPN", "Jamf Trust", "網路過濾", "使用率資料回�
 ## 如何驗證過濾功能正常 ：
 
 1.  **開啟 Jamf Trust App** ：
-
     - 若顯示 **綠色盾牌 (Protected)**，表示過濾功能正常運作中。
     - 若顯示黃色或紅色，可能有連線問題，需進一步排查。如果 Jamf Trust 顯示警告，但內容是關於系統版本過舊或未設鎖定密碼則無需太擔心。
 
 1.  **實際測試** ：
-
     - 嘗試用 Safari 前往一個已知被封鎖的網站（例如：遊戲網站）。
     - 若顯示「無法連接」或 Jamf 的封鎖頁面，表示過濾器正常運作。
 
 1.  **在 Jamf Pro 確認** ：
-
     - 登入 Jamf Pro，查看該裝置的設定描述檔列表。
     - 確認 Jamf Trust 相關描述檔（DNS Proxy、Content Filter）皆已安裝。
 
@@ -53,7 +49,6 @@ tags: ["精進方案", "VPN", "Jamf Trust", "網路過濾", "使用率資料回�
 
 - **Jamf Trust 顯示紅色**：嘗試重新開啟 App，或在 Jamf Pro 發送「更新資產」指令。若持續異常，可嘗試重新安裝 Jamf Trust。
 - **實戰陷阱：教育設定描述檔過期 (Certificate Expired)** ：Apple 課堂背後使用一組 **教育身分憑證**，效期通常為兩年。
-
   - **症狀**：全班突然都無法連線課堂，描述檔狀態顯示「無效」。
   - **對策**：需在 Jamf Pro 的「全域管理」>「Apple 教育支援」中重新產生憑證，並「重新部署」描述檔至所有裝置。
 

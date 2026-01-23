@@ -2,7 +2,6 @@
 term: "Zero-Touch Deployment"
 
 category: ["Enrollment"]
-
 ---
 
 ## 術語定義

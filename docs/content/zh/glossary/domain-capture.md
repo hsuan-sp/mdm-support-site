@@ -2,7 +2,6 @@
 term: "Domain Capture (域名擷取)"
 
 category: ["Apple", "Security"]
-
 ---
 
 ## 術語定義

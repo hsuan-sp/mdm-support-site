@@ -2,7 +2,6 @@
 term: "Single App Mode"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

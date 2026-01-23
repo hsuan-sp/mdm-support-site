@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["Web Navigation", "Safari", "Content Filtering", "Troubleshooting"]
-
 ---
 
 **Navigation failures are typically caused by browser restrictions, content filters, or excessive open tabs.**

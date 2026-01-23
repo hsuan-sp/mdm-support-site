@@ -2,7 +2,6 @@
 term: "Accessibility Features (輔助使用功能)"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

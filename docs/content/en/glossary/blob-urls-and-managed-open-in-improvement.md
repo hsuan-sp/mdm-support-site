@@ -2,7 +2,6 @@
 term: "Blob URLs and Managed Open-In Improvement"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

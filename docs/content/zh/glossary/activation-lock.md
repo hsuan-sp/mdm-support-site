@@ -2,7 +2,6 @@
 term: "Activation Lock (啟用鎖定)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

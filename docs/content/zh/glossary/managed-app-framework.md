@@ -2,7 +2,6 @@
 term: "Managed App Framework (管理式 App 框架)"
 
 category: ["DDM"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "MAC Address"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

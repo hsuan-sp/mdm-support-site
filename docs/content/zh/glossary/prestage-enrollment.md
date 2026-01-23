@@ -2,7 +2,6 @@
 term: "PreStage Enrollment"
 
 category: ["Enrollment", "Jamf"]
-
 ---
 
 ## 術語定義

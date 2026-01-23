@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["螢幕鎖定", "課堂秩序", "黑畫面模式"]
-
 ---
 
 **透過「課堂」App 的「鎖定 (Lock)」功能，可強制讓全班 iPad 進入黑畫面模式。**

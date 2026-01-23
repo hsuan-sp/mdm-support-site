@@ -2,7 +2,6 @@
 term: "Apple Configurator"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

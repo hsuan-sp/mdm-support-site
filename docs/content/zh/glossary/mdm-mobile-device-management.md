@@ -2,7 +2,6 @@
 term: "MDM (Mobile Device Management)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

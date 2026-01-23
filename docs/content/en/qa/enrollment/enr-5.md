@@ -8,7 +8,6 @@ category: "Section 2: Device Enrollment & Deployment"
 important: false
 
 tags: ["Account-Driven", "Service Discovery", ".well-known", "Technical Setup"]
-
 ---
 
 **Account-Driven Enrollment relies on "Service Discovery," allowing users to enroll simply by entering their school email address.**

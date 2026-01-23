@@ -8,9 +8,7 @@ category: "Section 2: Device Enrollment & Deployment"
 important: true
 
 tags:
-
   ["Passcode Lock", "Restore", "Apple Configurator", "Apple Devices App", "DFU"]
-
 ---
 
 **When a device displays 'iPad Unavailable' or 'Security Lockout,' it must be erased before it can be used again. If the device is MDM-managed, the solution depends on its connectivity status.**
@@ -33,12 +31,10 @@ If the iPad is still connected to Wi-Fi or a cellular network (previously joined
 If the device cannot connect to the network or the MDM command cannot reach it:
 
 1. **Prepare Tools**:
-
    - **macOS**: Use the built-in **Finder** or **Apple Configurator**.
    - **Windows**: Install the **Apple Devices app** from the Microsoft Store (or use iTunes for older environments).
 
 2. **Enter Recovery Mode**:
-
    - **Models without a Home Button (iPad 10, Air, Pro M-series)**: Press and quickly release Volume Up, press and quickly release Volume Down, then hold the Top Button until the computer connection icon appears.
    - **Models with a Home Button (iPad 9)**: Hold both the Home Button and the Top Button simultaneously until the computer connection icon appears.
 

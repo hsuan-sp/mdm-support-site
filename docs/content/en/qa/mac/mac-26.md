@@ -8,9 +8,7 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags:
-
   [
-
     "Hybrid Environment",
 
     "Intel Mac",
@@ -20,9 +18,7 @@ tags:
     "Smart Group",
 
     "Deployment Strategy",
-
   ]
-
 ---
 
 **2026 is the sunset year for Intel Macs. Most schools have a hybrid environment containing both 'x86_64 (Intel)' and 'arm 64 (M1–M5)' architectures. Assigning the wrong software package can lead to non-functional apps or system instability.**
@@ -51,7 +47,6 @@ IT coordinators should establish these baseline groups in Jamf Pro for accurate 
 
 1. **Prioritize Universal Binaries**: If a developer provides a Universal installer (e.g., Google Chrome or Microsoft Office), use it. macOS will automatically run the correct architecture.
 2. **Architecture-Specific .pkgs**:
-
    - For professional software (Adobe Creative Cloud, specialized lab tools), upload separate packages: `App_v1.0_AppleSilicon.pkg` and `App_v1.0_Intel.pkg`.
    - Scope the former to the Apple Silicon group and the latter to the Intel group.
 

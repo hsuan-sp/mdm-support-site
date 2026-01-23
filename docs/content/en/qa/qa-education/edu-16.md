@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Security", "Sideloading", "App Store"]
-
 ---
 
 **To ensure device security and stability, Apple restricts app installation to the App Store or trusted organizational MDM channels (preventing 'Sideloading').**

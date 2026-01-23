@@ -2,7 +2,6 @@
 term: "iPhone Mirroring (iPhone 鏡像)"
 
 category: ["macOS", "Security"]
-
 ---
 
 ## 術語定義

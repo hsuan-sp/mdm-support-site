@@ -2,7 +2,6 @@
 term: "Certificate"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

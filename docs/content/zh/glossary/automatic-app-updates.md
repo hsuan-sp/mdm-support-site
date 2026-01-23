@@ -2,7 +2,6 @@
 term: "Automatic App Updates（自動更新 App）"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Managed Device Attestation"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

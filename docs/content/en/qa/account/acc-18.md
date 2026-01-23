@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["VPP", "MDM Migration", "License Reclamation"]
-
 ---
 
 **You do not need to repurchase anything. App licenses are tied to the 'Location' in Apple School Manager (ASM), not to a specific MDM software.**

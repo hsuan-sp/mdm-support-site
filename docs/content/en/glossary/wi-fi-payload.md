@@ -2,7 +2,6 @@
 term: "Wi-Fi Payload"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

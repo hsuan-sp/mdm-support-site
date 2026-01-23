@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["BYOD", "隱私", "註冊模式", "帳號驅動"]
-
 ---
 
 \*\*使用者註冊是 Apple 專為「自帶裝置 (BYOD)」設計的模式，重點在於隔離組織資料並絕對保護使用者個人隱私。

@@ -2,7 +2,6 @@
 term: "Apple Intelligence"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: true
 
 tags: ["密碼鎖死", "還原", "Apple Configurator", "Apple 裝置 App", "DFU"]
-
 ---
 
 **當裝置顯示「iPad 無法使用」或「安全性鎖定」時，必須透過清除裝置 (Erase) 才能重新使用。若裝置受 MDM 管理，可依連網狀態選擇不同的處理方案。**
@@ -31,12 +30,10 @@ tags: ["密碼鎖死", "還原", "Apple Configurator", "Apple 裝置 App", "DFU"
 若裝置完全無法連網，或 MDM 指令無法傳達：
 
 1.  **準備電腦工具** ：
-
     - **macOS** ：使用內建的 **Finder** 或 **Apple Configurator** 。
     - **Windows** ：請安裝微軟商店提供的 **Apple 裝置 App (Apple Devices app)** ；若環境較舊則使用 iTunes。
 
 2.  **進入復原模式 (Recovery Mode)** ：
-
     - **無 Home 鍵機型 (如 iPad 10, A16, M 系列)** ：按下並快速放開「音量大」鍵，按下並快速放開「音量小」鍵，接著長按「頂端電源」鈕直到看到電腦連線圖示。
     - **有 Home 鍵機型 (如 iPad 9)** ：同時按住「Home 鍵」與「頂端電源」鈕，直到螢幕出現電腦連線圖示。
 

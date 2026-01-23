@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: true
 
 tags: ["Single App Mode", "ASAM", "Assessment Mode", "Risk Warning"]
-
 ---
 
 **Standard 'Single App Mode' cannot be exited by the user. If you need exit flexibility, you should use 'Autonomous Single App Mode (ASAM)'.**

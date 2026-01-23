@@ -2,7 +2,6 @@
 term: "MDM Profile"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

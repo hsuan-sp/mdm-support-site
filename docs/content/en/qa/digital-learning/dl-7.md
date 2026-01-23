@@ -8,7 +8,6 @@ category: "Section 5: Digital Initiatives (MOE Project)"
 important: false
 
 tags: ["iCloud", "Private Relay", "Digital Learning Project", "Policy Info"]
-
 ---
 
 **This policy ensures that 'Jamf Trust' functions correctly. Enabling this feature would disable the school's content filtering and stop usage data reporting.**

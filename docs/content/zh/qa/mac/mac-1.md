@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
 
 tags: ["AD", "身分認證", "Jamf Connect", "Platform SSO", "No-Bind"]
-
 ---
 
 **高度建議不要綁定 AD (No-Bind 策略)。請改用「平台單一登入 (Platform SSO)」或 Jamf Connect。** 傳統將 Mac「綁定 (Bind)」至 AD 網域的做法，在行動辦公與資安零信任（Zero Trust）架構下已顯得笨重且不可靠。
@@ -27,13 +26,11 @@ tags: ["AD", "身分認證", "Jamf Connect", "Platform SSO", "No-Bind"]
 自 macOS 13 起引進，並在 macOS 26 (Tahoe) 獲得重大更新。
 
 - **2026 年新功能：精簡設定 (Simplified Setup)**：
-
   - 管理員可直接在開箱時的「設定輔助程式」階段強制透過 IdP 驗證。
   - 使用者輸入 Entra ID (Azure AD) 或 Google 帳號後，直接自動建立對應的本機帳戶。
   - 這實現了真正的「零接觸部署」，資訊組長不再需要預設一組臨時密碼。
 
 - **優勢**：
-
   - **密碼同步**：Mac 本機密碼與雲端強標准同步，符合資安稽核。
   - **無密碼體驗**：macOS 26 支援透過 iPhone 的 FaceID/Touch ID 直接授權 Mac 登入。
 

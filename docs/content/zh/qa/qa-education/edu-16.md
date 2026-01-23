@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["安全", "側載", "Sideloading"]
-
 ---
 
 **這是為了確保裝置的安全與穩定。Apple 限制僅能從 App Store 或受信任的企業 MDM 管道安裝軟體**（防止「側載」）。

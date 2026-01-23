@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["AirPlay", "Apple TV", "Screen Sharing", "Instructional Display"]
-
 ---
 
 **Yes. Using the 'Classroom' app, a teacher can direct any student's screen to project via AirPlay without the student needing to take any action.**

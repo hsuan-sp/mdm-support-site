@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
-
 ---
 
 **macOS 26 (Tahoe) extends Declarative Device Management (DDM) to support non-App Store software (.pkg). This allows you to deploy installation packages via 'Declarations' for a more modern, transparent, and resilient installation experience compared to the legacy Jamf Binary/Policy method.**
@@ -27,7 +26,6 @@ tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 
 - **OS**: macOS 26 (Tahoe) or later.
 - **Package Quality**:
-
   - Must be a **Distribution Package** (not a basic component pkg).
   - Must be **signed** with a valid Apple Developer ID Installer certificate.
   - Must be **notarized** by Apple. MDM deployment in macOS 26 is extremely strict regarding security; unsigned or un-notarized packages will fail with a `VerificationFailed` error in the status channel.

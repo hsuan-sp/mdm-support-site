@@ -2,7 +2,6 @@
 term: "Casper Suite"
 
 category: ["Jamf"]
-
 ---
 
 ## Term Definition

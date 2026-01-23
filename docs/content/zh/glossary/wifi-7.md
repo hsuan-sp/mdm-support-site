@@ -2,7 +2,6 @@
 term: "Wi-Fi 7"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義

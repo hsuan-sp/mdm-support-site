@@ -2,7 +2,6 @@
 term: "Wi-Fi 6E"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

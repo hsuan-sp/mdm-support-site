@@ -2,7 +2,6 @@
 term: "Activation Lock"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

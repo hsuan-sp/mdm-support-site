@@ -2,7 +2,6 @@
 term: "Platform SSO in Setup Assistant (設定輔助程式中的 Platform SSO)"
 
 category: ["Mac"]
-
 ---
 
 ## 術語定義

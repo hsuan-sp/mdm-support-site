@@ -2,7 +2,6 @@
 term: "Passkeys"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Deprecated (已棄用)"
 
 category: ["Other"]
-
 ---
 
 ## 術語定義

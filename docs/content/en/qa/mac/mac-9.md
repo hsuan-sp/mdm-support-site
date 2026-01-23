@@ -8,7 +8,6 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags: ["Automation", "Shell Script", "Zsh", "Policies", "Scripts", "jamfHelper"]
-
 ---
 
 **Scripts allow administrators to execute shell commands with Root privileges on a Mac, enabling advanced customization that standard MDM payloads cannot achieve.**

@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["滑鼠", "鍵盤", "輔助使用", "配件"]
-
 ---
 
 **可以。iPadOS 13.4 及更新版本完整支援滑鼠、觸控式軌跡板、以及藍牙/USB 鍵盤，提供類似電腦的操作體驗。**

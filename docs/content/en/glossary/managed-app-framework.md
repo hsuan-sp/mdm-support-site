@@ -2,7 +2,6 @@
 term: "Managed App Framework"
 
 category: ["DDM"]
-
 ---
 
 ## Term Definition

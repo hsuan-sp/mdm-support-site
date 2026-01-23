@@ -2,7 +2,6 @@
 term: "TestFlight"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

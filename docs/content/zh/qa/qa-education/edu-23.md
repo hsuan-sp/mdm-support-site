@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["iPadOS 26", "多工處理", "視窗 App", "滑動置前", "教學效率"]
-
 ---
 
 **iPadOS 26.2 引進了全新的「視窗 App」模式，讓 iPad 能像電腦一樣自由調整視窗大小、並排使用多個 App。**這對於需要同時參考資料（如 Safari）與製作筆記或進行課堂評量（如課堂 App）的師生來說，能大幅提升生產力。

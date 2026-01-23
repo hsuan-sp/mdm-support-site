@@ -2,7 +2,6 @@
 term: "Root Certificate"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

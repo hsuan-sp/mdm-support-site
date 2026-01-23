@@ -2,7 +2,6 @@
 term: "Bundle ID"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

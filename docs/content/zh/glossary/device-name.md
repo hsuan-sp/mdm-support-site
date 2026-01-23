@@ -2,7 +2,6 @@
 term: "Device Name（裝置名稱）"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

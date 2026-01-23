@@ -2,7 +2,6 @@
 term: "USB-C"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

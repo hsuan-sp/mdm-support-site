@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["FileVault", "SSH", "遠端解鎖", "macOS 26", "遠端管理"]
-
 ---
 
 **macOS 26 新增在 Pre-boot 階段透過 SSH 解鎖 FileVault 的功能，解決遠端管理無螢幕主機的痛點。**
@@ -28,7 +27,6 @@ tags: ["FileVault", "SSH", "遠端解鎖", "macOS 26", "遠端管理"]
 ## 設定需求
 
 1.  **啟用遠端登入**：
-
     - 「系統設定」>「一般」>「共享」>「遠端登入」
     - 或透過 MDM 推送 `com.apple.RemoteManagement`
 

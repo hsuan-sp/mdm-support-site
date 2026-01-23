@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["Cellular Data", "Wi-Fi", "App Download", "Traffic Management", "iOS 26"]
-
 ---
 
 **In iOS 26 and iPadOS 26, the 'Declarative Device Management' (DDM) framework includes a new 'Restrict App Download Over Cellular' setting. This allows schools to force apps to download or update only in Wi-Fi environments, effectively managing SIM card data costs.**
@@ -21,7 +20,6 @@ This feature is implemented via **DDM** configurations. In **Jamf Pro**:
 
 2. Define the policy for individual managed apps or a group of apps.
 3. Set the **'CellularDataPolicy'** in the deployment declaration:
-
    - **Disallow**: Forces download/update to happen only over Wi-Fi.
    - **Allow**: Permits installation over any available network.
 
@@ -35,13 +33,11 @@ This feature is implemented via **DDM** configurations. In **Jamf Pro**:
 ## Impact and Limitations
 
 - **Applies to**:
-
   - Manual App Store downloads.
   - MDM-initiated (DDM) automated installs.
   - App auto-updates.
 
 - **Does NOT apply to**:
-
   - General web browsing or video streaming (YouTube still consumes data unless managed by a Content Filter).
   - In-app content updates (e.g., additional data packs inside a game).
 

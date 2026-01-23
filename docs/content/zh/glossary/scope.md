@@ -2,7 +2,6 @@
 term: "Scope (範圍)"
 
 category: ["Core", "Jamf"]
-
 ---
 
 ## 術語定義

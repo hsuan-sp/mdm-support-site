@@ -2,7 +2,6 @@
 term: "Ethernet"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

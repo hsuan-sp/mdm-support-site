@@ -2,7 +2,6 @@
 term: "Continuity"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Projection", "Adapters", "AirPlay", "HDMI"]
-
 ---
 
 **You can use a wired HDMI adapter (most stable) or third-party wireless projection software. For the best experience, we recommend the school acquire an Apple TV.**

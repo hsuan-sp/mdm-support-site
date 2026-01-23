@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: false
 
 tags: ["電池", "迷思", "MDM", "耗電"]
-
 ---
 
 **這是迷思。MDM 本身的資源消耗極低，不會明顯影響電池續航。真正的耗電殺手通常是螢幕亮度、影片串流、以及 GPS 導航等行為。**

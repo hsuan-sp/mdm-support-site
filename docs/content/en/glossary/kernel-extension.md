@@ -2,7 +2,6 @@
 term: "Kernel Extension (Kext)"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

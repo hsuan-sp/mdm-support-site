@@ -2,7 +2,6 @@
 term: "LDAP"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

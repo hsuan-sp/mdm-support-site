@@ -2,7 +2,6 @@
 term: "Notarization"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

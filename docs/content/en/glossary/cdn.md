@@ -2,7 +2,6 @@
 term: "CDN (Content Delivery Network)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

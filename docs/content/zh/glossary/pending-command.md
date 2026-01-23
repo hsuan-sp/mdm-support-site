@@ -2,7 +2,6 @@
 term: "Pending Command"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

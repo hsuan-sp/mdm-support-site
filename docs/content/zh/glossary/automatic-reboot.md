@@ -2,7 +2,6 @@
 term: "Automatic Reboot (自動重開機)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

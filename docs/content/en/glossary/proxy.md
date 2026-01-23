@@ -2,7 +2,6 @@
 term: "Proxy"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

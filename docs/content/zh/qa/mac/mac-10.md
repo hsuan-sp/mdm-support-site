@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["延伸屬性", "Extension Attributes", "腳本", "資產", "客製化欄位"]
-
 ---
 
 **請使用「電腦延伸屬性 (Computer Extension Attributes)」功能。**
@@ -32,13 +31,11 @@ tags: ["延伸屬性", "Extension Attributes", "腳本", "資產", "客製化欄
 
 1. **新增**：點選 **「+ 新增」**。
 1. **設定屬性**：
-
    - **顯示名稱**：欄位名稱（例如：Last Reboot Time）。
    - **輸入類型 (Input Type)**：選擇 **「腳本 (Script)」**。
    - **資料類型**：選擇 String (字串)、Integer (整數) 或 Date (日期)，這會影響後續智慧型群組的判斷邏輯（如「大於/小於」或「包含」）。
 
 1. **撰寫腳本**：
-
    - 在編輯器中貼上 Shell Script。
    - **關鍵語法**：Jamf Pro 僅會讀取被 `<result>` 與 `</result>` 標籤包住的輸出值。
    - **任何未被標籤包住的 echo 輸出僅會出現在除錯日誌中，不會寫入資料庫。**

@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: false
 
 tags: ["Battery", "Myths", "MDM", "Power Consumption"]
-
 ---
 
 **This is a myth. MDM itself consumes very little resources and does not significantly impact battery life. The real battery drainers are typically screen brightness, video streaming, and GPS navigation.** Actually, MDM operates in an extremely energy-efficient way.

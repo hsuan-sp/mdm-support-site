@@ -2,7 +2,6 @@
 term: "mDNS (Multicast DNS)"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags: ["MDM Migration", "Zero-Wipe", "System Maintenance", "iOS 26 Technology"]
-
 ---
 
 **Prior to 2026, the answer was yes. However, with the release of iOS 26 (Tahoe), Apple introduced 'Zero-Wipe MDM Migration.' If specific conditions are met, schools can migrate from Provider A to Provider B without erasing data or re-downloading apps.**

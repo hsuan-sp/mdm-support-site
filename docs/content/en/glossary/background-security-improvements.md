@@ -2,7 +2,6 @@
 term: "Background Security Improvements"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

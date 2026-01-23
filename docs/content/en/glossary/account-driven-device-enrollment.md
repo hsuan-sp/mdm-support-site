@@ -2,7 +2,6 @@
 term: "Account-Driven Device Enrollment"
 
 category: ["Enrollment"]
-
 ---
 
 ## Term Definition

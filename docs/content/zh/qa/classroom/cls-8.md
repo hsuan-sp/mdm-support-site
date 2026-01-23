@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["網路優化", "內容快取", "頻寬管理", "iCloud"]
-
 ---
 
 \*\*會。若沒有快取機制，30 台 iPad 會各自向互聯網索取資料，極易塞爆出口頻寬。

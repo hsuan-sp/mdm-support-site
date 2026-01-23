@@ -2,7 +2,6 @@
 term: "Keychain"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

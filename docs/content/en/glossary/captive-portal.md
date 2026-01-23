@@ -2,7 +2,6 @@
 term: "Captive Portal"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

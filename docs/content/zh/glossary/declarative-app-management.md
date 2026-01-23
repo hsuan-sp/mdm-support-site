@@ -2,7 +2,6 @@
 term: "Declarative App Management (宣告式 App 管理)"
 
 category: ["DDM"]
-
 ---
 
 ## 術語定義

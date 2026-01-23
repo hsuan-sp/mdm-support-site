@@ -8,7 +8,6 @@ category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
 
 tags: ["維修", "裝置替換", "ADE", "自動裝置註冊"]
-
 ---
 
 **維修替換機（Service Replacement）擁有全新的序號。要讓新機自動載入設定，核心在於「序號轉移」與「自動裝置註冊 (ADE)」。**

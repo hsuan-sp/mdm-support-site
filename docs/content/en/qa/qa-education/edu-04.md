@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios & FAQ"
 important: false
 
 tags: ["Classroom Management", "SOP", "Handoff", "RTS"]
-
 ---
 
 **The best method depends on how much time you have between lessons. For the fastest handoff, use 'Shared iPad' mode or the 'Return to Service' remote command.**
@@ -37,7 +36,6 @@ If you need to completely erase a device (e.g., between different year levels) b
 
 2. **Enable RTS**: Check the **"Return to Service"** option and include the campus Wi-Fi profile.
 3. **Preserve Apps**: Check the box to **"Preserve Managed Apps."**
-
    - **Result**: The iPad wipes its data but **does not delete the large apps** (like GarageBand or iMovie). It automatically rejoins Wi-Fi, skips all setup screens, and returns to the home screen ready for use in **3-5 minutes**.
 
 ## Institutional Advice:

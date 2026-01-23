@@ -2,7 +2,6 @@
 term: "JSON (JavaScript Object Notation)"
 
 category: ["Other"]
-
 ---
 
 ## Definition

@@ -2,7 +2,6 @@
 term: "VPP (Volume Purchase Program)"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

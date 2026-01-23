@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["VPP", "MDM 遷移", "授權回收"]
-
 ---
 
 **不需要重新購買。App 授權是綁定在 ASM 的「位置 (Location)」上，而非特定的 MDM 軟體。**

@@ -2,7 +2,6 @@
 term: "Secure Token"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

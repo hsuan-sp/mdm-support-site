@@ -2,7 +2,6 @@
 term: "Automatic App Updates"
 
 category: ["Apps"]
-
 ---
 
 ## Term Definition

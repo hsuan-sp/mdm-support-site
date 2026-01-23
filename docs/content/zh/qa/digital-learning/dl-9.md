@@ -8,7 +8,6 @@ category: "第五部分：數位學習精進方案專區 (MOE Digital Learning P
 important: false
 
 tags: ["隱私", "定位", "GPS", "遺失模式"]
-
 ---
 
 \*\*不會。Apple 的隱私架構嚴格限制了 MDM 的定位權限。

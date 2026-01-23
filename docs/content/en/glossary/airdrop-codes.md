@@ -2,7 +2,6 @@
 term: "AirDrop Codes"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

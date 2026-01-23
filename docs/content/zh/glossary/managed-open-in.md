@@ -2,7 +2,6 @@
 term: "Managed Open In"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

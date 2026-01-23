@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["裝置設定", "省電", "自動鎖定", "限制描述檔"]
-
 ---
 
 **MDM 可以強制設定「自動鎖定時間」，但「無法」直接控制螢幕亮度。** 根據 Apple MDM 協定規範：

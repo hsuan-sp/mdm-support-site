@@ -2,7 +2,6 @@
 term: "Battery Health (電池健康度)"
 
 category: ["Hardware"]
-
 ---
 
 ## 術語定義

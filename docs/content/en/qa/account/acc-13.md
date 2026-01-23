@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Password Reset", "ASM", "Administrator Action"]
-
 ---
 
 **Standard Apple School Manager (ASM) accounts do not currently offer a global 'Self-Service Password Reset' toggle for end-users.** Apple maintains strict permission levels for Managed Apple Account security. Password reset logic depends on your setup:

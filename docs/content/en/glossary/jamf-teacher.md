@@ -2,7 +2,6 @@
 term: "Jamf Teacher"
 
 category: ["Jamf", "Education"]
-
 ---
 
 ## Term Definition

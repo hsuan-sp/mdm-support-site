@@ -8,7 +8,6 @@ category: "第五部分：數位學習精進方案專區 (MOE Digital Learning P
 important: false
 
 tags: ["資料回報", "安全性", "Jamf Trust", "限制描述檔"]
-
 ---
 
 **會嚴重影響。Jamf Trust 是流量回報的唯一感應器，一旦被刪除，**該裝置在教育部報表中將被視為「未使用」。** 為了保證學校的 KPI 達標，管理員必須採取強硬的防護措施： **防範措施一：禁止刪除 App (最有效)** 1. 在 Jamf Pro 編輯該批裝置的 **「限制 (Restrictions)」\*\* 描述檔。

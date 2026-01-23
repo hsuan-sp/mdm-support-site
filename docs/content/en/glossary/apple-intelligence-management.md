@@ -2,7 +2,6 @@
 term: "Apple Intelligence Management"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

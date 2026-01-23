@@ -2,7 +2,6 @@
 term: "Guided Access（引導使用模式）"
 
 category: ["Education", "Apple"]
-
 ---
 
 ## 術語定義

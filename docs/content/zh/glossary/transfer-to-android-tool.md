@@ -2,7 +2,6 @@
 term: "Transfer to Android Tool (移轉至 Android 工具)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

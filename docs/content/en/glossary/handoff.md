@@ -2,7 +2,6 @@
 term: "Handoff"
 
 category: ["Apple"]
-
 ---
 
 ## Term Definition

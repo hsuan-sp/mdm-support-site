@@ -2,7 +2,6 @@
 term: "DFU Mode (Device Firmware Update)"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

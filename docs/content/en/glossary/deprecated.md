@@ -2,7 +2,6 @@
 term: "Deprecated"
 
 category: ["Other"]
-
 ---
 
 ## Term Definition

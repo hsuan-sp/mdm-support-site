@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["Account Lifecycle", "Graduation", "Data Retention"]
-
 ---
 
 **It is recommended to first 'Deactivate' the account, and strictly proceed to 'Delete' only after confirming the student has completed any necessary data migration. Please note that deletion is permanent and irreversible.**

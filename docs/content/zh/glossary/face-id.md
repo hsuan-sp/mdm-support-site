@@ -2,7 +2,6 @@
 term: "Face ID"
 
 category: ["Hardware"]
-
 ---
 
 ## 術語定義

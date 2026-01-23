@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: true
 
 tags: ["Migration", "MDM Transfer", "OS 26"]
-
 ---
 
 **While System Version 26 supports 'Automated MDM Migration', it remains 'strongly discouraged' in educational environments due to potential configuration conflicts.**

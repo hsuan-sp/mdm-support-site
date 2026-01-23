@@ -2,7 +2,6 @@
 term: "FileVault"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

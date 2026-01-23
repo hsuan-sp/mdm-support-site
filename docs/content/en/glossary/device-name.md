@@ -2,7 +2,6 @@
 term: "Device Name"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

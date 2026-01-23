@@ -2,7 +2,6 @@
 term: "Jamf Connect"
 
 category: ["Jamf", "Security", "macOS"]
-
 ---
 
 ## Term Definition

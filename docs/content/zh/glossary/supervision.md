@@ -2,7 +2,6 @@
 term: "Supervision (受監管)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

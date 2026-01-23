@@ -8,7 +8,6 @@ category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
 
 tags: ["行動數據", "Wi-Fi", "App 下載", "流量管理", "iOS 26"]
-
 ---
 
 **iOS 26 與 iPadOS 26 的宣告式裝置管理 (DDM) 功能新增了「限制透過行動網路下載 App」的設定，允許學校強制學生只能在 Wi-Fi 環境下下載或更新 App，有效控管 SIM 卡流量。**
@@ -22,7 +21,6 @@ tags: ["行動數據", "Wi-Fi", "App 下載", "流量管理", "iOS 26"]
 1.  進入 **Blueprints** 或 **App Declarations** 。
 2.  針對個別受管 App 進行定義。
 3.  在部署宣告中設定 **「CellularDataPolicy」** ：
-
     - **Disallow (不允許)** ：強制僅能透過 Wi-Fi 下載。
     - **Allow (允許)** ：不分網路類型執行安裝。
 
@@ -40,13 +38,11 @@ tags: ["行動數據", "Wi-Fi", "App 下載", "流量管理", "iOS 26"]
 ## 影響範圍與注意事項
 
 - **影響範圍** ：
-
   - App Store 手動下載。
   - MDM 透過 DDM 指派的 App 自動安裝。
   - App 自動更新。
 
 - **不影響項目** ：
-
   - 一般網頁瀏覽與影片串流（學生觀看 YouTube 仍會消耗流量，需另外透過 Content Filter 管控）。
   - 已下載 App 內的內容更新（如遊戲內的資料包）。
 

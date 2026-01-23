@@ -2,7 +2,6 @@
 term: "Apple Intelligence Reports (Apple Intelligence 報告與管理)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

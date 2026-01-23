@@ -2,7 +2,6 @@
 term: "AppleCare+"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

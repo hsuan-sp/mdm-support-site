@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["部署策略", "ADE", "離線安裝", "內容快取", "macOS 26"]
-
 ---
 
 **在 2026 年的校園環境中，零接觸部署 (Zero-Touch) 已經是標準操作。但面對全校性大規模採購（如 M5 Mac mini 教室）時，網路頻寬與 MDM 伺服器的負載將是最大挑戰。**
@@ -43,7 +42,6 @@ macOS 26 支援更強大的註冊機制。
 
 1.  **ASM/ADE 綁定**：確保序號已入庫並指向校內 Jamf。
 1.  **開箱啟動**：
-
     - **方法 A (有線網路)**：透過 Thunderbolt 轉 Ethernet 同時啟動 10 台。
     - **方法 B (無線網路)**：配合 WPA 3 預導向 (Managed Wi-Fi) 靜默連線。
 

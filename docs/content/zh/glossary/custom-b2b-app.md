@@ -2,7 +2,6 @@
 term: "Custom B2B App"
 
 category: ["Apps"]
-
 ---
 
 ## 術語定義

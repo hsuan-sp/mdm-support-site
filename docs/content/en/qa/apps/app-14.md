@@ -8,9 +8,7 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags:
-
   ["TestFlight", "App Store Connect", "Managed Apple Account", "Service Access"]
-
 ---
 
 **Yes. Apple allows 'Managed Apple Accounts' to act as TestFlight testers, but permissions must first be enabled within Apple School Manager (ASM).**

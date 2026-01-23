@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: false
 
 tags: ["MFA", "Security", "Managed Apple Account"]
-
 ---
 
 **Yes. Managed Apple Accounts support MFA via managed recovery phones or Federated Authentication.** Enables MFA is a basic security standard for high-privilege accounts, such as administrators or teachers.

@@ -2,7 +2,6 @@
 term: "Software Update"
 
 category: ["macOS", "Jamf"]
-
 ---
 
 ## 術語定義

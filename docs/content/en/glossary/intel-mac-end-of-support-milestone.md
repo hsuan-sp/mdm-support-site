@@ -2,7 +2,6 @@
 term: "Intel Mac End-of-Support Milestone"
 
 category: ["Mac"]
-
 ---
 
 ## Term Definition

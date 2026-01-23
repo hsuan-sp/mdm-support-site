@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios & FAQ"
 important: true
 
 tags: ["MOE Project", "VPN", "Jamf Trust", "Content Filtering", "Compliance"]
-
 ---
 
 **Yes, everything is working perfectly. In modern iPadOS versions (17 through 26), Jamf Trust uses "DNS Proxy" and "Content Filter" technology which does not require a VPN tunnel.** This architectural shift is intentional and was implemented to improve device battery life and network stability across school campuses.

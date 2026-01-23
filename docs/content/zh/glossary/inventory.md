@@ -2,7 +2,6 @@
 term: "Inventory"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

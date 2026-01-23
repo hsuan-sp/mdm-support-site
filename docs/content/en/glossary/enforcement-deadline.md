@@ -2,7 +2,6 @@
 term: "Enforcement Deadline"
 
 category: ["DDM"]
-
 ---
 
 ## Term Definition

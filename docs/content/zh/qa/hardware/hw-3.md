@@ -8,7 +8,6 @@ category: "第六部分：硬體維修與故障排除 (Hardware & Maintenance)"
 important: true
 
 tags: ["AirDrop", "AirPlay", "網路管理", "mDNS Relay", "投影故障排除"]
-
 ---
 
 **AirDrop 與 AirPlay 的運作原理不同，前者主要依賴點對點（P2P）通訊，後者則高度仰賴校園區域網路（LAN）的穩定性與協定放行。**
@@ -19,7 +18,6 @@ tags: ["AirDrop", "AirPlay", "網路管理", "mDNS Relay", "投影故障排除"]
 
 1.  **通訊介面狀態** ：AirDrop 需同時啟動藍牙（用於裝置發現與握手）與 Wi-Fi（用於建立傳輸通道）。即使 iPad 未連上網際網路，Wi-Fi 仍必須保持開啟。
 2.  **接收權限限制** ：
-
     - **系統限制** ：自 iOS 16.2 起，Apple 將「所有人」模式限制為每次 10 分鐘，逾時後會自動切回「僅限聯絡人」。
     - **MDM 限制** ：請確認 Jamf Pro 的限制描述檔中未禁用「AirDrop」。若裝置受監管（Supervised），管理員可強制開啟 or 關閉此功能。
 

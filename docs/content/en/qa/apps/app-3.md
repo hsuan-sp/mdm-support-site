@@ -8,7 +8,6 @@ category: "Section 3: App Management & Distribution"
 important: false
 
 tags: ["Self Service", "App Store", "Restrictions", "Student Autonomy"]
-
 ---
 
 **Even when the official App Store is disabled via a management profile, students can still safely acquire apps through the "Self Service" app.**

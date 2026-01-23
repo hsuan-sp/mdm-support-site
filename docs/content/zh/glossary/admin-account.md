@@ -2,7 +2,6 @@
 term: "Admin Account (管理者帳號)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

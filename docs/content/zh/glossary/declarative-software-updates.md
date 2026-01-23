@@ -2,7 +2,6 @@
 term: "Declarative Software Updates (宣告式軟體更新)"
 
 category: ["DDM"]
-
 ---
 
 ## 術語定義

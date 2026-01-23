@@ -8,7 +8,6 @@ category: "第一部分：帳號與伺服器管理 (Account & Server Management)
 important: false
 
 tags: ["帳號生命週期", "畢業離校", "資料保留"]
-
 ---
 
 **建議先「停用」帳號，待確認學生已完成資料遷移後再行「刪除」。請注意，刪除操作是永久性且無法復原的。**

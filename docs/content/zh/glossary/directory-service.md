@@ -2,7 +2,6 @@
 term: "Directory Service（目錄服務）"
 
 category: ["Network"]
-
 ---
 
 ## 術語定義
@@ -21,7 +20,6 @@ category: ["Network"]
 - **Microsoft Active Directory（AD）**
 - **LDAP（Lightweight Directory Access Protocol）**
 - **雲端身分服務**
-
   - Azure AD（Entra ID）
   - Google Workspace
   - Okta
@@ -43,6 +41,6 @@ category: ["Network"]
 
 它保存了每一位成員的正式紀錄：是誰、屬於哪個部門、擁有哪些權限。
 
-當使用者嘗試登入 Wi-Fi、Email，或進行 MDM 裝置註冊時，  
+當使用者嘗試登入 Wi-Fi、Email，或進行 MDM 裝置註冊時，
 
 這些系統都會查詢這個中央名冊來確認身分與權限，確保存取控管一致，並防止未授權的人員進入內部系統。

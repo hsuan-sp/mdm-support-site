@@ -2,7 +2,6 @@
 term: "Passcode Policy"
 
 category: ["Security", "Core"]
-
 ---
 
 ## Term Definition

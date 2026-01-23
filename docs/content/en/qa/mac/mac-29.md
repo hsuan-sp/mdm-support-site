@@ -8,9 +8,7 @@ category: "Section 1: Hardware & OS Updates"
 important: true
 
 tags:
-
   [
-
     "System Updates",
 
     "Jamf Pro",
@@ -22,9 +20,7 @@ tags:
     "iOS Update",
 
     "macOS Update",
-
   ]
-
 ---
 
 **By 2026, software update management in Jamf Pro has fully transitioned to the "Declarative Device Management (DDM)" framework.** This approach is more stable than legacy remote commands and allows devices to autonomously handle the download and installation process, significantly reducing server load.
@@ -37,7 +33,6 @@ This is the recommended and most professional method:
 
 2. Click `New` and set the target version (e.g., iOS 26.x or macOS 26 Tahoe).
 3. **Key Setting: Enforcement Deadline**:
-
    - Set a specific date and time (e.g., Three days from now at 5:00 PM).
    - Before the deadline, users will receive gentle system notifications.
    - **Once the deadline is reached, the device will ignore the user's state, force a restart, and install the update.**
@@ -53,7 +48,6 @@ If you need to send an update immediately to a specific set of search results:
 2. Choose **`Send Remote Commands`**.
 3. Select **"Update OS version on supervised devices"** from the list.
 4. On the **"Update OS Options"** page, choose your desired settings:
-
    - **Target Version**: Recommended to select "Latest version based on device eligibility."
    - **Action**:
      - **Download the update for users to install**: The device will pre-download the files, and students can install them at their convenience.

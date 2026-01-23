@@ -2,7 +2,6 @@
 term: "Screen Time"
 
 category: ["Apple", "Core"]
-
 ---
 
 ## Term Definition

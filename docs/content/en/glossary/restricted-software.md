@@ -2,7 +2,6 @@
 term: "Restricted Software"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

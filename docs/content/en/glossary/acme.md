@@ -2,7 +2,6 @@
 term: "ACME (Automated Certificate Management Environment)"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

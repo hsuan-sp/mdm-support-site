@@ -2,7 +2,6 @@
 term: "Status Channel"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

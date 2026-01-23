@@ -8,7 +8,6 @@ category: "Section 6: Hardware Maintenance & Troubleshooting"
 important: true
 
 tags: ["Repair", "Find My", "Activation Lock", "Maintenance", "Activation Lock"]
-
 ---
 
 **Yes, this is almost always a requirement for repair. Failure to disable 'Find My' triggers 'Activation Lock,' which prevents service centers from performing the necessary diagnostics or parts replacement, leading to the device being returned unrepaired.**

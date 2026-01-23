@@ -8,7 +8,6 @@ category: "第五部分：數位學習精進方案專區 (MOE Digital Learning P
 important: false
 
 tags: ["內容過濾", "例外開放", "YouTube", "Jamf Trust", "DNS Proxy"]
-
 ---
 
 **精進方案的過濾規則由上級單位（教育局）控管。極度不建議做更動，**但若真的臨時急需使用，建議採取「排除」策略而非修改阻擋名單。** 在不影響全校政策的前提下，可依需求選擇解法： **方法一：暫時將裝置排除 (Jamf Trust Scope Exclusion)\*\* 1. 登入 Jamf Pro。

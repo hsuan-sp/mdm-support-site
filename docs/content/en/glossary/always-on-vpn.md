@@ -2,7 +2,6 @@
 term: "Always-on VPN"
 
 category: ["Network"]
-
 ---
 
 ## Term Definition

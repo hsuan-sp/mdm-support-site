@@ -8,7 +8,6 @@ category: "Section 4: Classroom Management & Instructional Tools"
 important: false
 
 tags: ["AirDrop", "Code", "Privacy", "Policy Adjustment", "iOS 26.2"]
-
 ---
 
 **The 'AirDrop Code' is a privacy enhancement in iOS 26.2. It does NOT allow students to bypass MDM-enforced 'Disable AirDrop' settings. Your existing security policies remain effective.**

@@ -2,7 +2,6 @@
 term: "Liquid Glass (液態玻璃設計)"
 
 category: ["Core"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Return to Service"
 
 category: ["Enrollment"]
-
 ---
 
 ## 術語定義

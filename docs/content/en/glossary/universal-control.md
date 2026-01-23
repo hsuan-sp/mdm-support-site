@@ -2,7 +2,6 @@
 term: "Universal Control"
 
 category: ["Apple", "macOS"]
-
 ---
 
 ## Term Definition

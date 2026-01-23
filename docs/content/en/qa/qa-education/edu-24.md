@@ -8,7 +8,6 @@ category: "Section 8: Education Scenarios"
 important: true
 
 tags: ["Writing Tools", "Apple Intelligence", "Exam Security", "iOS 26", "AI"]
-
 ---
 
 **The 'Writing Tools' in Apple Intelligence can rewrite, proofread, and summarize text even while offline. This poses a significant risk for language and composition exams. On AI-capable devices, these features must be managed via MDM during assessments.**

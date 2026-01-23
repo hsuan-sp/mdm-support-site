@@ -2,7 +2,6 @@
 term: "Continuity（接續互通）"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

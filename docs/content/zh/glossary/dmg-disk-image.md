@@ -2,7 +2,6 @@
 term: "DMG (Disk Image)"
 
 category: ["macOS"]
-
 ---
 
 ## 術語定義

@@ -2,7 +2,6 @@
 term: "Managed Apple Account (管理式 Apple 帳號)"
 
 category: ["Apple"]
-
 ---
 
 ## 術語定義

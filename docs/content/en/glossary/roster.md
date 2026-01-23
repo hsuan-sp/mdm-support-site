@@ -2,7 +2,6 @@
 term: "Roster"
 
 category: ["Education"]
-
 ---
 
 ## Term Definition

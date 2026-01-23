@@ -2,7 +2,6 @@
 term: "Token (代號/權杖)"
 
 category: ["Security"]
-
 ---
 
 ## 術語定義

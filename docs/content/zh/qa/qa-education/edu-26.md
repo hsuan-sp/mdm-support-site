@@ -8,7 +8,6 @@ category: "第八部分：教育場域常見情境 (Education Scenarios)"
 important: true
 
 tags: ["Apple Intelligence", "寫作工具", "AI 管理", "測驗安全"]
-
 ---
 
 **Apple Intelligence 的「寫作工具 (Writing Tools)」是強大的輔助，但在語文課或測驗中需妥善控管。**老師可以透過行政端的 MDM 設定，或課堂當下的工具進行監管與引導。

@@ -8,9 +8,7 @@ category: "Section 7: Advanced Mac Management"
 important: false
 
 tags:
-
   [
-
     "Office",
 
     "Microsoft 365",
@@ -20,9 +18,7 @@ tags:
     "Volume License",
 
     "Jamf App Installers",
-
   ]
-
 ---
 
 **The best practice is to use 'Jamf App Installers' for automated deployment, combined with either the 'Volume License Serializer' or 'User-based Login' depending on the scenario.**

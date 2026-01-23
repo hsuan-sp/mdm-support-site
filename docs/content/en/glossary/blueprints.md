@@ -2,7 +2,6 @@
 term: "Blueprints"
 
 category: ["Jamf", "Core"]
-
 ---
 
 ## Term Definition

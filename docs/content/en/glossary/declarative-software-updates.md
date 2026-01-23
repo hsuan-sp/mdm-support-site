@@ -2,7 +2,6 @@
 term: "Declarative Software Updates"
 
 category: ["DDM"]
-
 ---
 
 ## Term Definition

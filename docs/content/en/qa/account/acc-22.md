@@ -8,7 +8,6 @@ category: "Section 1: Account & Server Management"
 important: true
 
 tags: ["ASM", "Batch Operations", "SFTP", "CSV", "Managed Apple Account"]
-
 ---
 
 **According to official Apple documentation, there are three primary ways to create Managed Apple Accounts: SFTP Upload (SIS integration), Manual CSV Import, and Federated Authentication.**
@@ -26,12 +25,10 @@ tags: ["ASM", "Batch Operations", "SFTP", "CSV", "Managed Apple Account"]
 If your school uses a Student Information System (SIS), you can upload data via Secure File Transfer Protocol (SFTP).
 
 - **Supported Formats**:
-
   - **Apple CSV Format**: Using standard Apple-provided templates.
   - **OneRoster CSV**: Supporting OneRoster version 1.1 specifications.
 
 - **Workflow**:
-
   1. **Setup Connection**: Obtain your SFTP URL, username, and password from ASM.
   2. **Prepare Files**: Export data and create a **ZIP archive** containing all necessary CSV files.
   3. **Upload**: Use an SFTP client to connect and drag the ZIP file into the **dropbox** folder (this is the default root folder on Apple’s SFTP server).
@@ -54,7 +51,6 @@ This is the most modern approach, linking ASM to **Google Workspace** or **Micro
 - **Advantage**: Users log in with their existing organizational Email and password to create their Managed Apple Account on the fly.
 
 - **Hybrid Mode**:
-
   - **Account Source**: Provided by Federated Authentication (IdP).
   - **Classes & Roster**: Can still be created via SFTP CSV uploads.
   - This perfectly combines existing identity providers with curriculum data.

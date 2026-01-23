@@ -2,7 +2,6 @@
 term: "Apple Silicon"
 
 category: ["Hardware"]
-
 ---
 
 ## Term Definition

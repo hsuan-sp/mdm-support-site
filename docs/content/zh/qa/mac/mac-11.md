@@ -8,7 +8,6 @@ category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
 
 tags: ["Gatekeeper", "安全性", "公證", "Notarization", "軟體安裝"]
-
 ---
 
 **這是 macOS 的 Gatekeeper 安全機制。對於教學所需但未經公證的軟體，建議透過「右鍵開啟」繞過，或由 MDM 統一派送以避免隔離標記。**

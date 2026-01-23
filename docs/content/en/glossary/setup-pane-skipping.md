@@ -2,7 +2,6 @@
 term: "Setup Pane Skipping"
 
 category: ["Mac"]
-
 ---
 
 ## Term Definition

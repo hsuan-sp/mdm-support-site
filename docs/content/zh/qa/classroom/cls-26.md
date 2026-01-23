@@ -8,7 +8,6 @@ category: "第四部分：課堂管理與教學應用 (Classroom Management)"
 important: false
 
 tags: ["AirDrop", "代碼", "隱私", "政策調整", "iOS 26.2"]
-
 ---
 
 **AirDrop 代碼是 iOS 26.2 新增的隱私增強功能，並不會讓學生繞過 MDM 的「停用 AirDrop」設定。學校既有的 AirDrop 管理政策依然有效，無需過度擔憂。**

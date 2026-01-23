@@ -2,7 +2,6 @@
 term: "N-1 Strategy"
 
 category: ["Core"]
-
 ---
 
 ## Term Definition

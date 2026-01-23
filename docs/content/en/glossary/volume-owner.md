@@ -2,7 +2,6 @@
 term: "Volume Owner"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition

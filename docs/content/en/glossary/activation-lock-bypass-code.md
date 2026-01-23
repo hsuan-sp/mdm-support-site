@@ -2,7 +2,6 @@
 term: "Activation Lock Bypass Code"
 
 category: ["Security"]
-
 ---
 
 ## Term Definition
