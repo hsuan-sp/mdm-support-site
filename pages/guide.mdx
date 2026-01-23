@@ -1,0 +1,20 @@
+import Guide from "@/components/features/Guide";
+import { getQAData } from "@/lib/data";
+import { useLanguage } from "@/hooks/useLanguage";
+
+export const getStaticProps = async () => {
+  const zhData = await getQAData("zh");
+  const enData = await getQAData("en");
+  return {
+    props: {
+      zhData,
+      enData,
+    },
+  };
+};
+
+export default function GuidePage({ zhData, enData }) {
+  const { language } = useLanguage();
+  const data = language === "en" ? enData : zhData;
+  return <Guide allData={data} />;
+}

@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nextra-primary-hue: 204deg;
+    --nextra-primary-saturation: 100%;
+    /* Classic Manuscript Grid (Soft Jade Green) */
+    --grid-color: rgba(34, 197, 94, 0.04);
+    --grid-accent: rgba(34, 197, 94, 0.08);
+  }
+
+  .dark {
+    --grid-color: rgba(255, 255, 255, 0.02);
+    --grid-accent: rgba(255, 255, 255, 0.04);
+  }
+
+  html {
+    font-family:
+      "Outfit",
+      "Noto Sans TC",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-white dark:bg-black text-zinc-900 dark:text-zinc-100;
+
+    /* Advanced Manuscript Paper Effect */
+    background-image:
+      linear-gradient(var(--grid-accent) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-accent) 1px, transparent 1px),
+      linear-gradient(var(--grid-color) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, var(--grid-color) 0.5px, transparent 0.5px);
+    background-size:
+      160px 160px,
+      160px 160px,
+      32px 32px,
+      32px 32px;
+    background-attachment: fixed;
+  }
+}
+
+/* Premium Apple-style Glassmorphism Navbar */
+.nextra-nav-container {
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  height: 4rem !important;
+}
+
+.dark .nextra-nav-container {
+  background-color: rgba(0, 0, 0, 0.72) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure Navbar Brand and Menu Items are Visible */
+.nextra-nav-container nav {
+  @apply px-4 md:px-6 h-full flex items-center justify-between !important;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .nextra-nav-container nav {
+    @apply gap-2 !important;
+  }
+}
+
+/* Mobile Search Bar Optimization */
+.nextra-search {
+  @apply max-w-[120px] sm:max-w-[200px] md:max-w-xs transition-all duration-300;
+}
+
+.nextra-nav-container a,
+.nextra-nav-container button {
+  @apply transition-all duration-300;
+}
+
+/* Sidebar Refinement */
+.nextra-sidebar-container {
+  background-color: transparent !important;
+  padding-top: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  .nextra-sidebar-container {
+    padding-top: 4rem !important;
+  }
+}
+
+.nextra-sidebar-container [role="menu"] {
+  @apply space-y-1 px-4;
+}
+
+.nextra-sidebar-container a {
+  @apply rounded-xl font-bold transition-all duration-200 !important;
+}
+
+.nextra-sidebar-container .active {
+  @apply bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 !important;
+}
+
+/* Main Content Area */
+.nextra-body {
+  @apply max-w-[1440px] mx-auto;
+}
+
+/* Typography Scale */
+h1 {
+  @apply text-4xl font-black tracking-tight mb-8;
+}
+h2 {
+  @apply text-2xl font-bold tracking-tight mb-6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+/* Footer Section - Ensure Integration */
+.global-footer {
+  @apply mt-20;
+}
+
+/* Vibrant Emojis via Noto Color Emoji */
+@font-face {
+  font-family: "VibrantEmoji";
+  src: url("https://fonts.gstatic.com/s/notocoloremoji/v24/Yq6P-KqIXIk05puL3vOndM-n0YI.woff2")
+    format("woff2");
+  unicode-range: U+1F000-1F9FF, U+2600-26FF, U+2700-27BF;
+}
+
+.emoji-vibrant {
+  font-family:
+    "VibrantEmoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
