@@ -175,12 +175,12 @@ export default defineConfig({
   },
 
   head: [
-    // 預設 favicon.ico
-    ["link", { rel: "icon", href: "/favicon.ico" }],
+    // 預設 favicon.ico - 加入 v=2 強制重新整理快取
+    ["link", { rel: "icon", href: "/favicon.ico?v=2" }],
     // 針對不同設備的 Favicons
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }],
-    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png?v=2" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png?v=2" }],
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=2" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
       "link",
@@ -200,10 +200,10 @@ export default defineConfig({
         content: "Apple, MDM, Jamf Pro, Jamf School, Education, MoE, Taiwan",
       },
     ],
-    // 注意：OG Image 建議使用絕對路徑以利社群平台抓取，這裡先以相對路徑確保基礎運作
+    // OG Image 同樣加入版本號確保社群平台抓取正確
     [
       "meta",
-      { property: "og:image", content: "/logo.png" },
+      { property: "og:image", content: "/logo.png?v=2" },
     ],
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
   ],
