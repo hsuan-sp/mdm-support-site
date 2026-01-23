@@ -175,7 +175,11 @@ export default defineConfig({
   },
 
   head: [
-    ["link", { rel: "icon", href: "/mdm-support-site/superinfo_favicon.jpeg" }],
+    ["link", { rel: "icon", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon.ico" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon-32x32.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon-16x16.png" }],
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/apple-touch-icon.png" }],
+    ["link", { rel: "manifest", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/site.webmanifest" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
       "link",
@@ -197,7 +201,7 @@ export default defineConfig({
     ],
     [
       "meta",
-      { property: "og:image", content: "/mdm-support-site/superinfo_logo.png" },
+      { property: "og:image", content: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/logo.png" },
     ],
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
   ],
@@ -221,6 +225,6 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: "/superinfo_logo.png",
+    logo: "/logo.png",
   },
 });
