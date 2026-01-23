@@ -3,7 +3,8 @@ id: enr-2
 title: "Can we just install a profile manually? What is the difference between Manual and Automated Enrollment?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Manual Enrollment","Account-Driven","Supervised","Apple Configurator"]
+tags:
+  ["Manual Enrollment", "Account-Driven", "Supervised", "Apple Configurator"]
 ---
 
 **Yes, you can, but manual enrollment (User-Initiated) provides significantly less administrative control compared to Automated Device Enrollment (ADE).**

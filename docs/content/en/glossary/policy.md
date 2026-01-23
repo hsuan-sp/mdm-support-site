@@ -18,4 +18,4 @@ A Policy consists of:
 
 A Policy is like a **"School Bell Schedule"** combined with a **"Lesson Plan."** You don't have to announce "Go to Math Class" to every student individually. The bell ( **Trigger** ) automatically signals to the students ( **Scope** ) that it is time to do a specific task ( **Payload** ).
 
-Similarly, a policy tells the computer: *"Every time you wake up (Trigger), check if the printer is installed (Payload)."*
+Similarly, a policy tells the computer: _"Every time you wake up (Trigger), check if the printer is installed (Payload)."_

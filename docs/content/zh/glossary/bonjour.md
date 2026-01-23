@@ -1,6 +1,6 @@
 ---
 term: "Bonjour"
-category: ["Network","Apple"]
+category: ["Network", "Apple"]
 ---
 
 ## 術語定義

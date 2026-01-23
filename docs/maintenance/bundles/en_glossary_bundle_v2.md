@@ -511,9 +511,9 @@ An **Identity Provider (IdP)** is a specialized service that creates, maintains,
 
 Common IdPs in Education:
 
-- **Google Workspace***** Microsoft Entra ID (formerly Azure AD)
+- **Google Workspace\*\*\*** Microsoft Entra ID (formerly Azure AD)
 
-***** Okta **** MDM Role **: In a modern setup, MDM does not manage passwords itself. Instead, it "outsources" authentication to the IdP. When a student tries to enroll an iPad, the MDM sends a request to the IdP (e.g., Google) to verify the password. This enables** Single Sign-On (SSO) ** , allowing students to use one single password for their iPad, their email, and their learning portal.
+**\*** Okta \***\* MDM Role **: In a modern setup, MDM does not manage passwords itself. Instead, it "outsources" authentication to the IdP. When a student tries to enroll an iPad, the MDM sends a request to the IdP (e.g., Google) to verify the password. This enables** Single Sign-On (SSO) ** , allowing students to use one single password for their iPad, their email, and their learning portal.
 
 ## Analogy
 
@@ -660,7 +660,7 @@ File: inventory-collection.md
 
 ---
 term: "Inventory Collection"
-category: ["Jamf","Core"]
+category: ["Jamf", "Core"]
 ---
 
 ## Definition
@@ -758,7 +758,7 @@ File: iphone-mirroring.md
 
 ---
 term: "iPhone Mirroring"
-category: ["macOS","Security"]
+category: ["macOS", "Security"]
 ---
 
 ## Definition
@@ -776,7 +776,7 @@ File: jamf-aad.md
 
 ---
 term: "JamfAAD"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## Definition
@@ -853,7 +853,7 @@ File: jamf-data-policy.md
 
 ---
 term: "Jamf Data Policy"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## Definition
@@ -871,7 +871,7 @@ File: jamf-helper.md
 
 ---
 term: "jamfHelper"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## Definition
@@ -907,7 +907,7 @@ File: jamf-private-access.md
 
 ---
 term: "Jamf Private Access"
-category: ["Jamf","Security","Network"]
+category: ["Jamf", "Security", "Network"]
 ---
 
 ## Definition
@@ -925,7 +925,7 @@ File: jamf-pro-api.md
 
 ---
 term: "Jamf Pro API"
-category: ["Jamf","Other"]
+category: ["Jamf", "Other"]
 ---
 
 ## Definition
@@ -972,7 +972,7 @@ File: jamf-protect.md
 
 ---
 term: "Jamf Protect"
-category: ["Jamf","Security","macOS"]
+category: ["Jamf", "Security", "macOS"]
 ---
 
 ## Definition
@@ -990,7 +990,7 @@ File: jamf-remote.md
 
 ---
 term: "Jamf Remote Assist"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
 ## Definition
@@ -1216,7 +1216,7 @@ Security mechanism:
 
 Think of this as an **"Automatic Lock-Changing System."** In the past, every classroom door in a school might have used the same "Master Key." If a thief stole that key, they could enter every room.
 
-With **LAPS** , every single door has a different, unique code that changes every few days. Even if someone steals a code today, it won't work on the next door, and it won't even work on the *same* door tomorrow.
+With **LAPS** , every single door has a different, unique code that changes every few days. Even if someone steals a code today, it won't work on the next door, and it won't even work on the _same_ door tomorrow.
 
 
 ---
@@ -1434,7 +1434,7 @@ Capabilities:
 
 In the past, giving an app its settings was like **"Leaving a note in a mailbox"** —the app could only read the note when it first opened.
 
-The new **Managed App Framework** is more like **"Instant Messaging."** The app can talk to the school system *while* you are using it to get the latest security updates or server changes instantly. It’s faster, safer, and means your apps are always set up perfectly without you having to restart them.
+The new **Managed App Framework** is more like **"Instant Messaging."** The app can talk to the school system _while_ you are using it to get the latest security updates or server changes instantly. It’s faster, safer, and means your apps are always set up perfectly without you having to restart them.
 
 
 ---
@@ -1963,4 +1963,5 @@ The command remains in the queue and will automatically execute the moment the d
 Think of this as a **"Letter Waiting in the Mailbox."** The school's main computer (the MDM) has already "mailed" the task to your iPad. However, if your iPad is turned off or unconnected, it can't "open the mail" yet.
 
 As soon as you turn your iPad on and connect to Wi-Fi, it **"checks the mail"** and does whatever work (installing apps, locking screen) is waiting for it.
+
 

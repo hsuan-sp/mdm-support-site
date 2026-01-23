@@ -3,7 +3,7 @@ id: mac-2
 title: "How do we manage Local Admin privileges for staff and students on Macs?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Privilege Management","LAPS","Security","Standard User"]
+tags: ["Privilege Management", "LAPS", "Security", "Standard User"]
 ---
 
 **The Gold Standard is to provide "Standard User" accounts for daily tasks, supplemented by a "just-in-time" Admin elevation tool or a Managed LAPS solution.**
@@ -20,7 +20,7 @@ Granting permanent Admin rights to students or teachers is a major security risk
 
 - **2026 Status**: As of **macOS 26**, Apple includes a native LAPS protocol.
 - **How it works**: Jamf Pro creates a hidden admin account on every Mac. The password for this account is a long, random string that **rotates automatically** every few days.
-- **Operational use**: If a technician needs to fix a Mac, they look up the *current* random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
+- **Operational use**: If a technician needs to fix a Mac, they look up the _current_ random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
 
 ### 3. Self-Service Elevation (Privileges App)
 

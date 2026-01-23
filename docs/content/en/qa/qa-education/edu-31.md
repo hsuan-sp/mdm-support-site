@@ -3,7 +3,14 @@ id: edu-31
 title: "What is the difference between the 'MOE Managed Jamf Pro' and 'School-Purchased Jamf Pro'?"
 category: "Section 8: Education Scenarios"
 important: true
-tags: ["MOE Instance", "Private Instance", "Permission Differences", "Integration", "IT Coordinator"]
+tags:
+  [
+    "MOE Instance",
+    "Private Instance",
+    "Permission Differences",
+    "Integration",
+    "IT Coordinator",
+  ]
 ---
 
 **The primary differences lie in administrative permissions, feature rollout speed, and 'Global Toggle' control. While assets can be moved between them, the daily management experience varies significantly.**
@@ -18,14 +25,14 @@ In the **MOE Managed Jamf Pro** architecture, permissions are layered to balance
 
 ## Core Comparison Matrix
 
-| Item | **MOE Managed Instance** | **Private/In-House Instance** |
-| :--- | :--- | :--- |
-| **Highest Authority** | **Ministry Central IT Team** | **School IT Team (100% Control)** |
-| **Server Hosting** | Jamf Cloud (MOE Tenant) | Dedicated Jamf Cloud Instance |
-| **Profile Management** | **Protected**. Cannot delete core MOE profiles. | **Unrestricted**. Full control to create/delete. |
-| **Software Updates (DDM)** | Managed by Central Admin schedule. | Fully customizable by the School. |
-| **Automation & API** | Restricted. Limited custom scripts/API tokens. | **Fully Open**. Full API and Custom Scripting. |
-| **New Feature Testing** | Must wait for Central IT to enable. | Enable on day one of an Apple release. |
+| Item                       | **MOE Managed Instance**                        | **Private/In-House Instance**                    |
+| :------------------------- | :---------------------------------------------- | :----------------------------------------------- |
+| **Highest Authority**      | **Ministry Central IT Team**                    | **School IT Team (100% Control)**                |
+| **Server Hosting**         | Jamf Cloud (MOE Tenant)                         | Dedicated Jamf Cloud Instance                    |
+| **Profile Management**     | **Protected**. Cannot delete core MOE profiles. | **Unrestricted**. Full control to create/delete. |
+| **Software Updates (DDM)** | Managed by Central Admin schedule.              | Fully customizable by the School.                |
+| **Automation & API**       | Restricted. Limited custom scripts/API tokens.  | **Fully Open**. Full API and Custom Scripting.   |
+| **New Feature Testing**    | Must wait for Central IT to enable.             | Enable on day one of an Apple release.           |
 
 ## Important Repository Statement (Disclaimer)
 

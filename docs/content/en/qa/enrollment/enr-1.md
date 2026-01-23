@@ -3,7 +3,7 @@ id: enr-1
 title: "My new iPad didn't show the 'Remote Management' screen during setup. How do I fix this?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["ADE","ASM","Enrollment Failure","Automated Device Enrollment"]
+tags: ["ADE", "ASM", "Enrollment Failure", "Automated Device Enrollment"]
 ---
 
 **If your iPad goes straight to the standard personal setup screens instead of the school's "Remote Management" prompt, it usually means the device serial number hasn't been linked to your MDM server by Apple.**

@@ -3,7 +3,7 @@ id: hw-5
 title: "How should we store iPads during the summer break to prevent battery damage?"
 category: "Section 6: Hardware & Maintenance"
 important: true
-tags: ["Battery Health","Storage","Summer Break","Prevention"]
+tags: ["Battery Health", "Storage", "Summer Break", "Prevention"]
 ---
 
 **To protect the long-term health of your iPad's lithium-ion battery during extended breaks, you should follow the "50% Power + Full Shutdown" rule.** Storing a device improperly for 2-3 months can lead to "Deep Discharge," where the battery becomes chemically unable to hold a charge ever again.

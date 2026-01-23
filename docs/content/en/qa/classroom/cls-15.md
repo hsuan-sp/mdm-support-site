@@ -3,7 +3,7 @@ id: cls-15
 title: "If a student iPad fails and they use a loaner, will their data still be there?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: false
-tags: ["Backup","Loaner Device","iCloud","Data Restore"]
+tags: ["Backup", "Loaner Device", "iCloud", "Data Restore"]
 ---
 
 **This depends on whether the data is stored 'Locally' or in the 'Cloud'.**

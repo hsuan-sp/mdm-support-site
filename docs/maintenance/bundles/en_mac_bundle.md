@@ -9,7 +9,7 @@ id: mac-1
 title: "Should we still bind our Macs to Active Directory (AD)? What is the modern recommendation?"
 category: "Section 7: Advanced Mac Management"
 important: true
-tags: ["AD","Identity","Jamf Connect","Platform SSO","No-Bind"]
+tags: ["AD", "Identity", "Jamf Connect", "Platform SSO", "No-Bind"]
 ---
 
 **We strongly recommend a "No-Bind" strategy. Instead of traditional AD binding, schools should adopt Platform SSO or Jamf Connect.**
@@ -45,6 +45,412 @@ If your school still has a large fleet of AD-bound Macs, we recommend a phased "
 
 
 ---
+File: mac-2.md
+---
+
+---
+id: mac-2
+title: "How do we manage Local Admin privileges for staff and students on Macs?"
+category: "Section 7: Advanced Mac Management"
+important: false
+tags: ["Privilege Management", "LAPS", "Security", "Standard User"]
+---
+
+**The Gold Standard is to provide "Standard User" accounts for daily tasks, supplemented by a "just-in-time" Admin elevation tool or a Managed LAPS solution.**
+
+Granting permanent Admin rights to students or teachers is a major security risk. It allows for the disabling of security software, the installation of unauthorized apps, and makes the campus network more vulnerable to ransomware.
+
+## The Three-Tier Management Strategy:
+
+### 1. Standard User by Default
+
+- All school-issued Macs should be set up with "Standard User" accounts. This prevents users from altering core system settings or installing system-wide software without oversight.
+
+### 2. Native LAPS (Local Administrator Password Solution)
+
+- **2026 Status**: As of **macOS 26**, Apple includes a native LAPS protocol.
+- **How it works**: Jamf Pro creates a hidden admin account on every Mac. The password for this account is a long, random string that **rotates automatically** every few days.
+- **Operational use**: If a technician needs to fix a Mac, they look up the _current_ random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
+
+### 3. Self-Service Elevation (Privileges App)
+
+For staff members who occasionally need to install a printer driver or specialized software:
+
+- **Tool**: Deploy the **Privileges** app (or Jamf’s equivalent).
+- **Workflow**: The teacher clicks a lock icon in the Dock, justifies the need, and is granted **Admin rights for 20 minutes**. After the timer expires, the system automatically demotes them back to a Standard User.
+
+## Institutional Advice:
+
+Adopting the "Principle of Least Privilege" does not mean making life difficult for teachers; it means providing them with the tools to be productive while ensuring the school’s digital assets remain secure and compliant with insurance standards.
+
+
+---
+File: mac-3.md
+---
+
+---
+id: mac-3
+title: "How do we distribute non-App Store software like Chrome, Adobe CC, or Office?"
+category: "Section 7: Advanced Mac Management"
+important: false
+tags: ["Software Distribution", "App Installers", "PKG", "Auto-Update"]
+---
+
+**Move away from manual packaging. Use Jamf Pro's "App Installers" for high-frequency apps, and DDM-based distribution for mission-critical software.**
+
+Managing Mac software used to involve a tedious cycle of downloading DMGs, repackaging them into PKGs, and uploading them. Today, there are much more efficient pathways.
+
+## Modern Software Deployment Tiers:
+
+### Tier 1: Jamf App Installers (Preferred)
+
+- **The Workflow**: You choose "Google Chrome" from the Jamf catalog. Jamf handles the downloading, packaging, and—crucially—the **Automatic Updates**.
+- **Self-Healing**: In **macOS 26**, this is backed by DDM. If a student deletes Chrome, the Mac notices the "State Desync" and automatically reinstalls the app in the background without any IT intervention.
+
+### Tier 2: Mac App Store (VPP)
+
+- Best for classroom favorites like Goodnotes, Keynote, or GarageBand.
+- Purchase licenses in bulk via Apple School Manager and push them to devices. Installation is silent and updates are managed by the system.
+
+### Tier 3: Adobe Creative Cloud (Shared Device License)
+
+- For computer labs, use the **Adobe Admin Console** to create a "Shared Device License" package.
+- Push this package via a Jamf Pro policy. This ensures that any student who sits at the Mac can use the software using their individual school ID.
+
+### Tier 4: Custom PKGs (Last Resort)
+
+- Use **Jamf Composer** to package specialized local curriculum software or niche drivers that are not found in public catalogs.
+
+## Institutional Advice:
+
+Focus on the "App Installers" catalog for 90% of your needs. Ensuring that apps like Chrome and Zoom are automatically kept on the latest version is the single best way to reduce security vulnerabilities across the campus.
+
+
+---
+File: mac-4.md
+---
+
+---
+id: mac-4
+title: "How should we design our macOS update strategy for 2026? How does DDM change things?"
+category: "Section 7: Advanced Mac Management"
+important: true
+tags: ["Software Updates", "DDM", "macOS 26", "Compliance", "IT Strategy"]
+---
+
+**In the macOS 26 (Tahoe) era, Apple has fully transitioned to Declarative Device Management (DDM) for software updates. IT teams no longer "send a command" to update; they "declare a state."**
+
+This shift solves the old problem of update commands being ignored or failing due to network timing.
+
+## I. Traditional vs. Declarative (DDM) Updates
+
+| Feature             | Old MDM Command                    | New DDM (macOS 23+)                      |
+| :------------------ | :--------------------------------- | :--------------------------------------- |
+| **Logic**           | Server pushes, Device might ignore | **Device self-monitors** and enforces    |
+| **Deadlines**       | Optional / Flaky                   | **Hard Enforcement Deadlines**           |
+| **User Experience** | Random popups                      | Clear countdowns and notifications       |
+| **Visibility**      | "Unknown" status until done        | Real-time status: "Downloading," "Ready" |
+
+## II. 2026 Standard Operating Procedure for IT
+
+### 1. Set Enforcement Deadlines
+
+- **Major Updates (e.g., 26.1)**: Set a deadline for **14-21 days** after release. This gives everyone time to choose a convenient moment.
+- **Security Patches (RSR)**: Set a deadline for **48 hours**. Critical security shouldn't wait.
+- **The Result**: Users get multiple gentle reminders. If they haven't updated by the deadline, the Mac will **force a restart and install** automatically at the specified time.
+
+### 2. Utilize DDM Status Channels
+
+- Administrators no longer need to manually "Scan for Inventory" to see who is updated.
+- DDM actively reports its progress: "I have downloaded the update and scheduled installation for 17:00."
+
+### 3. Campus Network Infrastructure
+
+- Massive simultaneous DDM updates place extreme stress on school bandwidth.
+- **Key Infrastructure**: Ensure each administrative or classroom building has at least one Mac mini acting as a **"Content Caching"** server. This ensures 90% of the update traffic stays on the local network.
+
+## III. Practical Reminders
+
+- **Avoid Exam Weeks**: DDM enforcement is highly strictly. During assessment weeks or high-stakes exams, please temporarily unassign the update profile to prevent a student's Mac from automatically restarting mid-exam because a deadline was reached.
+
+## Institutional Advice:
+
+Transitioning to DDM Enforcement Deadlines is the only way to ensure 100% compliance across a laptop fleet. It moves the responsibility of "staying updated" from the student to the hardware itself.
+
+
+---
+File: mac-5.md
+---
+
+---
+id: mac-5
+title: "How do I force a Mac to perform system updates? Students keep clicking 'Remind Me Later'."
+category: "Section 7: Advanced Mac Management"
+important: false
+tags: ["System Updates", "DDM", "Nudge", "IT Operations"]
+---
+
+**The modern solution is to use "Declarative Device Management (DDM)."** If you need more visual urgency, you can supplement this with the open-source tool "Nudge."
+
+Unlike iPads, Mac updates often require a lengthy restart, which leads students to postpone them indefinitely, creating a fragmented and insecure fleet.
+
+## Strategy 1: DDM Enforced Updates (Recommended for macOS 14+)
+
+- **The Logic**: This is Apple's newest management protocol. IT administrators set an **"Enforcement Deadline."**
+- **The Workflow**:
+  1. In the days leading up to the deadline, the system gently notifies the student.
+  2. As the deadline approaches, the notifications become more persistent.
+  3. **Once the deadline is reached**, the Mac will automatically download the update and force a restart. The student cannot postpone it further.
+- **Configuration**: This is set in Jamf Pro under **Configuration Profiles > Software Update**, where you define the target version and the specific cut-off date and time.
+
+## Strategy 2: Nudge (Visual Urgency)
+
+If the subtle system notifications aren't enough, the community-standard tool **Nudge** is the best solution.
+
+- **Functionality**: It pops up a non-dismissible window (which can be branded with the school logo) that clearly states: "Your Mac is out of date and insecure. Please update now."
+- **Escalation**: As the deadline nears, Nudge can dim the screen or blur the background, making it impossible for the student to ignore the update while they try to use other apps.
+- **Deployment**: Deploy the Nudge package and JSON configuration via Jamf Pro.
+
+## Institutional Advice:
+
+For computer labs that are unoccupied at night, use Jamf Pro to schedule a "Wake Up" command at 2:00 AM followed by a "Force Update" command. This allows the heavy lifting to happen while the students are asleep, ensuring the labs are ready and updated for the first period.
+
+
+---
+File: mac-6.md
+---
+
+---
+id: mac-6
+title: "How can I quickly reset (wipe) a Mac lab, similar to using recovery cards?"
+category: "Section 7: Advanced Mac Management"
+important: false
+tags:
+  ["Reset", "EACS", "Erase All Content and Settings", "Computer Lab", "Imaging"]
+---
+
+**In the era of Apple Silicon (M-series), using "recovery cards" or "Ghost" imaging is no longer recommended and often not even possible. Instead, use the "Erase All Content and Settings (EACS)" command.**
+
+Traditional monolithic imaging has been completely retired by Apple. The modern reset logic is "Clear user data + Keep operating system + Automatically re-enroll."
+
+## Comparison of Reset Methods
+
+| Feature              | Legacy Re-imaging                       | Erase All Content and Settings (EACS)     |
+| :------------------- | :-------------------------------------- | :---------------------------------------- |
+| **Principle**        | Format drive > Re-download & install OS | Destroy encryption keys > Clear user data |
+| **Time Required**    | 1-2 hours                               | **5-10 minutes**                          |
+| **Network Demand**   | Requires 12GB+ OS download              | **Minimal bandwidth**                     |
+| **Data Security**    | Disk formatting (recoverable)           | Cryptographic destruction (unrecoverable) |
+| **Hardware Support** | All Intel/Apple Silicon Macs            | Macs with T2 or Apple Silicon chips       |
+
+## Standard Reset SOP (Jamf Pro)
+
+### 1. Send Command
+
+- Send the **"Wipe Computer"** command to the target computer group in Jamf Pro.
+- **Crucial**: For Apple Silicon and T2-equipped Macs, this command automatically triggers **EACS (Erase All Content and Settings)**.
+
+### 2. Execution (Within minutes)
+
+- The system instantly discards the encryption keys (Cryptographic Erase), making data unreadable within seconds.
+- The computer reboots to the "Hello" (Setup Assistant) screen.
+
+### 3. Automated Deployment (Zero-Touch)
+
+- The computer connects to the network (Ensure a non-authenticated Wi-Fi or wired network is provided).
+- **ADE (Automated Device Enrollment)** is triggered automatically.
+- PreStage Enrollment settings are downloaded, admin accounts are created, and software is installed automatically.
+
+## Difference from Traditional Recovery Cards
+
+- Traditional cards "restore on every reboot."
+- Modern Mac management uses EACS reset at the "end of a semester or project."
+- If daily restoration is required (e.g., for library public kiosks), consider using **"Guest User" mode** (which deletes data upon logout) or specialized kiosk software (like Deep Freeze for Mac).
+
+
+---
+File: mac-7.md
+---
+
+---
+id: mac-7
+title: "What special restrictions apply to managing Apple Silicon (M-series) Macs?"
+category: "Section 7: Advanced Mac Management"
+important: false
+tags: ["Apple Silicon", "Bootstrap Token", "Secure Boot", "Kernel Extensions"]
+---
+
+**The security architecture of Apple Silicon (M1-M5) is fundamentally different from Intel Macs. The core of management lies in the "Bootstrap Token" and "Volume Ownership."**
+
+Without proper configuration, MDM will be unable to perform software updates or install kernel plugins.
+
+## Key Technical Indicators:
+
+### 1. Bootstrap Token
+
+- **The Issue**: On Apple Silicon, certain high-privilege operations (such as installing software updates or enabling kernel extensions) require a "Secure Token."
+- **The Solution**: Ensure that **"Allow MDM to upload Bootstrap Token"** is checked in the Jamf Pro **PreStage Enrollment** settings.
+- **Verification**: In the Jamf Pro computer record, confirm that `Bootstrap Token Allowed` is set to `Yes`. If it is "No," many management commands will fail.
+
+### 2. Volume Ownership
+
+- Only users designated as "Owners" can perform system resets or updates.
+- The first account created through ADE enrollment automatically gains ownership. MDM escorts this privilege via the Bootstrap Token.
+
+### 3. Kernel Extensions (KEXTs)
+
+- Apple Silicon **blocks** all third-party KEXTs by default.
+- If they must be installed (e.g., for older antivirus software), the device must be rebooted into Recovery Mode to lower the security setting to "Reduced Security."
+- **Modern Recommendation**: Use **System Extensions** instead. This is Apple's recommended architecture, which can be authorized directly via MDM configuration profiles without lowering system security.
+
+
+---
+File: mac-8.md
+---
+
+---
+id: mac-8
+title: "Why does MDM require FileVault? How do I recover a forgotten login password?"
+category: "Section 7: Advanced Mac Management"
+important: true
+tags:
+  [
+    "FileVault",
+    "Full Disk Encryption",
+    "Data Security",
+    "Recovery Key",
+    "Jamf Pro",
+    "Inventory",
+  ]
+---
+
+**FileVault is macOS's built-in "Full Disk Encryption" technology, ensuring that data cannot be stolen if the computer is lost. By escrowing the "Recovery Key" to MDM, administrators can help unlock the device if a user forgets their password.**
+
+## Technical Principles:
+
+- **XTS-AES-128 Encryption**: Before login, the hard drive data is encrypted and unreadable.
+- **Performance Impact**: Modern Macs handle encryption via the Secure Enclave hardware, resulting in virtually zero impact on daily performance.
+- **2026 Experience: Platform SSO (PSSO)**: In macOS 26, using PSSO allows users to enter their password just once at the FileVault screen to boot directly to the desktop. The system automatically handles subsequent identity provider (IdP) verification and login. This eliminates the legacy "double login" frustration.
+
+## Jamf Pro Deployment and Escrow Flow (SOP):
+
+### 1. Create Configuration Profile
+
+- Go to **Configuration Profiles > New > FileVault**.
+- Set to **Require FileVault**.
+- **Crucial Step**: Set to **Create Personal Recovery Key** and choose **Escrow Personal Recovery Key to MDM**.
+
+### 2. User-Side Activation
+
+- After deployment, the system will prompt the user to enable encryption at the next logout or reboot.
+- **Note**: Jamf Pro will only receive the key once the user completes this step and the status changes to "Encrypted."
+
+## Recovery Scenario: Looking up the Recovery Key
+
+If a user forgets their password, the administrator must retrieve the key from the console.
+
+### 1. Navigate to Inventory
+
+- Log in to Jamf Pro and search for the target computer.
+- Go to the detail page and select the **Inventory** tab > **Disk Encryption**.
+
+### 2. Verify Encryption and Key
+
+- First, check if **FileVault 2 Enabled** is set to **Encrypted** or **Enabled**.
+- **If Encrypted**: You will see a **Personal Recovery Key** field. Click **Show Key** to reveal the code.
+- **If Not Encrypted**: This field will not appear, meaning encryption is incomplete or the escrow failed. Recovery via MDM is not possible in this state.
+
+### 3. Perform the Unlock
+
+- On the Mac login screen, click the question mark (?) or enter the wrong password three times. Select **Reset password using Recovery Key** and enter the code.
+
+## Practical Advice & Warnings:
+
+- **Data Loss Risk**: If FileVault is enabled but Jamf Pro shows "Unknown" or no key, the escrow failed. If the password is forgotten in this state, **data is permanently unrecoverable**, and the device must be wiped.
+- **Institutional Recovery Key (IRK)**: Modern management favors the "Personal Recovery Key (PRK)" mechanism for higher security.
+
+
+---
+File: mac-9.md
+---
+
+---
+id: mac-9
+title: "What can Jamf Scripts do? How do I create and run them?"
+category: "Section 7: Advanced Mac Management"
+important: false
+tags: ["Automation", "Shell Script", "Zsh", "Policies", "Scripts", "jamfHelper"]
+---
+
+**Scripts allow administrators to execute shell commands with Root privileges on a Mac, enabling advanced customization that standard MDM payloads cannot achieve.**
+
+Jamf Pro's power lies in its proprietary binary. When combined with **Policies**, you can achieve the following advanced scenarios:
+
+## Common Application Scenarios:
+
+| Scenario                  | Script Example                                                                                        |
+| :------------------------ | :---------------------------------------------------------------------------------------------------- |
+| **User Interaction**      | Use `jamfHelper` to pop up full-screen announcements or countdown windows.                            |
+| **System Cleanup**        | Periodically delete specific cache files, temporary files, or reset the printing system.              |
+| **Advanced Install**      | Install Homebrew, Rosetta 2, or call Installomator for automated software updates.                    |
+| **Inventory Reporting**   | Collect info outside standard fields (e.g. battery health) and report it to **Extension Attributes**. |
+| **Permission Management** | Temporarily grant Admin rights to a user and remove them after a set duration.                        |
+| **AI Automation**         | Pre-trigger local indexing or semantic search initialization for Apple Intelligence models.           |
+| **Swift Scripting**       | **2026 Trend**: Use Swift for safer, more efficient automation supporting native APIs.                |
+
+## 2026 Trend: DDM is Replacing "Repetitive Scripts"
+
+While scripts were previously used to check system states periodically, macOS 26 recommends using **Declarative Device Management (DDM)**.
+
+- **Example**: Instead of a script that periodically deletes large caches in `/tmp/`, you can define a DDM policy that allows the system to perform "Self-Healing" in place, which is more efficient and real-time.
+
+## Setup and Deployment Flow (SOP):
+
+### 1. Write the Script
+
+- Use **Zsh** (`#!/bin/zsh`), the default shell for modern macOS. **Note**: Python 2.7 has been removed since macOS 12.3; you must deploy your own interpreter to run Python scripts.
+
+### 2. Upload to Jamf Pro
+
+- Go to **Settings > Computer Management > Scripts**.
+- Click **+ New**, enter a name, and paste your script content.
+- **Parameters**: You can set labels for variables `$4` through `$11`, allowing the same script to take different inputs (e.g., a printer IP) via different policies.
+
+### 3. Execute via Policy
+
+- Go to **Computers > Policies > + New**.
+- Set a **Trigger** (e.g., Recurring Check-in, Login).
+- Add the **Scripts** payload and select your uploaded script.
+- Set the **Scope** for the target computers.
+
+### 4. Execution Frequency
+
+- Define the frequency (e.g., **Once per computer** or **Ongoing** for every trigger).
+
+## Practical Example: Displaying a Notice with `jamfHelper`
+
+`jamfHelper` is a powerful notification tool built into Jamf, located at `/Library/Application Support/Jamf/bin/jamfHelper.app`.
+
+```bash
+#!/bin/bash
+
+# Define variables
+HELPER="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
+TITLE="School IT Department Announcement"
+HEADING="Software Update Notification"
+DESC="Your computer will undergo a security update in 10 minutes. Please save your work and connect to power."
+
+# Execute window
+"$HELPER" -windowType utility -title "$TITLE" -heading "$HEADING" -description "$DESC" -button1 "I understand" -defaultButton 1
+```
+
+## Practical Advice & Expert Tips:
+
+- **Permissions**: Scripts run by Jamf Pro default to **Root** status. Always test on a pilot device to avoid accidental deletion of critical system files.
+- **Running as User**: To run a command as the currently logged-in user (e.g., to modify their Dock), use: `sudo -u $(stat -f%Su /dev/console) command`.
+
+
+---
 File: mac-10.md
 ---
 
@@ -53,7 +459,7 @@ id: mac-10
 title: "Default Jamf Pro inventory lacks specific info (like file versions or last reboot). How do I collect custom data?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Extension Attributes","Scripts","Inventory","Custom Fields"]
+tags: ["Extension Attributes", "Scripts", "Inventory", "Custom Fields"]
 ---
 
 **Use the "Computer Extension Attributes" feature. This is the core tool in Jamf Pro for expanding database fields and collecting non-standard hardware/software information.**
@@ -120,7 +526,7 @@ id: mac-11
 title: "Why does my Mac show 'Unidentified Developer' or 'Cannot be opened' when installing software?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Gatekeeper","Security","Notarization","Software Installation"]
+tags: ["Gatekeeper", "Security", "Notarization", "Software Installation"]
 ---
 
 **This is macOS's Gatekeeper security mechanism. For software required for teaching that has not been notarized by Apple, we recommend using 'Right-click to Open' or deploying via MDM to bypass quarantine flags.**
@@ -173,7 +579,7 @@ id: mac-12
 title: "How do I prevent students from entering Recovery Mode to format the computer?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Tamper Proofing","Recovery Lock","Firmware Password","Security"]
+tags: ["Tamper Proofing", "Recovery Lock", "Firmware Password", "Security"]
 ---
 
 **The protection mechanism differs depending on the Mac architecture: Intel-based Macs require a 'Firmware Password,' while Apple Silicon (M-series) Macs require a 'Recovery Lock.' Both can be deployed via Jamf Pro.**
@@ -182,10 +588,10 @@ Recovery Mode is powerful. If left unprotected, anyone with physical access can 
 
 ## Comparison of Mechanisms:
 
-| Architecture | Protection Mechanism | Deployment Method |
-| :--- | :--- | :--- |
-| **Apple Silicon (M1-M5)** | **Recovery Lock** | Configured via **MDM Remote Command** only |
-| **Intel Mac** | **Firmware Password** | Configured via **Configuration Profile** or Command |
+| Architecture              | Protection Mechanism  | Deployment Method                                   |
+| :------------------------ | :-------------------- | :-------------------------------------------------- |
+| **Apple Silicon (M1-M5)** | **Recovery Lock**     | Configured via **MDM Remote Command** only          |
+| **Intel Mac**             | **Firmware Password** | Configured via **Configuration Profile** or Command |
 
 ### 1. Recovery Lock (For Apple Silicon)
 
@@ -214,7 +620,7 @@ id: mac-13
 title: "Google Meet or Zoom keeps asking for 'Screen Recording' permissions. Can MDM enable this automatically?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["PPPC","Privacy","TCC","Screen Recording","Standard Users"]
+tags: ["PPPC", "Privacy", "TCC", "Screen Recording", "Standard Users"]
 ---
 
 **This is governed by macOS TCC (Transparency, Consent, and Control) privacy mechanisms. For 'Screen Recording,' 'Microphone,' and 'Camera,' Apple mandates that the user must 'personally click to allow.'**
@@ -223,12 +629,12 @@ MDM cannot forcibly "turn on" these permissions. However, you can use a **PPPC (
 
 ## MDM Control Capability Matrix (2026 Edition)
 
-| Permission | Forced ON by MDM? | User Consent Needed? | Admin Strategy |
-| :--- | :--- | :--- | :--- |
-| **Screen Recording** | ❌ No | ✅ Yes | Authorize Standard Users to allow |
-| **Microphone / Camera** | ❌ No | ✅ Yes | Set to "Allow" (prevents blocking) |
-| **Accessibility** | ✅ Yes | ❌ No | Can be fully authorized silently |
-| **Full Disk Access** | ✅ Yes | ❌ No | Can be fully authorized silently |
+| Permission              | Forced ON by MDM? | User Consent Needed? | Admin Strategy                     |
+| :---------------------- | :---------------- | :------------------- | :--------------------------------- |
+| **Screen Recording**    | ❌ No             | ✅ Yes               | Authorize Standard Users to allow  |
+| **Microphone / Camera** | ❌ No             | ✅ Yes               | Set to "Allow" (prevents blocking) |
+| **Accessibility**       | ✅ Yes            | ❌ No                | Can be fully authorized silently   |
+| **Full Disk Access**    | ✅ Yes            | ❌ No                | Can be fully authorized silently   |
 
 ## Best Practices for Schools (SOP):
 
@@ -260,7 +666,7 @@ id: mac-14
 title: "How do I deploy multiple network printers to teacher Macs using Jamf Pro?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Printers","AirPrint","lpadmin","Policy","Self Service"]
+tags: ["Printers", "AirPrint", "lpadmin", "Policy", "Self Service"]
 ---
 
 **Modern Mac printing should prioritize the 'AirPrint (driverless)' protocol. For advanced configurations, use 'Policies' or Shell scripts executing the `lpadmin` command.**
@@ -314,7 +720,14 @@ id: mac-15
 title: "How do I mass-deploy Microsoft Office and activate licenses? Lab vs. Administrative Macs?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Office","Microsoft 365","Serializer","Volume License","Jamf App Installers"]
+tags:
+  [
+    "Office",
+    "Microsoft 365",
+    "Serializer",
+    "Volume License",
+    "Jamf App Installers",
+  ]
 ---
 
 **The best practice is to use 'Jamf App Installers' for automated deployment, combined with either the 'Volume License Serializer' or 'User-based Login' depending on the scenario.**
@@ -352,7 +765,7 @@ id: mac-16
 title: "How do I manage or disable 'iPhone Mirroring' in macOS Sequoia?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["macOS 15","iPhone Mirroring","Privacy","Restrictions","DLP"]
+tags: ["macOS 15", "iPhone Mirroring", "Privacy", "Restrictions", "DLP"]
 ---
 
 **While convenient, 'iPhone Mirroring' in macOS 15+ poses Data Loss Prevention (DLP) risks on shared school computers. It should be managed via MDM.**
@@ -382,7 +795,7 @@ id: mac-17
 title: "What are the advantages of using the Mac mini (M4/M5) for school labs?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Mac mini","M4","Lab Setup","Zero-Touch","ADE"]
+tags: ["Mac mini", "M4", "Lab Setup", "Zero-Touch", "ADE"]
 ---
 
 **The Mac mini (M4/M5), paired with macOS 26, offers 'Zero-Touch Deployment' and extreme energy efficiency, making it the ideal PC replacement for modern schools.**
@@ -415,7 +828,7 @@ id: mac-18
 title: "A Mac is locked by a former user's Apple ID (Activation Lock). How do I recover it?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Activation Lock","ASM","Unlocking","Asset Recovery"]
+tags: ["Activation Lock", "ASM", "Unlocking", "Asset Recovery"]
 ---
 
 **If the Mac is a school asset (enrolled in ASM), administrators can bypass Activation Lock directly from the Apple School Manager portal without the original user's password.**
@@ -448,7 +861,7 @@ id: mac-19
 title: "2026 macOS Deployment: Advanced strategies for large-scale enrollment."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Deployment","ADE","Offline Install","Content Caching","macOS 26"]
+tags: ["Deployment", "ADE", "Offline Install", "Content Caching", "macOS 26"]
 ---
 
 **In 2026, Zero-Touch deployment via ADE is the enterprise standard. However, the bottleneck for high-volume rollouts (like a 50-unit Mac mini lab) remains network bandwidth and MDM server load.**
@@ -479,46 +892,6 @@ For schools with unstable internet, use a hybrid strategy:
 ## III. 2026 NPU Considerations
 
 The **M4/M5** chips feature powerful Neural Engines. During your initial deployment, ensure you aren't over-restricting background tasks, as macOS uses this time to initialize local AI models (for Writing Tools and Siri). Allowing this process to finish during setup ensures students have a smooth "Day One" experience.
-
-
----
-File: mac-2.md
----
-
----
-id: mac-2
-title: "How do we manage Local Admin privileges for staff and students on Macs?"
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["Privilege Management","LAPS","Security","Standard User"]
----
-
-**The Gold Standard is to provide "Standard User" accounts for daily tasks, supplemented by a "just-in-time" Admin elevation tool or a Managed LAPS solution.**
-
-Granting permanent Admin rights to students or teachers is a major security risk. It allows for the disabling of security software, the installation of unauthorized apps, and makes the campus network more vulnerable to ransomware.
-
-## The Three-Tier Management Strategy:
-
-### 1. Standard User by Default
-
-- All school-issued Macs should be set up with "Standard User" accounts. This prevents users from altering core system settings or installing system-wide software without oversight.
-
-### 2. Native LAPS (Local Administrator Password Solution)
-
-- **2026 Status**: As of **macOS 26**, Apple includes a native LAPS protocol.
-- **How it works**: Jamf Pro creates a hidden admin account on every Mac. The password for this account is a long, random string that **rotates automatically** every few days.
-- **Operational use**: If a technician needs to fix a Mac, they look up the *current* random password in the Jamf dashboard. Once used, the password is refreshed, ensuring the old one can never be used again.
-
-### 3. Self-Service Elevation (Privileges App)
-
-For staff members who occasionally need to install a printer driver or specialized software:
-
-- **Tool**: Deploy the **Privileges** app (or Jamf’s equivalent).
-- **Workflow**: The teacher clicks a lock icon in the Dock, justifies the need, and is granted **Admin rights for 20 minutes**. After the timer expires, the system automatically demotes them back to a Standard User.
-
-## Institutional Advice:
-
-Adopting the "Principle of Least Privilege" does not mean making life difficult for teachers; it means providing them with the tools to be productive while ensuring the school’s digital assets remain secure and compliant with insurance standards.
 
 
 ---
@@ -555,11 +928,11 @@ After entering the password, the SSH session will momentarily drop as the encryp
 
 ## Security Risks & Mitigation
 
-| Risk | Mitigation Measure |
-| :--- | :--- |
-| Brute Force | Limit source IP, use firewall, strong passwords, change default port |
-| Man-in-the-Middle | Verify host keys, use VPN |
-| Network Sniffing | Dedicated management VLAN, Network Access Control (NAC) |
+| Risk              | Mitigation Measure                                                   |
+| :---------------- | :------------------------------------------------------------------- |
+| Brute Force       | Limit source IP, use firewall, strong passwords, change default port |
+| Man-in-the-Middle | Verify host keys, use VPN                                            |
+| Network Sniffing  | Dedicated management VLAN, Network Access Control (NAC)              |
 
 ## 2026 Safety Warning (M5 Macs)
 
@@ -583,7 +956,8 @@ id: mac-21
 title: "macOS 26 Transparency: Students can see MDM privacy settings. How do I handle questions?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Privacy Permissions", "Transparency", "PPPC", "macOS 26", "Communication"]
+tags:
+  ["Privacy Permissions", "Transparency", "PPPC", "macOS 26", "Communication"]
 ---
 
 **macOS 26 explicitly labels privacy permissions (Camera, Mic, Screen Recording) that are managed by the organization in System Settings.**
@@ -591,10 +965,12 @@ tags: ["Privacy Permissions", "Transparency", "PPPC", "macOS 26", "Communication
 ## Interface Changes
 
 ### Pre-macOS 26 (Before macOS 15 Sequoia)
-- Users saw toggles as grayed out but often didn't know *why*.
+
+- Users saw toggles as grayed out but often didn't know _why_.
 - Permission switches were simply locked without explanation.
 
 ### macOS 26
+
 - Displays a badge: **"Managed by [Organization Name]"**.
 - Displays management icons.
 - Users can see what has been authorized but still cannot change it, but now they know it is set by the school.
@@ -602,26 +978,31 @@ tags: ["Privacy Permissions", "Transparency", "PPPC", "macOS 26", "Communication
 ## Common Questions and Response Angles
 
 ### "Why is the Microphone forced ON?"
+
 - Response: This ensures apps like Zoom, Google Meet, or recording software for language classes work instantly.
 - Having the permission does not mean it is "Recording"—macOS still shows a hardware-level **Orange Light** whenever the mic is active (this cannot be bypassed by software).
 
 ### "Is Screen Recording for monitoring me?"
+
 - Response: This allows students to share their screen during presentations or remote lab sessions.
 - Having the permission allows the app to share; it does not mean continuous monitoring.
 - macOS displays a **Green indicator** when the screen is being shared or recorded.
 
 ### "Why can't I turn it OFF?"
+
 - Response: Managing these via MDM ensures that critical educational tools don't fail due to a student accidentally clicking "Deny."
 - This reduces the support burden of repeatedly troubleshooting permission prompts.
 
 ## Practical Advice:
 
 ### Preparation
+
 - List the permissions the school has set and explain the purpose of each.
 - Prepare an FAQ for students/staff.
 - Explain that this is a new design feature of macOS 26, not a new monitoring initiative.
 
 ### Response Principles
+
 - Acknowledge that privacy concerns are valid.
 - Explain the pedagogical necessity of each permission.
 - Emphasize macOS's built-in protections (hardware indicators, notifications).
@@ -636,7 +1017,14 @@ id: mac-22
 title: "macOS 26: The end of the Intel Mac era. How much longer can Intel Macs be used?"
 category: "Section 7: Advanced Mac Management"
 important: true
-tags: ["Intel Mac", "Apple Silicon", "System Support", "macOS 26", "Lifecycle Planning"]
+tags:
+  [
+    "Intel Mac",
+    "Apple Silicon",
+    "System Support",
+    "macOS 26",
+    "Lifecycle Planning",
+  ]
 ---
 
 **macOS 26 (Tahoe) has been confirmed as the final major version of macOS to support Intel-based Macs. Starting with macOS 27 in 2027, the operating system will exclusively support Apple Silicon (M1–M5 series).**
@@ -644,39 +1032,45 @@ tags: ["Intel Mac", "Apple Silicon", "System Support", "macOS 26", "Lifecycle Pl
 ## Support Roadmap and Retirement Timeline
 
 ### 1. The Last Supported Intel Macs
+
 - **iMac (Retina 5K, 27-inch, 2020)**: The peak of Intel Mac performance.
 - **MacBook Pro (16-inch, 2019)**.
 - **Mac Pro (2019+)**.
 - **Note**: Older models (2017 and prior) are already unsupported by modern macOS versions and can only run older system versions.
 
 ### 2. macOS 27 (Expected Late 2026/2027)
+
 - Exclusively supports Apple Silicon (M1/M2/M3/M4/M5).
 - Intel Macs will be unable to upgrade.
 
 ## Lifecycle Expectations
 
 ### 1. Security Updates
+
 - After macOS 26 stops receiving major feature updates, Apple typically provides **2-3 additional years of Security Updates**.
 - We expect Intel Macs on macOS 26 to be safe for school use until approximately **late 2028 or early 2029**.
 
 ### 2. App Support
+
 - Major developers (Adobe, Microsoft, Google) usually support the current OS plus two versions back.
 - Once security updates for macOS 26 cease, these vendors will likely stop releasing Intel-compatible versions or updates.
 
 ## Assessing Existing Intel Macs
 
 ### 1. Audit via MDM
+
 Use Jamf Pro to identify all Intel-based Macs:
+
 - Create a **Smart Computer Group**.
 - Criteria: `Architecture Type` is `x86_64`.
 
 ### 2. Impact assessment by Scenario
 
-| Scenario | Impact Assessment |
-| :--- | :--- |
-| **Professional Labs** | Software vendors may gradually phase out Intel support. |
+| Scenario                 | Impact Assessment                                                               |
+| :----------------------- | :------------------------------------------------------------------------------ |
+| **Professional Labs**    | Software vendors may gradually phase out Intel support.                         |
 | **Administrative Tasks** | Office and browsers have lower requirements; usable until security updates end. |
-| **Teacher Laptops** | Depends on specific software requirements. |
+| **Teacher Laptops**      | Depends on specific software requirements.                                      |
 
 ## Timeline Summary
 
@@ -685,6 +1079,7 @@ Use Jamf Pro to identify all Intel-based Macs:
 - **2029+**: Security updates end; devices should be replaced or used for non-networked tasks.
 
 ## Why Apple Silicon?
+
 - M1-M5 series offer revolutionary performance and battery life over Intel.
 - macOS and core apps are optimized for the Apple Silicon architecture.
 - Native support for running iOS/iPadOS apps.
@@ -699,7 +1094,14 @@ id: mac-23
 title: "Classroom Order: How to manage or disable 'iPhone Mirroring' to prevent student distractions."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["iPhone Mirroring", "Classroom Management", "Restrictions", "macOS 26", "Security"]
+tags:
+  [
+    "iPhone Mirroring",
+    "Classroom Management",
+    "Restrictions",
+    "macOS 26",
+    "Security",
+  ]
 ---
 
 **macOS 26 provides granular MDM controls for 'iPhone Mirroring.' IT coordinators can set different permission levels for 'Shared Lab Macs' versus 'Teacher Presentation Macs.'**
@@ -742,7 +1144,8 @@ id: mac-24
 title: "Exam Security: Managing Safari 'Distraction Control' to prevent cheating during web-based tests."
 category: "Section 7: Advanced Mac Management"
 important: true
-tags: ["Safari", "Distraction Control", "Exam Security", "macOS 26", "Proctoring"]
+tags:
+  ["Safari", "Distraction Control", "Exam Security", "macOS 26", "Proctoring"]
 ---
 
 **Safari in macOS 26 introduces 'Distraction Control,' which allows users to hide specific web elements (like ads or sidebars). However, in a Computer-Based Testing (CBT) environment, students could abuse this to hide timers, navigation menus, or proctoring warnings.**
@@ -757,12 +1160,15 @@ tags: ["Safari", "Distraction Control", "Exam Security", "macOS 26", "Proctoring
 IT coordinators should enforce the following settings via Jamf Pro during major exams:
 
 ### 1. Lock via Configuration Profile (Recommended)
+
 - **Domain**: `com.apple.Safari` advanced settings.
 - **Setting**: `AllowDistractionControl` = `false`
 - **Effect**: The "Distraction Control" option in the Safari menu will be grayed out and unavailable, ensuring the website UI remains exactly as intended by the test publisher.
 
 ### 2. Assessment Mode (AAC)
+
 For high-stakes exams, use a specialized testing app or a managed browser that invokes Apple's **'Automatic Assessment Configuration (AAC).'**
+
 - This mode forces the device into a secure workspace, automatically disabling non-essential features including Distraction Control, Siri, notifications, and multitasking.
 
 ## III. Operational Advice
@@ -782,7 +1188,14 @@ id: mac-25
 title: "Security Auditing: Using PSSO 2.0 to achieve 'Boot-to-Desktop' and meet strong password requirements."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Platform SSO", "Passwordless", "Security Standards", "MOE Requirements", "Authentication"]
+tags:
+  [
+    "Platform SSO",
+    "Passwordless",
+    "Security Standards",
+    "MOE Requirements",
+    "Authentication",
+  ]
 ---
 
 **In 2026, Platform SSO (PSSO) 2.0 allows schools to solve two major operational problems: weak teacher passwords and the 'double login' (FileVault + OS) frustration.** By synchronizing the local Mac login with organizational cloud accounts (Microsoft Entra ID or Google Workspace), you can enforce compliant strong password policies while providing a streamlined single-entry experience for the user.
@@ -823,7 +1236,14 @@ id: mac-26
 title: "Mixed Fleet Management: Using Smart Groups to distinguish between Intel and Apple Silicon software packages."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Hybrid Environment", "Intel Mac", "Apple Silicon", "Smart Group", "Deployment Strategy"]
+tags:
+  [
+    "Hybrid Environment",
+    "Intel Mac",
+    "Apple Silicon",
+    "Smart Group",
+    "Deployment Strategy",
+  ]
 ---
 
 **2026 is the sunset year for Intel Macs. Most schools have a hybrid environment containing both 'x86_64 (Intel)' and 'arm 64 (M1–M5)' architectures. Assigning the wrong software package can lead to non-functional apps or system instability.**
@@ -833,16 +1253,19 @@ tags: ["Hybrid Environment", "Intel Mac", "Apple Silicon", "Smart Group", "Deplo
 IT coordinators should establish these baseline groups in Jamf Pro for accurate deployment:
 
 ### 1. Apple Silicon Group (Primary)
+
 - **Criteria**: `Architecture Type`
 - **Operator**: `is`
 - **Value**: `arm 64` (or `Apple Silicon`)
 
 ### 2. Intel Mac Group (Legacy)
+
 - **Criteria**: `Architecture Type`
 - **Operator**: `is`
 - **Value**: `x86_64`
 
 ### 3. Rosetta 2 Status Group
+
 - Create a group for "Apple Silicon Macs MISSING Rosetta 2" to automatically trigger the installation of the Rosetta translation environment if you still rely on legacy Intel apps.
 
 ## II. Recommended Deployment Strategy
@@ -911,7 +1334,14 @@ id: mac-28
 title: "First-Aid: What to do if Mac Enrollment hangs after a 'Wipe All Content and Settings' (EACS) reset."
 category: "Section 7: Advanced Mac Management"
 important: true
-tags: ["EACS", "ADE Troubleshooting", "Network Auth", "Terminal Commands", "Recovery Mode"]
+tags:
+  [
+    "EACS",
+    "ADE Troubleshooting",
+    "Network Auth",
+    "Terminal Commands",
+    "Recovery Mode",
+  ]
 ---
 
 **While 'Erase All Content and Settings (EACS)' is highly stable, school environments with captive-portal Wi-Fi or strict firewalls can cause the Mac to hang at the 'Remote Management' enrollment screen.**
@@ -968,7 +1398,15 @@ id: mac-29
 title: "How to push system updates (iOS/iPadOS/macOS) via Jamf Pro?"
 category: "Section 1: Hardware & OS Updates"
 important: true
-tags: ["System Updates","Jamf Pro","DDM","Software Update Blueprints","iOS Update","macOS Update"]
+tags:
+  [
+    "System Updates",
+    "Jamf Pro",
+    "DDM",
+    "Software Update Blueprints",
+    "iOS Update",
+    "macOS Update",
+  ]
 ---
 
 **By 2026, software update management in Jamf Pro has fully transitioned to the "Declarative Device Management (DDM)" framework.** This approach is more stable than legacy remote commands and allows devices to autonomously handle the download and installation process, significantly reducing server load.
@@ -1008,360 +1446,4 @@ If you need to send an update immediately to a specific set of search results:
 1. **Avoid Exam Weeks**: While updates can be enforced, avoid doing so during exam periods or presentations to prevent devices from entering the 15–30 minute update screen unexpectedly.
 2. **Power Confirmation**: Remind students to plug in their iPad/Mac overnight when an update is scheduled. Constant power is the most critical factor for a successful update.
 
-
----
-File: mac-3.md
----
-
----
-id: mac-3
-title: "How do we distribute non-App Store software like Chrome, Adobe CC, or Office?"
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["Software Distribution","App Installers","PKG","Auto-Update"]
----
-
-**Move away from manual packaging. Use Jamf Pro's "App Installers" for high-frequency apps, and DDM-based distribution for mission-critical software.**
-
-Managing Mac software used to involve a tedious cycle of downloading DMGs, repackaging them into PKGs, and uploading them. Today, there are much more efficient pathways.
-
-## Modern Software Deployment Tiers:
-
-### Tier 1: Jamf App Installers (Preferred)
-
-- **The Workflow**: You choose "Google Chrome" from the Jamf catalog. Jamf handles the downloading, packaging, and—crucially—the **Automatic Updates**.
-- **Self-Healing**: In **macOS 26**, this is backed by DDM. If a student deletes Chrome, the Mac notices the "State Desync" and automatically reinstalls the app in the background without any IT intervention.
-
-### Tier 2: Mac App Store (VPP)
-
-- Best for classroom favorites like Goodnotes, Keynote, or GarageBand.
-- Purchase licenses in bulk via Apple School Manager and push them to devices. Installation is silent and updates are managed by the system.
-
-### Tier 3: Adobe Creative Cloud (Shared Device License)
-
-- For computer labs, use the **Adobe Admin Console** to create a "Shared Device License" package.
-- Push this package via a Jamf Pro policy. This ensures that any student who sits at the Mac can use the software using their individual school ID.
-
-### Tier 4: Custom PKGs (Last Resort)
-
-- Use **Jamf Composer** to package specialized local curriculum software or niche drivers that are not found in public catalogs.
-
-## Institutional Advice:
-
-Focus on the "App Installers" catalog for 90% of your needs. Ensuring that apps like Chrome and Zoom are automatically kept on the latest version is the single best way to reduce security vulnerabilities across the campus.
-
-
----
-File: mac-4.md
----
-
----
-id: mac-4
-title: "How should we design our macOS update strategy for 2026? How does DDM change things?"
-category: "Section 7: Advanced Mac Management"
-important: true
-tags: ["Software Updates", "DDM", "macOS 26", "Compliance", "IT Strategy"]
----
-
-**In the macOS 26 (Tahoe) era, Apple has fully transitioned to Declarative Device Management (DDM) for software updates. IT teams no longer "send a command" to update; they "declare a state."**
-
-This shift solves the old problem of update commands being ignored or failing due to network timing.
-
-## I. Traditional vs. Declarative (DDM) Updates
-
-| Feature | Old MDM Command | New DDM (macOS 23+) |
-| :--- | :--- | :--- |
-| **Logic** | Server pushes, Device might ignore | **Device self-monitors** and enforces |
-| **Deadlines** | Optional / Flaky | **Hard Enforcement Deadlines** |
-| **User Experience** | Random popups | Clear countdowns and notifications |
-| **Visibility** | "Unknown" status until done | Real-time status: "Downloading," "Ready" |
-
-## II. 2026 Standard Operating Procedure for IT
-
-### 1. Set Enforcement Deadlines
-
-- **Major Updates (e.g., 26.1)**: Set a deadline for **14-21 days** after release. This gives everyone time to choose a convenient moment.
-- **Security Patches (RSR)**: Set a deadline for **48 hours**. Critical security shouldn't wait.
-- **The Result**: Users get multiple gentle reminders. If they haven't updated by the deadline, the Mac will **force a restart and install** automatically at the specified time.
-
-### 2. Utilize DDM Status Channels
-
-- Administrators no longer need to manually "Scan for Inventory" to see who is updated.
-- DDM actively reports its progress: "I have downloaded the update and scheduled installation for 17:00."
-
-### 3. Campus Network Infrastructure
-
-- Massive simultaneous DDM updates place extreme stress on school bandwidth.
-- **Key Infrastructure**: Ensure each administrative or classroom building has at least one Mac mini acting as a **"Content Caching"** server. This ensures 90% of the update traffic stays on the local network.
-
-## III. Practical Reminders
-
-- **Avoid Exam Weeks**: DDM enforcement is highly strictly. During assessment weeks or high-stakes exams, please temporarily unassign the update profile to prevent a student's Mac from automatically restarting mid-exam because a deadline was reached.
-
-## Institutional Advice:
-
-Transitioning to DDM Enforcement Deadlines is the only way to ensure 100% compliance across a laptop fleet. It moves the responsibility of "staying updated" from the student to the hardware itself.
-
-
----
-File: mac-5.md
----
-
----
-id: mac-5
-title: "How do I force a Mac to perform system updates? Students keep clicking 'Remind Me Later'."
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["System Updates","DDM","Nudge","IT Operations"]
----
-
-**The modern solution is to use "Declarative Device Management (DDM)."** If you need more visual urgency, you can supplement this with the open-source tool "Nudge."
-
-Unlike iPads, Mac updates often require a lengthy restart, which leads students to postpone them indefinitely, creating a fragmented and insecure fleet.
-
-## Strategy 1: DDM Enforced Updates (Recommended for macOS 14+)
-
-- **The Logic**: This is Apple's newest management protocol. IT administrators set an **"Enforcement Deadline."**
-- **The Workflow**:
-  1. In the days leading up to the deadline, the system gently notifies the student.
-  2. As the deadline approaches, the notifications become more persistent.
-  3. **Once the deadline is reached**, the Mac will automatically download the update and force a restart. The student cannot postpone it further.
-- **Configuration**: This is set in Jamf Pro under **Configuration Profiles > Software Update**, where you define the target version and the specific cut-off date and time.
-
-## Strategy 2: Nudge (Visual Urgency)
-
-If the subtle system notifications aren't enough, the community-standard tool **Nudge** is the best solution.
-
-- **Functionality**: It pops up a non-dismissible window (which can be branded with the school logo) that clearly states: "Your Mac is out of date and insecure. Please update now."
-- **Escalation**: As the deadline nears, Nudge can dim the screen or blur the background, making it impossible for the student to ignore the update while they try to use other apps.
-- **Deployment**: Deploy the Nudge package and JSON configuration via Jamf Pro.
-
-## Institutional Advice:
-
-For computer labs that are unoccupied at night, use Jamf Pro to schedule a "Wake Up" command at 2:00 AM followed by a "Force Update" command. This allows the heavy lifting to happen while the students are asleep, ensuring the labs are ready and updated for the first period.
-
-
----
-File: mac-6.md
----
-
----
-id: mac-6
-title: "How can I quickly reset (wipe) a Mac lab, similar to using recovery cards?"
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["Reset","EACS","Erase All Content and Settings","Computer Lab","Imaging"]
----
-
-**In the era of Apple Silicon (M-series), using "recovery cards" or "Ghost" imaging is no longer recommended and often not even possible. Instead, use the "Erase All Content and Settings (EACS)" command.**
-
-Traditional monolithic imaging has been completely retired by Apple. The modern reset logic is "Clear user data + Keep operating system + Automatically re-enroll."
-
-## Comparison of Reset Methods
-
-| Feature | Legacy Re-imaging | Erase All Content and Settings (EACS) |
-| :--- | :--- | :--- |
-| **Principle** | Format drive > Re-download & install OS | Destroy encryption keys > Clear user data |
-| **Time Required** | 1-2 hours | **5-10 minutes** |
-| **Network Demand** | Requires 12GB+ OS download | **Minimal bandwidth** |
-| **Data Security** | Disk formatting (recoverable) | Cryptographic destruction (unrecoverable) |
-| **Hardware Support** | All Intel/Apple Silicon Macs | Macs with T2 or Apple Silicon chips |
-
-## Standard Reset SOP (Jamf Pro)
-
-### 1. Send Command
-
-- Send the **"Wipe Computer"** command to the target computer group in Jamf Pro.
-- **Crucial**: For Apple Silicon and T2-equipped Macs, this command automatically triggers **EACS (Erase All Content and Settings)**.
-
-### 2. Execution (Within minutes)
-
-- The system instantly discards the encryption keys (Cryptographic Erase), making data unreadable within seconds.
-- The computer reboots to the "Hello" (Setup Assistant) screen.
-
-### 3. Automated Deployment (Zero-Touch)
-
-- The computer connects to the network (Ensure a non-authenticated Wi-Fi or wired network is provided).
-- **ADE (Automated Device Enrollment)** is triggered automatically.
-- PreStage Enrollment settings are downloaded, admin accounts are created, and software is installed automatically.
-
-## Difference from Traditional Recovery Cards
-
-- Traditional cards "restore on every reboot."
-- Modern Mac management uses EACS reset at the "end of a semester or project."
-- If daily restoration is required (e.g., for library public kiosks), consider using **"Guest User" mode** (which deletes data upon logout) or specialized kiosk software (like Deep Freeze for Mac).
-
-
----
-File: mac-7.md
----
-
----
-id: mac-7
-title: "What special restrictions apply to managing Apple Silicon (M-series) Macs?"
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["Apple Silicon","Bootstrap Token","Secure Boot","Kernel Extensions"]
----
-
-**The security architecture of Apple Silicon (M1-M5) is fundamentally different from Intel Macs. The core of management lies in the "Bootstrap Token" and "Volume Ownership."**
-
-Without proper configuration, MDM will be unable to perform software updates or install kernel plugins.
-
-## Key Technical Indicators:
-
-### 1. Bootstrap Token
-
-- **The Issue**: On Apple Silicon, certain high-privilege operations (such as installing software updates or enabling kernel extensions) require a "Secure Token."
-- **The Solution**: Ensure that **"Allow MDM to upload Bootstrap Token"** is checked in the Jamf Pro **PreStage Enrollment** settings.
-- **Verification**: In the Jamf Pro computer record, confirm that `Bootstrap Token Allowed` is set to `Yes`. If it is "No," many management commands will fail.
-
-### 2. Volume Ownership
-
-- Only users designated as "Owners" can perform system resets or updates.
-- The first account created through ADE enrollment automatically gains ownership. MDM escorts this privilege via the Bootstrap Token.
-
-### 3. Kernel Extensions (KEXTs)
-
-- Apple Silicon **blocks** all third-party KEXTs by default.
-- If they must be installed (e.g., for older antivirus software), the device must be rebooted into Recovery Mode to lower the security setting to "Reduced Security."
-- **Modern Recommendation**: Use **System Extensions** instead. This is Apple's recommended architecture, which can be authorized directly via MDM configuration profiles without lowering system security.
-
-
----
-File: mac-8.md
----
-
----
-id: mac-8
-title: "Why does MDM require FileVault? How do I recover a forgotten login password?"
-category: "Section 7: Advanced Mac Management"
-important: true
-tags: ["FileVault","Full Disk Encryption","Data Security","Recovery Key","Jamf Pro","Inventory"]
----
-
-**FileVault is macOS's built-in "Full Disk Encryption" technology, ensuring that data cannot be stolen if the computer is lost. By escrowing the "Recovery Key" to MDM, administrators can help unlock the device if a user forgets their password.**
-
-## Technical Principles:
-
-- **XTS-AES-128 Encryption**: Before login, the hard drive data is encrypted and unreadable.
-- **Performance Impact**: Modern Macs handle encryption via the Secure Enclave hardware, resulting in virtually zero impact on daily performance.
-- **2026 Experience: Platform SSO (PSSO)**: In macOS 26, using PSSO allows users to enter their password just once at the FileVault screen to boot directly to the desktop. The system automatically handles subsequent identity provider (IdP) verification and login. This eliminates the legacy "double login" frustration.
-
-## Jamf Pro Deployment and Escrow Flow (SOP):
-
-### 1. Create Configuration Profile
-
-- Go to **Configuration Profiles > New > FileVault**.
-- Set to **Require FileVault**.
-- **Crucial Step**: Set to **Create Personal Recovery Key** and choose **Escrow Personal Recovery Key to MDM**.
-
-### 2. User-Side Activation
-
-- After deployment, the system will prompt the user to enable encryption at the next logout or reboot.
-- **Note**: Jamf Pro will only receive the key once the user completes this step and the status changes to "Encrypted."
-
-## Recovery Scenario: Looking up the Recovery Key
-
-If a user forgets their password, the administrator must retrieve the key from the console.
-
-### 1. Navigate to Inventory
-
-- Log in to Jamf Pro and search for the target computer.
-- Go to the detail page and select the **Inventory** tab > **Disk Encryption**.
-
-### 2. Verify Encryption and Key
-
-- First, check if **FileVault 2 Enabled** is set to **Encrypted** or **Enabled**.
-- **If Encrypted**: You will see a **Personal Recovery Key** field. Click **Show Key** to reveal the code.
-- **If Not Encrypted**: This field will not appear, meaning encryption is incomplete or the escrow failed. Recovery via MDM is not possible in this state.
-
-### 3. Perform the Unlock
-
-- On the Mac login screen, click the question mark (?) or enter the wrong password three times. Select **Reset password using Recovery Key** and enter the code.
-
-## Practical Advice & Warnings:
-
-- **Data Loss Risk**: If FileVault is enabled but Jamf Pro shows "Unknown" or no key, the escrow failed. If the password is forgotten in this state, **data is permanently unrecoverable**, and the device must be wiped.
-- **Institutional Recovery Key (IRK)**: Modern management favors the "Personal Recovery Key (PRK)" mechanism for higher security.
-
-
----
-File: mac-9.md
----
-
----
-id: mac-9
-title: "What can Jamf Scripts do? How do I create and run them?"
-category: "Section 7: Advanced Mac Management"
-important: false
-tags: ["Automation","Shell Script","Zsh","Policies","Scripts","jamfHelper"]
----
-
-**Scripts allow administrators to execute shell commands with Root privileges on a Mac, enabling advanced customization that standard MDM payloads cannot achieve.**
-
-Jamf Pro's power lies in its proprietary binary. When combined with **Policies**, you can achieve the following advanced scenarios:
-
-## Common Application Scenarios:
-
-| Scenario | Script Example |
-| :--- | :--- |
-| **User Interaction** | Use `jamfHelper` to pop up full-screen announcements or countdown windows. |
-| **System Cleanup** | Periodically delete specific cache files, temporary files, or reset the printing system. |
-| **Advanced Install** | Install Homebrew, Rosetta 2, or call Installomator for automated software updates. |
-| **Inventory Reporting** | Collect info outside standard fields (e.g. battery health) and report it to **Extension Attributes**. |
-| **Permission Management** | Temporarily grant Admin rights to a user and remove them after a set duration. |
-| **AI Automation** | Pre-trigger local indexing or semantic search initialization for Apple Intelligence models. |
-| **Swift Scripting** | **2026 Trend**: Use Swift for safer, more efficient automation supporting native APIs. |
-
-## 2026 Trend: DDM is Replacing "Repetitive Scripts"
-
-While scripts were previously used to check system states periodically, macOS 26 recommends using **Declarative Device Management (DDM)**.
-
-- **Example**: Instead of a script that periodically deletes large caches in `/tmp/`, you can define a DDM policy that allows the system to perform "Self-Healing" in place, which is more efficient and real-time.
-
-## Setup and Deployment Flow (SOP):
-
-### 1. Write the Script
-
-- Use **Zsh** (`#!/bin/zsh`), the default shell for modern macOS. **Note**: Python 2.7 has been removed since macOS 12.3; you must deploy your own interpreter to run Python scripts.
-
-### 2. Upload to Jamf Pro
-
-- Go to **Settings > Computer Management > Scripts**.
-- Click **+ New**, enter a name, and paste your script content.
-- **Parameters**: You can set labels for variables `$4` through `$11`, allowing the same script to take different inputs (e.g., a printer IP) via different policies.
-
-### 3. Execute via Policy
-
-- Go to **Computers > Policies > + New**.
-- Set a **Trigger** (e.g., Recurring Check-in, Login).
-- Add the **Scripts** payload and select your uploaded script.
-- Set the **Scope** for the target computers.
-
-### 4. Execution Frequency
-
-- Define the frequency (e.g., **Once per computer** or **Ongoing** for every trigger).
-
-## Practical Example: Displaying a Notice with `jamfHelper`
-
-`jamfHelper` is a powerful notification tool built into Jamf, located at `/Library/Application Support/Jamf/bin/jamfHelper.app`.
-
-```bash
-#!/bin/bash
-
-# Define variables
-HELPER="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-TITLE="School IT Department Announcement"
-HEADING="Software Update Notification"
-DESC="Your computer will undergo a security update in 10 minutes. Please save your work and connect to power."
-
-# Execute window
-"$HELPER" -windowType utility -title "$TITLE" -heading "$HEADING" -description "$DESC" -button1 "I understand" -defaultButton 1
-```
-
-## Practical Advice & Expert Tips:
-
-- **Permissions**: Scripts run by Jamf Pro default to **Root** status. Always test on a pilot device to avoid accidental deletion of critical system files.
-- **Running as User**: To run a command as the currently logged-in user (e.g., to modify their Dock), use: `sudo -u $(stat -f%Su /dev/console) command`.
 

@@ -1,6 +1,6 @@
 ---
 term: "Inventory Collection"
-category: ["Jamf","Core"]
+category: ["Jamf", "Core"]
 ---
 
 ## 術語定義

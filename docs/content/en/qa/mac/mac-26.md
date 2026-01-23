@@ -3,7 +3,14 @@ id: mac-26
 title: "Mixed Fleet Management: Using Smart Groups to distinguish between Intel and Apple Silicon software packages."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Hybrid Environment", "Intel Mac", "Apple Silicon", "Smart Group", "Deployment Strategy"]
+tags:
+  [
+    "Hybrid Environment",
+    "Intel Mac",
+    "Apple Silicon",
+    "Smart Group",
+    "Deployment Strategy",
+  ]
 ---
 
 **2026 is the sunset year for Intel Macs. Most schools have a hybrid environment containing both 'x86_64 (Intel)' and 'arm 64 (M1–M5)' architectures. Assigning the wrong software package can lead to non-functional apps or system instability.**
@@ -13,16 +20,19 @@ tags: ["Hybrid Environment", "Intel Mac", "Apple Silicon", "Smart Group", "Deplo
 IT coordinators should establish these baseline groups in Jamf Pro for accurate deployment:
 
 ### 1. Apple Silicon Group (Primary)
+
 - **Criteria**: `Architecture Type`
 - **Operator**: `is`
 - **Value**: `arm 64` (or `Apple Silicon`)
 
 ### 2. Intel Mac Group (Legacy)
+
 - **Criteria**: `Architecture Type`
 - **Operator**: `is`
 - **Value**: `x86_64`
 
 ### 3. Rosetta 2 Status Group
+
 - Create a group for "Apple Silicon Macs MISSING Rosetta 2" to automatically trigger the installation of the Rosetta translation environment if you still rely on legacy Intel apps.
 
 ## II. Recommended Deployment Strategy

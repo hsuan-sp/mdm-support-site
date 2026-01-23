@@ -20,10 +20,10 @@ The MDM server change must originate at the root of the ownership chain:
 
 ### 2. Configure the Migration Payload
 
-In your *existing* (MOE) MDM server, you must configure the migration instructions:
+In your _existing_ (MOE) MDM server, you must configure the migration instructions:
 
 - **Target MDM URL**: The enrollment URL of your new server.
-- **Enforcement Deadline**: Define the date and time when the transfer *must* occur.
+- **Enforcement Deadline**: Define the date and time when the transfer _must_ occur.
 
 ### 3. The Device Experience
 
@@ -34,6 +34,6 @@ In your *existing* (MOE) MDM server, you must configure the migration instructio
 
 ## Risks and Mitigation for Schools
 
-- **App Licensing**: VPP app licenses belong to the MDM server. You must ensure you have enough VPP licenses in the *new* server for all apps. We recommend setting the new server as the license owner prior to migration.
+- **App Licensing**: VPP app licenses belong to the MDM server. You must ensure you have enough VPP licenses in the _new_ server for all apps. We recommend setting the new server as the license owner prior to migration.
 - **Configuration Conflicts**: If the old server had a "Restriction" that the new server doesn't, those "ghost" restrictions might linger if not handled correctly. We recommend a "Cleanup" script run by the new MDM upon first check-in.
 - **Teacher/Staff vs. Student**: This feature is highly recommended for Teacher/Staff devices to avoid disrupting their administrative files. For student devices, if the storage is already cluttered, a traditional "Return to Service" (Wipe) remains the better option for long-term stability.

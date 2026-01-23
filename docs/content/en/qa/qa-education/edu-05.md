@@ -3,7 +3,7 @@ id: edu-05
 title: "The iPad feels slow or laggy. Is it faulty? How do we fix it?"
 category: "Section 8: Education Scenarios & FAQ"
 important: false
-tags: ["Performance","Troubleshooting","Maintenance"]
+tags: ["Performance", "Troubleshooting", "Maintenance"]
 ---
 
 **Most 'slowness' is caused by software fatigue rather than hardware failure. Regular maintenance steps can restore the device to its original speed.**

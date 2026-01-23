@@ -3,7 +3,14 @@ id: enr-13
 title: "How do I prevent students from removing the MDM management profile?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Prevent Unenrollment","Supervised","PreStage Enrollment","ADE","Return to Service"]
+tags:
+  [
+    "Prevent Unenrollment",
+    "Supervised",
+    "PreStage Enrollment",
+    "ADE",
+    "Return to Service",
+  ]
 ---
 
 **The key to preventing profile removal is using the 'Automated Device Enrollment (ADE)' process and enabling mandatory locking in the 'PreStage Enrollment' settings.**
@@ -26,5 +33,5 @@ If a device is enrolled manually (e.g., via a manual link or temporary Apple Con
 
 ## Practical Advice:
 
-- **Cannot be Retroactive**: If a student has *already* removed the profile, you cannot fix it remotely. You must wipe the device and have it go through the PreStage process with "Prevent Unenrollment" enabled.
+- **Cannot be Retroactive**: If a student has _already_ removed the profile, you cannot fix it remotely. You must wipe the device and have it go through the PreStage process with "Prevent Unenrollment" enabled.
 - **Version Requirements**: For modern environments, we recommend setting a **Minimum Required iPadOS Version** (e.g., iPadOS 17+) in PreStage to ensure "Return to Service" and latest security features function correctly.

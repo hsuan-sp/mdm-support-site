@@ -33,13 +33,13 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 
 ## User Experience Timeline
 
-| Time until Deadline | Notification Frequency | User Options |
-| :--- | :--- | :--- |
-| 30–14 Days | Banner in Settings | Can select "Later" |
-| 7 Days | Once per day | Can select "Later" |
-| 3 Days | Twice per day | Can select "Later" |
-| 24 Hours | Once per hour | Can select "Later" |
-| **At Deadline** | **Immediate Enforcement** | **No "Later" option** |
+| Time until Deadline | Notification Frequency    | User Options          |
+| :------------------ | :------------------------ | :-------------------- |
+| 30–14 Days          | Banner in Settings        | Can select "Later"    |
+| 7 Days              | Once per day              | Can select "Later"    |
+| 3 Days              | Twice per day             | Can select "Later"    |
+| 24 Hours            | Once per hour             | Can select "Later"    |
+| **At Deadline**     | **Immediate Enforcement** | **No "Later" option** |
 
 ### Behavior at Deadline:
 
@@ -55,5 +55,5 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 
 ## Communication:
 
-- **Teachers**: Explain *why* the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
+- **Teachers**: Explain _why_ the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
 - **Students**: Remind them to leave their iPads connected to power at home to allow for automatic background updates.

@@ -3,7 +3,7 @@ id: mac-14
 title: "學校有多台網路印表機，如何透過 Jamf Pro 派送設定給老師的 Mac？"
 category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
-tags: ["印表機","AirPrint","lpadmin","政策","自助服務","驅動程式"]
+tags: ["印表機", "AirPrint", "lpadmin", "政策", "自助服務", "驅動程式"]
 ---
 
 **現代化 Mac 列印部署應優先採用「AirPrint (免驅動)」協定。若需進階設定，則透過「政策 (Policies)」或 Shell 腳本執行 `lpadmin` 指令。**

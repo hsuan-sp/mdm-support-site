@@ -3,7 +3,7 @@ id: app-27
 title: "How to update apps via Jamf Pro? (Automated Enforcement and Manual Force Update)"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["App Update","Jamf Pro","Manual Update","Auto Update","DDM"]
+tags: ["App Update", "Jamf Pro", "Manual Update", "Auto Update", "DDM"]
 ---
 
 **In Jamf Pro, app updates are primarily managed through "Automated Enforcement" and the "Force Update" button.** To ensure classroom iPads remain up-to-date, it is recommended to combine automated checking with manual enforcement when necessary.

@@ -2,7 +2,7 @@
 
 > 此文件由腳本自動生成。用於讓維護人員（或 AI）快速確認目前已存在的內容，避免重複新增。
 
-最後更新時間：1/22/2026, 4:33:52 PM
+最後更新時間：1/23/2026, 10:16:18 AM
 
 ## 術語表 (Glossary)
 
@@ -75,7 +75,7 @@
 - **Device Name（裝置名稱）** (`device-name.md`)
 - **DFU Mode (Device Firmware Update)** (`dfu-mode-device-firmware-update.md`)
 - **DHCP (Dynamic Host Configuration Protocol)** (`dhcp-dynamic-host-configuration-protocol.md`)
-- **Directory Service (目錄服務)** (`directory-service.md`)
+- **Directory Service（目錄服務）** (`directory-service.md`)
 - **DMG (Disk Image)** (`dmg-disk-image.md`)
 - **DNS (Domain Name System)** (`dns-domain-name-system.md`)
 - **DNS over HTTPS/TLS (DNS 加密協定)** (`dns-over-https-tls.md`)
@@ -283,10 +283,10 @@
 - [`enr-14`] 如何讓 iPad 重置後自動連上 Wi-Fi 並完成註冊 (Return to Service)？
 - [`enr-15`] iPad 顯示「無法使用」或因密碼輸入錯誤太多次鎖死，該如何處理？
 - [`enr-16`] 裝置顯示「描述檔無效」或運作異常緩慢，即使重置也無法解決？
-- [`enr-17`] 裝置被「啟用鎖定 (Activation Lock)」鎖住了，該如何解除？
+- [`enr-17`] 裝置被「啟動鎖定 (Activation Lock)」鎖住了，該如何解除？
 - [`enr-18`] ASM 現在可以直接解除啟用鎖定嗎？還需要聯絡 Apple 客服嗎？
-- [`enr-19`] 【Mac 啟用鎖定】Mac 電腦維修回來後被鎖住，該如何徹底解決？
-- [`enr-20`] 【維修 SOP】廠商繳回 資訊組來的維修替換機，如何快速恢復原本的教學設定？
+- [`enr-19`] 【Mac 啟動鎖定】Mac 電腦維修回來後被鎖住，該如何徹底解決？
+- [`enr-20`] 【維修 SOP】廠商繳回資訊組來的維修替換機，如何快速恢復原本的教學設定？
 - [`enr-21`] 購買的機器沒有出現在 ASM 中，可以用 Apple Configurator 手動加入嗎？
 - [`enr-22`] 【Wi-Fi 遷移】學校要更換新的無線網路 SSID，如何確保 iPad 不會集體失聯？
 - [`enr-23`] 什麼是「零抹除 MDM 遷移」(Zero-Wipe MDM Migration)？iOS 26 新功能適合學校使用嗎？
@@ -420,7 +420,7 @@
 - [`mac-6`] Mac 電腦教室如何像還原卡一樣，快速清除重置 (Wipe)？
 - [`mac-7`] M 系列晶片 (Apple Silicon) 的 Mac 在管理上有什麼特殊限制？
 - [`mac-8`] 為什麼 MDM 要求開啟 FileVault？使用者忘記登入密碼時該如何救援？
-- [`mac-9`] Jamf 的 Script (腳本) 功能可以做什麼？如何建立與執行？
+- [`mac-9`] Jamf 的 Script (腳本) 功能 can do what? How to create and run?
 - [`mac-10`] Jamf Pro 預設的「資產」報告中沒有我要的資訊（如特定檔案版本、最後重開機時間），該如何自訂收集？
 - [`mac-11`] Mac 安裝軟體時顯示「來自未識別的開發者」或「無法打開」，如何解決？
 - [`mac-12`] 如何防止學生進入 Recovery Mode (復原模式) 格式化電腦？
@@ -467,7 +467,7 @@
 - [`edu-21`] 如何管理 iOS 18 新增的「訊息摘要 (Notification Summary)」功能？
 - [`edu-22`] iOS 26.2 的 AirDrop 代碼機制對課堂檔案分享的實務影響與應對方式
 - [`edu-23`] 如何使用 iPadOS 26.2 的「視窗 App (Window App)」多工處理功能提升教學效率？
-- [`edu-24`] iOS 26 的「寫作工具」(Writing Tools) 在正式評量或正式評量或正式評量或正式評量或考試時該如何管理？哪些功能需要禁用？
+- [`edu-24`] iOS 26 的「寫作工具」(Writing Tools) 在正式評量或考試時該如何管理？哪些功能需要禁用？
 - [`edu-25`] 精進方案結束後，學生使用的 iPad 還可以繼續用於學習嗎？系統升級到 iOS 26 會有問題嗎？
 - [`edu-26`] 老師如何管理 iOS 26 的 Apple Intelligence「寫作工具」？
 - [`edu-27`] 學校如果想更換 MDM 廠商，一定要把 iPad 全部重灌 (Wipe) 嗎？

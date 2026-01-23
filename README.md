@@ -1,7 +1,7 @@
 # 極電資訊 Apple MDM 專業知識庫 (Professional Knowledge Base)
 
 **當前版本 (Current Version):** 1.1.0
-**重構日期 (Restructured):** 2026-01-22
+**重構日期 (Restructured):** 2026-01-23
 
 ![VitePress](https://img.shields.io/badge/VitePress-1.6.4+-646CFF.svg) ![Node](https://img.shields.io/badge/Node-20%2B-339933.svg) ![Environment](https://img.shields.io/badge/Specs-2026_Tahoe-blue.svg)
 

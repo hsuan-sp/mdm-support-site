@@ -3,7 +3,7 @@ id: acc-9
 title: "The device shows 'Connection Failed' or won't update Inventory. How do I fix it?"
 category: "Section 1: Account & Server Management"
 important: false
-tags: ["Connection Issues","APNs","Network","Troubleshooting"]
+tags: ["Connection Issues", "APNs", "Network", "Troubleshooting"]
 ---
 
 **This usually indicates a breakdown in communication between the device and the MDM server or Apple's services. Please check the following four core areas in order:**
@@ -19,8 +19,8 @@ tags: ["Connection Issues","APNs","Network","Troubleshooting"]
 The device needs to reach both the Jamf server and Apple's servers. Ensure the campus firewall is not blocking:
 
 - **Apple Push Notification service (APNs)**:
-    - Hostname: **apple.com** and all subdomains.
-    - Ports: **TCP 443, 2197, 5223**.
+  - Hostname: **apple.com** and all subdomains.
+  - Ports: **TCP 443, 2197, 5223**.
 - **Jamf Pro Server**: Devices must be able to load your Jamf Cloud URL via HTTPS (443).
 - **Test**: Use Safari on the device to visit [appleid.apple.com](https://appleid.apple.com) and your Jamf login page to confirm connectivity.
 
@@ -35,10 +35,10 @@ The device needs to reach both the Jamf server and Apple's servers. Ensure the c
 
 - **Check Profile**: On the iPad, go to **Settings > General > VPN & Device Management** and confirm the "Management Profile" is still "Verified".
 - **Clear Pending Commands**:
-    1. Open the device record in Jamf Pro.
-    2. Go to **History > Management Commands**.
-    3. If there are many **Pending** or **Failed** commands, click **Cancel All Pending and Failed Commands**.
-    4. Click **Update Inventory** in the top right to trigger a fresh sync.
+  1. Open the device record in Jamf Pro.
+  2. Go to **History > Management Commands**.
+  3. If there are many **Pending** or **Failed** commands, click **Cancel All Pending and Failed Commands**.
+  4. Click **Update Inventory** in the top right to trigger a fresh sync.
 
 ## Advanced Troubleshooting:
 

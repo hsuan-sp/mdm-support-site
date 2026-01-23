@@ -3,7 +3,7 @@ id: cls-16
 title: "Students are disabling Wi-Fi or Bluetooth to avoid Apple Classroom monitoring. What can I do?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: false
-tags: ["Bluetooth","Wi-Fi","Restrictions","Classroom Management"]
+tags: ["Bluetooth", "Wi-Fi", "Restrictions", "Classroom Management"]
 ---
 
 **This is a common student deflection tactic. Administrators can use MDM to prevent students from 'modifying' these settings, but the logic differs between Wi-Fi and Bluetooth.**

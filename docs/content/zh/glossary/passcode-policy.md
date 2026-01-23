@@ -1,6 +1,6 @@
 ---
 term: "Passcode Policy（密碼原則）"
-category: ["Security","Core"]
+category: ["Security", "Core"]
 ---
 
 ## 術語定義

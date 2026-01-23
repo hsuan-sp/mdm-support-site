@@ -6,7 +6,7 @@ File: enrollment-invitation.md
 
 ---
 term: "Enrollment Invitation"
-category: ["Jamf","Enrollment"]
+category: ["Jamf", "Enrollment"]
 ---
 
 ## 術語定義
@@ -227,7 +227,7 @@ File: find-my.md
 
 ---
 term: "Find My（尋找）"
-category: ["Apple","Security"]
+category: ["Apple", "Security"]
 ---
 
 ## 術語定義
@@ -371,7 +371,7 @@ File: guided-access.md
 
 ---
 term: "Guided Access（引導使用模式）"
-category: ["Education","Apple"]
+category: ["Education", "Apple"]
 ---
 
 ## 術語定義
@@ -456,7 +456,7 @@ File: icloud-backup-icloud.md
 
 ---
 term: "iCloud Backup（iCloud 備份）"
-category: ["Core","Apple"]
+category: ["Core", "Apple"]
 ---
 
 ## 術語定義
@@ -660,7 +660,7 @@ File: inventory-collection.md
 
 ---
 term: "Inventory Collection"
-category: ["Jamf","Core"]
+category: ["Jamf", "Core"]
 ---
 
 ## 術語定義
@@ -780,7 +780,7 @@ File: iphone-mirroring-iphone.md
 
 ---
 term: "iPhone Mirroring (iPhone 鏡像)"
-category: ["macOS","Security"]
+category: ["macOS", "Security"]
 ---
 
 ## 術語定義
@@ -808,7 +808,7 @@ File: jamf-aad.md
 
 ---
 term: "JamfAAD"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## 術語定義
@@ -826,7 +826,7 @@ File: jamf-binary.md
 
 ---
 term: "Jamf binary"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
 ## 術語定義
@@ -837,9 +837,9 @@ category: ["Jamf","macOS"]
 
 - **執行引擎** ：它是駐守在 Mac 本機的「大腦」，負責執行來自 Jamf Pro 伺服器的指令。
 - **政策執行 (Policies)** ：不同於標準 MDM 描述檔，Binary 能夠執行複雜的腳本、安裝套件與進行系統維護。
-- ** 定期回報 (Check-ins)
+- \*\* 定期回報 (Check-ins)
 
-** ：定期向伺服器報到，檢查是否有新任務並回報執行結果。
+\*\* ：定期向伺服器報到，檢查是否有新任務並回報執行結果。
 
 **注意** ：這僅存在於 Mac 電腦上。iOS 裝置受限於系統架構，無法安裝此類代理程式，僅能依靠 Apple 內建的 MDM 框架。
 
@@ -856,7 +856,7 @@ File: jamf-connect.md
 
 ---
 term: "Jamf Connect"
-category: ["Jamf","Security","macOS"]
+category: ["Jamf", "Security", "macOS"]
 ---
 
 ## 術語定義
@@ -885,7 +885,7 @@ File: jamf-data-policy.md
 
 ---
 term: "Jamf Data Policy"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## 術語定義
@@ -915,7 +915,7 @@ File: jamf-helper.md
 
 ---
 term: "jamfHelper"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## 術語定義
@@ -963,7 +963,7 @@ File: jamf-pro-api.md
 
 ---
 term: "Jamf Pro API"
-category: ["Jamf","Other"]
+category: ["Jamf", "Other"]
 ---
 
 ## 術語定義
@@ -991,7 +991,7 @@ File: jamf-pro.md
 
 ---
 term: "Jamf Pro"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義
@@ -1020,7 +1020,7 @@ File: jamf-protect.md
 
 ---
 term: "Jamf Protect"
-category: ["Jamf","Security","macOS"]
+category: ["Jamf", "Security", "macOS"]
 ---
 
 ## 術語定義
@@ -1046,7 +1046,7 @@ File: jamf-remote.md
 
 ---
 term: "Jamf Remote"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
 ## 術語定義
@@ -1074,7 +1074,7 @@ File: jamf-safe-internet.md
 
 ---
 term: "Jamf Safe Internet"
-category: ["Jamf","Security","Network"]
+category: ["Jamf", "Security", "Network"]
 ---
 
 ## 術語定義
@@ -1105,7 +1105,7 @@ File: jamf-school.md
 
 ---
 term: "Jamf School"
-category: ["Jamf","Education"]
+category: ["Jamf", "Education"]
 ---
 
 ## 術語定義
@@ -1134,7 +1134,7 @@ File: jamf-student.md
 
 ---
 term: "Jamf Student"
-category: ["Jamf","Education"]
+category: ["Jamf", "Education"]
 ---
 
 ## 術語定義
@@ -1162,7 +1162,7 @@ File: jamf-teacher.md
 
 ---
 term: "Jamf Teacher"
-category: ["Jamf","Education"]
+category: ["Jamf", "Education"]
 ---
 
 ## 術語定義
@@ -1189,7 +1189,7 @@ File: jamf-trust-jamf-private-access.md
 
 ---
 term: "Jamf Trust (Jamf Private Access)"
-category: ["Jamf","Security","Network"]
+category: ["Jamf", "Security", "Network"]
 ---
 
 ## 術語定義
@@ -1437,7 +1437,7 @@ File: location-services.md
 
 ---
 term: "Location Services（定位服務）"
-category: ["Apple","Core"]
+category: ["Apple", "Core"]
 ---
 
 ## 術語定義
@@ -1583,7 +1583,7 @@ File: managed-classes.md
 
 ---
 term: "Managed Classes（管理化班級）"
-category: ["Education","Jamf"]
+category: ["Education", "Jamf"]
 ---
 
 ## 術語定義
@@ -1818,7 +1818,7 @@ File: nist-benchmarks.md
 
 ---
 term: "NIST Benchmarks (資安基準)"
-category: ["Security","Education"]
+category: ["Security", "Education"]
 ---
 
 ## 術語定義
@@ -1956,7 +1956,7 @@ File: passcode-policy.md
 
 ---
 term: "Passcode Policy（密碼原則）"
-category: ["Security","Core"]
+category: ["Security", "Core"]
 ---
 
 ## 術語定義
@@ -2010,7 +2010,7 @@ File: patch-management.md
 
 ---
 term: "Patch Management"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## 術語定義
@@ -2120,4 +2120,5 @@ category: ["Mac"]
 ## 技術優勢
 
 使用 Secure Enclave 儲存 SSO Token，安全性更高，且支援生物辨識解鎖（Touch ID / Face ID on MacBook）
+
 

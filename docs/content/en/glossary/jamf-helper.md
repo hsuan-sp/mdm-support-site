@@ -1,6 +1,6 @@
 ---
 term: "jamfHelper"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## Definition

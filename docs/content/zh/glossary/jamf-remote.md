@@ -1,6 +1,6 @@
 ---
 term: "Jamf Remote"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
 ## 術語定義

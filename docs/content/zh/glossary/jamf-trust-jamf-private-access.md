@@ -1,6 +1,6 @@
 ---
 term: "Jamf Trust (Jamf Private Access)"
-category: ["Jamf","Security","Network"]
+category: ["Jamf", "Security", "Network"]
 ---
 
 ## 術語定義

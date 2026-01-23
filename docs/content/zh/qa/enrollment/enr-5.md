@@ -3,7 +3,7 @@ id: enr-5
 title: "如何在學校網域環境下，順利進行「帳號驅動註冊」的服務偵測？"
 category: "第二部分：裝置註冊與部署 (Device Enrollment)"
 important: false
-tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
+tags: ["帳號驅動註冊", "服務偵測", ".well-known", "BYOD"]
 ---
 
 **帳號驅動註冊 (Account-driven Enrollment) 依賴 Apple 的「服務偵測 (Service Discovery)」機制，** 讓使用者只需輸入管理式 Apple 帳號即可引導註冊。
@@ -16,7 +16,7 @@ tags: ["帳號驅動註冊","服務偵測",".well-known","BYOD"]
 1. 使用者輸入 `user@school.edu.tw`。
 1. 裝置發送 HTTP GET 請求至：
 
- `https://school.edu.tw/.well-known/com.apple.remotemanagement`
+`https://school.edu.tw/.well-known/com.apple.remotemanagement`
 
 1. 伺服器需回傳一個 JSON 檔案，其中包含 MDM 伺服器的 URL。
 

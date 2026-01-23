@@ -17,6 +17,6 @@ Protected resources include:
 
 ## Analogy
 
-Think of this as a **"Standing Permission Slip."** Usually, your Mac is very protective and asks you, *"Are you SURE you want to let this app use your camera?"* every single time a new app opens.
+Think of this as a **"Standing Permission Slip."** Usually, your Mac is very protective and asks you, _"Are you SURE you want to let this app use your camera?"_ every single time a new app opens.
 
 With **PPPC** , the school has already **"signed the permission slip"** for you. This means official school apps can start working instantly without annoying you with questions, because the Mac knows the school trusts them.

@@ -3,7 +3,14 @@ id: enr-26
 title: "How does the 'Preserve Managed Apps' feature in iOS 26 Return to Service work?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Return to Service", "iOS 26", "Shared iPad", "App Preservation", "Rapid Deployment"]
+tags:
+  [
+    "Return to Service",
+    "iOS 26",
+    "Shared iPad",
+    "App Preservation",
+    "Rapid Deployment",
+  ]
 ---
 
 **In iOS 26, iPadOS 26, and visionOS 26, 'Return to Service' introduces the ability to 'Preserve Managed Apps.' This allows you to wipe user data while keeping the actual app binaries on the device, eliminating the massive time and bandwidth cost of redownloading gigabytes of educational software.**
@@ -27,13 +34,13 @@ tags: ["Return to Service", "iOS 26", "Shared iPad", "App Preservation", "Rapid 
 
 ## Efficiency Comparison
 
-| Step | Traditional Method | iOS 26 (Preserve Apps) |
-| :--- | :--- | :--- |
-| Wipe Data | 2–3 mins | 2–3 mins |
-| Reboot | 1–2 mins | 1–2 mins |
-| Re-enroll | 1–2 mins | 1–2 mins |
-| App Download/Install | **30–60 mins** | **0 mins** (Already there) |
-| **Total Time** | **35–65 mins** | **5–10 mins** |
+| Step                 | Traditional Method | iOS 26 (Preserve Apps)     |
+| :------------------- | :----------------- | :------------------------- |
+| Wipe Data            | 2–3 mins           | 2–3 mins                   |
+| Reboot               | 1–2 mins           | 1–2 mins                   |
+| Re-enroll            | 1–2 mins           | 1–2 mins                   |
+| App Download/Install | **30–60 mins**     | **0 mins** (Already there) |
+| **Total Time**       | **35–65 mins**     | **5–10 mins**              |
 
 ## Best Use Cases
 

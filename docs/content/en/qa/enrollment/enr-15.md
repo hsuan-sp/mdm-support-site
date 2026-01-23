@@ -3,7 +3,8 @@ id: enr-15
 title: "The iPad shows 'iPad Unavailable' or is locked due to too many failed passcode attempts. What should I do?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Passcode Lock","Restore","Apple Configurator","Apple Devices App","DFU"]
+tags:
+  ["Passcode Lock", "Restore", "Apple Configurator", "Apple Devices App", "DFU"]
 ---
 
 **When a device displays 'iPad Unavailable' or 'Security Lockout,' it must be erased before it can be used again. If the device is MDM-managed, the solution depends on its connectivity status.**

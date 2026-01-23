@@ -75,7 +75,7 @@ A Policy consists of:
 
 A Policy is like a **"School Bell Schedule"** combined with a **"Lesson Plan."** You don't have to announce "Go to Math Class" to every student individually. The bell ( **Trigger** ) automatically signals to the students ( **Scope** ) that it is time to do a specific task ( **Payload** ).
 
-Similarly, a policy tells the computer: *"Every time you wake up (Trigger), check if the printer is installed (Payload)."*
+Similarly, a policy tells the computer: _"Every time you wake up (Trigger), check if the printer is installed (Payload)."_
 
 
 ---
@@ -101,7 +101,7 @@ Protected resources include:
 
 ## Analogy
 
-Think of this as a **"Standing Permission Slip."** Usually, your Mac is very protective and asks you, *"Are you SURE you want to let this app use your camera?"* every single time a new app opens.
+Think of this as a **"Standing Permission Slip."** Usually, your Mac is very protective and asks you, _"Are you SURE you want to let this app use your camera?"_ every single time a new app opens.
 
 With **PPPC** , the school has already **"signed the permission slip"** for you. This means official school apps can start working instantly without annoying you with questions, because the Mac knows the school trusts them.
 
@@ -276,7 +276,7 @@ How MDM uses it:
 
 Think of this as a **"Digital Tap on the Shoulder."** To save battery, your iPad sleeps whenever it can. When the tech team wants to give you a new app, they can't shout at a sleeping iPad.
 
-Instead, they send a **Push Notification** . It’s like a gentle tap that wakes the iPad up and whispers, *"Hey, the teacher has some new work for you; go call the server to get it!"*
+Instead, they send a **Push Notification** . It’s like a gentle tap that wakes the iPad up and whispers, _"Hey, the teacher has some new work for you; go call the server to get it!"_
 
 
 ---
@@ -1372,7 +1372,7 @@ Functionality:
 
 ## Analogy
 
-This is the **"Exit Migration Helper."** Just as Apple has a tool to help people move *in*(Move to iOS), this tool helps people pack up their boxes and move*out* to a different house (Android).
+This is the **"Exit Migration Helper."** Just as Apple has a tool to help people move _in_(Move to iOS), this tool helps people pack up their boxes and move*out* to a different house (Android).
 
 For schools, it's something to watch out for. You don't want a student packing up the school's "furniture" (school data) and taking it to their personal house where the school keys no longer work.
 
@@ -1810,7 +1810,7 @@ category: ["Network"]
 Key innovations for education:
 
 - **320MHz Channels** : Doubles the bandwidth of Wi-Fi 6E, offering massive capacity for 8K video and AR/VR classrooms.
-- **Multi-Link Operation (MLO)** : Allows a device (like an iPhone 16) to connect to multiple bands (e.g., 5GHz and 6GHz)*simultaneously* to send and receive data. This dramatically reduces latency and connection drops.
+- **Multi-Link Operation (MLO)** : Allows a device (like an iPhone 16) to connect to multiple bands (e.g., 5GHz and 6GHz)_simultaneously_ to send and receive data. This dramatically reduces latency and connection drops.
 - **4K QAM** : Packs 20% more data into each signal transmission for higher peak speeds.
 
 ## Analogy
@@ -1981,7 +1981,7 @@ Mechanism (Declarative Device Management):
 
 2. **Transfer** : It retains user data (photos, files) and apps.
 
-3. **Re-enroll** : It immediately enrolls into the *new* MDM server designated in Apple School Manager.
+3. **Re-enroll** : It immediately enrolls into the _new_ MDM server designated in Apple School Manager.
 
 4. **Takeover** : The new server takes ownership of the existing managed apps.
 
@@ -1992,4 +1992,5 @@ Mechanism (Declarative Device Management):
 In the past, switching to a new management system was like **"tearing down a house and rebuilding it"** just to change the landlord.
 
 Now, **Zero-Wipe Migration** is like **"keeping your house and furniture exactly as is, but just hiring a new security guard."** All your photos and homework stay on the iPad, but the school gets to manage it using a newer, better system.
+
 

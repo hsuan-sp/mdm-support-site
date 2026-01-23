@@ -1,6 +1,6 @@
 ---
 term: "JamfAAD"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## Definition

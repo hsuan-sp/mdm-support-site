@@ -1,6 +1,6 @@
 ---
 term: "Remote Management"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義

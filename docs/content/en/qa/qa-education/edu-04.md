@@ -3,7 +3,7 @@ id: edu-04
 title: "How do we quickly reset iPads between different classes or rotating groups?"
 category: "Section 8: Education Scenarios & FAQ"
 important: false
-tags: ["Classroom Management","SOP","Handoff","RTS"]
+tags: ["Classroom Management", "SOP", "Handoff", "RTS"]
 ---
 
 **The best method depends on how much time you have between lessons. For the fastest handoff, use 'Shared iPad' mode or the 'Return to Service' remote command.**

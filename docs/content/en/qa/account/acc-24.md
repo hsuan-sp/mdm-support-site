@@ -11,7 +11,7 @@ tags: ["iCloud", "Storage", "Quota", "Managed Apple Account"]
 ## Storage Quotas by Organization Type
 
 - **Education (ASM)**: Apple provides **200GB** of iCloud storage for every user (staff and students) at no additional cost.
-- **Business (ABM)**: Defaults to 5GB. Organizations with **Apple Business Essentials (ABE)** may have 50GB or 200GB quotas. *Note: As of early 2026, ABE is not yet widely available in all regions (including Taiwan).*
+- **Business (ABM)**: Defaults to 5GB. Organizations with **Apple Business Essentials (ABE)** may have 50GB or 200GB quotas. _Note: As of early 2026, ABE is not yet widely available in all regions (including Taiwan)._
 
 ## Handling a Full 200GB Quota
 

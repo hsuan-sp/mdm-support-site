@@ -3,7 +3,14 @@ id: hw-6
 title: "How do I handle 'Ghost Touch' or issues with auto-rotation on the screen?"
 category: "Section 6: Hardware Maintenance & Troubleshooting"
 important: false
-tags: ["Touch Issues","Gyroscope","Accelerometer","Ghost Touch","Troubleshooting"]
+tags:
+  [
+    "Touch Issues",
+    "Gyroscope",
+    "Accelerometer",
+    "Ghost Touch",
+    "Troubleshooting",
+  ]
 ---
 
 **'Ghost Touch' (erratic touch input) typically involves Electromagnetic Interference (EMI) or a damaged digitizer layer. Auto-rotation issues are usually related to hardware failure of internal sensors (accelerometer and gyroscope).** These issues directly impact the usability of the device. Administrators should distinguish between software settings, environmental interference, and pure hardware failure before deciding on a repair.

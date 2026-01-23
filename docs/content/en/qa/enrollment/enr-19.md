@@ -3,7 +3,7 @@ id: enr-19
 title: "A Mac returned from repair is locked by Activation Lock. How do I fix it?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Mac Security","Activation Lock","Apple Silicon","Apple Configurator"]
+tags: ["Mac Security", "Activation Lock", "Apple Silicon", "Apple Configurator"]
 ---
 
 **Activation Lock for Macs with Apple Silicon (M1-M5) or the Apple T2 Security Chip is fully integrated into Apple School Manager (ASM).**

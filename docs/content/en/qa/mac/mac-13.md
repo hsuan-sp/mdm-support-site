@@ -3,7 +3,7 @@ id: mac-13
 title: "Google Meet or Zoom keeps asking for 'Screen Recording' permissions. Can MDM enable this automatically?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["PPPC","Privacy","TCC","Screen Recording","Standard Users"]
+tags: ["PPPC", "Privacy", "TCC", "Screen Recording", "Standard Users"]
 ---
 
 **This is governed by macOS TCC (Transparency, Consent, and Control) privacy mechanisms. For 'Screen Recording,' 'Microphone,' and 'Camera,' Apple mandates that the user must 'personally click to allow.'**
@@ -12,12 +12,12 @@ MDM cannot forcibly "turn on" these permissions. However, you can use a **PPPC (
 
 ## MDM Control Capability Matrix (2026 Edition)
 
-| Permission | Forced ON by MDM? | User Consent Needed? | Admin Strategy |
-| :--- | :--- | :--- | :--- |
-| **Screen Recording** | ❌ No | ✅ Yes | Authorize Standard Users to allow |
-| **Microphone / Camera** | ❌ No | ✅ Yes | Set to "Allow" (prevents blocking) |
-| **Accessibility** | ✅ Yes | ❌ No | Can be fully authorized silently |
-| **Full Disk Access** | ✅ Yes | ❌ No | Can be fully authorized silently |
+| Permission              | Forced ON by MDM? | User Consent Needed? | Admin Strategy                     |
+| :---------------------- | :---------------- | :------------------- | :--------------------------------- |
+| **Screen Recording**    | ❌ No             | ✅ Yes               | Authorize Standard Users to allow  |
+| **Microphone / Camera** | ❌ No             | ✅ Yes               | Set to "Allow" (prevents blocking) |
+| **Accessibility**       | ✅ Yes            | ❌ No                | Can be fully authorized silently   |
+| **Full Disk Access**    | ✅ Yes            | ❌ No                | Can be fully authorized silently   |
 
 ## Best Practices for Schools (SOP):
 

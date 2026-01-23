@@ -37,7 +37,7 @@ function generateGlossarySection(dir, isEn) {
   files.forEach(file => {
     const fm = getFrontmatter(path.join(dir, file));
     const term = fm.term || file;
-    output += `* **${term}** (\`${file}\`)\n`;
+    output += `- **${term}** (\`${file}\`)\n`;
   });
   return output + '\n';
 }
@@ -80,7 +80,7 @@ function generateQASection(baseDir, isEn) {
             const fm = getFrontmatter(path.join(baseDir, cat.dir, file));
             const id = fm.id || '';
             const title = fm.title || file;
-            output += `* [\`${id}\`] ${title}\n`;
+            output += `- [\`${id}\`] ${title}\n`;
         });
         output += '\n';
     });

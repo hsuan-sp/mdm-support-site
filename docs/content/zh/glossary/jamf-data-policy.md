@@ -1,6 +1,6 @@
 ---
 term: "Jamf Data Policy"
-category: ["Jamf","Security"]
+category: ["Jamf", "Security"]
 ---
 
 ## 術語定義

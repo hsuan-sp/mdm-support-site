@@ -10,12 +10,12 @@ tags: ["DDM", "App Management", "Declarative", "Auto-Update", "iOS 26"]
 
 ## Comparison: Traditional VPP vs. Declarative App Management
 
-| Feature | Traditional MDM (InstallApplication) | Declarative App Management (App Declaration) |
-| :--- | :--- | :--- |
-| **Trigger Mechanism** | Server must 'push' the command; fails if device is briefly offline. | Server pushes a 'Declaration.' The device autonomously retries until successful. |
-| **Status Reporting** | Passive. MDM must 'poll' the device to see if it finished. | **Real-time**. Device pushes status updates (installing, failed, success) immediately. |
-| **Update Control** | Global 'Auto-Update' or manual pushes. | Granular control **per app**: Force update, defer, or follow user preference. |
-| **Scope** | App Store Apps, VPP Apps. | App Store, VPP, Custom Apps, and **.pkg** files on macOS. |
+| Feature               | Traditional MDM (InstallApplication)                                | Declarative App Management (App Declaration)                                           |
+| :-------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------- |
+| **Trigger Mechanism** | Server must 'push' the command; fails if device is briefly offline. | Server pushes a 'Declaration.' The device autonomously retries until successful.       |
+| **Status Reporting**  | Passive. MDM must 'poll' the device to see if it finished.          | **Real-time**. Device pushes status updates (installing, failed, success) immediately. |
+| **Update Control**    | Global 'Auto-Update' or manual pushes.                              | Granular control **per app**: Force update, defer, or follow user preference.          |
+| **Scope**             | App Store Apps, VPP Apps.                                           | App Store, VPP, Custom Apps, and **.pkg** files on macOS.                              |
 
 ## Supported Platforms
 

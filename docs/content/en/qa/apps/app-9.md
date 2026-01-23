@@ -3,7 +3,7 @@ id: app-9
 title: "Do I need the student's Apple ID password to update apps? How can I achieve silent updates?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["App Updates","Device-based Assignment","Automated Updates","DDM"]
+tags: ["App Updates", "Device-based Assignment", "Automated Updates", "DDM"]
 ---
 
 **No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**
@@ -11,6 +11,7 @@ tags: ["App Updates","Device-based Assignment","Automated Updates","DDM"]
 ## The Preferred 2026 Method: Declarative Device Management (DDM)
 
 Under the latest OS architecture, **DDM** is the best path for silent updates:
+
 - **Autonomy**: The device itself monitors app versions based on the MDM declaration and triggers downloads in the background. It no longer relies on a one-way "push" command from the server.
 - **Status Transparency**: Admins get real-time progress reports (e.g., "Downloading" or "Insufficient Space") instead of the vague "Pending" status seen in older MDM versions.
 
@@ -18,7 +19,7 @@ Under the latest OS architecture, **DDM** is the best path for silent updates:
 
 1. **License Mode**: Must be set to "Device-based" (bound to serial number).
 2. **Supervised Mode**: The iPad must be in a "Supervised" state.
-3. **Jamf Configuration**: In the app's distribution settings, enable **"Automatically Update App."** (*Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration.*)
+3. **Jamf Configuration**: In the app's distribution settings, enable **"Automatically Update App."** (_Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration._)
 
 ## Common Troubleshooting for Failed Updates:
 

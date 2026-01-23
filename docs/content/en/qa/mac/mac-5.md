@@ -3,7 +3,7 @@ id: mac-5
 title: "How do I force a Mac to perform system updates? Students keep clicking 'Remind Me Later'."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["System Updates","DDM","Nudge","IT Operations"]
+tags: ["System Updates", "DDM", "Nudge", "IT Operations"]
 ---
 
 **The modern solution is to use "Declarative Device Management (DDM)."** If you need more visual urgency, you can supplement this with the open-source tool "Nudge."

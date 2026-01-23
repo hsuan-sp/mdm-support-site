@@ -3,7 +3,7 @@ id: enr-4
 title: "What is the difference between 'User Enrollment' and standard Device Enrollment?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["BYOD","Privacy","Partitioning","Account-Driven"]
+tags: ["BYOD", "Privacy", "Partitioning", "Account-Driven"]
 ---
 
 **User Enrollment is a privacy-first management mode specifically designed for "Bring Your Own Device" (BYOD) scenarios.**
@@ -12,14 +12,14 @@ Unlike standard enrollment used for school-owned iPads, User Enrollment (User-Dr
 
 ## Comparison Table:
 
-| Feature | Device Enrollment (Standard/ADE) | User Enrollment (BYOD) |
-| :--- | :--- | :--- |
-| **Ownership** | Institutional Asset | Personal Property |
-| **Supervision** | Mandatory (Supervised) | Prohibited |
-| **Data Isolation** | Full Device control | **Managed Data Partition only** |
-| **Privacy Protection** | Standard school visibility | **Strict User Privacy** (IT cannot see personal apps or location) |
-| **Remote Wipe** | Wipes the entire device | **Wipes school data only** (Personal photos remain safe) |
-| **Removal** | Can be prevented by IT | **User can opt-out anytime** |
+| Feature                | Device Enrollment (Standard/ADE) | User Enrollment (BYOD)                                            |
+| :--------------------- | :------------------------------- | :---------------------------------------------------------------- |
+| **Ownership**          | Institutional Asset              | Personal Property                                                 |
+| **Supervision**        | Mandatory (Supervised)           | Prohibited                                                        |
+| **Data Isolation**     | Full Device control              | **Managed Data Partition only**                                   |
+| **Privacy Protection** | Standard school visibility       | **Strict User Privacy** (IT cannot see personal apps or location) |
+| **Remote Wipe**        | Wipes the entire device          | **Wipes school data only** (Personal photos remain safe)          |
+| **Removal**            | Can be prevented by IT           | **User can opt-out anytime**                                      |
 
 ## Modern Approach (Account-Driven):
 

@@ -3,7 +3,7 @@ id: dl-1
 title: "升級 iPadOS 17 後，螢幕上的 VPN 圖示消失了，這樣正常嗎？"
 category: "第五部分：數位學習精進方案專區 (MOE Digital Learning Project)"
 important: true
-tags: ["iPadOS 17","VPN","Jamf Trust","精進方案","架構調整"]
+tags: ["iPadOS 17", "VPN", "Jamf Trust", "精進方案", "架構調整"]
 ---
 
 **完全正常。這是配合教育部「臺灣學術網路內容傳遞網路 (CDN)」服務政策，Jamf Trust 架構調整後的正常現象。**
@@ -18,8 +18,8 @@ tags: ["iPadOS 17","VPN","Jamf Trust","精進方案","架構調整"]
 
 ## 如何確認防護運作中？
 
-*   **檢查 App** ：開啟 **Jamf Trust App** ，若畫面顯示 **綠色盾牌 (Protected)** ，即代表防護與資料蒐集功能正常。
-*   **後台檢查** ：在 Jamf Pro 的裝置紀錄中，確認相關的「內容過濾」與「DNS 設定」描述檔狀態為「已安裝」。
+- **檢查 App** ：開啟 **Jamf Trust App** ，若畫面顯示 **綠色盾牌 (Protected)** ，即代表防護與資料蒐集功能正常。
+- **後台檢查** ：在 Jamf Pro 的裝置紀錄中，確認相關的「內容過濾」與「DNS 設定」描述檔狀態為「已安裝」。
 
 ## 實務建議 ：
 

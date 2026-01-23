@@ -3,7 +3,8 @@ id: enr-12
 title: "What is 'Shared iPad'? How can students share devices and keep their data private?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Shared iPad","Managed Apple Account","PreStage Enrollment","Multi-User"]
+tags:
+  ["Shared iPad", "Managed Apple Account", "PreStage Enrollment", "Multi-User"]
 ---
 
 **'Shared iPad' is an Apple feature designed for non-1:1 environments. It allows multiple students to sign in to the same iPad using their 'Managed Apple Accounts' while maintaining independent workspaces.**

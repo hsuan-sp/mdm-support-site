@@ -3,7 +3,15 @@ id: mac-29
 title: "How to push system updates (iOS/iPadOS/macOS) via Jamf Pro?"
 category: "Section 1: Hardware & OS Updates"
 important: true
-tags: ["System Updates","Jamf Pro","DDM","Software Update Blueprints","iOS Update","macOS Update"]
+tags:
+  [
+    "System Updates",
+    "Jamf Pro",
+    "DDM",
+    "Software Update Blueprints",
+    "iOS Update",
+    "macOS Update",
+  ]
 ---
 
 **By 2026, software update management in Jamf Pro has fully transitioned to the "Declarative Device Management (DDM)" framework.** This approach is more stable than legacy remote commands and allows devices to autonomously handle the download and installation process, significantly reducing server load.

@@ -1,6 +1,6 @@
 ---
 term: "Find My（尋找）"
-category: ["Apple","Security"]
+category: ["Apple", "Security"]
 ---
 
 ## 術語定義

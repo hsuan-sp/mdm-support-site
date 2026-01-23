@@ -15,6 +15,6 @@ Functionality:
 
 ## Analogy
 
-This is the **"Exit Migration Helper."** Just as Apple has a tool to help people move *in*(Move to iOS), this tool helps people pack up their boxes and move*out* to a different house (Android).
+This is the **"Exit Migration Helper."** Just as Apple has a tool to help people move _in_(Move to iOS), this tool helps people pack up their boxes and move*out* to a different house (Android).
 
 For schools, it's something to watch out for. You don't want a student packing up the school's "furniture" (school data) and taking it to their personal house where the school keys no longer work.

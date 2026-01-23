@@ -3,7 +3,7 @@ id: acc-19
 title: "如何控管「管理式 Apple 帳號」是否能使用 Apple Intelligence 功能？"
 category: "第一部分：帳號與伺服器管理 (Account & Server Management)"
 important: false
-tags: ["Apple Intelligence","服務存取","ASM"]
+tags: ["Apple Intelligence", "服務存取", "ASM"]
 ---
 
 **管理員可透過 Apple 校務管理 (ASM) 的服務存取設定，決定是否開放 AI 相關功能。**

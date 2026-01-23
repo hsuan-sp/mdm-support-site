@@ -3,7 +3,7 @@ id: enr-22
 title: "The school is changing its Wi-Fi SSID. How do I prevent iPads from losing connectivity?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Wi-Fi Migration","SSID","Disaster Prevention","Network Config"]
+tags: ["Wi-Fi Migration", "SSID", "Disaster Prevention", "Network Config"]
 ---
 
 **This is a common maintenance task that frequently leads to mass disconnections. You must follow the 'Parallel Deployment' principle: Never delete the old setting until the new network is verified as functional.**
@@ -15,7 +15,7 @@ If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable
 ### Step 1: Push the New Profile
 
 - Create a new Wi-Fi configuration profile in Jamf Pro (with the new SSID and password).
-- Deploy this to all devices. At this point, the iPads will have *both* the old and new Wi-Fi settings.
+- Deploy this to all devices. At this point, the iPads will have _both_ the old and new Wi-Fi settings.
 
 ### Step 2: Field Testing
 

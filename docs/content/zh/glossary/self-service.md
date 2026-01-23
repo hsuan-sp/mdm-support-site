@@ -1,6 +1,6 @@
 ---
 term: "Self Service"
-category: ["Apps","Jamf"]
+category: ["Apps", "Jamf"]
 ---
 
 ## 術語定義

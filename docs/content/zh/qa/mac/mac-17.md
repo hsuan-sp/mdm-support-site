@@ -3,7 +3,7 @@ id: mac-17
 title: "【硬體部署】學校電腦教室改用 Mac mini (M4) 有什麼優勢？"
 category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
-tags: ["Mac mini","M4","電腦教室","自動部署","ADE"]
+tags: ["Mac mini", "M4", "電腦教室", "自動部署", "ADE"]
 ---
 
 **Mac mini 憑藉其「零接觸部署 (Zero-Touch)」與「極低功耗」，已成為取代傳統 PC 電腦教室的首選方案。**

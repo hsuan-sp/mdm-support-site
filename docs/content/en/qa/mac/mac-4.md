@@ -12,12 +12,12 @@ This shift solves the old problem of update commands being ignored or failing du
 
 ## I. Traditional vs. Declarative (DDM) Updates
 
-| Feature | Old MDM Command | New DDM (macOS 23+) |
-| :--- | :--- | :--- |
-| **Logic** | Server pushes, Device might ignore | **Device self-monitors** and enforces |
-| **Deadlines** | Optional / Flaky | **Hard Enforcement Deadlines** |
-| **User Experience** | Random popups | Clear countdowns and notifications |
-| **Visibility** | "Unknown" status until done | Real-time status: "Downloading," "Ready" |
+| Feature             | Old MDM Command                    | New DDM (macOS 23+)                      |
+| :------------------ | :--------------------------------- | :--------------------------------------- |
+| **Logic**           | Server pushes, Device might ignore | **Device self-monitors** and enforces    |
+| **Deadlines**       | Optional / Flaky                   | **Hard Enforcement Deadlines**           |
+| **User Experience** | Random popups                      | Clear countdowns and notifications       |
+| **Visibility**      | "Unknown" status until done        | Real-time status: "Downloading," "Ready" |
 
 ## II. 2026 Standard Operating Procedure for IT
 

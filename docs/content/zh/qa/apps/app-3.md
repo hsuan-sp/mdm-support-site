@@ -3,7 +3,7 @@ id: app-3
 title: "如果隱藏了 App Store，學生要如何獲取教學所需的 App？"
 category: "第三部分：應用程式分發與管理 (Apps & Books)"
 important: false
-tags: ["Self Service","App Store","限制描述檔","自主學習"]
+tags: ["Self Service", "App Store", "限制描述檔", "自主學習"]
 ---
 
 **即使透過限制描述檔隱藏了官方 App Store，學生仍能透過「Self Service (自助服務)」App 安全地獲取 App。**
@@ -20,5 +20,5 @@ tags: ["Self Service","App Store","限制描述檔","自主學習"]
 
 ## 注意事項 ：
 
-*   **Self Service 無法開啟** ：請確認裝置已正確註冊，且「Self Service」App 本身已成功安裝並獲得信任。
-*   **Web Clips 整合** ：除了 App，您也可以將網頁捷徑（如：因材網、酷課雲）放在 Self Service 中，讓學生一鍵開啟。
+- **Self Service 無法開啟** ：請確認裝置已正確註冊，且「Self Service」App 本身已成功安裝並獲得信任。
+- **Web Clips 整合** ：除了 App，您也可以將網頁捷徑（如：因材網、酷課雲）放在 Self Service 中，讓學生一鍵開啟。

@@ -24,7 +24,8 @@
 .feature {
   background: var(--vp-c-bg-soft-up) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(10px);
   border-radius: 16px !important;
@@ -33,7 +34,8 @@
 
 .feature:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: var(--vp-c-brand-1);
 }
@@ -110,10 +112,11 @@ textarea,
 .search-box,
 .app-sidebar,
 .term-card {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 a:hover,
@@ -172,7 +175,7 @@ body.is-home::before {
   z-index: -1;
   pointer-events: none;
   background-color: #f5f7fa;
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(0, 122, 255, 0.1) 0, transparent 40%),
     radial-gradient(at 100% 0%, rgba(90, 200, 250, 0.1) 0, transparent 40%),
     radial-gradient(at 50% 100%, rgba(0, 122, 255, 0.05) 0, transparent 50%);
@@ -182,7 +185,7 @@ body.is-home::before {
 .dark body.is-home::before,
 .dark body.is-app::before {
   background-color: #000000;
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.1) 0, transparent 40%),
     radial-gradient(at 50% 0%, rgba(100, 210, 255, 0.05) 0, transparent 40%),
     radial-gradient(at 100% 0%, rgba(10, 132, 255, 0.1) 0, transparent 40%),
@@ -197,7 +200,7 @@ body.is-app::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(rgba(0, 122, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 122, 255, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -208,7 +211,7 @@ body.is-app::after {
 }
 
 .dark body.is-app::after {
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   opacity: 0.3;

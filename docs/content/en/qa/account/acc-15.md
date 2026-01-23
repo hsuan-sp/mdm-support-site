@@ -3,7 +3,7 @@ id: acc-15
 title: "What are the main differences between Jamf Pro and Jamf School? How should we choose?"
 category: "Section 1: Account & Server Management"
 important: false
-tags: ["Jamf Pro","Jamf School","Product Comparison"]
+tags: ["Jamf Pro", "Jamf School", "Product Comparison"]
 ---
 
 **Both products are Apple-validated MDM solutions, but they differ significantly in design philosophy, language support, and depth of management capabilities.**

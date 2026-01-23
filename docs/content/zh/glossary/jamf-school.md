@@ -1,6 +1,6 @@
 ---
 term: "Jamf School"
-category: ["Jamf","Education"]
+category: ["Jamf", "Education"]
 ---
 
 ## 術語定義

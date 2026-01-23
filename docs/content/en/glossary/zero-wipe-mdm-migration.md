@@ -13,7 +13,7 @@ Mechanism (Declarative Device Management):
 
 2. **Transfer** : It retains user data (photos, files) and apps.
 
-3. **Re-enroll** : It immediately enrolls into the *new* MDM server designated in Apple School Manager.
+3. **Re-enroll** : It immediately enrolls into the _new_ MDM server designated in Apple School Manager.
 
 4. **Takeover** : The new server takes ownership of the existing managed apps.
 

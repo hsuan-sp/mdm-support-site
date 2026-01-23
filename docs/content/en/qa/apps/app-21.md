@@ -3,7 +3,7 @@ id: app-21
 title: "How do I prevent students from 'hiding' or 'locking' Managed Apps in iOS 18?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["iOS 18","Hide App","Lock App","Restrictions"]
+tags: ["iOS 18", "Hide App", "Lock App", "Restrictions"]
 ---
 
 **The privacy features in iOS 18 allow users to lock or hide apps behind Face ID. This can interfere with classroom asset audits and instructional management.**

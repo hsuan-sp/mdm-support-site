@@ -9,7 +9,7 @@ id: app-1
 title: "Apps on the iPad are stuck on 'Waiting' or failing to install. How do I troubleshoot this?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["Troubleshooting","App Installation","VPP","DDM"]
+tags: ["Troubleshooting", "App Installation", "VPP", "DDM"]
 ---
 
 **A 'Waiting' status usually indicates that the installation process is stalled at either the 'License Verification' or the 'Download Queue' stage.**
@@ -20,7 +20,7 @@ When an MDM sends an installation command, a complex handshake occurs between th
 
 1. **Insufficient VPP Licenses (Most Common)**:
    - **Check**: Log in to Jamf Pro and verify the license count for that app.
-   - **Solution**: If **Used Count = Total Count**, Apple's servers will reject the download request. Go to Apple School Manager (ASM) and acquire more licenses. *Tip: For free apps, always "purchase" a large quantity (e.g., 5,000) to account for future growth.*
+   - **Solution**: If **Used Count = Total Count**, Apple's servers will reject the download request. Go to Apple School Manager (ASM) and acquire more licenses. _Tip: For free apps, always "purchase" a large quantity (e.g., 5,000) to account for future growth._
 
 2. **Campus Network Restrictions**:
    - App downloads require access to Apple’s **Content Delivery Network (CDN)**. If your school’s firewall blocks these domains, the download will sit at 0%.
@@ -37,6 +37,279 @@ When an MDM sends an installation command, a complex handshake occurs between th
 
 
 ---
+File: app-2.md
+---
+
+---
+id: app-2
+title: "Can we install apps on iPads without signing into an Apple ID?"
+category: "Section 3: App Management & Distribution"
+important: true
+tags: ["VPP", "Device-based Assignment", "Apple ID", "Managed Apple Account"]
+---
+
+**Yes. This is called "Device-based Assignment," and it is the standard and most efficient method for school environments.**
+
+By using the **Volume Purchase Program (VPP)** within Apple School Manager (ASM), the school links app licenses to the device’s **Serial Number** rather than a specific student’s Apple ID.
+
+## Advantages for the School:
+
+- **Zero-Login Deployment**: Students can receive all necessary classroom apps immediately upon unboxing the device without ever needing a personal or Managed Apple Account.
+- **Asset Reclamation**: App licenses remain school property. When a student graduates or an iPad is erased, the license is automatically "returned" to your school’s pool, ready to be redistributed to another device.
+- **Simplified Maintenance**: There are no prompts for passwords when apps need to be updated or reinstalled.
+
+## Important Limitation: In-App Purchases
+
+Since the device is not signed into a personal account, **In-App Purchases (IAP) are not supported** in this mode. If your curriculum requires premium features within an app, we strongly recommend choosing apps that offer a "Pro" or "Full" version available as a one-time VPP purchase.
+
+## Technical Requirement:
+
+In the Jamf Pro App settings, ensure the **"Assign VPP Content"** checkbox is selected and the distribution method is set to **"Install Automatically/Prompt users to install."**
+
+
+---
+File: app-3.md
+---
+
+---
+id: app-3
+title: "If the App Store is hidden, how can students get the apps they need for class?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["Self Service", "App Store", "Restrictions", "Student Autonomy"]
+---
+
+**Even when the official App Store is disabled via a management profile, students can still safely acquire apps through the "Self Service" app.**
+
+## The Role of Self Service:
+
+Self Service is the school’s private, curated app portal. Instead of giving students access to the millions of apps on the public App Store, IT "publishes" specific, pre-approved titles into Self Service.
+
+## Why this is the preferred setup:
+
+1. **Safety & Focus**: It prevents students from downloading non-educational games, social media, or inappropriate content.
+2. **Bandwidth & Storage Efficiency**: Instead of forcing 50 large apps onto every iPad (which uses up storage and slows down the network), IT can make them "Optional." Students only download the specific tools required for their current project.
+3. **Independence**: Students can reinstall apps or trigger manual updates for their school tools without needing to ask an ICT administrator for a password.
+
+## Troubleshooting:
+
+- **Missing Self Service**: If the app is missing, ensure the device is correctly enrolled and has a stable Wi-Fi connection.
+- **Web Clips**: The school can also place direct links to web-based platforms (like ManageBac or Google Classroom) inside Self Service for easy one-tap access.
+
+
+---
+File: app-4.md
+---
+
+---
+id: app-4
+title: "What details should we keep in mind when 'purchasing' free apps in bulk?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["VPP", "ASM", "Location Tokens", "Inventory Management"]
+---
+
+**In the Apple ecosystem, even $0 free apps must go through the "Purchase" workflow in Apple School Manager (ASM) to be authorized for school distribution.**
+
+## Key Details to Consider:
+
+1. **Location Token (VPP Token) Match**:
+   - If your school has multiple "Locations" in ASM (e.g., "Primary Campus" vs. "Secondary Campus"), you must purchase the apps for the _exact same_ location that is linked to your Jamf Pro server. Licenses bought for Location A cannot be used by a server linked to Location B.
+
+2. **Sync Lag**:
+   - After hitting "Get" in ASM, the licenses don't appear in Jamf Pro instantly. There is usually a **2-10 minute synchronization delay** between Apple’s servers and your MDM dashboard.
+
+3. **Purchase Quantity**:
+   - Since the licenses are free, we recommend "purchasing" a quantity that far exceeds your current needs (e.g., if you have 500 iPads, buy 2,000 licenses). This prevents deployment failures if you add more devices later.
+
+## Troubleshooting Tip:
+
+If an app is showing a "0 available" count in Jamf Pro despite being purchased in ASM, check the Location settings first and then manually trigger a **"Sync VPP Content"** in the Jamf Global Management settings.
+
+
+---
+File: app-5.md
+---
+
+---
+id: app-5
+title: "How do we balance automated app installs with limited school bandwidth?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["Deployment Strategy", "Content Caching", "Bandwidth Management"]
+---
+
+**During large-scale deployments (e.g., the first day of the school year), having hundreds of iPads simultaneously downloading the same apps can paralyze the campus network.** To manage this, we recommend a "Tiered Deployment" strategy.
+
+## Recommended Solutions:
+
+- **Implement Content Caching (Highly Recommended)**:
+  - Set up a dedicated Mac (connected via Ethernet) on your campus network and enable **"Content Caching"** in the System Settings.
+  - **The Result**: The first iPad downloads the app from the internet; the Mac saves a copy. The remaining 99 iPads then pull the app from that Mac over the high-speed local network, preserving your external internet bandwidth.
+- **Prioritize Essential vs. Optional Apps**:
+  - Configure only your core tools (e.g., MDM agents, browsers, LMS apps) as **"Auto-Install."**
+  - Place large, non-essential creative tools (e.g., GarageBand, iMovie, or heavy 3D titles) in **Self Service**. This allows students to download them gradually throughout the week as needed.
+- **Stagger the Enrollment**:
+  - Instead of letting an entire grade level unbox and enroll at the exact same minute, try staggering the classes by 30-minute intervals. This reduces the initial "burst" of traffic on your Wi-Fi access points.
+
+## Operational Note:
+
+If devices are showing a "Waiting" status during a major rollout, simply restarting the download in MDM often makes the problem worse by adding more requests to a choked network. Prioritizing **Content Caching** is the single most effective way to solve bandwidth fatigue.
+
+
+---
+File: app-6.md
+---
+
+---
+id: app-6
+title: "What is the difference between Managed Apps and personally installed apps? Can students take their apps with them after graduation?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["Managed Apps", "License Ownership", "VPP", "Data Protection"]
+---
+
+**It depends on the "purchaser" identity and the "management attributes" of the app. App licenses and the data inside them should be considered separately.**
+
+In a managed environment, apps are categorized as either "Managed" or "Personal," each with a completely different lifecycle:
+
+## 1. School-assigned "Managed Apps"
+
+- **Source**: Purchased by administrators via **Apple School Manager (ASM)** and deployed through an MDM using "Device-based assignment."
+- **Ownership**: The license belongs to the **school**.
+- **Graduation/Departure Process**:
+  - **License Recovery**: When a student leaves and the device is unenrolled, the MDM revokes the license. The app will either disappear from the device or become inaccessible. The license is then returned to the school's VPP (Volume Purchase Program) pool for the next student to use.
+  - **Data Risk**: If the "Remove app when management profile is removed" setting is enabled, all data stored within the app (e.g., unsaved projects, local notes) will be **permanently erased**.
+
+## 2. Apps purchased with a student's personal Apple Account
+
+- **Source**: Purchased by the student on a personal or unrestricted device using their private Apple Account.
+- **Ownership**: The license belongs permanently to the **individual student**.
+- **Graduation/Departure Process**:
+  - **Permanent Access**: The student can redownload the app on any new device by signing in with the same Apple Account, unaffected by the school's MDM.
+  - **Note**: On internal "Supervised" school iPads, admins often restrict personal Apple Account logins to the App Store, so these apps are less common on school-owned hardware.
+
+## Key Technical Mechanism: Converting Unmanaged to Managed
+
+- **Conversion Behavior**: If a student has already manually installed an app (e.g., Notability), and the MDM attempts to deploy the same app, administrators can trigger a request to "take over" management of the app.
+- **Impact**: Once converted, the app is subject to school policies, such as being prohibited from backing up to a personal iCloud account.
+
+## Institutional Advice & Risk Management
+
+- **Data Migration**: Teachers and students should ensure important projects are exported to cloud storage (e.g., Google Drive) or sent via AirDrop before graduation. **Once management is revoked, Managed Apps and any un-synced data within them cannot be recovered.**
+- **BYOD Recommendation**: For student-owned devices, using the "User Enrollment" mode is recommended. This maintains a clear separation between personal and school data, allowing the school to remove its apps without affecting the student's personal photos or purchases.
+
+
+---
+File: app-7.md
+---
+
+---
+id: app-7
+title: "I cannot find the app I want in ASM (due to regional restrictions or removal). How do I solve this?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["ASM Search", "Regional Restrictions", "Developer Settings", "App Store"]
+---
+
+**Search results in Apple School Manager (ASM) can sometimes differ from the consumer App Store. If you cannot find a specific item, check these factors in order:**
+
+## 1. Search by Apple ID String (Recommended)
+
+Don't search by name. Instead, find the app on the web-based App Store and locate its unique ID (e.g., `id123456789`). Paste this ID directly into the ASM search bar. This is the most accurate way to find a specific entry.
+
+## 2. Regional Store Consistency
+
+ASM only searches the App Store associated with your organization's registered region (e.g., the Taiwan store). If a developer has released an app exclusively for the U.S. store, it will not appear in a Taiwan-based ASM account.
+
+## 3. B2B / Custom Apps
+
+Some proprietary or school-specific apps are distributed as "Custom Apps." Ensure the developer has added your **Organization ID** to their distribution list in App Store Connect.
+
+## Risk Warning:
+
+If an app has been removed (delisted) from the App Store, you may be unable to download it to new devices even if you have remaining VPP licenses. Administrators should periodically audit the status of critical teaching apps in the store to avoid deployment gaps.
+
+
+---
+File: app-8.md
+---
+
+---
+id: app-8
+title: "Can I deploy Web Clips to student home screens? Are they considered apps?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["Web Clip", "Safari", "Configuration Profile", "Teaching Tools"]
+---
+
+**Yes. A Web Clip is not a true app; rather, it is a bookmark icon on the home screen that points to a specific URL.**
+
+This is highly effective for guiding students to specific learning portals.
+
+## Technical Details & Configuration Advice:
+
+### 1. Full-Screen Experience
+
+In your Jamf Pro configuration, ensure the "Full Screen" option is enabled.
+
+- **Effect**: Opening the link will hide the Safari address bar and toolbar.
+- **Benefit**: This makes the website look like a standalone native app, reducing the chance of students getting distracted by other sites.
+
+### 2. Custom Icons and Visuals
+
+- **Recommended Specification**: Upload a **180x180 pixel PNG file** for maximum clarity.
+- **Transparency Support**: Modern systems support PNG icons with transparency, allowing for more professional-looking home screen layouts.
+
+### 3. Prevent Removal (Non-removable)
+
+For shared classroom devices, you can set the Web Clip as "Non-removable."
+
+- **Advantage**: This ensures essential portals are not accidentally deleted by students, saving you the trouble of redeploying them.
+
+## Limitations & Risks:
+
+- **Browser Dependency**: Web Clips rely on the built-in Safari engine. If you have a restriction profile that completely disables the Safari app, Web Clips will not open.
+- **Internet Connectivity**: Since these are essentially web pages, the device must be online to load the content. For offline use, you must look for Progressive Web Apps (PWAs) that support offline caching or install native apps.
+
+
+---
+File: app-9.md
+---
+
+---
+id: app-9
+title: "Do I need the student's Apple ID password to update apps? How can I achieve silent updates?"
+category: "Section 3: App Management & Distribution"
+important: false
+tags: ["App Updates", "Device-based Assignment", "Automated Updates", "DDM"]
+---
+
+**No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**
+
+## The Preferred 2026 Method: Declarative Device Management (DDM)
+
+Under the latest OS architecture, **DDM** is the best path for silent updates:
+
+- **Autonomy**: The device itself monitors app versions based on the MDM declaration and triggers downloads in the background. It no longer relies on a one-way "push" command from the server.
+- **Status Transparency**: Admins get real-time progress reports (e.g., "Downloading" or "Insufficient Space") instead of the vague "Pending" status seen in older MDM versions.
+
+## Traditional MDM Configuration (Compatibility Layer):
+
+1. **License Mode**: Must be set to "Device-based" (bound to serial number).
+2. **Supervised Mode**: The iPad must be in a "Supervised" state.
+3. **Jamf Configuration**: In the app's distribution settings, enable **"Automatically Update App."** (_Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration._)
+
+## Common Troubleshooting for Failed Updates:
+
+- **App in Use**: If a student is currently using the app, the system will typically wait until the app is in the background or the device is idle before updating.
+- **Insufficient Storage**: Updates require temporary space to download the installer. If the device is full, the update will fail.
+- **Stuck Commands**: If you see many pending update commands, try sending a **"Blank Push"** to force the device to check in with Apple servers.
+
+**Note**: DDM makes the device more proactive in scheduling updates, reducing its real-time dependency on the MDM server for simple maintenance tasks.
+
+
+---
 File: app-10.md
 ---
 
@@ -45,7 +318,13 @@ id: app-10
 title: "Why does the iPad prompt for an Apple ID password when opening an app?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["Troubleshooting","License Conflicts","Managed Apps","Device-based Assignment"]
+tags:
+  [
+    "Troubleshooting",
+    "License Conflicts",
+    "Managed Apps",
+    "Device-based Assignment",
+  ]
 ---
 
 **This usually happens because the "License Source" does not match the "Installation Identity," causing the system to attempt to verify the original purchaser's ID.**
@@ -84,7 +363,7 @@ id: app-11
 title: "How do I distribute E-books (PDF/ePub) to student iPads?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["E-books","Material Distribution","PDF","Restrictions"]
+tags: ["E-books", "Material Distribution", "PDF", "Restrictions"]
 ---
 
 **Apple School Manager (ASM) in many regions (including Taiwan) does not support the direct purchase or distribution of content from the Apple Books Store.**
@@ -126,7 +405,7 @@ id: app-12
 title: "Can paid app licenses be shared between different schools? (Cross-school VPP)"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["VPP Locations","Resource Sharing","ASM"]
+tags: ["VPP Locations", "Resource Sharing", "ASM"]
 ---
 
 **Yes. This is achieved through 'Location' management within Apple School Manager (ASM).**
@@ -153,7 +432,7 @@ id: app-13
 title: "What is 'Managed App Configuration'? How is it used for mass deployment?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["AppConfig","XML","Variables","Jamf Pro"]
+tags: ["AppConfig", "XML", "Variables", "Jamf Pro"]
 ---
 
 **'Managed App Configuration' uses the MDM protocol to inject XML-based settings into apps that support the AppConfig standard, enabling 'Zero-touch Configuration'.**
@@ -187,7 +466,7 @@ You can use Jamf Pro's built-in variables to dynamically fill in specific inform
 </dict>
 ```
 
-*(Note: Specific Key-Value pairs must be referenced from the official management documentation of the app developer, e.g., Zoom, Chrome, or Microsoft.)*
+_(Note: Specific Key-Value pairs must be referenced from the official management documentation of the app developer, e.g., Zoom, Chrome, or Microsoft.)_
 
 
 ---
@@ -199,7 +478,8 @@ id: app-14
 title: "Can teachers use Managed Apple Accounts to test school-developed Beta apps in TestFlight?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["TestFlight","App Store Connect","Managed Apple Account","Service Access"]
+tags:
+  ["TestFlight", "App Store Connect", "Managed Apple Account", "Service Access"]
 ---
 
 **Yes. Apple allows 'Managed Apple Accounts' to act as TestFlight testers, but permissions must first be enabled within Apple School Manager (ASM).**
@@ -228,7 +508,13 @@ id: app-15
 title: "How do I prevent apps from updating during class time to avoid network congestion?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["App Updates","Classroom Management","Update Strategy","Bandwidth Control"]
+tags:
+  [
+    "App Updates",
+    "Classroom Management",
+    "Update Strategy",
+    "Bandwidth Control",
+  ]
 ---
 
 **The key is to disable 'Automatic Updates' and adopt a 'Manual Push during Maintenance Window' strategy.**
@@ -257,7 +543,7 @@ id: app-16
 title: "Can I standardize the iPad Home Screen layout for students?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["Home Screen Layout","Restrictions","Folders"]
+tags: ["Home Screen Layout", "Restrictions", "Folders"]
 ---
 
 **Yes. Using a 'Home Screen Layout' configuration profile, administrators can precisely define the placement of apps on student devices.**
@@ -286,7 +572,7 @@ id: app-17
 title: "I 'purchased' an app in ASM, but it's not appearing in my Jamf Pro list. Why?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["VPP Sync","ASM","Troubleshooting","Volume Purchase"]
+tags: ["VPP Sync", "ASM", "Troubleshooting", "Volume Purchase"]
 ---
 
 **This is usually due to a synchronization delay between Apple’s servers and your MDM server.**
@@ -317,7 +603,14 @@ id: app-18
 title: "The App Store icon disappeared! How do I get it back?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["App Store","Missing Icon","Troubleshooting","Screen Time","Restrictions"]
+tags:
+  [
+    "App Store",
+    "Missing Icon",
+    "Troubleshooting",
+    "Screen Time",
+    "Restrictions",
+  ]
 ---
 
 **A missing App Store icon usually results from 'Screen Time' restrictions on the device or a 'Restrictions' profile from the MDM. Follow these steps to troubleshoot:**
@@ -325,12 +618,12 @@ tags: ["App Store","Missing Icon","Troubleshooting","Screen Time","Restrictions"
 ## Step 1: Check Local 'Screen Time' (Most Common)
 
 - **Path**: Go to **Settings > Screen Time > Content & Privacy Restrictions > iTunes & App Store Purchases**.
-- **Key Setting**: Ensure **Installing Apps** is set to **Allow**. (*Note: This is a local iOS restriction; even if the MDM doesn't lock it, a user can accidentally disable it.*)
+- **Key Setting**: Ensure **Installing Apps** is set to **Allow**. (_Note: This is a local iOS restriction; even if the MDM doesn't lock it, a user can accidentally disable it._)
 
 ## Step 2: Check MDM Restrictions Profile
 
 - **Path**: Go to **Settings > General > VPN & Device Management** and inspect the "Restrictions" profile.
-- **Key Setting**: Look for an entry stating **Allow installing apps using App Store** is disabled. (*Note: This restriction only applies to Supervised devices.*)
+- **Key Setting**: Look for an entry stating **Allow installing apps using App Store** is disabled. (_Note: This restriction only applies to Supervised devices._)
 
 ## Step 3: Home Screen Search
 
@@ -338,7 +631,7 @@ Sometimes the icon is buried in a folder or has been "Removed from Home Screen" 
 
 ## Step 4: Reset Home Screen Layout (Last Resort)
 
-If the icon is truly missing from the view, go to **Settings > General > Transfer or Reset iPad > Reset > Reset Home Screen Layout**. (*Warning: This will undo all customized app groupings and folders.*)
+If the icon is truly missing from the view, go to **Settings > General > Transfer or Reset iPad > Reset > Reset Home Screen Layout**. (_Warning: This will undo all customized app groupings and folders._)
 
 
 ---
@@ -350,7 +643,7 @@ id: app-19
 title: "How do I lock an iPad into a 'Single App' for exams? Can students exit themselves?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["Single App Mode","ASAM","Assessment Mode","Risk Warning"]
+tags: ["Single App Mode", "ASAM", "Assessment Mode", "Risk Warning"]
 ---
 
 **Standard 'Single App Mode' cannot be exited by the user. If you need exit flexibility, you should use 'Autonomous Single App Mode (ASAM)'.**
@@ -382,37 +675,6 @@ Choosing the wrong mode is a leading cause of "bricked" devices during school de
 
 
 ---
-File: app-2.md
----
-
----
-id: app-2
-title: "Can we install apps on iPads without signing into an Apple ID?"
-category: "Section 3: App Management & Distribution"
-important: true
-tags: ["VPP","Device-based Assignment","Apple ID","Managed Apple Account"]
----
-
-**Yes. This is called "Device-based Assignment," and it is the standard and most efficient method for school environments.**
-
-By using the **Volume Purchase Program (VPP)** within Apple School Manager (ASM), the school links app licenses to the device’s **Serial Number** rather than a specific student’s Apple ID.
-
-## Advantages for the School:
-
-- **Zero-Login Deployment**: Students can receive all necessary classroom apps immediately upon unboxing the device without ever needing a personal or Managed Apple Account.
-- **Asset Reclamation**: App licenses remain school property. When a student graduates or an iPad is erased, the license is automatically "returned" to your school’s pool, ready to be redistributed to another device.
-- **Simplified Maintenance**: There are no prompts for passwords when apps need to be updated or reinstalled.
-
-## Important Limitation: In-App Purchases
-
-Since the device is not signed into a personal account, **In-App Purchases (IAP) are not supported** in this mode. If your curriculum requires premium features within an app, we strongly recommend choosing apps that offer a "Pro" or "Full" version available as a one-time VPP purchase.
-
-## Technical Requirement:
-
-In the Jamf Pro App settings, ensure the **"Assign VPP Content"** checkbox is selected and the distribution method is set to **"Install Automatically/Prompt users to install."**
-
-
----
 File: app-20.md
 ---
 
@@ -421,7 +683,7 @@ id: app-20
 title: "What is 'Declarative App Management' (DDM)?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["DDM","App Deployment","Status Monitoring","New Tech"]
+tags: ["DDM", "App Deployment", "Status Monitoring", "New Tech"]
 ---
 
 **Declarative Device Management (DDM) is a major evolution of the Apple MDM protocol, allowing devices to autonomously maintain their state based on 'Declarations' from the server.**
@@ -448,7 +710,7 @@ id: app-21
 title: "How do I prevent students from 'hiding' or 'locking' Managed Apps in iOS 18?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["iOS 18","Hide App","Lock App","Restrictions"]
+tags: ["iOS 18", "Hide App", "Lock App", "Restrictions"]
 ---
 
 **The privacy features in iOS 18 allow users to lock or hide apps behind Face ID. This can interfere with classroom asset audits and instructional management.**
@@ -478,7 +740,7 @@ id: app-22
 title: "Purchasing Procreate vs. Procreate Pocket: What's the difference, and what if we bought the wrong version?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["Procreate","App Purchasing","VPP","Universal Purchase","Refund"]
+tags: ["Procreate", "App Purchasing", "VPP", "Universal Purchase", "Refund"]
 ---
 
 **Buying the wrong version of a high-profile app is a common clerical error in educational procurement.** These two apps are distinct product lines and do **not** support "Universal Purchase."
@@ -486,14 +748,14 @@ tags: ["Procreate","App Purchasing","VPP","Universal Purchase","Refund"]
 ## Specification Comparison:
 
 - **Procreate (iPad version)**: Designed specifically for iPadOS and Apple Pencil. Supports large canvases and the full brush engine. This is the industry standard for art classes. **Higher price point**.
-- **Procreate Pocket (iPhone version)**: Designed for the smaller iPhone interface. While it *can* be installed on an iPad (via compatibility mode), it will have black bars around the interface and lacks support for Pencil pressure sensitivity and tilt. **Lower price point**.
+- **Procreate Pocket (iPhone version)**: Designed for the smaller iPhone interface. While it _can_ be installed on an iPad (via compatibility mode), it will have black bars around the interface and lacks support for Pencil pressure sensitivity and tilt. **Lower price point**.
 
 ## Standard Process for Correction:
 
 1. **Request a VPP Refund**:
    - The administrator should log in to **Apple School Manager**, go to **Settings > Payments and Billing > View Purchase History**.
    - Alternatively, log in to **reportaproblem.apple.com** using the Managed Apple Account used for the purchase.
-   - Select the order and "Request a refund," citing "Purchased wrong version." (*Note: Apple typically decides on refunds within 24–48 hours.*)
+   - Select the order and "Request a refund," citing "Purchased wrong version." (_Note: Apple typically decides on refunds within 24–48 hours._)
 
 2. **Re-purchase**:
    - Because the licenses are not interchangeable, you must purchase the correct iPad version to deploy it to student iPads.
@@ -518,12 +780,12 @@ tags: ["DDM", "App Management", "Declarative", "Auto-Update", "iOS 26"]
 
 ## Comparison: Traditional VPP vs. Declarative App Management
 
-| Feature | Traditional MDM (InstallApplication) | Declarative App Management (App Declaration) |
-| :--- | :--- | :--- |
-| **Trigger Mechanism** | Server must 'push' the command; fails if device is briefly offline. | Server pushes a 'Declaration.' The device autonomously retries until successful. |
-| **Status Reporting** | Passive. MDM must 'poll' the device to see if it finished. | **Real-time**. Device pushes status updates (installing, failed, success) immediately. |
-| **Update Control** | Global 'Auto-Update' or manual pushes. | Granular control **per app**: Force update, defer, or follow user preference. |
-| **Scope** | App Store Apps, VPP Apps. | App Store, VPP, Custom Apps, and **.pkg** files on macOS. |
+| Feature               | Traditional MDM (InstallApplication)                                | Declarative App Management (App Declaration)                                           |
+| :-------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------- |
+| **Trigger Mechanism** | Server must 'push' the command; fails if device is briefly offline. | Server pushes a 'Declaration.' The device autonomously retries until successful.       |
+| **Status Reporting**  | Passive. MDM must 'poll' the device to see if it finished.          | **Real-time**. Device pushes status updates (installing, failed, success) immediately. |
+| **Update Control**    | Global 'Auto-Update' or manual pushes.                              | Granular control **per app**: Force update, defer, or follow user preference.          |
+| **Scope**             | App Store Apps, VPP Apps.                                           | App Store, VPP, Custom Apps, and **.pkg** files on macOS.                              |
 
 ## Supported Platforms
 
@@ -617,13 +879,13 @@ tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 
 ## DDM Package vs. Jamf Policy
 
-| Feature | Jamf Policy (Legacy) | DDM Package Declaration (Modern) |
-| :--- | :--- | :--- |
-| **Execution** | Relies on the `Jamf` binary to run scripts and installers. | Relies on the macOS native MDM framework. |
-| **Trigger** | Requires a trigger (e.g., Login, Recurring Check-in). | **Autonomous**. Device installs as soon as conditions are met. |
-| **Status Channel** | Reported through Jamf logs with potential delay. | **Real-time** reporting of progress and error codes to MDM. |
-| **Offline Support** | Must be online to trigger the check-in. | If the declaration is local, the device handles install retries offline. |
-| **Suitability** | Best for complex scripts and .dmg installs. | Best for standard signed **Distribution Packages (.pkg)**. |
+| Feature             | Jamf Policy (Legacy)                                       | DDM Package Declaration (Modern)                                         |
+| :------------------ | :--------------------------------------------------------- | :----------------------------------------------------------------------- |
+| **Execution**       | Relies on the `Jamf` binary to run scripts and installers. | Relies on the macOS native MDM framework.                                |
+| **Trigger**         | Requires a trigger (e.g., Login, Recurring Check-in).      | **Autonomous**. Device installs as soon as conditions are met.           |
+| **Status Channel**  | Reported through Jamf logs with potential delay.           | **Real-time** reporting of progress and error codes to MDM.              |
+| **Offline Support** | Must be online to trigger the check-in.                    | If the declaration is local, the device handles install retries offline. |
+| **Suitability**     | Best for complex scripts and .dmg installs.                | Best for standard signed **Distribution Packages (.pkg)**.               |
 
 ## Requirements & Limitations
 
@@ -654,7 +916,7 @@ id: app-26
 title: "How to manage the AI-assisted teaching apps in 2024–2025 (e.g., Writing Tools, Image Playground)?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["AI","Apple Intelligence","App Management","Privacy","Exam Security"]
+tags: ["AI", "Apple Intelligence", "App Management", "Privacy", "Exam Security"]
 ---
 
 **With Apple Intelligence reaching full maturity in 2024–2025, teaching apps have entered the "AI-Assisted Era."**
@@ -694,7 +956,7 @@ id: app-27
 title: "How to update apps via Jamf Pro? (Automated Enforcement and Manual Force Update)"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["App Update","Jamf Pro","Manual Update","Auto Update","DDM"]
+tags: ["App Update", "Jamf Pro", "Manual Update", "Auto Update", "DDM"]
 ---
 
 **In Jamf Pro, app updates are primarily managed through "Automated Enforcement" and the "Force Update" button.** To ensure classroom iPads remain up-to-date, it is recommended to combine automated checking with manual enforcement when necessary.
@@ -727,242 +989,4 @@ In iOS 26 and the latest system environments, update execution is still subject 
 
 When pushing mass updates, ensure your school's **"Content Caching"** server is working properly to prevent all iPads from downloading from Apple simultaneously and saturating your bandwidth.
 
-
----
-File: app-3.md
----
-
----
-id: app-3
-title: "If the App Store is hidden, how can students get the apps they need for class?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["Self Service","App Store","Restrictions","Student Autonomy"]
----
-
-**Even when the official App Store is disabled via a management profile, students can still safely acquire apps through the "Self Service" app.**
-
-## The Role of Self Service:
-
-Self Service is the school’s private, curated app portal. Instead of giving students access to the millions of apps on the public App Store, IT "publishes" specific, pre-approved titles into Self Service.
-
-## Why this is the preferred setup:
-
-1. **Safety & Focus**: It prevents students from downloading non-educational games, social media, or inappropriate content.
-2. **Bandwidth & Storage Efficiency**: Instead of forcing 50 large apps onto every iPad (which uses up storage and slows down the network), IT can make them "Optional." Students only download the specific tools required for their current project.
-3. **Independence**: Students can reinstall apps or trigger manual updates for their school tools without needing to ask an ICT administrator for a password.
-
-## Troubleshooting:
-
-- **Missing Self Service**: If the app is missing, ensure the device is correctly enrolled and has a stable Wi-Fi connection.
-- **Web Clips**: The school can also place direct links to web-based platforms (like ManageBac or Google Classroom) inside Self Service for easy one-tap access.
-
-
----
-File: app-4.md
----
-
----
-id: app-4
-title: "What details should we keep in mind when 'purchasing' free apps in bulk?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["VPP","ASM","Location Tokens","Inventory Management"]
----
-
-**In the Apple ecosystem, even $0 free apps must go through the "Purchase" workflow in Apple School Manager (ASM) to be authorized for school distribution.**
-
-## Key Details to Consider:
-
-1. **Location Token (VPP Token) Match**:
-   - If your school has multiple "Locations" in ASM (e.g., "Primary Campus" vs. "Secondary Campus"), you must purchase the apps for the *exact same* location that is linked to your Jamf Pro server. Licenses bought for Location A cannot be used by a server linked to Location B.
-
-2. **Sync Lag**:
-   - After hitting "Get" in ASM, the licenses don't appear in Jamf Pro instantly. There is usually a **2-10 minute synchronization delay** between Apple’s servers and your MDM dashboard.
-
-3. **Purchase Quantity**:
-   - Since the licenses are free, we recommend "purchasing" a quantity that far exceeds your current needs (e.g., if you have 500 iPads, buy 2,000 licenses). This prevents deployment failures if you add more devices later.
-
-## Troubleshooting Tip:
-
-If an app is showing a "0 available" count in Jamf Pro despite being purchased in ASM, check the Location settings first and then manually trigger a **"Sync VPP Content"** in the Jamf Global Management settings.
-
-
----
-File: app-5.md
----
-
----
-id: app-5
-title: "How do we balance automated app installs with limited school bandwidth?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["Deployment Strategy","Content Caching","Bandwidth Management"]
----
-
-**During large-scale deployments (e.g., the first day of the school year), having hundreds of iPads simultaneously downloading the same apps can paralyze the campus network.** To manage this, we recommend a "Tiered Deployment" strategy.
-
-## Recommended Solutions:
-
-- **Implement Content Caching (Highly Recommended)**:
-  - Set up a dedicated Mac (connected via Ethernet) on your campus network and enable **"Content Caching"** in the System Settings.
-  - **The Result**: The first iPad downloads the app from the internet; the Mac saves a copy. The remaining 99 iPads then pull the app from that Mac over the high-speed local network, preserving your external internet bandwidth.
-- **Prioritize Essential vs. Optional Apps**:
-  - Configure only your core tools (e.g., MDM agents, browsers, LMS apps) as **"Auto-Install."**
-  - Place large, non-essential creative tools (e.g., GarageBand, iMovie, or heavy 3D titles) in **Self Service**. This allows students to download them gradually throughout the week as needed.
-- **Stagger the Enrollment**:
-  - Instead of letting an entire grade level unbox and enroll at the exact same minute, try staggering the classes by 30-minute intervals. This reduces the initial "burst" of traffic on your Wi-Fi access points.
-
-## Operational Note:
-
-If devices are showing a "Waiting" status during a major rollout, simply restarting the download in MDM often makes the problem worse by adding more requests to a choked network. Prioritizing **Content Caching** is the single most effective way to solve bandwidth fatigue.
-
-
----
-File: app-6.md
----
-
----
-id: app-6
-title: "What is the difference between Managed Apps and personally installed apps? Can students take their apps with them after graduation?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["Managed Apps","License Ownership","VPP","Data Protection"]
----
-
-**It depends on the "purchaser" identity and the "management attributes" of the app. App licenses and the data inside them should be considered separately.**
-
-In a managed environment, apps are categorized as either "Managed" or "Personal," each with a completely different lifecycle:
-
-## 1. School-assigned "Managed Apps"
-
-- **Source**: Purchased by administrators via **Apple School Manager (ASM)** and deployed through an MDM using "Device-based assignment."
-- **Ownership**: The license belongs to the **school**.
-- **Graduation/Departure Process**:
-  - **License Recovery**: When a student leaves and the device is unenrolled, the MDM revokes the license. The app will either disappear from the device or become inaccessible. The license is then returned to the school's VPP (Volume Purchase Program) pool for the next student to use.
-  - **Data Risk**: If the "Remove app when management profile is removed" setting is enabled, all data stored within the app (e.g., unsaved projects, local notes) will be **permanently erased**.
-
-## 2. Apps purchased with a student's personal Apple Account
-
-- **Source**: Purchased by the student on a personal or unrestricted device using their private Apple Account.
-- **Ownership**: The license belongs permanently to the **individual student**.
-- **Graduation/Departure Process**:
-  - **Permanent Access**: The student can redownload the app on any new device by signing in with the same Apple Account, unaffected by the school's MDM.
-  - **Note**: On internal "Supervised" school iPads, admins often restrict personal Apple Account logins to the App Store, so these apps are less common on school-owned hardware.
-
-## Key Technical Mechanism: Converting Unmanaged to Managed
-
-- **Conversion Behavior**: If a student has already manually installed an app (e.g., Notability), and the MDM attempts to deploy the same app, administrators can trigger a request to "take over" management of the app.
-- **Impact**: Once converted, the app is subject to school policies, such as being prohibited from backing up to a personal iCloud account.
-
-## Institutional Advice & Risk Management
-
-- **Data Migration**: Teachers and students should ensure important projects are exported to cloud storage (e.g., Google Drive) or sent via AirDrop before graduation. **Once management is revoked, Managed Apps and any un-synced data within them cannot be recovered.**
-- **BYOD Recommendation**: For student-owned devices, using the "User Enrollment" mode is recommended. This maintains a clear separation between personal and school data, allowing the school to remove its apps without affecting the student's personal photos or purchases.
-
-
----
-File: app-7.md
----
-
----
-id: app-7
-title: "I cannot find the app I want in ASM (due to regional restrictions or removal). How do I solve this?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["ASM Search","Regional Restrictions","Developer Settings","App Store"]
----
-
-**Search results in Apple School Manager (ASM) can sometimes differ from the consumer App Store. If you cannot find a specific item, check these factors in order:**
-
-## 1. Search by Apple ID String (Recommended)
-
-Don't search by name. Instead, find the app on the web-based App Store and locate its unique ID (e.g., `id123456789`). Paste this ID directly into the ASM search bar. This is the most accurate way to find a specific entry.
-
-## 2. Regional Store Consistency
-
-ASM only searches the App Store associated with your organization's registered region (e.g., the Taiwan store). If a developer has released an app exclusively for the U.S. store, it will not appear in a Taiwan-based ASM account.
-
-## 3. B2B / Custom Apps
-
-Some proprietary or school-specific apps are distributed as "Custom Apps." Ensure the developer has added your **Organization ID** to their distribution list in App Store Connect.
-
-## Risk Warning:
-
-If an app has been removed (delisted) from the App Store, you may be unable to download it to new devices even if you have remaining VPP licenses. Administrators should periodically audit the status of critical teaching apps in the store to avoid deployment gaps.
-
-
----
-File: app-8.md
----
-
----
-id: app-8
-title: "Can I deploy Web Clips to student home screens? Are they considered apps?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["Web Clip","Safari","Configuration Profile","Teaching Tools"]
----
-
-**Yes. A Web Clip is not a true app; rather, it is a bookmark icon on the home screen that points to a specific URL.**
-
-This is highly effective for guiding students to specific learning portals.
-
-## Technical Details & Configuration Advice:
-
-### 1. Full-Screen Experience
-
-In your Jamf Pro configuration, ensure the "Full Screen" option is enabled.
-- **Effect**: Opening the link will hide the Safari address bar and toolbar.
-- **Benefit**: This makes the website look like a standalone native app, reducing the chance of students getting distracted by other sites.
-
-### 2. Custom Icons and Visuals
-
-- **Recommended Specification**: Upload a **180x180 pixel PNG file** for maximum clarity.
-- **Transparency Support**: Modern systems support PNG icons with transparency, allowing for more professional-looking home screen layouts.
-
-### 3. Prevent Removal (Non-removable)
-
-For shared classroom devices, you can set the Web Clip as "Non-removable."
-- **Advantage**: This ensures essential portals are not accidentally deleted by students, saving you the trouble of redeploying them.
-
-## Limitations & Risks:
-
-- **Browser Dependency**: Web Clips rely on the built-in Safari engine. If you have a restriction profile that completely disables the Safari app, Web Clips will not open.
-- **Internet Connectivity**: Since these are essentially web pages, the device must be online to load the content. For offline use, you must look for Progressive Web Apps (PWAs) that support offline caching or install native apps.
-
-
----
-File: app-9.md
----
-
----
-id: app-9
-title: "Do I need the student's Apple ID password to update apps? How can I achieve silent updates?"
-category: "Section 3: App Management & Distribution"
-important: false
-tags: ["App Updates","Device-based Assignment","Automated Updates","DDM"]
----
-
-**No password is required. As long as you use "Device-based Assignment," the update process is completely hands-off.**
-
-## The Preferred 2026 Method: Declarative Device Management (DDM)
-
-Under the latest OS architecture, **DDM** is the best path for silent updates:
-- **Autonomy**: The device itself monitors app versions based on the MDM declaration and triggers downloads in the background. It no longer relies on a one-way "push" command from the server.
-- **Status Transparency**: Admins get real-time progress reports (e.g., "Downloading" or "Insufficient Space") instead of the vague "Pending" status seen in older MDM versions.
-
-## Traditional MDM Configuration (Compatibility Layer):
-
-1. **License Mode**: Must be set to "Device-based" (bound to serial number).
-2. **Supervised Mode**: The iPad must be in a "Supervised" state.
-3. **Jamf Configuration**: In the app's distribution settings, enable **"Automatically Update App."** (*Note: On DDM-supported devices, this checkbox automatically triggers a DDM declaration.*)
-
-## Common Troubleshooting for Failed Updates:
-
-- **App in Use**: If a student is currently using the app, the system will typically wait until the app is in the background or the device is idle before updating.
-- **Insufficient Storage**: Updates require temporary space to download the installer. If the device is full, the update will fail.
-- **Stuck Commands**: If you see many pending update commands, try sending a **"Blank Push"** to force the device to check in with Apple servers.
-
-**Note**: DDM makes the device more proactive in scheduling updates, reducing its real-time dependency on the MDM server for simple maintenance tasks.
 

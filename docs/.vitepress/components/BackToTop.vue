@@ -1,43 +1,58 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue'
-import { useData } from 'vitepress'
+import { onMounted, onUnmounted, ref, computed } from "vue";
+import { useData } from "vitepress";
 
-const { lang } = useData()
-const visible = ref(false)
+const { lang } = useData();
+const visible = ref(false);
 
 const t = computed(() => {
-  return lang.value === 'zh-TW' ? {
-    backToTop: '返回頂部'
-  } : {
-    backToTop: 'Back to Top'
-  }
-})
+  return lang.value === "zh-TW"
+    ? {
+        backToTop: "返回頂部",
+      }
+    : {
+        backToTop: "Back to Top",
+      };
+});
 
 const handleScroll = () => {
-  visible.value = window.scrollY > 300
-}
+  visible.value = window.scrollY > 300;
+};
 
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
-  })
-}
+    behavior: "smooth",
+  });
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll, { passive: true })
-})
+  window.addEventListener("scroll", handleScroll, { passive: true });
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <transition name="slide-fade">
-    <button v-if="visible" class="back-to-top" :aria-label="t.backToTop" @click="scrollToTop">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
+    <button
+      v-if="visible"
+      class="back-to-top"
+      :aria-label="t.backToTop"
+      @click="scrollToTop"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M18 15l-6-6-6 6" />
       </svg>
     </button>
@@ -100,7 +115,9 @@ onUnmounted(() => {
 
 .back-to-top:hover {
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(var(--vp-c-brand-rgb), 0.4);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.2),
+    0 6px 12px rgba(var(--vp-c-brand-rgb), 0.4);
 }
 
 .back-to-top:hover svg {
@@ -114,7 +131,8 @@ onUnmounted(() => {
 /* Smooth Slide Fade Transition */
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+  transition:
+    opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
     transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

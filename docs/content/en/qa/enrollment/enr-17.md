@@ -3,7 +3,7 @@ id: enr-17
 title: "The device is locked by 'Activation Lock'. How do I unlock it?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Activation Lock","Bypass Code","Apple Devices App"]
+tags: ["Activation Lock", "Bypass Code", "Apple Devices App"]
 ---
 
 **Activation Lock is an Apple security feature. If you have ownership of the device, there are several technical pathways to unlock it.**

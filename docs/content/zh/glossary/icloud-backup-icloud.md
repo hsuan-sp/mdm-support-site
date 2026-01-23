@@ -1,6 +1,6 @@
 ---
 term: "iCloud Backup（iCloud 備份）"
-category: ["Core","Apple"]
+category: ["Core", "Apple"]
 ---
 
 ## 術語定義

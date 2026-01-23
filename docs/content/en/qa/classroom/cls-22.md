@@ -3,7 +3,7 @@ id: cls-22
 title: "The school network is divided into 'Teacher' and 'Student' VLANs. Will Apple Classroom still work?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: true
-tags: ["Network Architecture","VLAN","Bonjour","mDNS"]
+tags: ["Network Architecture", "VLAN", "Bonjour", "mDNS"]
 ---
 
 **By default, no. Apple Classroom relies on Bonjour (mDNS) broadcast packets, which do not cross different subnets or VLANs.**

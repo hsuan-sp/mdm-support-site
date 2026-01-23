@@ -1,6 +1,6 @@
 ---
 term: "Jamf Pro API"
-category: ["Jamf","Other"]
+category: ["Jamf", "Other"]
 ---
 
 ## Definition

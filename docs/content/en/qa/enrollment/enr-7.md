@@ -3,7 +3,7 @@ id: enr-7
 title: "Why does the device get stuck on 'Installing Apps' during PreStage enrollment/Setup Assistant?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["PreStage Enrollment","App Deployment","ADE","DDM","Troubleshooting"]
+tags: ["PreStage Enrollment", "App Deployment", "ADE", "DDM", "Troubleshooting"]
 ---
 
 **When you configure 'Install Apps' in PreStage enrollment, the device waits for apps to download before allowing access to the Home Screen.**
@@ -30,5 +30,5 @@ tags: ["PreStage Enrollment","App Deployment","ADE","DDM","Troubleshooting"]
 ## Best Practices:
 
 - **Minimize Initial Payload**: PreStage should only enforce critical configuration profiles or extremely small "Guide Apps".
-- **Background Install**: Set main educational apps to deploy *after* enrollment is complete, rather than intercepting the user during the Setup Assistant.
+- **Background Install**: Set main educational apps to deploy _after_ enrollment is complete, rather than intercepting the user during the Setup Assistant.
 - **Pilot Test**: Before unboxing remotely, take one device through the full process to verify VPP sync and download speeds.

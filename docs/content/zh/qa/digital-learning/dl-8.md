@@ -3,10 +3,10 @@ id: dl-8
 title: "學校 Wi-Fi 訊號很差，精進方案的 iPad 可以接有線網路 (Ethernet) 嗎？"
 category: "第五部分：數位學習精進方案專區 (MOE Digital Learning Project)"
 important: false
-tags: ["網路","有線連接","Ethernet","Lightning","iPad 9"]
+tags: ["網路", "有線連接", "Ethernet", "Lightning", "iPad 9"]
 ---
 
-**可以。無論是傳統 Lightning 還是新款 USB-C 介面的 iPad，皆支援透過轉接器連接有線網路。
+\*\*可以。無論是傳統 Lightning 還是新款 USB-C 介面的 iPad，皆支援透過轉接器連接有線網路。
 
 ** 硬體需求與選擇 ** ：
 
@@ -28,7 +28,7 @@ tags: ["網路","有線連接","Ethernet","Lightning","iPad 9"]
 
 1. **重要步驟：接上電源** 。請務必將充電線插上轉接器的供電孔
 
- （Lightning 介面推動網卡通常需要外部電力）。
+（Lightning 介面推動網卡通常需要外部電力）。
 
 1. 接上網路線。
 1. iPad 的「設定」中會多出一個 **「乙太網路 (Ethernet)」** 選項。

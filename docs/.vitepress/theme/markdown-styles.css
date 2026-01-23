@@ -1,12 +1,14 @@
 /* ============================================================
    MDM Support Site - Premium Typography System (2026)
-   Designed for: Legibility, Hierarchy, and Visual Excellence
-   Updated: 2026-01-23 (Aligned with Markdown Standards)
+   Research-Based Readability Optimization
+   Updated: 2026-01-23
+   Standards: WCAG 2.1 AA, Modern Web Typography Best Practices
    ============================================================ */
 
 /* --- Base Variables & Core Layout --- */
 .vp-doc {
-  max-width: 800px; /* Slightly narrower for better reading comfort */
+  /* Optimal line length: 50-75 characters for English, ~65 CPL ideal */
+  max-width: 75ch; /* Character-based width for better readability */
   margin: 0 auto;
   font-family:
     "Inter",
@@ -20,19 +22,68 @@
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-  line-height: 1.75;
+  /* WCAG recommended: 1.5+ for body text */
+  line-height: 1.6;
   color: var(--vp-c-text-1);
+  /* Enhanced readability through spacing */
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
+
+/* Global optimization for markdown-body in Vue apps */
+.markdown-body {
+  max-width: 75ch;
+  overflow-x: auto;
+  /* Proper spacing for mixed CJK and Latin text */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* --- Language-Specific Optimizations --- */
+
+/* English: Optimal word spacing and justification */
+.vp-doc[lang="en"],
+.vp-doc[lang="en-US"],
+.markdown-body[lang="en"],
+.markdown-body[lang="en-US"] {
+  /* Slightly tighter line-height for Latin characters */
+  line-height: 1.6;
+  /* WCAG minimum: 0.16x font size for word spacing */
+  word-spacing: 0.03em;
+  /* Better justification for English */
+  text-align: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* Chinese: Adjusted spacing for CJK characters */
+.vp-doc[lang="zh"],
+.vp-doc[lang="zh-TW"],
+.vp-doc[lang="zh-CN"],
+.markdown-body[lang="zh"],
+.markdown-body[lang="zh-TW"],
+.markdown-body[lang="zh-CN"] {
+  /* CJK needs more breathing room */
+  line-height: 1.85;
+  /* Chinese doesn't use word-spacing, but letter-spacing helps */
+  letter-spacing: 0.02em;
+  text-align: left;
+  /* Better text wrapping for Chinese */
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* --- 1. Typography Hierarchy --- */
 
 /* H1: The Page Title */
 .vp-doc h1 {
-  font-size: 2.25rem;
+  font-size: clamp(1.875rem, 5vw, 2.25rem); /* Responsive sizing */
   font-weight: 800;
   letter-spacing: -0.025em;
+  line-height: 1.2; /* Tighter for headings */
   margin-top: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem; /* 2x font size (WCAG paragraph spacing) */
   color: var(--vp-c-text-1);
   background: linear-gradient(120deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
   background-clip: text;
@@ -41,20 +92,22 @@
   display: inline-block;
 }
 
-/* H2: Section Headers (Used for Q: and Term Definitions) */
+/* H2: Section Headers */
 .vp-doc h2 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
   font-weight: 700;
-  margin-top: 3.5rem; /* Breathable spacing, matches blank line enforcement */
-  margin-bottom: 1.25rem;
+  line-height: 1.3;
+  margin-top: 3rem; /* Clear section breaks */
+  margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-1);
   display: flex;
   align-items: center;
+  letter-spacing: -0.01em;
 }
 
-/* Add a subtle indicator for H2 to guide the eye */
+/* Visual indicator for H2 */
 .vp-doc h2::before {
   content: "";
   display: inline-block;
@@ -63,34 +116,64 @@
   background-color: var(--vp-c-brand-1);
   border-radius: 4px;
   margin-right: 12px;
+  flex-shrink: 0;
 }
 
 /* H3: Sub-sections */
 .vp-doc h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1.125rem, 3.5vw, 1.25rem);
   font-weight: 600;
+  line-height: 1.3;
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: var(--vp-c-text-1);
+  letter-spacing: -0.01em;
 }
 
 /* --- 2. Content & Readability --- */
 
-/* Paragraphs */
-.vp-doc p {
-  font-size: 1.0625rem; /* ~17px for readability */
-  margin-bottom: 1.5rem;
-  text-align: left; /* Improved readability, avoids weird gaps */
+/* Paragraphs - Research-backed optimal settings */
+.vp-doc p,
+.markdown-body p {
+  /* Minimum 16px, optimal 17-18px */
+  font-size: clamp(1rem, 2vw, 1.0625rem);
+  /* WCAG: 2x font size paragraph spacing */
+  margin-bottom: 1.75em;
+  line-height: 1.6;
+  text-align: left;
   color: var(--vp-c-text-2);
+  /* WCAG letter spacing: 0.12x font size */
+  letter-spacing: 0.015em;
+  /* Superior readability */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Lists - fixing the "ugly" list rendering */
+/* Language-specific paragraph optimizations */
+.vp-doc p[lang="en"],
+.vp-doc p[lang="en-US"],
+.markdown-body p[lang="en"],
+.markdown-body p[lang="en-US"] {
+  /* Better English word spacing */
+  word-spacing: 0.04em;
+  hyphens: auto;
+}
+
+.vp-doc p[lang="zh"],
+.vp-doc p[lang="zh-TW"],
+.markdown-body p[lang="zh"],
+.markdown-body p[lang="zh-TW"] {
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+
+/* Lists - Enhanced readability */
 .vp-doc ul,
 .vp-doc ol,
 .markdown-body ul,
 .markdown-body ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  margin-bottom: 1.75em;
   list-style-position: outside;
 }
 
@@ -99,10 +182,20 @@
   margin-bottom: 0.75rem;
   line-height: 1.7;
   color: var(--vp-c-text-2);
+  /* Better spacing for list items */
+  padding-left: 0.5em;
 }
 
-/* List markers styling - Unified for Doc and Apps */
-/* Note: This styles the output regardless of whether '*' or '-' is used in source */
+/* Nested lists */
+.vp-doc li > ul,
+.vp-doc li > ol,
+.markdown-body li > ul,
+.markdown-body li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Custom list markers */
 .vp-doc ul > li,
 .markdown-body ul > li {
   list-style-type: none;
@@ -115,7 +208,7 @@
   color: var(--vp-c-brand-1);
   font-weight: bold;
   position: absolute;
-  left: -1.25rem;
+  left: -1.5rem;
   font-size: 1.25em;
   line-height: 1.4;
   display: inline-block;
@@ -132,30 +225,40 @@
   font-weight: bold;
 }
 
-/* --- 3. Feature: Cards & Callouts (Q&A / Glossary Highlights) --- */
+/* --- 3. Feature: Cards & Callouts --- */
 
-/* The "Answer" block or "Definition" block often follows an H2. 
-   Let's make the FIRST paragraph after an H2 pop if it contains specific keywords or just generally. */
-
-/* Blockquotes - Enhanced for "Analogy" or "Notes" */
-.vp-doc blockquote {
+/* Blockquotes - Enhanced readability */
+.vp-doc blockquote,
+.markdown-body blockquote {
   background-color: var(--vp-c-bg-soft);
-  border: none; /* Remove default border */
+  border: none;
   border-left: 4px solid var(--vp-c-brand-1);
   border-radius: 0 8px 8px 0;
-  padding: 1rem 1.5rem;
+  padding: 1.25rem 1.75rem;
   margin: 2rem 0;
   color: var(--vp-c-text-2);
-  font-style: normal; /* Remove italic */
+  font-style: normal;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  line-height: 1.65;
 }
 
-/* Specific styling for "Analogy" (白話文比喻) often found in Glossary */
-.vp-doc blockquote p:first-child strong {
-  color: var(--vp-c-brand-dark) !important;
+.vp-doc blockquote p,
+.markdown-body blockquote p {
+  margin-bottom: 1rem;
 }
 
-/* Interactive/Important Badges */
+.vp-doc blockquote p:last-child,
+.markdown-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Emphasis styling */
+.vp-doc blockquote p:first-child strong,
+.markdown-body blockquote p:first-child strong {
+  color: var(--vp-c-brand-1);
+}
+
+/* Important Badges */
 .important-badge {
   background-color: var(--vp-c-danger-soft);
   color: var(--vp-c-danger-1);
@@ -169,58 +272,91 @@
   margin-right: 0.5rem;
 }
 
-/* --- 4. Tables --- */
-.vp-doc table {
+/* --- 4. Tables - Premium Design --- */
+.vp-doc table,
+.markdown-body table {
   width: 100%;
+  display: table;
   border-collapse: separate;
   border-spacing: 0;
   margin: 2rem 0;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.vp-doc th {
-  background-color: var(--vp-c-bg-mute);
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  padding: 12px 16px;
-  border-bottom: 2px solid var(--vp-c-divider);
-}
-
-.vp-doc td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--vp-c-divider);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background-color: var(--vp-c-bg-elv);
   font-size: 0.95rem;
 }
 
-.vp-doc tr:last-child td {
+.vp-doc th,
+.markdown-body th {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 14px 20px;
+  border-bottom: 2px solid var(--vp-c-divider);
+  text-align: left;
+  line-height: 1.5;
+}
+
+.vp-doc td,
+.markdown-body td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  word-spacing: 0.03em;
+}
+
+.vp-doc tr:last-child td,
+.markdown-body tr:last-child td {
   border-bottom: none;
 }
 
-.vp-doc tr:hover td {
+.vp-doc tr:hover td,
+.markdown-body tr:hover td {
   background-color: var(--vp-c-bg-soft);
+  transition: background-color 0.2s ease;
 }
 
 /* --- 5. Code & Pre --- */
-.vp-doc :not(pre) > code {
+.vp-doc :not(pre) > code,
+.markdown-body :not(pre) > code {
+  font-family: "JetBrains Mono", "Roboto Mono", "Courier New", monospace;
   font-size: 0.9em;
   color: var(--vp-c-brand-1);
-  background-color: var(--vp-c-bg-mute); /* Softer background */
-  padding: 0.2em 0.4em;
+  background-color: var(--vp-c-bg-mute);
+  padding: 0.25em 0.5em;
   border-radius: 6px;
+  letter-spacing: 0;
+  word-spacing: 0;
 }
 
-/* --- 6. Strong Emphasis (Bold Text) --- */
+.vp-doc pre,
+.markdown-body pre {
+  line-height: 1.5;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* --- 6. Strong & Emphasis --- */
 .vp-doc strong,
 .markdown-body strong {
   font-weight: 700;
   color: var(--vp-c-text-1);
 }
 
-/* Special Highlighting - Q&A Answer Card */
+.vp-doc em,
+.markdown-body em {
+  font-style: italic;
+  color: var(--vp-c-text-2);
+}
+
+/* Special highlighting for Q&A answers */
 .vp-doc h2 + p > strong:first-child {
   display: block;
   font-size: 1.125rem;
@@ -236,9 +372,95 @@
 }
 
 /* --- 7. Images --- */
-.vp-doc img {
+.vp-doc img,
+.markdown-body img {
   border-radius: 8px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   margin: 1.5rem auto;
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- 8. Links --- */
+.vp-doc a,
+.markdown-body a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.vp-doc a:hover,
+.markdown-body a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+/* --- 9. Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .vp-doc,
+  .markdown-body {
+    /* Mobile: 30-50 CPL optimal */
+    max-width: 45ch;
+  }
+
+  .vp-doc p,
+  .markdown-body p {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1.5em;
+  }
+
+  .vp-doc h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .vp-doc h2 {
+    font-size: 1.375rem;
+    margin-top: 2rem;
+  }
+
+  .vp-doc h3 {
+    font-size: 1.125rem;
+  }
+
+  .vp-doc ul,
+  .vp-doc ol,
+  .markdown-body ul,
+  .markdown-body ol {
+    padding-left: 1.5rem;
+  }
+
+  .vp-doc table,
+  .markdown-body table {
+    font-size: 0.875rem;
+  }
+
+  .vp-doc th,
+  .markdown-body th,
+  .vp-doc td,
+  .markdown-body td {
+    padding: 10px 14px;
+  }
+}
+
+/* --- 10. Print Optimization --- */
+@media print {
+  .vp-doc,
+  .markdown-body {
+    max-width: 100%;
+    line-height: 1.5;
+  }
+
+  .vp-doc p,
+  .markdown-body p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .vp-doc h2,
+  .vp-doc h3 {
+    page-break-after: avoid;
+  }
 }

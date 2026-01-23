@@ -3,7 +3,8 @@ id: mac-6
 title: "How can I quickly reset (wipe) a Mac lab, similar to using recovery cards?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Reset","EACS","Erase All Content and Settings","Computer Lab","Imaging"]
+tags:
+  ["Reset", "EACS", "Erase All Content and Settings", "Computer Lab", "Imaging"]
 ---
 
 **In the era of Apple Silicon (M-series), using "recovery cards" or "Ghost" imaging is no longer recommended and often not even possible. Instead, use the "Erase All Content and Settings (EACS)" command.**
@@ -12,13 +13,13 @@ Traditional monolithic imaging has been completely retired by Apple. The modern 
 
 ## Comparison of Reset Methods
 
-| Feature | Legacy Re-imaging | Erase All Content and Settings (EACS) |
-| :--- | :--- | :--- |
-| **Principle** | Format drive > Re-download & install OS | Destroy encryption keys > Clear user data |
-| **Time Required** | 1-2 hours | **5-10 minutes** |
-| **Network Demand** | Requires 12GB+ OS download | **Minimal bandwidth** |
-| **Data Security** | Disk formatting (recoverable) | Cryptographic destruction (unrecoverable) |
-| **Hardware Support** | All Intel/Apple Silicon Macs | Macs with T2 or Apple Silicon chips |
+| Feature              | Legacy Re-imaging                       | Erase All Content and Settings (EACS)     |
+| :------------------- | :-------------------------------------- | :---------------------------------------- |
+| **Principle**        | Format drive > Re-download & install OS | Destroy encryption keys > Clear user data |
+| **Time Required**    | 1-2 hours                               | **5-10 minutes**                          |
+| **Network Demand**   | Requires 12GB+ OS download              | **Minimal bandwidth**                     |
+| **Data Security**    | Disk formatting (recoverable)           | Cryptographic destruction (unrecoverable) |
+| **Hardware Support** | All Intel/Apple Silicon Macs            | Macs with T2 or Apple Silicon chips       |
 
 ## Standard Reset SOP (Jamf Pro)
 

@@ -3,7 +3,7 @@ id: mac-9
 title: "What can Jamf Scripts do? How do I create and run them?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Automation","Shell Script","Zsh","Policies","Scripts","jamfHelper"]
+tags: ["Automation", "Shell Script", "Zsh", "Policies", "Scripts", "jamfHelper"]
 ---
 
 **Scripts allow administrators to execute shell commands with Root privileges on a Mac, enabling advanced customization that standard MDM payloads cannot achieve.**
@@ -12,15 +12,15 @@ Jamf Pro's power lies in its proprietary binary. When combined with **Policies**
 
 ## Common Application Scenarios:
 
-| Scenario | Script Example |
-| :--- | :--- |
-| **User Interaction** | Use `jamfHelper` to pop up full-screen announcements or countdown windows. |
-| **System Cleanup** | Periodically delete specific cache files, temporary files, or reset the printing system. |
-| **Advanced Install** | Install Homebrew, Rosetta 2, or call Installomator for automated software updates. |
-| **Inventory Reporting** | Collect info outside standard fields (e.g. battery health) and report it to **Extension Attributes**. |
-| **Permission Management** | Temporarily grant Admin rights to a user and remove them after a set duration. |
-| **AI Automation** | Pre-trigger local indexing or semantic search initialization for Apple Intelligence models. |
-| **Swift Scripting** | **2026 Trend**: Use Swift for safer, more efficient automation supporting native APIs. |
+| Scenario                  | Script Example                                                                                        |
+| :------------------------ | :---------------------------------------------------------------------------------------------------- |
+| **User Interaction**      | Use `jamfHelper` to pop up full-screen announcements or countdown windows.                            |
+| **System Cleanup**        | Periodically delete specific cache files, temporary files, or reset the printing system.              |
+| **Advanced Install**      | Install Homebrew, Rosetta 2, or call Installomator for automated software updates.                    |
+| **Inventory Reporting**   | Collect info outside standard fields (e.g. battery health) and report it to **Extension Attributes**. |
+| **Permission Management** | Temporarily grant Admin rights to a user and remove them after a set duration.                        |
+| **AI Automation**         | Pre-trigger local indexing or semantic search initialization for Apple Intelligence models.           |
+| **Swift Scripting**       | **2026 Trend**: Use Swift for safer, more efficient automation supporting native APIs.                |
 
 ## 2026 Trend: DDM is Replacing "Repetitive Scripts"
 

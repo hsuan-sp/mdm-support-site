@@ -3,7 +3,14 @@ id: hw-9
 title: "The Smart or Magic Keyboard is not responding. How do I troubleshoot it?"
 category: "Section 6: Hardware Maintenance & Troubleshooting"
 important: false
-tags: ["Keyboard","Smart Connector","Magic Keyboard","Hardware Compatibility","Troubleshooting"]
+tags:
+  [
+    "Keyboard",
+    "Smart Connector",
+    "Magic Keyboard",
+    "Hardware Compatibility",
+    "Troubleshooting",
+  ]
 ---
 
 **Keyboard failures typically stem from model incompatibility, oxidized contacts, or physical misalignment of the magnets. Since original Apple keyboards do not require Bluetooth pairing, if cleaning doesn't work, it usually involves a hardware circuit failure.**

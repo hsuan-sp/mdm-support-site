@@ -1,9 +1,8 @@
-```
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, shallowRef } from "vue";
-import { useData } from 'vitepress';
+import { useData } from "vitepress";
 // @ts-ignore
-import { data as _rawDataImported } from '../../data/all.data';
+import { data as _rawDataImported } from "../../data/all.data";
 
 const { lang } = useData();
 const isMounted = ref(false);
@@ -12,20 +11,20 @@ const rawData = shallowRef(_rawDataImported);
 
 const langData = computed(() => {
   const d = rawData.value;
-  return lang.value === 'en-US' ? d?.en : d?.zh;
+  return lang.value === "en-US" ? d?.en : d?.zh;
 });
 const glossaryData = computed(() => langData.value?.glossaryData || []);
 
-import { useLayoutMode } from '../theme/composables/useLayoutMode';
-import { useAppFeatures } from '../theme/composables/useAppFeatures';
-import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
-import AppSidebar from './AppSidebar.vue';
-import MobileDrawer from '../theme/components/MobileDrawer.vue';
-import EmptyState from '../theme/components/EmptyState.vue';
+import { useLayoutMode } from "../theme/composables/useLayoutMode";
+import { useAppFeatures } from "../theme/composables/useAppFeatures";
+import { useKeyboardShortcuts } from "../theme/composables/useKeyboardShortcuts";
+import AppSidebar from "./AppSidebar.vue";
+import MobileDrawer from "../theme/components/MobileDrawer.vue";
+import EmptyState from "../theme/components/EmptyState.vue";
 
 const t = computed(() => {
   const translations = {
-    'zh-TW': {
+    "zh-TW": {
       sidebarTitle: "術語分類",
       searchPlaceholder: "輸入 MDM 術語或縮寫...",
       categoryLabel: "類別",
@@ -50,12 +49,20 @@ const t = computed(() => {
       fontLarge: "大",
       fontExtraLarge: "極大",
       categories: {
-        Core: "核心", Enrollment: "註冊", Apple: "Apple", Security: "安管",
-        Network: "網路", Hardware: "硬體", Apps: "軟體", Other: "其他",
-        Education: "教育", macOS: "macOS", Jamf: "Jamf"
-      }
+        Core: "核心",
+        Enrollment: "註冊",
+        Apple: "Apple",
+        Security: "安管",
+        Network: "網路",
+        Hardware: "硬體",
+        Apps: "軟體",
+        Other: "其他",
+        Education: "教育",
+        macOS: "macOS",
+        Jamf: "Jamf",
+      },
     },
-    'en-US': {
+    "en-US": {
       sidebarTitle: "Glossary Categories",
       searchPlaceholder: "Search terms or abbreviations...",
       categoryLabel: "Module",
@@ -68,7 +75,7 @@ const t = computed(() => {
       allCategories: "Glossary",
       totalTerms: "{n} items",
       analogyLabel: "In Plain English",
-      emptyState: "No results for \"{q}\"",
+      emptyState: 'No results for "{q}"',
       clearSearch: "Clear",
       menuBtn: "Search & Filter",
       drawerTitle: "Glossary Settings",
@@ -80,73 +87,126 @@ const t = computed(() => {
       fontLarge: "L",
       fontExtraLarge: "XL",
       categories: {
-        Core: "Core", Enrollment: "Enroll", Apple: "Apple", Security: "Security",
-        Network: "Network", Hardware: "Hardware", Apps: "Apps", Other: "Other",
-        Education: "Edu", macOS: "macOS", Jamf: "Jamf"
-      }
-    }
+        Core: "Core",
+        Enrollment: "Enroll",
+        Apple: "Apple",
+        Security: "Security",
+        Network: "Network",
+        Hardware: "Hardware",
+        Apps: "Apps",
+        Other: "Other",
+        Education: "Edu",
+        macOS: "macOS",
+        Jamf: "Jamf",
+      },
+    },
   };
-  return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
+  return (
+    translations[lang.value as keyof typeof translations] ||
+    translations["zh-TW"]
+  );
 });
 
 const { isMobileView } = useLayoutMode();
-const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-glossary');
+const { fontScale, isSidebarCollapsed, toggleSidebar } =
+  useAppFeatures("mdm-glossary");
 const searchQuery = ref("");
 const selectedCategory = ref<string | "All">("All");
-const sortOrder = ref<'asc' | 'desc'>('asc');
+const sortOrder = ref<"asc" | "desc">("asc");
 const isSettingsOpen = ref(false);
 
+const closeMobileDrawer = () => {
+  isSettingsOpen.value = false;
+};
+
+const selectCategoryAndClose = (cat: string) => {
+  selectedCategory.value = cat;
+  closeMobileDrawer();
+};
+
 const categoriesList = [
-  "All", "Core", "Enrollment", "Apple", "Security", "Network", "Hardware", "Apps", "Education", "macOS", "Jamf", "Other"
+  "All",
+  "Core",
+  "Enrollment",
+  "Apple",
+  "Security",
+  "Network",
+  "Hardware",
+  "Apps",
+  "Education",
+  "macOS",
+  "Jamf",
+  "Other",
 ] as const;
 
 const filteredTerms = computed(() => {
   let filtered = glossaryData.value.filter((item: any) => {
     const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
-    const matchesSearch = queries.every(q =>
-      item.term.toLowerCase().includes(q) ||
-      item.definition.toLowerCase().includes(q) ||
-      item.analogy.toLowerCase().includes(q));
+    const matchesSearch = queries.every(
+      (q) =>
+        item.term.toLowerCase().includes(q) ||
+        item.definition.toLowerCase().includes(q) ||
+        item.analogy.toLowerCase().includes(q),
+    );
 
-    const matchesCategory = selectedCategory.value === "All" ||
-      (Array.isArray(item.category) ? item.category.includes(selectedCategory.value) : item.category === selectedCategory.value);
+    const matchesCategory =
+      selectedCategory.value === "All" ||
+      (Array.isArray(item.category)
+        ? item.category.includes(selectedCategory.value)
+        : item.category === selectedCategory.value);
 
     return matchesSearch && matchesCategory;
   });
 
   return filtered.sort((a: any, b: any) => {
-    const termA = a.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
-    const termB = b.term.replace(/\s*\([^)]*\)/g, '').toUpperCase();
-    return sortOrder.value === 'asc' ? termA.localeCompare(termB) : termB.localeCompare(termA);
+    const termA = a.term.replace(/\s*\([^)]*\)/g, "").toUpperCase();
+    const termB = b.term.replace(/\s*\([^)]*\)/g, "").toUpperCase();
+    return sortOrder.value === "asc"
+      ? termA.localeCompare(termB)
+      : termB.localeCompare(termA);
   });
 });
 
 const getCategoryColor = (cat: string) => `badge-${cat.toLowerCase()}`;
-const toggleSort = () => sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+const toggleSort = () =>
+  (sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc");
 
 useKeyboardShortcuts({
-  onSearchFocus: () => (document.querySelector('.search-input') as HTMLInputElement)?.focus(),
-  onEscape: () => { searchQuery.value = ''; isSettingsOpen.value = false; }
+  onSearchFocus: () =>
+    (document.querySelector(".search-input") as HTMLInputElement)?.focus(),
+  onEscape: () => {
+    searchQuery.value = "";
+    isSettingsOpen.value = false;
+  },
 });
 
 onMounted(async () => {
   isMounted.value = true;
   await nextTick();
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('card-visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.term-card').forEach(el => observer.observe(el));
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("card-visible");
+      });
+    },
+    { threshold: 0.1 },
+  );
+  document.querySelectorAll(".term-card").forEach((el) => observer.observe(el));
 });
 
 const getCategoryCount = (cat: string) => {
-  if (cat === 'All') return glossaryData.value.length;
+  if (cat === "All") return glossaryData.value.length;
   return glossaryData.value.filter((item: any) =>
-    Array.isArray(item.category) ? item.category.includes(cat) : item.category === cat
+    Array.isArray(item.category)
+      ? item.category.includes(cat)
+      : item.category === cat,
   ).length;
 };
 
-const getCategoryName = (cat: string) => (cat === 'All' ? t.value.allLabel : (t.value.categories as any)[cat] || cat);
-const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips : (t.value.categories as any)[cat] || cat);
+const getCategoryName = (cat: string) =>
+  cat === "All" ? t.value.allLabel : (t.value.categories as any)[cat] || cat;
+const getCategoryChipName = (cat: string) =>
+  cat === "All" ? t.value.allChips : (t.value.categories as any)[cat] || cat;
 </script>
 
 <template>
@@ -154,7 +214,7 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
     <div v-if="isMounted" class="app-layout">
       <!-- Desktop Sidebar -->
       <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
-        @update:scale="val => fontScale = val">
+        @update:scale="(val) => (fontScale = val)">
         <template #search>
           <div class="search-section">
             <div class="search-box">
@@ -172,13 +232,17 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
         <template #nav-items>
           <div class="categories-header">
             <span>{{ t.categoryLabel }}</span>
-            <button @click="toggleSort" class="sort-btn">{{ sortOrder === 'asc' ? t.sortAZ : t.sortZA }}</button>
+            <button @click="toggleSort" class="sort-btn">
+              {{ sortOrder === "asc" ? t.sortAZ : t.sortZA }}
+            </button>
           </div>
           <div class="categories-list">
             <button v-for="cat in categoriesList" :key="cat" @click="selectedCategory = cat"
               :class="['cat-item', { active: selectedCategory === cat }]">
               {{ getCategoryName(cat) }}
-              <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{ getCategoryCount(cat) }}</span>
+              <span class="cat-count" v-if="getCategoryCount(cat) > 0">{{
+                getCategoryCount(cat)
+                }}</span>
             </button>
           </div>
         </template>
@@ -187,13 +251,17 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
       <main class="app-content">
         <header class="content-header">
           <div class="view-status-bar">
-            <span class="status-label">{{ selectedCategory === 'All' ? t.allCategories :
-              getCategoryName(selectedCategory)
+            <span class="status-label">{{
+              selectedCategory === "All"
+                ? t.allCategories
+                : getCategoryName(selectedCategory)
+            }}</span>
+            <span class="status-count">{{
+              t.totalTerms.replace("{n}", String(filteredTerms.length))
               }}</span>
-            <span class="status-count">{{ t.totalTerms.replace('{n}', String(filteredTerms.length)) }}</span>
-            <button v-if="!isMobileView" @click="toggleSort" class="desk-sort-btn">{{ sortOrder === 'asc' ? 'A-Z' :
-              'Z-A'
-              }}</button>
+            <button v-if="!isMobileView" @click="toggleSort" class="desk-sort-btn">
+              {{ sortOrder === "asc" ? "A-Z" : "Z-A" }}
+            </button>
           </div>
         </header>
 
@@ -204,8 +272,10 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
                 <header class="card-header">
                   <h3 class="term-title">{{ item.term }}</h3>
                   <div class="term-badges">
-                    <span v-for="cat in (Array.isArray(item.category) ? item.category : [item.category])" :key="cat"
-                      :class="['badge', getCategoryColor(cat)]">{{ getCategoryName(cat) }}</span>
+                    <span v-for="cat in Array.isArray(item.category)
+                      ? item.category
+                      : [item.category]" :key="cat" :class="['badge', getCategoryColor(cat)]">{{ getCategoryName(cat)
+                      }}</span>
                   </div>
                 </header>
                 <div class="term-definition markdown-body" :lang="lang" v-html="item.definition"></div>
@@ -222,12 +292,15 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
         </TransitionGroup>
 
         <EmptyState v-if="filteredTerms.length === 0" :description="t.emptyState.replace('{q}', searchQuery)"
-          :action-text="t.clearSearch" @clear="searchQuery = ''; selectedCategory = 'All'" />
+          :action-text="t.clearSearch" @clear="
+            searchQuery = '';
+          selectedCategory = 'All';
+          " />
       </main>
     </div>
 
     <!-- Mobile Unified Settings Drawer -->
-    <MobileDrawer v-if="isMounted" :is-open="isSettingsOpen" :title="t.drawerTitle" @close="isSettingsOpen = false">
+    <MobileDrawer v-if="isMounted" :is-open="isSettingsOpen" :title="t.drawerTitle" @close="closeMobileDrawer">
       <div class="mobile-drawer-inner">
         <!-- Search Section -->
         <div class="drawer-section">
@@ -239,7 +312,9 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
               </svg>
             </span>
             <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
-            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
+            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">
+              ✕
+            </button>
           </div>
         </div>
 
@@ -248,12 +323,12 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
           <div class="section-label-mini">
             <span>{{ t.drawerCategoryTitle }}</span>
             <button @click="toggleSort" class="sort-text-btn">
-              {{ sortOrder === 'asc' ? t.sortBtnAZ : t.sortBtnZA }}
+              {{ sortOrder === "asc" ? t.sortBtnAZ : t.sortBtnZA }}
             </button>
           </div>
           <div class="mobile-filter-chips">
             <div class="chip-scroll-container">
-              <button v-for="cat in categoriesList" :key="cat" @click="selectedCategory = cat"
+              <button v-for="cat in categoriesList" :key="cat" @click="selectCategoryAndClose(cat)"
                 :class="['filter-chip', { active: selectedCategory === cat }]">
                 {{ getCategoryChipName(cat) }}
               </button>
@@ -263,13 +338,25 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 
         <!-- Font Controls -->
         <div class="drawer-section">
-          <div class="section-label-mini"><span>{{ t.fontScaleTitle }}</span></div>
+          <div class="section-label-mini">
+            <span>{{ t.fontScaleTitle }}</span>
+          </div>
           <div class="btn-group-mobile">
-            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">{{ t.fontExtraSmall }}</button>
-            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">{{ t.fontSmall }}</button>
-            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
-            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
-            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">{{ t.fontExtraLarge }}</button>
+            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">
+              {{ t.fontExtraSmall }}
+            </button>
+            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">
+              {{ t.fontSmall }}
+            </button>
+            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">
+              {{ t.fontMedium }}
+            </button>
+            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">
+              {{ t.fontLarge }}
+            </button>
+            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">
+              {{ t.fontExtraLarge }}
+            </button>
           </div>
         </div>
       </div>
@@ -291,33 +378,57 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 </template>
 
 <style scoped>
-/* Readability Improvements */
+/* WCAG 2.1 AA Compliant Typography - Research-Based Readability */
 .markdown-body {
   font-size: 1.05em;
   line-height: 1.6 !important;
-  /* Tighter line height (was 1.85) */
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.015em;
+  /* WCAG: 0.12x font size */
+  word-spacing: 0.02em;
+  max-width: 75ch;
 }
 
 .markdown-body :deep(p) {
-  margin-bottom: 1.2em !important;
-  /* Reduced from 1.4em */
+  margin-bottom: 1.25rem;
+  line-height: inherit;
+  word-spacing: inherit;
 }
 
-/* Optimizations for CJK vs Latin */
-.markdown-body[lang="zh-TW"] {
+/* Ensure paragraphs inside list items don't have bottom margin */
+.markdown-body :deep(li p) {
+  margin-bottom: 0 !important;
+}
+
+/* Language-Specific Optimizations: Chinese */
+.markdown-body[lang="zh"],
+.markdown-body[lang="zh-TW"],
+.markdown-body[lang="zh-CN"] {
   line-height: 1.85 !important;
-  /* CJK needs slightly more breathing room */
+  /* CJK needs more breathing room */
+  letter-spacing: 0.02em;
   text-align: left;
+  word-break: break-word;
 }
 
+/* Language-Specific Optimizations: English */
+.markdown-body[lang="en"],
 .markdown-body[lang="en-US"] {
-  text-align: left;
-  /* Justify can look weird in short web text */
   line-height: 1.6 !important;
+  word-spacing: 0.04em;
+  /* Enhanced word spacing for English */
+  text-align: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Mixed Language: English words within Chinese text */
+.markdown-body[lang="zh"] :deep(code),
+.markdown-body[lang="zh-TW"] :deep(code) {
+  /* Code blocks maintain normal spacing */
+  letter-spacing: 0;
+  word-spacing: 0;
 }
 
 .glossary-app {
@@ -432,8 +543,13 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 .mobile-search-bar .search-icon {
   position: absolute;
   left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0.6;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  z-index: 2;
 }
 
 .clear-search-btn {
@@ -448,35 +564,36 @@ const getCategoryChipName = (cat: string) => (cat === 'All' ? t.value.allChips :
 .mobile-filter-chips {
   overflow: hidden;
   margin: 0 -12px;
+  padding: 0 12px;
 }
 
 .chip-scroll-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 10px;
-  overflow-x: auto;
-  padding: 4px 12px 12px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.chip-scroll-container::-webkit-scrollbar {
-  display: none;
+  padding: 4px 0;
 }
 
 .filter-chip {
   white-space: nowrap;
-  padding: 10px 20px;
+  padding: 12px 20px;
   background: var(--vp-c-bg-soft);
-  border-radius: 100px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
   border: 1px solid var(--vp-c-divider);
+  text-align: center;
+  min-width: 100px;
+  transition: all 0.2s;
 }
 
 .filter-chip.active {
   background: var(--vp-c-brand-1);
   color: white;
   border-color: var(--vp-c-brand-1);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
 }
 
 .btn-group-mobile {

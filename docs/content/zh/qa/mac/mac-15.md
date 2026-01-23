@@ -3,7 +3,8 @@ id: mac-15
 title: "如何大量部署 Microsoft Office 並啟用授權？電腦教室與行政機有何不同？"
 category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: false
-tags: ["Office","Microsoft 365","Serializer","大量授權","Jamf App Installers"]
+tags:
+  ["Office", "Microsoft 365", "Serializer", "大量授權", "Jamf App Installers"]
 ---
 
 **最佳實踐是使用「Jamf App Installers」自動部署安裝檔，並依據使用場景區分「序列化 (Serializer)」或「使用者登入」兩種啟用方式。**

@@ -3,7 +3,14 @@ id: mac-23
 title: "Classroom Order: How to manage or disable 'iPhone Mirroring' to prevent student distractions."
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["iPhone Mirroring", "Classroom Management", "Restrictions", "macOS 26", "Security"]
+tags:
+  [
+    "iPhone Mirroring",
+    "Classroom Management",
+    "Restrictions",
+    "macOS 26",
+    "Security",
+  ]
 ---
 
 **macOS 26 provides granular MDM controls for 'iPhone Mirroring.' IT coordinators can set different permission levels for 'Shared Lab Macs' versus 'Teacher Presentation Macs.'**

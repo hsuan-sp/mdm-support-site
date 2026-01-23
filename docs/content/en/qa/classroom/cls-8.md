@@ -3,7 +3,8 @@ id: cls-8
 title: "Will simultaneous downloads by the whole class crash the network? What is 'Content Caching'?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: false
-tags: ["Network Optimization","Content Caching","Bandwidth Management","iCloud"]
+tags:
+  ["Network Optimization", "Content Caching", "Bandwidth Management", "iCloud"]
 ---
 
 **Yes. Without a caching mechanism, 30 iPads requesting data individually from the internet will likely saturate your school's outbound bandwidth.**

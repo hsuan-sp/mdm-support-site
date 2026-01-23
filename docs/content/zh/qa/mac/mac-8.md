@@ -3,18 +3,18 @@ id: mac-8
 title: "為什麼 MDM 要求開啟 FileVault？使用者忘記登入密碼時該如何救援？"
 category: "第七部分：Mac 裝置管理 (Mac Management)"
 important: true
-tags: ["FileVault","全磁碟加密","資料安全","復原密鑰","Jamf Pro","資產"]
+tags: ["FileVault", "全磁碟加密", "資料安全", "復原密鑰", "Jamf Pro", "資產"]
 ---
 
 **FileVault 是 macOS 內建的「全磁碟加密」技術，能確保電腦遺失時資料無法被竊取。透過 MDM 託管「復原密鑰 (Recovery Key)」，管理員可在使用者忘記密碼時協助解鎖。**
 
 ## 技術原理：
 
-*   **XTS-AES-128 加密** ：未登入前，硬碟資料處於加密亂碼狀態。
-*   **效能影響** ：現代 Mac 透過 Secure Enclave 硬體處理加密，對日常效能幾乎無影響。
-*   **2026 年新體驗：Platform SSO Boot to Desktop** ：
-    - 在 macOS 26 中，配合 PSSO，使用者只需在 FileVault 畫面輸入一次密碼，即可直接「進入桌面」，系統會自動處理後續的 IdP 驗證與登入。
-    - 這解決了以往 FileVault 與 系統登入 需要「輸入兩次密碼」的痛點。
+- **XTS-AES-128 加密** ：未登入前，硬碟資料處於加密亂碼狀態。
+- **效能影響** ：現代 Mac 透過 Secure Enclave 硬體處理加密，對日常效能幾乎無影響。
+- **2026 年新體驗：Platform SSO Boot to Desktop** ：
+  - 在 macOS 26 中，配合 PSSO，使用者只需在 FileVault 畫面輸入一次密碼，即可直接「進入桌面」，系統會自動處理後續的 IdP 驗證與登入。
+  - 這解決了以往 FileVault 與 系統登入 需要「輸入兩次密碼」的痛點。
 
 ## Jamf Pro 部署與託管流程 (SOP)：
 
@@ -42,5 +42,5 @@ tags: ["FileVault","全磁碟加密","資料安全","復原密鑰","Jamf Pro","�
 
 ## 實務建議：重要注意事項
 
-*   **資料遺失風險** ：若 FileVault 已開啟 but Jamf Pro 顯示「Unknown」或無金鑰，代表託管失敗。此時若忘記密碼，資料將 **永久無法救回** ，只能清除重灌。
-*   **機構復原密鑰 (IRK)** ：現代管理建議優先使用「個人復原密鑰 (PRK)」機制，安全性較高。
+- **資料遺失風險** ：若 FileVault 已開啟 but Jamf Pro 顯示「Unknown」或無金鑰，代表託管失敗。此時若忘記密碼，資料將 **永久無法救回** ，只能清除重灌。
+- **機構復原密鑰 (IRK)** ：現代管理建議優先使用「個人復原密鑰 (PRK)」機制，安全性較高。

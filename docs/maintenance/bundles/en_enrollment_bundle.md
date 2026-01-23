@@ -9,7 +9,7 @@ id: enr-1
 title: "My new iPad didn't show the 'Remote Management' screen during setup. How do I fix this?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["ADE","ASM","Enrollment Failure","Automated Device Enrollment"]
+tags: ["ADE", "ASM", "Enrollment Failure", "Automated Device Enrollment"]
 ---
 
 **If your iPad goes straight to the standard personal setup screens instead of the school's "Remote Management" prompt, it usually means the device serial number hasn't been linked to your MDM server by Apple.**
@@ -41,6 +41,326 @@ If the device has already reached the Home Screen (skipping management):
 
 
 ---
+File: enr-2.md
+---
+
+---
+id: enr-2
+title: "Can we just install a profile manually? What is the difference between Manual and Automated Enrollment?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags:
+  ["Manual Enrollment", "Account-Driven", "Supervised", "Apple Configurator"]
+---
+
+**Yes, you can, but manual enrollment (User-Initiated) provides significantly less administrative control compared to Automated Device Enrollment (ADE).**
+
+Manual enrollment is typically reserved for personal "Bring Your Own Device" (BYOD) scenarios or donated legacy hardware that cannot be added to Apple School Manager (ASM).
+
+## Key Differences:
+
+1. **Management Authority**:
+   - **Automated (ADE)**: Devices are placed in **"Supervised Mode"** by default. This grants the school the highest level of authority, enabling features like silent app updates, forcing restrictions (kiosk mode), and preventing the removal of the management profile.
+   - **Manual**: Devices are "Unsupervised." The school has limited control and cannot force certain high-level restrictions.
+
+2. **Removal Rights**:
+   - **Automated (ADE)**: The school can make the management profile **"Non-Removable."** The student cannot delete the profile from settings.
+   - **Manual**: The user can delete the management profile at any time via **Settings > General > VPN & Device Management**, instantly disconnecting the device from the school's control.
+
+3. **Modern Methods**:
+   - While old-fashioned manual enrollment required visiting a web URL in Safari, the modern approach is **"Account-Driven Enrollment."** Users simply sign in with their Managed Apple Account in Settings, and the system automatically guides them through the enrollment.
+
+## How to Upgrade Manual Devices to "Supervised" Status:
+
+If you have a device that wasn't bought through school channels but you want full control over it:
+
+1. **Physical Link**: Connect the iPad to a Mac running **Apple Configurator**.
+2. **Prepare**: Use the "Prepare" wizard and select **"Add to Apple School Manager."**
+3. **Wipe & Bridge**: This process **will erase the device**. Once completed, the device enters a 30-day "provisional period" during which the user can still opt-out. After 30 days, the device is permanently merged into your ASM organization as a fully Supervised asset.
+
+## Institutional Advice:
+
+For school-owned assets, always insist on **Automated Device Enrollment (ADE)**. Manual enrollment should only be used as a temporary workaround or for personal devices joining the campus network.
+
+
+---
+File: enr-3.md
+---
+
+---
+id: enr-3
+title: "What is 'Supervised Mode'? Why is it essential for school-owned devices?"
+category: "Section 2: Device Enrollment & Deployment"
+important: true
+tags: ["Supervised", "Management Levels", "ADE"]
+---
+
+**Supervised Mode is a special state that gives the school "Institutional Ownership" over the device's operating system.**
+
+A standard iPad bought from a store is "Unsupervised" (private). A school-owned device, however, should always be in Supervised Mode—enabled through **ADE** or **Apple Configurator**—to ensure a safe and focused learning environment.
+
+## Critical Differences:
+
+| Feature                     | Unsupervised (Personal) | Supervised (School)                  |
+| :-------------------------- | :---------------------- | :----------------------------------- |
+| **MDM Profile Removal**     | User can delete anytime | **Can be made permanent**            |
+| **Kiosk Mode (Single App)** | Not supported           | **Supported (Lock to one activity)** |
+| **Global Network Proxy**    | Not supported           | **Supported (Filter web content)**   |
+| **AirDrop Control**         | User choice             | **Can be forced Off by school**      |
+| **Activation Lock Bypass**  | Impossible for IT       | **Managed by the school**            |
+| **Silent Updates**          | Requires user consent   | **IT can force OS & App updates**    |
+
+## How to Check the Status:
+
+Open **Settings** on the iPad. Look at the very top, just below the user’s name. You should see a line of text:
+
+> _This iPad is supervised and managed by [Your School Name]._
+
+## Institutional Advice:
+
+If a school iPad is not Supervised, students can easily bypass web filters, delete management profiles, or factory reset the device. Supervised Mode is the first line of defense in maintaining campus digital standards.
+
+
+---
+File: enr-4.md
+---
+
+---
+id: enr-4
+title: "What is the difference between 'User Enrollment' and standard Device Enrollment?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags: ["BYOD", "Privacy", "Partitioning", "Account-Driven"]
+---
+
+**User Enrollment is a privacy-first management mode specifically designed for "Bring Your Own Device" (BYOD) scenarios.**
+
+Unlike standard enrollment used for school-owned iPads, User Enrollment (User-Driven) creates a **secure partition** on the device to separate school data from the student's personal photos, messages, and apps.
+
+## Comparison Table:
+
+| Feature                | Device Enrollment (Standard/ADE) | User Enrollment (BYOD)                                            |
+| :--------------------- | :------------------------------- | :---------------------------------------------------------------- |
+| **Ownership**          | Institutional Asset              | Personal Property                                                 |
+| **Supervision**        | Mandatory (Supervised)           | Prohibited                                                        |
+| **Data Isolation**     | Full Device control              | **Managed Data Partition only**                                   |
+| **Privacy Protection** | Standard school visibility       | **Strict User Privacy** (IT cannot see personal apps or location) |
+| **Remote Wipe**        | Wipes the entire device          | **Wipes school data only** (Personal photos remain safe)          |
+| **Removal**            | Can be prevented by IT           | **User can opt-out anytime**                                      |
+
+## Modern Approach (Account-Driven):
+
+Apple now recommends **Account-Driven User Enrollment**. Instead of downloading a profile from a website, the student goes to **Settings > General > VPN & Device Management** and signs in with their **Managed Apple Account**. The device recognizes the campus ID and automatically sets up the school partition.
+
+## Institutional Advice:
+
+- **For School iPads**: Never use User Enrollment. You need the ability to lock and track the device if it’s lost.
+- **For Staff/Shared personal use**: User Enrollment is the perfect balance for teachers who want to access school email on their personal iPhones without the school being able to see their private data.
+
+
+---
+File: enr-5.md
+---
+
+---
+id: enr-5
+title: "How do we set up 'Service Discovery' for Account-Driven Enrollment on the campus network?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags: ["Account-Driven", "Service Discovery", ".well-known", "Technical Setup"]
+---
+
+**Account-Driven Enrollment relies on "Service Discovery," allowing users to enroll simply by entering their school email address.**
+
+## How it Works:
+
+When a user enters their email (e.g., `student@tes.tp.edu.tw`) during the enrollment process, the device attempts to find a secret instruction file on the school’s web domain.
+
+1. The device sends an HTTP GET request to:
+   `https://school.domain.com/.well-known/com.apple.remotemanagement`
+2. The school’s web server must respond with a JSON file that points the device to the correct MDM server URL.
+
+## Technical Requirements:
+
+- **Web Server Access**: Your school’s main website server must be configured to host this specific `.well-known` directory.
+- **MIME Type**: The server must return the file with the `application/json` header.
+- **SSL Certificate**: The server MUST have a valid, trusted HTTPS certificate.
+
+## Alternative Options:
+
+If your school’s website is managed by a third party and you cannot modify the server files, you can still enroll devices using these methods:
+
+1. **Direct URL/QR Code**: Provide students with a direct enrollment URL from Jamf Pro (e.g., `https://school.jamfcloud.com/enroll`). Converting this into a QR Code and posting it in the ICT department is a highly effective way to handle BYOD walk-ins.
+2. **Automated Enrollment (ADE)**: For school-purchased hardware, always use ADE. It bypasses the need for service discovery entirely, as the hardware is already "pre-linked" to the school in Apple’s database.
+
+
+---
+File: enr-6.md
+---
+
+---
+id: enr-6
+title: "The setup is stuck spinning on 'Retrieving remote management configuration'. How do I troubleshoot?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags: ["Enrollment Stuck", "Troubleshooting", "ADE", "DDM"]
+---
+
+**This indicates a communication delay or interruption while the device attempts to fetch the MDM configuration profile from Apple's servers.**
+
+It is usually related to the network environment or MDM server response. "Retrieving remote management configuration" is a key step in **Automated Device Enrollment (ADE)**. Ideally, it should complete within 30 seconds to 2 minutes. If it hangs for more than 5 minutes, proceed with the following checks:
+
+## Cause 1: Network Restrictions
+
+- **Firewall Blocking**: The school network might be blocking access to Apple's device management hosts. Ensure traffic to `iprofiles.apple.com` and your MDM server URL is allowed.
+- **Solution**: Try connecting the iPad to a mobile hotspot (4G/5G). If it proceeds successfully, the issue lies with the campus firewall.
+
+## Cause 2: Jamf Pro Performance or Settings
+
+- **Server Latency**: If hundreds of devices are enrolling simultaneously, Jamf Cloud might experience queuing delays.
+- **Corrupt PreStage**: Occasionally, a PreStage configuration can have logic errors. Try re-saving the PreStage setting in Jamf Pro to force a refresh.
+
+## Cause 3: Time Desynchronization
+
+- If the device's clock deviates significantly from standard time out-of-the-box, the SSL secure connection will fail.
+- Usually, restarting the device and connecting to a stable Wi-Fi network will automatically correct the time.
+
+## Remedial Action:
+
+Force restart the device (hold the Power button/Home button combo). The device will restart the Setup Assistant, and the second attempt often succeeds.
+
+
+---
+File: enr-7.md
+---
+
+---
+id: enr-7
+title: "Why does the device get stuck on 'Installing Apps' during PreStage enrollment/Setup Assistant?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags: ["PreStage Enrollment", "App Deployment", "ADE", "DDM", "Troubleshooting"]
+---
+
+**When you configure 'Install Apps' in PreStage enrollment, the device waits for apps to download before allowing access to the Home Screen.**
+
+**Any network issues or VPP license failures will cause a deadlock.** This is extremely common during **Automated Device Enrollment (ADE)**. Admins often want students to see essential apps immediately upon boot, but if the environment isn't perfect, it leads to disaster during mass deployments.
+
+## Core Causes:
+
+1. **Insufficient VPP Licenses or Invalid Token**:
+   - If the assigned app has 0 remaining licenses, Apple servers cannot issue a download token, causing the device to wait indefinitely.
+   - **Solution**: Check the "Volume Purchasing" status in Jamf Pro to ensure sufficient licenses.
+
+2. **Campus Wi-Fi Saturation**:
+   - If a class of 30 iPads tries to download a 2GB app (e.g., GarageBand) at the Setup screen simultaneously, the Wi-Fi bandwidth will collapse, leading to timeouts.
+   - **Solution**: Avoid forcing large apps during PreStage. Let students reach the Home Screen first, then allow apps to download in the background.
+
+3. **Declarative Device Management (DDM) State Changes**:
+   - In modern architectures, app deployment is handled by **DDM**.
+   - If your **Service Access** terms haven't been accepted in ASM, DDM may fail to trigger the silent download from the App Store.
+
+4. **Configuration Error: Mandatory Install**:
+   - In Jamf Pro's PreStage settings, if an app is marked as "Required" and cannot be skipped, the student cannot click "Continue" until the download finishes.
+
+## Best Practices:
+
+- **Minimize Initial Payload**: PreStage should only enforce critical configuration profiles or extremely small "Guide Apps".
+- **Background Install**: Set main educational apps to deploy _after_ enrollment is complete, rather than intercepting the user during the Setup Assistant.
+- **Pilot Test**: Before unboxing remotely, take one device through the full process to verify VPP sync and download speeds.
+
+
+---
+File: enr-8.md
+---
+
+---
+id: enr-8
+title: "Enrollment fails with 'Profile Installation Failed'. Why?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags: ["Troubleshooting", "Network", "Declarative Management", "Profile"]
+---
+
+**This error typically stems from the device's inability to establish a stable, trusted secure connection with the MDM server or Apple servers.**
+
+If you encounter this prompt during Enrollment, check the following common causes in order:
+
+## Check 1: Verify Date and Time Precision
+
+SSL certificate validation relies heavily on correct time. If the iPad's clock is off by more than a few minutes, the connection is treated as invalid.
+
+- **Solution**: On the device, check **Settings > General > Date & Time**. Ensure **Set Automatically** is on and it has connected to the network to fetch the time zone.
+
+## Check 2: Check Campus Firewall and Network Filtering
+
+MDM commands are delivered via **Apple Push Notification service (APNs)**. If the school network blocks specific hosts, enrollment fails.
+
+- **Critical Domains**: Ensure the firewall allows connections to `apple.com` and all its subdomains.
+- **Ports**: Must open **TCP 443, 2197, and 5223**.
+- **Test**: Try enrolling the iPad using an external mobile hotspot. If successful, it confirms a campus network restriction.
+
+## Check 3: Declarative Device Management (DDM) Sync Issues
+
+In the latest OS versions, Apple heavily utilizes "Declarative Management" for enrollment. If there are logic conflicts in Jamf Pro settings (e.g., assigning multiple PreStages overlap), the profile download may be interrupted.
+
+- **Solution**: Admins should check PreStage settings in Jamf Pro to ensure the device falls into only one enrollment scope and the corresponding VPP Token is healthy.
+
+## Check 4: Is the APNs Certificate Expired?
+
+If the APNs Push Certificate in the MDM backend has expired, Apple will reject all enrollment requests.
+
+- **Solution**: Ask an administrator to check the certificate validity in Jamf Pro's "Global Management".
+
+## Check 5: Clear Activation Lock
+
+If the device serial number is still locked to a previous user's Apple Account, you might be able to download the profile, but installation may fail due to identity conflict. Ensure Activation Lock is cleared before re-enrolling.
+
+
+---
+File: enr-9.md
+---
+
+---
+id: enr-9
+title: "Jamf Pro commands are stuck in 'Pending', but the device is definitely online. Why?"
+category: "Section 2: Device Enrollment & Deployment"
+important: false
+tags:
+  [
+    "Stuck Commands",
+    "Push Notification Service",
+    "APNs",
+    "Declarative Management",
+    "Blank Push",
+  ]
+---
+
+**'Pending' means the command has been sent to Apple's servers, but the device has not yet contacted the server to report its status.**
+
+In the current architecture where **Declarative Device Management (DDM)** runs alongside traditional MDM protocols, command status updates rely heavily on device response. If commands stall, check these core factors:
+
+1. **APNs Communication Blocked**:
+   - This is the most common cause. Even if the device can browse the web, if the firewall blocks **TCP Port 5223** (used for communicating with Apple servers), push commands will never reach the device.
+   - **Test**: Switch the device to a mobile hotspot. If the status immediately changes from "Pending" to "Completed", it proves a campus network restriction.
+
+2. **Device entered Deep Sleep**:
+   - iPads in deep sleep (screen locked for a long time without power) enter power-saving mode, potentially delaying push responses.
+   - **Solution**: Wake the screen by pressing the Home or Top button to force the device to contact the server.
+
+3. **Send a 'Blank Push' Command**:
+   - In the device record in Jamf Pro, click **Management > Send Blank Push**.
+   - This is a non-destructive command used purely to "wake up" the device. It forces the device to reconnect to Apple APNs, which then triggers the retrieval of subsequent queued commands.
+
+4. **Date & Time Accuracy**:
+   - If the device time drifts by more than a few minutes, the SSL secure connection fails. Ensure "Set Automatically" is enabled in Settings.
+
+## Practical Advice:
+
+If a single device is frequently Pending, it's usually a local network or hardware sleep issue. If devices across the entire school are Pending simultaneously, prioritize checking if the **APNs Certificate** in Jamf Pro is still valid.
+
+
+---
 File: enr-10.md
 ---
 
@@ -49,7 +369,7 @@ id: enr-10
 title: "I changed the device name in Jamf Pro, but the iPad still shows the old name locally. Why?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Renaming","Name Sync","Inventory Preload","PreStage","The MUT"]
+tags: ["Renaming", "Name Sync", "Inventory Preload", "PreStage", "The MUT"]
 ---
 
 **This is usually because you only modified the 'text record' in the Jamf Pro database but haven't sent the 'Remote Rename Command' to the physical device.**
@@ -98,7 +418,8 @@ id: enr-11
 title: "'Allow App Deletion' is enabled, but students still can't delete apps. Why?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["App Management","Restriction Profiles","Screen Time","Troubleshooting"]
+tags:
+  ["App Management", "Restriction Profiles", "Screen Time", "Troubleshooting"]
 ---
 
 **This is usually due to a 'System Permission Conflict' or specific 'App Management Attributes.' Check the following three areas in order:**
@@ -132,7 +453,8 @@ id: enr-12
 title: "What is 'Shared iPad'? How can students share devices and keep their data private?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Shared iPad","Managed Apple Account","PreStage Enrollment","Multi-User"]
+tags:
+  ["Shared iPad", "Managed Apple Account", "PreStage Enrollment", "Multi-User"]
 ---
 
 **'Shared iPad' is an Apple feature designed for non-1:1 environments. It allows multiple students to sign in to the same iPad using their 'Managed Apple Accounts' while maintaining independent workspaces.**
@@ -177,7 +499,14 @@ id: enr-13
 title: "How do I prevent students from removing the MDM management profile?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Prevent Unenrollment","Supervised","PreStage Enrollment","ADE","Return to Service"]
+tags:
+  [
+    "Prevent Unenrollment",
+    "Supervised",
+    "PreStage Enrollment",
+    "ADE",
+    "Return to Service",
+  ]
 ---
 
 **The key to preventing profile removal is using the 'Automated Device Enrollment (ADE)' process and enabling mandatory locking in the 'PreStage Enrollment' settings.**
@@ -200,7 +529,7 @@ If a device is enrolled manually (e.g., via a manual link or temporary Apple Con
 
 ## Practical Advice:
 
-- **Cannot be Retroactive**: If a student has *already* removed the profile, you cannot fix it remotely. You must wipe the device and have it go through the PreStage process with "Prevent Unenrollment" enabled.
+- **Cannot be Retroactive**: If a student has _already_ removed the profile, you cannot fix it remotely. You must wipe the device and have it go through the PreStage process with "Prevent Unenrollment" enabled.
 - **Version Requirements**: For modern environments, we recommend setting a **Minimum Required iPadOS Version** (e.g., iPadOS 17+) in PreStage to ensure "Return to Service" and latest security features function correctly.
 
 
@@ -213,7 +542,7 @@ id: enr-14
 title: "How do I make an iPad automatically connect to Wi-Fi and re-enroll after a reset? (Return to Service)"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Automation","Wi-Fi","Return to Service","Zero-Touch"]
+tags: ["Automation", "Wi-Fi", "Return to Service", "Zero-Touch"]
 ---
 
 **'Return to Service' is a command feature introduced by Apple in iOS 17. It allows a device to automatically bypass the initial setup screens, connect to Wi-Fi, and re-enroll after a remote wipe.**
@@ -255,7 +584,8 @@ id: enr-15
 title: "The iPad shows 'iPad Unavailable' or is locked due to too many failed passcode attempts. What should I do?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Passcode Lock","Restore","Apple Configurator","Apple Devices App","DFU"]
+tags:
+  ["Passcode Lock", "Restore", "Apple Configurator", "Apple Devices App", "DFU"]
 ---
 
 **When a device displays 'iPad Unavailable' or 'Security Lockout,' it must be erased before it can be used again. If the device is MDM-managed, the solution depends on its connectivity status.**
@@ -303,7 +633,13 @@ id: enr-16
 title: "The device shows 'Invalid Profile' or is running extremely slow, even after a reset. Why?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Invalid Profile","Troubleshooting","Wipe Device","Declarative Management"]
+tags:
+  [
+    "Invalid Profile",
+    "Troubleshooting",
+    "Wipe Device",
+    "Declarative Management",
+  ]
 ---
 
 **'Invalid Profile' typically indicates that the 'Trust Anchor' (the identity chain between the device and the MDM server) has been broken.**
@@ -340,7 +676,7 @@ id: enr-17
 title: "The device is locked by 'Activation Lock'. How do I unlock it?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Activation Lock","Bypass Code","Apple Devices App"]
+tags: ["Activation Lock", "Bypass Code", "Apple Devices App"]
 ---
 
 **Activation Lock is an Apple security feature. If you have ownership of the device, there are several technical pathways to unlock it.**
@@ -388,7 +724,7 @@ id: enr-18
 title: "Can I remove Activation Lock directly in ASM now? Do I still need Apple Support?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Activation Lock","ASM","Automated Device Enrollment","Unlock"]
+tags: ["Activation Lock", "ASM", "Automated Device Enrollment", "Unlock"]
 ---
 
 **Yes. As long as the device belongs to your organization, you can now self-service Activation Lock removal directly through the Apple School Manager (ASM) interface.**
@@ -428,7 +764,7 @@ id: enr-19
 title: "A Mac returned from repair is locked by Activation Lock. How do I fix it?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Mac Security","Activation Lock","Apple Silicon","Apple Configurator"]
+tags: ["Mac Security", "Activation Lock", "Apple Silicon", "Apple Configurator"]
 ---
 
 **Activation Lock for Macs with Apple Silicon (M1-M5) or the Apple T2 Security Chip is fully integrated into Apple School Manager (ASM).**
@@ -469,48 +805,6 @@ If the unlock command has been sent but the Mac remains stuck:
 
 
 ---
-File: enr-2.md
----
-
----
-id: enr-2
-title: "Can we just install a profile manually? What is the difference between Manual and Automated Enrollment?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["Manual Enrollment","Account-Driven","Supervised","Apple Configurator"]
----
-
-**Yes, you can, but manual enrollment (User-Initiated) provides significantly less administrative control compared to Automated Device Enrollment (ADE).**
-
-Manual enrollment is typically reserved for personal "Bring Your Own Device" (BYOD) scenarios or donated legacy hardware that cannot be added to Apple School Manager (ASM).
-
-## Key Differences:
-
-1. **Management Authority**:
-   - **Automated (ADE)**: Devices are placed in **"Supervised Mode"** by default. This grants the school the highest level of authority, enabling features like silent app updates, forcing restrictions (kiosk mode), and preventing the removal of the management profile.
-   - **Manual**: Devices are "Unsupervised." The school has limited control and cannot force certain high-level restrictions.
-
-2. **Removal Rights**:
-   - **Automated (ADE)**: The school can make the management profile **"Non-Removable."** The student cannot delete the profile from settings.
-   - **Manual**: The user can delete the management profile at any time via **Settings > General > VPN & Device Management**, instantly disconnecting the device from the school's control.
-
-3. **Modern Methods**:
-   - While old-fashioned manual enrollment required visiting a web URL in Safari, the modern approach is **"Account-Driven Enrollment."** Users simply sign in with their Managed Apple Account in Settings, and the system automatically guides them through the enrollment.
-
-## How to Upgrade Manual Devices to "Supervised" Status:
-
-If you have a device that wasn't bought through school channels but you want full control over it:
-
-1. **Physical Link**: Connect the iPad to a Mac running **Apple Configurator**.
-2. **Prepare**: Use the "Prepare" wizard and select **"Add to Apple School Manager."**
-3. **Wipe & Bridge**: This process **will erase the device**. Once completed, the device enters a 30-day "provisional period" during which the user can still opt-out. After 30 days, the device is permanently merged into your ASM organization as a fully Supervised asset.
-
-## Institutional Advice:
-
-For school-owned assets, always insist on **Automated Device Enrollment (ADE)**. Manual enrollment should only be used as a temporary workaround or for personal devices joining the campus network.
-
-
----
 File: enr-20.md
 ---
 
@@ -519,7 +813,7 @@ id: enr-20
 title: "How do I quickly restore settings to a replacement device from a repair vendor?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Repair","Replacement","ADE","Automated Device Enrollment"]
+tags: ["Repair", "Replacement", "ADE", "Automated Device Enrollment"]
 ---
 
 **A 'Service Replacement' unit has a brand-new serial number. To automate the setup, you must handle the serial transfer and use Automated Device Enrollment (ADE).**
@@ -565,7 +859,7 @@ id: enr-21
 title: "Can I use Apple Configurator to manually add devices that don't appear in ASM?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Apple Configurator","Manual ASM Addition","Provisional Period"]
+tags: ["Apple Configurator", "Manual ASM Addition", "Provisional Period"]
 ---
 
 **Yes. For devices not purchased through an authorized education reseller, you can use Apple Configurator to manually enroll them into your Apple School Manager (ASM) organization.**
@@ -600,7 +894,7 @@ id: enr-22
 title: "The school is changing its Wi-Fi SSID. How do I prevent iPads from losing connectivity?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Wi-Fi Migration","SSID","Disaster Prevention","Network Config"]
+tags: ["Wi-Fi Migration", "SSID", "Disaster Prevention", "Network Config"]
 ---
 
 **This is a common maintenance task that frequently leads to mass disconnections. You must follow the 'Parallel Deployment' principle: Never delete the old setting until the new network is verified as functional.**
@@ -612,7 +906,7 @@ If handled incorrectly, iPads will lose contact with the old Wi-Fi and be unable
 ### Step 1: Push the New Profile
 
 - Create a new Wi-Fi configuration profile in Jamf Pro (with the new SSID and password).
-- Deploy this to all devices. At this point, the iPads will have *both* the old and new Wi-Fi settings.
+- Deploy this to all devices. At this point, the iPads will have _both_ the old and new Wi-Fi settings.
 
 ### Step 2: Field Testing
 
@@ -743,13 +1037,13 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 
 ## User Experience Timeline
 
-| Time until Deadline | Notification Frequency | User Options |
-| :--- | :--- | :--- |
-| 30–14 Days | Banner in Settings | Can select "Later" |
-| 7 Days | Once per day | Can select "Later" |
-| 3 Days | Twice per day | Can select "Later" |
-| 24 Hours | Once per hour | Can select "Later" |
-| **At Deadline** | **Immediate Enforcement** | **No "Later" option** |
+| Time until Deadline | Notification Frequency    | User Options          |
+| :------------------ | :------------------------ | :-------------------- |
+| 30–14 Days          | Banner in Settings        | Can select "Later"    |
+| 7 Days              | Once per day              | Can select "Later"    |
+| 3 Days              | Twice per day             | Can select "Later"    |
+| 24 Hours            | Once per hour             | Can select "Later"    |
+| **At Deadline**     | **Immediate Enforcement** | **No "Later" option** |
 
 ### Behavior at Deadline:
 
@@ -765,7 +1059,7 @@ tags: ["Enforcement Deadline", "DDM", "Enforcement", "Deadline", "Compliance"]
 
 ## Communication:
 
-- **Teachers**: Explain *why* the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
+- **Teachers**: Explain _why_ the update is necessary (security/new features) and encourage them to update manually before the deadline to avoid interruptions.
 - **Students**: Remind them to leave their iPads connected to power at home to allow for automatic background updates.
 
 
@@ -778,7 +1072,8 @@ id: enr-25
 title: "Which Setup Assistant steps should I skip during PreStage Enrollment? What are the best practices for schools?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["PreStage", "Setup Assistant", "ADE", "Deployment Speed", "Best Practices"]
+tags:
+  ["PreStage", "Setup Assistant", "ADE", "Deployment Speed", "Best Practices"]
 ---
 
 **PreStage Enrollment allows you to suppress multiple steps during the initial device setup. For educational settings, we recommend skipping most non-essential steps to accelerate deployment and prevent students from misconfiguring the device.**
@@ -837,7 +1132,14 @@ id: enr-26
 title: "How does the 'Preserve Managed Apps' feature in iOS 26 Return to Service work?"
 category: "Section 2: Device Enrollment & Deployment"
 important: true
-tags: ["Return to Service", "iOS 26", "Shared iPad", "App Preservation", "Rapid Deployment"]
+tags:
+  [
+    "Return to Service",
+    "iOS 26",
+    "Shared iPad",
+    "App Preservation",
+    "Rapid Deployment",
+  ]
 ---
 
 **In iOS 26, iPadOS 26, and visionOS 26, 'Return to Service' introduces the ability to 'Preserve Managed Apps.' This allows you to wipe user data while keeping the actual app binaries on the device, eliminating the massive time and bandwidth cost of redownloading gigabytes of educational software.**
@@ -861,13 +1163,13 @@ tags: ["Return to Service", "iOS 26", "Shared iPad", "App Preservation", "Rapid 
 
 ## Efficiency Comparison
 
-| Step | Traditional Method | iOS 26 (Preserve Apps) |
-| :--- | :--- | :--- |
-| Wipe Data | 2–3 mins | 2–3 mins |
-| Reboot | 1–2 mins | 1–2 mins |
-| Re-enroll | 1–2 mins | 1–2 mins |
-| App Download/Install | **30–60 mins** | **0 mins** (Already there) |
-| **Total Time** | **35–65 mins** | **5–10 mins** |
+| Step                 | Traditional Method | iOS 26 (Preserve Apps)     |
+| :------------------- | :----------------- | :------------------------- |
+| Wipe Data            | 2–3 mins           | 2–3 mins                   |
+| Reboot               | 1–2 mins           | 1–2 mins                   |
+| Re-enroll            | 1–2 mins           | 1–2 mins                   |
+| App Download/Install | **30–60 mins**     | **0 mins** (Already there) |
+| **Total Time**       | **35–65 mins**     | **5–10 mins**              |
 
 ## Best Use Cases
 
@@ -916,10 +1218,10 @@ The MDM server change must originate at the root of the ownership chain:
 
 ### 2. Configure the Migration Payload
 
-In your *existing* (MOE) MDM server, you must configure the migration instructions:
+In your _existing_ (MOE) MDM server, you must configure the migration instructions:
 
 - **Target MDM URL**: The enrollment URL of your new server.
-- **Enforcement Deadline**: Define the date and time when the transfer *must* occur.
+- **Enforcement Deadline**: Define the date and time when the transfer _must_ occur.
 
 ### 3. The Device Experience
 
@@ -930,277 +1232,8 @@ In your *existing* (MOE) MDM server, you must configure the migration instructio
 
 ## Risks and Mitigation for Schools
 
-- **App Licensing**: VPP app licenses belong to the MDM server. You must ensure you have enough VPP licenses in the *new* server for all apps. We recommend setting the new server as the license owner prior to migration.
+- **App Licensing**: VPP app licenses belong to the MDM server. You must ensure you have enough VPP licenses in the _new_ server for all apps. We recommend setting the new server as the license owner prior to migration.
 - **Configuration Conflicts**: If the old server had a "Restriction" that the new server doesn't, those "ghost" restrictions might linger if not handled correctly. We recommend a "Cleanup" script run by the new MDM upon first check-in.
 - **Teacher/Staff vs. Student**: This feature is highly recommended for Teacher/Staff devices to avoid disrupting their administrative files. For student devices, if the storage is already cluttered, a traditional "Return to Service" (Wipe) remains the better option for long-term stability.
 
-
----
-File: enr-3.md
----
-
----
-id: enr-3
-title: "What is 'Supervised Mode'? Why is it essential for school-owned devices?"
-category: "Section 2: Device Enrollment & Deployment"
-important: true
-tags: ["Supervised","Management Levels","ADE"]
----
-
-**Supervised Mode is a special state that gives the school "Institutional Ownership" over the device's operating system.**
-
-A standard iPad bought from a store is "Unsupervised" (private). A school-owned device, however, should always be in Supervised Mode—enabled through **ADE** or **Apple Configurator**—to ensure a safe and focused learning environment.
-
-## Critical Differences:
-
-| Feature | Unsupervised (Personal) | Supervised (School) |
-| :--- | :--- | :--- |
-| **MDM Profile Removal** | User can delete anytime | **Can be made permanent** |
-| **Kiosk Mode (Single App)** | Not supported | **Supported (Lock to one activity)** |
-| **Global Network Proxy** | Not supported | **Supported (Filter web content)** |
-| **AirDrop Control** | User choice | **Can be forced Off by school** |
-| **Activation Lock Bypass** | Impossible for IT | **Managed by the school** |
-| **Silent Updates** | Requires user consent | **IT can force OS & App updates** |
-
-## How to Check the Status:
-
-Open **Settings** on the iPad. Look at the very top, just below the user’s name. You should see a line of text:
-
-> *This iPad is supervised and managed by [Your School Name].*
-
-## Institutional Advice:
-
-If a school iPad is not Supervised, students can easily bypass web filters, delete management profiles, or factory reset the device. Supervised Mode is the first line of defense in maintaining campus digital standards.
-
-
----
-File: enr-4.md
----
-
----
-id: enr-4
-title: "What is the difference between 'User Enrollment' and standard Device Enrollment?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["BYOD","Privacy","Partitioning","Account-Driven"]
----
-
-**User Enrollment is a privacy-first management mode specifically designed for "Bring Your Own Device" (BYOD) scenarios.**
-
-Unlike standard enrollment used for school-owned iPads, User Enrollment (User-Driven) creates a **secure partition** on the device to separate school data from the student's personal photos, messages, and apps.
-
-## Comparison Table:
-
-| Feature | Device Enrollment (Standard/ADE) | User Enrollment (BYOD) |
-| :--- | :--- | :--- |
-| **Ownership** | Institutional Asset | Personal Property |
-| **Supervision** | Mandatory (Supervised) | Prohibited |
-| **Data Isolation** | Full Device control | **Managed Data Partition only** |
-| **Privacy Protection** | Standard school visibility | **Strict User Privacy** (IT cannot see personal apps or location) |
-| **Remote Wipe** | Wipes the entire device | **Wipes school data only** (Personal photos remain safe) |
-| **Removal** | Can be prevented by IT | **User can opt-out anytime** |
-
-## Modern Approach (Account-Driven):
-
-Apple now recommends **Account-Driven User Enrollment**. Instead of downloading a profile from a website, the student goes to **Settings > General > VPN & Device Management** and signs in with their **Managed Apple Account**. The device recognizes the campus ID and automatically sets up the school partition.
-
-## Institutional Advice:
-
-- **For School iPads**: Never use User Enrollment. You need the ability to lock and track the device if it’s lost.
-- **For Staff/Shared personal use**: User Enrollment is the perfect balance for teachers who want to access school email on their personal iPhones without the school being able to see their private data.
-
-
----
-File: enr-5.md
----
-
----
-id: enr-5
-title: "How do we set up 'Service Discovery' for Account-Driven Enrollment on the campus network?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["Account-Driven","Service Discovery",".well-known","Technical Setup"]
----
-
-**Account-Driven Enrollment relies on "Service Discovery," allowing users to enroll simply by entering their school email address.**
-
-## How it Works:
-
-When a user enters their email (e.g., `student@tes.tp.edu.tw`) during the enrollment process, the device attempts to find a secret instruction file on the school’s web domain.
-
-1. The device sends an HTTP GET request to:
-   `https://school.domain.com/.well-known/com.apple.remotemanagement`
-2. The school’s web server must respond with a JSON file that points the device to the correct MDM server URL.
-
-## Technical Requirements:
-
-- **Web Server Access**: Your school’s main website server must be configured to host this specific `.well-known` directory.
-- **MIME Type**: The server must return the file with the `application/json` header.
-- **SSL Certificate**: The server MUST have a valid, trusted HTTPS certificate.
-
-## Alternative Options:
-
-If your school’s website is managed by a third party and you cannot modify the server files, you can still enroll devices using these methods:
-
-1. **Direct URL/QR Code**: Provide students with a direct enrollment URL from Jamf Pro (e.g., `https://school.jamfcloud.com/enroll`). Converting this into a QR Code and posting it in the ICT department is a highly effective way to handle BYOD walk-ins.
-2. **Automated Enrollment (ADE)**: For school-purchased hardware, always use ADE. It bypasses the need for service discovery entirely, as the hardware is already "pre-linked" to the school in Apple’s database.
-
-
----
-File: enr-6.md
----
-
----
-id: enr-6
-title: "The setup is stuck spinning on 'Retrieving remote management configuration'. How do I troubleshoot?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["Enrollment Stuck","Troubleshooting","ADE","DDM"]
----
-
-**This indicates a communication delay or interruption while the device attempts to fetch the MDM configuration profile from Apple's servers.**
-
-It is usually related to the network environment or MDM server response. "Retrieving remote management configuration" is a key step in **Automated Device Enrollment (ADE)**. Ideally, it should complete within 30 seconds to 2 minutes. If it hangs for more than 5 minutes, proceed with the following checks:
-
-## Cause 1: Network Restrictions
-
-- **Firewall Blocking**: The school network might be blocking access to Apple's device management hosts. Ensure traffic to `iprofiles.apple.com` and your MDM server URL is allowed.
-- **Solution**: Try connecting the iPad to a mobile hotspot (4G/5G). If it proceeds successfully, the issue lies with the campus firewall.
-
-## Cause 2: Jamf Pro Performance or Settings
-
-- **Server Latency**: If hundreds of devices are enrolling simultaneously, Jamf Cloud might experience queuing delays.
-- **Corrupt PreStage**: Occasionally, a PreStage configuration can have logic errors. Try re-saving the PreStage setting in Jamf Pro to force a refresh.
-
-## Cause 3: Time Desynchronization
-
-- If the device's clock deviates significantly from standard time out-of-the-box, the SSL secure connection will fail.
-- Usually, restarting the device and connecting to a stable Wi-Fi network will automatically correct the time.
-
-## Remedial Action:
-
-Force restart the device (hold the Power button/Home button combo). The device will restart the Setup Assistant, and the second attempt often succeeds.
-
-
----
-File: enr-7.md
----
-
----
-id: enr-7
-title: "Why does the device get stuck on 'Installing Apps' during PreStage enrollment/Setup Assistant?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["PreStage Enrollment","App Deployment","ADE","DDM","Troubleshooting"]
----
-
-**When you configure 'Install Apps' in PreStage enrollment, the device waits for apps to download before allowing access to the Home Screen.**
-
-**Any network issues or VPP license failures will cause a deadlock.** This is extremely common during **Automated Device Enrollment (ADE)**. Admins often want students to see essential apps immediately upon boot, but if the environment isn't perfect, it leads to disaster during mass deployments.
-
-## Core Causes:
-
-1. **Insufficient VPP Licenses or Invalid Token**:
-   - If the assigned app has 0 remaining licenses, Apple servers cannot issue a download token, causing the device to wait indefinitely.
-   - **Solution**: Check the "Volume Purchasing" status in Jamf Pro to ensure sufficient licenses.
-
-2. **Campus Wi-Fi Saturation**:
-   - If a class of 30 iPads tries to download a 2GB app (e.g., GarageBand) at the Setup screen simultaneously, the Wi-Fi bandwidth will collapse, leading to timeouts.
-   - **Solution**: Avoid forcing large apps during PreStage. Let students reach the Home Screen first, then allow apps to download in the background.
-
-3. **Declarative Device Management (DDM) State Changes**:
-   - In modern architectures, app deployment is handled by **DDM**.
-   - If your **Service Access** terms haven't been accepted in ASM, DDM may fail to trigger the silent download from the App Store.
-
-4. **Configuration Error: Mandatory Install**:
-   - In Jamf Pro's PreStage settings, if an app is marked as "Required" and cannot be skipped, the student cannot click "Continue" until the download finishes.
-
-## Best Practices:
-
-- **Minimize Initial Payload**: PreStage should only enforce critical configuration profiles or extremely small "Guide Apps".
-- **Background Install**: Set main educational apps to deploy *after* enrollment is complete, rather than intercepting the user during the Setup Assistant.
-- **Pilot Test**: Before unboxing remotely, take one device through the full process to verify VPP sync and download speeds.
-
-
----
-File: enr-8.md
----
-
----
-id: enr-8
-title: "Enrollment fails with 'Profile Installation Failed'. Why?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["Troubleshooting","Network","Declarative Management","Profile"]
----
-
-**This error typically stems from the device's inability to establish a stable, trusted secure connection with the MDM server or Apple servers.**
-
-If you encounter this prompt during Enrollment, check the following common causes in order:
-
-## Check 1: Verify Date and Time Precision
-
-SSL certificate validation relies heavily on correct time. If the iPad's clock is off by more than a few minutes, the connection is treated as invalid.
-
-- **Solution**: On the device, check **Settings > General > Date & Time**. Ensure **Set Automatically** is on and it has connected to the network to fetch the time zone.
-
-## Check 2: Check Campus Firewall and Network Filtering
-
-MDM commands are delivered via **Apple Push Notification service (APNs)**. If the school network blocks specific hosts, enrollment fails.
-
-- **Critical Domains**: Ensure the firewall allows connections to `apple.com` and all its subdomains.
-- **Ports**: Must open **TCP 443, 2197, and 5223**.
-- **Test**: Try enrolling the iPad using an external mobile hotspot. If successful, it confirms a campus network restriction.
-
-## Check 3: Declarative Device Management (DDM) Sync Issues
-
-In the latest OS versions, Apple heavily utilizes "Declarative Management" for enrollment. If there are logic conflicts in Jamf Pro settings (e.g., assigning multiple PreStages overlap), the profile download may be interrupted.
-
-- **Solution**: Admins should check PreStage settings in Jamf Pro to ensure the device falls into only one enrollment scope and the corresponding VPP Token is healthy.
-
-## Check 4: Is the APNs Certificate Expired?
-
-If the APNs Push Certificate in the MDM backend has expired, Apple will reject all enrollment requests.
-
-- **Solution**: Ask an administrator to check the certificate validity in Jamf Pro's "Global Management".
-
-## Check 5: Clear Activation Lock
-
-If the device serial number is still locked to a previous user's Apple Account, you might be able to download the profile, but installation may fail due to identity conflict. Ensure Activation Lock is cleared before re-enrolling.
-
-
----
-File: enr-9.md
----
-
----
-id: enr-9
-title: "Jamf Pro commands are stuck in 'Pending', but the device is definitely online. Why?"
-category: "Section 2: Device Enrollment & Deployment"
-important: false
-tags: ["Stuck Commands","Push Notification Service","APNs","Declarative Management","Blank Push"]
----
-
-**'Pending' means the command has been sent to Apple's servers, but the device has not yet contacted the server to report its status.**
-
-In the current architecture where **Declarative Device Management (DDM)** runs alongside traditional MDM protocols, command status updates rely heavily on device response. If commands stall, check these core factors:
-
-1. **APNs Communication Blocked**:
-   - This is the most common cause. Even if the device can browse the web, if the firewall blocks **TCP Port 5223** (used for communicating with Apple servers), push commands will never reach the device.
-   - **Test**: Switch the device to a mobile hotspot. If the status immediately changes from "Pending" to "Completed", it proves a campus network restriction.
-
-2. **Device entered Deep Sleep**:
-   - iPads in deep sleep (screen locked for a long time without power) enter power-saving mode, potentially delaying push responses.
-   - **Solution**: Wake the screen by pressing the Home or Top button to force the device to contact the server.
-
-3. **Send a 'Blank Push' Command**:
-   - In the device record in Jamf Pro, click **Management > Send Blank Push**.
-   - This is a non-destructive command used purely to "wake up" the device. It forces the device to reconnect to Apple APNs, which then triggers the retrieval of subsequent queued commands.
-
-4. **Date & Time Accuracy**:
-   - If the device time drifts by more than a few minutes, the SSL secure connection fails. Ensure "Set Automatically" is enabled in Settings.
-
-## Practical Advice:
-
-If a single device is frequently Pending, it's usually a local network or hardware sleep issue. If devices across the entire school are Pending simultaneously, prioritize checking if the **APNs Certificate** in Jamf Pro is still valid.
 

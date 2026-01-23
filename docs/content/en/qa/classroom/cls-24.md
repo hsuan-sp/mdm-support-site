@@ -3,7 +3,14 @@ id: cls-24
 title: "How do I prevent students from getting distracted by 'Windowed Apps' in iPadOS 26?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: true
-tags: ["Windowed Apps", "Multitasking", "Focus", "iPadOS 26", "Classroom Management"]
+tags:
+  [
+    "Windowed Apps",
+    "Multitasking",
+    "Focus",
+    "iPadOS 26",
+    "Classroom Management",
+  ]
 ---
 
 **iPadOS 26 introduces a new 'Windowed Apps' multitasking system, allowing apps to appear in resizable, overlapping windows. While great for productivity, it can lead to distraction. Schools can manage this via segmented MDM restrictions or use the 'Classroom' app for temporary focus locking.**
@@ -46,8 +53,8 @@ Maintain multitasking but enforce class norms.
 
 ## Comparison Table
 
-| Strategy | Ideal For | Management Effort |
-| :--- | :--- | :--- |
-| **Fully Disable** | Elementary, strict labs | Low (One-time setup) |
-| **Temporary Lock** | Middle school, mixed-use | Medium (Requires teacher action) |
-| **Guided Use** | High school, BYU/1:1 | High (Requires ongoing education) |
+| Strategy           | Ideal For                | Management Effort                 |
+| :----------------- | :----------------------- | :-------------------------------- |
+| **Fully Disable**  | Elementary, strict labs  | Low (One-time setup)              |
+| **Temporary Lock** | Middle school, mixed-use | Medium (Requires teacher action)  |
+| **Guided Use**     | High school, BYU/1:1     | High (Requires ongoing education) |

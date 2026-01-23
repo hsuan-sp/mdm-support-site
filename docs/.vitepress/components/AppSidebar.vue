@@ -1,45 +1,72 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useData } from 'vitepress';
+import { computed } from "vue";
+import { useData } from "vitepress";
 
-const props = defineProps<{ title: string; isOpen: boolean; }>();
+const props = defineProps<{ title: string; isOpen: boolean }>();
 
-const emit = defineEmits<{ (e: 'toggle'): void; (e: 'close'): void; (e: 'update:scale', value: number): void; }>();
+const emit = defineEmits<{
+  (e: "toggle"): void;
+  (e: "close"): void;
+  (e: "update:scale", value: number): void;
+}>();
 
 const { lang } = useData();
 
 const t = computed(() => {
-  return lang.value === 'zh-TW' ? {
-    fontSize: '字體大小',
-    extraSmaller: '極小',
-    smaller: '縮小',
-    reset: '重置',
-    larger: '放大',
-    extraLarger: '極大',
-    toggleSidebar: '收合側邊欄'
-  } : {
-    fontSize: 'Font Size',
-    extraSmaller: 'XS',
-    smaller: 'Smaller',
-    reset: 'Reset',
-    larger: 'Larger',
-    extraLarger: 'XL',
-    toggleSidebar: 'Toggle Sidebar'
-  }
+  return lang.value === "zh-TW"
+    ? {
+        fontSize: "字體大小",
+        extraSmaller: "極小",
+        smaller: "縮小",
+        reset: "重置",
+        larger: "放大",
+        extraLarger: "極大",
+        toggleSidebar: "收合側邊欄",
+      }
+    : {
+        fontSize: "Font Size",
+        extraSmaller: "XS",
+        smaller: "Smaller",
+        reset: "Reset",
+        larger: "Larger",
+        extraLarger: "XL",
+        toggleSidebar: "Toggle Sidebar",
+      };
 });
 </script>
 
 <template>
-  <aside class="app-sidebar" :class="{ 'collapsed': !isOpen }">
+  <aside class="app-sidebar" :class="{ collapsed: !isOpen }">
     <div class="sidebar-top">
       <div class="sidebar-ctrls">
-        <button class="sidebar-toggle-btn" @click="emit('toggle')" :title="t.toggleSidebar">
-          <svg v-if="isOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="sidebar-toggle-btn"
+          @click="emit('toggle')"
+          :title="t.toggleSidebar"
+        >
+          <svg
+            v-if="isOpen"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="9" y1="3" x2="9" y2="21"></line>
           </svg>
-          <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            v-else
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
@@ -60,11 +87,19 @@ const t = computed(() => {
       <div class="font-controls">
         <span class="ctrl-label">{{ t.fontSize }}</span>
         <div class="btn-group">
-          <button @click="emit('update:scale', 0.85)" :title="t.extraSmaller">A--</button>
-          <button @click="emit('update:scale', 0.92)" :title="t.smaller">A-</button>
+          <button @click="emit('update:scale', 0.85)" :title="t.extraSmaller">
+            A--
+          </button>
+          <button @click="emit('update:scale', 0.92)" :title="t.smaller">
+            A-
+          </button>
           <button @click="emit('update:scale', 1.0)" :title="t.reset">A</button>
-          <button @click="emit('update:scale', 1.2)" :title="t.larger">A+</button>
-          <button @click="emit('update:scale', 1.4)" :title="t.extraLarger">A++</button>
+          <button @click="emit('update:scale', 1.2)" :title="t.larger">
+            A+
+          </button>
+          <button @click="emit('update:scale', 1.4)" :title="t.extraLarger">
+            A++
+          </button>
         </div>
       </div>
       <slot name="footer"></slot>
@@ -297,7 +332,6 @@ const t = computed(() => {
   background: rgba(255, 255, 255, 0.1);
 }
 
-
 /* Styles for Slotted Content - Deep Selectors */
 :deep(.nav-item) {
   display: flex;
@@ -365,7 +399,12 @@ const t = computed(() => {
 
 :deep(.sidebar-divider) {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--vp-c-divider), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--vp-c-divider),
+    transparent
+  );
   margin: 16px 0;
   opacity: 0.5;
 }

@@ -3,7 +3,7 @@ id: mac-10
 title: "Default Jamf Pro inventory lacks specific info (like file versions or last reboot). How do I collect custom data?"
 category: "Section 7: Advanced Mac Management"
 important: false
-tags: ["Extension Attributes","Scripts","Inventory","Custom Fields"]
+tags: ["Extension Attributes", "Scripts", "Inventory", "Custom Fields"]
 ---
 
 **Use the "Computer Extension Attributes" feature. This is the core tool in Jamf Pro for expanding database fields and collecting non-standard hardware/software information.**

@@ -1,27 +1,31 @@
 <script setup>
-import { useData, withBase } from 'vitepress'
-import { computed } from 'vue'
-import ReportIssue from './ReportIssue.vue' // Assuming ReportIssue.vue is in the same directory
+import { useData, withBase } from "vitepress";
+import { computed } from "vue";
+import ReportIssue from "./ReportIssue.vue"; // Assuming ReportIssue.vue is in the same directory
 
-const { lang } = useData()
+const { lang } = useData();
 
 const t = computed(() => {
-  const isZh = lang.value === 'zh-TW' || lang.value === 'root'
+  const isZh = lang.value === "zh-TW" || lang.value === "root";
 
-  return isZh ? {
-    company: '極電資訊有限公司',
-    badges: 'Apple 授權教育經銷商｜Apple 校園體驗中心｜軟硬體專業諮詢',
-    slogan: '致力於給您最好的服務',
-    copyright: 'Copyright ©2026 極電資訊｜Apple 授權教育經銷商',
-    info: '極電資訊有限公司 | 統一編號 23756990'
-  } : {
-    company: 'Superinfo Computer Co., Ltd.',
-    badges: 'Apple Authorized Education Specialist｜Apple Campus Experience Center｜Hardware & Software Advisory',
-    slogan: 'Committed to excellence in service',
-    copyright: 'Copyright © 2026 Superinfo｜Apple Authorized Education Specialist',
-    info: 'Superinfo Computer Co., Ltd. | Tax ID 23756990'
-  }
-})
+  return isZh
+    ? {
+        company: "極電資訊有限公司",
+        badges: "Apple 授權教育經銷商｜Apple 校園體驗中心｜軟硬體專業諮詢",
+        slogan: "致力於給您最好的服務",
+        copyright: "Copyright ©2026 極電資訊｜Apple 授權教育經銷商",
+        info: "極電資訊有限公司 | 統一編號 23756990",
+      }
+    : {
+        company: "Superinfo Computer Co., Ltd.",
+        badges:
+          "Apple Authorized Education Specialist｜Apple Campus Experience Center｜Hardware & Software Advisory",
+        slogan: "Committed to excellence in service",
+        copyright:
+          "Copyright © 2026 Superinfo｜Apple Authorized Education Specialist",
+        info: "Superinfo Computer Co., Ltd. | Tax ID 23756990",
+      };
+});
 </script>
 
 <template>
@@ -30,8 +34,12 @@ const t = computed(() => {
     <div class="footer-promo">
       <h2 class="company-name">{{ t.company }}</h2>
       <p class="service-badges">{{ t.badges }}</p>
-      <a href="https://www.superinfo.com.tw" target="_blank" class="slogan-link"
-        title="Visit Superinfo Official Website">
+      <a
+        href="https://www.superinfo.com.tw"
+        target="_blank"
+        class="slogan-link"
+        title="Visit Superinfo Official Website"
+      >
         <p class="slogan">{{ t.slogan }}</p>
       </a>
     </div>

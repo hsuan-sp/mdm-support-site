@@ -1,8 +1,8 @@
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from "vue";
 
 /**
  * 應用程式功能 Hook (useAppFeatures)
- * 
+ *
  * 負責管理全域性的介面狀態，如字體縮放、側邊欄收合等，
  * 並提供持久化儲存 (localStorage) 功能。
  */
@@ -20,14 +20,14 @@ export function useAppFeatures(storageKeyPrefix: string) {
     if (savedScale) fontScale.value = parseFloat(savedScale);
 
     const savedCollapsed = localStorage.getItem(SIDEBAR_KEY);
-    if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === 'true';
+    if (savedCollapsed) isSidebarCollapsed.value = savedCollapsed === "true";
 
     // 2. 為 body 標註類別，供全域樣式渲染參考
-    document.body.classList.add('is-app');
+    document.body.classList.add("is-app");
   });
 
   onUnmounted(() => {
-    document.body.classList.remove('is-app');
+    document.body.classList.remove("is-app");
   });
 
   // 監聽狀態變動並即時同步至儲存區
@@ -46,6 +46,6 @@ export function useAppFeatures(storageKeyPrefix: string) {
   return {
     fontScale,
     isSidebarCollapsed,
-    toggleSidebar
+    toggleSidebar,
   };
 }

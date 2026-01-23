@@ -25,4 +25,3 @@ Now, it's like **"Posting the due date on the bulletin board"** and letting the 
 ## MDM Outlook
 
 ⚠️ **Important Reminder**: To align with Apple's platform trajectory, schools are encouraged to transition their update strategies to DDM by late 2026 to ensure continuous management capabilities.
-

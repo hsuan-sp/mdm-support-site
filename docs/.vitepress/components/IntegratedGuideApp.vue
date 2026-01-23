@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, shallowRef } from "vue";
-import { useData } from 'vitepress';
-import { useAppFeatures } from '../theme/composables/useAppFeatures';
-import { useKeyboardShortcuts } from '../theme/composables/useKeyboardShortcuts';
+import { useData } from "vitepress";
+import { useAppFeatures } from "../theme/composables/useAppFeatures";
+import { useKeyboardShortcuts } from "../theme/composables/useKeyboardShortcuts";
 // @ts-ignore
-import { data as rawLoaderData } from '../../data/all.data';
+import { data as rawLoaderData } from "../../data/all.data";
 
 const { lang } = useData();
 const isMounted = ref(false);
@@ -15,19 +15,19 @@ const rawData = shallowRef(rawLoaderData);
 // Selected data based on current language
 const langData = computed(() => {
   const d = rawData.value;
-  return lang.value === 'en-US' ? d?.en : d?.zh;
+  return lang.value === "en-US" ? d?.en : d?.zh;
 });
 const allQAData = computed(() => langData.value?.allQAData || []);
 
 import type { QAItem } from "../../types";
-import AppSidebar from './AppSidebar.vue';
-import MobileDrawer from '../theme/components/MobileDrawer.vue';
-import EmptyState from '../theme/components/EmptyState.vue';
+import AppSidebar from "./AppSidebar.vue";
+import MobileDrawer from "../theme/components/MobileDrawer.vue";
+import EmptyState from "../theme/components/EmptyState.vue";
 
 // UI Translations
 const t = computed(() => {
   const translations = {
-    'zh-TW': {
+    "zh-TW": {
       sidebarTitle: "指南導覽",
       allQuestions: "全部題目",
       searchPlaceholder: "搜尋服務、硬體或常見問題...",
@@ -46,18 +46,20 @@ const t = computed(() => {
       fontExtraLarge: "極大",
       allLabel: "全部",
       categoryTitle: "章節篩選",
+      expandAll: "展開全部題目",
+      collapseAll: "收合全部題目",
       hashMap: {
-        'account': '帳號與伺服器',
-        'enrollment': '裝置註冊',
-        'apps': 'App 管理',
-        'classroom': '課堂管理',
-        'digital-learning': '數位精進',
-        'hardware': '硬體排除',
-        'mac': 'Mac 管理',
-        'qa-education': '教育實戰'
-      }
+        account: "帳號與伺服器",
+        enrollment: "裝置註冊",
+        apps: "App 管理",
+        classroom: "課堂管理",
+        "digital-learning": "數位精進",
+        hardware: "硬體排除",
+        mac: "Mac 管理",
+        "qa-education": "教育實戰",
+      },
     },
-    'en-US': {
+    "en-US": {
       sidebarTitle: "Guide Navigation",
       allQuestions: "All Questions",
       searchPlaceholder: "Search services, hardware...",
@@ -76,84 +78,102 @@ const t = computed(() => {
       fontExtraLarge: "XL",
       allLabel: "All",
       categoryTitle: "Chapters",
+      expandAll: "Expand All Questions",
+      collapseAll: "Collapse All Questions",
       hashMap: {
-        'account': 'Account & Server Management',
-        'enrollment': 'Enrollment & Device Setup',
-        'apps': 'App & Content Distribution',
-        'classroom': 'Apple Classroom & Teaching Tools',
-        'digital-learning': 'Campus Digital Initiatives',
-        'hardware': 'Hardware & Maintenance',
-        'mac': 'Advanced Mac Management',
-        'qa-education': 'Education Scenarios & FAQ'
-      }
-    }
+        account: "Account & Server Management",
+        enrollment: "Enrollment & Device Setup",
+        apps: "App & Content Distribution",
+        classroom: "Apple Classroom & Teaching Tools",
+        "digital-learning": "Campus Digital Initiatives",
+        hardware: "Hardware & Maintenance",
+        mac: "Advanced Mac Management",
+        "qa-education": "Education Scenarios & FAQ",
+      },
+    },
   };
-  return translations[lang.value as keyof typeof translations] || translations['zh-TW'];
+  return (
+    translations[lang.value as keyof typeof translations] ||
+    translations["zh-TW"]
+  );
 });
 
 const getChapterCount = (source: string) => {
-  const module = (allQAData.value as any[]).find(m => m.source === source);
+  const module = (allQAData.value as any[]).find((m) => m.source === source);
   if (!module) return 0;
-  return module.sections.reduce((total: number, section: any) => total + section.items.length, 0);
+  return module.sections.reduce(
+    (total: number, section: any) => total + section.items.length,
+    0,
+  );
 };
 
 const searchQuery = ref("");
 const activeSource = ref<string | "All">("All");
 const isSidebarOpen = ref(false);
-const { fontScale, isSidebarCollapsed, toggleSidebar } = useAppFeatures('mdm-qa');
+const { fontScale, isSidebarCollapsed, toggleSidebar } =
+  useAppFeatures("mdm-qa");
 
 const handleHashChange = () => {
-  const hash = window.location.hash.replace('#', '').toLowerCase();
+  const hash = window.location.hash.replace("#", "").toLowerCase();
   if (!hash) return;
 
   const hashMap = t.value.hashMap as Record<string, string>;
-  const targetSource = hashMap[hash] || (allQAData.value as any[]).find((m: any) => m.source.toLowerCase().includes(hash))?.source;
+  const targetSource =
+    hashMap[hash] ||
+    (allQAData.value as any[]).find((m: any) =>
+      m.source.toLowerCase().includes(hash),
+    )?.source;
 
   if (targetSource) {
     activeSource.value = targetSource;
-    searchQuery.value = '';
-  } else if (hash === 'all') {
-    activeSource.value = 'All';
-    searchQuery.value = '';
+    searchQuery.value = "";
+  } else if (hash === "all") {
+    activeSource.value = "All";
+    searchQuery.value = "";
   }
 };
 
 const searchResults = computed(() => {
   if (!searchQuery.value.trim()) return null;
   const queries = searchQuery.value.trim().toLowerCase().split(/\s+/);
-  const results: { source: string, items: (QAItem & { relevance: number })[] }[] = [];
+  const results: {
+    source: string;
+    items: (QAItem & { relevance: number })[];
+  }[] = [];
 
   allQAData.value.forEach((file: any) => {
     const matches: (QAItem & { relevance: number })[] = [];
-    file.sections.forEach((s: any) => s.items.forEach((i: any) => {
-      let relevance = 0;
-      const tags = (i.tags || []).join(' ').toLowerCase();
+    file.sections.forEach((s: any) =>
+      s.items.forEach((i: any) => {
+        let relevance = 0;
+        const tags = (i.tags || []).join(" ").toLowerCase();
 
-      const allMatch = queries.every(q => {
-        let match = false;
-        if (i.question.toLowerCase().includes(q)) {
-          relevance += 10;
-          match = true;
-        }
-        if (tags.includes(q)) {
-          relevance += 5;
-          match = true;
-        }
-        if (i.answer.toLowerCase().includes(q)) {
-          relevance += 1;
-          match = true;
-        }
-        return match;
-      });
-
-      if (allMatch) {
-        matches.push({
-          ...i,
-          tags: [...(i.tags || []), file.source],
-          relevance
+        const allMatch = queries.every((q) => {
+          let match = false;
+          if (i.question.toLowerCase().includes(q)) {
+            relevance += 10;
+            match = true;
+          }
+          if (tags.includes(q)) {
+            relevance += 5;
+            match = true;
+          }
+          if (i.answer.toLowerCase().includes(q)) {
+            relevance += 1;
+            match = true;
+          }
+          return match;
         });
-      }
-    }));
+
+        if (allMatch) {
+          matches.push({
+            ...i,
+            tags: [...(i.tags || []), file.source],
+            relevance,
+          });
+        }
+      }),
+    );
 
     if (matches.length) {
       matches.sort((a, b) => b.relevance - a.relevance);
@@ -164,12 +184,14 @@ const searchResults = computed(() => {
 });
 
 const currentModule = computed(() => {
-  if (activeSource.value === 'All') return null;
-  return (allQAData.value as any[]).find((d: any) => d.source === activeSource.value);
+  if (activeSource.value === "All") return null;
+  return (allQAData.value as any[]).find(
+    (d: any) => d.source === activeSource.value,
+  );
 });
 
 const allQuestions = computed(() => {
-  if (activeSource.value !== 'All') return null;
+  if (activeSource.value !== "All") return null;
   return allQAData.value;
 });
 
@@ -185,8 +207,60 @@ const toggleItem = (id: string) => {
   openItems.value = next;
 };
 
+const expandAll = () => {
+  const allIds = new Set<string>();
+  if (searchResults.value) {
+    searchResults.value.forEach((group: any) => {
+      group.items.forEach((item: any) => allIds.add(item.id));
+    });
+  } else if (activeSource.value === "All") {
+    allQAData.value.forEach((module: any) => {
+      module.sections.forEach((section: any) => {
+        section.items.forEach((item: any) => allIds.add(item.id));
+      });
+    });
+  } else if (currentModule.value) {
+    currentModule.value.sections.forEach((section: any) => {
+      section.items.forEach((item: any) => allIds.add(item.id));
+    });
+  }
+  openItems.value = allIds;
+};
+
+const collapseAll = () => {
+  openItems.value = new Set();
+};
+
+const isAllExpanded = computed(() => {
+  if (searchResults.value) {
+    const totalItems = searchResults.value.reduce(
+      (acc: number, group: any) => acc + group.items.length,
+      0,
+    );
+    return openItems.value.size === totalItems && totalItems > 0;
+  } else if (activeSource.value === "All") {
+    const totalItems = allQAData.value.reduce(
+      (acc: number, module: any) =>
+        acc +
+        module.sections.reduce(
+          (s: number, section: any) => s + section.items.length,
+          0,
+        ),
+      0,
+    );
+    return openItems.value.size === totalItems && totalItems > 0;
+  } else if (currentModule.value) {
+    const totalItems = currentModule.value.sections.reduce(
+      (acc: number, section: any) => acc + section.items.length,
+      0,
+    );
+    return openItems.value.size === totalItems && totalItems > 0;
+  }
+  return false;
+});
+
 // Auto-open logic for search results
-import { watch } from 'vue';
+import { watch } from "vue";
 watch(searchQuery, (newVal) => {
   if (newVal.length > 2) {
     // If search is active, we don't necessarily open all, but we keep track
@@ -195,34 +269,40 @@ watch(searchQuery, (newVal) => {
 
 useKeyboardShortcuts({
   onSearchFocus: () => {
-    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    const searchInput = document.querySelector(
+      ".search-input",
+    ) as HTMLInputElement;
     searchInput?.focus();
   },
   onEscape: () => {
     if (searchQuery.value) {
-      searchQuery.value = '';
+      searchQuery.value = "";
     } else if (isSidebarOpen.value) {
       isSidebarOpen.value = false;
     }
-  }
+  },
 });
 
 onMounted(() => {
   isMounted.value = true;
   handleHashChange();
-  window.addEventListener('hashchange', handleHashChange);
+  window.addEventListener("hashchange", handleHashChange);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('hashchange', handleHashChange);
+  window.removeEventListener("hashchange", handleHashChange);
 });
 
 const switchModule = (source: string | "All") => {
   activeSource.value = source;
-  searchQuery.value = '';
+  searchQuery.value = "";
   isSidebarOpen.value = false;
   openItems.value.clear();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+const closeMobileDrawer = () => {
+  isSidebarOpen.value = false;
 };
 </script>
 
@@ -231,7 +311,7 @@ const switchModule = (source: string | "All") => {
     <div v-if="isMounted" class="app-layout">
       <!-- Desktop Sidebar -->
       <AppSidebar :title="t.sidebarTitle" :is-open="!isSidebarCollapsed" class="desktop-only" @toggle="toggleSidebar"
-        @update:scale="val => fontScale = val">
+        @update:scale="(val) => (fontScale = val)">
         <template #search>
           <div class="search-section">
             <div class="search-box">
@@ -248,24 +328,50 @@ const switchModule = (source: string | "All") => {
         </template>
 
         <template #nav-items>
-          <button @click="switchModule('All')"
-            :class="['nav-item', { active: activeSource === 'All' && !searchQuery }]">
+          <button @click="switchModule('All')" :class="[
+            'nav-item',
+            { active: activeSource === 'All' && !searchQuery },
+          ]">
             <span class="nav-text">{{ t.allQuestions }}</span>
-            <span class="nav-count">{{(allQAData as any[]).reduce((t: any, m: any) => t + getChapterCount(m.source),
-              0)}}</span>
+            <span class="nav-count">{{
+              (allQAData as any[]).reduce(
+                (t: any, m: any) => t + getChapterCount(m.source),
+                0,
+              )
+            }}</span>
           </button>
           <div class="sidebar-divider"></div>
-          <button v-for="module in allQAData" :key="module.source" @click="switchModule(module.source)"
-            :class="['nav-item', { active: activeSource === module.source && !searchQuery }]">
+          <button v-for="module in allQAData" :key="module.source" @click="switchModule(module.source)" :class="[
+            'nav-item',
+            { active: activeSource === module.source && !searchQuery },
+          ]">
             <span class="nav-text">{{ module.source }}</span>
             <span class="nav-count">{{ getChapterCount(module.source) }}</span>
           </button>
+        </template>
+
+        <template #footer>
+          <div class="sidebar-actions">
+            <button @click="isAllExpanded ? collapseAll() : expandAll()" class="desktop-expand-btn">
+              <svg v-if="!isAllExpanded" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+              <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+              <span>{{ isAllExpanded ? t.collapseAll : t.expandAll }}</span>
+            </button>
+          </div>
         </template>
       </AppSidebar>
 
       <main class="app-content">
         <header class="content-header" v-if="searchQuery">
-          <h2 class="title-text">{{ t.searchResult.replace('{q}', searchQuery) }}</h2>
+          <h2 class="title-text">
+            {{ t.searchResult.replace("{q}", searchQuery) }}
+          </h2>
         </header>
 
         <div v-if="searchQuery" class="result-container">
@@ -277,14 +383,18 @@ const switchModule = (source: string | "All") => {
                 <div class="qa-card-content">
                   <div class="qa-trigger" @click="toggleItem(item.id)">
                     <div class="q-main">
-                      <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
+                      <span v-if="item.important" class="imp-tag">{{
+                        t.important
+                      }}</span>
                       <span class="q-text">{{ item.question }}</span>
                     </div>
                     <span class="arrow">▼</span>
                   </div>
                   <div v-if="openItems.has(item.id)" class="qa-content">
                     <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
-                    <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
+                    <div class="tags">
+                      <span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -302,14 +412,18 @@ const switchModule = (source: string | "All") => {
                 <div class="qa-card-content">
                   <div class="qa-trigger" @click="toggleItem(item.id)">
                     <div class="q-main">
-                      <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
+                      <span v-if="item.important" class="imp-tag">{{
+                        t.important
+                      }}</span>
                       <span class="q-text">{{ item.question }}</span>
                     </div>
                     <span class="arrow">▼</span>
                   </div>
                   <div v-if="openItems.has(item.id)" class="qa-content">
                     <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
-                    <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
+                    <div class="tags">
+                      <span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -326,14 +440,18 @@ const switchModule = (source: string | "All") => {
                   <div class="qa-card-content">
                     <div class="qa-trigger" @click="toggleItem(item.id)">
                       <div class="q-main">
-                        <span v-if="item.important" class="imp-tag">{{ t.important }}</span>
+                        <span v-if="item.important" class="imp-tag">{{
+                          t.important
+                        }}</span>
                         <span class="q-text">{{ item.question }}</span>
                       </div>
                       <span class="arrow">▼</span>
                     </div>
                     <div v-if="openItems.has(item.id)" class="qa-content">
                       <div class="markdown-body" :lang="lang" v-html="item.answer"></div>
-                      <div class="tags"><span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span></div>
+                      <div class="tags">
+                        <span v-for="tag in item.tags" :key="tag" class="tag">#{{ tag }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -344,11 +462,10 @@ const switchModule = (source: string | "All") => {
       </main>
     </div>
 
-    <div v-if="!isMounted" class="app-loading-placeholder">
-    </div>
+    <div v-if="!isMounted" class="app-loading-placeholder"></div>
 
     <!-- Mobile Super Drawer: Contains Everything -->
-    <MobileDrawer v-if="isMounted" :is-open="isSidebarOpen" :title="t.drawerTitle" @close="isSidebarOpen = false">
+    <MobileDrawer v-if="isMounted" :is-open="isSidebarOpen" :title="t.drawerTitle" @close="closeMobileDrawer">
       <div class="mobile-drawer-inner">
         <!-- Search Section -->
         <div class="drawer-section">
@@ -360,13 +477,17 @@ const switchModule = (source: string | "All") => {
               </svg>
             </span>
             <input v-model="searchQuery" type="text" :placeholder="t.searchPlaceholder" class="search-input" />
-            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">✕</button>
+            <button v-if="searchQuery" class="clear-search-btn" @click="searchQuery = ''">
+              ✕
+            </button>
           </div>
         </div>
 
         <!-- Filter Chips Section -->
         <div class="drawer-section">
-          <div class="section-header-mini"><span>{{ t.categoryTitle }}</span></div>
+          <div class="section-header-mini">
+            <span>{{ t.categoryTitle }}</span>
+          </div>
           <div class="mobile-filter-chips">
             <div class="chip-scroll-container">
               <button @click="switchModule('All')" :class="['filter-chip', { active: activeSource === 'All' }]">
@@ -382,14 +503,43 @@ const switchModule = (source: string | "All") => {
 
         <!-- Font Controls Section -->
         <div class="drawer-section">
-          <div class="section-header-mini"><span>{{ t.fontScaleTitle }}</span></div>
-          <div class="btn-group-mobile">
-            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">{{ t.fontExtraSmall }}</button>
-            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">{{ t.fontSmall }}</button>
-            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">{{ t.fontMedium }}</button>
-            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">{{ t.fontLarge }}</button>
-            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">{{ t.fontExtraLarge }}</button>
+          <div class="section-header-mini">
+            <span>{{ t.fontScaleTitle }}</span>
           </div>
+          <div class="btn-group-mobile">
+            <button @click="fontScale = 0.85" :class="{ active: fontScale === 0.85 }">
+              {{ t.fontExtraSmall }}
+            </button>
+            <button @click="fontScale = 0.92" :class="{ active: fontScale === 0.92 }">
+              {{ t.fontSmall }}
+            </button>
+            <button @click="fontScale = 1.0" :class="{ active: fontScale === 1.0 }">
+              {{ t.fontMedium }}
+            </button>
+            <button @click="fontScale = 1.2" :class="{ active: fontScale === 1.2 }">
+              {{ t.fontLarge }}
+            </button>
+            <button @click="fontScale = 1.4" :class="{ active: fontScale === 1.4 }">
+              {{ t.fontExtraLarge }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Expand/Collapse All Button -->
+        <div class="drawer-section">
+          <button @click="
+            isAllExpanded ? collapseAll() : expandAll();
+          closeMobileDrawer();
+          " class="expand-all-btn">
+            <svg v-if="!isAllExpanded" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+            <span>{{ isAllExpanded ? t.collapseAll : t.expandAll }}</span>
+          </button>
         </div>
       </div>
     </MobileDrawer>
@@ -410,31 +560,56 @@ const switchModule = (source: string | "All") => {
 </template>
 
 <style scoped>
-/* Readability Improvements */
+/* WCAG 2.1 AA Compliant Typography - Research-Based Readability */
 .markdown-body {
   font-size: 1.05em;
-  line-height: 1.85 !important;
-  /* Increased line height for better eye tracking */
+  line-height: 1.6 !important;
   padding-top: 16px;
-  letter-spacing: 0.01em;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  /* Essential for mobile word wrapping */
-  hyphens: auto;
-  /* English hyphenation */
+  letter-spacing: 0.015em;
+  /* WCAG: 0.12x font size */
+  word-spacing: 0.02em;
+  max-width: 75ch;
   text-align: left;
-  /* Keep left aligned for standard readability */
 }
 
 .markdown-body :deep(p) {
-  margin-bottom: 1.4em !important;
-  /* Half-line equivalent block spacing */
+  margin-bottom: 1.25rem;
+  /* Reduced from 1.75em for better balance */
+  line-height: inherit;
+  word-spacing: inherit;
 }
 
-/* Specific logic for English wrapping to avoid cutting words */
+/* Ensure paragraphs inside list items don't have bottom margin */
+.markdown-body :deep(li p) {
+  margin-bottom: 0 !important;
+}
+
+/* Language-Specific Optimizations: Chinese */
+.markdown-body[lang="zh"],
+.markdown-body[lang="zh-TW"],
+.markdown-body[lang="zh-CN"] {
+  line-height: 1.85 !important;
+  /* CJK needs more breathing room */
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+
+/* Language-Specific Optimizations: English */
+.markdown-body[lang="en"],
 .markdown-body[lang="en-US"] {
-  text-align: justify;
+  line-height: 1.6 !important;
+  word-spacing: 0.04em;
+  /* Enhanced word spacing for English */
   hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Mixed Language: Code blocks maintain proper spacing */
+.markdown-body :deep(code) {
+  letter-spacing: 0;
+  word-spacing: 0;
 }
 
 .app-loading-placeholder {
@@ -580,7 +755,13 @@ const switchModule = (source: string | "All") => {
 .mobile-search-bar .search-icon {
   position: absolute;
   left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0.6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  z-index: 2;
 }
 
 .clear-search-btn {
@@ -602,33 +783,32 @@ const switchModule = (source: string | "All") => {
 }
 
 .chip-scroll-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 10px;
-  overflow-x: auto;
-  padding: 4px 0 12px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.chip-scroll-container::-webkit-scrollbar {
-  display: none;
+  padding: 4px 0;
 }
 
 .filter-chip {
   white-space: nowrap;
-  padding: 10px 20px;
+  padding: 12px 20px;
   background: var(--vp-c-bg-soft);
-  border-radius: 100px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
   border: 1px solid var(--vp-c-divider);
   transition: all 0.2s;
+  text-align: center;
+  min-width: 100px;
 }
 
 .filter-chip.active {
   background: var(--vp-c-brand-1);
   color: white;
   border-color: var(--vp-c-brand-1);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
 }
 
 .btn-group-mobile {
@@ -650,6 +830,39 @@ const switchModule = (source: string | "All") => {
   background: var(--vp-c-brand-1);
   color: white;
   border-color: var(--vp-c-brand-1);
+}
+
+/* Expand All Button */
+.expand-all-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  color: white;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.expand-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
+}
+
+.expand-all-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.expand-all-btn svg {
+  flex-shrink: 0;
 }
 
 /* QA Cards Styling */
@@ -675,6 +888,13 @@ const switchModule = (source: string | "All") => {
   gap: 20px;
 }
 
+.q-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
 .q-text {
   font-size: 1.15em;
   font-weight: 800;
@@ -685,11 +905,19 @@ const switchModule = (source: string | "All") => {
 .imp-tag {
   background: #ff3b30;
   color: white;
-  padding: 3px 8px;
+  padding: 0 8px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-bottom: 2px;
+  /* Optical adjustment to align with CJK text center line */
 }
 
 .arrow {
@@ -737,8 +965,15 @@ const switchModule = (source: string | "All") => {
 }
 
 .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
+  color: var(--vp-c-text-3);
+  pointer-events: none;
+  z-index: 2;
 }
 
 @media (max-width: 640px) {
@@ -753,5 +988,41 @@ const switchModule = (source: string | "All") => {
   .q-text {
     font-size: 1.1em;
   }
+}
+
+.sidebar-actions {
+  margin-top: 16px;
+  padding: 0 4px;
+}
+
+.desktop-expand-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  color: white;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.85em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+}
+
+.desktop-expand-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 122, 255, 0.3);
+}
+
+.desktop-expand-btn:active {
+  transform: translateY(0);
+}
+
+.desktop-expand-btn svg {
+  flex-shrink: 0;
 }
 </style>

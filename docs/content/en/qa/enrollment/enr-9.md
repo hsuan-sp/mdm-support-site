@@ -3,7 +3,14 @@ id: enr-9
 title: "Jamf Pro commands are stuck in 'Pending', but the device is definitely online. Why?"
 category: "Section 2: Device Enrollment & Deployment"
 important: false
-tags: ["Stuck Commands","Push Notification Service","APNs","Declarative Management","Blank Push"]
+tags:
+  [
+    "Stuck Commands",
+    "Push Notification Service",
+    "APNs",
+    "Declarative Management",
+    "Blank Push",
+  ]
 ---
 
 **'Pending' means the command has been sent to Apple's servers, but the device has not yet contacted the server to report its status.**

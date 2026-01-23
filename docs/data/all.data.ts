@@ -20,24 +20,41 @@ const md = new MarkdownIt({
  */
 function enhanceTypography(text: string) {
     if (!text) return "";
-    return text
-        // 1. Pangu Spacing: 在中文與英文/數字之間加上半形空格
-        // 中文 -> 英文/數字
-        .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, '$1 $2')
-        // 英文/數字 -> 中文
-        .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, '$1 $2')
-        // 2. 標點規範：修正中文語境下的英文標點
-        .replace(/([\u4e00-\u9fa5]),/g, '$1，')
-        .replace(/([\u4e00-\u9fa5]):/g, '$1：')
-        .replace(/([\u4e00-\u9fa5]);/g, '$1；')
-        .replace(/([\u4e00-\u9fa5])!/g, '$1！')
-        .replace(/([\u4e00-\u9fa5])\?/g, '$1？')
-        // 3. 標點美化：全形括號、橢圓、智慧引號
-        .replace(/\.\.\./g, '…')
-        .replace(/--/g, '—')
-        // 僅在中文字符附近優化引號
-        .replace(/([\u4e00-\u9fa5])"/g, '$1”')
-        .replace(/"([\u4e00-\u9fa5])/g, '“$1');
+
+    // Split into lines to avoid breaking markdown structures like tables and code blocks
+    return text.split('\n').map(line => {
+        // Skip lines that look like markdown syntax
+        const trimmed = line.trim();
+        if (
+            trimmed.startsWith('|') ||
+            trimmed.startsWith('#') ||
+            trimmed.startsWith('>') ||
+            trimmed.startsWith('- ') ||
+            trimmed.startsWith('* ') ||
+            /^\d+\. /.test(trimmed) || // Ordered lists
+            trimmed.startsWith('**') || // Bold starts
+            trimmed.startsWith('___') || // Horizontal rule
+            trimmed.startsWith('```')    // Code block
+        ) {
+            return line;
+        }
+
+        return line
+            // 1. Pangu Spacing
+            .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, '$1 $2')
+            .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, '$1 $2')
+            // 2. 標點規範
+            .replace(/([\u4e00-\u9fa5]),/g, '$1，')
+            .replace(/([\u4e00-\u9fa5]):/g, '$1：')
+            .replace(/([\u4e00-\u9fa5]);/g, '$1；')
+            .replace(/([\u4e00-\u9fa5])!/g, '$1！')
+            .replace(/([\u4e00-\u9fa5])\?/g, '$1？')
+            // 3. 標點美化
+            .replace(/\.\.\./g, '…')
+            .replace(/--/g, '—')
+            .replace(/([\u4e00-\u9fa5])"/g, '$1”')
+            .replace(/"([\u4e00-\u9fa5])/g, '“$1');
+    }).join('\n');
 }
 
 /**

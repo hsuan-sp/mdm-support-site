@@ -3,19 +3,19 @@ id: edu-10
 title: "Why is the App Store missing? How do I download apps?"
 category: "Section 8: Education Scenarios"
 important: true
-tags: ["App Store","Self Service","Restrictions"]
+tags: ["App Store", "Self Service", "Restrictions"]
 ---
 
 **This is an intentional setting by the school. The App Store is hidden to prevent students from downloading unauthorized apps. Use the 'Self Service' app to install school-approved applications instead.** Finding the App Store missing is a result of MDM restrictions, not a malfunction.
 
 ## Why the App Store is Hidden:
 
-| Reason | Description |
-| :--- | :--- |
-| **Prevent Gaming** | Keeps students focused on learning tools. |
-| **Consistency** | Ensures all devices have the same approved apps for teaching. |
-| **Account Safety** | Prevents data mixing or Activation Lock from personal Apple Accounts. |
-| **License Compliance** | Ensures all apps are legally licensed via VPP. |
+| Reason                 | Description                                                           |
+| :--------------------- | :-------------------------------------------------------------------- |
+| **Prevent Gaming**     | Keeps students focused on learning tools.                             |
+| **Consistency**        | Ensures all devices have the same approved apps for teaching.         |
+| **Account Safety**     | Prevents data mixing or Activation Lock from personal Apple Accounts. |
+| **License Compliance** | Ensures all apps are legally licensed via VPP.                        |
 
 ## How to Install Apps: Using Self Service
 

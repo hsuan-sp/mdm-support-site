@@ -3,7 +3,7 @@ id: app-26
 title: "How to manage the AI-assisted teaching apps in 2024–2025 (e.g., Writing Tools, Image Playground)?"
 category: "Section 3: App Management & Distribution"
 important: true
-tags: ["AI","Apple Intelligence","App Management","Privacy","Exam Security"]
+tags: ["AI", "Apple Intelligence", "App Management", "Privacy", "Exam Security"]
 ---
 
 **With Apple Intelligence reaching full maturity in 2024–2025, teaching apps have entered the "AI-Assisted Era."**

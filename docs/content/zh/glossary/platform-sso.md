@@ -1,6 +1,6 @@
 ---
 term: "Platform SSO (平台單一登入)"
-category: ["Security","macOS"]
+category: ["Security", "macOS"]
 ---
 
 ## 術語定義

@@ -1,6 +1,6 @@
 ---
 term: "PPPC (Privacy Preferences Policy Control)"
-category: ["Security","macOS"]
+category: ["Security", "macOS"]
 ---
 
 ## 術語定義

@@ -1,6 +1,6 @@
 ---
 term: "Jamf Protect"
-category: ["Jamf","Security","macOS"]
+category: ["Jamf", "Security", "macOS"]
 ---
 
 ## Definition

@@ -28,11 +28,11 @@ After entering the password, the SSH session will momentarily drop as the encryp
 
 ## Security Risks & Mitigation
 
-| Risk | Mitigation Measure |
-| :--- | :--- |
-| Brute Force | Limit source IP, use firewall, strong passwords, change default port |
-| Man-in-the-Middle | Verify host keys, use VPN |
-| Network Sniffing | Dedicated management VLAN, Network Access Control (NAC) |
+| Risk              | Mitigation Measure                                                   |
+| :---------------- | :------------------------------------------------------------------- |
+| Brute Force       | Limit source IP, use firewall, strong passwords, change default port |
+| Man-in-the-Middle | Verify host keys, use VPN                                            |
+| Network Sniffing  | Dedicated management VLAN, Network Access Control (NAC)              |
 
 ## 2026 Safety Warning (M5 Macs)
 

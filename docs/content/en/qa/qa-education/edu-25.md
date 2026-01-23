@@ -32,6 +32,7 @@ tags: ["MOE Project", "2026", "System Upgrade", "iPadOS 26", "Sustainability"]
 ## Recommendations for Post-Project Use
 
 We recommend maintaining your existing management framework to protect the learning environment:
+
 - **Ownership**: The device remains school property; management settings should remain identical to when it was in use during the project.
 - **App Guidelines**: If the App Store is currently blocked, keep it blocked to prevent the device from becoming a gaming console at home.
 - **Safety**: Continue using your Content Filter (e.g., Jamf Safe Internet) to protect students from inappropriate content while using the device off-campus.

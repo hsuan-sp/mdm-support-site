@@ -10,11 +10,11 @@ tags: ["ASM", "Batch Operations", "SFTP", "CSV", "Managed Apple Account"]
 
 ## Comparison of Methods
 
-| Method | Best For | Key Features |
-| :--- | :--- | :--- |
-| **Manual CSV Import** | Small schools, no SIS, or temporary batches | Straightforward web-based upload. Good for initial setup. |
-| **SFTP Upload** | Schools with a SIS, requiring regular updates | Supports Apple templates and OneRoster. Highly automated. |
-| **Federated Authentication** | Schools using Google Workspace / Entra ID | **Most Recommended**. Automatic account creation upon first login. |
+| Method                       | Best For                                      | Key Features                                                       |
+| :--------------------------- | :-------------------------------------------- | :----------------------------------------------------------------- |
+| **Manual CSV Import**        | Small schools, no SIS, or temporary batches   | Straightforward web-based upload. Good for initial setup.          |
+| **SFTP Upload**              | Schools with a SIS, requiring regular updates | Supports Apple templates and OneRoster. Highly automated.          |
+| **Federated Authentication** | Schools using Google Workspace / Entra ID     | **Most Recommended**. Automatic account creation upon first login. |
 
 ## 1. Uploading Data via SFTP (Automation/SIS Integration)
 

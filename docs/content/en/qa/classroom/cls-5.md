@@ -3,7 +3,7 @@ id: cls-5
 title: "Troubleshooting: Bluetooth is on, but why does Apple Classroom show the students as 'Offline'?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: false
-tags: ["Troubleshooting","Bluetooth","Local Network Permissions"]
+tags: ["Troubleshooting", "Bluetooth", "Local Network Permissions"]
 ---
 
 **This is usually caused by missing 'Local Network' permissions or an expired teacher certificate.**

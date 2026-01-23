@@ -10,13 +10,13 @@ tags: ["macOS 26", "Package", "DDM", ".pkg", "Jamf Policy"]
 
 ## DDM Package vs. Jamf Policy
 
-| Feature | Jamf Policy (Legacy) | DDM Package Declaration (Modern) |
-| :--- | :--- | :--- |
-| **Execution** | Relies on the `Jamf` binary to run scripts and installers. | Relies on the macOS native MDM framework. |
-| **Trigger** | Requires a trigger (e.g., Login, Recurring Check-in). | **Autonomous**. Device installs as soon as conditions are met. |
-| **Status Channel** | Reported through Jamf logs with potential delay. | **Real-time** reporting of progress and error codes to MDM. |
-| **Offline Support** | Must be online to trigger the check-in. | If the declaration is local, the device handles install retries offline. |
-| **Suitability** | Best for complex scripts and .dmg installs. | Best for standard signed **Distribution Packages (.pkg)**. |
+| Feature             | Jamf Policy (Legacy)                                       | DDM Package Declaration (Modern)                                         |
+| :------------------ | :--------------------------------------------------------- | :----------------------------------------------------------------------- |
+| **Execution**       | Relies on the `Jamf` binary to run scripts and installers. | Relies on the macOS native MDM framework.                                |
+| **Trigger**         | Requires a trigger (e.g., Login, Recurring Check-in).      | **Autonomous**. Device installs as soon as conditions are met.           |
+| **Status Channel**  | Reported through Jamf logs with potential delay.           | **Real-time** reporting of progress and error codes to MDM.              |
+| **Offline Support** | Must be online to trigger the check-in.                    | If the declaration is local, the device handles install retries offline. |
+| **Suitability**     | Best for complex scripts and .dmg installs.                | Best for standard signed **Distribution Packages (.pkg)**.               |
 
 ## Requirements & Limitations
 

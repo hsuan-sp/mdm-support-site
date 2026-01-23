@@ -6,7 +6,7 @@ File: platform-sso.md
 
 ---
 term: "Platform SSO (平台單一登入)"
-category: ["Security","macOS"]
+category: ["Security", "macOS"]
 ---
 
 ## 術語定義
@@ -61,7 +61,7 @@ File: pppc-privacy-preferences-policy-control.md
 
 ---
 term: "PPPC (Privacy Preferences Policy Control)"
-category: ["Security","macOS"]
+category: ["Security", "macOS"]
 ---
 
 ## 術語定義
@@ -88,7 +88,7 @@ File: prestage-enrollment.md
 
 ---
 term: "PreStage Enrollment"
-category: ["Enrollment","Jamf"]
+category: ["Enrollment", "Jamf"]
 ---
 
 ## 術語定義
@@ -115,7 +115,7 @@ File: private-relay.md
 
 ---
 term: "Private Relay (私密轉送)"
-category: ["Security","Apple"]
+category: ["Security", "Apple"]
 ---
 
 ## 術語定義
@@ -142,7 +142,7 @@ File: private-wi-fi-address.md
 
 ---
 term: "Private Wi-Fi Address (私有 Wi-Fi 位址)"
-category: ["Network","Security"]
+category: ["Network", "Security"]
 ---
 
 ## 術語定義
@@ -198,7 +198,7 @@ File: provisioning-profile.md
 
 ---
 term: "Provisioning Profile"
-category: ["Apps","Security"]
+category: ["Apps", "Security"]
 ---
 
 ## 術語定義
@@ -255,7 +255,7 @@ File: push-notification.md
 
 ---
 term: "Push Notification (推播通知)"
-category: ["Core","Apple"]
+category: ["Core", "Apple"]
 ---
 
 ## 術語定義
@@ -279,7 +279,7 @@ MDM 的運作流程：
 這是 **「數位拍肩膀」** 。
 
 - **省電模式** ：iPad 為了省電，沒事的時候都在睡覺。IT 部門不能對著睡著的 iPad 大吼大叫。
-- **拍一下** ：所以他們發一個 **推播通知** 。就像輕輕拍一下學生的肩膀，在他耳邊悄悄說： *「老師有新的作業要給你，趕快去辦公室領一下！」*
+- **拍一下** ：所以他們發一個 **推播通知** 。就像輕輕拍一下學生的肩膀，在他耳邊悄悄說： _「老師有新的作業要給你，趕快去辦公室領一下！」_
 
 
 ---
@@ -372,7 +372,7 @@ File: recon.md
 
 ---
 term: "Recon"
-category: ["Jamf","macOS"]
+category: ["Jamf", "macOS"]
 ---
 
 ## 術語定義
@@ -430,7 +430,7 @@ File: recovery-mode.md
 
 ---
 term: "Recovery Mode（復原模式）"
-category: ["Apple","macOS"]
+category: ["Apple", "macOS"]
 ---
 
 ## 術語定義
@@ -459,7 +459,7 @@ File: remote-management.md
 
 ---
 term: "Remote Management"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義
@@ -503,7 +503,7 @@ category: ["Network"]
 
 這是 **「僅限 Wi-Fi 模式」** 的強力版。
 
-- **家長規定** ：就像爸媽規定的家規： **「要下載新遊戲只能回家用 Wi-Fi 下載，不准在公車上用手機網路下載！」***** 保護荷包** ：這張安全網確保不會因為某一個學生下載了 10GB 的遊戲，就害全班這個月的網路流量被切斷。
+- **家長規定** ：就像爸媽規定的家規： **「要下載新遊戲只能回家用 Wi-Fi 下載，不准在公車上用手機網路下載！」\*\*\*** 保護荷包\*\* ：這張安全網確保不會因為某一個學生下載了 10GB 的遊戲，就害全班這個月的網路流量被切斷。
 
 
 ---
@@ -720,7 +720,7 @@ File: scope.md
 
 ---
 term: "Scope (範圍)"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義
@@ -739,7 +739,7 @@ Scope 由三個邏輯閘組成：
 
 這是派對的 **「邀請名單」** 。
 
-- **邏輯** ：就像你要辦生日趴，你會說： **「邀請所有足球社的人 (Target)，但我只要住在台北市的 (Limitation)，還有，絕對不要邀請小明 (Exclusion)！」***** 結果** ：只有完全符合這三個條件的人才會收到邀請卡。Scope 就是 IT 發送 App 或指令時，用來過濾裝置的那張清單。
+- **邏輯** ：就像你要辦生日趴，你會說： **「邀請所有足球社的人 (Target)，但我只要住在台北市的 (Limitation)，還有，絕對不要邀請小明 (Exclusion)！」\*\*\*** 結果\*\* ：只有完全符合這三個條件的人才會收到邀請卡。Scope 就是 IT 發送 App 或指令時，用來過濾裝置的那張清單。
 
 
 ---
@@ -748,7 +748,7 @@ File: screen-time.md
 
 ---
 term: "Screen Time（螢幕使用時間）"
-category: ["Apple","Core"]
+category: ["Apple", "Core"]
 ---
 
 ## 術語定義
@@ -830,7 +830,7 @@ File: security-update.md
 
 ---
 term: "Security Update"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義
@@ -857,7 +857,7 @@ File: self-service.md
 
 ---
 term: "Self Service"
-category: ["Apps","Jamf"]
+category: ["Apps", "Jamf"]
 ---
 
 ## 術語定義
@@ -941,7 +941,7 @@ File: shared-ipad.md
 
 ---
 term: "Shared iPad (共用 iPad)"
-category: ["Education","Enrollment"]
+category: ["Education", "Enrollment"]
 ---
 
 ## 術語定義
@@ -1056,7 +1056,7 @@ File: smart-group.md
 
 ---
 term: "Smart Group"
-category: ["Core","Jamf"]
+category: ["Core", "Jamf"]
 ---
 
 ## 術語定義
@@ -1074,7 +1074,7 @@ category: ["Core","Jamf"]
 
 Smart Group 是一個 **「自動分類箱」** 。
 
-- **規則** ：你設好一個規則： **「只要學生 iPad 電量低於 10%，就丟進『待充電』名單。」***** 執行** ：系統會 24 小時盯著每一台裝置，只要有人電量掉到 9%，它就會自動跳進那個名單，完全不需要人工去檢查。
+- **規則** ：你設好一個規則： **「只要學生 iPad 電量低於 10%，就丟進『待充電』名單。」\*\*\*** 執行\*\* ：系統會 24 小時盯著每一台裝置，只要有人電量掉到 9%，它就會自動跳進那個名單，完全不需要人工去檢查。
 
 
 ---
@@ -1083,7 +1083,7 @@ File: software-update.md
 
 ---
 term: "Software Update"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## 術語定義
@@ -1164,7 +1164,7 @@ File: student-information-system-sis.md
 
 ---
 term: "Student Information System（SIS，學生資訊系統）"
-category: ["Education","Other"]
+category: ["Education", "Other"]
 ---
 
 ## 術語定義
@@ -1500,7 +1500,7 @@ File: universal-control.md
 
 ---
 term: "Universal Control（通用控制）"
-category: ["Apple","macOS"]
+category: ["Apple", "macOS"]
 ---
 
 ## 術語定義
@@ -1588,7 +1588,7 @@ File: user-approved-mdm.md
 
 ---
 term: "User Approved MDM（使用者核准的 MDM）"
-category: ["Enrollment","macOS"]
+category: ["Enrollment", "macOS"]
 ---
 
 ## 術語定義
@@ -1951,7 +1951,7 @@ File: wpa-wpa2-wpa3.md
 
 ---
 term: "WPA / WPA2 / WPA3"
-category: ["Network","Security"]
+category: ["Network", "Security"]
 ---
 
 ## 術語定義
@@ -2061,4 +2061,5 @@ category: ["MDM"]
 
 - **風險提示** ：雖然方便，但在教育環境（特別是 Shared iPad）使用此功能有風險，容易導致舊設定殘留或 App 無法更新（變成殭屍 App）。
 - **建議** ：對於大批次學校設備轉移，使用 **"Return to Service"** 進行完全重置通常還是最乾淨、最穩定的做法。
+
 

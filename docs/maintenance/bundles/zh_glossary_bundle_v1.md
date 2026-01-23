@@ -1119,7 +1119,7 @@ File: blueprints.md
 
 ---
 term: "Blueprints"
-category: ["Jamf","Core"]
+category: ["Jamf", "Core"]
 ---
 
 ## 術語定義
@@ -1149,7 +1149,7 @@ File: bonjour.md
 
 ---
 term: "Bonjour"
-category: ["Network","Apple"]
+category: ["Network", "Apple"]
 ---
 
 ## 術語定義
@@ -1517,7 +1517,7 @@ File: composer.md
 
 ---
 term: "Composer"
-category: ["macOS","Jamf"]
+category: ["macOS", "Jamf"]
 ---
 
 ## 術語定義
@@ -2088,7 +2088,7 @@ File: domain-capture.md
 
 ---
 term: "Domain Capture (域名擷取)"
-category: ["Apple","Security"]
+category: ["Apple", "Security"]
 ---
 
 ## 術語定義
@@ -2183,7 +2183,7 @@ File: enrollment-customization.md
 
 ---
 term: "Enrollment Customization (註冊自訂內容)"
-category: ["Enrollment","Apple"]
+category: ["Enrollment", "Apple"]
 ---
 
 ## 術語定義
@@ -2209,4 +2209,5 @@ category: ["Enrollment","Apple"]
 3. 檢查身分證確認是本人（帳號登入）。
 
 這一切都在你拿到手機、還沒進入桌面 app 之前就完成了，既專業又安全。
+
 

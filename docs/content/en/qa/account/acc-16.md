@@ -3,7 +3,7 @@ id: acc-16
 title: "How do I handle 'Domain Conflicts' in Apple School Manager and reclaim account ownership?"
 category: "Section 1: Account & Server Management"
 important: true
-tags: ["Domain Conflict","Account Transfer","ASM"]
+tags: ["Domain Conflict", "Account Transfer", "ASM"]
 ---
 
 **Once a school verifies its domain in Apple School Manager (ASM), the system automatically identifies 'Personal Apple Accounts' registered with school email addresses and initiates a migration process.**

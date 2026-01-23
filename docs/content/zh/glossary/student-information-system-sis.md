@@ -1,6 +1,6 @@
 ---
 term: "Student Information System（SIS，學生資訊系統）"
-category: ["Education","Other"]
+category: ["Education", "Other"]
 ---
 
 ## 術語定義

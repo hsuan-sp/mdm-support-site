@@ -3,24 +3,31 @@ id: cls-25
 title: "Classroom vs. Schoolwork apps: What's the difference, and which should teachers use?"
 category: "Section 4: Classroom Management & Instructional Tools"
 important: false
-tags: ["Schoolwork", "Classroom", "Feature Comparison", "Teaching Tools", "Assignment Management"]
+tags:
+  [
+    "Schoolwork",
+    "Classroom",
+    "Feature Comparison",
+    "Teaching Tools",
+    "Assignment Management",
+  ]
 ---
 
 **The 'Classroom' app is for active classroom management (the 'Now'), while the 'Schoolwork' app is for assignment distribution and progress tracking (the 'Long-form'). Most successful teachers use both in tandem.**
 
 ## Core Comparison Table
 
-| Feature | Classroom (v6.0+) | Schoolwork |
-| :--- | :--- | :--- |
-| **Primary Goal** | Classroom order and guidance. | Handing out materials, collecting work, grading. |
-| **Real-time Level** | **High** (Immediate). | **Low** (Asynchronous). |
-| **Proximity** | Supports local and remote classes (Cloud classes). | **Unlimited** (Distance learning). |
-| **Screen View** | ✅ (View student screens in real-time). | ❌ |
-| **Device Lock** | ✅ (Lock screen or lock into a specific app). | ❌ |
-| **File Exchange** | AirDrop or Cloud share. | ✅ End-to-end assignment workflow. |
-| **Tracking** | Current app usage only. | ✅ Progress down to the minute. |
-| **Teacher Device** | iPhone, iPad, Mac. | iPad. |
-| **Student Device** | iPad, Mac. | **iPad** (Optimized for Apple Pencil). |
+| Feature             | Classroom (v6.0+)                                  | Schoolwork                                       |
+| :------------------ | :------------------------------------------------- | :----------------------------------------------- |
+| **Primary Goal**    | Classroom order and guidance.                      | Handing out materials, collecting work, grading. |
+| **Real-time Level** | **High** (Immediate).                              | **Low** (Asynchronous).                          |
+| **Proximity**       | Supports local and remote classes (Cloud classes). | **Unlimited** (Distance learning).               |
+| **Screen View**     | ✅ (View student screens in real-time).            | ❌                                               |
+| **Device Lock**     | ✅ (Lock screen or lock into a specific app).      | ❌                                               |
+| **File Exchange**   | AirDrop or Cloud share.                            | ✅ End-to-end assignment workflow.               |
+| **Tracking**        | Current app usage only.                            | ✅ Progress down to the minute.                  |
+| **Teacher Device**  | iPhone, iPad, Mac.                                 | iPad.                                            |
+| **Student Device**  | iPad, Mac.                                         | **iPad** (Optimized for Apple Pencil).           |
 
 ## Teaching Scenarios
 

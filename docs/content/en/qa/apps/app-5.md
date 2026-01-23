@@ -3,7 +3,7 @@ id: app-5
 title: "How do we balance automated app installs with limited school bandwidth?"
 category: "Section 3: App Management & Distribution"
 important: false
-tags: ["Deployment Strategy","Content Caching","Bandwidth Management"]
+tags: ["Deployment Strategy", "Content Caching", "Bandwidth Management"]
 ---
 
 **During large-scale deployments (e.g., the first day of the school year), having hundreds of iPads simultaneously downloading the same apps can paralyze the campus network.** To manage this, we recommend a "Tiered Deployment" strategy.

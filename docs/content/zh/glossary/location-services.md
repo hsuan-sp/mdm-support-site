@@ -1,6 +1,6 @@
 ---
 term: "Location Services（定位服務）"
-category: ["Apple","Core"]
+category: ["Apple", "Core"]
 ---
 
 ## 術語定義

@@ -3,7 +3,7 @@ id: acc-8
 title: "What should I do if I forget the Jamf Pro administrator password?"
 category: "Section 1: Account & Server Management"
 important: false
-tags: ["Password Reset","Jamf Pro","Disaster Recovery"]
+tags: ["Password Reset", "Jamf Pro", "Disaster Recovery"]
 ---
 
 **The recovery method depends on your Jamf Pro deployment (Cloud vs. On-Premise) and whether SSO is enabled.**
