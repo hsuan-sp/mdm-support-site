@@ -175,11 +175,12 @@ export default defineConfig({
   },
 
   head: [
-    ["link", { rel: "icon", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon.ico" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon-32x32.png" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/favicon-16x16.png" }],
-    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/apple-touch-icon.png" }],
-    ["link", { rel: "manifest", href: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/site.webmanifest" }],
+    // 預設 favicon.ico
+    ["link", { rel: "icon", href: "/favicon.ico" }],
+    // 針對不同設備的 Favicons
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }],
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     [
       "link",
@@ -199,9 +200,10 @@ export default defineConfig({
         content: "Apple, MDM, Jamf Pro, Jamf School, Education, MoE, Taiwan",
       },
     ],
+    // 注意：OG Image 建議使用絕對路徑以利社群平台抓取，這裡先以相對路徑確保基礎運作
     [
       "meta",
-      { property: "og:image", content: (process.env.GITHUB_ACTIONS === "true" ? "/mdm-support-site" : "") + "/logo.png" },
+      { property: "og:image", content: "/logo.png" },
     ],
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
   ],
