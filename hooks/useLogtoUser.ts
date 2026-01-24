@@ -24,8 +24,21 @@ export function useUser() {
       if (res.ok) {
         const userData = await res.json();
         // 增強檢查：確保 userData 不是空物件且包含 sub 或 isAuthenticated
+        // 同時執行網域檢查 (Domain Whitelist Enforcement)
         if (userData && (userData.sub || userData.isAuthenticated)) {
-          setUser(userData);
+          const email = userData.primaryEmail || userData.email || "";
+          const isEdu = /\.edu\.tw$/i.test(email);
+          const isOfficial = email.endsWith("@superinfo.com.tw");
+
+          if (isEdu || isOfficial) {
+            setUser(userData);
+          } else {
+            // 網域不符，視為未登入或重導向
+            console.warn("Unauthorized domain:", email);
+            setUser(null);
+            // 如果需要強制跳轉到未授權頁面，可以在這裡執行:
+            router.push("/unauthorized");
+          }
         } else {
           setUser(null);
         }

@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 import { LanguageProvider } from '../hooks/useLanguage'
 import SecurityGuard from '../components/features/SecurityGuard'
 import BackToTop from '../components/ui/BackToTop'
-import GlobalLoader from '../components/ui/GlobalLoader'
+import AuthGuard from '../components/features/AuthGuard'
 import Footer from '../components/layout/Footer'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -13,9 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <LanguageProvider>
-      <GlobalLoader />
       <SecurityGuard />
-      {getLayout(<Component {...pageProps} />)}
+      <AuthGuard>
+        {getLayout(<Component {...pageProps} />)}
+      </AuthGuard>
       <Footer />
       <BackToTop />
     </LanguageProvider>
