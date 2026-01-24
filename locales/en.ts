@@ -190,6 +190,7 @@ export const en = {
     },
     menuBtn: "Filter Terms",
     drawerTitle: "Search & Glossary Settings",
+    layoutTitle: "Grid Layout",
   },
   changelog: {
     title: "Changelog",
@@ -252,7 +253,7 @@ export const en = {
   pageTitles: {
     index: "Home",
     guide: "Guides",
-    glossary: "Glossary Hub",
+    glossary: "Glossary",
     changelog: "Changelog",
     "404": "Page Not Found",
   },

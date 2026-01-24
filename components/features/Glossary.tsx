@@ -1,13 +1,12 @@
 "use client"
 import React, { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'nextra/hooks'
-import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu } from 'lucide-react'
+import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu, Grid, List as ListIcon, LayoutGrid, SignedIn, SignedOut } from 'lucide-react'
 import { GlossaryItem } from '@/types'
 import EmptyState from '@/components/ui/EmptyState'
 
 import { translations } from '@/locales'
 import { useLanguage } from '@/hooks/useLanguage'
-import { SignedIn, SignedOut } from '@clerk/nextjs'
 import AuthGate from '../ui/AuthGate'
 
 interface GlossaryProps {
@@ -39,7 +38,8 @@ const Glossary: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [fontScale, setFontScale] = useState(0.9) // 預設較小字體
+  const [fontScale, setFontScale] = useState(0.9) 
+  const [gridCols, setGridCols] = useState<1 | 2 | 3>(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   useEffect(() => {
@@ -132,6 +132,31 @@ const Glossary: React.FC = () => {
         </nav>
       </div>
 
+      {/* Layout Grid Switcher */}
+      <div className="mb-10 lg:mb-12 pt-2">
+        <p className="text-[11px] font-black uppercase tracking-widest text-zinc-400 px-1 mb-4">
+          {t.layoutTitle || '版面配置'}
+        </p>
+        <div className="flex items-center gap-2 p-1.5 bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
+          {[1, 2, 3].map((num) => (
+            <button
+              key={num}
+              onClick={() => setGridCols(num as any)}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl transition-all ${
+                gridCols === num 
+                  ? 'bg-white dark:bg-zinc-800 text-[#0071e3] shadow-md border border-zinc-200 dark:border-zinc-700' 
+                  : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200'
+              }`}
+            >
+              {num === 1 && <ListIcon className="w-4 h-4" />}
+              {num === 2 && <Grid className="w-4 h-4" />}
+              {num === 3 && <LayoutGrid className="w-4 h-4" />}
+              <span className="text-xs font-black">{num}x</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
         <p className="text-[11px] font-black uppercase tracking-widest text-zinc-400 mb-4">{t.fontScaleTitle}</p>
         <div className="flex items-center justify-between p-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl">
@@ -191,11 +216,11 @@ const Glossary: React.FC = () => {
             </div>
 
             {filteredTerms.length > 0 ? (
-              <div className="grid grid-cols-1 gap-6">
+              <div className={`grid grid-cols-1 ${gridCols === 2 ? 'md:grid-cols-2' : gridCols === 3 ? 'md:grid-cols-2 xl:grid-cols-3' : ''} gap-6`}>
                 {filteredTerms.map(item => (
                   <article 
                     key={item.term}
-                    className="group flex flex-col bg-white dark:bg-zinc-900 rounded-3xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 p-10 sm:p-12 md:p-16 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
+                    className={`group flex flex-col bg-white dark:bg-zinc-900 rounded-3xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 ${gridCols === 1 ? 'p-10 sm:p-12 md:p-16' : 'p-8 md:p-10'} shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative`}
                   >
                     <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/10 transition-all duration-700" />
                     
@@ -210,29 +235,29 @@ const Glossary: React.FC = () => {
                           </span>
                         ))}
                       </div>
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300">
+                      <h3 className={`${gridCols === 1 ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl md:text-2xl'} font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300`}>
                         {item.term}
                       </h3>
                     </header>
 
                     <div 
-                      className="flex-1 prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 mb-8 relative z-10"
+                      className={`flex-1 prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 mb-8 relative z-10 ${gridCols > 1 ? 'text-sm' : ''}`}
                       style={{ '--current-font-scale': fontScale } as any}
                       dangerouslySetInnerHTML={{ __html: item.definition }}
                     />
 
                     {item.analogy && (
                       <div 
-                        className="p-6 sm:p-8 bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-200 dark:border-amber-900/30 rounded-3xl relative group-hover:border-amber-300 dark:group-hover:border-amber-800/40 transition-all z-10"
+                        className={`${gridCols === 1 ? 'p-6 sm:p-8' : 'p-5 md:p-6'} bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-200 dark:border-amber-900/30 rounded-3xl relative group-hover:border-amber-300 dark:group-hover:border-amber-800/40 transition-all z-10`}
                         style={{ '--current-font-scale': fontScale } as any}
                       >
-                        <div className="flex items-center gap-2 mb-5 text-amber-600 dark:text-amber-500 font-black text-xs uppercase tracking-[0.2em]">
+                        <div className="flex items-center gap-2 mb-4 text-amber-600 dark:text-amber-500 font-black text-xs uppercase tracking-[0.2em]">
                           <Lightbulb className="w-4 h-4" />
                           {t.analogyLabel}
                         </div>
                         <div 
-                          className="text-[15px] md:text-[17px] text-zinc-800 dark:text-zinc-200 leading-relaxed font-bold italic opacity-90"
-                          style={{ fontSize: `calc(${fontScale} * 16px)` }}
+                          className={`${gridCols === 1 ? 'text-[15px] md:text-[17px]' : 'text-sm'} text-zinc-800 dark:text-zinc-200 leading-relaxed font-bold italic opacity-90`}
+                          style={{ fontSize: `calc(${fontScale} * ${gridCols === 1 ? '16px' : '14px'})` }}
                           dangerouslySetInnerHTML={{ __html: item.analogy }}
                         />
                       </div>

@@ -190,6 +190,7 @@ export const zhTW = {
     },
     menuBtn: "術語篩選",
     drawerTitle: "搜尋與術語設定",
+    layoutTitle: "版面配置",
   },
   changelog: {
     title: "更新日誌",
@@ -250,7 +251,7 @@ export const zhTW = {
   pageTitles: {
     index: "首頁",
     guide: "實戰指南",
-    glossary: "術語百科",
+    glossary: "術語表",
     changelog: "更新日誌",
     "404": "頁面未找到",
   },
