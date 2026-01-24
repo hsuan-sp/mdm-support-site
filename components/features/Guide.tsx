@@ -22,7 +22,7 @@ const Guide: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSource, setActiveSource] = useState<string | 'All'>('All')
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
-  const [fontScale, setFontScale] = useState(1)
+  const [fontScale, setFontScale] = useState(0.9)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
   // Infinite Scroll State
@@ -224,13 +224,13 @@ const Guide: React.FC = () => {
       <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
         <p className="text-[11px] font-black uppercase tracking-widest text-zinc-400 mb-4">{t.fontScaleTitle}</p>
         <div className="flex items-center justify-between p-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl">
-          {[0.8, 0.9, 1, 1.1, 1.2].map(scale => (
+          {[0.85, 0.9, 1, 1.1, 1.15].map(scale => (
             <button
               key={scale}
               onClick={() => setFontScale(scale)}
               className={`flex-1 flex items-center justify-center py-2 rounded-lg text-[13px] font-bold transition-all ${fontScale === scale ? 'bg-white dark:bg-zinc-800 text-blue-600 shadow-sm' : 'text-zinc-400 hover:text-zinc-600'}`}
             >
-              {scale === 0.8 ? 'A--' : scale === 0.9 ? 'A-' : scale === 1 ? 'A' : scale === 1.1 ? 'A+' : 'A++'}
+              {scale === 0.85 ? 'A--' : scale === 0.9 ? 'A-' : scale === 1 ? 'A' : scale === 1.1 ? 'A+' : 'A++'}
             </button>
           ))}
         </div>

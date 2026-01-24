@@ -289,3 +289,51 @@ h2 {
   font-family:
     "VibrantEmoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
 }
+/* 隱藏 Nextra 預設的側邊欄和 hamburger */
+.nextra-sidebar-container,
+button[aria-label*="sidebar"],
+button[aria-label*="Menu"],
+.nextra-hamburger {
+  display: none !important;
+}
+
+/* Guide 卡片內容字體優化 - 統一大小、減少差異 */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.2em !important;
+  margin-bottom: 0.6em !important;
+  line-height: 1.4 !important;
+}
+
+.prose p {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  margin-bottom: 0.8em !important;
+}
+
+.prose ul,
+.prose ol {
+  font-size: 0.95rem !important;
+  padding-left: 1.5em !important;
+}
+
+.prose li {
+  margin-bottom: 0.4em !important;
+}
+
+.prose strong {
+  font-weight: 600 !important;
+  color: inherit !important;
+}
+
+.prose code {
+  font-size: 0.9em !important;
+  padding: 0.15em 0.3em !important;
+  border-radius: 0.25em !important;
+}

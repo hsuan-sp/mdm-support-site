@@ -1,17 +1,18 @@
 import React from 'react'
+import type { DocsThemeConfig } from 'nextra-theme-docs'
 import Footer from './components/layout/Footer'
 import { Logo, NavbarExtra } from './components/layout/NavbarItems'
 
 /**
  * Superinfo Apple MDM Hub - Theme Configuration
- * Optimized for Nextra 3.x
+ * Nextra 3.x Standard Configuration
  */
 
 const config = {
   logo: <Logo />,
   logoLink: '/',
-  project: { link: null },
-  chat: { link: null },
+  project: {}, // No project link
+  chat: {}, // No chat link
   docsRepositoryBase: 'https://github.com/hsuan-sp/mdm-support-site/tree/main',
   gitTimestamp: null,
   useNextSeoProps() {
@@ -28,7 +29,7 @@ const config = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 1,
-    toggleButton: true,
+    toggleButton: false, // 隱藏 Nextra 預設的 hamburger，使用自訂 MobileNav
   },
   footer: {
     component: null
