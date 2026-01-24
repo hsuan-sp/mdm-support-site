@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 // 適應新結構: md_data 位於路徑根目錄
 const CONTENT_DIR = path.join(__dirname, "../../md_data");
-const BUNDLE_DIR = path.join(__dirname, "../../maintenance/bundles");
+const BUNDLE_DIR = path.join(__dirname, "../../_generated/bundles");
 
 const QA_ORDER = [
   "account",

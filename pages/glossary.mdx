@@ -1,20 +1,5 @@
 import Glossary from "@/components/features/Glossary";
-import { getGlossaryData } from "@/lib/data";
-import { useLanguage } from "@/hooks/useLanguage";
 
-export const getStaticProps = async () => {
-  const zhData = await getGlossaryData("zh");
-  const enData = await getGlossaryData("en");
-  return {
-    props: {
-      zhData,
-      enData,
-    },
-  };
-};
-
-export default function GlossaryPage({ zhData, enData }) {
-  const { language } = useLanguage();
-  const data = language === "en" ? enData : zhData;
-  return <Glossary data={data} />;
+export default function GlossaryPage() {
+  return <Glossary />;
 }

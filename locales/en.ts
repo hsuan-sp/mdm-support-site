@@ -8,70 +8,127 @@ export const en = {
     searchGlossary: "Search Glossary",
     exploreThemes: "Explore Topics",
     mastery: "From basic setup to advanced management, master it all here.",
-    badge: "v4.0 Professional Edition",
+    badge: "v4.0 Professional",
     features: [
       {
         id: "account",
         title: "Account & Identity",
         subtitle: "Identity",
         desc: "Learn about Managed Apple IDs, Federated Authentication, and roles.",
-        icon: "User",
+        emoji: "🆔",
       },
       {
         id: "enrollment",
         title: "Zero-Touch Deployment",
         subtitle: "Deployment",
         desc: "Achieve out-of-the-box automation with Apple Configurator and ADE.",
-        icon: "Package",
+        emoji: "🚀",
       },
       {
         id: "apps",
         title: "Software Procurement",
         subtitle: "VPP Apps",
         desc: "Master bulk licensing and lifecycle management for apps and books.",
-        icon: "Smartphone",
+        emoji: "📦",
       },
       {
         id: "classroom",
         title: "Classroom Instruction",
         subtitle: "Classroom",
         desc: "Empower teachers with screen monitoring, file sharing, and interaction.",
-        icon: "GraduationCap",
+        emoji: "🎓",
       },
       {
         id: "digital-learning",
         title: "Project Compliance",
         subtitle: "Education",
         desc: "Align with MOE technical requirements to optimize digital learning.",
-        icon: "Apple",
+        emoji: "🍎",
       },
       {
         id: "hardware",
         title: "Maintenance & Repair",
         subtitle: "Service",
         desc: "Hardware warranty checks, repair flows, and loaner management.",
-        icon: "Wrench",
+        emoji: "🔧",
       },
       {
         id: "mac",
         title: "Mac Management",
         subtitle: "macOS",
         desc: "Advanced macOS management tips, script deployment, and security.",
-        icon: "Monitor",
+        emoji: "🖥️",
       },
       {
         id: "qa-education",
         title: "Campus Q&A",
         subtitle: "Q&A",
         desc: "A collection of essential solutions for common campus deployment issues.",
-        icon: "HelpCircle",
+        emoji: "💡",
       },
       {
         id: "glossary",
         title: "Glossary Hub",
         subtitle: "Glossary",
         desc: "Simple explanations for over 200 professional MDM terms.",
-        icon: "Book",
+        emoji: "📚",
+      },
+    ],
+  },
+  resources: {
+    label: "Resources",
+    groups: [
+      {
+        title: "External Links",
+        items: [
+          { text: "Superinfo Website", link: "https://www.superinfo.com.tw" },
+          {
+            text: "Apple Education (TW)",
+            link: "https://www.apple.com/tw/education/",
+          },
+          { text: "MOE MDM Platform", link: "https://mdm.edu.tw" },
+          {
+            text: "Digital Learning Initiative",
+            link: "https://pads.moe.edu.tw/index.php",
+          },
+          {
+            text: "Apple Platform Deployment Guide",
+            link: "https://support.apple.com/zh-tw/guide/deployment/welcome/web",
+          },
+          {
+            text: "Apple School Manager Guide",
+            link: "https://support.apple.com/zh-tw/guide/apple-school-manager/welcome/web",
+          },
+          {
+            text: "Jamf Pro Documentation",
+            link: "https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/Jamf_Pro_Documentation.html",
+          },
+          {
+            text: "Jamf School Documentation",
+            link: "https://learn.jamf.com/bundle/jamf-school-documentation/page/Jamf_School_Documentation.html",
+          },
+        ],
+      },
+      {
+        title: "Contact",
+        items: [
+          {
+            text: "Sales Support (Line: @406ifuui)",
+            link: "https://line.me/R/ti/p/@406ifuui",
+          },
+          {
+            text: "Tech Support (Line: @257yzoxx)",
+            link: "https://line.me/R/ti/p/@257yzoxx",
+          },
+          {
+            text: "NTNU Apple Campus Store",
+            link: "https://page.line.me/xat.0000119425.rpn?openQrModal=true",
+          },
+          {
+            text: "SHU Apple Campus Store",
+            link: "https://page.line.me/xat.0000119425.rpn?openQrModal=true",
+          },
+        ],
       },
     ],
   },

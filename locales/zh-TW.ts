@@ -8,70 +8,127 @@ export const zhTW = {
     searchGlossary: "查詢術語表",
     exploreThemes: "探索主題",
     mastery: "從基礎設定到進階管理，一切盡在掌握。",
-    badge: "v4.0 專業版現已發佈",
+    badge: "v4.0 專業版",
     features: [
       {
         id: "account",
         title: "帳號與身分",
         subtitle: "Identity",
         desc: "深入了解管理式 Apple ID、聯合驗證與權限委派。",
-        icon: "User",
+        emoji: "🆔",
       },
       {
         id: "enrollment",
         title: "零接觸部署",
         subtitle: "Deployment",
         desc: "透過 Apple Configurator 與 ADE 達成自動化開箱即用。",
-        icon: "Package",
+        emoji: "🚀",
       },
       {
         id: "apps",
         title: "軟體採購",
         subtitle: "VPP Apps",
         desc: "掌握 App 與圖書的批量授權派發與生命週期管理。",
-        icon: "Smartphone",
+        emoji: "📦",
       },
       {
         id: "classroom",
         title: "課堂教學",
         subtitle: "Classroom",
         desc: "賦能教師掌握即時畫面控管、文件傳送與數位互動。",
-        icon: "GraduationCap",
+        emoji: "🎓",
       },
       {
         id: "digital-learning",
         title: "方案規範",
         subtitle: "Education",
         desc: "接軌教育部專案規範，優化校園數位學習環境。",
-        icon: "Apple",
+        emoji: "🍎",
       },
       {
         id: "hardware",
         title: "維護報修",
         subtitle: "Service",
         desc: "了解硬體保固查詢、維修流程與備機管理策略。",
-        icon: "Wrench",
+        emoji: "🔧",
       },
       {
         id: "mac",
         title: "Mac 管理",
         subtitle: "macOS",
         desc: "進階 macOS 管理技巧、腳本部署與安全性策略。",
-        icon: "Monitor",
+        emoji: "🖥️",
       },
       {
         id: "qa-education",
         title: "校園實戰",
         subtitle: "Q&A",
         desc: "整理校園部署中最常遇到的關鍵疑難雜症解答。",
-        icon: "HelpCircle",
+        emoji: "💡",
       },
       {
         id: "glossary",
         title: "術語百科",
         subtitle: "Glossary",
         desc: "收錄超過 200 項 MDM 專業術語的白話文解析。",
-        icon: "Book",
+        emoji: "📚",
+      },
+    ],
+  },
+  resources: {
+    label: "資源與服務",
+    groups: [
+      {
+        title: "常用連結",
+        items: [
+          { text: "極電資訊官網", link: "https://www.superinfo.com.tw" },
+          {
+            text: "Apple 教育官網",
+            link: "https://www.apple.com/tw/education/",
+          },
+          { text: "教育部 MDM 管理平台", link: "https://mdm.edu.tw" },
+          {
+            text: "推動中小學數位學習精進方案入口網",
+            link: "https://pads.moe.edu.tw/index.php",
+          },
+          {
+            text: "Apple 平台部署指南",
+            link: "https://support.apple.com/zh-tw/guide/deployment/welcome/web",
+          },
+          {
+            text: "Apple School Manager 使用手冊",
+            link: "https://support.apple.com/zh-tw/guide/apple-school-manager/welcome/web",
+          },
+          {
+            text: "Jamf Pro 官方文件",
+            link: "https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/Jamf_Pro_Documentation.html",
+          },
+          {
+            text: "Jamf School 官方文件",
+            link: "https://learn.jamf.com/bundle/jamf-school-documentation/page/Jamf_School_Documentation.html",
+          },
+        ],
+      },
+      {
+        title: "聯絡客服",
+        items: [
+          {
+            text: "業務客服 (Line: @406ifuui)",
+            link: "https://line.me/R/ti/p/@406ifuui",
+          },
+          {
+            text: "技術客服 (Line: @257yzoxx)",
+            link: "https://line.me/R/ti/p/@257yzoxx",
+          },
+          {
+            text: "師大 APPLE 校園體驗中心",
+            link: "https://page.line.me/xat.0000119425.rpn?openQrModal=true",
+          },
+          {
+            text: "世新 APPLE 校園體驗中心",
+            link: "https://page.line.me/xat.0000119425.rpn?openQrModal=true",
+          },
+        ],
       },
     ],
   },

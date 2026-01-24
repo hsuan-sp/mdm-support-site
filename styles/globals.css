@@ -4,11 +4,28 @@
 
 @layer base {
   :root {
-    --nextra-primary-hue: 204deg;
+    --nextra-primary-hue: 210deg; /* More standard blue */
     --nextra-primary-saturation: 100%;
-    /* Classic Manuscript Grid (Soft Jade Green) */
-    --grid-color: rgba(34, 197, 94, 0.04);
-    --grid-accent: rgba(34, 197, 94, 0.08);
+    /* Clean, modern grid - very subtle */
+    --grid-color: rgba(0, 0, 0, 0.02);
+    --grid-accent: rgba(0, 0, 0, 0.04);
+
+    /* Fluid Typography System - Smooth scaling across all viewports */
+    --font-xs: clamp(0.625rem, 0.5rem + 0.25vw, 0.75rem); /* 10px → 12px */
+    --font-sm: clamp(0.75rem, 0.65rem + 0.25vw, 0.875rem); /* 12px → 14px */
+    --font-base: clamp(0.875rem, 0.75rem + 0.3vw, 1rem); /* 14px → 16px */
+    --font-lg: clamp(1rem, 0.85rem + 0.35vw, 1.125rem); /* 16px → 18px */
+    --font-xl: clamp(1.125rem, 0.95rem + 0.4vw, 1.25rem); /* 18px → 20px */
+    --font-2xl: clamp(1.25rem, 1rem + 0.5vw, 1.5rem); /* 20px → 24px */
+    --font-3xl: clamp(1.5rem, 1.2rem + 0.6vw, 1.875rem); /* 24px → 30px */
+    --font-4xl: clamp(1.875rem, 1.5rem + 0.8vw, 2.25rem); /* 30px → 36px */
+
+    /* Fluid Spacing System */
+    --spacing-xs: clamp(0.25rem, 0.2rem + 0.125vw, 0.375rem); /* 4px → 6px */
+    --spacing-sm: clamp(0.5rem, 0.4rem + 0.25vw, 0.75rem); /* 8px → 12px */
+    --spacing-md: clamp(1rem, 0.8rem + 0.5vw, 1.5rem); /* 16px → 24px */
+    --spacing-lg: clamp(1.5rem, 1.2rem + 0.75vw, 2rem); /* 24px → 32px */
+    --spacing-xl: clamp(2rem, 1.5rem + 1vw, 3rem); /* 32px → 48px */
   }
 
   .dark {
@@ -18,30 +35,143 @@
 
   html {
     font-family:
-      "Outfit",
+      "Inter",
       "Noto Sans TC",
       -apple-system,
       BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
       sans-serif;
+    /* Smooth font scaling */
+    font-size: clamp(14px, 0.875rem + 0.15vw, 16px);
   }
 
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply bg-white dark:bg-black text-zinc-900 dark:text-zinc-100;
+    @apply bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100;
 
-    /* Advanced Manuscript Paper Effect */
-    background-image:
-      linear-gradient(var(--grid-accent) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-accent) 1px, transparent 1px),
-      linear-gradient(var(--grid-color) 0.5px, transparent 0.5px),
-      linear-gradient(90deg, var(--grid-color) 0.5px, transparent 0.5px);
+    /* Beautiful gradient background with subtle texture */
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(59, 130, 246, 0.08),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(147, 51, 234, 0.06),
+        transparent 40%
+      ),
+      radial-gradient(var(--grid-accent) 1px, transparent 1px);
     background-size:
-      160px 160px,
-      160px 160px,
-      32px 32px,
-      32px 32px;
+      100% 100%,
+      100% 100%,
+      clamp(24px, 1.5rem + 0.5vw, 32px) clamp(24px, 1.5rem + 0.5vw, 32px);
     background-attachment: fixed;
+  }
+
+  .dark body {
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(59, 130, 246, 0.12),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(147, 51, 234, 0.1),
+        transparent 50%
+      ),
+      radial-gradient(var(--grid-accent) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      100% 100%,
+      clamp(24px, 1.5rem + 0.5vw, 32px) clamp(24px, 1.5rem + 0.5vw, 32px);
+    background-attachment: fixed;
+  }
+}
+
+/* Global Typography & Interactive Rules */
+@layer components {
+  /* Fluid Typography Utilities */
+  .text-fluid-xs {
+    font-size: var(--font-xs);
+  }
+  .text-fluid-sm {
+    font-size: var(--font-sm);
+  }
+  .text-fluid-base {
+    font-size: var(--font-base);
+  }
+  .text-fluid-lg {
+    font-size: var(--font-lg);
+  }
+  .text-fluid-xl {
+    font-size: var(--font-xl);
+  }
+  .text-fluid-2xl {
+    font-size: var(--font-2xl);
+  }
+  .text-fluid-3xl {
+    font-size: var(--font-3xl);
+  }
+  .text-fluid-4xl {
+    font-size: var(--font-4xl);
+  }
+
+  /* Fluid Spacing Utilities */
+  .gap-fluid-xs {
+    gap: var(--spacing-xs);
+  }
+  .gap-fluid-sm {
+    gap: var(--spacing-sm);
+  }
+  .gap-fluid-md {
+    gap: var(--spacing-md);
+  }
+  .gap-fluid-lg {
+    gap: var(--spacing-lg);
+  }
+  .gap-fluid-xl {
+    gap: var(--spacing-xl);
+  }
+
+  /* Prevent italics universally if desired, or just use non-italic utility */
+  .italic {
+    font-style: normal !important;
+  }
+  em {
+    font-style: normal !important;
+    font-weight: 600;
+    color: rgb(37, 99, 235);
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  /* Interactive Elements: High Opacity & Hover Effects */
+  a,
+  button,
+  [role="button"] {
+    @apply opacity-100 transition-opacity duration-200;
+  }
+
+  /* Non-interactive text slightly softer */
+  p,
+  li,
+  span:not(.font-bold) {
+    @apply text-zinc-600 dark:text-zinc-400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-zinc-900 dark:text-zinc-100 opacity-100 font-bold;
   }
 }
 
@@ -50,7 +180,14 @@
   backdrop-filter: saturate(180%) blur(20px) !important;
   background-color: rgba(255, 255, 255, 0.72) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-  height: 4rem !important;
+  height: 3.5rem !important; /* Compact mobile navbar */
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .nextra-nav-container {
+    height: 4rem !important;
+  }
 }
 
 .dark .nextra-nav-container {
@@ -84,7 +221,7 @@
 /* Sidebar Refinement */
 .nextra-sidebar-container {
   background-color: transparent !important;
-  padding-top: 1rem !important;
+  padding-top: 3.5rem !important; /* Match mobile navbar height */
 }
 
 @media (min-width: 768px) {
@@ -107,7 +244,7 @@
 
 /* Main Content Area */
 .nextra-body {
-  @apply max-w-[1440px] mx-auto;
+  @apply max-w-[1440px] mx-auto px-4 md:px-6; /* Ensure padding on mobile */
 }
 
 /* Typography Scale */

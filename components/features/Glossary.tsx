@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'nextra/hooks'
 import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu } from 'lucide-react'
 import { GlossaryItem } from '@/types'
@@ -27,16 +27,36 @@ const CATEGORIES = [
   'Other',
 ]
 
-const Glossary: React.FC<GlossaryProps> = ({ data }) => {
+const Glossary: React.FC = () => {
   const router = useRouter()
   const { language: locale } = useLanguage()
   const t = translations[locale as keyof typeof translations]?.glossary || translations['zh-TW'].glossary
 
+  const [data, setData] = useState<GlossaryItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [fontScale, setFontScale] = useState(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true)
+      try {
+        const res = await fetch(`/api/glossary?lang=${locale}`)
+        if (res.ok) {
+          const result = await res.json()
+          setData(result)
+        }
+      } catch (error) {
+        console.error('Failed to fetch glossary data', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchData()
+  }, [locale])
 
   const getChapterCount = (cat: string) => {
     if (cat === 'All') return data.length
@@ -135,6 +155,17 @@ const Glossary: React.FC<GlossaryProps> = ({ data }) => {
     </div>
   )
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-pulse flex flex-col items-center">
+          <div className="w-12 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-full mb-4"></div>
+          <div className="w-48 h-4 bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
       {/* Desktop Sidebar */}
@@ -163,33 +194,33 @@ const Glossary: React.FC<GlossaryProps> = ({ data }) => {
             {filteredTerms.map(item => (
               <article 
                 key={item.term}
-                className="group flex flex-col bg-white dark:bg-zinc-900 rounded-[32px] border-2 border-transparent hover:border-blue-500/10 p-8 md:p-10 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 overflow-hidden relative"
+                className="group flex flex-col bg-white dark:bg-zinc-900 rounded-3xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 p-8 sm:p-10 md:p-12 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
               >
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/10 transition-all duration-700" />
                 
-                <header className="mb-8 relative">
+                <header className="mb-8 relative z-10">
                   <div className="flex flex-wrap gap-2 mb-6">
                     {(Array.isArray(item.category) ? item.category : [item.category]).map(cat => (
                       <span 
                         key={cat} 
-                        className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50"
+                        className="px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50"
                       >
                         {getCategoryName(cat)}
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300">
                     {item.term}
                   </h3>
                 </header>
 
                 <div 
-                  className={`flex-1 prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 mb-8 relative ${fontClasses}`}
+                  className={`flex-1 prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 mb-8 relative z-10 ${fontClasses}`}
                   dangerouslySetInnerHTML={{ __html: item.definition }}
                 />
 
                 {item.analogy && (
-                  <div className="p-8 bg-amber-50/30 dark:bg-amber-900/10 border-2 border-amber-100/50 dark:border-amber-900/20 rounded-[28px] relative group-hover:border-amber-200 transition-all">
+                  <div className="p-6 sm:p-8 bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-200 dark:border-amber-900/30 rounded-3xl relative group-hover:border-amber-300 dark:group-hover:border-amber-800/40 transition-all z-10">
                     <div className="flex items-center gap-2 mb-5 text-amber-600 dark:text-amber-500 font-black text-xs uppercase tracking-[0.2em]">
                       <Lightbulb className="w-4 h-4" />
                       {t.analogyLabel}

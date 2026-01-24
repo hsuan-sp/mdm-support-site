@@ -33,3 +33,26 @@ yarn-error.log*
 .vercel
 .env*.local
 .turbo
+
+# Documentation Specific
+.vitepress/dist
+.vitepress/cache
+
+# Production bundle
+out/
+
+# Vercel
+.vercel
+
+# Turbo
+.turbo
+
+# Misc
+.DS_Store
+
+# Build artifacts and generated files
+*.tsbuildinfo
+*.timestamp-*.mjs
+_generated/
+maintenance/bundles/
+data/logs/

@@ -12,16 +12,44 @@ interface GuideProps {
   allData: QAModule[]
 }
 
-const Guide: React.FC<GuideProps> = ({ allData }) => {
+const Guide: React.FC = () => {
   const router = useRouter()
   const { language: locale } = useLanguage()
   const t = translations[locale as keyof typeof translations]?.guide || translations['zh-TW'].guide
 
+  const [allData, setAllData] = useState<QAModule[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSource, setActiveSource] = useState<string | 'All'>('All')
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
   const [fontScale, setFontScale] = useState(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  
+  // Infinite Scroll State
+  const [visibleCount, setVisibleCount] = useState(20)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true)
+      try {
+        const res = await fetch(`/api/guide?lang=${locale}`)
+        if (res.ok) {
+          const data = await res.json()
+          setAllData(data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch guide data', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchData()
+  }, [locale])
+
+  // Reset visible count on search/filter change
+  useEffect(() => {
+    setVisibleCount(20)
+  }, [searchQuery, activeSource])
 
   // 獲取章節題目數量的輔助函式
   const getChapterCount = useCallback((source: string) => {
@@ -34,7 +62,7 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
     return allData.reduce((total, module) => total + module.sections.reduce((t, s) => t + s.items.length, 0), 0)
   }, [allData])
 
-  const filteredData = useMemo(() => {
+  const filteredFullData = useMemo(() => {
     let baseData = allData
     if (activeSource !== 'All') {
       baseData = allData.filter(m => m.source === activeSource)
@@ -56,6 +84,46 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
     })).filter(module => module.sections.length > 0)
   }, [allData, activeSource, searchQuery])
 
+  // Flatten items for virtualization/pagination
+  const visibleModules = useMemo(() => {
+    let count = 0
+    return filteredFullData.map(module => ({
+      ...module,
+      sections: module.sections.map(section => {
+        const items = section.items
+        const remaining = visibleCount - count
+        if (remaining <= 0) return { ...section, items: [] }
+        
+        const slice = items.slice(0, remaining)
+        count += slice.length
+        return { ...section, items: slice }
+      }).filter(s => s.items.length > 0)
+    })).filter(m => m.sections.length > 0)
+  }, [filteredFullData, visibleCount])
+
+  const hasMore = useMemo(() => {
+    const currentShown = visibleModules.reduce((acc, m) => acc + m.sections.reduce((a, s) => a + s.items.length, 0), 0)
+    const totalFiltered = filteredFullData.reduce((acc, m) => acc + m.sections.reduce((a, s) => a + s.items.length, 0), 0)
+    return currentShown < totalFiltered
+  }, [visibleModules, filteredFullData])
+
+  // Intersection Observer for Infinite Scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setVisibleCount(prev => prev + 20)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    
+    const sentinel = document.getElementById('scroll-sentinel')
+    if (sentinel) observer.observe(sentinel)
+
+    return () => observer.disconnect()
+  }, [hasMore, visibleModules])
+
   // Font scale classes
   const fontClasses = useMemo(() => {
     if (fontScale === 0.8) return 'text-[13px] prose-sm'
@@ -74,7 +142,7 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
 
   const expandAll = () => {
     const allIds = new Set<string>()
-    filteredData.forEach(module => {
+    filteredFullData.forEach(module => {
       module.sections.forEach(section => {
         section.items.forEach(item => allIds.add(item.id))
       })
@@ -170,6 +238,17 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
     </div>
   )
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-pulse flex flex-col items-center">
+          <div className="w-12 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-full mb-4"></div>
+          <div className="w-48 h-4 bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
       {/* Desktop Sidebar */}
@@ -193,9 +272,9 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
           </div>
         )}
 
-        {filteredData.length > 0 ? (
+        {visibleModules.length > 0 ? (
           <div className="space-y-16">
-            {filteredData.map(module => (
+            {visibleModules.map(module => (
               <section key={module.source} id={module.source} className="scroll-mt-32 space-y-8">
                 <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-between border border-blue-100 dark:border-blue-900/30">
                    <h2 className="text-2xl font-black tracking-tight text-[#0071e3] m-0">
@@ -215,29 +294,39 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
                       {section.items.map(item => (
                         <div 
                           key={item.id}
-                          className={`group transition-all duration-500 rounded-[28px] border-2 ${openItems.has(item.id) ? 'bg-white dark:bg-zinc-900 border-blue-500/20 shadow-2xl shadow-blue-500/5' : 'bg-[#fbfbfd] dark:bg-zinc-900/30 border-transparent hover:bg-white dark:hover:bg-zinc-900 hover:border-zinc-100 dark:hover:border-zinc-800'}`}
+                          className={`group transition-all duration-300 rounded-3xl border-2 ${
+                            openItems.has(item.id) 
+                              ? 'bg-white dark:bg-zinc-900 border-blue-500/30 shadow-2xl shadow-blue-500/10' 
+                              : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 hover:shadow-xl'
+                          }`}
                         >
                           <button 
                             onClick={() => toggleItem(item.id)}
-                            className="w-full text-left p-6 md:p-8 flex items-start gap-4 md:gap-6"
+                            className="w-full text-left p-6 sm:p-8 md:p-10 flex items-start gap-4 md:gap-6"
                           >
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                               {item.important && (
-                                <span className="inline-flex items-center px-2 py-0.5 mb-4 bg-[#ff3b30] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-md shadow-lg shadow-red-500/20">
+                                <span className="inline-flex items-center px-2.5 py-1 mb-4 bg-[#ff3b30] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-lg shadow-lg shadow-red-500/20">
                                   {t.important}
                                 </span>
                               )}
-                              <h4 className={`text-lg md:text-2xl font-bold leading-tight transition-colors ${openItems.has(item.id) ? 'text-[#0071e3]' : 'text-[#1d1d1f] dark:text-zinc-100'}`}>
+                              <h4 className={`text-lg sm:text-xl md:text-2xl font-bold leading-tight transition-colors ${
+                                openItems.has(item.id) ? 'text-[#0071e3]' : 'text-[#1d1d1f] dark:text-zinc-100'
+                              }`}>
                                 {item.question}
                               </h4>
                             </div>
-                            <div className={`mt-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 transition-all duration-500 ${openItems.has(item.id) ? 'rotate-180 bg-blue-600 text-white shadow-lg' : 'text-zinc-400'}`}>
-                               <ChevronDown className="w-5 h-5 transition-transform" />
+                            <div className={`mt-1.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                              openItems.has(item.id) 
+                                ? 'rotate-180 bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
+                                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
+                            }`}>
+                               <ChevronDown className="w-5 h-5" />
                             </div>
                           </button>
 
                           {openItems.has(item.id) && (
-                            <div className="px-6 pb-10 pt-0 md:px-12 md:pb-12 animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="px-6 pb-10 pt-0 sm:px-8 md:px-12 md:pb-12 animate-in fade-in slide-in-from-top-2 duration-300">
                               <div 
                                 className={`prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 prose-headings:text-zinc-800 dark:prose-headings:text-zinc-100 ${fontClasses}`}
                                 dangerouslySetInnerHTML={{ __html: item.answer }}
@@ -245,7 +334,7 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
                               {item.tags && item.tags.length > 0 && (
                                 <div className="mt-10 flex flex-wrap gap-2">
                                   {item.tags.map(tag => (
-                                    <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 rounded-full text-[11px] font-bold border border-zinc-100 dark:border-zinc-700">
+                                    <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full text-[11px] font-bold border border-zinc-200 dark:border-zinc-700">
                                       <Tag className="w-3.5 h-3.5" />
                                       {tag}
                                     </span>
@@ -262,6 +351,13 @@ const Guide: React.FC<GuideProps> = ({ allData }) => {
                 </div>
               </section>
             ))}
+            
+            {/* Scroll Sentinel */}
+            {hasMore && (
+              <div id="scroll-sentinel" className="py-8 flex justify-center">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
+              </div>
+            )}
           </div>
         ) : (
           <EmptyState onClear={() => { setSearchQuery(''); setActiveSource('All'); }} actionText={t.clearSearch} />

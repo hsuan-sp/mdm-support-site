@@ -35,14 +35,4 @@ export default {
       toc: false,
     },
   },
-  login: {
-    title: "登入",
-    type: "page",
-    display: "hidden",
-    theme: {
-      layout: "raw",
-      navbar: false,
-      footer: false,
-    },
-  },
 };
