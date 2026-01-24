@@ -26,7 +26,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clerk/nextjs": "6.36.10",
+    "@logto/next": "^4.2.8",
     "lucide-react": "^0.562.0",
     "next": "14.2.35",
     "nextra": "3.3.1",

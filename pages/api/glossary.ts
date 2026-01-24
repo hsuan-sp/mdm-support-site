@@ -1,18 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getAuth } from "@clerk/nextjs/server";
+// Logto 認證將透過 middleware 和 session 處理
 import { getGlossaryData } from "@/lib/data";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { userId } = getAuth(req);
-
-  if (!userId) {
-    return res
-      .status(401)
-      .json({ error: "Unauthorized. Please sign in to access this content." });
-  }
+  // 認證檢查已由 middleware 處理
+  // 如果能到達這裡，表示使用者已通過認證
 
   try {
     const { lang } = req.query;
