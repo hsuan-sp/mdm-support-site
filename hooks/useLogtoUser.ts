@@ -23,7 +23,12 @@ export function useUser() {
       const res = await fetch("/api/logto/user");
       if (res.ok) {
         const userData = await res.json();
-        setUser(userData);
+        // 增強檢查：確保 userData 不是空物件且包含 sub 或 isAuthenticated
+        if (userData && (userData.sub || userData.isAuthenticated)) {
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
       } else {
         setUser(null);
       }
