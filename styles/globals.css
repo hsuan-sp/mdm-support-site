@@ -10,22 +10,22 @@
     --grid-color: rgba(0, 0, 0, 0.02);
     --grid-accent: rgba(0, 0, 0, 0.04);
 
-    /* Fluid Typography System - Smooth scaling across all viewports */
-    --font-xs: clamp(0.625rem, 0.5rem + 0.25vw, 0.75rem); /* 10px → 12px */
-    --font-sm: clamp(0.75rem, 0.65rem + 0.25vw, 0.875rem); /* 12px → 14px */
-    --font-base: clamp(0.875rem, 0.75rem + 0.3vw, 1rem); /* 14px → 16px */
-    --font-lg: clamp(1rem, 0.85rem + 0.35vw, 1.125rem); /* 16px → 18px */
-    --font-xl: clamp(1.125rem, 0.95rem + 0.4vw, 1.25rem); /* 18px → 20px */
-    --font-2xl: clamp(1.25rem, 1rem + 0.5vw, 1.5rem); /* 20px → 24px */
-    --font-3xl: clamp(1.5rem, 1.2rem + 0.6vw, 1.875rem); /* 24px → 30px */
-    --font-4xl: clamp(1.875rem, 1.5rem + 0.8vw, 2.25rem); /* 30px → 36px */
+    /* Fluid Typography System - Refined for better readability */
+    --font-xs: clamp(0.6rem, 0.45rem + 0.2vw, 0.7rem);
+    --font-sm: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+    --font-base: clamp(0.85rem, 0.7rem + 0.25vw, 0.95rem);
+    --font-lg: clamp(0.95rem, 0.8rem + 0.3vw, 1.05rem);
+    --font-xl: clamp(1.05rem, 0.9rem + 0.35vw, 1.15rem);
+    --font-2xl: clamp(1.2rem, 1rem + 0.4vw, 1.35rem);
+    --font-3xl: clamp(1.4rem, 1.1rem + 0.5vw, 1.65rem);
+    --font-4xl: clamp(1.7rem, 1.4rem + 0.7vw, 2.1rem);
 
-    /* Fluid Spacing System */
-    --spacing-xs: clamp(0.25rem, 0.2rem + 0.125vw, 0.375rem); /* 4px → 6px */
-    --spacing-sm: clamp(0.5rem, 0.4rem + 0.25vw, 0.75rem); /* 8px → 12px */
-    --spacing-md: clamp(1rem, 0.8rem + 0.5vw, 1.5rem); /* 16px → 24px */
-    --spacing-lg: clamp(1.5rem, 1.2rem + 0.75vw, 2rem); /* 24px → 32px */
-    --spacing-xl: clamp(2rem, 1.5rem + 1vw, 3rem); /* 32px → 48px */
+    /* Fluid Spacing System - More generous whitespace */
+    --spacing-xs: clamp(0.3rem, 0.25rem + 0.15vw, 0.45rem);
+    --spacing-sm: clamp(0.6rem, 0.5rem + 0.3vw, 0.9rem);
+    --spacing-md: clamp(1.25rem, 1rem + 0.6vw, 1.75rem);
+    --spacing-lg: clamp(2rem, 1.5rem + 1vw, 2.5rem);
+    --spacing-xl: clamp(3rem, 2rem + 2vw, 4.5rem);
   }
 
   .dark {
@@ -297,17 +297,21 @@ button[aria-label*="Menu"],
   display: none !important;
 }
 
-/* Guide 卡片內容字體優化 - 統一大小、減少差異 */
+/* Guide 卡片內容字體優化 - 統一大小、更自然的比例 */
 .prose h1,
-.prose h2,
+.prose h2 {
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+}
+
 .prose h3,
 .prose h4,
 .prose h5,
 .prose h6 {
-  font-size: 1.1rem !important;
+  font-size: 1.05rem !important;
   font-weight: 700 !important;
-  margin-top: 1.2em !important;
-  margin-bottom: 0.6em !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.8em !important;
   line-height: 1.4 !important;
 }
 

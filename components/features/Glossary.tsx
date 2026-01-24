@@ -37,7 +37,7 @@ const Glossary: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [fontScale, setFontScale] = useState(1)
+  const [fontScale, setFontScale] = useState(0.9) // 預設較小字體
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   useEffect(() => {
@@ -194,7 +194,7 @@ const Glossary: React.FC = () => {
             {filteredTerms.map(item => (
               <article 
                 key={item.term}
-                className="group flex flex-col bg-white dark:bg-zinc-900 rounded-3xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 p-8 sm:p-10 md:p-12 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
+                className="group flex flex-col bg-white dark:bg-zinc-900 rounded-3xl border-2 border-zinc-200 dark:border-zinc-800 hover:border-blue-500/20 p-10 sm:p-12 md:p-16 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
               >
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/10 transition-all duration-700" />
                 
@@ -209,7 +209,7 @@ const Glossary: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#1d1d1f] dark:text-zinc-100 group-hover:text-[#0071e3] transition-colors duration-300">
                     {item.term}
                   </h3>
                 </header>
