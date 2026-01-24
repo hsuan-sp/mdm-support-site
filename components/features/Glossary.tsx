@@ -1,12 +1,13 @@
 "use client"
 import React, { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'nextra/hooks'
-import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu, Grid, List as ListIcon, LayoutGrid, SignedIn, SignedOut } from 'lucide-react'
+import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu, Grid, List as ListIcon, LayoutGrid } from 'lucide-react'
 import { GlossaryItem } from '@/types'
 import EmptyState from '@/components/ui/EmptyState'
 
 import { translations } from '@/locales'
 import { useLanguage } from '@/hooks/useLanguage'
+import { useUser } from '@/hooks/useLogtoUser'
 import AuthGate from '../ui/AuthGate'
 
 interface GlossaryProps {
@@ -41,8 +42,11 @@ const Glossary: React.FC = () => {
   const [fontScale, setFontScale] = useState(0.9) 
   const [gridCols, setGridCols] = useState<1 | 2 | 3>(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const { user, isLoading: isAuthLoading } = useUser()
 
   useEffect(() => {
+    if (isAuthLoading || !user) return
+
     const fetchData = async () => {
       setIsLoading(true)
       try {
@@ -58,7 +62,7 @@ const Glossary: React.FC = () => {
       }
     }
     fetchData()
-  }, [locale])
+  }, [locale, user, isAuthLoading])
 
   const getChapterCount = (cat: string) => {
     if (cat === 'All') return data.length
@@ -174,6 +178,9 @@ const Glossary: React.FC = () => {
     </div>
   )
 
+  if (isAuthLoading) return null
+  if (!user) return <AuthGate />
+
   if (isLoading) {
     return (
       <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10 opacity-60">
@@ -192,8 +199,7 @@ const Glossary: React.FC = () => {
 
   return (
     <>
-      <SignedIn>
-        <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
+      <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-[320px] flex-shrink-0 sticky top-28 h-[calc(100vh-8rem)]">
             <SidebarContent />
@@ -307,11 +313,7 @@ const Glossary: React.FC = () => {
               </div>
             </div>
           )}
-        </div>
-      </SignedIn>
-      <SignedOut>
-        <AuthGate />
-      </SignedOut>
+      </div>
     </>
   )
 }
