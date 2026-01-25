@@ -1,13 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { logtoClient } from "@/lib/logto";
 import { getQAData } from "@/lib/data";
+import { isAuthorizedEmail } from "@/lib/auth";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   // 1. 伺服器端安全檢查 (Server-side Security Check)
-  const { isAuthenticated, claims } = await logtoClient.getLogtoContext(
+  // 使用 any 解決型別不匹配
+  const { isAuthenticated, claims } = await (logtoClient as any).getContext(
     req,
     res
   );
@@ -16,19 +18,13 @@ export default async function handler(
     return res.status(401).json({ error: "Unauthorized: Please sign in" });
   }
 
-  const email = (
-    claims.email ||
-    (claims as any).primary_email ||
-    ""
-  ).toLowerCase();
-  const isEdu = /\.edu\.tw$/i.test(email);
-  const isOfficial = /@superinfo\.com\.tw$/i.test(email);
+  const email = claims.email || (claims as any).primary_email;
 
-  if (!isEdu && !isOfficial) {
+  if (!isAuthorizedEmail(email)) {
     console.warn("API direct access blocked for unauthorized domain:", email);
     return res
       .status(403)
-      .json({ error: "Forbidden: Education email required" });
+      .json({ error: "Forbidden: Authorized email required" });
   }
 
   // 2. 安全性標頭：防止敏感數據在本地緩存

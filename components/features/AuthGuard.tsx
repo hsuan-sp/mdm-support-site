@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useUser } from '@/hooks/useLogtoUser'
+import { isAuthorizedEmail } from '@/lib/auth'
 import AuthGate from '../ui/AuthGate'
 import { ShieldCheck } from 'lucide-react'
 
@@ -9,7 +10,7 @@ interface AuthGuardProps {
   children: React.ReactNode
 }
 
-const PUBLIC_ROUTES = ['/', '/404', '/unauthorized', '/api', '/_error']
+const PUBLIC_ROUTES = ['/', '/404', '/unauthorized', '/api', '/_error', '/changelog']
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const router = useRouter()
@@ -36,12 +37,10 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       return
     }
 
-    // 嚴格 Email 白名單檢查 (與 Hook 對齊)
-    const email = (user.primaryEmail || (user as any).email || user.username || '').toLowerCase()
-    const isEdu = /\.edu\.tw$/i.test(email)
-    const isOfficial = /@superinfo\.com\.tw$/i.test(email)
+    // 嚴格 Email 白名單檢查 (與 Hook 及 API 對齊)
+    const email = user.primaryEmail || (user as any).email || user.username || ''
 
-    if (isEdu || isOfficial) {
+    if (isAuthorizedEmail(email)) {
       setIsAuthorized(true)
     } else {
       setIsAuthorized(false)

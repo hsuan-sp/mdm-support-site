@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
+import { isAuthorizedEmail } from "@/lib/auth";
 
 interface LogtoUser {
   sub: string;
@@ -26,15 +27,9 @@ export function useUser() {
         // 增強檢查：確保 userData 不是空物件且包含 sub 或 isAuthenticated
         // 同時執行網域檢查 (Domain Whitelist Enforcement)
         if (userData && (userData.sub || userData.isAuthenticated)) {
-          const email = (
-            userData.primaryEmail ||
-            userData.email ||
-            ""
-          ).toLowerCase();
-          const isEdu = /\.edu\.tw$/i.test(email);
-          const isOfficial = /@superinfo\.com\.tw$/i.test(email);
+          const email = userData.primaryEmail || userData.email || "";
 
-          if (isEdu || isOfficial) {
+          if (isAuthorizedEmail(email)) {
             setUser(userData);
           } else {
             console.warn("Unauthorized domain access attempt:", email);
