@@ -1,15 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import LogtoClient from "@logto/next";
-import { logtoConfig } from "@/lib/logto";
+import { logtoClient } from "@/lib/logto";
 import { getGlossaryData } from "@/lib/data";
 import { isAuthorizedEmail } from "@/lib/auth";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const client = new LogtoClient(logtoConfig);
-  const { isAuthenticated, claims } = await client.getLogtoContext(req, res);
+/**
+ * Glossary API Handler (Pages Router)
+ */
+export default logtoClient.withLogtoApiRoute(async (req, res) => {
+  const { isAuthenticated, claims } = req.user;
 
   if (!isAuthenticated || !claims) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -30,4 +27,4 @@ export default async function handler(
     console.error("[API Glossary Error]", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+});
