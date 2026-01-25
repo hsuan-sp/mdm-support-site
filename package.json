@@ -10,7 +10,7 @@
     "gen-data": "node scripts/build-data.mjs",
     "prebuild": "npm run gen-data",
     "dev": "npm run gen-data && next dev -p 4000",
-    "build": "next build && npx @opennextjs/cloudflare build --skipBuild",
+    "build": "npx patch-package && next build && npx @opennextjs/cloudflare build --skipBuild",
     "build:gh": "npm run gen-data && next build",
     "start": "next start -p 4000",
     "lint": "next lint",
@@ -19,7 +19,8 @@
     "update-bundles": "node scripts/maintenance/generate-bundles.js",
     "fix-markdown": "node scripts/maintenance/unified-formatter.js",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "patch-package" 
   },
   "dependencies": {
     "@logto/next": "^4.2.8",
