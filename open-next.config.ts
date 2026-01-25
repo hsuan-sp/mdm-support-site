@@ -1,7 +1,11 @@
 import type { OpenNextConfig } from '@opennextjs/cloudflare';
 
-const config: OpenNextConfig = {
+const config = {
     default: {
+        // 🔥 關鍵：強制 esbuild 將 jose 視為外部套件
+        buildOptions: {
+            external: ["jose", "node:crypto", "node:buffer"],
+        },
         override: {
             wrapper: "cloudflare-node",
             converter: "edge",
@@ -11,12 +15,8 @@ const config: OpenNextConfig = {
             queue: "dummy",
         },
     },
-
-    // 🚀 這裡就是你的最強武器
-    // 既然 jose 報錯是因為 esbuild 找不到它在 workerd 下的檔案
-    // 我們直接在這裡宣告它為 External，OpenNext 的打包腳本就會跳過它
+    // 這裡也要留著，針對 Middleware
     edgeExternals: ["node:crypto", "node:buffer", "jose"],
-
     middleware: {
         external: true,
         override: {
@@ -30,4 +30,5 @@ const config: OpenNextConfig = {
     },
 };
 
-export default config;
+// 使用 as any 繞過 TS 對於 buildOptions 可能存在的型別報錯
+export default config as any as OpenNextConfig;
