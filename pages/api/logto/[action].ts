@@ -1,8 +1,8 @@
-import LogtoClient from "@logto/next";
+import { handleAuthRoutes } from "@logto/next";
 import { logtoConfig } from "@/lib/logto";
 
 /**
- * Logto Auth Handler - Fixed Standard
- * 每次請求重新實例化以保證 Session 的一致性與獨立性。
+ * Logto Auth Handler (v4 Functional Standard)
+ * 這是對抗 404 與 500 回調錯誤的最佳實踐。
  */
-export default new LogtoClient(logtoConfig).handleAuthRoutes();
+export default handleAuthRoutes(logtoConfig);

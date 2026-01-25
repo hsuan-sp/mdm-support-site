@@ -1,20 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import LogtoClient from "@logto/next";
+import { withLogtoApiRoute } from "@logto/next";
 import { logtoConfig } from "@/lib/logto";
 import { getGlossaryData } from "@/lib/data";
 
 /**
- * Glossary API (High Stability)
+ * Glossary API - v4 Protected Route
  */
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // 伺服器端現場取回 Context
-  const client = new LogtoClient(logtoConfig);
-  const context = await client.getContext(req, res);
-
-  if (!context.isAuthenticated) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // withLogtoApiRoute 會自動將使用者身分注入 req.user
+  if (!req.user.isAuthenticated) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
@@ -28,3 +22,5 @@ export default async function handler(
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export default withLogtoApiRoute(handler, logtoConfig);

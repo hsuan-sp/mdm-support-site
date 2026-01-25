@@ -7,23 +7,28 @@ import { LanguageProvider } from '../hooks/useLanguage'
 import SecurityGuard from '../components/features/SecurityGuard'
 import BackToTop from '../components/ui/BackToTop'
 import Footer from '../components/layout/Footer'
+import { isAuthorizedEmail } from '@/lib/auth'
 
-// 受保護的路徑開頭
+// 定義受保護的路徑 (僅限指南與百科)
 const PROTECTED_PREFIXES = ['/guide', '/glossary']
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [userEmail, setUserEmail] = useState<string | null>(null)
+  
   const getLayout = (Component as any).getLayout || ((page: React.ReactNode) => page)
 
-  // 1. 精確判斷當前頁面是否需要守護
+  // 1. 精確過濾：只有進入受保護路徑才發起身分辨識
   const isProtected = useMemo(() => {
-    return PROTECTED_PREFIXES.some(prefix => router.pathname.startsWith(prefix))
+    // 首頁、公開頁面一律放行
+    if (router.pathname === '/' || router.pathname === '/unauthorized' || router.pathname === '/changelog') return false;
+    return PROTECTED_PREFIXES.some(prefix => router.pathname.startsWith(prefix));
   }, [router.pathname])
 
   useEffect(() => {
-    // 只有在受保護頁面才發起身分檢查，首頁等公開頁面直接放行
+    // 首頁秒開，不發起任何請求
     if (!isProtected) {
       setIsLoading(false)
       return
@@ -35,6 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
         if (res.ok) {
           const user = await res.json()
           setIsAuthenticated(!!(user && user.sub))
+          setUserEmail(user.primaryEmail || user.email || null)
         } else {
           setIsAuthenticated(false)
         }
@@ -50,22 +56,26 @@ export default function App({ Component, pageProps }: AppProps) {
 
   // 2. 授權跳轉邏輯
   useEffect(() => {
-    if (!isLoading && isProtected && !isAuthenticated) {
-      // 導向 Logto 登入畫面
-      window.location.href = '/api/logto/sign-in'
+    if (!isLoading && isProtected) {
+      if (!isAuthenticated) {
+        // 未登入，導向登入頁面
+        window.location.href = '/api/logto/sign-in'
+      } else if (!isAuthorizedEmail(userEmail)) {
+        // 已登入但網域不對
+        router.replace('/unauthorized')
+      }
     }
-  }, [isLoading, isProtected, isAuthenticated])
+  }, [isLoading, isProtected, isAuthenticated, userEmail, router])
 
-  // 3. 渲染守衛畫面：受保護路徑在載入或未授權時，顯示 Loading，防止內容閃爍
-  if (isProtected && (isLoading || !isAuthenticated)) {
+  // 3. 守衛渲染
+  if (isProtected && (isLoading || !isAuthenticated || !isAuthorizedEmail(userEmail))) {
      return (
-       <div className="min-h-screen flex items-center justify-center font-bold text-blue-600 bg-white dark:bg-black">
-         🛡️ 安全守衛加載中...
+       <div className="min-h-screen flex items-center justify-center font-black text-blue-600 bg-white dark:bg-black">
+         🛡️ 安全守衛正在核對您的身分...
        </div>
      )
   }
 
-  // 4. 公開頁面或已授權頁面，正常渲染
   return (
     <LanguageProvider>
       <SecurityGuard />
