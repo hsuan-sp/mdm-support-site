@@ -16,9 +16,9 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const { user, isLoading, isSignedIn } = useUser()
   const [isAuthorized, setIsAuthorized] = useState(false)
 
-  // 檢查是否為公開路由
+  // 檢查是否為公開路由 (確保首頁徹底放行)
   const isPublicRoute = PUBLIC_ROUTES.some(path => 
-    router.pathname === path || router.pathname.startsWith('/api')
+    router.pathname === path || router.pathname.startsWith('/api') || router.asPath === '/'
   )
 
   useEffect(() => {
@@ -36,29 +36,30 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       return
     }
 
-    // 嚴格 Email 白名單檢查
-    const email = user.primaryEmail || (user as any).email || user.username || ''
+    // 嚴格 Email 白名單檢查 (與 Hook 對齊)
+    const email = (user.primaryEmail || (user as any).email || user.username || '').toLowerCase()
     const isEdu = /\.edu\.tw$/i.test(email)
-    const isOfficial = email.endsWith('@superinfo.com.tw')
+    const isOfficial = /@superinfo\.com\.tw$/i.test(email)
 
     if (isEdu || isOfficial) {
       setIsAuthorized(true)
     } else {
       setIsAuthorized(false)
-      // 非法網域，強制踢到 Unauthorized 頁面
-      console.warn('Unauthorized domain detected via Global Guard:', email)
-      router.replace('/unauthorized')
+      if (router.pathname !== '/unauthorized') {
+        console.warn('Unauthorized domain detected via Global Guard:', email)
+        router.replace('/unauthorized')
+      }
     }
   }, [isLoading, user, isPublicRoute, router.pathname])
 
-  // 1. 載入中：顯示全域 Loader，不渲染任何內容
-  if (isLoading) {
-    return <GlobalLoader /> // 或者返回 null
-  }
-
-  // 2. 公開路由：直接渲染內容
+  // 1. 公開路由：優先不檢查身分，實現秒開 (Bypass loading for public routes)
   if (isPublicRoute) {
     return <>{children}</>
+  }
+
+  // 2. 載入中：對受保護頁面顯示全域 Loader
+  if (isLoading) {
+    return <GlobalLoader />
   }
 
   // 3. 受保護路由 & 未登入：顯示 AuthGate

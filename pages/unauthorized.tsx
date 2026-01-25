@@ -18,7 +18,7 @@ const UnauthorizedPage = () => {
         </h1>
         
         <p className="text-zinc-500 dark:text-zinc-400 mb-8 leading-relaxed font-medium">
-          抱歉，此平台僅限使用 <span className="text-blue-600 dark:text-blue-400 font-bold">.edu.tw</span> 教育信箱或是 <span className="text-blue-600 dark:text-blue-400 font-bold">@superinfo.com.tw</span> 官方帳號登入。
+          抱歉，此平台僅限使用 <span className="text-blue-600 dark:text-blue-400 font-bold">.edu.tw</span> 教育信箱登入。
           <br /><br />
           請登出並使用符合資格的帳號重新登入。
         </p>

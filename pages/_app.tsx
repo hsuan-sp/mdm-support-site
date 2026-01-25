@@ -16,8 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <SecurityGuard />
       <AuthGuard>
         {getLayout(<Component {...pageProps} />)}
+        <Footer />
       </AuthGuard>
-      <Footer />
       <BackToTop />
     </LanguageProvider>
   )

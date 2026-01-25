@@ -1,14 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-// Logto 認證將透過 middleware 和 session 處理
+import { logtoClient } from "@/lib/logto";
 import { getQAData } from "@/lib/data";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // 認證檢查已由 middleware 處理
-  // 如果能到達這裡，表示使用者已通過認證
+  // 1. 伺服器端安全檢查 (Server-side Security Check)
+  const { isAuthenticated, claims } = await logtoClient.getContext(req, res);
 
+  if (!isAuthenticated || !claims) {
+    return res.status(401).json({ error: "Unauthorized: Please sign in" });
+  }
+
+  const email = (
+    claims.email ||
+    (claims as any).primary_email ||
+    ""
+  ).toLowerCase();
+  const isEdu = /\.edu\.tw$/i.test(email);
+  const isOfficial = /@superinfo\.com\.tw$/i.test(email);
+
+  if (!isEdu && !isOfficial) {
+    console.warn("API direct access blocked for unauthorized domain:", email);
+    return res
+      .status(403)
+      .json({ error: "Forbidden: Education email required" });
+  }
   try {
     const { lang } = req.query;
     const data = await getQAData(lang === "en" ? "en" : "zh");
