@@ -8,11 +8,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // 1. 伺服器端安全檢查 (Server-side Security Check)
-  // 使用 any 解決型別不匹配
-  const { isAuthenticated, claims } = await (logtoClient as any).getContext(
-    req,
-    res
-  );
+  const context = await logtoClient.getContext(req, res);
+  const { isAuthenticated, claims } = context;
 
   if (!isAuthenticated || !claims) {
     return res.status(401).json({ error: "Unauthorized: Please sign in" });

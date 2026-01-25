@@ -8,16 +8,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // 1. 伺服器端安全檢查 (Server-side Security Check)
-  // 使用 any 斷言解決 SDK 在 Pages Router 型別檢查下的 Property 不存在問題
-  const { isAuthenticated, claims } = await (logtoClient as any).getContext(
-    req,
-    res
-  );
+  // 使用 getContext 獲取 Pages Router 環境下的身分上下文
+  const context = await logtoClient.getContext(req, res);
+  const { isAuthenticated, claims } = context;
 
   if (!isAuthenticated || !claims) {
     return res.status(401).json({ error: "Unauthorized: Please sign in" });
   }
 
+  // 從 claims 中優先提取 email
   const email = claims.email || (claims as any).primary_email;
 
   if (!isAuthorizedEmail(email)) {

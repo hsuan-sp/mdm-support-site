@@ -1,4 +1,4 @@
-import LogtoClient from "@logto/next";
+import LogtoClient, { UserScope } from "@logto/next";
 
 export const logtoConfig = {
   endpoint: process.env.LOGTO_ENDPOINT || "https://36dxrv.logto.app/",
@@ -7,6 +7,7 @@ export const logtoConfig = {
   baseUrl: process.env.LOGTO_BASE_URL || "http://localhost:3000",
   cookieSecret: process.env.LOGTO_COOKIE_SECRET || "",
   cookieSecure: process.env.NODE_ENV === "production",
+  scopes: [UserScope.Email, UserScope.Profile],
 };
 
 export const logtoClient = new LogtoClient(logtoConfig);
