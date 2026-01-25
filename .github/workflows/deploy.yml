@@ -26,29 +26,27 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          # ⚠️ 關鍵修正：移除 cache: npm
-          # 因為倉庫裡沒有 package-lock.json，開啟快取會導致 Actions 報錯崩潰
+          node-version: 22
+          # ✅ 重新啟用快取，因為現在有 package-lock.json 了
+          cache: npm
 
       - name: Install dependencies
-        # 使用 npm install 而非 npm ci，並加上 --force 處理依賴衝突
+        # 有 lock 檔時，npm install --force 會參考 lock 檔並處理依賴衝突
         run: npm install --force
 
       - name: Build with Next.js
-        # 這會依序執行：prebuild (gen-data) -> next build (靜態導出)
-        run: npm run build
+        # 執行專屬 GitHub Pages 的靜態導出指令
+        run: npm run build:gh
         env:
           LOGTO_ENDPOINT: ${{ secrets.LOGTO_ENDPOINT }}
           LOGTO_APP_ID: ${{ secrets.LOGTO_APP_ID }}
           LOGTO_BASE_URL: ${{ secrets.LOGTO_BASE_URL }}
           LOGTO_COOKIE_SECRET: ${{ secrets.LOGTO_COOKIE_SECRET }}
-          # 確保觸發 next.config.js 裡的 isGithubActions 邏輯
           GITHUB_ACTIONS: "true"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Next.js 靜態導出的預設資料夾
           path: out
 
   deploy:
