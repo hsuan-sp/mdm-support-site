@@ -64,7 +64,7 @@ import LogtoClient from "@logto/next/edge";
 在 `pages/api/logto/[action].ts` 以及所有受保護的 API 頂部加入：
 
 ```typescript
-export const runtime = "edge";
+export const runtime = "nodejs";
 ```
 
 ### C. 處理 API 請求 (Request/Response)

@@ -14,10 +14,10 @@ const PUBLIC_ROUTES = ['/', '/404', '/unauthorized', '/api', '/_error', '/change
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const router = useRouter()
-  const { user, isLoading, isSignedIn } = useUser()
+  const { user, isLoading } = useUser()
   const [isAuthorized, setIsAuthorized] = useState(false)
 
-  // 檢查是否為公開路由 (確保首頁徹底放行)
+  // 1. 檢查是否為公開路由
   const isPublicRoute = PUBLIC_ROUTES.some(path => 
     router.pathname === path || router.pathname.startsWith('/api') || router.asPath === '/'
   )
@@ -31,32 +31,43 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       return
     }
 
-    // 如果未登入，顯示 AuthGate (由下方渲染邏輯處理)
+    // 如果未登入，這裡不處理跳轉，交由下方渲染邏輯顯示 AuthGate
     if (!user) {
       setIsAuthorized(false)
       return
     }
 
-    // 嚴格 Email 白名單檢查 (與 Hook 及 API 對齊)
-    const email = user.primaryEmail || (user as any).email || user.username || ''
+    /**
+     * 修正後的 Email 提取邏輯
+     * Logto 的 user 對象中，email 可能存在於不同的欄位
+     * 優先順序：claims.email > primaryEmail > email
+     */
+    const email = (user as any).claims?.email || 
+                  user.primaryEmail || 
+                  (user as any).email || 
+                  '';
 
+    // 進行白名單檢查
     if (isAuthorizedEmail(email)) {
       setIsAuthorized(true)
     } else {
       setIsAuthorized(false)
+      // 避免無限循環檢查
       if (router.pathname !== '/unauthorized') {
-        console.warn('Unauthorized domain detected via Global Guard:', email)
+        console.warn('Unauthorized email detected:', email)
         router.replace('/unauthorized')
       }
     }
-  }, [isLoading, user, isPublicRoute, router.pathname])
+  }, [isLoading, user, isPublicRoute, router.pathname, router])
 
-  // 1. 公開路由：優先不檢查身分，實現秒開 (Bypass loading for public routes)
+  // --- 渲染邏輯 ---
+
+  // A. 公開路由：優先不檢查身分，實現秒開
   if (isPublicRoute) {
     return <>{children}</>
   }
 
-  // 2. 載入中：對受保護頁面顯示品牌加載畫面
+  // B. 載入中：對受保護頁面顯示品牌加載畫面
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-black">
@@ -73,22 +84,22 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     )
   }
 
-  // 3. 受保護路由 & 未登入：顯示 AuthGate
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <AuthGate />
-      </div>
-    )
-  }
-
-  // 4. 受保護路由 & 已登入 & 已授權：渲染內容
-  if (isAuthorized) {
+  // C. 已登入且通過白名單檢查
+  if (user && isAuthorized) {
     return <>{children}</>
   }
 
-  // 5. 受保護路由 & 已登入 & 未授權 (跳轉中)：不渲染內容
-  return null
+  // D. 已登入但「未」通過白名單：由 useEffect 處理跳轉，此處返回空避免閃爍
+  if (user && !isAuthorized) {
+    return null
+  }
+
+  // E. 受保護路由 & 未登入：顯示 AuthGate
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <AuthGate />
+    </div>
+  )
 }
 
 export default AuthGuard

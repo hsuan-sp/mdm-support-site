@@ -1,22 +1,16 @@
-import LogtoClient from "@logto/next/edge";
-import { UserScope } from "@logto/next/edge";
+// lib/logto.ts
+import LogtoClient from "@logto/next";
 
-/**
- * Logto Configuration & Client for Cloudflare Pages (Edge Runtime)
- * 使用 @logto/next/edge 並建立全域實例，符合 Edge 執行環境規範。
- */
 export const logtoConfig = {
-  endpoint: process.env.LOGTO_ENDPOINT || "https://36dxrv.logto.app/",
-  appId: process.env.LOGTO_APP_ID || "gkv7y7qb9hts3wib55g46",
-  appSecret: process.env.LOGTO_APP_SECRET || "",
-  baseUrl: process.env.LOGTO_BASE_URL || "http://localhost:3000",
-  cookieSecret:
-    process.env.LOGTO_COOKIE_SECRET ||
-    "complex_secret_for_logto_session_32_chars",
+  endpoint: process.env.LOGTO_ENDPOINT!,
+  appId: process.env.LOGTO_APP_ID!,
+  appSecret: process.env.LOGTO_APP_SECRET!,
+  baseUrl: process.env.LOGTO_BASE_URL!,
+  cookieSecret: process.env.LOGTO_COOKIE_SECRET!,
   cookieSecure: process.env.NODE_ENV === "production",
+  // 建議明確加上路徑與 SameSite 設定，防止跨域遺失 Cookie
   cookiePath: "/",
-  scopes: [UserScope.Email, UserScope.Profile],
+  scopes: ["email", "profile", "offline_access"], // 加上 offline_access 確保 session 持久
 };
 
-// 建立 Edge 相容的 LogtoClient
 export const logtoClient = new LogtoClient(logtoConfig);

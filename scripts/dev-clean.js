@@ -11,7 +11,7 @@ import { promisify } from "util";
 
 const execPromise = promisify(exec);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const isWindows = process.platform === "win32";
 
 console.log("\x1b[36m🔍 Checking for processes on port %d...\x1b[0m", PORT);

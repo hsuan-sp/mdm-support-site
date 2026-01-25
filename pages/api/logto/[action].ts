@@ -1,40 +1,35 @@
 import { logtoClient } from "@/lib/logto";
-import { type NextRequest } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export const runtime = "edge";
+// 1. 確保這是 nodejs，以便讀取檔案系統
+export const runtime = "nodejs";
 
 /**
- * Logto Auth API Handler for Edge Runtime
- * 由於 @logto/next/edge 不提供 handleAuthRoutes，我們需手動導流不同動作。
+ * Logto Auth API Handler - Pages Router Node.js 版
  */
-export default async function handler(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const action = searchParams.get("action");
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // 2. 在 Pages Router 中，action 是從 query 取得，而非 URL 物件
+  const { action } = req.query;
 
   try {
     switch (action) {
       case "sign-in":
-        return await logtoClient.handleSignIn()(req);
+        return await logtoClient.handleSignIn()(req, res);
       case "sign-in-callback":
-        return await logtoClient.handleSignInCallback()(req);
+        return await logtoClient.handleSignInCallback()(req, res);
       case "sign-out":
-        return await logtoClient.handleSignOut()(req);
+        return await logtoClient.handleSignOut()(req, res);
       case "user":
-        return await logtoClient.handleUser()(req);
+        // 這裡會回傳當前使用者資訊
+        return await logtoClient.handleUser()(req, res);
       default:
-        return new Response(null, { status: 404 });
+        res.status(404).end();
     }
   } catch (error: any) {
-    console.error("[Logto Edge API Error]", error);
-    return new Response(
-      JSON.stringify({
-        error: "Authentication Error",
-        message: error.message,
-      }),
-      {
-        status: 500,
-        headers: { "content-type": "application/json" },
-      }
-    );
+    console.error("[Logto API Error]", error);
+    res.status(500).json({
+      error: "Authentication Error",
+      message: error.message,
+    });
   }
 }

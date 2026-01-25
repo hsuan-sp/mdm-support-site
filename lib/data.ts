@@ -1,6 +1,5 @@
 import MarkdownIt from "markdown-it";
-import fs from "node:fs";
-import path from "node:path";
+// 注意：移除了這裡的 node:fs 和 node:path 靜態引用
 import matter from "gray-matter";
 
 const md = new MarkdownIt({
@@ -86,6 +85,13 @@ const EN_SOURCE_TITLE_MAP: Record<string, string> = {
 };
 
 export async function getQAData(locale: string = "zh-TW") {
+  // 1. 環境檢查：如果是瀏覽器端，直接回傳空陣列
+  if (typeof window !== "undefined") return [];
+
+  // 2. 動態引入 Node.js 模組 (這樣 Webpack 就不會在客戶端打包時報錯)
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+
   const root = path.resolve(
     process.cwd(),
     "md_data",
@@ -151,6 +157,13 @@ export async function getQAData(locale: string = "zh-TW") {
 }
 
 export async function getGlossaryData(locale: string = "zh-TW") {
+  // 1. 環境檢查
+  if (typeof window !== "undefined") return [];
+
+  // 2. 動態引入 Node.js 模組
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+
   const root = path.resolve(
     process.cwd(),
     "md_data",
@@ -201,6 +214,13 @@ export async function getGlossaryData(locale: string = "zh-TW") {
 }
 
 export async function getChangelogData(locale: string = "zh-TW") {
+  // 1. 環境檢查
+  if (typeof window !== "undefined") return [];
+
+  // 2. 動態引入 Node.js 模組
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+
   const isEn = locale === "en";
   const root = path.resolve(
     process.cwd(),
