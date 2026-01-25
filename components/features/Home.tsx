@@ -1,6 +1,8 @@
 "use client"
+
 import React from 'react'
-import { useRouter } from 'nextra/hooks'
+// ✅ Nextra 4 / App Router 下必須從 next/navigation 引入 useRouter
+import { useRouter } from 'next/navigation'
 import { 
   User, Package, Smartphone, GraduationCap, Apple, Wrench, Monitor, HelpCircle, Book,
   ArrowRight, ChevronRight
@@ -11,12 +13,15 @@ import { useLanguage } from '@/hooks/useLanguage'
 const Home: React.FC = () => {
   const router = useRouter()
   const { language: locale } = useLanguage()
+  
+  // 取得對應語言的翻譯資料
   const t = translations[locale as keyof typeof translations]?.home || translations['zh-TW'].home
 
   const handleRoute = (id: string) => {
     if (id === 'glossary') {
       router.push('/glossary')
     } else {
+      // 在 App Router 中，push 帶 hash 的路徑依然有效
       router.push(`/guide#${id}`)
     }
   }

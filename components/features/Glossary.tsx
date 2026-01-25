@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useMemo, useEffect } from 'react'
-import { useRouter } from 'nextra/hooks' // 確保這是正確的 import
 import { Search, X, Lightbulb, SortAsc, SortDesc, Filter, Grid, List as ListIcon, LayoutGrid } from 'lucide-react'
 import { GlossaryItem } from '@/types'
 import EmptyState from '@/components/ui/EmptyState'
@@ -208,7 +207,7 @@ const Glossary: React.FC = () => {
     <>
       <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
           {/* Desktop Sidebar */}
-          <aside className="hidden lg:block w-[320px] flex-shrink-0 sticky top-28 h-[calc(100vh-8rem)]">
+          <aside className="hidden lg:block w-[320px] shrink-0 sticky top-28 h-[calc(100vh-8rem)]">
             <SidebarContent />
           </aside>
 
@@ -221,7 +220,7 @@ const Glossary: React.FC = () => {
               </div>
               <button 
                 onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
-                className="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.1em] text-[#0071e3] transition-all active:scale-95"
+                className="flex items-center gap-2 text-[13px] font-black uppercase tracking-widest text-[#0071e3] transition-all active:scale-95"
               >
                 {sortOrder === 'asc' ? <SortAsc className="w-4 h-4" /> : <SortDesc className="w-4 h-4" />}
                 {sortOrder === 'asc' ? t.sortAZ : t.sortZA}
@@ -299,7 +298,7 @@ const Glossary: React.FC = () => {
 
           {/* Mobile Drawer Overlay */}
           {isDrawerOpen && (
-            <div className="fixed inset-0 z-[100] lg:hidden">
+            <div className="fixed inset-0 z-100 lg:hidden">
               <div 
                 className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-in fade-in duration-300" 
                 onClick={() => setIsDrawerOpen(false)} 

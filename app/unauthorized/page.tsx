@@ -1,10 +1,16 @@
+"use client"
 import React from 'react';
 import Link from 'next/link';
 import { Home, LogOut } from 'lucide-react';
-import { useUser } from '@/hooks/useLogtoUser';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const UnauthorizedPage = () => {
-  const { signOut } = useUser();
+  const { t } = useLanguage();
+
+  // ⚠️ 呼叫原子化的登出路由
+  const handleSignOut = () => {
+    window.location.href = '/api/logto/sign-out';
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-zinc-50 dark:bg-black">
@@ -25,7 +31,7 @@ const UnauthorizedPage = () => {
 
         <div className="flex flex-col gap-3">
           <button 
-            onClick={signOut}
+            onClick={handleSignOut}
             className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 active:scale-95 transition-all shadow-lg shadow-red-500/20"
           >
             <LogOut className="w-4 h-4" />

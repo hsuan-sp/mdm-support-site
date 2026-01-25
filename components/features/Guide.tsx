@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
-import { useRouter } from 'nextra/hooks'
 import { Search, ChevronDown, Tag, AlertCircle, X, ChevronRight, Menu, Maximize2, Minimize2, Settings2, Filter } from 'lucide-react'
 import { QAModule } from '../../types'
 import EmptyState from '../../components/ui/EmptyState'
@@ -272,7 +271,7 @@ const Guide: React.FC = () => {
     <>
       <div className="flex flex-col lg:flex-row gap-0 lg:gap-12 py-10">
           {/* Desktop Sidebar */}
-          <aside className="hidden lg:block w-[320px] flex-shrink-0 sticky top-28 h-[calc(100vh-8rem)]">
+          <aside className="hidden lg:block w-[320px] shrink-0 sticky top-28 h-[calc(100vh-8rem)]">
             <SidebarContent />
           </aside>
 
@@ -336,7 +335,7 @@ const Guide: React.FC = () => {
                                     {item.question}
                                   </h4>
                                 </div>
-                                <div className={`mt-1.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                                <div className={`mt-1.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                                   openItems.has(item.id) 
                                     ? 'rotate-180 bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
                                     : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
@@ -400,7 +399,7 @@ const Guide: React.FC = () => {
 
           {/* Mobile Drawer Overlay */}
           {isDrawerOpen && (
-            <div className="fixed inset-0 z-[100] lg:hidden">
+            <div className="fixed inset-0 z-100 lg:hidden">
               <div 
                 className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-in fade-in duration-300" 
                 onClick={() => setIsDrawerOpen(false)} 

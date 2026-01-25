@@ -2,30 +2,32 @@
   "compilerOptions": {
     /* 1. 現代化語法與相容性 */
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    
     /* 2. 允許 JS 與 JSON (您的專案關鍵需求) */
     "allowJs": true,
-    "resolveJsonModule": true, 
+    "resolveJsonModule": true,
     "esModuleInterop": true,
-    
     /* 3. 嚴格模式與檔案系統安全性 */
     "strict": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true, 
-    
+    "forceConsistentCasingInFileNames": true,
     /* 4. Next.js 建置優化 */
     "noEmit": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    
+    "jsx": "react-jsx",
     /* 5. 路徑別名 */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "plugins": [
       {
@@ -38,7 +40,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "scripts/**/*.mjs" 
+    "scripts/**/*.mjs",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

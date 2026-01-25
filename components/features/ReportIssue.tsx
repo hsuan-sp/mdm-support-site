@@ -1,11 +1,13 @@
+"use client" // ✅ 1. 必須加入，因為使用了 Hooks 和 DOM 操作
+
 import React, { useState, useMemo, useEffect } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation' // ✅ 2. App Router 必須改用 navigation
 import { useConfig } from 'nextra-theme-docs'
 import { createPortal } from 'react-dom'
 import { Mail, Copy, X, FileText, Check } from 'lucide-react'
 
-// 1. 複製按鈕小元件 (帶有狀態回饋)
+// 1. 複製按鈕小元件 (保持不變)
 const CopyButton = ({ text, label, icon: Icon }: { text: string, label: string, icon: any }) => {
   const [copied, setCopied] = useState(false)
 
@@ -33,8 +35,11 @@ const CopyButton = ({ text, label, icon: Icon }: { text: string, label: string, 
 
 const ReportIssue = () => {
   const { language } = useLanguage()
-  const router = useRouter()
-  const config = useConfig()
+  const pathname = usePathname() // ✅ 3. 取代原本的 router.asPath
+  
+  // ✅ 4. 使用 any 繞過 TS(2339)，因為 Nextra 4 的 LayoutContext 型別尚未完全對齊 App Router
+  const config = useConfig() as any 
+  
   const [showDialog, setShowDialog] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -54,12 +59,12 @@ const ReportIssue = () => {
 
   const t = useMemo(() => {
     const isZh = language === 'zh-TW'
-    const pageTitle = config.title || 'Untitled'
     
-    // 客戶端 URL 偵測
+    // ✅ 5. Nextra 4 取得標題的安全路徑
+    const pageTitle = config?.normalizePagesResult?.activeMetadata?.title || 'Untitled'
+    
     const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
 
-    // 類別偵測
     let category = isZh ? '一般頁面' : 'General'
     if (currentUrl.includes('/glossary/')) category = isZh ? '術語表' : 'Glossary'
     if (currentUrl.includes('/qa/')) category = isZh ? '問答庫' : 'Q&A'
@@ -114,13 +119,12 @@ Description:
           close: 'Close',
           template: unifiedBody,
         }
-  }, [language, config.title, router.asPath])
+  }, [language, config, pathname]) // ✅ 6. 依賴項更新為 pathname
 
   const openReport = (e: React.MouseEvent) => {
     e.preventDefault()
     window.location.href = t.mailtoLink
     
-    // 如果 Mail 客戶端沒有開啟，短暫延遲後顯示對話框
     setTimeout(() => {
       setShowDialog(true)
     }, 800)
@@ -141,7 +145,7 @@ Description:
 
       {showDialog && createPortal(
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
           onClick={() => setShowDialog(false)}
           role="dialog"
           aria-modal="true"
@@ -168,7 +172,6 @@ Description:
             </p>
 
             <div className="space-y-5 mb-6">
-              {/* Email Section - 這裡是原本報錯的地方，已修正 */}
               <div>
                 <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Email</label>
                 <div className="flex items-center gap-2">
@@ -181,11 +184,10 @@ Description:
                 </div>
               </div>
 
-              {/* Template Section */}
               <div>
                 <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Template</label>
                 <div className="flex flex-col gap-2">
-                  <pre className="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-lg text-xs font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap max-h-[200px] overflow-y-auto custom-scrollbar select-all">
+                  <pre className="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-lg text-xs font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap max-h-50 overflow-y-auto custom-scrollbar select-all">
                     {t.template}
                   </pre>
                   <CopyButton text={t.template} label={t.copyTemplate} icon={FileText} />
@@ -209,4 +211,4 @@ Description:
   )
 }
 
-export default ReportIssue
+export default ReportIssue;

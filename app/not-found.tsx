@@ -1,15 +1,14 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import { Home, AlertCircle, ArrowLeft } from 'lucide-react'
 import { useLanguage } from '@/hooks/useLanguage'
-import { translations } from '@/locales'
 
-export default function Custom404() {
-  const { language } = useLanguage()
-  const t = translations[language as keyof typeof translations]?.error404 || translations['zh-TW'].error404
+export default function NotFound() {
+  const { t } = useLanguage()
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6">
+    <div className="min-h-[80vh] flex items-center justify-center px-6 bg-white dark:bg-black">
       <div className="max-w-md w-full text-center">
         {/* Animated Error Icon */}
         <div className="relative inline-block mb-8">
@@ -23,11 +22,11 @@ export default function Custom404() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-4 tracking-tight">
-          {t.title}
+          {t.error404.title}
         </h1>
         <p 
           className="text-zinc-500 dark:text-zinc-400 font-bold mb-10 leading-relaxed text-lg"
-          dangerouslySetInnerHTML={{ __html: t.subtitle }}
+          dangerouslySetInnerHTML={{ __html: t.error404.subtitle }}
         />
 
         <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
@@ -36,14 +35,14 @@ export default function Custom404() {
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-[15px] hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 active:scale-95"
           >
             <Home className="w-4 h-4" />
-            {t.backHome}
+            {t.error404.backHome}
           </Link>
           <button 
             onClick={() => window.history.back()}
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-2xl font-black text-[15px] hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95 border border-zinc-200 dark:border-zinc-700"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t.backPrev}
+            {t.error404.backPrev}
           </button>
         </div>
 

@@ -1,43 +1,40 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
-import { isAuthorizedEmail } from "@/lib/auth";
 
 interface LogtoUser {
   sub: string;
-  email: string;
-  isAuthenticated: boolean;
+  email?: string;
+  name?: string;
 }
 
 interface UserContextType {
   user: LogtoUser | null;
+  isAuthenticated: boolean;
   isLoading: boolean;
-  isSignedIn: boolean;
-  isAuthorized: boolean;
-  signIn: () => void;
+  signIn: (redirectPath?: string) => void;
   signOut: () => void;
-  recheck: () => Promise<void>;
+  revalidate: () => Promise<void>; // 新增：手動刷新使用者狀態
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<LogtoUser | null>(null);
+  const [data, setData] = useState<{user: LogtoUser | null, auth: boolean}>({ user: null, auth: false });
   const [isLoading, setIsLoading] = useState(true);
   const hasFetched = useRef(false);
 
-  const checkAuth = useCallback(async () => {
+  const fetchUser = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const res = await fetch("/api/logto/user", { cache: 'no-store' });
-      if (res.ok) {
-        const userData = await res.json();
-        if (userData.isAuthenticated && userData.email) {
-          setUser(userData);
-        } else {
-          setUser(null);
-        }
-      }
-    } catch (error) {
-      setUser(null);
+      // 確保路徑與你的 API 檔案結構一致 (app/api/logto/user/route.ts)
+      const res = await fetch("/api/logto/user", {
+        cache: 'no-store', // Next.js 16 強制不快取驗證請求
+      }); 
+      if (!res.ok) throw new Error("Unauthorized");
+      const json = await res.json();
+      setData({ user: json.user || null, auth: !!json.isAuthenticated });
+    } catch (err) {
+      setData({ user: null, auth: false });
     } finally {
       setIsLoading(false);
     }
@@ -45,32 +42,41 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (!hasFetched.current) {
-      checkAuth();
+      fetchUser();
       hasFetched.current = true;
     }
-  }, [checkAuth]);
+  }, [fetchUser]);
 
-  const signIn = () => (window.location.href = "/api/logto/sign-in");
-  const signOut = () => (window.location.href = "/api/logto/sign-out");
-
-  const value = {
-    user,
-    isLoading,
-    isSignedIn: !!user?.isAuthenticated,
-    isAuthorized: user ? isAuthorizedEmail(user.email) : false,
-    signIn,
-    signOut,
-    recheck: checkAuth,
+  const signIn = (redirectPath?: string) => {
+    // 💡 關鍵修正：Next.js 16 下，確保拿到的是絕對路徑的 pathname
+    // 如果沒傳，則抓當前 window.location.pathname
+    const path = redirectPath || window.location.pathname;
+    
+    // 強制導向到 API Route，這會觸發我們手動拼湊 redirect_uri 的後端邏輯
+    const target = `/api/logto/sign-in?redirect=${encodeURIComponent(path)}`;
+    window.location.href = target;
   };
 
-  return <UserContext.Provider value={ value }> { children } </UserContext.Provider>;
+  const signOut = () => {
+    window.location.href = '/api/logto/sign-out';
+  };
+
+  return (
+    <UserContext.Provider value={{ 
+      user: data.user, 
+      isAuthenticated: data.auth,
+      isLoading, 
+      signIn, 
+      signOut,
+      revalidate: fetchUser
+    }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
-// 匯出 Hook 供組件使用
-export function useUser() {
+export const useUser = () => {
   const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useUser must be used within a UserProvider");
-  }
+  if (!context) throw new Error("useUser must be used within UserProvider");
   return context;
-}
+};

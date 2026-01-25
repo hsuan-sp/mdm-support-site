@@ -1,0 +1,129 @@
+/* 1. 核心匯入：v4 專用語法 */
+@import "tailwindcss";
+
+/* 2. 物理隔離：防止 Nextra 內部層級衝突 */
+@import "../node_modules/nextra-theme-docs/dist/style.css" layer(base);
+
+/* 3. v4 設計系統配置 */
+/* 3. v4 設計系統配置 */
+@theme {
+  /* v4 建議使用 kebab-case 且直接定義在 theme 命名空間下 */
+  --font-sans: "Inter", "Noto Sans TC", -apple-system, sans-serif;
+  
+  /* 原版變數對接 */
+  --color-grid-subtle: rgba(0, 0, 0, 0.02);
+  --color-grid-accent: rgba(0, 0, 0, 0.04);
+  
+  /* Fluid 字體系統：v4 建議將自定義值對應到命名空間 */
+  --text-fluid-xs: clamp(0.6rem, 0.45rem + 0.2vw, 0.7rem);
+  --text-fluid-4xl: clamp(1.7rem, 1.4rem + 0.7vw, 2.1rem);
+  
+  /* 如果要在 @theme 內定義原生變數，需確保不與內建命名衝突 */
+  --spacing-fluid-md: clamp(1.25rem, 1rem + 0.6vw, 1.75rem);
+}
+
+/* 4. 全域基礎樣式 (不使用 @apply 以避免報錯) */
+@layer base {
+  :root {
+    --nextra-primary-hue: 210deg;
+    --nextra-primary-saturation: 100%;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 0.875rem + 0.15vw, 16px);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: white;
+    color: rgb(24, 24, 27); /* zinc-900 */
+    -webkit-font-smoothing: antialiased;
+    
+    /* 原版背景漸變 */
+    background:
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.06), transparent 40%),
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 32px 32px;
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-color: rgb(9, 9, 11); /* zinc-950 */
+    color: rgb(244, 244, 245); /* zinc-100 */
+    background:
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1), transparent 50%),
+      radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  }
+}
+
+/* 5. 組件樣式 (修正 !important 與 @apply 報錯) */
+@layer components {
+  /* Apple-style Navbar */
+  .nextra-nav-container {
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    background-color: rgba(255, 255, 255, 0.72) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    height: 4rem !important;
+  }
+
+  .dark .nextra-nav-container {
+    background-color: rgba(0, 0, 0, 0.72) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* 側邊欄按鈕 (移除所有 @apply 以換取穩定性) */
+  .sidebar-btn {
+    position: relative;
+    overflow: hidden;
+    padding: 0.875rem 1.25rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s ease-out;
+    border: 1px solid transparent;
+  }
+
+  .sidebar-btn:hover {
+    background-color: rgba(244, 244, 245, 1);
+    transform: translateX(4px);
+  }
+
+  .sidebar-btn-active {
+    background-color: rgb(37, 99, 235) !important;
+    color: white !important;
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.2);
+  }
+
+  /* 強制隱藏 UI */
+  .nextra-sidebar-container,
+  .nextra-hamburger {
+    display: none !important;
+  }
+
+  /* Typography */
+  .prose p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: rgb(82, 82, 91); /* zinc-600 */
+  }
+}
+
+/* 6. 功能性樣式 */
+@layer utilities {
+  .text-fluid-4xl { font-size: var(--font-size-fluid-4xl); }
+  
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: #e5e5e5;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}

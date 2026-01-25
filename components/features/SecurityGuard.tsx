@@ -1,6 +1,8 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+// ✅ 在 App Router 下，必須改用 next/navigation
+import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/hooks/useLanguage'
 
 const SecurityGuard: React.FC = () => {
@@ -8,16 +10,17 @@ const SecurityGuard: React.FC = () => {
   const { language, setLanguage } = useLanguage()
   const [isMounted, setIsMounted] = useState(false)
 
+  // 1. 處理掛載狀態，防止 Hydration 錯誤
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  // 1. Language Auto-Redirect (Only once per session)
+  // 2. 語系自動導向 (僅限 Session 首次啟動)
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (typeof window === "undefined" || !isMounted) return
 
     const checkLanguageRedirect = () => {
-      const userLang = navigator.language || (navigator as any).userLanguage || ""
+      const userLang = navigator.language || ""
       const isChinese = userLang.toLowerCase().startsWith("zh")
       const hasRedirected = sessionStorage.getItem("lang-redirect-checked")
 
@@ -29,44 +32,42 @@ const SecurityGuard: React.FC = () => {
     }
 
     checkLanguageRedirect()
-  }, [language, setLanguage])
+  }, [language, setLanguage, isMounted])
 
-  // 2. Security Event Listeners
+  // 3. 安全事件監聽 (右鍵、快捷鍵、複製、拖曳)
   useEffect(() => {
+    if (!isMounted) return
+
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault()
-      return false
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // ✅ 使用 e.key 取代 e.keyCode (更好的跨平台支援)
+      const ctrlOrMeta = e.ctrlKey || e.metaKey
+      
       const isForbidden =
-        e.keyCode === 123 || // F12
-        ((e.ctrlKey || e.metaKey) && e.keyCode === 85) || // Ctrl+U
-        ((e.ctrlKey || e.metaKey) && e.keyCode === 83) || // Ctrl+S
-        ((e.ctrlKey || e.metaKey) && e.keyCode === 80) || // Ctrl+P
-        ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-        ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
-        ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-        (e.metaKey && e.altKey && e.keyCode === 73) // Mac Opt+Cmd+I
+        e.key === 'F12' ||
+        (ctrlOrMeta && e.key === 'u') || // 查看原始碼
+        (ctrlOrMeta && e.key === 's') || // 儲存網頁
+        (ctrlOrMeta && e.key === 'p') || // 列印
+        (ctrlOrMeta && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || // 開發者工具
+        (e.metaKey && e.altKey && e.key === 'i') // Mac DevTools
 
       if (isForbidden) {
         e.preventDefault()
         e.stopPropagation()
-        return false
       }
     }
 
     const handleCopy = (e: ClipboardEvent) => {
-      e.preventDefault()
       const msg = "🔒 本站內容受技術保護，禁止複製或側錄。\n\n如需引用，請聯繫：hsuan@superinfo.com.tw"
-      if (e.clipboardData) {
-        e.clipboardData.setData("text/plain", msg)
-      }
+      e.clipboardData?.setData("text/plain", msg)
+      e.preventDefault()
     }
 
     const handleDragStart = (e: DragEvent) => {
       e.preventDefault()
-      return false
     }
 
     document.addEventListener("contextmenu", handleContextMenu)
@@ -80,50 +81,39 @@ const SecurityGuard: React.FC = () => {
       document.removeEventListener("copy", handleCopy)
       document.removeEventListener("dragstart", handleDragStart)
     }
-  }, [])
+  }, [isMounted])
 
-  // 3. DevTools & Crawler Detection
+  // 4. 開發者工具與自動化偵測
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') return // Don't annoy dev in localhost
+    if (process.env.NODE_ENV === 'development' || !isMounted) return
 
     let devtoolsOpen = false
     const detectDevTools = () => {
       const threshold = 160
-      const widthThreshold = window.outerWidth - window.innerWidth > threshold
-      const heightThreshold = window.outerHeight - window.innerHeight > threshold
+      const isDevToolsOpen = 
+        window.outerWidth - window.innerWidth > threshold || 
+        window.outerHeight - window.innerHeight > threshold
       
-      if (widthThreshold || heightThreshold) {
+      if (isDevToolsOpen) {
         if (!devtoolsOpen) {
           devtoolsOpen = true
-          // Only log once to avoid spamming
           console.clear()
           console.log("%c⚠️ 警告 Warning", "color: red; font-size: 40px; font-weight: bold;")
-          console.log("%c請勿在此貼上或執行任何代碼！\nDo not paste or run any code here!", "font-size: 16px;")
+          console.log("%c請勿在此執行任何指令！", "font-size: 16px;")
         }
       } else {
         devtoolsOpen = false
       }
     }
 
-    const detectCrawler = () => {
-      const userAgent = navigator.userAgent.toLowerCase()
-      const isSuspicious = 
-        !navigator.webdriver && 
-        /headless|phantom|selenium|puppeteer|chromium/i.test(userAgent)
-
-      if (isSuspicious || navigator.webdriver) {
-        console.warn("🤖 Automation Detected")
-      }
-    }
-
-    const intervalId = setInterval(detectDevTools, 2000) // Reduced frequency for performance
-    detectCrawler()
-
+    const intervalId = setInterval(detectDevTools, 2000)
     return () => clearInterval(intervalId)
-  }, [])
+  }, [isMounted])
 
-  // 4. Inject Global Styles (Cleanly)
+  // 5. 注入全局 CSS (禁止選擇與列印保護)
   useEffect(() => {
+    if (!isMounted) return
+
     const styleId = 'security-guard-styles'
     if (!document.getElementById(styleId)) {
       const style = document.createElement('style')
@@ -131,48 +121,26 @@ const SecurityGuard: React.FC = () => {
       style.innerHTML = `
         body {
           -webkit-user-select: none !important;
-          -moz-user-select: none !important;
-          -ms-user-select: none !important;
           user-select: none !important;
         }
-        /* Allow selection in inputs */
         input, textarea, [contenteditable="true"] {
           -webkit-user-select: text !important;
-          -moz-user-select: text !important;
-          -ms-user-select: text !important;
           user-select: text !important;
         }
-        /* Hide print */
         @media print {
           body { display: none !important; }
         }
       `
       document.head.appendChild(style)
     }
-    return () => {
-      const style = document.getElementById(styleId)
-      if (style) style.remove()
-    }
-  }, [])
+  }, [isMounted])
 
   if (!isMounted) return null
 
-  // Geometric Watermark rendered via React Portal or simply fixed div
-  // Using pure React JSX instead of dangerously injecting HTML string
   return (
     <div 
       id="geometric-watermark" 
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 0,
-        userSelect: 'none',
-        mixBlendMode: 'multiply' // Better blending
-      }}
+      className="fixed inset-0 pointer-events-none z-0 select-none mix-blend-multiply dark:mix-blend-overlay"
       aria-hidden="true"
     >
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
