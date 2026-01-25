@@ -1,12 +1,16 @@
 // open-next.config.ts
-import { type Node, type Function, type Bundle } from 'open-next/types';
 
+// 這裡不需要任何 import
 export default {
+    // 1. 設定預設的 function
+    default: {},
+
+    // 2. 新增一個 functions 區塊，明確告訴 OpenNext 我們要用 Edge
     functions: {
-        // 'default' 指的是所有 API Routes 和 pages
-        default: {
-            // 強制所有 function 在 Cloudflare Edge 上運行
+        edge: {
+            // 3. 強制所有路由 (*) 都跑在 edge runtime
             runtime: "edge",
+            patterns: ["*"],
         },
     },
 };
