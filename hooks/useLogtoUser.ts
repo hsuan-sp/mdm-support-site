@@ -24,6 +24,12 @@ export function useUser() {
       const res = await fetch("/api/logto/user");
       if (res.ok) {
         const userData = await res.json();
+        // 加入前端偵錯日誌
+        console.log(
+          "[Auth Hook Debug] User metadata:",
+          JSON.stringify(userData)
+        );
+
         // 增強檢查：確保 userData 不是空物件且包含 sub 或 isAuthenticated
         // 同時執行網域檢查 (Domain Whitelist Enforcement)
         if (userData && (userData.sub || userData.isAuthenticated)) {

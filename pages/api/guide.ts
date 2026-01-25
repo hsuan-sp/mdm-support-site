@@ -8,17 +8,30 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // 1. 伺服器端安全檢查 (Server-side Security Check)
-  const context = await logtoClient.getContext(req, res);
+  // 使用 getLogtoContext (使用 any 解決型別不匹配)
+  const context = await (logtoClient as any).getLogtoContext(req, res);
   const { isAuthenticated, claims } = context;
+
+  // 加入偵錯日誌
+  console.log(
+    "[API Debug - Guide] Claims:",
+    claims ? JSON.stringify(claims) : "None"
+  );
 
   if (!isAuthenticated || !claims) {
     return res.status(401).json({ error: "Unauthorized: Please sign in" });
   }
 
-  const email = claims.email || (claims as any).primary_email;
+  const rawEmail =
+    claims.email ||
+    (claims as any).primary_email ||
+    (claims as any).email_address;
 
-  if (!isAuthorizedEmail(email)) {
-    console.warn("API direct access blocked for unauthorized domain:", email);
+  if (!isAuthorizedEmail(rawEmail)) {
+    console.warn(
+      "API direct access blocked for unauthorized domain:",
+      rawEmail
+    );
     return res
       .status(403)
       .json({ error: "Forbidden: Authorized email required" });
@@ -26,6 +39,7 @@ export default async function handler(
 
   // 2. 安全性標頭：防止敏感數據在本地緩存
   res.setHeader("Cache-Control", "no-store, max-age=0");
+
   try {
     const { lang } = req.query;
     const data = await getQAData(lang === "en" ? "en" : "zh");
