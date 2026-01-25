@@ -1,0 +1,10 @@
+name = "mdm-docs-superinfo"
+main = ".open-next/worker.js"
+compatibility_date = "2026-01-20"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = ".open-next/assets"
+
+[observability]
+enabled = true
