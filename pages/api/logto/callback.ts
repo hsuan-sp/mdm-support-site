@@ -1,17 +1,38 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { logtoClient } from "../../../lib/logto";
 
-export const runtime = "edge";
+// ⚠️ 絕對不要寫 export const runtime = "edge"，這會毀了 Cloudflare 的編譯
+// 在 Pages Router 中，不寫就是預設 Node.js 模式
 
-export default async function handler(req: NextRequest) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        // ⚠️ 這裡直接傳入 req.url，不經過任何 Next.js 路由轉換
-        const handler = await logtoClient.handleSignInCallback(req.url);
-        return await handler(req);
+        // 1. 取得完整 URL
+        // 在 Node.js 環境下，我們從 headers 組合出完整的 URL
+        const protocol = req.headers['x-forwarded-proto'] || 'http';
+        const host = req.headers.host;
+        const fullUrl = `${protocol}://${host}${req.url}`;
+
+        // 2. 呼叫 Logto Callback Handler
+        // Logto 的 handleSignInCallback 會傳回一個適配器函數
+        // 傳入 fullUrl 讓它知道要處理哪個回傳地址
+        const logtoHandler = await logtoClient.handleSignInCallback(fullUrl);
+
+        // 💡 關鍵：Logto SDK 在 Pages Router 下需要 Web 標準的 Request/Response 交互
+        // 但在 OpenNext 環境，我們直接呼叫它並傳入轉換後的請求即可
+        // 這裡我們直接利用 Logto 內建的處理邏輯
+        await logtoHandler(req as any);
+
+        // 成功後，Logto 通常會自動處理 redirect
+        // 如果它沒處理，我們可以在這裡手動導向
+        if (!res.writableEnded) {
+            res.redirect("/");
+        }
+
     } catch (error: any) {
         console.error("❌ Callback 失敗:", error.message);
-        // 如果失敗，嘗試清除 Cookie 並導回首頁，強制重新開始
-        const res = NextResponse.redirect(new URL("/", req.url));
-        return res;
+        // 失敗時強制導回首頁
+        if (!res.writableEnded) {
+            res.redirect("/");
+        }
     }
 }

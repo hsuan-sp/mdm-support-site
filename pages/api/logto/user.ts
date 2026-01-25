@@ -1,39 +1,55 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { logtoClient } from "../../../lib/logto";
 
-export const runtime = "edge";
+// ⚠️ 移除此行以通過 OpenNext 編譯
+// export const runtime = "edge"; 
 
-export default async function handler(req: NextRequest) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const context = await logtoClient.getLogtoContext(req);
+        // 1. 將 Node.js 的請求封裝成真正的 NextRequest
+        // 這一步能解決 TS 報錯，因為它帶有了 Logto 想要的 nextUrl 和 cookies
+        const protocol = req.headers['x-forwarded-proto'] || 'http';
+        const host = req.headers.host;
+        const fullUrl = `${protocol}://${host}${req.url}`;
 
-        // ⚠️ 強化 Email 提取：嘗試從不同的標籤中抓取
+        const nextReq = new NextRequest(fullUrl, {
+            headers: new Headers(req.headers as any),
+            method: req.method,
+        });
+
+        // 2. 獲取 Logto Context (這裡型別就對得上了)
+        const context = await logtoClient.getLogtoContext(nextReq);
+
+        // 3. 提取 Email
         const email =
             context.claims?.email ||
             (context as any).userInfo?.email ||
             null;
 
-        // 偵錯日誌：這會印在您的 VS Code 終端機
         if (context.isAuthenticated) {
             console.log(`>>> [API Debug] 使用者已登入: ${email}`);
         }
 
         const responseData = {
             isAuthenticated: context.isAuthenticated,
-            email: email, // 這裡如果是 null，前端頭貼就會變問號
+            email: email,
             sub: context.claims?.sub || null
         };
 
-        const response = NextResponse.json(responseData);
+        // 4. 使用 NextResponse 生成 JSON 並轉回 NextApiResponse
+        const nextRes = NextResponse.json(responseData);
 
-        // 強制不快取，確保登入/登出切換順利
-        response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
-        response.headers.set("Pragma", "no-cache");
+        // 設定 Header
+        res.status(nextRes.status);
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
 
-        return response;
+        // 將 JSON 內容傳回
+        return res.json(responseData);
 
     } catch (error) {
         console.error(">>> [API Error] /api/logto/user 崩潰:", error);
-        return NextResponse.json({ isAuthenticated: false, email: null }, { status: 200 });
+        return res.status(200).json({ isAuthenticated: false, email: null });
     }
 }
