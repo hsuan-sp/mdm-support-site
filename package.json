@@ -12,7 +12,7 @@
     "prebuild": "npm run gen-data",
     "dev": "npm run gen-data && next dev -p 4000",
     "build": "next build && npx @opennextjs/cloudflare build", 
-    "build:gh": "next build",
+    "build:gh": "npm run gen-data && next build",
     "start": "next start -p 4000",
     "lint": "next lint",
     "upgrade-all": "npm install next@latest nextra@3 nextra-theme-docs@3 react@18 react-dom@18 @logto/next@latest swr@latest lucide-react@latest --force && npm install --save-dev @types/react@18 @types/react-dom@18 typescript@latest prettier@latest tailwindcss@3 postcss@8 autoprefixer@10 gray-matter@latest markdown-it@latest --force",
