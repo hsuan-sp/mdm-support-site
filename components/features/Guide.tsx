@@ -4,28 +4,42 @@ import { useRouter } from 'nextra/hooks'
 import { Search, ChevronDown, Tag, AlertCircle, X, ChevronRight, Menu, Maximize2, Minimize2, Settings2, Filter } from 'lucide-react'
 import { QAModule } from '../../types'
 import EmptyState from '../../components/ui/EmptyState'
-
 import { translations } from '../../locales'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useUser } from '../../hooks/useLogtoUser'
 import AuthGate from '../ui/AuthGate'
+
+// 如果沒有 useDebounce，請自行加入或安裝 use-debounce
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  return debouncedValue;
+}
 
 interface GuideProps {
   allData: QAModule[]
 }
 
 const Guide: React.FC = () => {
-  const router = useRouter()
+  // const router = useRouter() // 沒用到可以移除
   const { language: locale } = useLanguage()
   const t = translations[locale as keyof typeof translations]?.guide || translations['zh-TW'].guide
 
   const [allData, setAllData] = useState<QAModule[]>([])
   const [isDataLoading, setIsDataLoading] = useState(true)
+  
+  // 搜尋與篩選
   const [searchQuery, setSearchQuery] = useState('')
+  const debouncedQuery = useDebounce(searchQuery, 300) // 加入 Debounce
+  
   const [activeSource, setActiveSource] = useState<string | 'All'>('All')
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
-  const [fontScale, setFontScale] = useState(0.9)
+  const [fontScale, setFontScale] = useState(1) // 預設 1
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  
   const { user, isLoading: isAuthLoading } = useUser()
   
   // Infinite Scroll State
@@ -54,7 +68,7 @@ const Guide: React.FC = () => {
   // Reset visible count on search/filter change
   useEffect(() => {
     setVisibleCount(20)
-  }, [searchQuery, activeSource])
+  }, [debouncedQuery, activeSource]) // 依賴 debouncedQuery
 
   // 獲取章節題目數量的輔助函式
   const getChapterCount = useCallback((source: string) => {
@@ -73,9 +87,10 @@ const Guide: React.FC = () => {
       baseData = allData.filter(m => m.source === activeSource)
     }
 
-    if (!searchQuery.trim()) return baseData
+    // 使用 debouncedQuery
+    if (!debouncedQuery.trim()) return baseData
 
-    const query = searchQuery.toLowerCase()
+    const query = debouncedQuery.toLowerCase()
     return baseData.map(module => ({
       ...module,
       sections: module.sections.map(section => ({
@@ -87,7 +102,7 @@ const Guide: React.FC = () => {
         )
       })).filter(section => section.items.length > 0)
     })).filter(module => module.sections.length > 0)
-  }, [allData, activeSource, searchQuery])
+  }, [allData, activeSource, debouncedQuery]) // 依賴 debouncedQuery
 
   // Flatten items for virtualization/pagination
   const visibleModules = useMemo(() => {
@@ -127,7 +142,7 @@ const Guide: React.FC = () => {
     if (sentinel) observer.observe(sentinel)
 
     return () => observer.disconnect()
-  }, [hasMore, visibleModules])
+  }, [hasMore, visibleModules]) // 這裡依賴正確
 
   const toggleItem = (id: string) => {
     const next = new Set(openItems)
@@ -193,7 +208,7 @@ const Guide: React.FC = () => {
               onClick={() => { setActiveSource(module.source); setIsDrawerOpen(false); }}
               className={`sidebar-btn ${activeSource === module.source ? 'sidebar-btn-active' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50'}`}
             >
-              <span className="truncate pr-4">{module.source}</span>
+              <span className="truncate pr-4 text-left">{module.source}</span>
               <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${activeSource === module.source ? 'bg-white/20' : 'bg-zinc-100 dark:bg-zinc-800'}`}>{getChapterCount(module.source)}</span>
             </button>
           ))}
@@ -332,9 +347,11 @@ const Guide: React.FC = () => {
 
                               {openItems.has(item.id) && (
                                 <div className="px-6 pb-8 pt-0 sm:px-7 md:px-8 md:pb-10 animate-in fade-in slide-in-from-top-2 duration-300">
+                                  {/* 內容區域：修正字體縮放應用 */}
                                   <div 
                                     className="prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 prose-headings:text-zinc-800 dark:prose-headings:text-zinc-100"
-                                    style={{ '--current-font-scale': fontScale } as any}
+                                    // 直接使用百分比縮放
+                                    style={{ fontSize: `${fontScale * 100}%` }}
                                     dangerouslySetInnerHTML={{ __html: item.answer }}
                                   />
                                   {item.tags && item.tags.length > 0 && (
@@ -370,7 +387,7 @@ const Guide: React.FC = () => {
             )}
           </main>
 
-          {/* Mobile Floating Button - 模仿截圖 4 */}
+          {/* Mobile Floating Button */}
           <div className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
             <button 
               onClick={() => setIsDrawerOpen(true)}
@@ -381,7 +398,7 @@ const Guide: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Drawer Overlay - 模仿截圖 3 */}
+          {/* Mobile Drawer Overlay */}
           {isDrawerOpen && (
             <div className="fixed inset-0 z-[100] lg:hidden">
               <div 

@@ -58,3 +58,6 @@ maintenance/bundles/
 data/logs/
 VERCEL_ENV_VARS.txt
 *.local
+
+# Generated Data
+lib/generated-data.json

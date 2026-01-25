@@ -1,4 +1,4 @@
-name: Deploy VitePress site
+name: Deploy Next.js site to Pages
 
 on:
   push:
@@ -30,15 +30,25 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        # 使用 --force 因為 Next 15 + React 18 可能會有依賴衝突警告
+        run: npm install --force
 
-      - name: Build with VitePress
+      - name: Build with Next.js
+        # 這會觸發 prebuild (gen-data) -> next build (export)
         run: npm run build
+        env:
+          # 如果你的程式碼在 Client 端有用到環境變數，要在這裡注入
+          # 雖然是靜態導出，但 Logto 的 Client ID 等資訊仍需填入
+          LOGTO_ENDPOINT: ${{ secrets.LOGTO_ENDPOINT }}
+          LOGTO_APP_ID: ${{ secrets.LOGTO_APP_ID }}
+          LOGTO_BASE_URL: ${{ secrets.LOGTO_BASE_URL }}
+          LOGTO_COOKIE_SECRET: ${{ secrets.LOGTO_COOKIE_SECRET }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist
+          # Next.js 靜態導出的輸出資料夾預設是 out
+          path: out
 
   deploy:
     environment:

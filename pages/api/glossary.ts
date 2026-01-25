@@ -1,41 +1,55 @@
+import { NextRequest, NextResponse } from "next/server";
 import { logtoClient } from "@/lib/logto";
 import { getGlossaryData } from "@/lib/data";
-import type { NextApiRequest, NextApiResponse } from "next";
 
-// 強制使用 Node.js，這在 Vercel 上才能正確跑 fs 動態匯入
-export const runtime = "nodejs";
+// 指定使用 Edge Runtime
+export const runtime = "edge";
 
-export default logtoClient.withLogtoApiRoute(async (req: NextApiRequest, res: NextApiResponse) => {
-  // --- 診斷邏輯 ---
-  // 如果你在瀏覽器網址列直接打開這個 API 卻看到 Unauthorized，
-  // 請取消下面這行註解，看看終端機有沒有印出 Cookie
-  // console.log("Glossary Request Cookies:", req.headers.cookie);
+export default async function handler(req: NextRequest) {
+  // --- 診斷邏輯 (可選) ---
+  // Edge Runtime 中無法使用 req.headers.cookie，需透過 req.cookies
+  // console.log("Glossary Request Cookies:", req.cookies.getAll());
 
-  // 1. 檢查身分
-  // req.user 是由 withLogtoApiRoute 根據 Cookie 自動注入的
-  if (!req.user || !req.user.isAuthenticated) {
-    return res.status(401).json({
-      error: "Unauthorized",
-      message: "Sign-in session not found or expired"
-    });
-  }
-
-  // 2. 獲取數據
   try {
-    const { lang } = req.query;
+    // 1. 檢查身分 (Edge 模式)
+    // 注意：這裡使用 getLogtoContext 來取代原本的 wrapper
+    const context = await logtoClient.getLogtoContext(req);
 
-    // 呼叫你在 lib/data.ts 寫的動態引入版本
+    if (!context.isAuthenticated) {
+      return NextResponse.json(
+        {
+          error: "Unauthorized",
+          message: "Sign-in session not found or expired",
+        },
+        { status: 401 }
+      );
+    }
+
+    // 2. 獲取參數 (使用標準 URL API)
+    // req.query 在 Edge Runtime 不存在，必須解析 URL
+    const { searchParams } = new URL(req.url);
+    const lang = searchParams.get("lang");
+
+    // 3. 獲取數據
+    // 呼叫改寫後的 lib/data.ts (現在它只會回傳記憶體中的 JSON，速度極快)
     const data = await getGlossaryData(lang === "en" ? "en" : "zh");
 
-    // 設定不快取，確保權限變動時能即時反應
-    res.setHeader("Cache-Control", "no-store, max-age=0");
-    return res.status(200).json(data);
+    // 4. 回傳回應
+    const response = NextResponse.json(data);
+
+    // 設定不快取
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+
+    return response;
 
   } catch (error: any) {
     console.error("[Glossary API Error]:", error);
-    return res.status(500).json({
-      error: "Internal Server Error",
-      message: error.message
-    });
+    return NextResponse.json(
+      {
+        error: "Internal Server Error",
+        message: error.message,
+      },
+      { status: 500 }
+    );
   }
-});
+}

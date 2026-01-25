@@ -1,262 +1,27 @@
-import MarkdownIt from "markdown-it";
-// 注意：移除了這裡的 node:fs 和 node:path 靜態引用
-import matter from "gray-matter";
+import generatedData from "./generated-data.json";
 
-const md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-  breaks: false,
-});
-
-function enhanceTypography(text: string) {
-  if (!text) return "";
-  return text
-    .split("\n")
-    .map((line) => {
-      const trimmed = line.trim();
-      if (
-        trimmed.startsWith("|") ||
-        trimmed.startsWith("#") ||
-        trimmed.startsWith(">") ||
-        trimmed.startsWith("- ") ||
-        trimmed.startsWith("* ") ||
-        /^\d+\. /.test(trimmed) ||
-        trimmed.startsWith("**") ||
-        trimmed.startsWith("___") ||
-        trimmed.startsWith("```")
-      ) {
-        return line;
-      }
-
-      return line
-        .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, "$1 $2")
-        .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, "$1 $2")
-        .replace(/([\u4e00-\u9fa5]),/g, "$1，")
-        .replace(/([\u4e00-\u9fa5]):/g, "$1：")
-        .replace(/([\u4e00-\u9fa5]);/g, "$1；")
-        .replace(/([\u4e00-\u9fa5])!/g, "$1！")
-        .replace(/([\u4e00-\u9fa5])\?/g, "$1？")
-        .replace(/\.\.\./g, "…")
-        .replace(/--/g, "—")
-        .replace(/([\u4e00-\u9fa5])"/g, "$1”")
-        .replace(/"([\u4e00-\u9fa5])/g, "“$1");
-    })
-    .join("\n");
-}
-
-function renderMarkdown(text: string) {
-  if (!text) return "";
-  const enhanced = enhanceTypography(text);
-  return md.render(enhanced);
-}
-
-const QA_ORDER = [
-  "account",
-  "enrollment",
-  "apps",
-  "classroom",
-  "digital-learning",
-  "hardware",
-  "mac",
-  "qa-education",
-];
-
-const SOURCE_TITLE_MAP: Record<string, string> = {
-  account: "帳號與伺服器",
-  enrollment: "裝置註冊",
-  apps: "App 管理",
-  classroom: "課堂管理",
-  "digital-learning": "數位精進",
-  hardware: "硬體排除",
-  mac: "Mac 管理",
-  "qa-education": "教育實戰",
-};
-
-const EN_SOURCE_TITLE_MAP: Record<string, string> = {
-  account: "Account & Server Management",
-  enrollment: "Enrollment & Device Setup",
-  apps: "App & Content Distribution",
-  classroom: "Apple Classroom & Teaching Tools",
-  "digital-learning": "Campus Digital Initiatives",
-  hardware: "Hardware & Maintenance",
-  mac: "Advanced Mac Management",
-  "qa-education": "Education Scenarios & FAQ",
-};
+/**
+ * 這裡不需要 fs, path, gray-matter 或 markdown-it。
+ * 所有的解析工作都已經在 build 階段由 scripts/build-data.mjs 完成了。
+ * 
+ * 這確保了在 Edge Runtime (Cloudflare Pages) 上完全零依賴，
+ * 且讀取速度極快（因為資料已經編譯成 JS 物件）。
+ */
 
 export async function getQAData(locale: string = "zh-TW") {
-  // 1. 環境檢查：如果是瀏覽器端，直接回傳空陣列
-  if (typeof window !== "undefined") return [];
-
-  // 2. 動態引入 Node.js 模組 (這樣 Webpack 就不會在客戶端打包時報錯)
-  const fs = await import("node:fs");
-  const path = await import("node:path");
-
-  const root = path.resolve(
-    process.cwd(),
-    "md_data",
-    locale === "en" ? "en" : "zh"
-  );
-
-  const titleMap = locale === "en" ? EN_SOURCE_TITLE_MAP : SOURCE_TITLE_MAP;
-
-  const sections = [];
-
-  const getFiles = (dir: string): string[] => {
-    if (!fs.existsSync(dir)) return [];
-    return fs
-      .readdirSync(dir)
-      .filter((file) => file.endsWith(".md"))
-      .map((file) => path.join(dir, file));
-  };
-
-  for (const slug of QA_ORDER) {
-    const dir = path.join(root, "qa", slug);
-    const files = getFiles(dir);
-    const items = [];
-
-    for (const filePath of files) {
-      try {
-        const fileContent = fs.readFileSync(filePath, "utf-8");
-        const { data, content } = matter(fileContent);
-
-        items.push({
-          id: String(data.id || path.basename(filePath, ".md")),
-          question: String(data.title || path.basename(filePath, ".md")),
-          answer: renderMarkdown(content.trim()),
-          important: Boolean(data.important),
-          tags: Array.isArray(data.tags)
-            ? data.tags
-            : data.tags
-              ? [data.tags]
-              : [],
-          category: data.category || titleMap[slug],
-        });
-      } catch (err) {
-        console.error(`Error parsing QA file ${filePath}:`, err);
-      }
-    }
-
-    items.sort((a, b) =>
-      (a.id || "").localeCompare(b.id || "", undefined, { numeric: true })
-    );
-
-    if (items.length > 0) {
-      sections.push({
-        source: titleMap[slug] || slug,
-        sections: [
-          {
-            title: items[0].category || titleMap[slug],
-            items: items,
-          },
-        ],
-      });
-    }
-  }
-  return sections;
+  const langKey = locale === "en" ? "en" : "zh";
+  // @ts-ignore: 忽略 JSON 尚未生成時的 TS 警告
+  return generatedData.qa[langKey] || [];
 }
 
 export async function getGlossaryData(locale: string = "zh-TW") {
-  // 1. 環境檢查
-  if (typeof window !== "undefined") return [];
-
-  // 2. 動態引入 Node.js 模組
-  const fs = await import("node:fs");
-  const path = await import("node:path");
-
-  const root = path.resolve(
-    process.cwd(),
-    "md_data",
-    locale === "en" ? "en" : "zh"
-  );
-
-  const isEn = locale === "en";
-  const dir = path.join(root, "glossary");
-
-  if (!fs.existsSync(dir)) return [];
-
-  const files = fs
-    .readdirSync(dir)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => path.join(dir, file));
-
-  const terms = [];
-  const analogyMarker = !isEn ? "## 白話文比喻" : "## Analogy";
-  const definitionMarker = !isEn ? "## 術語定義" : "## Term Definition";
-
-  for (const filePath of files) {
-    try {
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      const { data, content } = matter(fileContent);
-
-      const parts = content.split(analogyMarker);
-      const definition = parts[0].replace(definitionMarker, "").trim();
-      const analogy = parts[1] ? parts[1].trim() : "";
-
-      terms.push({
-        term: String(data.term || path.basename(filePath, ".md")),
-        definition: renderMarkdown(definition),
-        analogy: renderMarkdown(analogy),
-        category: data.category || [],
-        tags: Array.isArray(data.tags)
-          ? data.tags
-          : data.tags
-            ? [data.tags]
-            : [],
-      });
-    } catch (err) {
-      console.error(`Error parsing Glossary file ${filePath}:`, err);
-    }
-  }
-
-  terms.sort((a, b) => (a.term || "").localeCompare(b.term || ""));
-  return terms;
+  const langKey = locale === "en" ? "en" : "zh";
+  // @ts-ignore
+  return generatedData.glossary[langKey] || [];
 }
 
 export async function getChangelogData(locale: string = "zh-TW") {
-  // 1. 環境檢查
-  if (typeof window !== "undefined") return [];
-
-  // 2. 動態引入 Node.js 模組
-  const fs = await import("node:fs");
-  const path = await import("node:path");
-
-  const isEn = locale === "en";
-  const root = path.resolve(
-    process.cwd(),
-    "data/changelog",
-    isEn ? "en" : "zh"
-  );
-
-  if (!fs.existsSync(root)) return [];
-
-  const files = fs
-    .readdirSync(root)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => path.join(root, file));
-
-  const logs = [];
-
-  for (const filePath of files) {
-    try {
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      const { data, content } = matter(fileContent);
-
-      logs.push({
-        version: String(data.version || path.basename(filePath, ".md")),
-        date: String(data.date || new Date().toISOString().split("T")[0]),
-        type: String(data.type || "patch"),
-        content: renderMarkdown(content.trim()),
-      });
-    } catch (err) {
-      console.error(`Error parsing Changelog file ${filePath}:`, err);
-    }
-  }
-
-  logs.sort(
-    (a, b) =>
-      b.date.localeCompare(a.date) ||
-      b.version.localeCompare(a.version, undefined, { numeric: true })
-  );
-  return logs;
+  const langKey = locale === "en" ? "en" : "zh";
+  // @ts-ignore
+  return generatedData.changelog[langKey] || [];
 }

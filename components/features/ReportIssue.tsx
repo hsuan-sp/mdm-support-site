@@ -1,24 +1,65 @@
-import React, { useState, useMemo } from 'react'
-import { useLanguage } from '../../hooks/useLanguage'
+import React, { useState, useMemo, useEffect } from 'react'
+import { useLanguage } from '@/hooks/useLanguage'
 import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 import { createPortal } from 'react-dom'
-import { Mail, Copy, X, FileText } from 'lucide-react'
+import { Mail, Copy, X, FileText, Check } from 'lucide-react'
+
+// 1. 複製按鈕小元件 (帶有狀態回饋)
+const CopyButton = ({ text, label, icon: Icon }: { text: string, label: string, icon: any }) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button 
+      onClick={handleCopy}
+      className={`flex items-center justify-center gap-2 w-full py-2 rounded-lg transition text-xs font-bold ${
+        copied 
+          ? 'bg-green-600 text-white hover:bg-green-700' 
+          : 'bg-blue-600 text-white hover:bg-blue-700'
+      }`}
+      title={label}
+    >
+      {copied ? <Check className="w-3.5 h-3.5" /> : <Icon className="w-3.5 h-3.5" />}
+      {copied ? 'Copied!' : label}
+    </button>
+  )
+}
 
 const ReportIssue = () => {
   const { language } = useLanguage()
   const router = useRouter()
   const config = useConfig()
   const [showDialog, setShowDialog] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // 防止 Hydration Mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // 支援 ESC 鍵關閉視窗
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowDialog(false)
+    }
+    if (showDialog) window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [showDialog])
 
   const t = useMemo(() => {
     const isZh = language === 'zh-TW'
     const pageTitle = config.title || 'Untitled'
     
-    // Client-side URL detection
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown URL'
+    // 客戶端 URL 偵測
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
 
-    // Context Detection
+    // 類別偵測
     let category = isZh ? '一般頁面' : 'General'
     if (currentUrl.includes('/glossary/')) category = isZh ? '術語表' : 'Glossary'
     if (currentUrl.includes('/qa/')) category = isZh ? '問答庫' : 'Q&A'
@@ -26,24 +67,20 @@ const ReportIssue = () => {
     const unifiedBody = `=== PAGE ISSUE REPORT / 頁面問題回報 ===
 
 [PAGE CONTEXT / 頁面資訊]
-- Title / 標題: ${pageTitle}
-- URL / 網址: ${currentUrl}
-- Category / 類別: ${category}
+Title / 標題: ${pageTitle}
+URL / 網址: ${currentUrl}
+Category / 類別: ${category}
 
 [ISSUE TYPE / 問題類型]
 (Please mark with [x] / 請在括號中填入 x)
-[ ] Content Accuracy / 內容準確性 (e.g. Incorrect technical info / 技術資訊錯誤)
-[ ] Outdated Info / 資訊過時 (e.g. Does not match iOS 26 specifications / 已不符 2026 規格)
-[ ] Translation / 翻譯建議 (e.g. Phrasing or Terminology / 術語或語句優化)
-[ ] Technical Bug / 技術故障 (e.g. Layout or Function error / 頁面功能異常)
-[ ] Broken Link / 連結失效 (e.g. Image or External link / 圖片或連結失效)
+[ ] Content Accuracy / 內容準確性
+[ ] Outdated Info / 資訊過時
+[ ] Translation / 翻譯建議
+[ ] Technical Bug / 技術故障
+[ ] Broken Link / 連結失效
 
-[DESCRIPTION & EXAMPLES / 詳細描述與範例]
-(Please describe the issue below. Example: "The DDM section in acc-11 mentions iOS 25, but it should be iOS 26.")
-(請在下方詳述問題。範例：「acc-11 中的 DDM 描述提到 iOS 25，應更正為 iOS 26。」)
-
+[DESCRIPTION / 詳細描述]
 Description:
-
 
 === END OF REPORT ===`.trim()
 
@@ -71,8 +108,7 @@ Description:
           email: 'hsuan@superinfo.com.tw',
           mailtoLink: mailto,
           dialogTitle: 'Issue Report',
-          dialogDesc:
-            'If mail client fails to open, please copy the info below and send to our team:',
+          dialogDesc: 'If mail client fails to open, please copy the info below and send to our team:',
           copyEmail: 'Copy Email',
           copyTemplate: 'Copy Template',
           close: 'Close',
@@ -80,89 +116,88 @@ Description:
         }
   }, [language, config.title, router.asPath])
 
-  const openReport = () => {
-    const start = Date.now()
+  const openReport = (e: React.MouseEvent) => {
+    e.preventDefault()
     window.location.href = t.mailtoLink
-
+    
+    // 如果 Mail 客戶端沒有開啟，短暫延遲後顯示對話框
     setTimeout(() => {
-      if (Date.now() - start < 2000) {
-        setShowDialog(true)
-      }
-    }, 500)
+      setShowDialog(true)
+    }, 800)
   }
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-  }
+  if (!mounted) return null
 
   return (
-    <div className="mt-4">
+    <div className="mt-6 print:hidden">
       <button
         onClick={openReport}
         title={t.title}
-        className="inline-flex items-center gap-1.5 px-3 py-1 text-[13px] text-zinc-500 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-600 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-600 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all font-medium"
       >
-        <Mail className="w-3.5 h-3.5" />
+        <Mail className="w-4 h-4" />
         {t.label}
       </button>
 
-      {showDialog && typeof document !== 'undefined' && createPortal(
+      {showDialog && createPortal(
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
           onClick={() => setShowDialog(false)}
+          role="dialog"
+          aria-modal="true"
         >
           <div 
-            className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-lg shadow-2xl border border-zinc-200 dark:border-zinc-800"
+            className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-lg shadow-2xl border border-zinc-200 dark:border-zinc-800 animate-in zoom-in-95 duration-200"
             onClick={e => e.stopPropagation()}
           >
-            <h3 className="text-lg font-bold mb-3 text-zinc-900 dark:text-white flex items-center gap-2">
-              <Mail className="w-5 h-5 text-blue-600" />
-              {t.dialogTitle}
-            </h3>
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                <Mail className="w-5 h-5 text-blue-600" />
+                {t.dialogTitle}
+              </h3>
+              <button 
+                onClick={() => setShowDialog(false)}
+                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
             <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
               {t.dialogDesc}
             </p>
 
-            <div className="space-y-4 mb-6">
+            <div className="space-y-5 mb-6">
+              {/* Email Section - 這裡是原本報錯的地方，已修正 */}
               <div>
                 <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Email</label>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 bg-zinc-50 dark:bg-zinc-950 px-3 py-2 rounded-lg text-sm font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">
+                  <code className="flex-1 bg-zinc-50 dark:bg-zinc-950 px-3 py-2 rounded-lg text-sm font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 select-all">
                     {t.email}
                   </code>
-                  <button 
-                    onClick={() => copyToClipboard(t.email)}
-                    className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition w-auto"
-                    title={t.copyEmail}
-                  >
-                    <Copy className="w-4 h-4" />
-                  </button>
+                  <div className="w-24">
+                    <CopyButton text={t.email} label="Copy" icon={Copy} />
+                  </div>
                 </div>
               </div>
 
+              {/* Template Section */}
               <div>
                 <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Template</label>
                 <div className="flex flex-col gap-2">
-                  <pre className="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-lg text-xs font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap max-h-[150px] overflow-y-auto custom-scrollbar">
+                  <pre className="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-lg text-xs font-mono border border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap max-h-[200px] overflow-y-auto custom-scrollbar select-all">
                     {t.template}
                   </pre>
-                  <button 
-                    onClick={() => copyToClipboard(t.template)}
-                    className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-xs font-bold"
-                  >
-                    <FileText className="w-3.5 h-3.5" />
-                    {t.copyTemplate}
-                  </button>
+                  <CopyButton text={t.template} label={t.copyTemplate} icon={FileText} />
                 </div>
               </div>
             </div>
 
             <div className="flex justify-end pt-4 border-t border-zinc-100 dark:border-zinc-800">
               <button 
-                className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded-lg text-sm font-bold transition flex items-center gap-2"
+                className="px-5 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded-lg text-sm font-bold transition flex items-center gap-2"
                 onClick={() => setShowDialog(false)}
               >
-                <X className="w-4 h-4" />
                 {t.close}
               </button>
             </div>

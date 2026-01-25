@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 import { useRouter } from 'next/router'
 import { useLanguage } from '../../hooks/useLanguage'
 import { translations } from '../../locales'
-import { X, ChevronRight, Moon, Sun, Globe, ExternalLink, User, LogOut } from 'lucide-react'
+import { X, ChevronRight, Moon, Sun, Globe, ExternalLink, User as UserIcon, LogOut } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useUser } from '../../hooks/useLogtoUser'
 
@@ -18,7 +18,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   const { language, setLanguage } = useLanguage()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const { user, signIn, signOut } = useUser()
+  const { user, signIn, signOut, recheck } = useUser()
   
   const t = translations[language as keyof typeof translations] || translations['zh-TW']
   const isZh = language === 'zh-TW'
@@ -30,14 +30,13 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
+      recheck?.()
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [isOpen])
+    return () => { document.body.style.overflow = 'auto' }
+  }, [isOpen, recheck])
 
   const navigate = (path: string) => {
     router.push(path)
@@ -50,82 +49,60 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen || !mounted) return null
 
-  // 使用 Portal 渲染到 body 層級，突破 navbar 容器限制
   return createPortal(
     <div className="fixed inset-0 z-[10000] lg:hidden">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md animate-in fade-in duration-300"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md animate-in fade-in duration-300" onClick={onClose} />
       
-      {/* Drawer - Premium Design */}
       <div className="absolute right-0 top-0 h-full w-[90vw] max-w-md bg-white dark:bg-zinc-900 shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col overflow-hidden border-l border-zinc-200 dark:border-zinc-800">
-        {/* Header - Optimized Alignment */}
+        
+        {/* Header */}
         <div className="flex items-center justify-between px-6 border-b border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 h-[72px] shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-1 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
               <img src="/logo-square.png" alt="Logo" className="h-7 w-7 object-contain" />
             </div>
             <div className="flex flex-col">
-              <h2 className="text-[1rem] font-black text-zinc-900 dark:text-white leading-tight">
-                {isZh ? '極電資訊' : 'Superinfo'}
-              </h2>
-              <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-0.5">
-                {isZh ? 'MDM 知識庫' : 'MDM Hub'}
-              </p>
+              <h2 className="text-[1rem] font-black text-zinc-900 dark:text-white leading-tight">{isZh ? '極電資訊' : 'Superinfo'}</h2>
+              <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">{isZh ? 'MDM 知識庫' : 'MDM Hub'}</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all active:scale-90"
-            aria-label="Close menu"
-          >
+          <button onClick={onClose} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all active:scale-90">
             <X className="w-6 h-6 text-zinc-400" />
           </button>
         </div>
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8 no-scrollbar">
-          {/* User Section - Enhanced Cohesion */}
+          
+          {/* 使用者狀態區 */}
           <div className="p-1 bg-zinc-50 dark:bg-zinc-800/30 rounded-3xl border border-zinc-100 dark:border-zinc-800/50">
             {user ? (
               <div className="flex flex-col p-2 space-y-2">
                 <div className="flex items-center gap-4 p-3 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-inner shrink-0 leading-none">
-                    {user.username?.[0]?.toUpperCase() || user.primaryEmail?.[0]?.toUpperCase() || <User className="w-5 h-5" />}
+                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
+                    {user.email ? user.email[0].toUpperCase() : <UserIcon className="w-5 h-5" />}
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest leading-none">Active Session</span>
-                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 truncate mt-1">
-                      {user.username || user.primaryEmail || (isZh ? '已安全登入' : 'Securely Signed In')}
-                    </span>
+                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 truncate mt-1">{user.email}</span>
                   </div>
                 </div>
-                <button 
-                  onClick={signOut}
-                  className="w-full flex items-center justify-center gap-2 px-5 py-3 text-red-600 dark:text-red-400 font-black text-[13px] hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-all"
-                >
+                <button onClick={signOut} className="w-full flex items-center justify-center gap-2 px-5 py-3 text-red-600 dark:text-red-400 font-black text-[13px] hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-all">
                   <LogOut className="w-4 h-4" />
-                  {userCenterT.logout || (isZh ? '登出帳號' : 'Sign Out')}
+                  {userCenterT.logout || '登出帳號'}
                 </button>
               </div>
             ) : (
-              <button 
-                onClick={signIn}
-                className="w-full flex items-center justify-center gap-3 px-5 py-4 bg-blue-600 text-white rounded-2xl font-black text-[14px] hover:bg-blue-700 active:scale-[0.98] transition-all shadow-lg shadow-blue-500/20"
-              >
+              <button onClick={signIn} className="w-full flex items-center justify-center gap-3 px-5 py-4 bg-blue-600 text-white rounded-2xl font-black text-[14px] hover:bg-blue-700 shadow-lg shadow-blue-500/20">
                 {isZh ? '登入帳號系統' : 'Sign In to Access'}
                 <ChevronRight className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          {/* Navigation Links */}
+          {/* 常用導航 */}
           <nav className="space-y-3">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 px-4 mb-2">
-              {isZh ? '常用導航' : 'Navigation'}
-            </h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 px-4 mb-2">{isZh ? '常用導航' : 'Navigation'}</h3>
             {[
               { path: '/', label: isZh ? '網站首頁' : 'Home' },
               { path: '/guide', label: isZh ? '實戰指南' : 'Guides' },
@@ -142,89 +119,58 @@ const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 }`}
               >
                 <span className="text-[15px]">{link.label}</span>
-                {router.pathname === link.path && <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
               </button>
             ))}
           </nav>
 
-          {/* Resources Section */}
+          {/* 常用連結 (Resources Section) - 恢復處 🚀 */}
           <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 px-4 mb-4">
-              {t.resources?.label || '資源與服務'}
-            </h3>
-            
-            {t.resources?.groups && t.resources.groups.length > 0 ? (
-              t.resources.groups.map((group: any, idx: number) => (
-                <div key={idx} className="mb-8 last:mb-0">
-                  <h4 className="text-[11px] font-black text-zinc-500 px-4 mb-3 flex items-center gap-2">
-                    <div className="w-1 h-3 bg-blue-500 rounded-full" />
-                    {group.title}
-                  </h4>
-                  <div className="space-y-1">
-                    {group.items.map((item: any, itemIdx: number) => (
-                      <button
-                        key={itemIdx}
-                        onClick={() => navigateExternal(item.link)}
-                        className="w-full flex items-center justify-between px-5 py-3.5 text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 rounded-xl transition-all group"
-                      >
-                        <span className="truncate pr-2 text-left">{item.text}</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-zinc-300 group-hover:text-blue-500 transition-colors" />
-                      </button>
-                    ))}
-                  </div>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 px-4 mb-4">{t.resources?.label || '資源與服務'}</h3>
+            {t.resources?.groups?.map((group: any, idx: number) => (
+              <div key={idx} className="mb-6 last:mb-0">
+                <h4 className="text-[11px] font-black text-zinc-500 px-4 mb-2">{group.title}</h4>
+                <div className="space-y-1">
+                  {group.items.map((item: any, itemIdx: number) => (
+                    <button
+                      key={itemIdx}
+                      onClick={() => navigateExternal(item.link)}
+                      className="w-full flex items-center justify-between px-5 py-3 text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 rounded-xl transition-all"
+                    >
+                      <span>{item.text}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-zinc-300" />
+                    </button>
+                  ))}
                 </div>
-              ))
-            ) : (
-              <p className="text-sm text-zinc-500 px-4">暫無資源</p>
-            )}
+              </div>
+            ))}
           </div>
 
-          {/* Settings Section */}
-          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 space-y-3 pb-10">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 px-4 mb-4">
-              {isZh ? '系統設定' : 'Preferences'}
-            </h3>
-            
-            <div className="grid grid-cols-1 gap-3 px-2">
-              {/* Theme Toggle */}
-              {mounted && (
-                <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 rounded-2xl hover:bg-white dark:hover:bg-zinc-800 transition-all group"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-xl transition-colors ${theme === 'dark' ? 'bg-blue-500/10 text-blue-500' : 'bg-amber-500/10 text-amber-500'}`}>
-                      {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                    </div>
-                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
-                      {isZh ? '介面風格' : 'Appearance'}
-                    </span>
-                  </div>
-                  <div className={`w-10 h-6 rounded-full relative transition-colors ${theme === 'dark' ? 'bg-blue-600' : 'bg-zinc-200'}`}>
-                    <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${theme === 'dark' ? 'left-5' : 'left-1'}`} />
-                  </div>
-                </button>
-              )}
-
-              {/* Language Toggle */}
-              <button
-                onClick={() => setLanguage(language === 'zh-TW' ? 'en' : 'zh-TW')}
-                className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 rounded-2xl hover:bg-white dark:hover:bg-zinc-800 transition-all group"
-              >
+          {/* 系統設定 (Theme / Language Switch) - 恢復處 🚀 */}
+          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 pb-10 space-y-4">
+             {/* 主題切換 */}
+             <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="w-full flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl text-zinc-500 group-hover:text-blue-500 transition-colors">
+                  <div className={`p-2 rounded-xl ${theme === 'dark' ? 'bg-blue-500/10 text-blue-500' : 'bg-amber-500/10 text-amber-500'}`}>
+                    {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+                  </div>
+                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{isZh ? '介面風格' : 'Appearance'}</span>
+                </div>
+             </button>
+
+             {/* 語言切換 */}
+             <button onClick={() => setLanguage(language === 'zh-TW' ? 'en' : 'zh-TW')} className="w-full flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl text-zinc-500">
                     <Globe className="w-4 h-4" />
                   </div>
-                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
-                    {isZh ? '語言切換' : 'Display Language'}
-                  </span>
+                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{isZh ? '語言切換' : 'Display Language'}</span>
                 </div>
-                <div className="px-3 py-1 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg text-xs font-black text-zinc-900 dark:text-zinc-100 shadow-sm">
+                <div className="px-3 py-1 bg-white dark:bg-zinc-700 border border-zinc-200 rounded-lg text-xs font-black">
                   {language === 'zh-TW' ? 'ENGLISH' : '繁體中文'}
                 </div>
-              </button>
-            </div>
+             </button>
           </div>
+
         </div>
       </div>
     </div>,

@@ -1,16 +1,19 @@
 // lib/logto.ts
-import LogtoClient from "@logto/next";
+import LogtoClient from "@logto/next/edge";
 
 export const logtoConfig = {
-  endpoint: process.env.LOGTO_ENDPOINT!,
-  appId: process.env.LOGTO_APP_ID!,
-  appSecret: process.env.LOGTO_APP_SECRET!,
-  baseUrl: process.env.LOGTO_BASE_URL!,
-  cookieSecret: process.env.LOGTO_COOKIE_SECRET!,
+  endpoint: process.env.LOGTO_ENDPOINT?.trim()!,
+  appId: process.env.LOGTO_APP_ID?.trim()!,
+  appSecret: process.env.LOGTO_APP_SECRET?.trim()!,
+  baseUrl: process.env.LOGTO_BASE_URL?.trim()!,
+  cookieSecret: process.env.LOGTO_COOKIE_SECRET?.trim()!,
+
+  // ⚠️ 關鍵修正：必須加入 scopes，否則拿不到 email
+  scopes: ["email", "profile", "offline_access"],
+
   cookieSecure: process.env.NODE_ENV === "production",
-  // 建議明確加上路徑與 SameSite 設定，防止跨域遺失 Cookie
+  cookieSameSite: "lax" as const,
   cookiePath: "/",
-  scopes: ["email", "profile", "offline_access"], // 加上 offline_access 確保 session 持久
 };
 
 export const logtoClient = new LogtoClient(logtoConfig);

@@ -1,24 +1,16 @@
-/**
- * 統一的 Email 網域校驗邏輯
- * 確保與 AuthGuard 的正則表達式完全一致
- */
+// lib/auth.ts
 export function isAuthorizedEmail(email: string | undefined | null): boolean {
-  if (!email) {
-    console.log("[Auth Debug] No email provided to validation");
-    return false;
-  }
+  if (!email) return false;
 
-  // 1. 標準化處理：轉小寫、去空格
   const normalizedEmail = email.toLowerCase().trim();
 
-  // 2. 判斷邏輯
-  // 支援 .edu.tw 以及 superinfo.com.tw
+  // 1. 判定是否為教育網域 (包含 .edu.tw)
   const isEdu = normalizedEmail.endsWith('.edu.tw');
+
+  // 2. 判定是否為官方網域 (精確匹配 @superinfo.com.tw)
   const isOfficial = normalizedEmail.endsWith('@superinfo.com.tw');
 
-  // 3. 特別偵錯：在瀏覽器 F12 Console 可以看到到底是哪個 Email 在跑
-  console.log(`[Auth Debug] Testing Email: "${normalizedEmail}"`);
-  console.log(`[Auth Debug] Is Edu: ${isEdu}, Is Official: ${isOfficial}`);
+  console.log(`[Auth] Checking: ${normalizedEmail} | Result: ${isEdu || isOfficial}`);
 
   return isEdu || isOfficial;
 }

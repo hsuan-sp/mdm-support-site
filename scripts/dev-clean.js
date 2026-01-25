@@ -1,135 +1,112 @@
 #!/usr/bin/env node
 
 /**
- * Kill Port and Start Dev Server
- * 跨平台自動清理指定 port 的舊 process 並啟動新的 dev server
- * 支援 Windows 和 macOS/Linux
+ * 🚀 MDM Docs Professional Debug Cleaner
+ * 功能：清除快取、生成資料、殺掉 Port 佔用並在 4000 Port 啟動
  */
 
 import { exec, spawn } from "child_process";
 import { promisify } from "util";
+import fs from "fs";
+import path from "path";
 
 const execPromise = promisify(exec);
 
-const PORT = process.env.PORT || 4000;
+const PORT = 4000; // 固定為 4000 Port
 const isWindows = process.platform === "win32";
+const CWD = process.cwd();
 
-console.log("\x1b[36m🔍 Checking for processes on port %d...\x1b[0m", PORT);
+// --- 1. 清除暫存檔案邏輯 ---
+async function cleanArtifacts() {
+  console.log("\x1b[35m🧹 Cleaning artifacts and cache...\x1b[0m");
+  
+  const foldersToClean = [
+    ".next",
+    "out",
+    "node_modules/.cache",
+    "lib/generated-data.json" // 確保舊資料被移除
+  ];
 
-async function killProcessOnPort(port) {
-  try {
-    let command;
-
-    if (isWindows) {
-      // Windows: 使用 netstat 找到 PID
-      command = `netstat -ano | findstr :${port}`;
-    } else {
-      // macOS/Linux: 使用 lsof
-      command = `lsof -ti:${port}`;
+  for (const folder of foldersToClean) {
+    const fullPath = path.join(CWD, folder);
+    try {
+      if (fs.existsSync(fullPath)) {
+        // 使用 Node 20+ 的 rmSync
+        fs.rmSync(fullPath, { recursive: true, force: true });
+        console.log(`   \x1b[32m✓ Removed: ${folder}\x1b[0m`);
+      }
+    } catch (err) {
+      console.log(`   \x1b[33m⚠️  Failed to remove ${folder}: ${err.message}\x1b[0m`);
     }
+  }
+}
 
+// --- 2. 殺掉 Port 佔用邏輯 ---
+async function killProcessOnPort(port) {
+  console.log("\x1b[36m🔍 Checking for processes on port %d...\x1b[0m", port);
+  try {
+    let command = isWindows ? `netstat -ano | findstr :${port}` : `lsof -ti:${port}`;
     let stdout;
+    
     try {
       const result = await execPromise(command);
       stdout = result.stdout;
     } catch (err) {
-      // 沒有找到 process 是正常的
-      if (err.code === 1 || !err.stdout || err.stdout.trim() === "") {
-        console.log("\x1b[32m✓ Port %d is free\x1b[0m", port);
-        return;
-      }
-      throw err;
-    }
-
-    if (!stdout || !stdout.trim()) {
       console.log("\x1b[32m✓ Port %d is free\x1b[0m", port);
       return;
     }
 
-    console.log("\x1b[33m⚠️  Found process(es) using port %d\x1b[0m", port);
+    if (!stdout || !stdout.trim()) return;
 
+    console.log("\x1b[33m⚠️  Found process(es) using port %d, cleaning up...\x1b[0m", port);
+
+    const pids = new Set();
     if (isWindows) {
-      // Windows: 從 netstat 輸出解析 PID
-      const lines = stdout.split("\n");
-      const pids = new Set();
-
-      lines.forEach((line) => {
+      stdout.split("\n").forEach((line) => {
         const match = line.trim().match(/LISTENING\s+(\d+)/);
-        if (match) {
-          pids.add(match[1]);
-        }
+        if (match) pids.add(match[1]);
       });
-
-      for (const processId of pids) {
-        console.log("   \x1b[31mKilling process PID: %s\x1b[0m", processId);
-        try {
-          await execPromise(`taskkill /F /PID ${processId}`);
-          console.log("   \x1b[32m✓ Process killed\x1b[0m");
-        } catch (killError) {
-          console.log(
-            "   \x1b[33m⚠️  Could not kill process (might already be dead)\x1b[0m"
-          );
-        }
-      }
     } else {
-      // macOS/Linux: lsof 直接返回 PID
-      const pids = stdout
-        .trim()
-        .split("\n")
-        .filter((p) => p);
-
-      for (const processId of pids) {
-        console.log("   \x1b[31mKilling process PID: %s\x1b[0m", processId);
-        try {
-          await execPromise(`kill -9 ${processId}`);
-          console.log("   \x1b[32m✓ Process killed\x1b[0m");
-        } catch (killError) {
-          console.log(
-            "   \x1b[33m⚠️  Could not kill process (might already be dead)\x1b[0m"
-          );
-        }
-      }
+      stdout.trim().split("\n").forEach((p) => pids.add(p.trim()));
     }
 
-    // 等待 port 釋放
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    for (const processId of pids) {
+      console.log("   \x1b[31mKilling PID: %s\x1b[0m", processId);
+      const killCmd = isWindows ? `taskkill /F /PID ${processId}` : `kill -9 ${processId}`;
+      await execPromise(killCmd);
+    }
+    
+    // 等待 OS 釋放 Socket
+    await new Promise((resolve) => setTimeout(resolve, 800));
   } catch (error) {
-    console.log("\x1b[33m⚠️  Note: %s\x1b[0m", error.message);
-    console.log("\x1b[32m✓ Continuing anyway...\x1b[0m");
+    console.log("\x1b[33m⚠️  Skip Kill Port: %s\x1b[0m", error.message);
   }
 }
 
+// --- 3. 啟動開發伺服器 ---
 async function startDevServer() {
-  console.log("\n\x1b[36m🚀 Starting dev server...\x1b[0m\n");
+  console.log("\n\x1b[32m✅ System Clean. Starting dev server on Port 4000...\x1b[0m\n");
 
-  // 使用 spawn 來保持輸出流暢
   const npm = isWindows ? "npm.cmd" : "npm";
+  // 注意：這裡跑的是 "npm run dev"，會觸發我們 package.json 裡的 gen-data
   const devProcess = spawn(npm, ["run", "dev"], {
     stdio: "inherit",
     shell: true,
+    env: { ...process.env, PORT: "4000" } // 強制環境變數也是 4000
   });
 
   devProcess.on("error", (error) => {
-    console.error("\x1b[31m❌ Failed to start dev server:\x1b[0m", error);
+    console.error("\x1b[31m❌ Failed to start:\x1b[0m", error);
     process.exit(1);
-  });
-
-  devProcess.on("exit", (code) => {
-    if (code !== 0 && code !== null) {
-      console.error("\x1b[31m❌ Dev server exited with code %d\x1b[0m", code);
-      process.exit(code);
-    }
   });
 }
 
-// Main execution
+// --- 執行流程 ---
 (async () => {
-  try {
-    await killProcessOnPort(PORT);
-    await startDevServer();
-  } catch (error) {
-    console.error("\x1b[31m❌ Error:\x1b[0m", error.message);
-    console.log("\x1b[33mTrying to start dev server anyway...\x1b[0m");
-    await startDevServer();
-  }
+  console.clear();
+  console.log("\x1b[1m\x1b[34m=== MDM DOCS DEBUG MODE ===\x1b[0m\n");
+  
+  await cleanArtifacts();
+  await killProcessOnPort(PORT);
+  await startDevServer();
 })();

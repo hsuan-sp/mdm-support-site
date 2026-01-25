@@ -1,54 +1,56 @@
 "use client"
 import React, { useState, useMemo, useEffect } from 'react'
-import { useRouter } from 'nextra/hooks'
-import { Search, X, Lightbulb, Tag, SortAsc, SortDesc, Filter, Menu, Grid, List as ListIcon, LayoutGrid } from 'lucide-react'
+import { useRouter } from 'nextra/hooks' // 確保這是正確的 import
+import { Search, X, Lightbulb, SortAsc, SortDesc, Filter, Grid, List as ListIcon, LayoutGrid } from 'lucide-react'
 import { GlossaryItem } from '@/types'
 import EmptyState from '@/components/ui/EmptyState'
-
 import { translations } from '@/locales'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useUser } from '@/hooks/useLogtoUser'
 import AuthGate from '../ui/AuthGate'
 
-interface GlossaryProps {
-  data: GlossaryItem[]
+// 如果沒有 useDebounce，可以簡單寫一個或暫時不用
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  return debouncedValue;
 }
 
 const CATEGORIES = [
-  'All',
-  'Core',
-  'Enrollment',
-  'Apple',
-  'Security',
-  'Network',
-  'Hardware',
-  'Apps',
-  'Education',
-  'macOS',
-  'Jamf',
-  'Other',
+  'All', 'Core', 'Enrollment', 'Apple', 'Security', 'Network',
+  'Hardware', 'Apps', 'Education', 'macOS', 'Jamf', 'Other',
 ]
 
 const Glossary: React.FC = () => {
-  const router = useRouter()
+  // const router = useRouter() // 沒用到可以拿掉
   const { language: locale } = useLanguage()
   const t = translations[locale as keyof typeof translations]?.glossary || translations['zh-TW'].glossary
 
   const [data, setData] = useState<GlossaryItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  
+  // 搜尋相關
   const [searchQuery, setSearchQuery] = useState('')
+  const debouncedQuery = useDebounce(searchQuery, 300) // 使用 debounce 優化效能
+
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [fontScale, setFontScale] = useState(0.9) 
+  const [fontScale, setFontScale] = useState(1) // 預設改為 1 比較直覺
   const [gridCols, setGridCols] = useState<1 | 2 | 3>(1)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  
   const { user, isLoading: isAuthLoading } = useUser()
 
   useEffect(() => {
+    // 登入中不執行 fetch，避免無謂請求
     if (isAuthLoading || !user) return
 
     const fetchData = async () => {
-      setIsLoading(true)
+      // 這裡可以選擇不設 true，以避免切換語言時閃爍，看個人喜好
+      setIsLoading(true) 
       try {
         const res = await fetch(`/api/glossary?lang=${locale}`)
         if (res.ok) {
@@ -74,8 +76,10 @@ const Glossary: React.FC = () => {
   }
 
   const filteredTerms = useMemo(() => {
+    // 使用 debouncedQuery 來過濾
+    const q = debouncedQuery.toLowerCase().trim()
+    
     let filtered = data.filter(item => {
-      const q = searchQuery.toLowerCase().trim()
       const matchesSearch = !q || 
         item.term.toLowerCase().includes(q) || 
         item.definition.toLowerCase().includes(q) || 
@@ -94,11 +98,12 @@ const Glossary: React.FC = () => {
       const termB = b.term.toUpperCase()
       return sortOrder === 'asc' ? termA.localeCompare(termB) : termB.localeCompare(termA)
     })
-  }, [data, searchQuery, selectedCategory, sortOrder])
+  }, [data, debouncedQuery, selectedCategory, sortOrder]) // 依賴改為 debouncedQuery
 
   const getCategoryName = (cat: string) => 
     cat === 'All' ? t.allLabel : (t.categories as any)[cat] || cat
 
+  // 抽離 Sidebar 邏輯保持乾淨
   const SidebarContent = () => (
     <div className="flex flex-col h-full overflow-y-auto no-scrollbar pb-10">
       <div className="relative group mb-8 lg:mb-10">
@@ -120,6 +125,7 @@ const Glossary: React.FC = () => {
         )}
       </div>
 
+      {/* Category List */}
       <div className="mb-8">
         <p className="hidden lg:block text-[11px] font-black uppercase tracking-widest text-zinc-400 px-4 mb-4">{t.sidebarTitle}</p>
         <nav className="grid grid-cols-2 lg:flex lg:flex-col gap-2">
@@ -129,7 +135,7 @@ const Glossary: React.FC = () => {
               onClick={() => { setSelectedCategory(cat); setIsDrawerOpen(false); }}
               className={`sidebar-btn ${selectedCategory === cat ? 'sidebar-btn-active' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50'}`}
             >
-              <span className="truncate pr-4">{getCategoryName(cat)}</span>
+              <span className="truncate pr-4 text-left">{getCategoryName(cat)}</span>
               <span className={`text-[10px] font-black px-2 py-0.5 rounded-md ${selectedCategory === cat ? 'bg-white/20' : 'bg-zinc-100 dark:bg-zinc-800'}`}>{getChapterCount(cat)}</span>
             </button>
           ))}
@@ -161,6 +167,7 @@ const Glossary: React.FC = () => {
         </div>
       </div>
 
+      {/* Font Scale Control */}
       <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
         <p className="text-[11px] font-black uppercase tracking-widest text-zinc-400 mb-4">{t.fontScaleTitle}</p>
         <div className="flex items-center justify-between p-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl">
@@ -178,7 +185,7 @@ const Glossary: React.FC = () => {
     </div>
   )
 
-  if (isAuthLoading) return null
+  if (isAuthLoading) return null // 這裡可以回傳一個全屏 loading
   if (!user) return <AuthGate />
 
   if (isLoading) {
@@ -246,16 +253,20 @@ const Glossary: React.FC = () => {
                       </h3>
                     </header>
 
+                    {/* Definition 區塊：修正字體縮放應用 */}
                     <div 
                       className={`flex-1 prose prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed prose-p:mb-6 mb-8 relative z-10 ${gridCols > 1 ? 'text-sm' : ''}`}
-                      style={{ '--current-font-scale': fontScale } as any}
+                      // 使用 scale 來縮放字體，會比操作變數更穩定
+                      style={{ fontSize: `${fontScale * 100}%` }}
                       dangerouslySetInnerHTML={{ __html: item.definition }}
                     />
 
+                    {/* Analogy 區塊 */}
                     {item.analogy && (
                       <div 
                         className={`${gridCols === 1 ? 'p-6 sm:p-8' : 'p-5 md:p-6'} bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-200 dark:border-amber-900/30 rounded-3xl relative group-hover:border-amber-300 dark:group-hover:border-amber-800/40 transition-all z-10`}
-                        style={{ '--current-font-scale': fontScale } as any}
+                        // 這裡維持原本邏輯，或者也改成百分比
+                         style={{ fontSize: `${fontScale * 100}%` }}
                       >
                         <div className="flex items-center gap-2 mb-4 text-amber-600 dark:text-amber-500 font-black text-xs uppercase tracking-[0.2em]">
                           <Lightbulb className="w-4 h-4" />
@@ -263,7 +274,6 @@ const Glossary: React.FC = () => {
                         </div>
                         <div 
                           className={`${gridCols === 1 ? 'text-[15px] md:text-[17px]' : 'text-sm'} text-zinc-800 dark:text-zinc-200 leading-relaxed font-bold italic opacity-90`}
-                          style={{ fontSize: `calc(${fontScale} * ${gridCols === 1 ? '16px' : '14px'})` }}
                           dangerouslySetInnerHTML={{ __html: item.analogy }}
                         />
                       </div>

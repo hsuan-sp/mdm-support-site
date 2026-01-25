@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { Globe, ChevronDown, ExternalLink, Moon, Sun } from 'lucide-react'
@@ -6,7 +7,7 @@ import { translations } from '../../locales'
 import UserCenter from '../features/UserCenter'
 import MobileNav from './MobileNav'
 
-// Logo Component  
+// Logo 組件
 export const Logo = () => {
   const { language } = useLanguage()
   const isZh = language === 'zh-TW'
@@ -14,7 +15,6 @@ export const Logo = () => {
     <div className="flex items-center gap-2 select-none group branding-logo-container">
       <img src="/logo-square.png" alt="Logo" className="h-5 md:h-6 w-auto transition-transform duration-500 group-hover:rotate-[360deg] shrink-0" />
       <div className="flex flex-col md:flex-row md:items-baseline md:gap-1.5 overflow-hidden">
-        {/* 使用 clamp 讓字體平滑縮小而非隱藏 */}
         <span className="font-black text-zinc-900 dark:text-white whitespace-nowrap leading-tight" style={{ fontSize: 'clamp(11px, 2.5vw, 17px)' }}>
           {isZh ? '極電資訊' : 'Superinfo'}
         </span>
@@ -26,54 +26,7 @@ export const Logo = () => {
   )
 }
 
-// NavTranslator Component
-export const NavTranslator = () => {
-  const { language } = useLanguage()
-  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const navLinks = document.querySelectorAll('.nextra-nav-container a')
-      const navMap: Record<string, Record<string, string>> = {
-        'zh-TW': {
-          '/': '首頁',
-          '/guide': '指南',
-          '/glossary': '術語表',
-          '/changelog': '更新日誌'
-        },
-        'en': {
-          '/': 'Home',
-          '/guide': 'Guide',
-          '/glossary': 'Glossary',
-          '/changelog': 'Changelog'
-        }
-      }
-
-      navLinks.forEach((link: any) => {
-        const href = link.getAttribute('href')
-        // Skip logo container
-        if (link.querySelector('.branding-logo-container') || link.querySelector('img')) return
-
-        if (href && navMap[language][href]) {
-          const span = link.querySelector('span')
-          if (span) {
-            span.textContent = navMap[language][href]
-          } else if (link.childNodes.length > 0) {
-            link.childNodes.forEach((node: any) => {
-              if (node.nodeType === Node.TEXT_NODE) {
-                node.textContent = navMap[language][href]
-              }
-            })
-          }
-        }
-      })
-    }, 200)
-    return () => clearTimeout(timer)
-  }, [language])
-
-  return null
-}
-
-// NavbarExtra Component
+// Navbar 右側功能區
 export const NavbarExtra = () => {
   const { theme, setTheme } = useTheme()
   const { language, setLanguage } = useLanguage()
@@ -88,22 +41,22 @@ export const NavbarExtra = () => {
   }, [])
 
   return (
-    <>
-      <NavTranslator />
-      <div className="flex items-center gap-2 md:gap-3">
-        {/* Hamburger Button - Mobile Only */}
-        <button
-          onClick={() => setIsMobileNavOpen(true)}
-          className="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors"
-          aria-label="Open menu"
-        >
-          <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+    <div className="flex items-center gap-2 md:gap-3">
+      {/* 手機版漢堡選單按鈕 */}
+      <button 
+        onClick={() => setIsMobileNavOpen(true)} 
+        className="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors"
+      >
+        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
 
-        {/* Resources Dropdown - Desktop Only */}
-        <div className="hidden lg:block relative">
+      {/* --- 桌面版專屬區塊 (lg:flex) --- */}
+      <div className="hidden lg:flex items-center gap-2">
+        
+        {/* 1. 常用連結 (Resources Dropdown) - 恢復處 🚀 */}
+        <div className="relative">
           <button
             onClick={() => setResourcesOpen(!resourcesOpen)}
             className="flex items-center gap-1.5 px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all text-sm font-bold text-zinc-700 dark:text-zinc-300"
@@ -140,36 +93,31 @@ export const NavbarExtra = () => {
           )}
         </div>
 
-        {/* Theme Toggle - Desktop Only */}
+        {/* 2. 主題切換 */}
         {mounted && (
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="hidden lg:flex p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all"
-            aria-label="Toggle theme"
+          <button 
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
+            className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all"
           >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5 text-yellow-500" />
-            ) : (
-              <Moon className="w-5 h-5 text-zinc-600" />
-            )}
+            {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-zinc-600" />}
           </button>
         )}
 
-        {/* Language Toggle - Desktop Only */}
-        <button
-          onClick={() => setLanguage(language === 'zh-TW' ? 'en' : 'zh-TW')}
-          className="hidden lg:flex items-center gap-1.5 px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all text-sm font-bold text-zinc-700 dark:text-zinc-300"
+        {/* 3. 語言切換 (Language Toggle) - 恢復處 🚀 */}
+        <button 
+          onClick={() => setLanguage(language === 'zh-TW' ? 'en' : 'zh-TW')} 
+          className="flex items-center gap-1.5 px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-all text-sm font-bold text-zinc-700 dark:text-zinc-300"
         >
           <Globe className="w-4 h-4" />
           <span>{language === 'zh-TW' ? 'EN' : '中文'}</span>
         </button>
-
-        {/* User Center */}
-        <UserCenter />
       </div>
 
-      {/* Custom Mobile Navigation */}
+      {/* 4. 使用者中心 (頭貼與登入登出) */}
+      <UserCenter />
+
+      {/* 手機版導覽抽屜 */}
       <MobileNav isOpen={isMobileNavOpen} onClose={() => setIsMobileNavOpen(false)} />
-    </>
+    </div>
   )
 }
