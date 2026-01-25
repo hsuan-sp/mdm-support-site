@@ -8,51 +8,52 @@ import { LanguageProvider } from '../hooks/useLanguage'
 import SecurityGuard from '../components/features/SecurityGuard'
 import BackToTop from '../components/ui/BackToTop'
 import Footer from '../components/layout/Footer'
+import { isAuthorizedEmail } from '@/lib/auth'
 
-// Fetcher
+// 標準 Fetcher
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
-// 嚴格定義公開路徑
-const PUBLIC_PATHS = ['/', '/unauthorized', '/changelog', '/api/logto/sign-in', '/api/logto/sign-out', '/404']
+// 定義需要保護的路徑
+const PROTECTED_PATHS = ['/guide', '/glossary']
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const getLayout = (Component as any).getLayout || ((page: React.ReactNode) => page)
 
-  // 1. 精確判定是否為保護路徑 (排除首頁與白名單)
+  // 1. 路徑判定：確保首頁完全不被攔截
   const isProtected = useMemo(() => {
-    // 如果是首頁 (精確比對)
-    if (router.pathname === '/') return false;
-    // 如果在白名單內
-    if (PUBLIC_PATHS.includes(router.pathname)) return false;
-    // 只針對 guide 和 glossary 保護
-    return router.pathname.startsWith('/guide') || router.pathname.startsWith('/glossary');
+    return PROTECTED_PATHS.some(path => router.pathname.startsWith(path))
   }, [router.pathname])
 
-  // 2. 只有保護路徑才啟用 SWR 守衛
-  const { data, isLoading } = useSWR(isProtected ? '/api/check-auth' : null, fetcher, {
+  // 2. 呼叫 Logto 內建的 User API
+  // 這是最穩定的獲取身分方式，不會噴 500。
+  const { data: user, isLoading } = useSWR(isProtected ? '/api/logto/user' : null, fetcher, {
     revalidateOnFocus: false,
     shouldRetryOnError: false
   })
 
-  // 3. 處理跳轉
+  // 3. 核心授權守衛 (在前端判定 Email)
   useEffect(() => {
     if (!isProtected || isLoading) return;
 
-    if (data && !data.authorized) {
-      if (data.reason === 'not_logged_in') {
-        window.location.href = '/api/logto/sign-in'
-      } else {
-        router.replace('/unauthorized')
-      }
+    // 如果沒登入 (Logto user API 會回傳 isAuthenticated: false 或 401)
+    if (!user || user.isAuthenticated === false) {
+      window.location.href = '/api/logto/sign-in'
+      return
     }
-  }, [isProtected, data, isLoading, router])
 
-  //受保護頁面渲染 Loading，首頁等公開頁面則秒開
-  if (isProtected && (isLoading || !data)) {
+    // 登入成功了，核對 Email 網域
+    const email = user.primaryEmail || user.email || "";
+    if (!isAuthorizedEmail(email)) {
+      router.replace('/unauthorized')
+    }
+  }, [isProtected, user, isLoading, router])
+
+  // 渲染邏輯：受保護路徑的封鎖畫面
+  if (isProtected && (isLoading || !user || !isAuthorizedEmail(user.primaryEmail || user.email || ""))) {
     return (
       <div className="min-h-screen flex items-center justify-center font-bold text-blue-600 bg-white dark:bg-black">
-        🛡️ 安全身分核對中...
+        🔒 安全核對中，請稍候...
       </div>
     )
   }
