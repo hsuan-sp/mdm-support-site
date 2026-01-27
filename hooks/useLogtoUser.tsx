@@ -1,5 +1,12 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 
 interface LogtoUser {
   sub: string;
@@ -18,29 +25,50 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [data, setData] = useState<{user: LogtoUser | null, auth: boolean}>({ user: null, auth: false });
-  const [isLoading, setIsLoading] = useState(true);
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  // Check build-time env first, fallback to runtime check
+  const isGhPagesEnv = process.env.NEXT_PUBLIC_IS_GH_PAGES === "true";
+  // Also keep the runtime check as a backup if env missing
+  const isGhPagesRuntime =
+    typeof window !== "undefined" &&
+    window.location.hostname.includes("github.io");
+  const isStaticPreview = isGhPagesEnv || isGhPagesRuntime;
+
+  const mockUser = {
+    sub: "guest",
+    email: "collaborator@github.io",
+    name: "Collaborator (Static Preview)",
+  };
+
+  // Initialize with auth state if we know it's a static preview
+  const [data, setData] = useState<{ user: LogtoUser | null; auth: boolean }>({
+    user: isStaticPreview ? mockUser : null,
+    auth: isStaticPreview,
+  });
+  const [isLoading, setIsLoading] = useState(!isStaticPreview);
   const hasFetched = useRef(false);
 
   const fetchUser = useCallback(async () => {
-    // 🔍 偵測是否在 GitHub Pages 環境 (根據主機名)
-    const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-
-    if (isGitHubPages) {
-      setData({ 
-        user: { sub: 'guest', email: 'collaborator@github.io', name: 'Collaborator (Static Preview)' }, 
-        auth: true 
-      });
-      setIsLoading(false);
+    // If we already determined it's a static preview, no need to fetch
+    if (
+      process.env.NEXT_PUBLIC_IS_GH_PAGES === "true" ||
+      (typeof window !== "undefined" &&
+        window.location.hostname.includes("github.io"))
+    ) {
+      if (!data.auth) {
+        setData({ user: mockUser, auth: true });
+        setIsLoading(false);
+      }
       return;
     }
 
     setIsLoading(true);
     try {
       const res = await fetch("/api/logto/user", {
-        cache: 'no-store',
-      }); 
+        cache: "no-store",
+      });
       if (!res.ok) {
         if (res.status === 401) {
           console.log("[useUser] User is not authenticated");
@@ -51,21 +79,31 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
       const json = await res.json();
-      setData({ 
-        user: json.claims ? {
-          sub: json.claims.sub,
-          email: json.claims.email,
-          name: json.claims.name || json.claims.username
-        } : null, 
-        auth: !!json.isAuthenticated 
+      setData({
+        user: json.claims
+          ? {
+              sub: json.claims.sub,
+              email: json.claims.email,
+              name: json.claims.name || json.claims.username,
+            }
+          : null,
+        auth: !!json.isAuthenticated,
       });
     } catch (e) {
       console.error("[useUser] Fetch failed (likely static build)", e);
-      setData({ user: null, auth: false });
+      // Fallback for static export if fetch fails
+      if (
+        typeof window !== "undefined" &&
+        window.location.hostname.includes("github.io")
+      ) {
+        setData({ user: mockUser, auth: true });
+      } else {
+        setData({ user: null, auth: false });
+      }
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [data.auth]);
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -81,18 +119,20 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = () => {
-    window.location.href = '/api/logto/sign-out';
+    window.location.href = "/api/logto/sign-out";
   };
 
   return (
-    <UserContext.Provider value={{ 
-      user: data.user, 
-      isAuthenticated: data.auth,
-      isLoading, 
-      signIn, 
-      signOut,
-      revalidate: fetchUser
-    }}>
+    <UserContext.Provider
+      value={{
+        user: data.user,
+        isAuthenticated: data.auth,
+        isLoading,
+        signIn,
+        signOut,
+        revalidate: fetchUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
