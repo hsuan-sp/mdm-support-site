@@ -127,6 +127,21 @@
     }
   }
 
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
+
+  /* Utility class for animation */
+  .animate-float {
+    animation: float 10s ease-in-out infinite;
+  }
+
   /* 背景模糊 (Backdrop Blur) */
   --backdrop-blur-xs: 2px;
 }
@@ -147,24 +162,15 @@ html {
 }
 
 body {
-  background-color: #ffffff;
   color: #1d1d1f;
   line-height: 1.5;
   letter-spacing: -0.01em;
-
-  /* Subtle background */
-  background:
-    radial-gradient(at 0% 0%, rgba(0, 113, 227, 0.03) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.03) 0, transparent 50%);
-  background-attachment: fixed;
+  background-color: transparent !important; /* Force transparency */
 }
 
 .dark body {
-  background-color: #000000;
   color: #f5f5f7;
-  background:
-    radial-gradient(at 0% 0%, rgba(0, 113, 227, 0.08) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(147, 51, 234, 0.06) 0, transparent 50%);
+  background-color: transparent !important;
 }
 
 h1,

@@ -39,6 +39,7 @@ jobs:
         # 靜態導出不支援 API routes，因此在 GitHub Pages 部署時將其移除
         run: |
           rm -rf app/api
+          rm -rf app/callback
           npm run build
         env:
           GITHUB_ACTIONS: "true"

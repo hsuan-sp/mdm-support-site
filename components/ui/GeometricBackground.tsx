@@ -81,20 +81,20 @@ const GeometricBackground: React.FC = () => {
       {/* Floating orbs with subtle animation */}
       <div className="absolute inset-0">
         {[
-          { top: '10%', left: '20%', size: 300, delay: 0, color: isDark ? 'rgba(0, 113, 227, 0.06)' : 'rgba(0, 113, 227, 0.03)' },
-          { top: '60%', left: '70%', size: 400, delay: 2, color: isDark ? 'rgba(175, 82, 222, 0.05)' : 'rgba(175, 82, 222, 0.025)' },
-          { top: '30%', left: '80%', size: 250, delay: 4, color: isDark ? 'rgba(94, 92, 230, 0.06)' : 'rgba(94, 92, 230, 0.03)' },
+          { top: '10%', left: '20%', size: 300, delay: 0, color: isDark ? 'rgba(0, 113, 227, 0.12)' : 'rgba(0, 113, 227, 0.08)' },
+          { top: '60%', left: '70%', size: 400, delay: 2, color: isDark ? 'rgba(175, 82, 222, 0.1)' : 'rgba(175, 82, 222, 0.06)' },
+          { top: '30%', left: '80%', size: 250, delay: 4, color: isDark ? 'rgba(94, 92, 230, 0.12)' : 'rgba(94, 92, 230, 0.08)' },
         ].map((orb, index) => (
           <div
             key={index}
-            className="absolute rounded-full blur-3xl transition-all duration-1000"
+            className="absolute rounded-full blur-3xl transition-all duration-1000 animate-float"
             style={{
               top: orb.top,
               left: orb.left,
               width: `${orb.size}px`,
               height: `${orb.size}px`,
               background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
-              animation: `float ${10 + index * 2}s ease-in-out infinite ${orb.delay}s`,
+              animationDelay: `${orb.delay}s`,
               transform: 'translate(-50%, -50%)',
             }}
           />
@@ -108,18 +108,6 @@ const GeometricBackground: React.FC = () => {
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
         }}
       />
-
-      {/* CSS animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translate(-50%, -50%) translateY(0px);
-          }
-          50% {
-            transform: translate(-50%, -50%) translateY(-20px);
-          }
-        }
-      `}</style>
     </div>
   )
 }
