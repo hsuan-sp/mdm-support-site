@@ -137,13 +137,13 @@
     }
   }
 
-  /* Utility class for animation */
-  .animate-float {
-    animation: float 10s ease-in-out infinite;
-  }
-
   /* 背景模糊 (Backdrop Blur) */
   --backdrop-blur-xs: 2px;
+}
+
+/* Utility class for animation */
+.animate-float {
+  animation: float 10s ease-in-out infinite;
 }
 
 /* 4. 全域設置與基礎樣式 */
