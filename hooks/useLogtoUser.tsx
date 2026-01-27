@@ -38,8 +38,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const mockUser = {
     sub: "guest",
-    email: "collaborator@github.io",
-    name: "Collaborator (Static Preview)",
+    email: "guest@superinfo.com.tw", // 使用授權網域，避免被 Guard 擋住
+    name: "Guest (Static Preview)",
   };
 
   // Initialize with auth state if we know it's a static preview

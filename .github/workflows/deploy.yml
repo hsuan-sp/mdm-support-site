@@ -38,8 +38,9 @@ jobs:
         # 執行 Next.js 建置，當 GITHUB_ACTIONS=true 時會自動觸發靜態導出 (output: 'export')
         # 靜態導出不支援 API routes，因此在 GitHub Pages 部署時將其移除
         run: |
-          rm -rf app/api
-          rm -rf app/callback
+          # 徹底移除所有動態路由與 API (包含隱藏目錄)
+          find app -name "route.ts" -o -name "route.js" | xargs rm -f
+          rm -rf app/api app/callback
           npm run build
         env:
           GITHUB_ACTIONS: "true"
