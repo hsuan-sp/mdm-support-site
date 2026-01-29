@@ -402,6 +402,25 @@ const Guide: React.FC<GuideProps> = ({ initialData }) => {
     ]
   );
 
+  // Handle hash scrolling
+  useEffect(() => {
+    if (isDataLoading || !allData.length) return;
+
+    // Check hash on load or data ready
+    const hash = window.location.hash;
+    if (hash) {
+      // Decode hash to handle special characters if any, though IDs should be slugs
+      const id = decodeURIComponent(hash.substring(1));
+      const element = document.getElementById(id);
+      if (element) {
+        // Delay slightly to ensure layout is stable
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [isDataLoading, allData.length]);
+
   if (isAuthLoading) return null;
   if (!user || !isAuthenticated) return <AuthGate redirectPath="/guide" />;
 
@@ -423,7 +442,6 @@ const Guide: React.FC<GuideProps> = ({ initialData }) => {
       </div>
     );
   }
-
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-0 lg:gap-16 py-12 animate-reveal">
@@ -480,7 +498,7 @@ const Guide: React.FC<GuideProps> = ({ initialData }) => {
               {visibleModules.map((module) => (
                 <section
                   key={module.source}
-                  id={module.source}
+                  id={module.id} // use slug as ID
                   className="scroll-mt-32 space-y-10"
                 >
                   <div className="p-8 bg-apple-bg dark:bg-apple-dark-bg/40 rounded-apple-lg flex items-center justify-between border border-transparent">

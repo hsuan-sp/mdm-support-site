@@ -13,6 +13,7 @@ export interface QASection {
 }
 
 export interface QAModule {
+  id: string; // ID (slug) for anchor linking
   source: string;
   sections: QASection[];
 }

@@ -20,8 +20,7 @@ const AuthGate: React.FC<AuthGateProps> = ({ redirectPath = "/" }) => {
 
   // 自動跳轉邏輯
   React.useEffect(() => {
-    const timer = setTimeout(handleSignIn, 1500); // 1.5秒後自動跳轉，給用戶一點提示
-    return () => clearTimeout(timer);
+    handleSignIn();
   }, [handleSignIn]);
 
   return (
